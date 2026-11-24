@@ -51,10 +51,10 @@
     <PackageReference Include="AWSSDK.KeyManagementService" Version="4.0.100.17" />
     <!-- IXmlRepository / KeyManagementOptions live in the full DataProtection assembly (shared framework). -->
     <!-- OpenTelemetry (WP F9): only OpenTelemetry.* packages; the Microsoft.Extensions.AI.* set above is unaffected. -->
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.19.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.19.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.19.0" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.19.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.21.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.21.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.21.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.19.1-beta.1" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
