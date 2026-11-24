@@ -10,7 +10,7 @@ go 1.26.0
 // pulled in: E5c promoted it from indirect to direct when it started importing
 // it, so the file now says what the module actually uses).
 require (
-	github.com/godbus/dbus/v5 v5.2.2
+	github.com/godbus/dbus/v5 v5.2.4
 	github.com/vecchiotom/reelbolt/sandbox v0.0.0
 	github.com/zalando/go-keyring v0.2.8
 )
