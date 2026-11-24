@@ -30,14 +30,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [csharp, go, javascript-typescript]
+        include:
+          # Go does not support build-mode none. 'manual' builds the three modules that compile on a plain runner:
+          # autobuild would also try the Wails desktop module, which needs gtk4/webkitgtk headers.
+          - { language: csharp, build-mode: none }
+          - { language: go, build-mode: manual }
+          - { language: javascript-typescript, build-mode: none }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
           languages: ${{ matrix.language }}
-          build-mode: none
+          build-mode: ${{ matrix.build-mode }}
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        if: matrix.language == 'go'
+        with:
+          go-version-file: api/go.mod
+
+      - name: Build the Go modules (CodeQL manual build)
+        if: matrix.language == 'go'
+        run: |
+          for d in api runner sandbox; do
+            (cd "$d" && go build ./...)
+          done
 
       - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
