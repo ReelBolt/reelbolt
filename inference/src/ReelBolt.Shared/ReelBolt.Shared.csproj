@@ -48,7 +48,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.12" />
     <PackageReference Include="AWSSDK.S3" Version="4.0.104.4" />
     <!-- Same AWSSDK 4.x family as AWSSDK.S3; wraps the Data Protection key ring (docs/design/cloud-provider-adr.md). -->
-    <PackageReference Include="AWSSDK.KeyManagementService" Version="4.0.100.17" />
+    <PackageReference Include="AWSSDK.KeyManagementService" Version="4.1.1.1" />
     <!-- IXmlRepository / KeyManagementOptions live in the full DataProtection assembly (shared framework). -->
     <!-- OpenTelemetry (WP F9): only OpenTelemetry.* packages; the Microsoft.Extensions.AI.* set above is unaffected. -->
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.19.1" />
