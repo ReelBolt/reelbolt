@@ -1,0 +1,9 @@
+{
+  "banner": "We use Google Analytics cookies, and a cookie and a random visitor ID of our own that remember which link brought you here and record which pages you open, which sign-up buttons you press and whether you start to sign up, to understand how visitors use this site and which channels bring sign-ups. They’re only set if you accept. Until you choose, Google Analytics receives a basic page-visit signal (including your IP address) but sets no cookie; if you decline, it receives nothing more. Declining changes nothing about what you can do here. Read our <privacy>privacy policy</privacy> for details.",
+  "summary": "We use cookies to measure visits and sign-ups, but only if you accept.",
+  "privacyLink": "Privacy policy",
+  "details": "Details",
+  "hideDetails": "Hide details",
+  "reject": "Reject",
+  "accept": "Accept"
+}

@@ -1,0 +1,2479 @@
+{
+  "forEach": {
+    "loopSource": "Loop source",
+    "earlierFields": {
+      "label": "Fields earlier steps produce",
+      "description": "Field names you can use in the expression above."
+    }
+  },
+  "parallel": {
+    "intro": "Agents run in parallel. Their outputs are merged into a JSON array for the next step.",
+    "agentColumn": "Agent",
+    "removeAgent": "Remove {name}",
+    "addPlaceholder": "Add agent to parallel group…",
+    "outputFormat": "Output format:"
+  },
+  "agentOptions": {
+    "notStarted": "not started",
+    "loading": "Loading…",
+    "runNotListed": "A run that is no longer listed",
+    "continue": {
+      "label": "Continue from an earlier run's composition",
+      "description": "The agent picks up the finished video project of a previous run of this project, rather than starting empty."
+    },
+    "savedVersion": "Continues from a saved composition version ({versionId}). Switch the option off and on to pick a run instead.",
+    "runSelect": {
+      "label": "Run to continue from",
+      "loading": "Loading runs…",
+      "select": "Select a run",
+      "empty": "This project has no runs yet"
+    },
+    "saveOutput": {
+      "label": "Save output as a project file",
+      "description": "Lists what this step delivers in Files, so later runs and other steps can use it."
+    }
+  },
+  "pinInsert": {
+    "contentKind": {
+      "Step": "The video or image of an earlier step",
+      "ProjectFile": "An uploaded video or image",
+      "StepResult": "The output of an earlier run (step result ID)"
+    },
+    "intro": "Puts a video or image on the green, blue or magenta screens an Analyze step tracked in your footage. No AI model is involved and it costs nothing. Point a compile step's graphics plan at this step and turn on screen inserts there.",
+    "trackedScreens": {
+      "legend": "Tracked screens",
+      "foundBy": "Screens found by",
+      "previousStep": "The previous step"
+    },
+    "contentLegend": "What goes on the screens",
+    "screenIdHint": "A screen id looks like r0, r1, ...",
+    "screen": {
+      "label": "Screen",
+      "description": "r0, r1, ... as the analysis lists them; empty for every screen"
+    },
+    "removePin": "Remove pin {n}",
+    "content": "Content",
+    "step": {
+      "label": "Step",
+      "placeholder": "Select a step"
+    },
+    "file": {
+      "label": "File"
+    },
+    "stepResult": {
+      "label": "Step result ID",
+      "description": "The ID of a step result from an earlier run of this project (shown on the run page)"
+    },
+    "addPin": "Add content for another screen",
+    "requireApplied": {
+      "label": "Stop if something cannot be put on a screen",
+      "description": "Off: put on what works and list the rest in the step's result"
+    }
+  },
+  "extractFrame": {
+    "sourceKind": {
+      "ProjectFile": "An uploaded video file",
+      "PreviousStepOutput": "The output of the previous step",
+      "StepOutput": "The output of a specific step",
+      "StepResult": "The output of an earlier run (step result ID)"
+    },
+    "at": {
+      "Last": "The last frame (recommended for continuing a shot)",
+      "First": "The first frame",
+      "Time": "A moment I choose"
+    },
+    "format": {
+      "png": "PNG (sharp, larger file)",
+      "jpeg": "JPEG (smaller file)"
+    },
+    "intro": "Saves one frame of a video as an image. Use it to keep the last frame of a generated clip and start the next clip from it, or to grab a still. No AI model is involved and it costs nothing.",
+    "video": {
+      "legend": "Which video",
+      "takeFrom": "Take the frame from",
+      "file": "Video file",
+      "step": "Step",
+      "stepPlaceholder": "Select a step",
+      "stepResult": {
+        "label": "Step result ID",
+        "description": "The ID of a step result from an earlier run of this project (shown on the run page)"
+      }
+    },
+    "frame": {
+      "legend": "Which frame",
+      "label": "Frame",
+      "moment": {
+        "label": "Moment (seconds)",
+        "description": "Counting from the start of the video"
+      }
+    },
+    "image": {
+      "legend": "Image",
+      "format": "Format",
+      "longestSide": {
+        "label": "Longest side (pixels)",
+        "description": "{min} to {max}. Empty keeps the video's own size."
+      },
+      "save": {
+        "label": "Save to project files",
+        "description": "Lists the image in Files so you can download it and reuse it in later runs"
+      }
+    }
+  },
+  "audioGenerate": {
+    "kind": {
+      "Music": "Music",
+      "SoundEffect": "Sound effect"
+    },
+    "intro": "Generates music or a sound effect from a description and saves it to your project files, where the later steps can use it. Each take is paid for in credits.",
+    "what": {
+      "legend": "What to generate",
+      "kind": "Kind",
+      "kindAria": "Kind of audio",
+      "description": {
+        "label": "Description",
+        "music": "Style, mood, instruments and pacing, for example \"warm acoustic guitar, hopeful, builds to a bright finish\"",
+        "soundEffect": "The sound, for example \"heavy wooden door creaking open, then a soft thud\""
+      },
+      "planNote": "A composition plan is set under Advanced; its sections set the length, so there is no description or duration here.",
+      "length": {
+        "label": "Length (seconds)",
+        "description": "{min} to {max} seconds per take. The chosen model may allow a narrower range."
+      },
+      "instrumental": "Instrumental only (no vocals)",
+      "loop": {
+        "label": "Make it a seamless loop",
+        "description": "Only for models that support looping"
+      },
+      "influence": {
+        "label": "How closely to follow the description (0 to 1)",
+        "description": "Empty uses the model's own default"
+      }
+    },
+    "cost": {
+      "legend": "Cost and output",
+      "provider": "Provider",
+      "nullMeansMusic": "Blank uses the default music provider.",
+      "nullMeansSoundEffect": "Blank uses the default sound effect provider.",
+      "takes": {
+        "label": "Takes",
+        "description": "Separate versions to choose from, 1 to {max}. Each one is paid for."
+      },
+      "limit": {
+        "label": "Spending limit (credits)",
+        "description": "Stops the step before it spends more than this. Empty applies only your own daily video limit (if you set one) and your credit balance."
+      },
+      "noLimitWarning": "No spending limit is set. Set one so a mistyped length or take count cannot spend more than you expect.",
+      "save": {
+        "label": "Save to project files",
+        "description": "Lists each take in Files so you can listen, download and reuse it"
+      }
+    },
+    "advanced": {
+      "description": "A specific model, a music composition plan and the saved file name. The defaults suit almost every step.",
+      "model": {
+        "label": "Model",
+        "description": "Leave empty for the provider's own model, else the default. The server refuses a model it does not list."
+      },
+      "plan": {
+        "label": "Composition plan (JSON)",
+        "description": "Music only, in place of a description: the vendor's section-by-section plan. The sections set the length."
+      },
+      "prefix": {
+        "label": "File name prefix",
+        "description": "Letters, digits, - and _ (1 to 40). Empty uses music or sfx."
+      }
+    }
+  },
+  "imageGenerate": {
+    "mode": {
+      "Generate": "Make pictures",
+      "Edit": "Edit a picture"
+    },
+    "sourceKind": {
+      "ProjectFile": "A file in the project",
+      "PreviousStepOutput": "The previous step's picture",
+      "StepOutput": "A picture from an earlier step",
+      "StepResult": "A picture from an earlier run",
+      "BriefFiles": "One picture per file the app gets"
+    },
+    "intro": "Makes pictures from a description, or changes one picture by an instruction, with an AI image model, and saves them to your project files. Each picture is paid for in credits.",
+    "what": {
+      "legend": "What to make",
+      "mode": "What to do",
+      "modeAria": "Make new pictures or edit one",
+      "prompt": {
+        "label": "Description",
+        "description": "What the picture should show, for example \"a lighthouse at dusk, soft light, wide shot\""
+      },
+      "instruction": {
+        "label": "What to change",
+        "description": "The change to make to the picture, for example \"make it night and add stars\""
+      },
+      "itemList": {
+        "label": "Items (one per line)",
+        "description": "One picture is made for each item, up to 24. Write one per line or separate them with commas. Use '{'item'}' in the description or the change to say where the item goes, for example \"a '{'item'}' sofa in a bright living room\". Leave empty to make a single picture."
+      }
+    },
+    "source": {
+      "legend": "Picture to edit",
+      "takeFrom": "Take the picture from",
+      "file": "Picture file",
+      "step": "Step",
+      "stepPlaceholder": "Choose a step",
+      "stepResult": {
+        "label": "Step result id",
+        "description": "The id of a finished step result from an earlier run of this project"
+      },
+      "egress": {
+        "label": "Allow sending this picture to the AI service",
+        "description": "Required for editing. The picture is shared with the hosted model for 10 minutes. Until you tick this, a run stops with EGRESS_REFUSED and nothing is sent."
+      }
+    },
+    "cost": {
+      "legend": "Cost and output",
+      "provider": "Provider",
+      "nullMeansGenerate": "Blank uses the default image generation provider.",
+      "nullMeansEdit": "Blank uses the default image edit provider.",
+      "variations": {
+        "label": "Pictures",
+        "description": "Separate pictures to choose from, 1 to {max}. Each one is paid for."
+      },
+      "limit": {
+        "label": "Spending limit (credits)",
+        "description": "Stops the step before it spends more than this. Empty limits it to the priced total."
+      },
+      "noLimitWarning": "No spending limit is set. Set one so a picture count you mistyped cannot spend more than you expect.",
+      "save": {
+        "label": "Save to project files",
+        "description": "Lists each picture in Files so you can see, download and reuse it"
+      }
+    },
+    "advanced": {
+      "description": "Picture shape and the saved file name. The defaults suit almost every step.",
+      "aspect": {
+        "label": "Aspect ratio",
+        "description": "For example 16:9 or 1:1, where the model takes one. Not with a width and height."
+      },
+      "width": {
+        "label": "Width (pixels)",
+        "description": "Use with height. Not with an aspect ratio."
+      },
+      "height": {
+        "label": "Height (pixels)",
+        "description": "Use with width. Not with an aspect ratio."
+      },
+      "size": {
+        "legend": "Picture size",
+        "resolution": {
+          "label": "Resolution",
+          "automatic": "Automatic"
+        },
+        "outputWidth": {
+          "label": "Exact width (pixels)"
+        },
+        "outputHeight": {
+          "label": "Exact height (pixels)"
+        },
+        "helper": "The picture is made at the closest size the model can draw, then resized to exactly this size. For example 2000 x 2000.",
+        "tierTooSmall": "Too small: {tier} makes pictures up to {edge} pixels on the long edge, but the exact size needs {need}. Pick a larger resolution or Automatic.",
+        "clearExactFirst": "Clear the exact size to use this."
+      },
+      "prefix": {
+        "label": "File name prefix",
+        "description": "Letters, digits, - and _ (1 to 40). Empty uses image."
+      }
+    }
+  },
+  "conditional": {
+    "intro": "Pick which step runs next when the condition is true or false.",
+    "condition": "Condition",
+    "labels": {
+      "mode": "How to decide",
+      "conditionExpression": "Condition expression",
+      "decisionQuestion": "Decision question name",
+      "threshold": "Yes-probability threshold",
+      "providerId": "Decision provider",
+      "timeoutSeconds": "Decision timeout (seconds)"
+    },
+    "hints": {
+      "conditionExpression": "A formula over earlier outputs, e.g. steps[1].score >= 7. In Decision mode it also seeds the question the model is asked.",
+      "decisionQuestion": "Optional short name for the yes/no question. Leave blank to derive one from the expression.",
+      "thresholdDecision": "The branch is True when the model’s probability of \"yes\" is at least this. 0.5 = a coin flip.",
+      "thresholdExpression": "Only used in Decision mode (ignored while Expression is selected).",
+      "timeoutSeconds": "How long to wait for the Decision provider. On timeout the step evaluates False, it never fails."
+    },
+    "mode": {
+      "expression": "Expression: evaluate a formula (default)",
+      "decision": "Decision: ask a decision model a yes/no question",
+      "decisionHint": "The step asks a Decision provider a yes/no question first. With no Decision provider configured it falls back to the False branch. Calls a model, so it can cost tokens.",
+      "expressionHint": "Deterministic: the condition expression is evaluated locally, no model call."
+    },
+    "provider": {
+      "description": "Which Decision-capable provider answers. Blank uses the default one.",
+      "nullMeans": "Without one, a Decision-mode step evaluates False.",
+      "onlyDecision": "Decision provider: only used in Decision mode."
+    },
+    "branch": {
+      "trueLabel": "If true, go to",
+      "trueDescription": "Step that runs when the condition holds",
+      "falseLabel": "If false, go to",
+      "falseDescription": "Step that runs otherwise"
+    },
+    "earlierFields": {
+      "label": "Fields earlier steps produce",
+      "description": "Field names you can use in the expression above."
+    }
+  },
+  "designSystem": {
+    "op": {
+      "Parse": "Read my design files",
+      "Compose": "Combine and save the profile",
+      "Require": "Require an approved profile"
+    },
+    "intro": "Reads your design files and app structure into a brand and product profile. Free — no AI model is involved.",
+    "whatItDoes": "What this step does",
+    "parse": {
+      "legend": "Read",
+      "includeDesign": "Read the brand (colours, fonts, spacing)",
+      "includeProductMap": "Read the product structure (pages, parts, libraries)",
+      "chooseOne": "Choose at least one thing to read.",
+      "limits": {
+        "label": "Limits",
+        "description": "How many files to read and how large they may be.",
+        "maxFiles": "Most files to read",
+        "maxBytesPerFile": "Largest file (bytes)",
+        "maxTotalBytes": "Largest total (bytes)"
+      },
+      "extraGlobs": {
+        "label": "Also read files matching",
+        "description": "Type a pattern, e.g. docs/**/*.md. Up to 20 patterns, 100 characters each.",
+        "placeholder": "docs/**/*.md"
+      }
+    },
+    "compose": {
+      "legend": "Combine",
+      "parseStep": {
+        "label": "Which earlier step read your files",
+        "description": "Its result is combined into the profile this step saves.",
+        "missing": "Choose which earlier step read your files: this step combines nothing without it."
+      },
+      "designFallback": {
+        "label": "Brand fallback steps (optional)",
+        "description": "Steps whose result can fill a missing brand profile."
+      },
+      "productFallback": {
+        "label": "Product profile fallback steps (optional)",
+        "description": "Steps whose result can fill a missing product profile."
+      },
+      "noFallback": "No fallback steps",
+      "ingest": "Save the profile for this project"
+    },
+    "require": {
+      "legend": "Require",
+      "design": "Needs an approved brand profile",
+      "product": "Needs an approved product profile",
+      "chooseOne": "Choose at least one: a profile the step requires, or it always fails."
+    }
+  },
+  "reviewLoop": {
+    "intro": "A reviewer scores the target step's output; below the minimum score the target runs again, up to the iteration cap.",
+    "labels": {
+      "loopTargetStepOrder": "Step to re-run when the score is too low",
+      "minScore": "Minimum passing score (1-10)",
+      "maxIterations": "Maximum review rounds",
+      "enabled": "Early stop with a decision model",
+      "acceptAt": "Early-stop confidence",
+      "bimodalMargin": "Early-stop margin",
+      "providerId": "Decision provider",
+      "timeoutSeconds": "Decision timeout (seconds)"
+    },
+    "hints": {
+      "minScore": "Leave blank to let the review agent decide when the work is good enough.",
+      "maxIterations": "A hard cap so a loop can never run forever. Each round costs a review plus a re-run.",
+      "enabled": "Off (default): the reviewer always runs. On: a Decision provider may accept the work early and skip a review, saving tokens. Anything uncertain still goes to the reviewer.",
+      "acceptAt": "How sure the decision model must be that the score passes (0-1). Higher = fewer early stops. 0.85 is an untuned default.",
+      "bimodalMargin": "If the top two score levels are closer than this, the reviewer runs instead. 0.15 is an untuned default.",
+      "timeoutSeconds": "Gate-level budget; on timeout the reviewer runs as normal.",
+      "loopTargetStepOrder": "The step whose output is reviewed and re-run, usually the author or editor step above this one."
+    },
+    "provider": {
+      "description": "Only used when early stop is on. Blank uses the default Decision provider.",
+      "nullMeans": "With no Decision provider the reviewer simply always runs."
+    },
+    "advanced": {
+      "label": "Advanced: visual check",
+      "description": "Optionally look at the video's frames for cut-off or unreadable text before each review."
+    },
+    "scoreHint": "The review agent expects the target step to produce a 'score' field (1-10) in its output.",
+    "visualCheck": {
+      "enabled": {
+        "label": "Check the picture before each review",
+        "description": "Looks at a few frames of the video for text that is cut off, too close to the edge or too small to read, and tells the reviewer."
+      },
+      "frames": {
+        "label": "Frames to look at",
+        "description": "2 to 16. More frames find more problems and cost more."
+      },
+      "failScoreCap": "Highest score when a serious problem is found (0-10)",
+      "safeMargin": {
+        "label": "Safe margin (% of the frame)",
+        "description": "Text closer to the edge than this is flagged. 0 to 20."
+      },
+      "minText": {
+        "label": "Smallest readable text (% of the frame height)",
+        "description": "Smaller text is flagged. 0.5 to 20."
+      },
+      "vision": {
+        "label": "Vision model",
+        "description": "The model that looks at the frames. Blank uses the default Vision model."
+      }
+    }
+  },
+  "extract": {
+    "inputSource": {
+      "Previous": "Previous step output",
+      "Step": "Specific step",
+      "Accumulated": "Accumulated workflow output",
+      "ProjectFiles": "Project files"
+    },
+    "step": "Step",
+    "selectStep": "Select a step",
+    "noEarlierSteps": "No earlier steps",
+    "stepFallback": "Step {n}",
+    "operation": {
+      "label": "Operation",
+      "description": "What this step does to the earlier results. No AI is involved.",
+      "Project": "Keep the key details: trim a list down to the fields you choose",
+      "Resolve": "Look up chosen items: fetch the full entries for a list of picks",
+      "Files": "Read project files: list or summarise them"
+    },
+    "inputs": {
+      "legend": "Inputs",
+      "source": "Source",
+      "path": {
+        "label": "Path",
+        "description": "JSON path resolved against the source, e.g. $.components"
+      },
+      "ids": "IDs",
+      "idsPath": {
+        "label": "IDs path",
+        "description": "JSON path inside the ids input, e.g. $.selectedIds"
+      },
+      "records": "Records",
+      "recordsPath": {
+        "label": "Records path",
+        "description": "JSON path inside the records input, e.g. $.view.items"
+      },
+      "categories": "Categories",
+      "includeExtensions": "Include extensions",
+      "excludePathContains": "Exclude path contains"
+    },
+    "idSkip": {
+      "legend": "ID & skip handling"
+    },
+    "output": {
+      "legend": "Output shaping",
+      "expectations": "Expectations (fail fast before the next step runs)",
+      "requiredPaths": {
+        "label": "Required paths",
+        "description": "JSON paths that must be present in the output view"
+      },
+      "minItems": "Min items",
+      "maxItems": "Max items",
+      "nonEmpty": {
+        "label": "Non-empty string paths",
+        "description": "Paths that must resolve to a non-empty string"
+      }
+    },
+    "technical": {
+      "label": "Technical details",
+      "description": "The exact format this step hands to the next one.",
+      "handsOver": "What this step hands to the next one"
+    }
+  },
+  "kit": {
+    "fieldNote": {
+      "rejected": "Server rejected this: {message}",
+      "proposes": "Assistant proposes: {before} → {after}"
+    },
+    "askAssistant": "Ask assistant",
+    "advanced": "Advanced",
+    "egressTitle": "Data leaves this server",
+    "stepOrder": {
+      "unlabelled": "{stepType} step",
+      "unavailable": "{order}. (step not available here)",
+      "select": "Select a step",
+      "none": "No other steps yet"
+    },
+    "provider": {
+      "model": "Model",
+      "unknownModel": "Unknown model",
+      "groupWorkspace": "This workspace",
+      "groupUnavailable": "No longer available",
+      "capability": {
+        "Chat": "Chat",
+        "Transcription": "Transcription",
+        "Vision": "Vision",
+        "Decision": "Decision",
+        "VideoGeneration": "Video generation",
+        "SpeechSynthesis": "Speech synthesis",
+        "Embedding": "Embedding",
+        "ImageGeneration": "Image generation",
+        "ImageEdit": "Image edit",
+        "Segmentation": "Segmentation",
+        "Depth": "Depth",
+        "ImageErase": "Object removal",
+        "ImageFill": "Area fill",
+        "ImageExpand": "Expand",
+        "ImageBackgroundReplace": "Background replace",
+        "ImageRelight": "Relight",
+        "ImageUpscale": "Upscale",
+        "VideoSegmentation": "Video segmentation",
+        "Compute": "Compute",
+        "MusicGeneration": "Music generation",
+        "SoundEffectGeneration": "Sound effect generation",
+        "AudioIsolation": "Audio cleanup",
+        "LipSync": "Lip-sync"
+      },
+      "placeholder": {
+        "denied": "Default {noun} model (not available to your role)",
+        "loading": "Loading models...",
+        "none": "No {noun} model configured",
+        "default": "Use the default {noun} model"
+      },
+      "deniedNote": "Your role cannot choose a model, so {noun} runs on the workspace default.",
+      "emptyNote": "No {noun} model configured.",
+      "addPlatform": "Add one in <link>Platform → Inference</link>",
+      "addOrg": "Add one in <link>Organization → Providers</link>",
+      "askAdmin": "Ask an Owner or Admin of this workspace to add one.",
+      "sentenceEnd": "."
+    },
+    "noAudio": {
+      "what": {
+        "music": "music",
+        "sfx": "sound-effect",
+        "both": "music or sound-effect"
+      },
+      "without": {
+        "music": "music",
+        "sfx": "sound effects",
+        "both": "them"
+      },
+      "title": "No {what} files yet",
+      "body": "Your project has no {what} files. Upload an audio track in <link>Files</link> — there's no built-in library yet. Without one, the video comes out without {without}."
+    },
+    "assistantPrompt": {
+      "withTopic": "I'm configuring step {order} ({stepType}) of this workflow. {topic}",
+      "generic": "I'm configuring step {order} ({stepType}) of this workflow. Explain what each setting does and suggest a good setup for my goal."
+    }
+  },
+  "schemaForm": {
+    "select": "Select...",
+    "defaultValue": "Default: {value}",
+    "addItems": "Add items...",
+    "arrayUnsupported": "Array (not supported in this form)",
+    "nestedObject": "Nested object configuration",
+    "unknownType": "Unknown type: {type}",
+    "advancedOptions": "Advanced options",
+    "unapplied": "Unapplied changes: click Apply to keep them",
+    "apply": "Apply",
+    "nestedRef": "Nested object: {ref}"
+  },
+  "timelineRender": {
+    "preset": {
+      "Hd1080p16x9": "HD 1080p (16:9)",
+      "Uhd4k16x9": "4K (16:9)",
+      "Vertical9x16": "Vertical (9:16, phones)",
+      "Square1x1": "Square (1:1)",
+      "Portrait4x5": "Portrait (4:5)",
+      "Master": "Master — the timeline's own size, highest quality",
+      "AudioOnly": "Audio only (.m4a)"
+    },
+    "codec": {
+      "H264": "H.264 (plays everywhere)",
+      "H265": "H.265 (smaller files, newer players)"
+    },
+    "speed": {
+      "Fast": "Fast (larger file)",
+      "Medium": "Balanced",
+      "Slow": "Slow (smallest file)"
+    },
+    "intro": "Turns one of this project's editor timelines into a finished video file. The cut, the layers and the audio levels come from the timeline itself; this step only chooses the delivery format. No AI model is involved.",
+    "what": {
+      "legend": "What to render"
+    },
+    "timeline": {
+      "label": "Timeline",
+      "description": "An editor timeline of this project",
+      "option": "{name} (revision {revision})",
+      "notListed": "{id} (not in this project's list)",
+      "none": "No timelines in this project yet",
+      "choose": "Choose a timeline",
+      "loading": "Loading timelines…",
+      "noMatch": "No timeline matches",
+      "idLabel": "Timeline id",
+      "idDescription": "The id of the editor timeline to render",
+      "required": "Choose a timeline: the step cannot run without one."
+    },
+    "revision": {
+      "label": "Revision",
+      "description": "Leave blank to render the latest revision when the step starts; the run records the revision it used."
+    },
+    "delivery": {
+      "legend": "Delivery",
+      "format": "Format",
+      "fileName": {
+        "label": "File name",
+        "description": "Letters, digits, spaces, dots, dashes and underscores; no folders"
+      },
+      "register": "Also list the file in this project's Files"
+    },
+    "advanced": {
+      "label": "Advanced",
+      "description": "Part of the timeline, custom encoding and loudness normalisation."
+    },
+    "range": {
+      "legend": "Part of the timeline",
+      "only": "Render only a frame range",
+      "first": "First frame",
+      "end": "End frame (not included)"
+    },
+    "encoding": {
+      "legend": "Encoding",
+      "override": "Override the preset's encoder settings",
+      "codec": "Video codec",
+      "speed": "Speed vs size",
+      "quality": "Quality (0 best – 51 smallest)",
+      "audioBitrate": "Audio bitrate (kbps)",
+      "customSize": "Custom size",
+      "width": "Width (even, 16–7680)",
+      "height": "Height (even, 16–4320)",
+      "rateControl": "How to set the file size",
+      "rateMode": {
+        "Quality": "Steady look",
+        "Capped": "Look first, with a size limit",
+        "Average": "Aim for a size"
+      },
+      "videoBitrate": "Video bitrate (kbps, 200–100000)"
+    },
+    "loudness": {
+      "legend": "Loudness",
+      "normalise": {
+        "label": "Normalise the programme loudness",
+        "description": "Two-pass measurement to a broadcast-style target. Off: the mix is measured but left as the timeline set it."
+      },
+      "target": "Target (LUFS)",
+      "truePeak": "True peak (dBTP)",
+      "range": "Range (LU)"
+    }
+  },
+  "thumbnailGenerate": {
+    "fontColor": {
+      "white": "White",
+      "black": "Black",
+      "yellow": "Yellow"
+    },
+    "boxColor": {
+      "black_0_45": "Dark panel (see-through)",
+      "black_0_6": "Dark panel (stronger)",
+      "white_0_4": "Light panel (see-through)",
+      "none": "No panel"
+    },
+    "selection": {
+      "Auto": "Pick the best moment for me (recommended)",
+      "AtTime": "Take one exact moment I choose"
+    },
+    "fit": {
+      "Cover": "Fill the image and crop the edges",
+      "Contain": "Show the whole frame, with bars where it does not fit"
+    },
+    "position": {
+      "None": "No text (default)",
+      "LowerThird": "Lower third of the image",
+      "UpperThird": "Upper third of the image",
+      "Center": "Centre"
+    },
+    "stepFallback": "Step {n}",
+    "setElsewhere": "{value} (set elsewhere)",
+    "intro": "Takes one frame out of your footage and saves it as an image — the picture people see before they press play. No AI model is involved, and nothing about the video itself changes.",
+    "frame": {
+      "legend": "Which frame",
+      "how": "How the moment is chosen",
+      "autoHint": "The moment is chosen from what the Watch footage step measured: the strongest take, how sharp and how calm the frame is, and whether the same moment was filmed more than once. Add a <b>Watch footage</b> step above this one to get started.",
+      "atTimeHint": "You give the exact moment. Nothing is chosen for you, so this also works on a clip the Watch footage step never looked at.",
+      "footage": {
+        "label": "Footage",
+        "description": "The 'Watch footage' step whose clips the frame is taken from"
+      },
+      "footageNumber": {
+        "label": "Footage step number",
+        "description": "The number of the 'Watch footage' step whose clips the frame is taken from"
+      },
+      "noFootage": "No 'Watch footage' step comes before this one, so there is nothing to take a frame from yet. Add one and move it above this step.",
+      "moment": {
+        "label": "Moment (seconds)",
+        "description": "Where in the clip to take the frame, counting from its start"
+      },
+      "clip": {
+        "label": "Clip number",
+        "description": "Which analysed clip to read, counting from 1. 1 is the first."
+      },
+      "candidates": {
+        "label": "Moments to score",
+        "description": "More moments can find a better frame and take a little longer (1 to 500)"
+      },
+      "minShot": {
+        "label": "Ignore moments shorter than (seconds)",
+        "description": "A very short shot is usually a flash frame"
+      },
+      "bestTake": {
+        "label": "Prefer the best attempt",
+        "description": "When the same moment was filmed more than once, use the best take rather than the highest score alone."
+      }
+    },
+    "output": {
+      "legend": "Output",
+      "width": {
+        "label": "Width (pixels)",
+        "description": "16 to 4096. 1280 fits every platform's cover image."
+      },
+      "height": {
+        "label": "Height (pixels)",
+        "description": "16 to 4096. 720 with the width above is the usual 16:9 cover."
+      },
+      "fit": "When the frame's shape differs",
+      "quality": {
+        "label": "Image quality",
+        "description": "2 is the best quality and 31 the smallest file. 4 is a good default."
+      },
+      "fileName": {
+        "label": "File name",
+        "description": "A name only, not a folder"
+      },
+      "save": {
+        "label": "Save to project files",
+        "description": "Lists the image in Files so you can download it or set it as the video's cover"
+      }
+    },
+    "overlay": {
+      "legend": "Text overlay (optional)",
+      "text": {
+        "label": "Text on the image",
+        "description": "Usually the video's headline. Leave blank for no text."
+      },
+      "position": "Where the text sits",
+      "nothingDrawn": "Nothing will be drawn yet: type the text above.",
+      "burnedIn": "The text is written into the picture, so it cannot be edited or translated afterwards. Keep it short — long text shrinks to fit.",
+      "size": "Text size (% of image height)",
+      "maxChars": {
+        "label": "Longest text (characters)",
+        "description": "Anything longer is cut. 1 to 400."
+      },
+      "fontColor": "Text colour",
+      "boxColor": {
+        "label": "Panel behind the text",
+        "description": "Keeps the text readable over a busy picture"
+      }
+    },
+    "advanced": {
+      "description": "Reusing an earlier run's footage analysis. The defaults suit almost every thumbnail.",
+      "reuse": {
+        "label": "Reuse footage analysis from an earlier run (result ID)",
+        "placeholder": "Leave blank to use this run's analysis"
+      }
+    }
+  },
+  "voiceover": {
+    "intro": "Reads your narration aloud with an AI voice.",
+    "selectStep": "Select a step",
+    "noEarlierSteps": "No earlier steps",
+    "source": {
+      "title": "Source",
+      "description": "Where the words come from: type them yourself, use the script an earlier step wrote, or use the narration an earlier step wrote for the edit.",
+      "aria": "Voiceover source",
+      "kind": {
+        "Inline": "Type lines here",
+        "ScriptScenes": "From Scriptwriter scenes",
+        "NarrationPlan": "From Narration plan",
+        "PickupPlan": "Re-recorded lines"
+      }
+    },
+    "lines": {
+      "title": "Voiceover lines",
+      "add": "Add line",
+      "empty": "No voiceover lines. Click \"Add line\" to get started.",
+      "text": {
+        "label": "Text",
+        "placeholder": "Voiceover text"
+      },
+      "start": "Start (sec)",
+      "voice": {
+        "label": "Voice",
+        "placeholder": "Default voice"
+      },
+      "remove": "Remove line"
+    },
+    "script": {
+      "label": "Script step",
+      "description": "The earlier step that wrote the script. Each scene's narration is read aloud."
+    },
+    "narration": {
+      "label": "Narration writer step",
+      "description": "The earlier step that writes the narration. Each of its lines is read aloud.",
+      "readOnly": "The lines come from that step, so they cannot be edited here."
+    },
+    "pickup": {
+      "label": "Re-recording planner step",
+      "description": "The earlier step that chose which sentences to re-record. Pick the presenter's own voice below so the new lines match."
+    },
+    "voice": {
+      "divider": "Voice",
+      "label": "Voice",
+      "descriptionProject": "A voice from this project. Only voices with permission to use them are offered.",
+      "descriptionNoProject": "Save the workflow inside a project to pick one of its voices.",
+      "defaultPlaceholder": "The service's default voice",
+      "none": "No voices in this project yet",
+      "language": {
+        "label": "Language (optional)",
+        "description": "e.g. en-US, or es-ES for a Spanish version"
+      },
+      "manage": "Choose or add voices in this project's Voices tab"
+    },
+    "service": {
+      "divider": "Voice service",
+      "cost": "The voice service charges per character read. Running the same lines again reuses the audio already made.",
+      "label": "Speech service",
+      "description": "Which voice service reads the lines. Blank uses the default one.",
+      "nullMeans": "Without a speech service this step cannot make audio."
+    },
+    "advanced": {
+      "description": "Voice model and ID, size limit, pronunciation and automatic voice casting.",
+      "providerDefault": "provider default",
+      "providerDefaultCapital": "Provider default",
+      "model": {
+        "label": "Model (optional)",
+        "descriptionProvider": "Blank uses {name}'s own model ({model}).",
+        "descriptionService": "Blank uses the service's own model."
+      },
+      "voiceId": {
+        "label": "Default voice ID",
+        "description": "A voice ID from the speech service, used when no project voice is chosen. Blank uses its default voice."
+      },
+      "maxBytes": {
+        "label": "Audio size limit (bytes)",
+        "description": "Safety cap on each line's audio (2,000,000 is about 1 minute of speech)."
+      },
+      "pronunciation": {
+        "label": "Pronunciation help",
+        "description": "Auto teaches the voice how to say product and technology names found in your code (Fish Audio only).",
+        "Off": "Off (default)",
+        "Auto": "Auto"
+      },
+      "casting": {
+        "label": "Automatic voice casting",
+        "description": "Lets a decision model pick one of the project's voices for these lines. Off uses the voice above.",
+        "Off": "Off (default)",
+        "Decision": "On: let the decision model choose"
+      }
+    }
+  },
+  "captionStyle": {
+    "style": {
+      "label": "Caption style",
+      "Subtitle": "Subtitle: a line or two at a time, on a box",
+      "Karaoke": "Karaoke: each word lights up as it is spoken",
+      "Punch": "Punch: one big bold word at a time",
+      "Bold": "Bold: big words a few at a time, Reels/TikTok style"
+    },
+    "styleName": {
+      "Subtitle": "Subtitle",
+      "Karaoke": "Karaoke",
+      "Punch": "Punch",
+      "Bold": "Bold"
+    },
+    "font": {
+      "label": "Font",
+      "licence": "Every font here is built in and licensed for commercial use.",
+      "autoNote": "{name} ({font} for {style})",
+      "Auto": {
+        "name": "Automatic",
+        "hint": "The best font for the style you picked"
+      },
+      "Inter": {
+        "name": "Inter",
+        "hint": "Clean and very easy to read"
+      },
+      "Montserrat": {
+        "name": "Montserrat",
+        "hint": "Wide and confident"
+      },
+      "Poppins": {
+        "name": "Poppins",
+        "hint": "Rounded and friendly"
+      },
+      "BebasNeue": {
+        "name": "Bebas Neue",
+        "hint": "Tall, narrow capitals"
+      },
+      "Anton": {
+        "name": "Anton",
+        "hint": "Heavy and punchy, the classic social look"
+      },
+      "DejaVuSans": {
+        "name": "DejaVu Sans",
+        "hint": "Plain, the original caption font"
+      }
+    },
+    "position": {
+      "label": "Position",
+      "description": "Captions always stay clear of the edges, and of the app buttons on vertical videos.",
+      "Auto": "Automatic: bottom, or the middle for Punch",
+      "Bottom": "Bottom",
+      "Center": "Middle",
+      "Top": "Top"
+    },
+    "size": {
+      "auto": {
+        "label": "Automatic text size",
+        "description": "Sized for the style and for phones. Turn off to set it yourself."
+      },
+      "label": "Text size (% of the video's height)"
+    },
+    "textColor": {
+      "white": "White",
+      "yellow": "Yellow",
+      "black": "Black"
+    },
+    "boxColor": {
+      "black_0_6": "Dark, see-through",
+      "black_0_45": "Light, see-through",
+      "black": "Solid black",
+      "none": "No box (outlined text)"
+    },
+    "colour": {
+      "text": "Text colour",
+      "highlight": "Spoken-word colour",
+      "box": "Box behind the text",
+      "noBox": "{style} never uses a box: its words get a heavy outline."
+    },
+    "maxChars": {
+      "label": "Longest caption (characters)",
+      "description": "A longer sentence is split at a word break."
+    },
+    "preview": {
+      "title": "Preview (approximate)",
+      "sample": "Ship it today",
+      "ship": "Ship",
+      "shipIt": "Ship it",
+      "today": "today"
+    }
+  },
+  "reframe": {
+    "errors": {
+      "notList": "Reframes must be a JSON list: [ '{' ... '}', '{' ... '}' ].",
+      "notObject": "Each reframe must be an object with a sourceIndex and its keyframes.",
+      "invalidJson": "Not valid JSON: {detail}"
+    },
+    "legend": "Reframing, fits and inserts by reference",
+    "reframes": {
+      "label": "Reframes (JSON)",
+      "description": "Zoom and pan over a stretch of a clip, eased between keyframes. Needs Re-encode mode. The server checks keyframe order, overlaps and ranges when you save and says what to fix."
+    },
+    "fits": {
+      "title": "Fit for single clips",
+      "description": "Overrides \"When a clip has a different shape\" for one clip, for example a title card shown whole while the footage around it fills the frame. Ignored when the shape is \"As filmed\".",
+      "clip": {
+        "label": "Clip number",
+        "description": "Place in the Watch footage step (1 = first)"
+      },
+      "fit": "Fit",
+      "option": {
+        "Crop": "Fill the frame, crop the edges",
+        "Pad": "Show the whole clip, fill the rest",
+        "Subject": "Fill the frame around the subject"
+      },
+      "remove": "Remove",
+      "add": "Fit a clip differently"
+    },
+    "insertRef": {
+      "label": "Insert content by reference",
+      "description": "Names the content a screen shows when no entry above matches it (it takes the place of the single file above). A video or an image.",
+      "from": {
+        "ProjectFile": "An uploaded file",
+        "Step": "The output of an earlier step",
+        "StepResult": "The output of an earlier run (step result ID)"
+      },
+      "none": "None",
+      "file": {
+        "label": "File",
+        "select": "Select a file",
+        "empty": "No videos or images uploaded to this project"
+      },
+      "step": {
+        "label": "Step",
+        "select": "Select a step",
+        "none": "No earlier steps"
+      },
+      "stepResult": {
+        "label": "Step result ID",
+        "description": "The ID of a step result from an earlier run of this project"
+      }
+    },
+    "needsReencode": "Reframes need Re-encode mode; the server refuses them with Stream copy.",
+    "safeArea": {
+      "label": "Safe margin around text (fraction of the frame)",
+      "description": "Only when a clip is fitted around its subject: text is kept this far inside the edge. 0 to 0.25. Empty uses 0.05; 0 switches it off."
+    }
+  },
+  "videoGenerate": {
+    "stepFallback": "Step {n}",
+    "intro": "Generates new video clips from text. Every clip is a paid call.",
+    "cost": "Costs real money. The step refuses to start if its estimate exceeds Max spend, and your own daily video limit (Settings > Usage, none by default) applies on top. Max spend is a credit cap, like every other spend figure in ReelBolt. Identical re-runs reuse the cached clips unless you set Cache mode to Never.",
+    "what": {
+      "label": "What to generate",
+      "description": "Type one prompt yourself, or make one clip for each new shot an earlier planning step proposed."
+    },
+    "planSource": {
+      "Inline": "Inline prompt",
+      "StepRef": "Plan from a planner step"
+    },
+    "prompt": {
+      "label": "Prompt",
+      "unused": "Unused while the prompt comes from a planner step",
+      "description": "Text prompt describing the video to generate (max 7000 chars)",
+      "placeholder": "A serene landscape with mountains and clouds..."
+    },
+    "plan": {
+      "step": "Plan step",
+      "analysis": "Analysis step (optional)",
+      "lookMatching": {
+        "label": "Match the surrounding footage's look",
+        "description": "Appends the anchor shot's measured colour words (warm/cool, contrast, saturation) to each prompt. Needs the Analysis step above."
+      },
+      "camera": {
+        "label": "Continue the anchor shot's camera move",
+        "description": "When the planner leaves the camera word blank, use the measured move of the real shot (static or handheld only). Needs the Analysis step above."
+      }
+    },
+    "provider": {
+      "label": "Video generation provider",
+      "description": "Which provider renders the clips. Blank uses the default one.",
+      "nullMeans": "Without a Video generation provider this step fails before spending anything."
+    },
+    "model": {
+      "label": "Model",
+      "comfyT2v": "ComfyUI: Wan 2.2 TI2V-5B text-to-video (self-hosted, GPU budget)",
+      "comfyI2v": "ComfyUI: Wan 2.2 TI2V-5B image-to-video (self-hosted, GPU budget)"
+    },
+    "resolution": "Resolution",
+    "duration": {
+      "label": "Duration (seconds)",
+      "description": "{min}-{max} seconds"
+    },
+    "ratio": "Aspect Ratio",
+    "takes": {
+      "label": "Takes",
+      "description": "Number of generation attempts (1-{max})"
+    },
+    "maxClips": {
+      "label": "Max Clips",
+      "description": "Caps paid clips ({min}-{max}). Every take counts, so shots x takes must fit"
+    },
+    "maxSpend": {
+      "label": "Max spend (credits)",
+      "description": "Hard cap on this step's spending, in credits — the unit every other spend figure in ReelBolt uses"
+    },
+    "maxGpu": {
+      "label": "Max GPU minutes (ComfyUI)",
+      "description": "Hard cap on GPU time for a self-hosted ComfyUI provider, which bills nothing. Ignored by paid vendors; required instead of Max spend for ComfyUI."
+    },
+    "loopBack": {
+      "label": "When this step runs again (loop-back)",
+      "description": "Reuse (default) serves clips with an identical prompt, model, duration and take that were already generated, at no cost. Regenerate pays for fresh clips on every loop-back. The Run/Retry dialog can also force regeneration.",
+      "Reuse": "Reuse previously generated clips",
+      "Regenerate": "Regenerate (costs money each loop)"
+    },
+    "egress": {
+      "label": "Allow sending your media to the video service",
+      "description": "Off stops the step before anything is sent: no frame of your footage, no start picture, no avatar's pictures, videos or voice samples. Only you can switch this on, here in the app.",
+      "avatar": "An avatar needs this switched on: its pictures and videos, and a person's voice samples, go to the video service."
+    },
+    "advanced": "Advanced",
+    "frames": {
+      "none": "None",
+      "previousStep": "The previous step",
+      "intro": "Start the clip from a picture: the first frame, and optionally the last, taken from an earlier step that produced an image (for example a \"Grab a frame\" step). Only for a typed prompt, and only for models that accept it; the server says so before anything is spent.",
+      "first": "First frame from step",
+      "last": "Last frame from step",
+      "pickFirst": "Pick a first frame first",
+      "egressWarning": "The picture is sent to the video service, so switch on \"Allow sending your media to the video service\" above, or the step stops before anything is spent."
+    },
+    "conform": {
+      "fps": {
+        "label": "Conform to frame rate",
+        "description": "Frame-interpolate a lower-rate clip up to this fps (ffmpeg minterpolate). 0 keeps the clip's own rate; never downsamples."
+      },
+      "height": {
+        "label": "Conform to height (px)",
+        "description": "Upscale a smaller clip to this height, keeping its aspect. 0 keeps the clip's own size; never downscales."
+      }
+    },
+    "poll": {
+      "label": "Poll Interval (seconds)",
+      "description": "{min}-{max} seconds"
+    },
+    "timeout": {
+      "label": "Timeout (seconds)",
+      "description": "{min}-{max} seconds"
+    },
+    "avatar": {
+      "title": "Avatar",
+      "intro": "Show a person from the project's Avatars tab in every take. Only an avatar whose consent is on record can be chosen.",
+      "introAny": "Show a person or an object from the project's Avatars tab in every take. Only one that is ready can be chosen.",
+      "introObjects": "Show an object from the project's Avatars tab in every take. Only one that is ready can be chosen.",
+      "groupPeople": "People",
+      "groupObjects": "Objects",
+      "label": "Avatar to show",
+      "none": "None",
+      "option": "{name} · {status}",
+      "noneMeansRun": "With None, the avatar chosen when the run starts (the Avatar field on the app page) is shown, if one is chosen there.",
+      "blocked": {
+        "plan": "An avatar works only with \"Inline prompt\": a step that makes clips from a planner step cannot show one.",
+        "frames": "An avatar cannot be combined with a first or last frame. Remove the frames under Advanced to choose an avatar."
+      },
+      "unusable": "\"{name}\" cannot be used: {reason} The step would stop. Choose another avatar, or fix it in the Avatars tab.",
+      "missing": "An avatar that no longer exists",
+      "missingHint": "The chosen avatar was deleted. Choose another one, or None.",
+      "noAvatars": "This project has no avatars yet.",
+      "openAvatars": "Open the Avatars tab",
+      "roles": {
+        "label": "References to send",
+        "description": "Which of the avatar's files go to the video service. Untick a kind to leave it out.",
+        "needPicture": "Keep at least one picture (Face, Upper body or Full body).",
+        "needPictureObject": "Keep at least one picture (Front view, Another angle or Close-up detail)."
+      },
+      "speech": {
+        "label": "Speech the person says",
+        "notForObjects": "An object says nothing, so there is no speech to choose.",
+        "hint": {
+          "yes": "This model makes the person say this speech, word for word. The clip is as long as the speech, at most the duration above.",
+          "no": "This model does not make the person say a speech track: with one, the step is refused. For exact spoken lines, use a talking-head model, as the \"Talking avatar (budget)\" recipe does.",
+          "unknown": "Only talking-head models (as in the \"Talking avatar (budget)\" recipe) make the person say a speech track. Any other model refuses the step when it runs."
+        },
+        "none": "None",
+        "fromStep": "Voiceover step",
+        "fromFile": "Audio file",
+        "stepLabel": "Voiceover step for the speech",
+        "pickStep": "Choose a Voiceover step",
+        "noVoiceoverStep": "No earlier step of this workflow is a Voiceover step.",
+        "stepFallback": "Step {n}",
+        "fileLabel": "Audio file for the speech",
+        "pickFile": "Choose an audio file",
+        "noAudioFiles": "The project has no audio files. Upload one in the Files tab."
+      },
+      "egressNeeded": "Switch on \"Allow sending your media to the video service\" just below, or the step stops before anything is sent."
+    }
+  },
+  "room": {
+    "stepFallback": "Step {n}",
+    "gateNote": "The convening gate has no effect on the {badge} (it has no fixed set of answers a decision model could pick from). Leave it Off.",
+    "footage": "Footage to discuss",
+    "EditRoom": {
+      "badge": "Editing team",
+      "summary": "Several AI editors discuss your footage and a lead editor settles on one cut, usually a better pick than a single editor working alone.",
+      "viewHelp": "Which footage the team discusses: normally the step that watched your footage. The final-video step can use this team's choice exactly as it would a single editor's.",
+      "labelPlaceholder": "Step label (e.g. Edit room deliberation)"
+    },
+    "GraphicsRoom": {
+      "badge": "Graphics team",
+      "summary": "AI designers for layout, timing and wording discuss where titles and callouts go, and a lead designer settles on one plan. No titles at all is a valid outcome.",
+      "viewHelp": "Which footage the team discusses: pick the step that watched your footage, with \"Find spots for titles\" switched on. Choose it by name: \"previous step\" is usually the editor's choice instead.",
+      "labelPlaceholder": "Step label (e.g. Graphics room deliberation)"
+    },
+    "ColorGradeRoom": {
+      "badge": "Colour team",
+      "summary": "AI colourists discuss the look of your footage and a lead colourist settles on one colour look for the whole video. Keeping the original look is a valid outcome.",
+      "viewHelp": "Which footage the team discusses: pick the step that watched your footage by name; \"previous step\" is usually the editor's choice instead.",
+      "labelPlaceholder": "Step label (e.g. Color grade room deliberation)"
+    },
+    "DailiesRoom": {
+      "badge": "DAILIES ROOM",
+      "summary": "Continuity, motion and image judges + a director compare the generated takes of each planned shot, then pick ONE take per shot by its offered take id — never a score or a number.",
+      "viewHelp": "Which step's bounded '{'view, meta'}' envelope the judges see — the VideoAnalyze step whose source is the GeneratedClips of the generation step (one analyzed source per delivered take, each with its take id). An empty selection is a valid outcome: every shot then keeps its first delivered take.",
+      "labelPlaceholder": "Step label (e.g. Dailies room: pick one take per shot)"
+    },
+    "labels": {
+      "rounds": "Discussion rounds",
+      "maxTurns": "Maximum turns",
+      "persistTranscript": "Save the discussion transcript",
+      "fallbackToSoloEditor": "If the team gets stuck, let one editor decide",
+      "fallbackToSoloPlanner": "If the team gets stuck, let one designer decide",
+      "fallbackToSoloColorist": "If the team gets stuck, let one colourist decide",
+      "fallbackToSoloSelector": "If the team gets stuck, let one judge decide",
+      "decisionScheduling": "Decision scheduling",
+      "conveneGate": "Convening gate",
+      "conveneAcceptAt": "Gate confidence",
+      "conveneMinMargin": "Gate margin",
+      "conveneProviderId": "Gate decision provider"
+    },
+    "placeholders": {
+      "rounds": "Default: 2",
+      "maxTurns": "Default: 8"
+    },
+    "hints": {
+      "rounds": "How many times each team member speaks before the lead decides (1-6). More rounds take longer and cost more.",
+      "maxTurns": "Upper limit on how many times anyone speaks in total, so a discussion cannot run on.",
+      "persistTranscript": "Keeps the discussion so you can read it on the run page afterwards.",
+      "conveneAcceptAt": "Only read when the gate is not Off. 0.85 is an untuned default.",
+      "conveneMinMargin": "Only read when the gate is not Off. 0.25 is an untuned default."
+    },
+    "scheduling": {
+      "Off": "Off: fixed round-robin (default)",
+      "Questions": "Questions: record convergence and next-speaker answers",
+      "Adaptive": "Adaptive: same as Questions for now",
+      "questionsHint": "After each director turn a decision model is asked \"has the room converged?\" and \"who speaks next?\". The answers are recorded for calibration only; the speaking order does not change. Uses the default Decision provider.",
+      "fixedHint": "The room speaks in a fixed order. No decision-model calls."
+    },
+    "gate": {
+      "Off": "Off: always convene the room (default)",
+      "Shadow": "Shadow: observe only, never changes the outcome",
+      "Gate": "Gate: a decision model may skip the discussion",
+      "gateHint": "A Decision provider decides whether the room needs to meet at all; when it is confident the room is skipped, saving a whole discussion. Anything uncertain convenes as usual.",
+      "shadowHint": "The decision model runs alongside and its answer is recorded for the Calibration page, but the room always convenes.",
+      "offHint": "The room always convenes.",
+      "providerDescription": "Only used when the gate is Shadow or Gate. Blank uses the default Decision provider.",
+      "providerNullMeans": "Without one the gate does nothing and the room convenes."
+    },
+    "advanced": {
+      "description": "Decision-model options for teams that collect calibration data. Leave them off.",
+      "legend": "Decision model (advanced)"
+    }
+  },
+  "panel": {
+    "stepLabel": {
+      "label": "Step label",
+      "placeholder": "Label for this step"
+    },
+    "inputMapping": {
+      "label": "What this agent sees (input mapping)",
+      "description": "Leave blank to give the agent everything earlier steps produced. Fill in to pick exactly which earlier results it sees."
+    },
+    "cache": {
+      "label": "Reuse earlier results",
+      "description": "Normal reuses this step's result when nothing it depends on changed. Never always runs it again (use for a fresh creative take).",
+      "Default": "Normal (recommended)",
+      "Always": "Always reuse",
+      "Never": "Never reuse"
+    },
+    "agentAdvanced": "What the agent sees from earlier steps, and when its result is reused.",
+    "legend": {
+      "agent": "AI agent",
+      "condition": "Condition",
+      "loopSource": "Loop source",
+      "reviewLoop": "Review loop",
+      "parallel": "Parallel agents",
+      "room": "{type} configuration",
+      "stepSettings": "Step settings"
+    },
+    "title": "Step {n} settings: {role}",
+    "rejected": "The last save was rejected for this step",
+    "proposes": "The assistant proposes changes to {count, plural, one {# field} other {# fields}} on this step",
+    "proposesNote": "Highlighted below. Nothing changes until you apply the proposal from the assistant."
+  },
+  "sheet": {
+    "stepLabel": {
+      "label": "Step label",
+      "placeholder": "Label for this step"
+    },
+    "inputMapping": {
+      "label": "Input Mapping JSON",
+      "description": "Advanced. Leave blank to give the agent all earlier outputs. Fill in to pick exactly which earlier outputs it sees."
+    },
+    "cache": {
+      "label": "Cache Mode",
+      "description": "Default reuses this step's result when nothing it depends on changed. Never always re-runs it (use for fresh creative takes).",
+      "Default": "Default (built-in policy)",
+      "Always": "Always cache",
+      "Never": "Never cache"
+    },
+    "legend": {
+      "agent": "Agent",
+      "condition": "Condition",
+      "loopSource": "Loop source",
+      "reviewLoop": "Review loop",
+      "parallel": "Parallel agents",
+      "room": "{type} configuration",
+      "stepSettings": "Step settings"
+    },
+    "proposes": "The assistant proposes changes to {count, plural, one {# field} other {# fields}} on this step",
+    "proposesNote": "Highlighted below. Nothing changes until you apply the proposal from the assistant.",
+    "dragHandle": "Drag handle",
+    "configure": "Configure {type}",
+    "done": "Done"
+  },
+  "videoAnalyze": {
+    "videoSourceRefPicker": {
+      "sourceVideo": {
+        "aria": "Source video",
+        "title": "Source video"
+      },
+      "step": {
+        "label": "Step",
+        "placeholder": "Select a step"
+      },
+      "stepResultId": {
+        "label": "Step result ID",
+        "description": "The ID of a step result from an earlier run of this project (shown on the run page)"
+      },
+      "videoFile": {
+        "label": "Video file"
+      },
+      "useFromSeconds": {
+        "label": "Use from (seconds)",
+        "description": "Empty = from the start"
+      },
+      "useUntilSeconds": {
+        "label": "Use until (seconds)",
+        "description": "Empty = to the end"
+      },
+      "mustBeAfterStart": "Must be after the start"
+    },
+    "videoMultiSourceRefPicker": {
+      "chooseClips": {
+        "label": "Choose clips…",
+        "description": "Pick every clip to use. They are cut together in the order listed below."
+      },
+      "clipsTitle": "Clips ({count})",
+      "clipN": "Clip {n}",
+      "removeClip": "Remove clip {n}",
+      "addClip": "Add another clip"
+    },
+    "yourFootage": {
+      "legend": "Your footage"
+    },
+    "useSeveralClips": {
+      "label": "Use several clips",
+      "description": "Cut several clips together into one video."
+    },
+    "whatToLook": {
+      "legend": "What to look for"
+    },
+    "detectSilence": {
+      "label": "Detect silence",
+      "description": "Finds pauses, so dead air can be cut out."
+    },
+    "detectShots": {
+      "label": "Detect shots",
+      "description": "Finds where one shot ends and the next begins."
+    },
+    "analyzeVisuals": {
+      "label": "Analyze visuals",
+      "description": "Measures movement, brightness and colour, and spots repeated takes."
+    },
+    "analyzeAudioLevels": {
+      "label": "Analyze audio levels",
+      "description": "Measures how loud each shot is and how much of it is speech."
+    },
+    "maxShotSec": {
+      "label": "Split shots longer than (seconds)",
+      "description": "Cuts long shots into shorter parts so the editor can keep only part of one. 0 = never split."
+    },
+    "subShotMode": {
+      "label": "Cut points inside long shots",
+      "description": "Where a long shot is cut into parts the editor can choose from.",
+      "Off": "Off",
+      "Even": "Even",
+      "Content": "Where the picture pauses or changes"
+    },
+    "minSubShotSec": {
+      "label": "Shortest part (seconds)",
+      "description": "No part is cut shorter than this."
+    },
+    "maxSubShotSec": {
+      "label": "Longest part (seconds)",
+      "description": "Parts are kept at or under this length."
+    },
+    "maxSubShotsPerShot": {
+      "label": "Most parts per shot",
+      "description": "A very long shot gets longer parts rather than more of them."
+    },
+    "ask": {
+      "label": "Ask"
+    },
+    "transcription": {
+      "label": "Transcribe what is said"
+    },
+    "speechToText": {
+      "label": "Speech-to-text service",
+      "description": "Blank uses the default one.",
+      "nullMeans": "Without one, transcription is skipped (or the run stops, if set to Always)."
+    },
+    "language": {
+      "label": "Language",
+      "description": "Two-letter code, e.g. en or fr. Leave blank to detect it.",
+      "placeholder": "en"
+    },
+    "vision": {
+      "label": "Describe shots"
+    },
+    "imageAi": {
+      "label": "Image AI",
+      "description": "Blank uses the default one.",
+      "nullMeans": "Without one, shots are not described."
+    },
+    "captionSelection": {
+      "label": "Which shots"
+    },
+    "maxCaptionedShots": {
+      "label": "At most this many shots",
+      "description": "Caps the number of AI calls"
+    },
+    "locateSubjects": {
+      "label": "Find the subject of each shot",
+      "description": "Lets a vertical or square version keep what matters in the frame instead of cropping the middle. Uses the image AI above: two calls per shot."
+    },
+    "subjectLabel": {
+      "label": "What to look for",
+      "description": "Blank finds the main subject",
+      "placeholder": "e.g. the phone, the presenter"
+    },
+    "maxSubjectShots": {
+      "label": "At most this many shots",
+      "description": "Caps the number of AI calls"
+    },
+    "prepareMaterialFor": {
+      "legend": "Prepare material for later steps"
+    },
+    "emitOverlayPlacements": {
+      "label": "Find spots for titles",
+      "description": "Needed by a titles & graphics step or a graphics team."
+    },
+    "offerMusicTracks": {
+      "label": "Offer your music tracks",
+      "description": "Needed by a music step. Uses the audio files you uploaded."
+    },
+    "offerSfxClips": {
+      "label": "Offer your sound-effect clips",
+      "description": "Needed by a sound-effects step. Uses the audio files you uploaded."
+    },
+    "detectInsertRegions": {
+      "label": "Find green screens",
+      "description": "Finds a green (or blue) screen in the shot so the final video can show your content on it. Slower."
+    },
+    "analyzeMusicBeats": {
+      "label": "Measure the music's beat",
+      "description": "Tells the editor the tempo, the bars, the drop and the ending of your music, so it can cut to the beat when you ask for it."
+    },
+    "musicBeatTrackProjectFileId": {
+      "label": "Music the video is cut to",
+      "description": "Usually the same track as in the final step. Offered music tracks are measured too.",
+      "onlyOffered": "Only the offered tracks",
+      "empty": "No audio files uploaded to this project"
+    },
+    "insertRegionColor": {
+      "label": "Screen colour",
+      "green": "green",
+      "blue": "blue",
+      "magenta": "magenta"
+    },
+    "whatToFollow": {
+      "label": "What to follow / prompt",
+      "placeholder": "licence plate",
+      "description": "Up to {max} characters. It is cleaned before it is sent, and never becomes part of a video command."
+    },
+    "howToFollow": {
+      "label": "How to follow it",
+      "descriptionSegmentation": "Sends the clip to the provider to follow this object frame by frame.",
+      "descriptionFeature": "Runs on this server and costs nothing."
+    },
+    "howManyTo": {
+      "label": "How many to follow",
+      "descriptionSingle": "One object only: the first one the model finds, or the one you marked by hand.",
+      "descriptionAll": "Every match, so hiding or blurring covers all of them and not just the first."
+    },
+    "sendThisClip": {
+      "label": "Send this clip to the configured provider",
+      "description": "Required for segmentation. Until you tick this, a run stops with EGRESS_REFUSED and names the clip; nothing is uploaded."
+    },
+    "segmentationProvider": {
+      "label": "Segmentation provider",
+      "description": "Which configured provider follows the object. Every one is billed per 16 frames of video.",
+      "nullMeans": "Use the workspace's default segmentation provider"
+    },
+    "maxSegmentationSeconds": {
+      "label": "Longest clip analysed (seconds)",
+      "description": "A longer source is refused, and the message names its length."
+    },
+    "segmentationDetectionThreshold": {
+      "label": "Detection threshold",
+      "description": "Lower finds more objects, including wrong ones (0.01 to 1)."
+    },
+    "maxSegmentationObjects": {
+      "label": "Objects at most per clip",
+      "description": "Each one adds work to the same paid call."
+    },
+    "segmentationTimeoutSeconds": {
+      "label": "Provider timeout (seconds)",
+      "description": "How long one call may take before it is abandoned."
+    },
+    "detectionSensitivityLimits": {
+      "description": "Detection sensitivity, limits, how much detail the AI editor sees, and other technical settings."
+    },
+    "silenceDetection": {
+      "legend": "Silence detection"
+    },
+    "silenceThresholdDb": {
+      "label": "Quieter than (dB) counts as silence"
+    },
+    "minSilenceMs": {
+      "label": "Shortest pause (ms)"
+    },
+    "shotDetection": {
+      "legend": "Shot detection"
+    },
+    "sceneThreshold": {
+      "label": "Shot change sensitivity",
+      "description": "0 to 1. Lower finds more shot changes."
+    },
+    "visualDetail": {
+      "legend": "Visual detail",
+      "label": "How much visual detail the AI editor sees",
+      "description": "Less detail leaves room for more shots when the footage is long."
+    },
+    "detectNearDuplicates": {
+      "label": "Spot repeated takes"
+    },
+    "analyzeColorGrading": {
+      "label": "Measure colour and tone"
+    },
+    "detectLookGroups": {
+      "label": "Group shots with a similar look"
+    },
+    "detectLetterbox": {
+      "label": "Detect black bars"
+    },
+    "shotDescriptions": {
+      "legend": "Shot descriptions"
+    },
+    "keyframesPerShot": {
+      "label": "Frames per shot",
+      "description": "1 is a single still; 2-3 show the AI how the shot moves"
+    },
+    "keyframeMaxWidth": {
+      "label": "Frame width sent to the AI (px)"
+    },
+    "persistKeyframes": {
+      "label": "Keep the frames",
+      "description": "Saves each described frame next to the analysis"
+    },
+    "howManyOptions": {
+      "legend": "How many options later steps get"
+    },
+    "maxPlacements": {
+      "label": "Spots for titles"
+    },
+    "maxMusicTracks": {
+      "label": "Music tracks"
+    },
+    "maxSfxClips": {
+      "label": "Sound-effect clips"
+    },
+    "minInsertRegionSeconds": {
+      "label": "Shortest green-screen moment (s)"
+    },
+    "maxInsertRegions": {
+      "label": "Green screens at most"
+    },
+    "objectTracking": {
+      "legend": "Object tracking"
+    },
+    "objectDetectEverySec": {
+      "label": "Look again every (s)",
+      "description": "Catches objects that appear later"
+    },
+    "maxObjectDetectFrames": {
+      "label": "Looks per clip at most",
+      "description": "Each costs one or two AI calls"
+    },
+    "objectTrackMaxSide": {
+      "label": "Tracking resolution (px)",
+      "description": "Higher finds smaller objects, slower"
+    },
+    "transcriptionDetail": {
+      "legend": "Transcription detail"
+    },
+    "wordTimestamps": {
+      "label": "Time each word",
+      "description": "Needed for word-by-word captions and precise cuts."
+    },
+    "maxAsrChunkBytes": {
+      "label": "Audio chunk size sent for transcription (bytes)"
+    },
+    "limits": {
+      "legend": "Limits"
+    },
+    "maxDurationSeconds": {
+      "label": "Longest video to edit (minutes)",
+      "description": "Leave empty to use the longest video the platform can edit."
+    },
+    "maxInputBytes": {
+      "label": "Largest video to edit (GB)",
+      "description": "Leave empty to use the largest video the platform can edit."
+    },
+    "howMuchThe": {
+      "legend": "How much the AI editor reads"
+    },
+    "maxOutputChars": {
+      "label": "Total size (characters)"
+    },
+    "maxViewSegments": {
+      "label": "Transcript lines"
+    },
+    "maxSegmentTextChars": {
+      "label": "Characters per line"
+    },
+    "checksBeforeThe": {
+      "legend": "Checks before the next step runs"
+    },
+    "expect": {
+      "label": "At least this many shots",
+      "description": "0 to 1"
+    },
+    "expect_atLeastThis": {
+      "label": "At least this many transcript lines"
+    },
+    "expect_atMostThis": {
+      "label": "At most this share of silence"
+    },
+    "decisionModelFor": {
+      "legend": "Decision model (for teams collecting calibration data)"
+    },
+    "derushPrePass": {
+      "label": "Rate each shot before editing",
+      "description": "Gives the editor a keep-or-drop hint for every shot. It never removes anything."
+    },
+    "derushAcceptAt": {
+      "label": "Confident at or above",
+      "description": "0 to 1. 0.85 is a starting point, not a tuned value."
+    },
+    "derushMinMargin": {
+      "label": "Minimum margin",
+      "description": "How far from 50/50 an answer must be. 0.25 is a starting point."
+    },
+    "screenInstructionLikeSpans": {
+      "label": "Flag text in the footage that looks like instructions to the AI",
+      "description": "Such text is pointed out to the editor (never removed). For safety reviews."
+    },
+    "sourceKind": {
+      "ProjectFile": "Uploaded project file",
+      "PreviousStepOutput": "Previous step output",
+      "StepOutput": "Specific step",
+      "StepResult": "Output of an earlier run"
+    },
+    "intro": "Watches your footage to find the shots, the pauses and what is said, so the next steps can pick the best moments.",
+    "speech": {
+      "legend": "Speech"
+    },
+    "describeShots": {
+      "legend": "Describe each shot with AI (optional)",
+      "intro": "An AI looks at a frame from each shot and describes it, which helps the editor understand what is on screen. Costs one AI call per described shot."
+    },
+    "trackObjects": {
+      "legend": "Track objects (optional)",
+      "intro": "One row per object. The free tracker follows flat, rigid things well. Segmentation follows things that bend, turn or get hidden behind something, and is paid.",
+      "empty": "No objects yet. Add one to blur it, highlight it or show content on it in the final video.",
+      "remove": "Remove this object",
+      "add": "Add an object",
+      "marked": "Plus {count, plural, one {# area} other {# areas}} marked by hand or by the assistant."
+    },
+    "transcriptionMode": {
+      "Off": "Off: don't transcribe",
+      "Optional": "If possible (recommended): skip it when no speech service is set up",
+      "Required": "Always: stop the run if it cannot transcribe"
+    },
+    "visionMode": {
+      "Off": "Off (default)",
+      "Optional": "If possible: skip it when no image AI is set up",
+      "Required": "Always: stop the run if it cannot describe shots"
+    },
+    "captionSelectionMode": {
+      "PerDuplicateGroup": "One per set of similar takes (fewest calls)",
+      "LongestShots": "The longest shots first",
+      "EvenlySpaced": "Spread evenly through the video"
+    },
+    "prepareHint": "Turn on only what a later step uses. Each one makes this step a little slower.",
+    "trackMethod": {
+      "Feature": "Free tracker (default)",
+      "Segmentation": "AI segmentation (paid)"
+    },
+    "matchScope": {
+      "AllInstances": "Every match (default)",
+      "SingleTrack": "Just one object"
+    },
+    "segmentation": {
+      "title": "Following with segmentation",
+      "egress": "Each clip in this step is uploaded to the segmentation provider so it can follow the object. The provider is asked not to keep a copy, and nothing else about the clip leaves this server.",
+      "blocked": "Segmentation is on for at least one object and this is off, so this step cannot run yet. Tick the box to allow the upload, or set that object back to the free tracker.",
+      "cost": "Segmentation is billed per 16 frames of video, rounded up, on top of the usual step cost. A cache hit makes no provider call and bills nothing."
+    },
+    "visualDetailMode": {
+      "None": "None",
+      "Compact": "Compact: the essentials per shot",
+      "Full": "Full: everything measured"
+    },
+    "limitsHint": "On very long footage the least important items are left out to stay within these sizes.",
+    "checksHint": "Stop the run early if the footage does not look right. Leave blank to skip a check.",
+    "decision": {
+      "hint": "Both options send text to your Decision service. Leave them off unless an admin has set one up.",
+      "Off": "Off (default)",
+      "Prior": "On",
+      "cost": "One decision call per batch of shots and transcript lines.",
+      "egress": "The on-screen text and transcript of your video are sent to the Decision service for checking. Use a self-hosted one if that text is confidential."
+    },
+    "technical": "Technical: what this step hands to the next one"
+  },
+  "videoCompile": {
+    "objectCombobox": {
+      "pickAnObject": {
+        "placeholder": "Pick an object, or type one"
+      }
+    },
+    "keepWholeSources": {
+      "label": "Keep every source whole (no edit)",
+      "description": "Use every clip in full, without an editor choosing parts, for example to only blur objects or add a screen insert."
+    },
+    "whichClipsTo": {
+      "label": "Which clips to keep"
+    },
+    "keepOrder": {
+      "label": "Order of the clips",
+      "description": "Whether the editor may move a moment from late in a clip to the start, for example to open on the strongest shot"
+    },
+    "analysisStepOrder": {
+      "label": "Footage",
+      "description": "The 'Watch footage' step whose clips this video is made from"
+    },
+    "analysisStepOrder_footageStepNumber": {
+      "label": "Footage step number",
+      "description": "The number of the 'Watch footage' step whose clips this video is made from"
+    },
+    "formatAndLength": {
+      "legend": "Format and length"
+    },
+    "outputFormat": {
+      "label": "Shape",
+      "description": "Where the video will be posted"
+    },
+    "outputFit": {
+      "label": "When a clip has a different shape"
+    },
+    "loudnessTarget": {
+      "label": "Loudness",
+      "description": "Makes the finished video as loud as other videos where it will be posted. The balance between voice and music stays the same."
+    },
+    "targetDurationSec": {
+      "label": "Target length (seconds)",
+      "description": "Roughly how long the video should be. Leave at 0 to keep whatever length the edit needs."
+    },
+    "saving": {
+      "legend": "Saving"
+    },
+    "outputFileName": {
+      "label": "File name"
+    },
+    "registerProjectFile": {
+      "label": "Save to project files",
+      "description": "Lists the finished video in Files so you can download or re-edit it"
+    },
+    "ask": {
+      "label": "Ask"
+    },
+    "enableGraphics": {
+      "label": "Add titles and graphics",
+      "description": "Adds the titles, name tags and callouts a titles & graphics step planned."
+    },
+    "titlesGraphicsPlan": {
+      "label": "Titles & graphics plan from"
+    },
+    "enableInserts": {
+      "label": "Show content on a green screen",
+      "description": "Places one of your videos or images onto a green phone or monitor screen in the footage, following it as it moves. Needs 'Find green screens' on in the Watch footage step."
+    },
+    "insertContentProjectFileId": {
+      "label": "Insert content (your file)",
+      "description": "Shown on every green screen found. Pick it here, not as a clip in the Watch footage step: those are clips to cut, this is what appears on the screen.",
+      "none": "None: use the titles & graphics plan",
+      "empty": "No videos or images uploaded to this project"
+    },
+    "file": {
+      "label": "File"
+    },
+    "onlyOnScreens": {
+      "label": "Only on screens in clip number",
+      "description": "The clip's place in the Watch footage step (1 = first). Empty = any clip."
+    },
+    "onlyOnScreen": {
+      "label": "Only on screen",
+      "description": "A screen id from the Watch footage step's result, such as r2. Empty = any screen."
+    },
+    "fit": {
+      "label": "Fit"
+    },
+    "insertContentDips": {
+      "label": "When your video fades to black",
+      "description": "Screen recordings often dip to black between screens, which makes the phone look switched off"
+    },
+    "insertFit": {
+      "label": "Content fit",
+      "description": "How content of a different shape is fitted to the plate"
+    },
+    "insertSurface": {
+      "label": "Surface",
+      "description": "Curved screens get a mesh warp when measured curved",
+      "Auto": "Auto (from measured curvature)",
+      "Planar": "Flat corner pin",
+      "Mesh": "Mesh warp"
+    },
+    "enableInsertMatte": {
+      "label": "Clip to the screen's real shape",
+      "description": "Keeps rounded corners, the camera notch and fingers crossing the screen in front of the content"
+    },
+    "mixInsertAudio": {
+      "label": "Mix the sound from the inserted clip",
+      "description": "Your file's own sound plays while its picture is on the screen — the clicks and the notification pings of a screen recording, for example. A file with no sound, such as a still image, simply stays silent."
+    },
+    "insertAudioGainDb": {
+      "label": "Insert sound volume (dB)",
+      "description": "0 keeps your file's own loudness. A negative number turns it down, a positive one turns it up."
+    },
+    "maxInserts": {
+      "label": "Max inserts"
+    },
+    "minInsertConfidence": {
+      "label": "Minimum tracking confidence",
+      "description": "0 to 1. Below this a screen is skipped rather than covered badly"
+    },
+    "object": {
+      "label": "Object"
+    },
+    "censorStyle": {
+      "label": "Effect"
+    },
+    "censorPadding": {
+      "label": "Padding",
+      "description": "Growth around the object (0-1)"
+    },
+    "censorHoldSec": {
+      "label": "Hold (s)",
+      "description": "Extra cover before/after each track"
+    },
+    "effect": {
+      "label": "Effect"
+    },
+    "strength": {
+      "label": "Strength",
+      "description": "0 to 2. Bigger is stronger; the default is 1."
+    },
+    "softEdgePx": {
+      "label": "Soft edge (px)",
+      "description": "0 keeps a crisp edge; up to 64 softens it."
+    },
+    "opacity": {
+      "label": "Opacity",
+      "description": "1 applies the effect fully, 0 leaves the picture untouched."
+    },
+    "everythingExceptThis": {
+      "label": "Everything except this object",
+      "description": "Applies the effect to the whole picture except the object."
+    },
+    "enableColorGrade": {
+      "label": "Apply a colour look",
+      "description": "Applies the colour look a colour step or colour team chose to the whole video."
+    },
+    "colourLookFrom": {
+      "label": "Colour look from"
+    },
+    "enableMusic": {
+      "label": "Add background music",
+      "description": "Plays one of your uploaded tracks under the video, quieter while people talk."
+    },
+    "muteSourceAudio": {
+      "label": "Mute the clips' own sound",
+      "description": "Only the music, narration and sound effects are heard. Useful for generated clips that come with their own audio."
+    },
+    "musicTrackProjectFileId": {
+      "label": "Music track",
+      "hint": "Pick a track yourself, or leave it blank and let a music step choose one of your tracks.",
+      "letStep": "Let a music step choose",
+      "empty": "No audio files uploaded to this project"
+    },
+    "musicChoiceFrom": {
+      "label": "Music choice from"
+    },
+    "musicDucking": {
+      "label": "While people talk",
+      "description": "How the music behaves under speech"
+    },
+    "musicFitPolicy": {
+      "label": "If the track is shorter than the video"
+    },
+    "musicFadeInMs": {
+      "label": "Music fade in (ms)"
+    },
+    "musicFadeOutMs": {
+      "label": "Music fade out (ms)"
+    },
+    "beatSync": {
+      "label": "Cut to the beat",
+      "description": "Moves every cut onto the music's beat or bar, and cuts on the drop"
+    },
+    "enableSfx": {
+      "label": "Add sound effects",
+      "description": "Adds the whooshes, clicks and hits a sound-effects step chose from your uploaded clips."
+    },
+    "soundEffectsFrom": {
+      "label": "Sound effects from"
+    },
+    "maxSfxCues": {
+      "label": "At most this many sound effects"
+    },
+    "maxSfxCueSeconds": {
+      "label": "Longest sound effect (s)",
+      "description": "Longer clips are trimmed"
+    },
+    "enableVoiceover": {
+      "label": "Mix narration from a Voiceover step",
+      "description": "Places the lines an earlier Voiceover step synthesized on the output timeline and mixes them over the program. Requires Re-encode mode."
+    },
+    "voiceoverStep": {
+      "label": "Voiceover step",
+      "description": "The earlier Voiceover step whose lines to mix."
+    },
+    "voiceoverMode": {
+      "label": "Source dialogue under narration",
+      "description": "What happens to the original dialogue while a line plays. Replacing it is the basis for dubs and pickups."
+    },
+    "voiceoverDuckDb": {
+      "label": "Duck depth (dB)"
+    },
+    "voiceoverDuckRampMs": {
+      "label": "Ramp (ms)"
+    },
+    "enableCaptions": {
+      "label": "Burn captions",
+      "description": "Burns the narration into the picture from the words the voice actually spoke and their measured timings. Karaoke and Punch need word timings (a Transcription provider); Subtitle works without them."
+    },
+    "enablePickups": {
+      "label": "Splice pickups",
+      "description": "Replaces the dialogue of the transcript segments a pickup-sourced Voiceover step re-recorded, picture untouched. Requires Re-encode mode."
+    },
+    "pickupVoiceoverStep": {
+      "label": "Pickup Voiceover step",
+      "description": "The Voiceover step (source kind PickupPlan) whose lines are the pickups."
+    },
+    "enableGeneratedClips": {
+      "label": "Add generated clips",
+      "description": "Places the clips a 'New clips' step generated into the video."
+    },
+    "generatedClipsFrom": {
+      "label": "Generated clips from"
+    },
+    "maxGeneratedClips": {
+      "label": "Max generated clips",
+      "description": "Any further clips are left out"
+    },
+    "takeSelection": {
+      "label": "Use a dailies take selection",
+      "description": "When the generation step made several takes per shot, place only the take a Dailies Room step chose (its first delivered take otherwise). Off places every delivered take as before."
+    },
+    "takeSelectionStep": {
+      "label": "Take selection step"
+    },
+    "transitionPolicy": {
+      "label": "Transitions between clips",
+      "description": "Off gives plain cuts. Auto picks a soft transition where it suits the footage. Expressive allows more noticeable ones."
+    },
+    "programFadeInMs": {
+      "label": "Video fade in (ms)"
+    },
+    "programFadeOutMs": {
+      "label": "Video fade out (ms)"
+    },
+    "programAudioFadeInMs": {
+      "label": "Audio fade in (ms)"
+    },
+    "programAudioFadeOutMs": {
+      "label": "Audio fade out (ms)"
+    },
+    "programFadeColor": {
+      "label": "Fade colour"
+    },
+    "encodingCutTiming": {
+      "description": "Encoding, cut timing, transition timing, checks, reframing and inserts by reference. The defaults suit almost every video."
+    },
+    "mode": {
+      "label": "Mode"
+    },
+    "allowKeyframeSnapping": {
+      "label": "Allow keyframe snapping",
+      "description": "Required for stream copy. In a single continuous cut, the cut points drift to the nearest keyframe."
+    },
+    "videoCodec": {
+      "label": "Video codec",
+      "description": "Output is always 4:2:0 standard-range MP4, so phones and messengers can play it"
+    },
+    "audioCodec": {
+      "label": "Audio codec"
+    },
+    "preset": {
+      "label": "Preset"
+    },
+    "crf": {
+      "label": "Quality (CRF)",
+      "description": "Lower is better quality and bigger files. 20 is a good default."
+    },
+    "prePaddingMs": {
+      "label": "Pre-padding (ms)"
+    },
+    "postPaddingMs": {
+      "label": "Post-padding (ms)"
+    },
+    "minSegmentMs": {
+      "label": "Min segment (ms)"
+    },
+    "maxSegments": {
+      "label": "Max segments"
+    },
+    "analysisStepResultId": {
+      "label": "Reuse footage analysis from an earlier run (result ID)",
+      "placeholder": "Leave blank to use this run's analysis"
+    },
+    "audioSeamRampMs": {
+      "label": "Audio seam ramp (ms)",
+      "description": "Half-width of the audio declick ramp an audio-only seam treatment applies around the cut"
+    },
+    "softCutMs": {
+      "label": "Soft cut (ms)",
+      "description": "Duration of a soft-cut (short crossfade) treatment"
+    },
+    "dissolveMs": {
+      "label": "Dissolve (ms)",
+      "description": "Duration of a dissolve treatment"
+    },
+    "dipToBlackMs": {
+      "label": "Dip to black (ms)",
+      "description": "Duration of a dip-to-black treatment"
+    },
+    "dipCutMs": {
+      "label": "Dip cut (ms)",
+      "description": "Duration of a dip-cut (brief dip without a full dip-to-black) treatment"
+    },
+    "sectionBreakGapMs": {
+      "label": "Section break gap (ms)",
+      "description": "Silence gap that qualifies as a section break rather than a plain cut"
+    },
+    "maxTransitionMs": {
+      "label": "Max transition (ms)",
+      "description": "Hard ceiling on any single transition's duration"
+    },
+    "maxTransitionRatioPct": {
+      "label": "Max transition ratio (%)",
+      "description": "Caps what percent of all cuts may carry a crossfade-style treatment; excess cuts downgrade to audio-only"
+    },
+    "maxTransitionSegments": {
+      "label": "Max transition segments",
+      "description": "Caps how many cuts in the whole edit may receive a non-hard-cut treatment"
+    },
+    "checksBeforeEncoding": {
+      "legend": "Checks before encoding"
+    },
+    "expect": {
+      "label": "Min output seconds",
+      "description": "Refuses an edit that discards nearly everything"
+    },
+    "expect_maxOutputSeconds": {
+      "label": "Max output seconds"
+    },
+    "expect_minRetainedRatio": {
+      "label": "Min retained ratio"
+    },
+    "expect_maxRetainedRatio": {
+      "label": "Max retained ratio"
+    },
+    "insertAudioProblem": {
+      "insertsOff": {
+        "title": "Screen inserts are switched off",
+        "body": "Your inserted clip's own sound can only be heard when screen inserts are on. Switch on \"Show content on a green screen\" above, or switch this sound back off."
+      },
+      "copyAudio": {
+        "title": "This sound cannot be mixed in",
+        "body": "The program's audio is set to be copied as it is, which leaves no room to add anything to it. Choose another audio codec under Advanced below, or switch this sound back off."
+      }
+    },
+    "engine": {
+      "Tracker": "tracked",
+      "Segmentation": "segmentation (paid)"
+    },
+    "objectOption": "{text} — {engine}",
+    "keepOrderMode": {
+      "SourceOrder": "In the order it was filmed (default)",
+      "AsListed": "In the editor's order"
+    },
+    "outputFormatMode": {
+      "Source": "Original size",
+      "Vertical": "Vertical 9:16 — Reels/TikTok/Shorts",
+      "Square": "Square 1:1 — feed",
+      "Landscape": "Landscape 16:9 — YouTube",
+      "Portrait": "Portrait 4:5 — feed"
+    },
+    "outputFitMode": {
+      "Crop": "Fill the frame (crop the middle)",
+      "Subject": "Fill the frame, keep the subject in shot",
+      "Pad": "Fit whole clip (bars)"
+    },
+    "loudnessMode": {
+      "Off": "As mixed",
+      "Social": "Social media (−14 LUFS)",
+      "Web": "Website (−16 LUFS)",
+      "Broadcast": "TV broadcast (−23 LUFS)"
+    },
+    "insertFitMode": {
+      "sameAsAbove": "Same as above",
+      "Auto": "Auto (keep your file's shape)",
+      "Contain": "Contain (black bars)",
+      "Cover": "Cover (crop to fill)",
+      "Stretch": "Stretch"
+    },
+    "insertDipMode": {
+      "Freeze": "Keep showing the last picture (default)",
+      "Cut": "Skip the black part",
+      "Keep": "Leave it as it is"
+    },
+    "trackedEffect": {
+      "Blur": "Blur",
+      "Pixelate": "Pixelate",
+      "Fill": "Solid black (strongest)"
+    },
+    "regionEffect": {
+      "Blur": "Blur",
+      "Pixelate": "Pixelate",
+      "Highlight": "Highlight it and dim the rest",
+      "Spotlight": "Spotlight: dim everything else",
+      "ColorPop": "Colour pop: keep colour on it only",
+      "Outline": "Outline"
+    },
+    "beatSyncMode": {
+      "Off": "Off (default)",
+      "Beat": "On every beat",
+      "Bar": "On every bar (four beats)"
+    },
+    "voiceoverModeOption": {
+      "OverMusic": "Over the program (default): dialogue untouched",
+      "DuckDialogue": "Duck dialogue under each line",
+      "ReplaceDialogue": "Replace dialogue under each line (dubs)"
+    },
+    "transitionPolicyMode": {
+      "Off": "Off: hard cuts (default)",
+      "AudioOnly": "Audio only: declick every splice",
+      "Auto": "Auto: pick a treatment per cut",
+      "Expressive": "Expressive: allow noticeable transitions",
+      "Editor": "Editor: the editor picks each transition and its speed"
+    },
+    "videoCodecMode": {
+      "libx264": "H.264 — plays everywhere",
+      "libx265": "H.265 — smaller, newer devices"
+    },
+    "intro": "Puts the final video together from the clips the editor chose. Extras like music, narration and titles are off until you switch them on below.",
+    "subjectFitNote": "Each clip is cropped around a tracked screen, or around the subject found by <b>Find the subject of each shot</b> in the analysis step. Clips with neither are cropped in the middle.",
+    "insertContents": {
+      "remove": "Remove this content",
+      "add": "Add content for other screens",
+      "hint": "Different screens can show different files: for example a phone recording on the phone and a desktop recording on the laptop. A screen that no extra content is meant for shows the file above.",
+      "nothingShown": "Pick a file above, or set up a titles & graphics plan above. With neither, nothing is shown on the screen."
+    },
+    "effects": {
+      "legend": "Effects on objects (optional)",
+      "intro": "One row per object, picked from what the Watch footage step follows. A tracked object is hidden by the free tracker. A segmentation object is handled by the paid one, which can also highlight, spotlight, colour-pop or outline it. The rest of the picture is untouched.",
+      "empty": "No effects yet. Add an object to blur it or to make it stand out.",
+      "remove": "Remove this effect",
+      "invalid": "EFFECT_INVALID: name the object this effect applies to, or the step is refused.",
+      "cancel": "Cancel",
+      "add": "Add an effect",
+      "limit": "{max} effects is the limit: a further one is refused with EFFECT_LIMIT_EXCEEDED rather than dropped.",
+      "limitExceeded": "EFFECT_LIMIT_EXCEEDED: this config lists {count} effects and the limit is {max}. Remove some, or the step is refused.",
+      "requiresReencode": "EFFECT_REQUIRES_REENCODE: an effect changes pixels, so the mode must be Reencode.",
+      "trackedShared": "Style, padding and hold are set once for every object you hide, because the free tracker hides them all the same way.",
+      "order": "Effects are applied to the finished picture: after screen inserts and before the program fade."
+    },
+    "musicDuckingMode": {
+      "SpeechEnvelope": "Dip under speech, louder in between",
+      "Off": "Stay quiet the whole time"
+    },
+    "musicFitMode": {
+      "LoopToFit": "Loop to fit the whole edit",
+      "PlayOnce": "Play once, then silence"
+    },
+    "fades": {
+      "title": "Fade in at the start and out at the end"
+    },
+    "encoding": {
+      "legend": "Encoding"
+    },
+    "encodingMode": {
+      "Reencode": "Re-encode: frame-accurate (default)",
+      "StreamCopy": "Stream copy: one continuous cut is a lossless copy; a cut with more than one part is re-encoded"
+    },
+    "cutTiming": {
+      "legend": "Cut timing"
+    },
+    "transitionTiming": {
+      "title": "Transition timing",
+      "hint": "Only used when transitions are not Off."
+    },
+    "checksHint": "Stop the run early if the edit does not look right. Leave blank to skip a check.",
+    "narration": {
+      "legend": "Narration & captions (optional)"
+    },
+    "motionLegend": "Titles and graphics (optional)",
+    "insertsLegend": "Screen inserts (optional)",
+    "colourLegend": "Colour look (optional)",
+    "musicLegend": "Background music (optional)",
+    "sfxLegend": "Sound effects (optional)",
+    "generatedLegend": "Generated clips (optional)",
+    "transitionsLegend": "Transitions and fades",
+    "rateControl": {
+      "label": "How to set the file size",
+      "description": "“Look first, with a size limit” and “Aim for a size” need a video bitrate. “Steady look” is the plain quality encode.",
+      "options": {
+        "Quality": "Steady look",
+        "Capped": "Look first, with a size limit",
+        "Average": "Aim for a size"
+      }
+    },
+    "videoBitrateKbps": {
+      "label": "Video bitrate (kbps)"
+    }
+  },
+  "prompts": {
+    "audioGenerate": "What should I ask for, how long should it be, and what should I cap the spend at?",
+    "imageGenerate": "What should I describe, which picture should I edit, and what should I cap the spend at?",
+    "conditional": "How should I write the condition and choose the true/false branches? Should I use Expression or Decision mode?",
+    "designSystem": "What should this brand and product profile step read or require?",
+    "extractFrame": "Which video and which frame should this step grab, and what should I do with the image?",
+    "pinInsert": "What should this step put on which tracked screen?",
+    "reviewLoop": "What minimum score and iteration cap should I use, and is the decision early stop worth enabling?",
+    "room": "Which analysis view should it use, and how many rounds and turns make sense? Should I turn on decision scheduling?",
+    "agent": "Which agent fits here, and does it need an input mapping or a cache override?",
+    "forEach": "What loop source expression should I use and how many iterations?",
+    "parallel": "Which agents should run in parallel here?",
+    "extract": "Which operation and inputs should this Extract step use?",
+    "thumbnailGenerate": "Which frame should this thumbnail use, and what output size and text should it have?",
+    "timelineRender": "Which timeline and delivery preset should this render use?",
+    "videoAnalyze": "Which clips, transcription and shot-description options fit my footage, and what will they cost?",
+    "videoAnalyzeSpeech": "Explain the transcription settings: what they do, what they cost, and a good starting setup.",
+    "videoAnalyzeShots": "Explain the shot description settings: what they do, what they cost, and a good starting setup.",
+    "videoAnalyzeTrack": "Explain the \"Track objects\" section: how objects are found and followed, the difference between the free tracker and segmentation, what segmentation costs, and how to blur them afterwards.",
+    "videoCompile": "Which extras (titles, music, colour, sound effects, generated clips) should I switch on, and what do they need from earlier steps?",
+    "compileMotion": "Explain the \"Motion graphics\" section: what each setting does, what it costs, and a good starting setup.",
+    "compileInserts": "Explain the \"Screen inserts\" section: what each setting does, what it costs, whether the inserted clip's own sound is mixed in, and a good starting setup.",
+    "compileEffects": "Explain \"Effects on objects\": the difference between an object the free tracker follows and one followed with segmentation, which effects each one allows, what segmentation costs, and a good starting setup.",
+    "compileColour": "Explain the \"Colour grade\" section: what each setting does, what it costs, and a good starting setup.",
+    "compileMusic": "Explain the \"Background music\" section: what each setting does, what it costs, and a good starting setup.",
+    "compileSfx": "Explain the \"Sound effects\" section: what each setting does, what it costs, and a good starting setup.",
+    "compileNarration": "Explain the \"Narration & captions\" section: how the voiceover lines are mixed, what the dialogue modes do, how captions are burned, and a good starting setup.",
+    "compileGenerated": "Explain the \"Generated clips\" section: what each setting does, what it costs, and a good starting setup.",
+    "compileTransitions": "Explain the \"Transitions & program fades\" section: what each setting does, what it costs, and a good starting setup.",
+    "videoGenerate": "Should I type one prompt or use a Shot Director plan? What budget and number of takes are sensible?",
+    "voiceover": "Which source and voice should I use, and what will it cost?",
+    "videoEnhance": "Which video and which improvement should this step apply, and is it free or does it use credits?",
+    "audioCleanup": "Which recording should this step clean, what should it fix, and is it worth using credits for it?"
+  },
+  "videoEnhance": {
+    "sourceKind": {
+      "ProjectFile": "An uploaded file",
+      "PreviousStepOutput": "The output of the previous step",
+      "StepOutput": "The output of a specific step",
+      "StepResult": "The output of an earlier run (step result ID)"
+    },
+    "intro": "Improves a video and saves the result to your project files. Making it bigger and smoother can run free on this server or on an outside AI service that uses credits; extending the picture always runs on the outside AI service; cleaning up noise and adding motion blur always run free on this server.",
+    "source": {
+      "legend": "Which video",
+      "takeFrom": "Take the video from",
+      "file": "File",
+      "step": "Step",
+      "stepPlaceholder": "Select a step",
+      "nothingBefore": "Nothing comes before this step: pick an uploaded file instead.",
+      "stepResult": {
+        "label": "Step result ID",
+        "description": "The ID of a step result from an earlier run of this project (shown on the run page)"
+      }
+    },
+    "op": {
+      "Upscale": "Make it bigger",
+      "Interpolate": "Make motion smoother",
+      "Denoise": "Clean up grain and noise",
+      "MotionBlur": "Add natural motion blur",
+      "Extend": "Extend the picture",
+      "legend": "What to improve",
+      "label": "Improvement",
+      "hostedCapableHint": "This can run free on this server or on an outside service that uses credits.",
+      "extendHostedHint": "This always runs on the outside service and uses credits.",
+      "localOnlyHint": "This always runs free on this server."
+    },
+    "engine": {
+      "label": "Where it runs",
+      "Local": "On this server (free)",
+      "Hosted": "Outside service (uses credits)",
+      "freeHint": "Runs on this server and costs nothing.",
+      "creditsHint": "Uses credits, and the video is sent to an outside service."
+    },
+    "options": {
+      "legend": "Settings"
+    },
+    "upscale": {
+      "label": "New size",
+      "size": {
+        "x2": "Twice as big",
+        "x4": "Four times as big",
+        "h720": "720 pixels tall",
+        "h1080": "1080 pixels tall",
+        "h1440": "1440 pixels tall",
+        "h2160": "2160 pixels tall (4K)"
+      }
+    },
+    "interpolate": {
+      "label": "Frames to add",
+      "multiplier": {
+        "2": "Twice as many frames",
+        "4": "Four times as many frames",
+        "8": "Eight times as many frames"
+      }
+    },
+    "denoise": {
+      "strength": "Strength",
+      "strengthValue": {
+        "Light": "Light",
+        "Strong": "Strong"
+      },
+      "keepGrain": {
+        "label": "Keep some film grain",
+        "description": "Cleans the noise but leaves a little texture so it does not look plastic"
+      }
+    },
+    "motionBlur": {
+      "label": "Shutter angle (degrees)",
+      "description": "Leave blank for the natural look. A bigger angle gives more blur."
+    },
+    "extend": {
+      "mode": {
+        "label": "How to choose the new frame",
+        "aspect": "Pick a shape",
+        "sides": "Set each side"
+      },
+      "aspect": {
+        "label": "New shape",
+        "16:9": "Landscape 16:9",
+        "9:16": "Vertical 9:16",
+        "1:1": "Square 1:1",
+        "4:5": "4:5"
+      },
+      "side": {
+        "amount": "How much to add",
+        "left": "Add on the left",
+        "right": "Add on the right",
+        "top": "Add on the top",
+        "bottom": "Add on the bottom",
+        "description": "Percent of that side, from 1 to 50. Every side you pick grows by this same amount."
+      },
+      "prompt": {
+        "label": "What should the new edges show? (optional)",
+        "description": "Plain words, up to {max} characters. Leave blank to continue the scene naturally."
+      }
+    },
+    "maxSeconds": {
+      "label": "Longest video (seconds)",
+      "description": "Stops the step on a video longer than this. It can only lower the limit your workspace already has."
+    },
+    "output": {
+      "save": {
+        "label": "Save to Files",
+        "description": "List the enhanced result in the project files"
+      }
+    },
+    "hosted": {
+      "legend": "Outside service"
+    },
+    "provider": {
+      "label": "Provider",
+      "nullMeans": "Blank uses the default provider."
+    },
+    "consent": {
+      "warning": "The chosen video is sent to an outside service so it can be enhanced. The service is asked not to keep a copy, and nothing else leaves this server.",
+      "label": "Allow sending this video to the outside service",
+      "description": "Required for this option. Until you tick this, a run stops and names the file; nothing is uploaded.",
+      "blocked": "This is off, so this step cannot run yet. Tick the box to allow it, or choose the free option."
+    }
+  },
+  "audioCleanup": {
+    "target": {
+      "VoiceBasic": "Clean up a voice (free)",
+      "Hum": "Remove hum (free)",
+      "Wind": "Reduce wind noise (free)",
+      "Hiss": "Remove hiss (free)",
+      "Echo": "Reduce echo (free)",
+      "IsolateVoice": "Keep only the voice (uses credits)",
+      "RemoveMusic": "Remove background music (uses credits)"
+    },
+    "sourceKind": {
+      "ProjectFile": "An uploaded file",
+      "PreviousStepOutput": "The output of the previous step",
+      "StepOutput": "The output of a specific step",
+      "StepResult": "The output of an earlier run (step result ID)"
+    },
+    "outputKind": {
+      "Auto": "Match the source",
+      "Audio": "Audio only",
+      "VideoWithCleanAudio": "Video with the clean audio"
+    },
+    "intro": "Cleans up the sound of a video or audio file and saves the result to your project files. Fixing hum, wind, hiss, echo and a rough voice is free; keeping only the voice or removing music uses credits.",
+    "source": {
+      "legend": "Which recording",
+      "takeFrom": "Take the audio from",
+      "file": "File",
+      "step": "Step",
+      "stepPlaceholder": "Select a step",
+      "stepResult": {
+        "label": "Step result ID",
+        "description": "The ID of a step result from an earlier run of this project (shown on the run page)"
+      }
+    },
+    "what": {
+      "legend": "What to fix",
+      "target": "Fix",
+      "freeHint": "Runs on this server and costs nothing.",
+      "creditsHint": "Uses credits, and the audio is sent to an outside service."
+    },
+    "provider": {
+      "label": "Provider",
+      "nullMeans": "Blank uses the default audio cleanup provider."
+    },
+    "consent": {
+      "warning": "The audio of the chosen file is sent to an outside service so it can be cleaned. The service is asked not to keep a copy, and nothing else leaves this server.",
+      "label": "Allow sending this audio to the outside service",
+      "description": "Required for this fix. Until you tick this, a run stops and names the file; nothing is uploaded.",
+      "blocked": "This is off, so this step cannot run yet. Tick the box to allow it, or choose a free fix."
+    },
+    "maxMinutes": {
+      "label": "Longest recording (minutes)",
+      "description": "Stops the step on a recording longer than this. It can only lower the limit your workspace already has."
+    },
+    "output": {
+      "legend": "Result",
+      "kind": "Result type",
+      "save": {
+        "label": "Save to Files",
+        "description": "List the cleaned result in the project files"
+      }
+    }
+  }
+}

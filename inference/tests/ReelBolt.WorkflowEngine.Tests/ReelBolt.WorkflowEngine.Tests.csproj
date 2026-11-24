@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="AwesomeAssertions" Version="9.6.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ReelBolt.WorkflowEngine\ReelBolt.WorkflowEngine.csproj" />
+    <ProjectReference Include="..\..\src\ReelBolt.Shared\ReelBolt.Shared.csproj" />
+    <ProjectReference Include="..\..\src\ReelBolt.Inference.Api\ReelBolt.Inference.Api.csproj" />
+    <ProjectReference Include="..\..\src\ReelBolt.ImportWorker\ReelBolt.ImportWorker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Both referenced web projects copy their own appsettings.json to this output directory and
+         the Inference API's wins, so the engine's config is linked in under a distinct name. -->
+    <None Include="..\..\src\ReelBolt.WorkflowEngine\appsettings.json" Link="WorkflowEngine.appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The AI-SDK chat request body: ONE copy, shared by the C# seam test (which reads it out of
+         this output directory) and the e2e seam spec (which reads it out of the source tree). It is
+         the shared artifact that keeps both halves of the seam pinned to the same body.
+         `Update`, not `Include`: the SDK's default item glob already carries this path as `None`,
+         and a second `Include` for the same file is an NETSDK1022 duplicate-item build error. -->
+    <None Update="TestData\assistant-chat-ai-sdk-body.json" CopyToOutputDirectory="PreserveNewest" />
+    <!-- T-002's real replay pack: the sibling initiative's real fal-ai/sam-3-1/video-rle responses
+         and the two clips they were made from (PROVENANCE.md says what was left out and why). The
+         decode regression test reads the responses out of this output directory, so a missing or
+         renamed file fails as a fixture error, not as a decoder pass. -->
+    <None Update="TestData\prompted-region-effects\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The official Meta PDQ regression vector (bridge-1-original.jpg, SHA-256 b5b0799…7298).
+         PdqHasherTests pins the computed hash to the documented one within Hamming distance 11. -->
+    <None Update="TestData\PdqParity\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData\ffprobe-rotation\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- A reviewer completion captured verbatim from staging (promo-2, iteration 1): its fenced JSON
+         block follows prose and leaves every `criteria` entry unclosed. Read by
+         ReviewLoopStepExecutorTests, which pins that the loop scores it as written. -->
+    <None Update="TestData\promo2-it1-review-output.txt" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Recorded audio-vendor mocks (fal + ElevenLabs, T-107): replayed by the audio client tests;
+         nothing in them came from a live call. -->
+    <None Update="Inference\Fixtures\Audio\**" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Hand-written video-enhance vendor mocks (fal Topaz/bytedance/RIFE/FILM, video-enhance T-002): shaped like the
+         OpenAPI output schemas read 2026-11-02; nothing in them came from a live call. -->
+    <None Update="Inference\Fixtures\VideoEnhance\**" CopyToOutputDirectory="PreserveNewest" />
+    <!-- T-002's trimmed, sanitized Claude Design export (README.md says what was removed and why;
+         the PNGs are synthetic). ClaudeDesignImporterTests reads it out of this output directory. -->
+    <None Update="TestData\claude-design\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- T-001's synthetic SVG hostile corpus (README.md says so in the directory). SvgSanitizerTests
+         reads the fixtures out of this output directory, so a missing file fails as a fixture
+         error rather than as a sanitizer pass. -->
+    <None Update="TestData\design-import\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

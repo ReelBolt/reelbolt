@@ -1,0 +1,7 @@
+{
+  "color": {
+    "$type": "color",
+    "valid": { "$value": "#000000" },
+    "weird": { "$type": "gradient", "$value": "linear-gradient(red, blue)" }
+  }
+}

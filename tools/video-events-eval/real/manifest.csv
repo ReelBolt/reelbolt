@@ -1,0 +1,42 @@
+id,videoType,title,url,licence,attribution,startSec,durSec
+real-anim-01,animation,Sintel,https://download.blender.org/demo/movies/Sintel.2010.1080p.mkv,CC BY 3.0,© Blender Foundation | durian.blender.org,120,45
+real-anim-02,animation,Elephants Dream,https://upload.wikimedia.org/wikipedia/commons/a/a2/Elephants_Dream_%282006%29.webm,CC BY 2.5,© Blender Foundation / NMAI | elephantsdream.org,60,45
+real-anim-03,animation,Cosmos Laundromat First Cycle,https://archive.org/download/CosmosLaundromatFirstCycle/Cosmos%20Laundromat%20-%20First%20Cycle%20%281080p%29.mp4,CC BY 4.0,Blender Foundation,90,45
+real-anim-04,animation,Hero (Blender 2D),https://archive.org/download/hero_20260106/hero.mp4,CC BY 4.0,Blender Studio / Daniel Martinez Lara,30,45
+real-anim-05,animation,How the Ear Functions 1940,https://archive.org/download/HowtheEa1940/HowtheEa1940.mp4,Public domain mark,Prelinger Archives,120,45
+real-anim-06,animation,What Makes Us Tick 1952,https://archive.org/download/WhatMake1952/WhatMake1952.mp4,Public domain mark,Prelinger Archives,120,45
+real-anim-07,animation,Told By a Tooth 1939,https://archive.org/download/ToldByaT1939/ToldByaT1939.mp4,Public domain mark,Prelinger Archives,90,45
+real-anim-08,animation,Working Dollars 1957,https://archive.org/download/WorkingD1957/WorkingD1957.mp4,Public domain mark,Prelinger Archives,90,45
+real-anim-09,animation,Man of Action 1955,https://archive.org/download/ManofAct1955/ManofAct1955.mp4,Public domain mark,Prelinger Archives,120,45
+real-anim-10,animation,Aluminum on the March II 1956,https://archive.org/download/Aluminum1956_2/Aluminum1956_2.mp4,Public domain mark,Prelinger Archives,150,45
+real-anim-11,animation,NASA Spacewalks animation 2026-10-20,https://upload.wikimedia.org/wikipedia/commons/1/1c/Animation_Explains_U_S_Spacewalks_100_And_101_At_the_International_Space_Station_%E2%80%93_October_20%2C_2026_%28jsc2026m000938%29.webm,Public domain NASA,NASA,60,45
+real-anim-12,animation,West Antarctic Collapse,https://upload.wikimedia.org/wikipedia/commons/e/e9/West_Antarctic_Collapse.ogv,Public domain,see Commons file page,20,45
+real-scr-01,screen,gscan2pdf Debian 10 KDE,https://upload.wikimedia.org/wikipedia/commons/e/ec/2_pdf_creating_by_gscan2pdf_in_debian_10_KDE.webm,CC0,none,60,45
+real-scr-02,screen,Fieldpapers in JOSM,https://upload.wikimedia.org/wikipedia/commons/0/08/Fieldpapers_in_Josm_aktivieren.ogv,CC0,none,30,45
+real-scr-03,screen,A box game written in Python,https://upload.wikimedia.org/wikipedia/commons/1/1d/A_box_game_written_in_Python.ogv,CC0,none,5,45
+real-scr-04,screen,Clangset01,https://upload.wikimedia.org/wikipedia/commons/7/74/Clangset01.ogv,CC0,none,200,45
+real-scr-05,screen,Autohotkey builds Bausteine,https://upload.wikimedia.org/wikipedia/commons/2/20/Autohotkey-skript_erzeugt_published-bausteine.OGV,CC0,none,20,45
+real-scr-06,screen,Blender3D Die Another Way,https://upload.wikimedia.org/wikipedia/commons/a/a7/Blender3D_Die_Another_Way.ogv,Public domain,none,100,45
+real-scr-07,screen,3D Edges in Inkscape,https://upload.wikimedia.org/wikipedia/commons/a/a2/3D_Edges_in_Inkscape_demonstration.webm,CC BY 4.0,Wikimedia Commons (see file page),20,45
+real-scr-08,screen,Darktable ep 150,https://upload.wikimedia.org/wikipedia/commons/4/4b/Darktable_ep_150_-_New_features_in_darktable_5.0_%28pt_1_of_2%29.webm,CC BY 3.0,Wikimedia Commons (see file page),90,45
+real-scr-09,screen,Inkscape biohazard symbol,https://upload.wikimedia.org/wikipedia/commons/f/ff/Inkscape-_making_a_biohazard_symbol.webm,CC BY 3.0,Wikimedia Commons (see file page),60,45
+real-scr-10,screen,Raspberry Pi Recommended Software,https://upload.wikimedia.org/wikipedia/commons/8/8f/Exploring_the_Recommended_Software_on_Raspberry_Pi.webm,CC BY 3.0,Wikimedia Commons (see file page),40,45
+real-scr-11,screen,OpenRefine to Wikidata,https://upload.wikimedia.org/wikipedia/commons/5/5c/How_to_import_books_to_Wikidata_using_a_spreadsheet_and_OpenRefine.webm,CC BY 4.0,Wikimedia Commons (see file page),300,45
+real-scr-12,screen,KDE Plasma 5,https://upload.wikimedia.org/wikipedia/commons/5/53/KDE_Plasma_5.webm,CC BY-SA 4.0,Wikimedia Commons (see file page),60,45
+real-scr-13,screen,Basic Introduction to HTML,https://upload.wikimedia.org/wikipedia/commons/5/58/Basic_Introduction_to_HTML.webm,CC BY-SA 3.0,Wikimedia Commons (see file page),120,45
+real-scr-14,screen,EDEX-UI terminal emulator,https://upload.wikimedia.org/wikipedia/commons/7/7b/EDEX-UI_terminal_emulator.webm,CC BY-SA 4.0,Wikimedia Commons (see file page),30,45
+real-scr-15,screen,Drupal Screencast Reference dialog,https://archive.org/download/DrupalScreencastReferenceDialog/ReferencesDialog.mp4,CC0,none,120,45
+real-sil-01,silent,Soil Climate Station rain,https://upload.wikimedia.org/wikipedia/commons/d/d4/20140404-OC-LSC-9207-Timelapse-Soil-Climate_Station-Rain.webm,Public domain,USDA,30,60
+real-sil-02,silent,Soil Climate Station TL,https://upload.wikimedia.org/wikipedia/commons/f/f9/20140403-OC-LSC-9001-Soil_Climate_Station_TL.webm,Public domain,USDA,0,60
+real-sil-03,silent,Truck Farm planting,https://upload.wikimedia.org/wikipedia/commons/8/8a/2012_D_C_Central_Kitchen_Truck_Farm_Planting_%2820120406-DM-LSC-9001%29.webm,Public domain,USDA,0,60
+real-sil-04,silent,Grand Canyon Light and Shadow,https://upload.wikimedia.org/wikipedia/commons/b/b4/Grand_Canyon_National_Park_Light_and_Shadow_Show_%2813831652883%29.webm,Public domain,NPS,0,60
+real-sil-05,silent,NASA Arctic Sea Ice Age,https://upload.wikimedia.org/wikipedia/commons/2/2b/NASA-WeeklyArcticSeaIceAge-1984-2019.webm,Public domain,NASA SVS,0,60
+real-sil-06,silent,Sonnenuntergang Bensersiel,https://upload.wikimedia.org/wikipedia/commons/6/65/Sonnenuntergang_Bensersiel_20200909_191315-001.webm,CC BY 4.0,PantheraLeo1359531,60,60
+real-sil-07,silent,Niagara Falls Time Lapse,https://upload.wikimedia.org/wikipedia/commons/8/84/Niagara_Falls_Time_Lapse.webm,CC BY 3.0,Jorge Mir,0,60
+real-sil-08,silent,Fog covering mountain,https://upload.wikimedia.org/wikipedia/commons/0/06/Fog_covering_mountain_time_lapse.webm,CC BY-SA 4.0,Athulvis,0,45
+real-sil-09,silent,Timelapse nuages Belfort 2011-07-18,https://upload.wikimedia.org/wikipedia/commons/4/44/2011-07-18-Timelapse-nuages-belfort.ogv,CC BY 3.0,Thomas Bresson,0,60
+real-sil-10,silent,Timelapse clouds Belfort 2012-05-11,https://upload.wikimedia.org/wikipedia/commons/1/1c/2012-05-11_21-18-07-timelapse-nuages-belfort-47%2C651795-6%2C846655.ogv,CC BY 3.0,Thomas Bresson,0,60
+real-sil-11,silent,Timelapse clouds Belfort 2011-11-20,https://upload.wikimedia.org/wikipedia/commons/4/41/2011-11-20_17-15-27-timelapse-clouds-belfort-47.651795-6.846655.ogv,CC BY 3.0,Thomas Bresson,0,60
+real-sil-12,silent,Davies Reef time lapse,https://upload.wikimedia.org/wikipedia/commons/9/9d/Davies_Reef_%28GBR%29_Underwater_Camera_18_Month_Time_Lapse_in_30_sec.webm,CC BY 3.0,AIMS,0,45
+real-sil-13,silent,ESO ALMA antennas,https://upload.wikimedia.org/wikipedia/commons/d/dd/ESO_-_Four_ALMA_antennas_on_the_Chajnantor_plain_%28by%29.ogv,CC BY 4.0,ESO / Jose Francisco Salgado,0,45
+real-sil-14,silent,One Year One Tree One Drone,https://upload.wikimedia.org/wikipedia/commons/b/b4/One_Year._One_Tree._One_Drone.webm,CC BY 3.0,Marius Arnesen,0,45

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  WiX v4 source for the ReelBolt Runner per-user MSI (WP E10b).
+
+  Built by package.ps1:
+
+    wix build -arch x64 -d Version=1.4.2 -d DistDir=<dir> -d UpgradeCode=<guid> \
+              -o reelbolt-runner-1.4.2-windows-amd64.msi runner.wxs
+
+  WHY PER-USER, WITH NO ELEVATION:
+
+  The runner is a personal compute agent. It installs into
+  %LOCALAPPDATA%\ReelBolt\Runner, writes its configuration under the user's own
+  config directory and its device key into the user's own credential store
+  (runner/internal/identity). A machine-wide install would need an administrator
+  to add a whole second user's worth of state and would gain nothing: there is no
+  service, no driver and no shared state. Scope="perUser" is therefore the whole
+  no-UAC story, and the PATH entry below is the user's own PATH.
+
+  WHY PATH IS PART OF THE PACKAGE:
+
+  The runner looks up ffmpeg and ffprobe as programs named "ffmpeg" and
+  "ffprobe" on PATH (runner/internal/daemon/probe.go). The installer puts this
+  release's own pinned static builds in the same directory as the binary, so
+  putting that directory first on the user's PATH is what makes a job on this
+  machine produce the same output as the same job in the cloud.
+
+  WHAT IS NOT HERE:
+
+  macOS. D26 defers every macOS step, so there is no .pkg, no .dmg and nothing to
+  notarise.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+    Name="ReelBolt Runner"
+    Manufacturer="ReelBolt"
+    Version="$(var.Version)"
+    UpgradeCode="$(var.UpgradeCode)"
+    Scope="perUser"
+    InstallerVersion="500"
+    Compressed="yes">
+
+    <SummaryInformation Description="ReelBolt Runner $(var.Version)" Manufacturer="ReelBolt" />
+
+    <!-- A downgrade is never an update. The runner's own update path refuses
+         one outright (refuse-downgrade, runner/internal/update/plan.go), so the
+         installer must not be the way around that rule. MajorUpgrade also makes
+         this MSI replace an older per-user install rather than stacking beside
+         it, which is why UpgradeCode must never change. -->
+    <MajorUpgrade
+      DowngradeErrorMessage="A newer version of ReelBolt Runner is already installed."
+      AllowDowngrades="no" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="ReelBoltDir" Name="ReelBolt">
+        <Directory Id="RunnerDir" Name="Runner" />
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="AppMenuDir" Name="ReelBolt" />
+    </StandardDirectory>
+
+    <Feature Id="Main" Title="ReelBolt Runner" Level="1">
+      <ComponentGroupRef Id="RunnerFiles" />
+      <ComponentRef Id="UserPath" />
+      <ComponentRef Id="StartMenuShortcut" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <!-- Every file the runner needs, in one directory. The tray application is
+         what a user launches; the daemon is what it starts, and is also the file
+         a signed manifest's "exe" artifact replaces when the runner updates
+         itself in place. -->
+    <ComponentGroup Id="RunnerFiles" Directory="RunnerDir">
+      <Component Id="TrayExe" Guid="{8B311265-0D2E-4319-B009-0AC090162F40}">
+        <File Id="reelboltRunnerDesktopExe" Source="$(var.DistDir)/reelbolt-runner-desktop.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="DaemonExe" Guid="{1968A06D-ACFF-467D-ADAC-7D0CAADD2D9B}">
+        <File Id="reelboltRunnerExe" Source="$(var.DistDir)/reelbolt-runner.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="FfmpegExe" Guid="{D5F0962B-96F1-4059-B83C-DF8FCC2DA1D5}">
+        <File Id="ffmpegExe" Source="$(var.DistDir)/ffmpeg.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="FfprobeExe" Guid="{362CDE09-B64F-4FEA-A6D8-A5CE2BED524A}">
+        <File Id="ffprobeExe" Source="$(var.DistDir)/ffprobe.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="Licence" Guid="{8B9A75C8-0640-461B-8C74-357952EE0242}">
+        <File Id="thirdPartyNotices" Source="$(var.DistDir)/THIRD_PARTY_NOTICES.md" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <!-- The user's PATH, not the machine's: this is a per-user install and
+         writing to the system PATH would need the elevation the rest of this
+         package exists to avoid. Part="first" so this release's pinned ffmpeg
+         wins over whatever else the user has; on uninstall WiX removes the
+         entry rather than blanking PATH, because the value it wrote is
+         recorded in the component. -->
+    <Component Id="UserPath" Directory="RunnerDir" Guid="{76C62926-071B-4B4D-8D85-8D40CD57FB2B}">
+      <Environment Id="RunnerPathEntry"
+                   Name="PATH"
+                   Value="[RunnerDir]"
+                   Action="set"
+                   Part="first"
+                   Permanent="no"
+                   System="no" />
+    </Component>
+  </Fragment>
+
+  <Fragment>
+    <Component Id="StartMenuShortcut" Directory="AppMenuDir" Guid="{8B9A75C8-0640-461B-8C74-357952EE0243}">
+      <Shortcut Id="TrayShortcut"
+                Name="ReelBolt Runner"
+                Description="Run ReelBolt render jobs on this computer"
+                Target="[RunnerDir]reelbolt-runner-desktop.exe"
+                WorkingDirectory="RunnerDir" />
+      <RemoveFolder Id="RemoveAppMenuDir" On="uninstall" />
+      <!-- The shortcut is the keypath and it is not a file, so this component
+           needs the registry value below to have something to key on. -->
+      <RegistryValue Root="HKCU" Key="Software\ReelBolt\Runner" Name="Shortcut" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+  </Fragment>
+</Wix>

@@ -1,0 +1,143 @@
+{
+  "seo": {
+    "title": "Galleria delle ricette: ricette video pronte",
+    "description": "Sfoglia le ricette video condivise dalla community di ReelBolt. Guarda l'anteprima, leggi i passaggi e le istruzioni, poi copiala nel tuo spazio di lavoro e adattala.",
+    "detailTitleFallback": "Ricetta video",
+    "detailDescriptionFallback": "Una ricetta video condivisa su ReelBolt, con {steps} passaggi. Guarda l'anteprima, leggi i passaggi e copiala nel tuo spazio di lavoro.",
+    "unavailableTitle": "Ricetta non più disponibile",
+    "unavailableDescription": "Questa ricetta è stata rimossa o non è più condivisa."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "recipes": "Ricette"
+  },
+  "page": {
+    "eyebrow": "Galleria delle ricette",
+    "title": "Ricette video da copiare",
+    "intro": "Una ricetta è un flusso di lavoro video che qualcuno su ReelBolt ha condiviso. Guarda l'anteprima, leggi cosa fa ogni passaggio, poi copiala nel tuo spazio di lavoro e usala con i tuoi filmati e le tue impostazioni."
+  },
+  "gallery": {
+    "searchLabel": "Cerca ricette",
+    "searchPlaceholder": "Cerca per nome o descrizione",
+    "sortLabel": "Ordina per",
+    "categoryLabel": "Categoria",
+    "stepTypeLabel": "Passaggio",
+    "languageLabel": "Lingua",
+    "all": "Tutte",
+    "clear": "Azzera i filtri",
+    "loadMore": "Mostra altre",
+    "loading": "Caricamento delle ricette",
+    "empty": "Non ci sono ancora ricette condivise. Torna presto.",
+    "emptyFiltered": "Nessuna ricetta corrisponde a questi filtri.",
+    "resultsLabel": "Ricette",
+    "costLabel": "Costo",
+    "loadFailed": "Non siamo riusciti a caricare le ricette.",
+    "loadMoreFailed": "Non siamo riusciti a caricare altre ricette.",
+    "retry": "Riprova",
+    "resultCount": "{count, plural, one {# ricetta} other {# ricette}}"
+  },
+  "sort": {
+    "new": "Più recenti",
+    "copied": "Più copiate",
+    "rated": "Meglio valutate"
+  },
+  "card": {
+    "steps": "{count, plural, one {# passaggio} other {# passaggi}}",
+    "by": "di {author}",
+    "copies": "{count, plural, one {Copiata una volta} other {Copiata # volte}}",
+    "previewLabel": "Anteprima di {name}",
+    "open": "Apri la ricetta"
+  },
+  "cost": {
+    "label": "Costo",
+    "none": "Nessun credito",
+    "credits": "Usa crediti",
+    "creditsVoice": "Usa crediti e una voce",
+    "creditsShots": "Usa crediti e riprese AI"
+  },
+  "detail": {
+    "back": "Tutte le ricette",
+    "by": "Condivisa da {author}",
+    "copy": "Copia nel mio spazio di lavoro",
+    "copyHint": "Ti verrà chiesto di accedere. La copia è tua e puoi modificarla.",
+    "stepsTitle": "Passaggi",
+    "stepsIntro": "Cosa fa la ricetta, in ordine.",
+    "needTitle": "Cosa ti serve",
+    "needNone": "Nient'altro che i tuoi filmati e le tue impostazioni.",
+    "needInputs": "Da fornire tu",
+    "needSlots": "Da scegliere tu",
+    "promptsTitle": "Testi inviati all'AI",
+    "promptsNote": "Mostrati esattamente come li ha scritti l'autore. Dopo la copia puoi modificarli.",
+    "promptStep": "Passaggio {step}",
+    "stats": "In breve",
+    "length": "Durata dell'anteprima",
+    "copiesLabel": "Copie",
+    "ratingLabel": "Valutazione",
+    "rating": "{average} su 5 da {count} valutazioni",
+    "ratingNone": "Ancora poche valutazioni",
+    "costNoteLabel": "Nota sul costo",
+    "loading": "Caricamento della ricetta",
+    "unavailableTitle": "Questa ricetta non è più disponibile",
+    "unavailableBody": "Potrebbe essere stata rimossa dall'autore o dal nostro team. Sfoglia la galleria per trovarne altre.",
+    "unavailableCta": "Torna alla galleria",
+    "ctaTitle": "Rendila tua",
+    "ctaBody": "Copiala, sostituisci i tuoi filmati e le tue istruzioni e usala nel tuo spazio di lavoro.",
+    "limitsLabel": "Limiti di questo passaggio",
+    "loadFailed": "Non siamo riusciti a caricare questa ricetta. Controlla la connessione e riprova.",
+    "retry": "Riprova"
+  },
+  "slot": {
+    "provider": "Un fornitore di AI",
+    "file": "Un file",
+    "voice": "Una voce",
+    "other": "Qualcosa da scegliere"
+  },
+  "preview": {
+    "play": "Guarda l'anteprima",
+    "pause": "Metti in pausa l'anteprima",
+    "none": "Anteprima non ancora pronta"
+  },
+  "stepType": {
+    "other": "Passaggio",
+    "agent": "Compito AI",
+    "conditional": "Decisione",
+    "foreach": "Ripeti per ogni elemento",
+    "reviewloop": "Revisione e miglioramento",
+    "parallel": "In parallelo",
+    "extract": "Estrazione di informazioni",
+    "videoanalyze": "Analisi del video",
+    "videocompile": "Montaggio del video",
+    "editroom": "Sala di montaggio",
+    "graphicsroom": "Sala grafica",
+    "colorgraderoom": "Sala di color grading",
+    "videogenerate": "Generazione del video",
+    "voiceover": "Voce fuori campo",
+    "thumbnailgenerate": "Miniatura",
+    "designgraphic": "Progettazione grafica",
+    "revise": "Revisione"
+  },
+  "category": {
+    "other": "Altro",
+    "promo": "Video promozionali",
+    "footage": "Filmati",
+    "brand": "Marchio",
+    "utility": "Utilità"
+  },
+  "field": {
+    "other": "Testo",
+    "prompt": "Istruzione",
+    "instructions": "Istruzioni",
+    "script": "Copione",
+    "style": "Stile",
+    "brief": "Brief",
+    "title": "Titolo",
+    "text": "Testo",
+    "negativeprompt": "Cosa evitare",
+    "systemprompt": "Ruolo"
+  },
+  "limit": {
+    "reviewRounds": "Rivede e migliora, fino a {count} giri",
+    "passMark": "Voto minimo {score} su 10",
+    "spendCap": "Spesa limitata a {credits} crediti"
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "common": {
+    "px": "{n}px",
+    "percent": "{n}%",
+    "credits": "{n, plural, one {# credit} other {# credits}}",
+    "about": "about {credits}",
+    "runWithPrice": "{action}, {line}",
+    "noProvider": {
+      "admin": "Picture tools are not set up in this workspace yet.",
+      "member": "Ask your workspace admin to set up picture tools."
+    }
+  },
+  "resultBar": {
+    "changed": {
+      "none": "{title} finished, but nothing new came back.",
+      "options": "{title} found {count} options. Showing option 1.",
+      "one": "{title} added a new layer, \"{name}\". Your original is untouched.",
+      "many": "{title} added {count} new layers. Your originals are untouched."
+    },
+    "charged": {
+      "cost": "It cost {credits}.",
+      "none": "No credits were charged."
+    },
+    "option": "Option {n} of {total}",
+    "dismiss": "Dismiss this message",
+    "previous": "Previous option",
+    "next": "Next option",
+    "keepOne": "Keep this one",
+    "keepAll": "Keep all as layers",
+    "showingBefore": "Showing before",
+    "compare": "Compare with before",
+    "undo": "Undo",
+    "undoLabel": "Undo this result",
+    "tryAgain": "Try again",
+    "tryAgainCost": "Try again ({cost})"
+  },
+  "maskBar": {
+    "group": "Mask for {layer}",
+    "painting": "Painting the mask of \"{layer}\"",
+    "brushLabel": "Mask brush",
+    "hide": "Hide",
+    "show": "Show",
+    "hint": "Hide takes parts of the layer away. Show brings them back. Hold Alt to switch for one stroke.",
+    "size": "Brush size",
+    "softness": "Edge softness",
+    "undoStroke": "Undo stroke",
+    "redoStroke": "Redo stroke",
+    "maskOnly": "Show mask only",
+    "saving": "Saving the mask…",
+    "discardAsk": "Throw away what you painted?",
+    "keepPainting": "Keep painting",
+    "throwAway": "Throw away",
+    "cancel": "Cancel",
+    "tryAgain": "Try again",
+    "done": "Done"
+  },
+  "brush": {
+    "hintTarget": "Paint over the part of \"{layer}\" you want to change. The painted area shows in red.",
+    "hintNone": "Select a picture layer first. Text layers have no pixels to paint on.",
+    "modeLabel": "Brush mode",
+    "paint": "Paint",
+    "erase": "Rub out",
+    "size": "Brush size",
+    "maskReady": "Mask ready.",
+    "nothingPainted": "Nothing painted yet.",
+    "clear": "Clear"
+  },
+  "subject": {
+    "intro": "Click the thing you want to cut out, or drag a box around it. To leave something out, choose \"Leave out\" below, then click it (with a keyboard, Shift-click does the same). You can also just type its name.",
+    "markLabel": "What a click marks",
+    "cutThis": "Cut this out",
+    "leaveThisOut": "Leave this out",
+    "cuttingFrom": "Cutting from <b>{name}</b>. Select another picture layer to cut from that one instead.",
+    "describe": "Or describe it",
+    "describePlaceholder": "the person on the left",
+    "marksTitle": "Marks on the picture",
+    "clearMarks": "Clear marks",
+    "removeInclude": "Remove include mark {n}",
+    "removeLeaveOut": "Remove leave-out mark {n}",
+    "removeBox": "Remove box {n}",
+    "include": "Include {n}",
+    "leaveOut": "Leave out {n}",
+    "box": "Box {n}",
+    "options": "Give me up to {count} options",
+    "optionsHint": "Each option becomes its own layer.",
+    "run": "Cut out",
+    "needInput": "Click the picture, drag a box, or type a name first.",
+    "paidNote": "This sends the picture to an AI provider and adds what it finds as new layers. It is a paid call on every press."
+  },
+  "crop": {
+    "title": "Crop {label}",
+    "intro": "Drag the box, or type the numbers. The part outside the box is hidden, not thrown away: you can open Crop again to widen it, and Undo puts it back.",
+    "handle": "Crop handle, {side}",
+    "handles": {
+      "nw": "top left corner",
+      "n": "top edge",
+      "ne": "top right corner",
+      "e": "right edge",
+      "se": "bottom right corner",
+      "s": "bottom edge",
+      "sw": "bottom left corner",
+      "w": "left edge"
+    },
+    "fields": {
+      "x": "Left",
+      "y": "Top",
+      "w": "Width",
+      "h": "Height"
+    },
+    "fieldAria": {
+      "x": "Crop left in pixels",
+      "y": "Crop top in pixels",
+      "w": "Crop width in pixels",
+      "h": "Crop height in pixels"
+    },
+    "reset": "Reset",
+    "cancel": "Cancel",
+    "removeCrop": "Remove crop",
+    "apply": "Crop"
+  },
+  "layers": {
+    "upload": "Upload an image",
+    "uploadProgress": "Upload progress",
+    "empty": "This picture has no layers yet. Upload an image, add text, or create a picture with AI.",
+    "listLabel": "Layers, front first",
+    "pick": "Include {name} in the chosen layers",
+    "hide": "Hide {name}",
+    "show": "Show {name}",
+    "lock": "Lock {name}",
+    "unlock": "Unlock {name}",
+    "select": "Select {name}",
+    "editMask": "Edit the mask of {name}",
+    "maskOptions": "Mask options for {name}",
+    "on": "On",
+    "imageMissing": "Image missing",
+    "moreActions": "More actions for {name}",
+    "deleteLayer": "Delete layer",
+    "moveForward": "Move {name} forward",
+    "moveBack": "Move {name} back",
+    "delete": "Delete {name}",
+    "changeGraphic": "Change this graphic",
+    "name": "Name",
+    "opacity": "Opacity",
+    "blend": "Blend",
+    "role": "Role",
+    "flipH": "Flip horizontally",
+    "flipV": "Flip vertically",
+    "lockedHint": "Locked: unlock to move, resize or flip.",
+    "history": {
+      "rename": "Rename layer",
+      "opacity": "Change opacity",
+      "blend": "Change blend mode",
+      "role": "Change role"
+    },
+    "menu": {
+      "forward": "Bring forward",
+      "back": "Send back",
+      "front": "Bring to front",
+      "backmost": "Send to back"
+    },
+    "maskMenu": {
+      "add": "Add mask",
+      "edit": "Edit mask",
+      "invert": "Invert mask",
+      "delete": "Delete mask",
+      "only": "Show mask only"
+    },
+    "kind": {
+      "source": "original",
+      "cutout": "cut-out",
+      "generated": "AI",
+      "text": "text",
+      "image": "image"
+    },
+    "blendMode": {
+      "normal": "Normal",
+      "multiply": "Multiply",
+      "screen": "Screen",
+      "overlay": "Overlay",
+      "darken": "Darken",
+      "lighten": "Lighten",
+      "soft-light": "Soft light",
+      "hard-light": "Hard light",
+      "difference": "Difference"
+    },
+    "roleName": {
+      "background": "Background",
+      "subject": "Subject",
+      "overlay": "Overlay"
+    },
+    "defaultText": "Text",
+    "defaultMerged": "Merged layer",
+    "working": "Working on this layer",
+    "aiMade": "AI-generated · {names}",
+    "aiMadePlain": "AI-generated"
+  },
+  "canvas": {
+    "label": "Thumbnail canvas",
+    "help": "Select a layer, then use the arrow keys to nudge it by one pixel, or hold Shift for ten. Hold Space and drag, or drag with two fingers, to move around. Scroll or pinch to zoom; press 0 to fit the picture, 1 for actual size.",
+    "picture": "Your picture",
+    "history": {
+      "move": "Move",
+      "resize": "Resize",
+      "rotate": "Rotate",
+      "nudge": "Nudge"
+    },
+    "zoomOutTip": "Zoom out (−)",
+    "zoomOut": "Zoom out",
+    "actualSizeTip": "Actual size (1)",
+    "zoomActual": "Zoom {zoom}. Show at actual size",
+    "zoomInTip": "Zoom in (+)",
+    "zoomIn": "Zoom in",
+    "fitTip": "Fit the picture (0)",
+    "fit": "Fit the picture on screen",
+    "working": "Working on this layer"
+  },
+  "editor": {
+    "panelTitle": {
+      "layers": "Layers",
+      "text": "Text",
+      "ai": "AI tools",
+      "canvas": "Canvas"
+    },
+    "dock": {
+      "layers": "Layers",
+      "text": "Text",
+      "ai": "AI",
+      "canvas": "Canvas"
+    },
+    "dockLabel": "Picture tools",
+    "toolsLabel": "Tools",
+    "tools": {
+      "select": "Select and move",
+      "hand": "Move around the canvas",
+      "text": "Text",
+      "subject": "Cut out a subject",
+      "brush": "Brush mask"
+    },
+    "croppedTool": "This picture is cropped. Open Crop and choose \"Remove crop\" first, so this works on the whole picture.",
+    "finishMaskFirst": "Press Done or Cancel to finish the mask first.",
+    "noProviderFallback": "This workspace has no AI provider set up for it.",
+    "thisLayer": "this layer",
+    "layerMoved": "Layer moved",
+    "history": {
+      "nudge": "Nudge",
+      "addText": "Add text",
+      "addImage": "Add image",
+      "cutOut": "Cut out subject",
+      "keepOne": "Keep one option",
+      "keepAll": "Keep all options",
+      "designGraphic": "Design a graphic",
+      "editText": "Edit text",
+      "assistant": "Assistant: {summary}",
+      "assistantChange": "Assistant change",
+      "reviewShow": "Show the kept result",
+      "reviewDiscard": "Discard the kept result"
+    },
+    "errors": {
+      "textAdd": "The text could not be added.",
+      "imageAdd": "The image could not be added.",
+      "uploadWith": "The image could not be uploaded: {reason}",
+      "upload": "The image could not be uploaded. Check your connection and try again.",
+      "subjectCut": "The subject could not be cut out.",
+      "pictureLoading": "The picture is still loading. Try again in a moment.",
+      "opFailed": "{title} did not work.",
+      "layerRemove": "The layer could not be removed.",
+      "designFlush": "Your latest edits could not be saved yet, so the design was not started. Try again in a moment.",
+      "graphicAdd": "The finished graphic could not be added.",
+      "assistantReload": "The assistant changed this picture, but it could not be reloaded.",
+      "designsLoad": "Your designs could not be loaded.",
+      "pictureOpening": "The picture is still opening.",
+      "exportFlush": "Your latest edits could not be saved yet. Try again in a moment.",
+      "exportTooBig": "This file is {size}, more than the {max} a project can store. Download it instead."
+    },
+    "notes": {
+      "reconciled": "{title} took longer than expected, but it finished. The result is on your picture, and you were charged once.",
+      "opDone": "{title} done. {notice}",
+      "subjectDone": "{count, plural, one {Added one cut-out layer.} other {Added # cut-out layers.}}",
+      "keptOption": "Kept this option. Undo brings the others back.",
+      "graphicReady": "{count, plural, one {Your graphic is ready.{summary}} other {# graphics are ready.{summary}}}",
+      "assistantSaid": "The assistant: {summary}",
+      "assistantChanged": "The assistant changed this picture."
+    },
+    "export": {
+      "quoted": "\"{name}\"",
+      "unloadableOne": "{name} could not be loaded, so it cannot be exported yet. Check your connection and try again.",
+      "unloadableMany": "{count, plural, one {# layer ({names}) could not be loaded, so it cannot be exported yet.} other {# layers ({names}) could not be loaded, so they cannot be exported yet.}} Check your connection and try again.",
+      "waiting": "Waiting for {what} to load.",
+      "layersCount": "{count, plural, one {# layer} other {# layers}}",
+      "leftOutOne": "The image of {name} is gone, so the export leaves it out.",
+      "leftOutMany": "The images of {names} are gone, so the export leaves them out.",
+      "downloaded": "Downloaded {fileName} ({size}, {bytes}).",
+      "saved": "Saved as {fileName} in your project's files ({size}).",
+      "button": "Export",
+      "aiLabel": "AI-generated"
+    },
+    "loadFailed": "This picture could not be opened",
+    "tryAgain": "Try again",
+    "opening": "Opening your picture…",
+    "subjectBlocker": {
+      "noLayer": "Select a picture layer to cut a subject out of.",
+      "working": "Working on it…"
+    },
+    "save": {
+      "saving": "Saving…",
+      "unsaved": "Unsaved changes",
+      "error": "Not saved",
+      "saved": "All changes saved"
+    },
+    "saveFailed": "Your changes could not be saved",
+    "undoTip": "Undo: {label}",
+    "undoNone": "Nothing to undo",
+    "undo": "Undo",
+    "redoTip": "Redo: {label}",
+    "redoNone": "Nothing to redo",
+    "redo": "Redo",
+    "deleteTitle": "Delete this layer?",
+    "deleteMessage": "The layer is removed for good, and undo history is cleared because earlier steps could no longer be undone safely.",
+    "addImage": {
+      "label": "Add an image from this project",
+      "pick": "Pick an image",
+      "none": "No images in this project",
+      "noneDot": "No images in this project.",
+      "add": "Add to the picture",
+      "hint": "A picture larger than the canvas is fitted inside it. Drag a corner to make it bigger."
+    },
+    "busyGuard": {
+      "title": "This layer is busy",
+      "message": "This layer is still being worked on. If you go on, the result will follow your change when it is ready.",
+      "goOn": "Go on",
+      "back": "Back",
+      "stop": "Stop"
+    },
+    "review": {
+      "message": "The layer this was made for was deleted. The result is kept, hidden.",
+      "show": "Show it",
+      "discard": "Discard",
+      "label": "Result needs your OK"
+    },
+    "subjects": {
+      "noPictures": "Confirm this person's consent again in the Avatars tab before using them in a picture.",
+      "notUsable": "One of the people or objects you chose cannot be used right now. Check it in the Avatars tab.",
+      "notUsableReason": "One of the people or objects you chose cannot be used right now. {reason}",
+      "unsupported": "The AI model set up for this tool cannot be shown people or objects. Run it without them, or ask an admin to choose another model.",
+      "unsupportedModels": "The AI model set up for this tool cannot be shown people or objects. These models can: {models}.",
+      "plan": {
+        "avatars": "Your plan does not include avatars of people. See the plans to unlock them.",
+        "avatar_objects": "Your plan does not include objects. See the plans to unlock them.",
+        "other": "Your plan does not include this. See the plans to unlock it."
+      },
+      "consent": "Agree to send the files first."
+    }
+  },
+  "document": {
+    "openFailed": "This picture could not be opened.",
+    "changedElsewhere": "This picture was changed somewhere else, so it was reloaded. Your last edits were not applied.",
+    "changedElsewhereMask": "This picture was changed somewhere else, so it was reloaded. Your mask is still here: press Done again.",
+    "saveFailed": "Your changes could not be saved.",
+    "flushNotRun": "Your latest edits could not be saved yet, so this was not run. Try again in a moment.",
+    "flushNotRemoved": "Your latest edits could not be saved yet, so the layer was not removed. Try again in a moment.",
+    "flush": "Your latest edits could not be saved yet. Try again in a moment."
+  },
+  "maskEdit": {
+    "saveFailed": "The mask could not be saved.",
+    "layerLoading": "This layer is still loading. Try again in a moment.",
+    "maskLoading": "The mask is still loading. Try again in a moment."
+  }
+}

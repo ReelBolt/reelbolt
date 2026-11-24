@@ -1,0 +1,170 @@
+/* The editor hub: one list language for timelines, renders and pictures. Hairline structure,
+   one radius (12px for the list shell, 8px for the leading tile), no shadows, the app's violet
+   as the only accent. */
+
+/* The hub header: the title area (title + Early preview label) keeps its natural width, so the
+   label is never clipped; the project picker is the item that gives way. It shrinks first, and on
+   a phone it takes its own full-width line under the title, with a 44px tap target. */
+.headerTitle {
+  flex: 1 1 18rem;
+  min-width: auto;
+}
+
+.picker {
+  flex: 0 1 280px;
+  min-width: 12rem;
+}
+
+.list {
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--rb-ed-surface);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  min-height: 64px;
+  transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.row + .row {
+  border-top: 1px solid var(--mantine-color-default-border);
+}
+
+.row:hover {
+  background: var(--rb-ed-subtle);
+}
+
+.rowLink {
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 6px;
+  outline-offset: 4px;
+}
+
+.tile {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rb-ed-thumb-bg);
+  color: var(--mantine-color-dimmed);
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tileAccent {
+  background: var(--mantine-color-violet-light);
+  color: var(--mantine-color-violet-light-color);
+}
+
+.meta {
+  font-size: var(--mantine-font-size-xs);
+  color: var(--mantine-color-dimmed);
+  font-variant-numeric: tabular-nums;
+}
+
+.sectionTitle {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.tabs {
+  border-bottom: 1px solid var(--mantine-color-default-border);
+}
+
+.empty {
+  border: 1px dashed var(--mantine-color-default-border);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.enter {
+  animation: hubEnter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hubEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter {
+    animation: none;
+  }
+  .row {
+    transition: none;
+  }
+}
+
+/* Same rule as lib/editing/device-class.ts PHONE_MAX_WIDTH (600): one phone rule everywhere (W3-D1). */
+@media (max-width: 599.98px) {
+  .row {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .rowLink {
+    gap: 10px;
+  }
+  .tile {
+    width: 48px;
+    height: 32px;
+  }
+  .hideOnPhone {
+    display: none;
+  }
+  .picker {
+    flex-basis: 100%;
+  }
+  .pickerInput {
+    min-height: 44px;
+  }
+}
+
+/* R01.1: touch targets. A fingertip needs 44px; a mouse keeps the compact control. */
+.menuButton,
+.menuItem,
+.touchTarget,
+.touchInput {
+  min-height: 0;
+}
+
+@media (pointer: coarse), (max-width: 599.98px) {
+  .menuButton {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .menuItem,
+  .touchTarget,
+  .touchInput {
+    min-height: 44px;
+  }
+}

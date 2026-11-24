@@ -1,0 +1,6 @@
+{
+  "globs": [
+    "app/(app)/admin/links/**/*.tsx",
+    "components/admin/links/**/*.{ts,tsx}"
+  ]
+}

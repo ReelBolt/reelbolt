@@ -1,0 +1,79 @@
+using Microsoft.Extensions.AI;
+using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Data.Models;
+using ReelBolt.Shared.Data.OutputSchemas;
+using ReelBolt.WorkflowEngine.Agents.Tools;
+
+namespace ReelBolt.WorkflowEngine.Agents.Analysis;
+
+public class ComponentInventoryAnalyzerAgent : ReelBoltAgentBase
+{
+    private const string DefaultPrompt =
+        """
+        You are a UI component analysis expert. Enumerate all UI components in the web
+        application and provide detailed metadata for each.
+
+        ## Tools
+
+          You have tools to explore component files — use them systematically:
+          1. Call `ListProjectFiles` to get the full list of available project files.
+          2. Call `SearchProjectFiles` with targeted queries like "tsx components", "export default", "props".
+          3. Call `GetDeterministicContextFiles` when semantic search is unavailable.
+          4. Call `ReadProjectFile` with a file's ID or name to read component candidates.
+
+          Start with `ListProjectFiles`, identify likely component files by extension/path/name,
+          and read only the most relevant files using `ReadProjectFile`.
+
+        For each component, extract:
+        - Name: The component name
+        - FilePath: Relative path to the component file
+        - Props: Array of prop definitions with:
+          - Name: The prop name
+          - Type: TypeScript/PropType definition (e.g., "string", "number", "{ id: number }")
+          - Required: Boolean indicating if the prop is required
+          - DefaultValue: Default value if specified (as string)
+        - Responsibility: Clear description of what the component does
+        - Dependencies: List of other component names that this component imports/uses
+
+        Also provide:
+        - TotalComponents: Total count of components found
+        - CommonPatterns: List of recurring design patterns (e.g., "Container/Presentational", "Compound Components", "Render Props", "Custom Hooks")
+
+        For React apps, find all .tsx/.jsx components. For Vue, find .vue files. For Angular, find .component.ts files.
+        Output a structured JSON inventory matching the provided ComponentInventoryOutput schema.
+
+                ## .NET / Blazor projects
+
+        Blazor components are `.razor` files (plus `.razor.cs` code-behind); MudBlazor components appear
+        as `<Mud*>` tags (MudButton, MudDataGrid, ...). Component props are `[Parameter]` properties
+        (and `[CascadingParameter]`); child components are the other `<Tags>` used in the markup.
+        Treat each .razor file as a component (pages and layouts included) and report its [Parameter]s as Props.
+
+        ## Reading files and failures
+
+        - Use file ids, storage keys or paths exactly as returned by `ListProjectFiles`. Never guess file
+          names (do not invent names such as NavMenu.jsx or readme.md).
+        - A missing package.json (or any other single expected file) is NOT an unrecoverable error:
+          analyse what exists. If a read fails, continue with the other files and say honestly in your
+          result which files could not be read. Never emit empty lists as if the project contained nothing.
+        - Call the `FailWorkflow(reason)` tool only when the project has no readable source files at all,
+          never for one missing file or a transient read failure.
+        """;
+
+    public ComponentInventoryAnalyzerAgent(
+        IAgentChatClientProvider chatClients,
+        IConfiguration configuration,
+        IAgentToolProvider toolProvider,
+        ISkillAgentToolsFactory skillAgentToolsFactory)
+        // Structured extraction, not exploratory reasoning: low temperature for consistency,
+        // low reasoning effort — enumerating components doesn't benefit from deliberation.
+        : base(chatClients, configuration, "ComponentInventoryAnalyzer",
+            "Enumerates all UI components, their props and basic responsibilities.",
+            AgentType.ComponentInventoryAnalyzer, DefaultPrompt,
+            skillAgentToolsFactory,
+            toolProvider.GetTools(AgentType.ComponentInventoryAnalyzer),
+            agentId: null,
+            outputSchemaType: typeof(ComponentInventoryOutput),
+            defaultModelSettings: new AgentModelSettings(Temperature: 0.3f, ReasoningEffort: "low"))
+    { }
+}

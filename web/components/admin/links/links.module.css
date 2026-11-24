@@ -1,0 +1,74 @@
+/* Secondary lines of the links table. Mantine's `dimmed` is under 4.5:1 at this size; these are not. */
+.sub {
+  font-size: var(--mantine-font-size-xs);
+  line-height: 1.4;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
+}
+
+.code {
+  font-family: var(--mantine-font-family-monospace);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* The link column stays in view while the funnel columns scroll sideways. */
+.linkCell {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 210px;
+  max-width: 280px;
+  text-align: left;
+  font-weight: 400;
+  vertical-align: top;
+  background: var(--mantine-color-body);
+}
+
+.count {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.numberCell {
+  min-width: 68px;
+  text-align: right;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+/* Where most accounts stop: a tint, a rule under the cell and an icon, never colour alone. */
+.marked {
+  background: light-dark(var(--mantine-color-orange-0), rgba(253, 126, 20, 0.16));
+  box-shadow: inset 0 -2px 0 var(--mantine-color-orange-6);
+}
+
+.bar {
+  height: 4px;
+  margin-top: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--mantine-color-violet-filled);
+}
+
+.barFillMarked {
+  background: var(--mantine-color-orange-6);
+}
+
+.footRow th,
+.footRow td {
+  border-top: 2px solid var(--mantine-color-default-border);
+}
+
+/* Phone: one card per link, the funnel as a list. */
+.stepRow {
+  padding: 6px 8px;
+  border-radius: var(--mantine-radius-sm);
+}

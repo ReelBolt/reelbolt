@@ -1,0 +1,31 @@
+{
+  "id": "crt-scanlines",
+  "version": "1.0.0",
+  "title": "CRT scanlines",
+  "category": "effects",
+  "description": "Wrap a scene in an old CRT monitor look: scanlines, rounded screen, vignette and flicker. Use for retro or gaming moments.",
+  "tags": [
+    "crt",
+    "retro",
+    "scanlines",
+    "overlay"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-crt-scanlines",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      0,
+      20,
+      40
+    ]
+  },
+  "props": "{children?: ReactNode; intensity?: number /*0.5*/; lineHeight?: number /*4*/; curvature?: number /*40*/; flicker?: number /*0.4*/; seed?: string}",
+  "example": "import {CrtScanlines} from './blocks/crt-scanlines/CrtScanlines.tsx';\n<CrtScanlines intensity={0.6}><Scene /></CrtScanlines>"
+}

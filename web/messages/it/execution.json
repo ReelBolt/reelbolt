@@ -1,0 +1,73 @@
+{
+  "stepState": {
+    "Completed": "Fatto",
+    "Running": "In corso",
+    "Failed": "Non riuscito",
+    "Skipped": "Saltato",
+    "NotRun": "Non eseguito",
+    "Pending": "In attesa"
+  },
+  "stepRow": {
+    "ariaLabel": "Passaggio {order}, {name}, {state}{live, select, none {} other {, {live}}}{duration, select, none {} other {, {duration}}}"
+  },
+  "history": {
+    "emptyTitle": "Ancora nessuna esecuzione",
+    "emptyDescription": "Premi Avvia per creare un video. Ogni esecuzione compare qui.",
+    "heading": "Cronologia esecuzioni",
+    "starting": "Avvio…",
+    "retries": "{count, plural, one {# giro di revisione} other {# giri di revisione}}",
+    "runNumber": "Esecuzione {number}"
+  },
+  "event": {
+    "type": {
+      "running": "Avviata",
+      "completed": "Terminata",
+      "failed": "Non riuscita",
+      "stepStarted": "Passaggio avviato",
+      "progress": "Avanzamento",
+      "toolCalled": "Strumento",
+      "reasoning": "Ragionamento",
+      "chatTurn": "Discussione",
+      "stepCompleted": "Passaggio fatto",
+      "other": "Aggiornamento"
+    },
+    "title": {
+      "running": "Il tuo video è in lavorazione",
+      "completed": "Il tuo video è pronto",
+      "failed": "L'esecuzione si è fermata per un problema",
+      "stepStarted": "Passaggio avviato",
+      "progress": "Avanzamento del passaggio",
+      "toolCalled": "Chiamata a uno strumento",
+      "reasoning": "Ragionamento del modello",
+      "speakerSpoke": "{speaker} ha parlato",
+      "discussionTurn": "Turno di discussione",
+      "stepFailed": "Passaggio non riuscito",
+      "stepSkipped": "Passaggio saltato",
+      "stepCompleted": "Passaggio completato"
+    },
+    "meta": {
+      "stepNumber": "Passaggio n. {number}",
+      "took": "Durata: {duration}",
+      "tokens": "{count} token",
+      "tool": "Strumento: {name}",
+      "call": "Chiamata n. {number}",
+      "reasoning": "Ragionamento n. {number}",
+      "percent": "{percent}%",
+      "turnOf": "Turno {turn} di {total}",
+      "turn": "Turno {turn}"
+    },
+    "hideRaw": "Nascondi dati grezzi",
+    "showRaw": "Mostra dati grezzi",
+    "payloadLabel": "Dati dell'evento"
+  },
+  "page": {
+    "runStatus": {
+      "Queued": "In attesa di partire",
+      "Running": "In corso",
+      "Passed": "Terminata",
+      "Failed": "Non riuscita",
+      "Cancelled": "Interrotta",
+      "Stopped": "Interrotta"
+    }
+  }
+}

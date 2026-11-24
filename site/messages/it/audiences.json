@@ -1,0 +1,466 @@
+{
+  "picker": {
+    "title": "Qual è la tua storia?",
+    "intro": "ReelBolt è per chi ha una storia da raccontare e non ha il tempo di raccontarla. Scegli quella più vicina alla tua e guarda cosa puoi fare già oggi.",
+    "link": "ReelBolt per {audience}"
+  },
+  "page": {
+    "eyebrow": "ReelBolt per {audience}",
+    "support": "Nessuna carta richiesta. Il tuo primo video è offerto da noi.",
+    "breadcrumbHome": "Home",
+    "beforeAfter": {
+      "title": "Prima di ReelBolt, e dopo"
+    },
+    "make": {
+      "title": "Cosa puoi fare già oggi",
+      "intro": "Tutto quello che vedi qui esiste già. Ogni voce dice se funziona con la prova gratuita o se richiede un piano a pagamento. Le voci della prova gratuita usano crediti, e prima di ogni esecuzione vedi una stima.",
+      "gate": {
+        "trial": "Prova gratuita",
+        "paid": "Sui piani {plans}"
+      },
+      "resolutionTier": "fino a {resolution} con {plans}",
+      "pricing": "Confronta i piani"
+    },
+    "how": {
+      "title": "Tre passaggi per un video finito"
+    },
+    "faq": {
+      "title": "Le domande prima di iniziare"
+    },
+    "final": {
+      "bodySignup": "Crea uno spazio di lavoro gratuito, carica le tue clip e guarda il primo montaggio. Nessuna carta richiesta. Il tuo primo video è offerto da noi.",
+      "bodyContact": "Raccontaci cosa vuoi realizzare e da quale materiale parti. Ti mostriamo cosa ne fa ReelBolt.",
+      "pricing": "Vedi i prezzi"
+    },
+    "others": {
+      "title": "ReelBolt per altre storie"
+    }
+  },
+  "steps": {
+    "drop": {
+      "title": "Carica quello che hai"
+    },
+    "say": {
+      "title": "Di' a cosa serve"
+    },
+    "review": {
+      "title": "Ricevi un montaggio già rivisto, che puoi cambiare",
+      "description": "Un team video AI lo monta e valuta la bozza prima che tu la veda. Se il punteggio è basso, la bozza torna indietro per un altro giro. Poi cambi una battuta, una clip o tutto il montaggio nell'editor. Servono pochi minuti per un lavoro piccolo, a volte mezz'ora per uno grande."
+    }
+  },
+  "costFaq": {
+    "q": "Quanto costa provarlo?",
+    "a": "Per iniziare niente, e non serve una carta. La prova gratuita include {trialCredits} crediti, e il tuo primo video è offerto da noi: altri {credits} crediti quando verifichi la tua email, da usare entro {days, plural, one {# giorno} other {# giorni}}. I crediti del primo video vengono dati una volta per persona, e non sono disponibili da alcune connessioni o con un indirizzo email temporaneo. Le esportazioni di prova sono a {resolution} con filigrana. I piani e cosa include ciascuno sono nella pagina dei prezzi."
+  },
+  "capabilities": {
+    "highlightEdit": {
+      "title": "Montaggio dei momenti migliori dalle riprese grezze",
+      "description": "Tempi morti, false partenze e take ripetuti spariscono, e ogni taglio cade a fine frase. Funziona con un numero di clip da 1 a 20."
+    },
+    "titledEdit": {
+      "title": "Montaggio con titoli e richiami",
+      "description": "Lo stesso montaggio asciutto, con titoli e richiami a schermo nei momenti giusti."
+    },
+    "musicEdit": {
+      "title": "Montaggio con musica o effetti sonori",
+      "description": "Musica di sottofondo o effetti sonori dai file che carichi tu, mixati sotto il montaggio. Non c'è una libreria musicale integrata."
+    },
+    "narratedStory": {
+      "title": "Storia con voce narrante e sottotitoli",
+      "description": "Le tue clip e un breve brief diventano un video con voce narrante e sottotitoli, con una voce stock o con una voce clonata con consenso registrato."
+    },
+    "subtitles": {
+      "title": "Sottotitoli",
+      "description": "Impressi nel video nella lingua parlata, più i file SRT e VTT."
+    },
+    "translatedSubtitles": {
+      "title": "Sottotitoli in un'altra lingua",
+      "description": "Gli stessi sottotitoli tradotti, con i tempi originali."
+    },
+    "dub": {
+      "title": "Doppiaggio in un'altra lingua",
+      "description": "La traccia parlata viene sostituita da una narrazione tradotta. Il movimento delle labbra in video non cambia."
+    },
+    "testimonialReel": {
+      "title": "Video di testimonianza",
+      "description": "Una persona che parla alla camera e uno screenshot, montati in un video breve."
+    },
+    "thumbnail": {
+      "title": "Miniatura e testo di copertina",
+      "description": "Un'immagine di copertina presa dal tuo video, con sopra un titolo. Usa pochissimi crediti: paghi solo il tempo di elaborazione."
+    },
+    "postText": {
+      "title": "Testo del post",
+      "description": "Una didascalia e gli hashtag scritti per il video che hai appena fatto."
+    },
+    "codePromo": {
+      "title": "Video promozionale dal tuo codice",
+      "description": "Un breve video promozionale costruito dal codice sorgente della tua app e dalle sue schermate reali, senza bisogno di riprese."
+    },
+    "shapes": {
+      "title": "Il formato che ogni canale richiede",
+      "description": "Orizzontale, verticale, quadrato o ritratto, scelto prima dell'esecuzione."
+    },
+    "editor": {
+      "title": "Un editor per gli ultimi ritocchi",
+      "description": "Apri qualsiasi montaggio come timeline e cambia una battuta, una clip o tutto il montaggio. L'editor è in anteprima anticipata."
+    },
+    "brandKit": {
+      "title": "Brand kit",
+      "description": "I tuoi colori, i tuoi font e il tuo tono, ricavati da un PDF del brand o da un export di design. Lo approvi tu prima che venga usato."
+    },
+    "githubSync": {
+      "title": "Sincronizzazione da GitHub",
+      "description": "Scegli un repository, un branch e i file che ti servono. I nuovi push aggiornano il progetto."
+    },
+    "claudeCode": {
+      "title": "Chiedilo da Claude Code",
+      "description": "Collega Claude Code al tuo spazio di lavoro e avvia un video dal terminale. Claude Code ti chiede conferma prima di modificare o spendere qualcosa."
+    },
+    "reviewLinks": {
+      "title": "Link di revisione per gli ospiti",
+      "description": "Il cliente guarda un video finito e lascia note in punti precisi, senza un account. In anteprima anticipata."
+    },
+    "handoff": {
+      "title": "Passaggio al tuo editor",
+      "description": "Esporta la timeline in OTIO, EDL o Final Cut XML, con i file multimediali. In anteprima anticipata."
+    },
+    "generatedClips": {
+      "title": "Clip e b-roll generati dall'AI",
+      "description": "Stacchi, un cold open o una scheda finale, generati entro un tetto di spesa che imposti tu."
+    },
+    "generatedAudio": {
+      "title": "Musica ed effetti sonori generati",
+      "description": "Un brano musicale o un effetto sonoro creato a partire da una descrizione."
+    },
+    "ownProvider": {
+      "title": "Il tuo provider AI",
+      "description": "Collega il tuo account di un provider e scegli il modello usato da ogni agente. Questo utilizzo non consuma crediti ReelBolt."
+    },
+    "api": {
+      "title": "API e webhook",
+      "description": "Avvia le esecuzioni dai tuoi sistemi e ricevi un webhook firmato quando finiscono. L'API è in alpha."
+    },
+    "fullResolution": {
+      "title": "Senza filigrana, risoluzione più alta",
+      "description": "Esportazioni senza la filigrana che la prova aggiunge: {tiers}."
+    }
+  },
+  "items": {
+    "creator": {
+      "name": "Creator",
+      "audience": "i creator",
+      "who": "Vlogger, streamer e podcaster che girano e pubblicano",
+      "pain": "Giro tutta la settimana e monto tutto il fine settimana.",
+      "outcome": "Un primo montaggio pronto mentre pensi al prossimo video.",
+      "seo": {
+        "title": "Montaggio video con AI per i creator",
+        "description": "Carica le clip della settimana e ricevi un primo montaggio senza tempi morti, con sottotitoli, miniatura e testo del post. Scopri cosa funziona nella prova gratuita."
+      },
+      "hero": {
+        "title": "Gira tutta la settimana. Tieniti il fine settimana.",
+        "intro": "Carica le clip girate questa settimana e di' a cosa serve il video. ReelBolt toglie i tempi morti, le false partenze e i take ripetuti, fa cadere ogni taglio a fine frase e valuta la bozza prima che tu la veda. Parti da un primo montaggio, non da una timeline vuota."
+      },
+      "before": {
+        "summary": "Un rullino pieno di take. Una timeline vuota. Un fine settimana andato.",
+        "points": {
+          "0": "Take che non hai più riguardato da quando li hai girati",
+          "1": "Una timeline vuota che ti aspetta il sabato mattina",
+          "2": "Sottotitoli, miniatura e testo del post ancora da fare"
+        }
+      },
+      "after": {
+        "summary": "Un primo montaggio senza tempi morti, nel formato che ogni canale richiede.",
+        "points": {
+          "0": "Tempi morti, false partenze e take ripetuti eliminati, con i tagli a fine frase",
+          "1": "Sottotitoli impressi nel video, più i file dei sottotitoli da caricare",
+          "2": "Una miniatura e il testo del post per lo stesso video",
+          "3": "Verticale, quadrato, ritratto o orizzontale, scelto prima dell'esecuzione"
+        }
+      },
+      "steps": {
+        "drop": "Carica le clip dal telefono o dalla videocamera, da 1 a 20 per un montaggio dei momenti migliori. Più inquadrature diverse danno al montaggio qualcosa su cui lavorare.",
+        "say": "Scegli il montaggio dei momenti migliori e spiega in una frase a cosa serve il video, per esempio “un riassunto di un minuto del viaggio, in verticale, per il mio canale”."
+      },
+      "faq": {
+        "0": {
+          "q": "Taglierà le parti che volevo tenere?",
+          "a": "Toglie i tempi morti, le false partenze e i take ripetuti, e taglia a fine frase. Ogni bozza viene valutata prima che tu la veda, e se il punteggio è basso torna indietro per un altro giro. Decidi sempre tu: apri il montaggio nell'editor e cambia una battuta, una clip o tutto il montaggio."
+        },
+        "1": {
+          "q": "Può montare un episodio lungo per il mio canale?",
+          "a": "Non ancora. ReelBolt è pensato per video brevi, di circa 90 secondi o meno. Se gli dai un'unica ripresa lunga può solo accorciarla. Più inquadrature diverse danno un vero montaggio."
+        },
+        "2": {
+          "q": "C'è della musica che posso usare?",
+          "a": "Non c'è una libreria musicale integrata. Puoi caricare un brano di cui hai i diritti e ReelBolt lo mixa sotto il montaggio. Generare un brano o un effetto sonoro da una descrizione è disponibile sui piani {audioGenPlans}."
+        }
+      },
+      "final": {
+        "title": "Premi play sul video di questa settimana"
+      }
+    },
+    "business": {
+      "name": "Piccole attività",
+      "audience": "le piccole attività",
+      "who": "Negozi, studi, ristoranti, servizi locali e chi fa marketing da solo",
+      "pain": "So che ci serve il video. Io mando avanti un'attività, non faccio il montatore.",
+      "outcome": "Un video per il negozio, il lancio o l'offerta, con il tuo brand.",
+      "seo": {
+        "title": "Video per la tua piccola attività, senza un montatore",
+        "description": "Gira qualche clip con il telefono e ricevi un video finito per il negozio, il lancio o l'offerta, con titoli e sottotitoli quando li vuoi. Con ciò che sa fare oggi e ciò che ancora non sa fare."
+      },
+      "hero": {
+        "title": "Tu mandi avanti l'attività. ReelBolt monta il video.",
+        "intro": "Gira con il telefono qualche clip del negozio, del prodotto o di un cliente soddisfatto. Di' a cosa serve il video, e un team video AI lo monta e rivede la bozza prima che tu la veda. Titoli e sottotitoli li aggiungi quando vuoi. Non serve saper montare e non parti da una timeline vuota."
+      },
+      "before": {
+        "summary": "Clip sul telefono che non sono mai diventate un post.",
+        "points": {
+          "0": "Clip del negozio rimaste sul telefono",
+          "1": "Un preventivo d'agenzia che non rientra nel budget",
+          "2": "Una serata persa su un'app di montaggio che non volevi imparare"
+        }
+      },
+      "after": {
+        "summary": "Un video breve per il negozio, il lancio o l'offerta, pronto da pubblicare.",
+        "points": {
+          "0": "Un montaggio asciutto con titoli e richiami a schermo",
+          "1": "Sottotitoli per chi guarda senza audio, quando li attivi",
+          "2": "Le parole di un cliente soddisfatto, montate in un video di testimonianza",
+          "3": "Un formato per ogni posto in cui pubblichi"
+        }
+      },
+      "steps": {
+        "drop": "Gira con il telefono qualche clip breve: l'ingresso del negozio, il prodotto in uso, un cliente, tu che dici una frase. Caricale così come sono.",
+        "say": "Spiega in una frase a cosa serve, per esempio “un video di trenta secondi per l'apertura di primavera, in verticale”. Aggiungi il PDF del tuo brand, se ne hai uno."
+      },
+      "faq": {
+        "0": {
+          "q": "Non ho mai montato un video. Posso usarlo lo stesso?",
+          "a": "Sì. Tu carichi le clip e dici a cosa serve il video, e il team video AI si occupa dei tagli. Titoli e sottotitoli sono scelte che fai prima dell'esecuzione, non cose da costruire a mano. Ogni montaggio viene valutato prima che tu lo veda. Aprire l'editor è facoltativo."
+        },
+        "1": {
+          "q": "Può fare un video se non ho riprese?",
+          "a": "Non con la prova gratuita. ReelBolt monta le clip che hai girato tu, e nella prova gratuita nessuna ricetta crea un video partendo solo da un testo o solo da foto. Per iniziare basta qualche clip fatta con il telefono. Le clip generate dall'AI sono disponibili sui piani {videoGenPlans}."
+        },
+        "2": {
+          "q": "Il video avrà l'aspetto del mio brand?",
+          "a": "Dai a ReelBolt un PDF del brand o un export di design e lui costruisce un brand kit con i tuoi colori, i tuoi font e il tuo tono. Il kit lo approvi tu prima che venga usato, e le grafiche progettate lo seguono."
+        }
+      },
+      "final": {
+        "title": "Trasforma in un video le clip che hai sul telefono"
+      }
+    },
+    "educator": {
+      "name": "Chi insegna",
+      "audience": "chi insegna",
+      "who": "Coach, insegnanti e autori di corsi",
+      "pain": "Le mie lezioni migliori sono sepolte in registrazioni di un'ora.",
+      "outcome": "Clip brevi e sottotitolate, dalle lezioni che tieni già.",
+      "seo": {
+        "title": "Clip di lezioni brevi e sottotitolate per chi insegna",
+        "description": "Trasforma i take di una lezione in una clip asciutta con sottotitoli, sottotitoli tradotti o un doppiaggio in un'altra lingua. Con quello che ReelBolt non sa ancora fare."
+      },
+      "hero": {
+        "title": "Spiegalo una volta. Condividilo in una clip breve, con i sottotitoli.",
+        "intro": "Carica i take della tua lezione e di' a chi è rivolta. ReelBolt toglie le pause, le false partenze e le ripetizioni, e valuta il montaggio prima che tu lo veda. Può anche imprimere i sottotitoli, tradurli o doppiare la lezione in un'altra lingua."
+      },
+      "before": {
+        "summary": "Buone lezioni, sepolte in registrazioni lunghe.",
+        "points": {
+          "0": "Il punto chiave è a metà di una registrazione lunga",
+          "1": "Pause, ripartenze e “aspetta, lo ridico”",
+          "2": "Niente sottotitoli, e una sola lingua"
+        }
+      },
+      "after": {
+        "summary": "Una clip asciutta e sottotitolata sul punto che volevi spiegare.",
+        "points": {
+          "0": "Una clip asciutta, senza pause e false partenze",
+          "1": "Sottotitoli impressi nel video, più i file dei sottotitoli",
+          "2": "La stessa lezione con i sottotitoli o il doppiaggio in un'altra lingua"
+        }
+      },
+      "steps": {
+        "drop": "Carica i take della lezione che vuoi condividere. Qualche take più breve funziona meglio di un'unica registrazione lunga, che può solo essere accorciata.",
+        "say": "Di' a chi è rivolta e cosa deve restare, per esempio “un consiglio di un minuto per principianti, con i sottotitoli”."
+      },
+      "faq": {
+        "0": {
+          "q": "Può trasformare una lezione di un'ora in clip brevi?",
+          "a": "Da solo, non ancora. ReelBolt è pensato per video brevi, di circa 90 secondi o meno, e un'unica ripresa lunga può solo essere accorciata. Funziona meglio se registri la lezione in qualche take più breve, o se carichi solo la parte che vuoi condividere."
+        },
+        "1": {
+          "q": "In quali lingue può fare sottotitoli o doppiaggio?",
+          "a": "I sottotitoli vengono creati nella lingua parlata e possono essere tradotti in un'altra lingua con i tempi originali. Il doppiaggio sostituisce la traccia parlata con una narrazione tradotta, e il movimento delle labbra in video non cambia. Non pubblichiamo ancora un elenco fisso di lingue, quindi prova prima la tua su una clip breve."
+        },
+        "2": {
+          "q": "La voce narrante può essere la mia?",
+          "a": "Sì. La narrazione è letta con una voce stock, oppure con una voce clonata dalle tue registrazioni una volta che hai registrato il tuo consenso."
+        }
+      },
+      "final": {
+        "title": "Tira fuori la tua lezione migliore dalla registrazione"
+      }
+    },
+    "nonprofit": {
+      "name": "Non profit",
+      "audience": "il non profit",
+      "who": "Associazioni, gruppi di comunità e campagne",
+      "pain": "Le storie e le clip le abbiamo. Nel team nessuno sa montare.",
+      "outcome": "La causa, raccontata bene, senza il budget di un'agenzia.",
+      "seo": {
+        "title": "Racconta la tua causa in video, senza un montatore",
+        "description": "Trasforma le clip dell'evento o dell'intervista in una storia con voce narrante e sottotitoli o in un video di testimonianza. Scopri cosa funziona nella prova gratuita."
+      },
+      "hero": {
+        "title": "Le storie le hai già. Al montaggio pensa ReelBolt.",
+        "intro": "Carica le clip dell'evento, della visita o dell'intervista e scrivi un breve brief. ReelBolt costruisce una storia con voce narrante e sottotitoli, oppure un video di testimonianza da una persona che parla alla camera, e rivede la bozza prima che tu la veda."
+      },
+      "before": {
+        "summary": "Le storie sono state filmate. Nessuno ha il tempo di montarle.",
+        "points": {
+          "0": "Le clip dell'evento sparse su tre telefoni diversi",
+          "1": "Un volontario che aveva intenzione di montarle",
+          "2": "Una campagna che ha bisogno di un video e non ha il budget per un'agenzia"
+        }
+      },
+      "after": {
+        "summary": "La causa, raccontata in un video breve da condividere.",
+        "points": {
+          "0": "Una storia con voce narrante e sottotitoli, fatta con le tue clip",
+          "1": "Un video di testimonianza con le parole di chi parla",
+          "2": "Sottotitoli per chi guarda senza audio, anche in un'altra lingua"
+        }
+      },
+      "steps": {
+        "drop": "Raccogli le clip dai telefoni di tutti e caricale: l'evento, le persone, qualcuno che racconta la propria storia alla camera.",
+        "say": "Scrivi un breve brief: di chi parla la storia, cosa vuoi che faccia chi guarda e quanto deve durare il video."
+      },
+      "faq": {
+        "0": {
+          "q": "Da noi nessuno sa montare video. È un problema?",
+          "a": "No. Tu carichi le clip e scrivi un breve brief, e il team video AI si occupa del montaggio, della voce narrante e dei sottotitoli. Ogni bozza viene valutata prima che tu la veda, e se il punteggio è basso torna indietro per un altro giro."
+        },
+        "1": {
+          "q": "C'è uno sconto per il non profit?",
+          "a": "Oggi no. I piani, la prova gratuita e cosa include ciascuno sono nella pagina dei prezzi. Se aggiungeremo uno sconto per il non profit, sarà scritto lì."
+        },
+        "2": {
+          "q": "Dove finiscono le nostre riprese?",
+          "a": "Nel servizio in hosting i tuoi progetti, le riprese e i video finiti restano nel tuo spazio di lavoro, e i servizi AI ricevono solo ciò che serve per un lavoro. Non addestriamo modelli AI sui tuoi contenuti e non li vendiamo."
+        }
+      },
+      "final": {
+        "title": "Racconta la storia che hai già filmato"
+      }
+    },
+    "software": {
+      "name": "Team software",
+      "audience": "i team software",
+      "who": "Founder e team di prodotto",
+      "pain": "Rilasciamo ogni settimana e lo annunciamo con uno screenshot.",
+      "outcome": "Un video di lancio per ogni release.",
+      "seo": {
+        "title": "Video di lancio per team software, dal tuo codice",
+        "description": "ReelBolt costruisce un video promozionale dal codice e dalle schermate reali della tua app, monta le registrazioni delle demo e funziona da GitHub e da Claude Code."
+      },
+      "hero": {
+        "title": "Tu rilasci. ReelBolt fa il video di lancio.",
+        "intro": "Collega il tuo repository o carica il codice. ReelBolt capisce cosa fa il prodotto, scrive lo script, costruisce il video dalle tue schermate reali e dal tuo brand, e rivede la bozza prima che tu la veda. Vanno bene anche le registrazioni dello schermo e le riprese grezze."
+      },
+      "before": {
+        "summary": "La funzionalità esce. Il video di lancio no.",
+        "points": {
+          "0": "La release esce con uno screenshot e una riga di changelog",
+          "1": "Nessuno ha una giornata da passare su una timeline",
+          "2": "Il video di lancio slitta allo sprint successivo, di nuovo"
+        }
+      },
+      "after": {
+        "summary": "Un video di lancio costruito dal prodotto stesso.",
+        "points": {
+          "0": "Un video promozionale costruito dal codice e dalle schermate della tua app",
+          "1": "La stessa ricetta, rilanciata per la release successiva",
+          "2": "Le registrazioni delle demo ridotte ai momenti che contano"
+        }
+      },
+      "steps": {
+        "drop": "Collega un repository GitHub o carica il codice. Aggiungi registrazioni dello schermo, riprese grezze e file del brand, se ne hai.",
+        "say": "Scegli il video promozionale dal codice e spiega cos'è la release e a chi è rivolta. La stima mostra quanto userà l'esecuzione prima che parta."
+      },
+      "faq": {
+        "0": {
+          "q": "Servono delle riprese o basta il codice?",
+          "a": "Per un video promozionale basta il codice: ReelBolt costruisce le scene dalle schermate reali della tua app. Se hai anche registrazioni dello schermo o riprese, le ricette per le riprese le montano in un video finito."
+        },
+        "1": {
+          "q": "Posso usare il mio provider AI e i miei modelli?",
+          "a": "Sui piani {ownProviderPlans} puoi collegare il tuo account di un provider AI e scegliere il modello usato da ogni agente. Questo utilizzo non consuma crediti ReelBolt, perché paghi direttamente il provider."
+        },
+        "2": {
+          "q": "Funziona da Claude Code?",
+          "a": "Sì. Collega Claude Code al tuo spazio di lavoro e può fare quello che fa l'assistente nell'app. Claude Code ti chiede conferma prima di un passaggio che modifica qualcosa o usa crediti."
+        }
+      },
+      "final": {
+        "title": "Fai il video di lancio di questa release"
+      }
+    },
+    "agency": {
+      "name": "Agenzie",
+      "audience": "le agenzie",
+      "who": "Studi e freelance che montano per i clienti",
+      "pain": "I primi montaggi si mangiano il margine.",
+      "outcome": "Un primo montaggio già rivisto, poi il passaggio all'editor che usi già.",
+      "seo": {
+        "title": "Primi montaggi per agenzie e montatori freelance",
+        "description": "Ricevi un primo montaggio già rivisto dalle riprese grezze del cliente, condividi un link di revisione e passa la timeline al tuo editor. Le parti in anteprima anticipata sono indicate."
+      },
+      "hero": {
+        "title": "I primi montaggi si mangiano il margine. Lasciali a ReelBolt.",
+        "intro": "Carica le riprese grezze del cliente e il brief. ReelBolt restituisce un primo montaggio già rivisto: pochi minuti per un lavoro piccolo, a volte mezz'ora per uno grande. Manda al cliente un link di revisione, poi finisci in ReelBolt o passa la timeline all'editor che usi già."
+      },
+      "before": {
+        "summary": "Una giornata di premontaggio prima che inizi il lavoro creativo.",
+        "points": {
+          "0": "Ore di catalogazione e premontaggio prima di qualsiasi scelta creativa",
+          "1": "Le note del cliente sparse tra email e messaggi",
+          "2": "Le linee guida del brand da ricercare a ogni progetto"
+        }
+      },
+      "after": {
+        "summary": "Un primo montaggio già rivisto, e il tuo tempo sulla parte per cui i clienti pagano.",
+        "points": {
+          "0": "Un primo montaggio già rivisto dalle riprese grezze del cliente",
+          "1": "Un link di revisione dove il cliente lascia note in punti precisi",
+          "2": "Un brand kit per il progetto di ogni cliente",
+          "3": "Un pacchetto da passare all'app di montaggio che usi già"
+        }
+      },
+      "steps": {
+        "drop": "Crea un progetto per il cliente e carica le sue riprese grezze e il PDF del suo brand.",
+        "say": "Incolla il brief del cliente in una o due frasi: a cosa serve il video, chi lo guarda e che formato deve avere."
+      },
+      "faq": {
+        "0": {
+          "q": "Posso finire il montaggio nella mia app di montaggio?",
+          "a": "Sì, in anteprima anticipata. Puoi esportare la timeline in OTIO, EDL o Final Cut XML, con i file multimediali o con il loro elenco. Non abbiamo ancora aperto noi stessi questi pacchetti nelle principali app di montaggio, quindi provane prima uno su un progetto piccolo."
+        },
+        "1": {
+          "q": "Come fanno i clienti a rivedere un montaggio?",
+          "a": "Crea un link di revisione per un render finito. Il cliente lo guarda senza un account, lascia note in punti precisi e lo approva o chiede modifiche. Vede solo quel video, e puoi disattivare il link in qualsiasi momento."
+        },
+        "2": {
+          "q": "Il mio team può condividere i progetti?",
+          "a": "Sì. Uno spazio di lavoro del team contiene i progetti, le riprese e la cronologia delle esecuzioni, con ruoli per proprietari, amministratori, membri e fatturazione, e inviti al posto delle password condivise. Uno spazio di lavoro del team ha un prezzo per postazione; i dettagli sono nella pagina dei prezzi."
+        }
+      },
+      "final": {
+        "title": "Inizia il prossimo progetto del cliente da un primo montaggio"
+      }
+    }
+  }
+}

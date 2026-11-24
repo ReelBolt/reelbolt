@@ -1,0 +1,216 @@
+/* R07: Animate chips, clip controls, transition picker and the seam "+" - touch targets >= 44 px on a coarse pointer. */
+.chip {
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 6px;
+}
+
+.wordButton {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 4px;
+  min-height: 64px;
+  border-radius: 6px;
+  border: 1px solid var(--mantine-color-default-border);
+  background: var(--mantine-color-default);
+  color: var(--mantine-color-text);
+  cursor: var(--rb-cursor-pointer);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.wordButton[data-active='true'] {
+  border-color: var(--mantine-color-blue-5);
+  background: var(--mantine-color-blue-light);
+}
+
+.wordButton:disabled {
+  opacity: 0.5;
+  cursor: var(--rb-cursor-not-allowed);
+}
+
+/* The looping thumbnails: two colour blocks, A (outgoing) and B (incoming). */
+.thumb {
+  position: relative;
+  height: 34px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--mantine-color-dark-8);
+}
+
+.thumbA,
+.thumbB {
+  position: absolute;
+  inset: 0;
+}
+
+.thumbA {
+  background: var(--mantine-color-orange-6);
+}
+
+.thumbB {
+  background: var(--mantine-color-blue-5);
+}
+
+.motionBox {
+  position: absolute;
+  left: 30%;
+  top: 25%;
+  width: 40%;
+  height: 50%;
+  border-radius: 3px;
+  background: var(--mantine-color-blue-5);
+}
+
+.dissolve .thumbB {
+  animation: rbDissolve 1.8s ease-in-out infinite;
+}
+.fadeblack .thumbB {
+  animation: rbDipBlack 1.8s ease-in-out infinite;
+}
+.fadewhite .thumbB {
+  animation: rbDipWhite 1.8s ease-in-out infinite;
+}
+.wipeleft .thumbB {
+  animation: rbWipeLeft 1.8s ease-in-out infinite;
+}
+.wiperight .thumbB {
+  animation: rbWipeRight 1.8s ease-in-out infinite;
+}
+.slideleft .thumbB {
+  animation: rbSlideLeft 1.8s ease-in-out infinite;
+}
+.slideright .thumbB {
+  animation: rbSlideRight 1.8s ease-in-out infinite;
+}
+.circleopen .thumbB {
+  animation: rbCircleOpen 1.8s ease-in-out infinite;
+}
+
+.zoomIn {
+  animation: rbZoomIn 1.8s ease-in-out infinite;
+}
+.zoomOut {
+  animation: rbZoomOut 1.8s ease-in-out infinite;
+}
+.pop {
+  animation: rbPop 1.8s ease-out infinite;
+}
+.slideLeft {
+  animation: rbMoveFromLeft 1.8s ease-out infinite;
+}
+.slideRight {
+  animation: rbMoveFromRight 1.8s ease-out infinite;
+}
+.slideTop {
+  animation: rbMoveFromTop 1.8s ease-out infinite;
+}
+.slideBottom {
+  animation: rbMoveFromBottom 1.8s ease-out infinite;
+}
+.fade {
+  animation: rbFadeIn 1.8s linear infinite;
+}
+.kenBurns {
+  animation: rbKenBurns 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumbB,
+  .motionBox {
+    animation: none !important;
+  }
+}
+
+@keyframes rbDissolve {
+  0%, 15% { opacity: 0; }
+  60%, 100% { opacity: 1; }
+}
+@keyframes rbDipBlack {
+  0%, 10% { opacity: 0; filter: none; }
+  40% { opacity: 0; filter: brightness(0); }
+  50% { opacity: 1; filter: brightness(0); }
+  80%, 100% { opacity: 1; filter: none; }
+}
+@keyframes rbDipWhite {
+  0%, 10% { opacity: 0; filter: none; }
+  40% { opacity: 0; filter: brightness(8); }
+  50% { opacity: 1; filter: brightness(8); }
+  80%, 100% { opacity: 1; filter: none; }
+}
+@keyframes rbWipeLeft {
+  0%, 10% { clip-path: inset(0 100% 0 0); }
+  70%, 100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes rbWipeRight {
+  0%, 10% { clip-path: inset(0 0 0 100%); }
+  70%, 100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes rbSlideLeft {
+  0%, 10% { transform: translateX(100%); }
+  70%, 100% { transform: translateX(0); }
+}
+@keyframes rbSlideRight {
+  0%, 10% { transform: translateX(-100%); }
+  70%, 100% { transform: translateX(0); }
+}
+@keyframes rbCircleOpen {
+  0%, 10% { clip-path: circle(0% at 50% 50%); }
+  70%, 100% { clip-path: circle(75% at 50% 50%); }
+}
+@keyframes rbZoomIn {
+  0%, 10% { transform: scale(1); }
+  80%, 100% { transform: scale(1.5); }
+}
+@keyframes rbZoomOut {
+  0%, 10% { transform: scale(1.5); }
+  80%, 100% { transform: scale(1); }
+}
+@keyframes rbPop {
+  0%, 5% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.15); opacity: 1; }
+  70%, 100% { transform: scale(1); opacity: 1; }
+}
+@keyframes rbMoveFromLeft {
+  0%, 10% { transform: translateX(-160%); }
+  60%, 100% { transform: translateX(0); }
+}
+@keyframes rbMoveFromRight {
+  0%, 10% { transform: translateX(160%); }
+  60%, 100% { transform: translateX(0); }
+}
+@keyframes rbMoveFromTop {
+  0%, 10% { transform: translateY(-160%); }
+  60%, 100% { transform: translateY(0); }
+}
+@keyframes rbMoveFromBottom {
+  0%, 10% { transform: translateY(160%); }
+  60%, 100% { transform: translateY(0); }
+}
+@keyframes rbFadeIn {
+  0%, 10% { opacity: 0; }
+  70%, 100% { opacity: 1; }
+}
+@keyframes rbKenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.5) translate(-8%, -4%); }
+}
+
+@media (pointer: coarse) {
+  .chip {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .wordButton {
+    min-height: 88px;
+  }
+}

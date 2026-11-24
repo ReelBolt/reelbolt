@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+L'avatar {{.FileName}} {{if .ProjectName}}in {{.ProjectName}}{{else}}nella libreria degli avatar dello spazio di lavoro{{end}} (spazio di lavoro {{.OrgName}}) arriva tra 7 giorni alla fine del periodo per cui è conservato e verrà poi eliminato insieme ai suoi file di riferimento.
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+Per conservarlo, apri l'avatar e conferma di nuovo il consenso della persona. Nulla viene prolungato senza una nuova conferma.
+
+{{.Link}}
+
+-- {{.FooterNote}}

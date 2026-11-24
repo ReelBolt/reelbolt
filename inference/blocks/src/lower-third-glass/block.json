@@ -1,0 +1,34 @@
+{
+  "id": "lower-third-glass",
+  "version": "1.0.0",
+  "title": "Lower third: glass",
+  "category": "titles",
+  "description": "Frosted translucent name card that floats up in the lower left; use over busy footage or imagery.",
+  "tags": [
+    "lower third",
+    "name",
+    "glass",
+    "frosted"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-lower-third-glass",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      6,
+      14,
+      40
+    ]
+  },
+  "props": "{name: string; subtitle?: string; accentColor?: string /*'#38bdf8'*/; textColor?: string; fontFamily?: string /*'DM Sans, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+  "example": "import {LowerThirdGlass} from './blocks/lower-third-glass/LowerThirdGlass.tsx';\n<LowerThirdGlass name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+}

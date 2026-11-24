@@ -1,0 +1,59 @@
+{
+ "clip": "syn-sil-01",
+ "videoType": "silent",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 540,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "text_in",
+   "frame": 175,
+   "region": [
+    260,
+    220,
+    460,
+    60
+   ],
+   "note": "faint label reaches half of its peak opacity"
+  },
+  {
+   "id": "ev2",
+   "type": "move_start",
+   "frame": 402,
+   "region": [
+    122,
+    420,
+    36,
+    36
+   ],
+   "note": "lone dot starts moving"
+  },
+  {
+   "id": "ev3",
+   "type": "move_stop",
+   "frame": 469,
+   "region": [
+    780,
+    420,
+    36,
+    36
+   ],
+   "note": "lone dot is at rest again"
+  },
+  {
+   "id": "ev4",
+   "type": "text_out",
+   "frame": 521,
+   "region": [
+    260,
+    220,
+    460,
+    60
+   ],
+   "note": "faint label drops below half of its peak opacity"
+  }
+ ]
+}

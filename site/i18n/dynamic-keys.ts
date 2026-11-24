@@ -1,0 +1,33 @@
+// Catalogue keys that are built at run time (`t(`plan.${id}`)`) cannot be seen by the unused-key
+// scan, so each such prefix is declared here. `catalog.test.ts` treats everything under a listed
+// prefix as used.
+export const dynamicKeyPrefixes: readonly string[] = [
+  'home.page.steps',
+  'home.page.features',
+  'home.page.beforeAfter',
+  'home.useCases.items',
+  'plans.highlights',
+  'plans.comparison.rows',
+  'plans.comparison.priority',
+  'plans.explainer.points',
+  'contact.form.topics',
+  'contact.form.validation',
+  'contact.form.enterpriseItems',
+  'faq.home',
+  'faq.pricing',
+  'features.blocks',
+  'features.bands',
+  'runner.platform',
+  'recipes.cost',
+  'recipes.sort',
+  'recipes.slot',
+  'recipes.stepType',
+  'recipes.category',
+  'recipes.field',
+  'recipes.limit',
+  'audiences.capabilities',
+  'audiences.items',
+  'audiences.steps',
+  'audiences.page.make.gate',
+  'proof.trust.items',
+];

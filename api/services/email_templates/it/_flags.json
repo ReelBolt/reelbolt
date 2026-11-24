@@ -1,0 +1,13 @@
+{
+  "subjects.deletion_scheduled": "'è in programma per l'eliminazione' is stiff; alternative 'sarà eliminato il ...' needs the date in the subject",
+  "subjects.job_succeeded/job_failed": "'video job' rendered as 'video' / 'esecuzione'; glossary has run=esecuzione but no 'job'",
+  "subjects.runner_paired": "'collegato' chosen for 'paired'; confirm against desktop-app copy",
+  "subjects.invite": "Masculine 'invitato' assumed; gender unknown (alternative: 'Invito a ... da {inviter}')",
+  "footerNote.it": "Alpha line: 'alpha pubblica' per glossary; rest is a free rendering",
+  "unsubscribe link label": "'Annulla l'iscrizione' (English 'Unsubscribe')",
+  "review_activity.revisione": "'revisione condivisa' for 'shared review'; check against the review-link UI copy",
+  "welcome.txt/html.Accedi": "Imperative 'Accedi' for 'Sign in'",
+  "*.spazio di lavoro": "Glossary says 'spazio di lavoro'; sentences read long but consistent",
+  "greeting": "'Ciao,' without a name when the display name is empty (no 'utente'); neutral welcome subject 'Ti diamo il benvenuto su ReelBolt'",
+  "invite.role": "Role names rendered in code (itRoles): proprietario / amministratore / membro / referente per la fatturazione"
+}

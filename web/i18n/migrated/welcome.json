@@ -1,0 +1,9 @@
+{
+  "globs": [
+    "app/(app)/welcome/layout.tsx",
+    "app/(app)/welcome/page.tsx",
+    "components/dashboard/FirstVideoRail.tsx",
+    "components/onboarding/TourCard.tsx",
+    "components/welcome/WelcomeFlow.tsx"
+  ]
+}

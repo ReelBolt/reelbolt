@@ -1,0 +1,36 @@
+{
+  "id": "caption-outline-bold",
+  "version": "1.0.0",
+  "title": "Caption outline bold",
+  "category": "captions",
+  "description": "Use for bold upper-case captions with a thick outline that stay readable over busy footage; the spoken word changes colour. The `captions` prop is a @remotion/captions Caption[].",
+  "tags": [
+    "caption",
+    "subtitle",
+    "outline",
+    "bold",
+    "readable"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "@remotion/captions"
+  ],
+  "sharedFiles": [
+    "_shared/captions.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-caption-outline-bold",
+    "durationInFrames": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      20,
+      50,
+      80
+    ]
+  },
+  "props": "{captions: Caption[]; maxWordsPerPage?: number /*3*/; color?: string; activeColor?: string /*'#ffe14d'*/; outlineColor?: string /*'#000'*/; fontSize?: number; fontFamily?: string /*'Anton, sans-serif'*/}",
+  "example": "import {CaptionOutlineBold} from './blocks/caption-outline-bold/CaptionOutlineBold.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionOutlineBold captions={captions} />"
+}

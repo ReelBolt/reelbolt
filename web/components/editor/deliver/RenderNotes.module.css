@@ -1,0 +1,14 @@
+/* A fingertip is bigger than a pointer: the disclosure is a 44px target wherever the primary input is touch. */
+.notesToggle {
+  align-self: flex-start;
+  margin-inline-start: -6px;
+
+  @media (pointer: coarse) {
+    min-height: 44px;
+  }
+}
+
+/* Long sentences wrap on a phone instead of widening the row. */
+.notesText {
+  overflow-wrap: anywhere;
+}

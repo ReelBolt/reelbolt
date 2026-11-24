@@ -1,0 +1,32 @@
+/* Animated parts of the activity kit. Motion is decoration: it stops under reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  .motion,
+  .motion * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.tapTarget {
+  min-height: 32px;
+}
+
+@media (pointer: coarse) {
+  .tapTarget {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* The editor's 24 px floor (`[data-editor-surface] .mantine-ActionIcon-root`, global.css) outranks the plain rule above, so the phone
+   header's indicator stayed 36x34 on a touch screen. Inside the editor surface the coarse-pointer target has to win it. */
+@media (pointer: coarse) {
+  :global([data-editor-surface]) .tapTarget:global(.mantine-ActionIcon-root) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+.rowTitle {
+  min-width: 0;
+}

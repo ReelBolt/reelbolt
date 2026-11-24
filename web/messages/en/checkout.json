@@ -1,0 +1,53 @@
+{
+  "actions": {
+    "checkPlan": "Check your plan and balance",
+    "dashboard": "Go to the dashboard"
+  },
+  "reference": {
+    "copied": "Copied",
+    "copy": "Copy reference"
+  },
+  "confirmation": {
+    "confirmingTitle": "Confirming your payment",
+    "notConfirmedTitle": "Not confirmed yet",
+    "pendingCopy": {
+      "confirming": "We are confirming your payment with the payment provider. This usually takes a few seconds.",
+      "pending": "The payment provider has not confirmed this yet. Your plan and credits update as soon as it does, usually within a minute; you can leave this page.",
+      "neutral": "We could not confirm it here. Your plan and credits update when the payment provider's notification arrives; check Billing in a minute."
+    },
+    "titleConfirmed": "Payment confirmed",
+    "titleAbandoned": "Checkout not completed",
+    "breadcrumbDashboard": "Dashboard",
+    "breadcrumbCheckout": "Checkout",
+    "confirming": "Confirming your payment. This usually takes a few seconds.",
+    "success": "Your payment is confirmed",
+    "plan": "Plan: {plan} ({status})",
+    "creditsAvailable": "{credits} credits available now",
+    "creditsAvailableAdded": "{credits} credits available now — credits added",
+    "abandoned": "The checkout was not completed. Nothing was charged.",
+    "backToBilling": "Back to billing"
+  },
+  "page": {
+    "metaTitle": "Checkout",
+    "title": "Confirming your payment",
+    "breadcrumbDashboard": "Dashboard",
+    "breadcrumbCheckout": "Checkout",
+    "referenceTitle": "Your transaction reference",
+    "referenceQuote": "Quote this if you contact us about this payment. It identifies the transaction at the payment provider.",
+    "referenceNone": "This link carried no transaction reference. If you paid, the payment provider puts one on the confirmation it sends you. You do not need it for the charge to be applied.",
+    "nextTitle": "Where to go next",
+    "nextConfirmed": "Billing shows the plan and the credit balance that are in force right now.",
+    "nextPending": "Billing shows the plan and the credit balance that are in force right now, so it is where the change appears once the notification arrives. If it is not there yet, that means the notification has not landed, not that the payment failed."
+  },
+  "paddleReturn": {
+    "received": "Payment received",
+    "plan": "Plan: {plan} ({status})",
+    "credits": "{credits} credits available now",
+    "titleSlow": "No change to see yet",
+    "titleNeutral": "Not confirmed yet",
+    "titleWaiting": "Waiting for your payment to be confirmed",
+    "neutral": "This page cannot tell whether a payment went through. Your plan and credits update when the payment provider's notification arrives; check Billing in a minute.",
+    "waiting": "You are back from the payment provider. We are waiting for its notification, which usually arrives within a few seconds, and this page updates by itself when it does.",
+    "slow": "We can't see a change yet. Refresh in a moment or check Billing, which always shows what is in force."
+  }
+}

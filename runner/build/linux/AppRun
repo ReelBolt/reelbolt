@@ -1,0 +1,17 @@
+#!/bin/sh
+# AppRun for the ReelBolt runner AppImage.
+#
+# The AppImage runtime mounts the AppDir at $APPDIR and executes this file. The
+# only thing this script has to do is put the AppImage's own bin directory on
+# PATH before it execs the runner: the runner finds ffmpeg and ffprobe as
+# programs named "ffmpeg" and "ffprobe" on PATH, and the bundled, pinned copies
+# are inside the AppDir. Without this the runner would silently fall back to
+# whatever the host happens to have, which is exactly the output-parity problem
+# the bundled build exists to avoid.
+set -eu
+
+here=$(dirname "$(readlink -f "$0")")
+PATH="$here/usr/bin:$PATH"
+export PATH
+
+exec "$here/usr/bin/reelbolt-runner-desktop" "$@"

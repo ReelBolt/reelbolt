@@ -1,0 +1,18 @@
+{
+  "globs": [
+    "components/editor/phone/ActionSheets.tsx",
+    "components/editor/phone/AudioSheet.tsx",
+    "components/editor/phone/CaptionsSheet.tsx",
+    "components/editor/phone/ClipSheet.tsx",
+    "components/editor/phone/ClipStrip.tsx",
+    "components/editor/phone/ProposalSheet.tsx",
+    "components/editor/phone/WordPicker.tsx",
+    "components/editor/phone/phone-controls.tsx",
+    "components/editor/panels/ComparePanel.tsx",
+    "components/editor/panels/HistoryPanel.tsx",
+    "components/editor/panels/ProposalPanel.tsx",
+    "components/editor/panels/clip-depth/TransitionPicker.tsx",
+    "components/editor/viewer/TransformOverlay.tsx",
+    "components/editor/viewer/OverlayFrameHandles.tsx"
+  ]
+}

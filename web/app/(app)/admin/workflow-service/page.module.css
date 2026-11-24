@@ -1,0 +1,230 @@
+.screen {
+  --bg-0: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+  --bg-1: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  --bg-2: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  --line: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  --text: light-dark(var(--mantine-color-gray-9), var(--mantine-color-gray-0));
+  --muted: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
+  --success: light-dark(var(--mantine-color-green-7), var(--mantine-color-green-3));
+  --danger: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-3));
+  --warn: light-dark(var(--mantine-color-orange-9), var(--mantine-color-orange-3));
+  --step: light-dark(var(--mantine-color-violet-7), var(--mantine-color-violet-3));
+
+  position: relative;
+  min-height: calc(100vh - 95px);
+  padding: 24px;
+  color: var(--text);
+  background: var(--bg-0);
+  overflow: hidden;
+}
+
+.screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.kpiGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.kpiCard {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+}
+
+.kpiLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.kpiValue {
+  font-size: 2rem;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.surface {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+  border-radius: var(--mantine-radius-md);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.surface::before {
+  content: '';
+  position: absolute;
+  inset: -30% 0;
+  display: none;
+  animation: sweep 5s linear infinite;
+}
+
+@keyframes sweep {
+  from {
+    transform: translateY(-25%);
+  }
+  to {
+    transform: translateY(25%);
+  }
+}
+
+.nodes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.node {
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: var(--mantine-radius-sm);
+  padding: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: var(--bg-1);
+}
+
+.lanes {
+  display: grid;
+  gap: 12px;
+}
+
+.lane {
+  position: relative;
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--line);
+  height: 18px;
+  overflow: hidden;
+  background: var(--bg-2);}
+
+.packet {
+  position: absolute;
+  left: -7%;
+  top: 50%;
+  width: 18px;
+  height: 8px;
+  border-radius: var(--mantine-radius-sm);
+  transform: translateY(-50%);
+  animation: packetFlight 3.5s linear infinite;
+  animation-delay: var(--delay, 0ms);
+  box-shadow: none;
+}
+
+.packet::after {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 1px;
+  width: 16px;
+  height: 6px;
+  border-radius: var(--mantine-radius-sm);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, currentColor, transparent 50%));
+}
+
+.packetQueue {
+  color: var(--warn);
+}
+
+.packetStep {
+  color: var(--step);
+}
+
+.packetSuccess {
+  color: var(--success);
+}
+
+.packetFailed {
+  color: var(--danger);
+}
+
+@keyframes packetFlight {
+  from {
+    left: -8%;
+  }
+  to {
+    left: 106%;
+  }
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+}
+
+.sectionTitle {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.eventFeed {
+  max-height: 420px;
+}
+
+.eventRow {
+  padding: 10px;
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+
+.eventMeta {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.statusRunning {
+  color: var(--step);
+}
+
+.statusCompleted {
+  color: var(--success);
+}
+
+.statusFailed {
+  color: var(--danger);
+}
+
+@media (max-width: 75em) {
+  .nodes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

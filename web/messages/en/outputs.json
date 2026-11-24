@@ -1,0 +1,99 @@
+{
+  "share": {
+    "scopeNote": "Share copies a link that opens only for people signed in to this project. Public links are not available yet.",
+    "copiedTitle": "Link copied",
+    "failedTitle": "Could not share this video",
+    "copyYourself": "Copy the link yourself: {url}"
+  },
+  "check": {
+    "pending": "Checking your video. It will appear here by itself.",
+    "pendingFile": "Checking this file. It will appear here by itself.",
+    "cue": "Checking",
+    "blocked": "This video can't be shown."
+  },
+  "loadError": {
+    "generic": "This video could not be loaded.",
+    "missing": "This video could not be loaded. It may have been removed from storage.",
+    "moderationFile": "This file is temporarily unavailable while it passes the publication check. Try again in a moment.",
+    "moderation": "This video is temporarily unavailable while it passes the publication check. Try again in a moment."
+  },
+  "player": {
+    "checking": "Checking why this video could not be loaded…",
+    "ariaLabel": "Video {title}",
+    "download": "Download",
+    "share": "Share",
+    "openRun": "Open run"
+  },
+  "stage": {
+    "final": "Final",
+    "draft": "Draft",
+    "inProgress": "In progress"
+  },
+  "takes": {
+    "run": "Run {number}",
+    "earlierRun": "Earlier run",
+    "replaced": "{run} · replaced during the run",
+    "failed": "That did not work",
+    "count": "{count, plural, one {# earlier version} other {# earlier versions}}",
+    "deleteEarlier": "Delete earlier versions",
+    "listLabel": "Earlier versions",
+    "stillGoing": "Run still going",
+    "inProgressTake": "Version in progress",
+    "pinned": "Pinned",
+    "play": "Play",
+    "playLabel": "Play {label}",
+    "download": "Download",
+    "downloadLabel": "Download {label}",
+    "unpin": "Unpin",
+    "pinTip": "Pin: keep this version",
+    "unpinLabel": "Unpin {label}",
+    "pinLabel": "Pin {label}",
+    "unpinned": "Version unpinned",
+    "pinnedDone": "Version pinned",
+    "deleteTip": "Delete this version",
+    "deleteLabel": "Delete {label}",
+    "deleteAllTitle": "Delete earlier versions?",
+    "deleteOneTitle": "Delete this version?",
+    "deleteAllBody": "This permanently deletes {count, plural, one {# earlier version} other {# earlier versions}} of this video. The latest version and pinned versions stay.",
+    "deleteOneBody": "This permanently deletes this version of the video, and removes it from Files. The latest version stays.",
+    "deletedAll": "Earlier versions deleted",
+    "deletedOne": "Version deleted"
+  },
+  "modal": {
+    "render": "Video",
+    "close": "Close player",
+    "prev": "Previous video",
+    "next": "Next video"
+  },
+  "rail": {
+    "label": "Videos",
+    "play": "Play {title}",
+    "playStage": "Play {title} ({stage})"
+  },
+  "warnings": {
+    "many": "{count} things to check in this video"
+  },
+  "quota": {
+    "title": "Your workspace is out of storage",
+    "plans": "See plans and storage"
+  },
+  "usage": {
+    "ariaUnlimited": "{used} used; this plan has no storage limit",
+    "ariaPercent": "Storage used: {percent}%",
+    "unlimited": "This plan has no storage limit.",
+    "free": "{free} free of {total}.",
+    "largest": "Largest projects"
+  },
+  "gallery": {
+    "title": "{count, plural, one {# picture} other {# pictures}}",
+    "listLabel": "Pictures of this run",
+    "pictureN": "Picture {n}",
+    "open": "Open {name} full size",
+    "download": "Download {name}",
+    "downloadAll": "Download all",
+    "downloadThis": "Download",
+    "previous": "Previous picture",
+    "next": "Next picture",
+    "close": "Close"
+  }
+}

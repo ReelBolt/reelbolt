@@ -1,0 +1,32 @@
+{
+  "id": "glitch-cut",
+  "version": "1.0.0",
+  "title": "Glitch cut",
+  "category": "transitions",
+  "description": "Scene change through jittering horizontal slices (slices is clamped to 2-24); use for tech, gaming or error-themed cuts.",
+  "tags": [
+    "transition",
+    "glitch",
+    "cut",
+    "digital"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [],
+  "previewComposition": {
+    "compositionId": "Block-glitch-cut",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*14*/; slices?: number /*8*/; intensity?: number /*90*/; seed?: string /*'glitch'*/}",
+  "example": "import {GlitchCut} from './blocks/glitch-cut/GlitchCut.tsx';\n<GlitchCut from={<SceneA />} to={<SceneB />} startFrame={40} slices={8} intensity={90} />"
+}

@@ -1,0 +1,26 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "text_in-ev1",
+   "frame": 175,
+   "label": "text in"
+  },
+  {
+   "name": "move_start-ev2",
+   "frame": 402,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev3",
+   "frame": 469,
+   "label": "move stop"
+  },
+  {
+   "name": "text_out-ev4",
+   "frame": 521,
+   "label": "text out"
+  }
+ ]
+}

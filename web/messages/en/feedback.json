@@ -1,0 +1,33 @@
+{
+  "trigger": "Flag a bug or send feedback",
+  "triggerShort": "Feedback",
+  "errorAction": "Flag a bug",
+  "reportProblem": "Report a problem",
+  "onUs": "This one is on us. You were not charged for this step.",
+  "dialog": {
+    "title": "Flag a bug / Send feedback",
+    "sendFailed": "Could not send the report.",
+    "thanks": "Thanks — your report reached the team.",
+    "close": "Close",
+    "kindLabel": "Report kind",
+    "kindBug": "Bug",
+    "kindFeedback": "Feedback",
+    "whatHappened": "What happened?",
+    "maxChars": "Up to {max} characters.",
+    "attachedTitle": "What will be attached",
+    "attachedHint": "Everything below is sent with your message. Remove anything you would rather not share.",
+    "shareDiagnostics": "Share diagnostics",
+    "shareDiagnosticsHint": "Adds this screen's menu and layout state, the names of saved settings and cookies (personal parts removed), your screen size, browser and OS family, and the app version. No personal data.",
+    "nothingAttached": "Nothing else will be attached.",
+    "sendTitle": "Exactly what we will send",
+    "allRemoved": "You removed every attachment; only your message will be sent.",
+    "cancel": "Cancel",
+    "send": "Send",
+    "field": {
+      "page": "The page you are on",
+      "projectId": "The project id",
+      "executionId": "The run (execution) id",
+      "assistantTurns": "The last assistant turns"
+    }
+  }
+}

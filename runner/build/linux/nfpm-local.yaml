@@ -1,0 +1,71 @@
+# nfpm v2 configuration for the LOCAL Linux package of the desktop runner.
+#
+# It is deliberately NOT linux/nfpm.yaml. That one is the release recipe and
+# assumes a staged tree that also carries the pinned ffmpeg/ffprobe builds and
+# their licence notices; a local build has no ffmpeg (the package recommends the
+# distribution's instead) and only what desktop-local.sh just compiled.
+#
+#   VERSION=<0.1.0-local> ARCH=<amd64|arm64> nfpm package \
+#     --config runner/build/linux/nfpm-local.yaml --packager deb --target <dir>
+#
+# VERSION is passed as DEB_VERSION by desktop-local.sh, which strips the leading
+# "v" the Go binaries carry: a Debian version must start with a digit.
+#
+# The src paths are the ones that exist INSIDE the build container:
+# /out holds the two binaries it just built, /src is the checked-out tree.
+name: reelbolt-runner
+arch: ${ARCH}
+platform: linux
+version: ${DEB_VERSION}
+section: net
+priority: optional
+maintainer: ReelBolt <support@reelbolt.ai>
+vendor: ReelBolt
+homepage: https://reelbolt.ai
+license: Apache-2.0
+description: |
+  The ReelBolt desktop runner: computer folder sync, plus render and media jobs
+  on this computer.
+  .
+  reelbolt-runner-desktop is the tray and the window; reelbolt-runner is the
+  same daemon headless, with the CLI. It listens on no port and holds no
+  provider credential: it dials out to the ReelBolt API and the runner gateway,
+  and media moves over presigned URLs.
+  .
+  This is a LOCAL BUILD, not a signed release. It carries no release public key,
+  so it refuses every self-update by design.
+
+# Windows and Linux desktop runners need GTK and the webview at runtime; these
+# are what the binary links (verified with ldd on Ubuntu 24.04).
+depends:
+  - libgtk-4-1
+  - libwebkitgtk-6.0-4
+
+recommends:
+  # Needed to run a render; folder sync needs neither.
+  - docker.io | podman
+  - ffmpeg
+
+contents:
+  - src: /out/reelbolt-runner
+    dst: /opt/reelbolt/runner/reelbolt-runner
+    file_info:
+      mode: 0755
+  - src: /out/reelbolt-runner-desktop
+    dst: /opt/reelbolt/runner/reelbolt-runner-desktop
+    file_info:
+      mode: 0755
+  - src: /src/runner/build/linux/reelbolt-runner-wrapper
+    dst: /usr/bin/reelbolt-runner
+    file_info:
+      mode: 0755
+  - src: /src/runner/build/linux/reelbolt-runner-desktop-wrapper
+    dst: /usr/bin/reelbolt-runner-desktop
+    file_info:
+      mode: 0755
+  - src: /src/runner/build/linux/reelbolt-runner.desktop
+    dst: /usr/share/applications/reelbolt-runner.desktop
+  - src: /src/runner/assets/icons/reelbolt-runner-256.png
+    dst: /usr/share/icons/hicolor/256x256/apps/reelbolt-runner.png
+  - src: /out/REELBOLT-LOCAL-BUILD.md
+    dst: /usr/share/doc/reelbolt-runner/README.md

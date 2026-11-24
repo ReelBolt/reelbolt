@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+{{if .ActorName}}{{.ActorName}} edited a thumbnail graphic{{else}}A thumbnail graphic was edited{{end}} in {{.ProjectName}} (workspace {{.OrgName}}).
+{{if .FileName}}
+Graphic: {{.FileName}}
+{{end}}
+Open the project files:
+
+{{.Link}}
+
+-- {{.FooterNote}}

@@ -1,0 +1,365 @@
+# ============================================================================
+#  docker-compose.control.yml - CONTROL PLANE service selection
+#  Host: the control-plane VM of the two-box layout
+#
+#  Usage (from /opt/reelbolt):
+#    docker compose -f docker-compose.yml -f docker-compose.control.yml up -d
+#
+#  docker-compose.yml IS NOT EDITED. This is a pure override layer, so a
+#  a "git pull" never conflicts and the repo stays clean.
+#
+#  WHAT THIS BOX RUNS (11 services):
+#    postgres, garage, rabbitmq, qdrant, inference, mcp, go-api, site, docs,
+#    web, nginx
+#
+#  WHAT IT MUST NEVER RUN:
+#    workflow-engine, sandbox-runtime, sandbox-executor, runner-gateway
+#        -> the render stack; they belong to the media plane (10.0.0.3).
+#           Pinned behind the "media-plane" profile, which is never activated here.
+#    whisper, embeddings
+#        -> DROPPED from the cloud deployment (third-party inference only).
+#           Base compose gives them no profile, so without this they WOULD start.
+#    autoheal
+#        -> mounts /var/run/docker.sock (host root). With it off, NOTHING on this
+#           box mounts the Docker socket. The one other service that does is
+#           sandbox-executor, which is media-plane only.
+#    decision  -> already behind its own "gpu" profile; left untouched.
+#    caddy     -> already behind its own "tls" profile; left untouched so the
+#                 documented TLS cut-over still works once a domain exists.
+#
+#  PRIVATE-NETWORK PUBLISHING. The data services live on THIS box but the media
+#  plane's engine consumes them, so each is published on CONTROL_PRIVATE_IP
+#  (10.0.0.2) as well as loopback. This mirrors an operator file (not in the public repository).
+#  control.yml, which publishes rabbitmq and inference on exactly this variable.
+#  CONTROL_PRIVATE_IP uses the repo's ":?" form, so an unset value fails loudly
+#  instead of silently binding 0.0.0.0. Nothing is published on the PUBLIC IP.
+#
+#  Required in /opt/reelbolt/.env:
+#    CONTROL_PRIVATE_IP   this host's Hetzner private address (10.0.0.2)
+#    ENGINE_PRIVATE_IP    the media plane's private address (10.0.0.3)
+# ============================================================================
+
+# The control plane always needs the session key, even if REELBOLT_RENDER_HOST (render hosts only)
+# were set by mistake: this overrides the base guard and reaches no container.
+x-session-key-guard: ${JWT_SIGNING_KEY:?set JWT_SIGNING_KEY in .env to a random value of at least 32 characters (openssl rand -hex 32)}
+
+services:
+
+  # ------------------------------------------------------------------------
+  #  MEDIA PLANE - the render stack. Never starts from this file.
+  # ------------------------------------------------------------------------
+  workflow-engine:
+    profiles: ["media-plane"]
+  sandbox-runtime:
+    profiles: ["media-plane"]
+  sandbox-executor:
+    profiles: ["media-plane"]
+  # Re-profiles runner-gateway away from its shipped "fabric" profile: activating
+  # "fabric" here would auto-enable its workflow-engine dependency and start the
+  # engine on the control plane. The gateway belongs on the media plane.
+  # `!override` replaces the shipped list; a plain `profiles:` would be APPENDED
+  # to ["fabric"], leaving `--profile fabric` able to start the gateway here.
+  runner-gateway:
+    profiles: !override ["media-plane"]
+
+  # ------------------------------------------------------------------------
+  #  LOCAL MODEL CONTAINERS - dropped (third-party inference only).
+  #  Neither has a profile in the base file, so both must be pinned here.
+  # ------------------------------------------------------------------------
+  whisper:
+    profiles: ["cloud-disabled"]
+  embeddings:
+    profiles: ["cloud-disabled"]
+
+  # ------------------------------------------------------------------------
+  #  DOCKER SOCKET - media-only. Pinning autoheal off is what leaves this box
+  #  with no /var/run/docker.sock mount at all.
+  # ------------------------------------------------------------------------
+  autoheal:
+    profiles: ["cloud-disabled"]
+
+  # ------------------------------------------------------------------------
+  #  GARAGE - retired. Object storage moved to Cloudflare R2, and the config
+  #  keys are still spelled `MinIO__*` / `MINIO_*` for history (see the .env
+  #  contract in an operator document). The pin matters because
+  #  the operator release script runs `compose up -d`, which starts every service whose profile
+  #  is active: without it a `stop`ped Garage comes straight back. The
+  #  `garagedata`/`garagemeta` volumes are deliberately left in place so the
+  #  old objects can still be read back, and so this is reversible.
+  # ------------------------------------------------------------------------
+  garage:
+    profiles: ["cloud-disabled"]
+
+  # ------------------------------------------------------------------------
+  #  DATA SERVICES - loopback for the host, private IP for the media plane.
+  # ------------------------------------------------------------------------
+  postgres:
+    ports: !override
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+      - "${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}:${POSTGRES_PORT:-5432}:5432"
+
+  # One-shot engine migration (never part of `up`: it sits behind its own profile). The engine on
+  # the media host no longer migrates its tables at startup, so the operator release script runs this once per
+  # release, after the API is healthy and before an operator file (not in the public repository):
+  #   docker compose ... --profile db-migrate run --rm --no-deps -T engine-migrator
+  # It is the workflow-engine image started with --migrate-only, and it gets the database
+  # connection and nothing else: no RabbitMQ, JWT, object storage, sandbox token or Docker socket.
+  # Login: POSTGRES_USER as today, or the engine's migration login once
+  # ENGINE_MIGRATOR_DB_PASSWORD is set in this host's .env (the operator release script then sets
+  # ENGINE_MIGRATOR_DB_USER to that role; the password never goes on a command line).
+  # The image is built off the box for THIS host's architecture and shipped with the other control
+  # images; the operator release script points ENGINE_MIGRATOR_TAG at the release.
+  engine-migrator:
+    profiles: ["db-migrate"]
+    build:
+      context: ./inference
+      dockerfile: src/ReelBolt.WorkflowEngine/Dockerfile
+    image: ${STABLE:-reelbolt}-engine-migrator:${ENGINE_MIGRATOR_TAG:-latest}
+    pull_policy: never
+    restart: "no"
+    command: ["--migrate-only"]
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ConnectionStrings__MigrationConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-reelforge};Username=${ENGINE_MIGRATOR_DB_USER:-${POSTGRES_USER:-postgres}};Password=${ENGINE_MIGRATOR_DB_PASSWORD:-${POSTGRES_PASSWORD:-postgres}}
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-reelforge};Username=${ENGINE_MIGRATOR_DB_USER:-${POSTGRES_USER:-postgres}};Password=${ENGINE_MIGRATOR_DB_PASSWORD:-${POSTGRES_PASSWORD:-postgres}}
+      Database__MaxPoolSize: "2"
+    networks:
+      - reelbolt
+
+  # AMQP for the media plane's engine; management UI stays loopback-only.
+  # Same shape as an operator file (not in the public repository).
+  rabbitmq:
+    ports: !override
+      - "${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}:${RABBITMQ_PORT:-5672}:5672"
+      - "127.0.0.1:${RABBITMQ_MGMT_PORT:-15672}:15672"
+
+  # The engine reads/writes embeddings vectors here, so 6333 (REST) and 6334
+  # (gRPC) go on the private address. In-network consumers are unaffected.
+  qdrant:
+    ports: !override
+      - "${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}:6333:6333"
+      - "${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}:6334:6334"
+
+  # ------------------------------------------------------------------------
+  #  INFERENCE API - the media plane's engine calls it for CRUD and provider
+  #  config, and the engine service-level credential is not the only caller.
+  #  Published on the private address only, exactly as the cloud control file does.
+  # ------------------------------------------------------------------------
+  inference:
+    ports:
+      - "${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}:8080:8080"
+    volumes:
+      # ca.pem, client.pem, client-key.pem from an operator file (not in the public repository)
+      - ${GATEWAY_INTERNAL_TLS_DIR:-./certs/gateway-internal/client}:/run/gateway-tls:ro
+    environment:
+      # A model on a customer's own computer is reached through the media host's runner-gateway
+      # (docs/local-llm-gateway.md). The link is TLS 1.3 with mutual authentication on the private
+      # address; GatewayRequireTls makes a plain-HTTP URL here an error instead of a fallback. Without the
+      # certificates and the token a local-model call answers "not set up"; nothing else is affected.
+      # ── Engine token key: validates the media plane engine's calls (confined to the routes it uses)
+      #    and signs the 60-second admin tokens the engine accepts. Same value as the media host's
+      #    ENGINE_JWT_SIGNING_KEY, never the JWT_SIGNING_KEY value (the API refuses to start if equal).
+      EngineJwt__SigningKey: ${ENGINE_JWT_SIGNING_KEY:?set ENGINE_JWT_SIGNING_KEY in .env (openssl rand -hex 32, same value as the media host, never the JWT_SIGNING_KEY value)}
+      #    The engine's admin reads (/api/v1/workflow-engine/*) are proxied by this service, so it needs
+      #    the engine's private address, the same one nginx uses for the health probe.
+      WorkflowEngine__BaseUrl: ${ENGINE_UPSTREAM:-http://10.0.0.3:8080}
+      Compute__GatewayBaseUrl: https://${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:8443
+      Compute__GatewayRequireTls: "true"
+      Compute__GatewayCaFile: /run/gateway-tls/ca.pem
+      Compute__GatewayClientCertFile: /run/gateway-tls/client.pem
+      Compute__GatewayClientKeyFile: /run/gateway-tls/client-key.pem
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      # ── Data Protection — ONE ring shared by both hosts (docs/secrets.md, WP F3).
+      #    The Inference API writes provider API keys through DataProtectionSecretProtector
+      #    and the media plane's WorkflowEngine must decrypt them. A per-host /keys ring
+      #    cannot do that, so the ring lives in the shared Postgres (data_protection_keys),
+      #    wrapped by one identical DATA_PROTECTION_KMS_LOCAL_KEY held in both .env files.
+      # -- Object storage. Base compose hardcodes the self-hosted Garage endpoint
+      #    and region; these keys make the backend a .env choice so the same
+      #    override runs against Garage (self-host) or Cloudflare R2 (cloud).
+      #    R2 needs region "auto" (Garage enforces "garage") and is path-style.
+      MinIO__Endpoint: ${MINIO_ENDPOINT:-http://garage:3900}
+      MinIO__Region: ${MINIO_REGION:-garage}
+      MinIO__ForcePathStyle: ${MINIO_FORCE_PATH_STYLE:-true}
+      # -- Tenancy shape for the .NET services. The Go API reads the flat
+      #    TENANCY_MODE env var; .NET binds the Tenancy:Mode configuration
+      #    section, i.e. env Tenancy__Mode. Without this the Go API runs Cloud
+      #    while the Inference API keeps SelfHosted account-purge semantics.
+      Tenancy__Mode: ${TENANCY_MODE:-}
+      DataProtection__Store: ${DATA_PROTECTION_STORE:-FileSystem}
+      DataProtection__Kms__LocalKey: ${DATA_PROTECTION_KMS_LOCAL_KEY:-}
+      # Hosted ASR + embeddings as platform provider rows (WP F6). The local
+      # whisper/embeddings containers do not run here, so these two slots are the
+      # only transcription and embedding source. A blank NAME skips the slot.
+      PlatformProviders__0__Name: ${PLATFORM_ASR_NAME:-}
+      PlatformProviders__0__Kind: ${PLATFORM_ASR_KIND:-OpenAICompatible}
+      PlatformProviders__0__Capability: Transcription
+      PlatformProviders__0__Endpoint: ${PLATFORM_ASR_ENDPOINT:-}
+      PlatformProviders__0__Model: ${PLATFORM_ASR_MODEL:-}
+      PlatformProviders__0__ApiKey: ${PLATFORM_ASR_API_KEY:-}
+      PlatformProviders__0__IsDefault: ${PLATFORM_ASR_DEFAULT:-true}
+      PlatformProviders__1__Name: ${PLATFORM_EMBEDDING_NAME:-}
+      PlatformProviders__1__Kind: ${PLATFORM_EMBEDDING_KIND:-OpenAICompatible}
+      PlatformProviders__1__Capability: Embedding
+      PlatformProviders__1__Endpoint: ${PLATFORM_EMBEDDING_ENDPOINT:-}
+      PlatformProviders__1__Model: ${PLATFORM_EMBEDDING_MODEL:-}
+      PlatformProviders__1__ApiKey: ${PLATFORM_EMBEDDING_API_KEY:-}
+      PlatformProviders__1__IsDefault: ${PLATFORM_EMBEDDING_DEFAULT:-true}
+      # Project Arachnid Shield (docs/csam.md). Self-host default is off; the cloud control overlay
+      # sets CSAM_ENABLED=true. /opt/reelbolt/.env holds ARACHNID_API_USERNAME / ARACHNID_API_PASSWORD;
+      # blank means not configured and fail open. Credentials are control-host only.
+      Csam__Arachnid__Enabled: ${CSAM_ENABLED:-false}
+      Csam__Arachnid__Username: ${ARACHNID_API_USERNAME:-}
+      Csam__Arachnid__Password: ${ARACHNID_API_PASSWORD:-}
+
+  # ------------------------------------------------------------------------
+  #  POOL WAKER - the on-demand pool's scaler loop (docs/pool-waker.md).
+  #  It lives on THIS host, not the media host: it holds a read/write cloud
+  #  provider token, and the media host runs untrusted render workloads.
+  #  Behind its own profile so a normal deploy neither starts nor stops it:
+  #    docker compose ... --profile poolwaker up -d pool-waker
+  #  It needs no database and no Docker socket. It talks to the provider API
+  #  and to the media host's gateway, over the gateway's internal TLS port
+  #  (TLS 1.3, client certificate required) on the private network. It sits on
+  #  its own compose network, so it cannot reach Postgres, RabbitMQ or the API
+  #  containers, and it publishes no port. The provider token is a mounted
+  #  file, never an environment value. `pool-edge` (what nodes dial) stays on
+  #  the media host.
+  # ------------------------------------------------------------------------
+  pool-waker:
+    profiles: ["poolwaker"]
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: pool-waker
+      args:
+        GOPROXY: ${GOPROXY:-https://proxy.golang.org,direct}
+        GOSUMDB: ${GOSUMDB:-sum.golang.org}
+    image: reelbolt-pool-waker:local
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    environment:
+      POOL_WAKER_ENABLED: "true"
+      POOL_PROVIDER: hetzner
+      POOL_INSTANCE: ${POOL_INSTANCE:-}
+      # The scaler refuses to start with a provider token when this says "media".
+      REELBOLT_ROLE: control
+      # Same port the Inference API uses (RUNNER_GATEWAY_INTERNAL_TLS_ADDR=:8443 on the media host).
+      # The scaler refuses a plain http:// URL to another host.
+      RUNNER_GATEWAY_URL: https://${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:8443
+      RUNNER_GATEWAY_CA_FILE: /run/gateway-tls/ca.pem
+      RUNNER_GATEWAY_CLIENT_CERT_FILE: /run/gateway-tls/client.pem
+      RUNNER_GATEWAY_CLIENT_KEY_FILE: /run/gateway-tls/client-key.pem
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      POOL_NODE_GATEWAY_URL: ${POOL_NODE_GATEWAY_URL:-}
+      HCLOUD_TOKEN_FILE: /run/secrets/hcloud_token
+      HCLOUD_SNAPSHOT_ID: ${HCLOUD_SNAPSHOT_ID:-}
+      HCLOUD_FIREWALL: ${HCLOUD_FIREWALL:-}
+      HCLOUD_LOCATION: ${HCLOUD_LOCATION:-}
+      HCLOUD_NETWORK: ${HCLOUD_NETWORK:-}
+      HCLOUD_NETWORK_SUBNET: ${HCLOUD_NETWORK_SUBNET:-}
+      HCLOUD_SERVER_TYPES: ${HCLOUD_SERVER_TYPES:-ccx33,ccx23,ccx13}
+      POOL_MAX_NODES: ${POOL_MAX_NODES:-2}
+      POOL_DAILY_SPEND_CAP_EUR: ${POOL_DAILY_SPEND_CAP_EUR:-5}
+      POOL_IDLE_SECONDS: ${POOL_IDLE_SECONDS:-0}
+      POOL_HOUR_END_MARGIN_SECONDS: ${POOL_HOUR_END_MARGIN_SECONDS:-300}
+      POOL_LOOP_INTERVAL_SECONDS: ${POOL_LOOP_INTERVAL_SECONDS:-15}
+    volumes:
+      # Never interpolated with :? (compose reads every service, profile or not); the scaler refuses to start
+      # on an empty setting or a token file that is not a regular 0600 file.
+      # Mode 0600 file owned by uid 10001 holding the Hetzner token (docs/pool-waker.md).
+      - ${POOL_WAKER_TOKEN_FILE:-/dev/null}:/run/secrets/hcloud_token:ro
+      # ca.pem, client.pem, client-key.pem: the waker's OWN client identity (the waker/ directory from
+      # an operator file (not in the public repository)), not the Inference API's. The key is owned by uid 10001.
+      - ${POOL_WAKER_GATEWAY_TLS_DIR:-./certs/gateway-internal/waker}:/run/gateway-tls:ro
+      # The spend ledger and usage record: they must survive a restart or the daily cap resets.
+      - pool-waker-state:/var/lib/pool-waker
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9108/metrics | grep -q ."]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - pool-waker
+
+  # ------------------------------------------------------------------------
+  #  GO API - tenancy shape is never passed by the base compose file, so a cloud
+  #  deployment would silently run SelfHosted (users join a shared Default org).
+  #  Passed through here; TENANCY_MODE=Cloud in .env.
+  #  Cosmetic Go<->inference: go-api builds its own DATABASE_URL from POSTGRES_*
+  #  pointing at the compose service name, which is correct in-network.
+  # ------------------------------------------------------------------------
+  go-api:
+    environment:
+      TENANCY_MODE: ${TENANCY_MODE:-}
+    # Base compose gates go-api on Garage being healthy. Garage is retired (see
+    # the `garage` pin above), and a depends_on naming a service that no active
+    # profile defines makes the whole project invalid - "service \"go-api\"
+    # depends on undefined service \"garage\"". So the dependency list is
+    # replaced rather than extended: inference and rabbitmq still gate go-api,
+    # Garage no longer does.
+    depends_on: !override
+      inference:
+        condition: service_healthy
+        restart: true
+      rabbitmq:
+        condition: service_healthy
+        restart: true
+
+  # ------------------------------------------------------------------------
+  #  NEXT.JS APPS - reached by nginx over the compose network, so neither needs a
+  #  host publish. Dropping them also removes web's :9229 Node-inspector publish,
+  #  which is unauthenticated RCE for anyone who can reach the port.
+  # ------------------------------------------------------------------------
+  web:
+    ports: !reset []
+  site:
+    ports: !reset []
+
+  # ------------------------------------------------------------------------
+  #  FRONT DOOR
+  #   * UPSTREAM_WORKFLOW_ENGINE: the engine is on the media plane, so nginx
+  #     proxies /api/v1/workflow-engine/health to its private address instead of a
+  #     compose hostname (the engine's other routes go through the Inference API). An IP literal is deliberate - nginx.conf sets a
+  #     resolver, and a name it cannot resolve at request time would 502.
+  #   * depends_on: workflow-engine and sandbox-executor are not on this box, so
+  #     nginx cannot and must not wait for them (a cross-host depends_on is
+  #     impossible in compose). Their health is checked from outside.
+  # ------------------------------------------------------------------------
+  nginx:
+    environment:
+      UPSTREAM_WORKFLOW_ENGINE: ${ENGINE_UPSTREAM:-http://10.0.0.3:8080}
+      # The runner gateway on the media plane, published at /runner/* on this
+      # host (nginx/runner-locations.conf.template). The media box publishes it on
+      # its private address; set RUNNER_GATEWAY_UPSTREAM= (empty) to unpublish.
+      UPSTREAM_RUNNER_GATEWAY: ${RUNNER_GATEWAY_UPSTREAM-http://10.0.0.3:8090}
+      RUNNER_HOSTNAME: ${RUNNER_HOSTNAME:-}
+      # Cloudflare Free caps request bodies at 100M; see docs/tls.md "Upload size".
+      CLIENT_MAX_BODY_SIZE: ${CLIENT_MAX_BODY_SIZE:-100M}
+    depends_on: !override
+      site:
+        condition: service_healthy
+        restart: true
+      web:
+        condition: service_healthy
+        restart: true
+      go-api:
+        condition: service_healthy
+        restart: true
+      inference:
+        condition: service_healthy
+        restart: true
+
+volumes:
+  # The pool waker's spend ledger and usage record (docs/pool-waker.md).
+  pool-waker-state:
+
+networks:
+  # The waker alone: outbound only (provider API, media host gateway), no path to the data services.
+  pool-waker:

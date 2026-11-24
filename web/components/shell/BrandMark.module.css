@@ -1,0 +1,33 @@
+/* BrandMark — colour scheme handling.
+ *
+ * The mark's GEOMETRY is fixed (it mirrors brand/app-icon.svg exactly) and lives in the
+ * component. Only the colours live here, because they are the one part that has to follow the
+ * colour scheme: the mark is drawn twice over, once against a light header and once against a
+ * dark one, and a single fixed palette cannot serve both.
+ *
+ * The light scheme keeps the inverted reading that has always shipped — a pale violet square
+ * with a deep violet R — which is what gives the mark contrast on a white header.
+ *
+ * The dark scheme restores the BRAND MASTER's own colours (brand/app-icon.svg: a #2E1065 square
+ * with a #C4B5FD R and a #A855F7 bolt), expressed here as Mantine ramp steps so the mark keeps
+ * following app/theme.ts's primaryColor. That is the point: on a dark header the pale square was
+ * the brightest thing on screen, and the master is already designed to sit on dark.
+ *
+ * The bolt keeps its violet-6 fill in both schemes — it carries on either square — and its
+ * outline always matches the square it is drawn on, which is what keeps it legible as a
+ * separate shape rather than a blob.
+ */
+
+.square {
+  fill: light-dark(var(--mantine-color-violet-1), var(--mantine-color-violet-9));
+}
+
+/* The R. */
+.mark {
+  stroke: light-dark(var(--mantine-color-violet-9), var(--mantine-color-violet-2));
+}
+
+.bolt {
+  fill: var(--mantine-color-violet-6);
+  stroke: light-dark(var(--mantine-color-violet-1), var(--mantine-color-violet-9));
+}

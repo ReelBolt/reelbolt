@@ -1,0 +1,42 @@
+{
+  "save": "Save",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "edit": "Edit",
+  "close": "Close",
+  "back": "Back",
+  "next": "Next",
+  "search": "Search",
+  "loading": "Loading…",
+  "retry": "Try again",
+  "yes": "Yes",
+  "no": "No",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "upload": "Upload",
+  "confirm": "Confirm",
+  "actions": "Actions",
+  "name": "Name",
+  "status": "Status",
+  "created": "Created",
+  "updated": "Updated",
+  "optional": "Optional",
+  "required": "Required",
+  "learnMore": "Learn more",
+  "errors": {
+    "generic": "Something went wrong. Try again in a moment.",
+    "network": "We could not reach ReelBolt. Check your connection and try again.",
+    "notFound": "We could not find that.",
+    "forbidden": "You do not have permission to do that.",
+    "unauthorized": "Your session has ended. Sign in again to continue."
+  },
+  "language": {
+    "label": "Language",
+    "description": "The language of menus, buttons and messages.",
+    "saveFailed": "We could not save your language. Please try again."
+  },
+  "meta": {
+    "description": "AI-powered promotional video generation"
+  }
+}

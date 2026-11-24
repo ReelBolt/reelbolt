@@ -1,0 +1,274 @@
+{
+  "account": "Account",
+  "meta": {
+    "usage": "Usage",
+    "notifications": "Notifications",
+    "data": "Your data"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "description": "How the dashboard looks. This is saved in this browser, so it does not follow you to another device.",
+    "auto": "Follow the system",
+    "light": "Light",
+    "dark": "Dark",
+    "ariaLabel": "Colour scheme",
+    "hint": "The sun and moon button in the top bar sets Light or Dark directly. Choose one of those here to go back to following your system."
+  },
+  "storage": {
+    "title": "Storage",
+    "description": "What this workspace's files use, across every project. Files synced from your computer or from cloud storage count, and so do agent and workflow outputs.",
+    "seePlans": "See plans",
+    "hint": "Delete files you no longer need, or move the workspace to a bigger plan.",
+    "loading": "Reading your storage usage…",
+    "failed": "Storage usage could not be read. Try again."
+  },
+  "displayName": {
+    "saved": "Your name was saved.",
+    "saveFailed": "Could not save your name.",
+    "label": "Your name",
+    "description": "Shown in greetings. 1 to 100 characters.",
+    "save": "Save name"
+  },
+  "data": {
+    "title": "Your data",
+    "breadcrumbAccount": "Account",
+    "intro": "Take a copy of everything ReelBolt holds about you, or close your account."
+  },
+  "mcp": {
+    "title": "Admin tools over MCP",
+    "description": "Lets an agent connected through MCP see and use the {count} administrative tools. This only matters if you already have that authority. Off by default.",
+    "saveFailed": "Could not save. Your change was not applied.",
+    "loadFailed": "Could not load your MCP settings. Try again.",
+    "switchLabel": "Allow admin tools over MCP",
+    "stateOn": "On — an MCP agent can use the admin tools.",
+    "stateOff": "Off — an MCP agent cannot use the admin tools."
+  },
+  "marketing": {
+    "title": "Marketing emails",
+    "description": "Product news, tips and offers. Account and billing emails are sent either way.",
+    "status": {
+      "optedInOn": "You agreed to marketing emails on {date}.",
+      "optedIn": "You agreed to marketing emails.",
+      "pending": "Waiting for you to confirm from your inbox. Nothing is sent until you confirm.",
+      "withdrawnOn": "You unsubscribed on {date}.",
+      "withdrawn": "You are unsubscribed.",
+      "none": "You have not signed up for marketing emails."
+    },
+    "errors": {
+      "unavailable": "Marketing emails cannot be turned on right now. Please try again in a moment.",
+      "wordingChanged": "The wording of this option has just changed. Please read it again and switch it on if you still want to.",
+      "subscribeFailed": "That did not go through. Nothing was changed.",
+      "unsubscribeFailed": "We could not unsubscribe you just now. Please try again."
+    },
+    "subscribed": "Subscribed",
+    "notSubscribed": "Not subscribed",
+    "verifyEmail": "Verify your email address to manage marketing emails.",
+    "readFailed": "Your marketing email preference could not be read right now. Every marketing email also has an unsubscribe link.",
+    "reading": "Reading your preference…"
+  },
+  "export": {
+    "title": "Download your data",
+    "description": "A zip file with your account, your personal workspace’s projects, files and runs, your assistant chats and your billing history.",
+    "checking": "Checking for a copy of your data",
+    "unavailable": "Downloading a copy of your data isn't available on this server. Ask the person who runs it for a copy.",
+    "preparingTitle": "We’re preparing your file",
+    "preparingBody": "This can take a few minutes if you have a lot of footage. We'll email you a link when it's ready, and it will also appear here. You can leave this page.",
+    "ready": "{previous, select, yes {Your previous copy} other {Your latest copy}} {made, select, none {is ready} other {was made on {made}}}{size, select, none {} other { ({size})}}.{until, select, none {} other { You can download it until {until}.}}",
+    "background": "We'll put the file together in the background and email you a link. You can ask for one copy a day.",
+    "checkFailed": "We couldn't check for an earlier copy just now.",
+    "tooSoon": "You can ask for one copy a day. The next one is possible {unit, select, hours {in {n, plural, one {# hour} other {# hours}}} other {in {n, plural, one {# minute} other {# minutes}}}}.",
+    "requestFailed": "We couldn't start your copy. Please try again in a moment.",
+    "downloadFailed": "We couldn't start the download. Please try again in a moment.",
+    "expired": "That copy has expired. Ask for a new one.",
+    "download": "Download your data (zip)",
+    "requestNew": "Request a new copy",
+    "request": "Request a copy"
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "description": "Close your ReelBolt account and remove what it holds.",
+    "summary": "You're signed out everywhere straight away, and your projects, files, runs and chats are removed after {days} days. Sign in any time before then and the deletion is cancelled — nothing is lost.",
+    "notes": "If you're the only owner of a team that still has other members, hand the team over first. A paid plan isn't cancelled for you: cancel it from <link>Plan & billing</link> → Cancel plan before you go. Want a copy of your data? Download it above first.",
+    "openButton": "Delete account…",
+    "modalTitle": "Delete your account?",
+    "modalBody": "Your account will be scheduled for deletion and you'll be signed out on every device. You have {days} days to change your mind by signing in again.",
+    "passwordLabel": "Your password",
+    "passwordHint": "To make sure it’s really you.",
+    "useProvider": "I sign in with Google or GitHub",
+    "providerNote": "You'll confirm by signing in with Google or GitHub instead of a password. Nothing is deleted until you come back from that sign-in.",
+    "usePassword": "Use my password instead",
+    "typeToConfirm": "Type {word} to confirm",
+    "cancel": "Cancel",
+    "confirmPassword": "Delete my account",
+    "confirmProvider": "Continue",
+    "outcome": {
+      "wrongPassword": "That password isn't right. Try again.",
+      "passwordRequired": "This account signs in with a password. Enter it above to continue.",
+      "soleOwner": "You're the only owner of “{team}”, which still has other members. Make someone else an owner or remove the members first: switch to that team with the workspace switcher, then open <link>Workspace → Members</link>. Nothing has been deleted.",
+      "aTeam": "a team",
+      "providerTitle": "Confirm with {name}",
+      "providerBody": "Nothing has been deleted yet. Sign in with {name} to prove the account is yours; your account is scheduled for deletion when you come back.",
+      "providerContinue": "Continue with {name}",
+      "unavailable": "Signing in with Google or GitHub isn't set up on this server, so it can't confirm the deletion. Set a password with “Forgot password?” on the sign-in page, then come back and use it here.",
+      "signedOut": "You've been signed out. Sign in again, then come back here.",
+      "failed": "Something went wrong and your account was not deleted. Please try again in a moment."
+    }
+  },
+  "page": {
+    "title": "Account",
+    "breadcrumbDashboard": "Dashboard",
+    "intro": "Your account, and where to find this workspace's usage and plan. Changes here apply to you and follow you between workspaces; the workspace's own settings stay under Workspace.",
+    "tabs": {
+      "profile": "Profile",
+      "security": "Security",
+      "notifications": "Notifications",
+      "data": "Your data"
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "Who you are signed in as. These come from your session.",
+      "email": "Email",
+      "emailConfirmed": "Email confirmed",
+      "notConfirmed": "Not confirmed",
+      "confirmed": "Confirmed",
+      "workspace": "Workspace",
+      "platformAdmin": "Platform administrator",
+      "yes": "Yes",
+      "roleHint": "Your role in this workspace is changed by an Owner or Admin on <link>Workspace → Members</link>."
+    },
+    "workspace": {
+      "title": "Workspace",
+      "body": "The workspace you are in right now is set by the switcher at the top of the left menu. What it has used and what it is on are on <usage>Usage</usage> and <billing>Plan & billing</billing>."
+    },
+    "security": {
+      "passwordTitle": "Password",
+      "passwordDescription": "Changing it signs you out of your other devices.",
+      "toolsTitle": "Connecting other tools",
+      "toolsDescription": "ReelBolt does not use personal API keys, so there is nothing to create or copy here.",
+      "toolsBody": "An AI agent such as Claude Code connects over MCP by opening a ReelBolt sign-in in your browser and asking for your approval. It acts as you, with your workspace's limits, and you can stop it by changing your password."
+    },
+    "notificationsNote": "Emails about your own jobs finishing or failing are on the <link>Notifications</link> page.",
+    "data": {
+      "title": "Your data",
+      "intro": "Take a copy of everything ReelBolt holds about you, or close your account."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "breadcrumbSettings": "Settings",
+    "switches": {
+      "jobSucceeded": {
+        "label": "Job finished",
+        "description": "An email when a video job you started finishes successfully."
+      },
+      "jobFailed": {
+        "label": "Job failed",
+        "description": "An email when a video job you started fails, including the reason it failed."
+      },
+      "fileCreated": {
+        "label": "File added",
+        "description": "An email when a file is added to a project in your workspace."
+      },
+      "graphicsEdited": {
+        "label": "Thumbnail graphic edited",
+        "description": "An email when a thumbnail graphic in a project in your workspace is edited."
+      },
+      "reviewActivity": {
+        "label": "Review activity",
+        "description": "Email me when someone leaves a note or a decision on a review link I shared."
+      },
+      "avatarRetention": {
+        "label": "Avatar about to be deleted",
+        "description": "Email me a week before an avatar I made is deleted because its keep-for period ends, so I can renew it."
+      },
+      "socialPublishing": {
+        "label": "Social publishing",
+        "description": "Email me when a post I made is published or fails, or when a connected account needs reconnecting."
+      }
+    },
+    "saveFailed": "Your change could not be saved. The switch is back to how it was. Try again.",
+    "loadFailed": "Could not load your notification settings. Try again.",
+    "emailMe": "Email me",
+    "emailMeAria": "Email me: {label}",
+    "recent": {
+      "title": "Recent activity",
+      "description": "The latest emails you were sent, newest first. A red dot means the send failed.",
+      "empty": "Nothing here yet. When a job finishes or a file is added, you’ll see it."
+    }
+  },
+  "usage": {
+    "title": "Usage",
+    "breadcrumbDashboard": "Dashboard",
+    "ranges": {
+      "d7": "7 days",
+      "d30": "30 days",
+      "d90": "90 days"
+    },
+    "axes": {
+      "day": "By day",
+      "project": "By project",
+      "model": "By model",
+      "kind": "By step kind",
+      "mode": "Who pays",
+      "source": "By source"
+    },
+    "axisPhrase": {
+      "day": "day by day, in UTC",
+      "project": "by project",
+      "model": "by the model that did the work",
+      "kind": "by what was consumed",
+      "mode": "by who paid the provider",
+      "source": "by what the credits were spent on"
+    },
+    "noBilling": {
+      "title": "Billing is not enabled on this deployment",
+      "body": "This deployment runs without billing, so it does not keep a credit balance or charge for usage. Nothing is wrong with your account: the usage and credits view is simply switched off here. Nothing you do on this page has been metered or charged."
+    },
+    "loadFailed": {
+      "title": "Could not load your usage",
+      "fallback": "Please try again in a moment.",
+      "retry": "Retry"
+    },
+    "loadingAria": "Loading usage",
+    "intro": "Every call the platform makes on your behalf is recorded with what it consumed, which provider and model did the work, and the credits it was charged. The charge is priced when the call runs, so a later price change never rewrites what you were billed.",
+    "breakdown": {
+      "title": "Breakdown",
+      "periodAria": "Period",
+      "groupByAria": "Group by",
+      "empty": "No metered usage in the last {days} days. Runs, uploads and assistant answers all write a record here, so an empty list means nothing has been metered yet.",
+      "showing": "Showing {count, plural, one {# row} other {# rows}}, grouped {axis}. “Metered calls” counts recorded calls, not steps: one step can make several calls."
+    },
+    "credits": {
+      "available": "Credits available",
+      "loadingAria": "Loading credits",
+      "heldLine": "{balance} in the account · {reserved} held for running work",
+      "renews": "{plan} renews {date}"
+    },
+    "totals": {
+      "used": "Credits used",
+      "calls": "{events, plural, one {# metered call} other {# metered calls}} in the last {days} days",
+      "providerCost": "Our provider cost: {cost}"
+    },
+    "whoPays": {
+      "title": "Who paid the provider",
+      "empty": "Nothing metered in this period.",
+      "shareAria": "{mode} share of credits",
+      "note": "Work on your own providers or runners is charged at the platform rate, never at the provider's own price."
+    }
+  },
+  "emailChange": {
+    "title": "Email change pending",
+    "body": "We are waiting for you to confirm {email} from your current address. The request expires on {date}.",
+    "cancel": "Cancel the change",
+    "cancelFailed": "Could not cancel the change. Please try again."
+  },
+  "mcpMediaEgress": {
+    "title": "Media and connected tools (MCP)",
+    "description": "Lets a tool connected through MCP allow sending your media to outside AI model providers (other companies) for one action at a time: a run it starts, a clip that shows your avatars and objects, a variant made with AI, an object pulled out of a video, or a picture. Each action must still ask for it, and a run's record shows who allowed it. Off by default.",
+    "saveFailed": "Could not save. Your change was not applied.",
+    "loadFailed": "Could not load this setting. Try again.",
+    "switchLabel": "Let connected tools (MCP) allow sending my media to outside AI model providers (other companies)",
+    "stateOn": "On: a connected tool can allow sending your media for a run, a clip, a variant, an object or a picture.",
+    "stateOff": "Off: a connected tool cannot allow sending your media."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "globs": [
+    "components/editor/thumbnail/AiPanel.tsx",
+    "components/editor/thumbnail/TextPanel.tsx",
+    "components/editor/thumbnail/DesignGraphicPanel.tsx",
+    "components/editor/thumbnail/ExportDialog.tsx",
+    "components/editor/thumbnail/CanvasPanel.tsx",
+    "components/editor/thumbnail/ArrangePanel.tsx",
+    "components/editor/thumbnail/useArrange.ts",
+    "components/editor/thumbnail/ReferencePictureControl.tsx",
+    "components/editor/thumbnail/AiToolPicker.tsx",
+    "components/editor/media/AnnotationEditor.tsx",
+    "components/editor/media/BinTree.tsx",
+    "components/editor/media/ClipGrid.tsx",
+    "components/editor/media/FilmstripStrip.tsx",
+    "components/editor/media/MediaPool.tsx",
+    "components/editor/media/MetadataPanel.tsx",
+    "components/editor/media/PaneResizer.tsx",
+    "components/editor/media/PrepareDerivatives.tsx",
+    "components/editor/media/SmartBinEditor.tsx",
+    "components/editor/media/SourceViewer.tsx",
+    "components/editor/media/use-source-playback.ts",
+    "components/editor/media/TilePoster.tsx",
+    "components/editor/media/useTouchLiftDrag.tsx",
+    "components/editor/media/SfxLibraryPanel.tsx",
+    "components/editor/media/SubjectsPanel.tsx",
+    "components/editor/subjects/*.tsx"
+  ]
+}

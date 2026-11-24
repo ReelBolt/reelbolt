@@ -1,0 +1,15 @@
+#!/bin/sh
+# Added by the reelbolt-runner Debian package.
+#
+# WHY THIS EXISTS: two reasons, and the first one is the daemon's too.
+#
+#  1. The tray/window app lives under /opt/reelbolt/runner beside its daemon, so
+#     that os.Executable() inside the process resolves to a package-managed path.
+#     That is how the runner knows it must never replace itself behind dpkg's
+#     back (runner/internal/update) and instead asks the user to upgrade through
+#     the package manager.
+#  2. The desktop entry's Exec= names `reelbolt-runner-desktop`, which has to
+#     resolve on PATH for the applications menu to launch anything at all.
+set -eu
+
+exec /opt/reelbolt/runner/reelbolt-runner-desktop "$@"

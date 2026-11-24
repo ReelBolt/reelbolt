@@ -1,0 +1,42 @@
+# Private listener for the engine-to-API path (blue-green deploys). Rendered by render-config.sh
+# only when NGINX_PRIVATE_PORT is set; published on the control box's private IP by the stable
+# overlay and never on a public address. The workflow engine on the media box calls the inference
+# API here, so the API behind this block can move to a new slot without the engine's URL changing.
+#
+# Deliberately NOT the public path: no cookie-to-JWT translation, no basic auth and no rate limits.
+# The engine's own `Authorization` header is forwarded untouched (nginx passes request headers by
+# default, and nothing below sets Authorization), and the API validates it exactly as it did when
+# the engine reached it directly. The client-address headers are overwritten (see `location /`).
+# Who may connect is left to the deployment (the publish address and the host firewall): there is
+# no allow/deny list here, because the engine's address differs per deployment.
+server {
+    listen ${NGINX_PRIVATE_PORT};
+    server_name _;
+
+    # Uploaded and rendered media travels through here: no practical body limit, and streamed
+    # both ways instead of buffered to disk.
+    client_max_body_size ${NGINX_PRIVATE_MAX_BODY};
+    proxy_request_buffering off;
+    proxy_buffering off;
+    proxy_http_version 1.1;
+    proxy_connect_timeout 10s;
+    proxy_read_timeout 1h;
+    proxy_send_timeout 1h;
+
+    set $inference_api ${UPSTREAM_INFERENCE_API};
+
+    location / {
+        proxy_set_header Host $host;
+        # The caller here is the workflow engine, which sends no client-address header of its own.
+        # Anything else on the private network could send one, and the API keys per-address limits
+        # and consent evidence on X-Real-IP, so both are overwritten with the socket peer (not
+        # appended to: there is no proxy in front of this listener whose chain should be kept),
+        # and nginx's own slot signal is blanked as on the public side. Authorization is not named
+        # here, so the engine's token still passes untouched.
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-ReelBolt-Slot-Fallback "";
+        proxy_pass $inference_api;
+    }
+}

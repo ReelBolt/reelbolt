@@ -1,0 +1,155 @@
+{
+ "clip": "syn-anim-04",
+ "videoType": "animation",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 480,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "speech_start",
+   "frame": 12,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev2",
+   "type": "appear",
+   "frame": 44,
+   "region": [
+    220,
+    30,
+    520,
+    70
+   ],
+   "note": "banner slides fully into place"
+  },
+  {
+   "id": "ev3",
+   "type": "move_start",
+   "frame": 71,
+   "region": [
+    302,
+    260,
+    130,
+    130
+   ],
+   "note": "yellow box starts moving"
+  },
+  {
+   "id": "ev4",
+   "type": "move_stop",
+   "frame": 90,
+   "region": [
+    520,
+    260,
+    130,
+    130
+   ],
+   "note": "yellow box is at rest again"
+  },
+  {
+   "id": "ev5",
+   "type": "hit",
+   "frame": 100,
+   "region": [
+    94,
+    160,
+    130,
+    130
+   ],
+   "note": "magenta box shake begins"
+  },
+  {
+   "id": "ev6",
+   "type": "speech_end",
+   "frame": 105,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev7",
+   "type": "hit",
+   "frame": 108,
+   "region": [
+    93,
+    160,
+    130,
+    130
+   ],
+   "note": "magenta box shake begins"
+  },
+  {
+   "id": "ev8",
+   "type": "transition",
+   "frame": 240,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "scene 1 fade: midpoint of the blend"
+  },
+  {
+   "id": "ev9",
+   "type": "speech_start",
+   "frame": 262,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev10",
+   "type": "move_start",
+   "frame": 269,
+   "region": [
+    161,
+    250,
+    100,
+    170
+   ],
+   "note": "dancer starts moving"
+  },
+  {
+   "id": "ev11",
+   "type": "hit",
+   "frame": 330,
+   "region": [
+    640,
+    250,
+    100,
+    170
+   ],
+   "note": "dancer scale pop"
+  },
+  {
+   "id": "ev12",
+   "type": "speech_end",
+   "frame": 372,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev13",
+   "type": "transition",
+   "frame": 380,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "scene 2 cut: first frame of new scene"
+  },
+  {
+   "id": "ev14",
+   "type": "text_in",
+   "frame": 388,
+   "region": [
+    380,
+    180,
+    200,
+    120
+   ],
+   "note": "closing text reaches half of its peak opacity"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "caption-karaoke",
+  "version": "1.0.0",
+  "title": "Caption karaoke",
+  "category": "captions",
+  "description": "Use for word-by-word spoken captions where each word fills with colour as it is said (talking heads, voice-overs). The `captions` prop is a @remotion/captions Caption[].",
+  "tags": [
+    "caption",
+    "karaoke",
+    "subtitle",
+    "word highlight"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "@remotion/captions"
+  ],
+  "sharedFiles": [
+    "_shared/captions.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-caption-karaoke",
+    "durationInFrames": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      20,
+      50,
+      80
+    ]
+  },
+  "props": "{captions: Caption[]; maxWordsPerPage?: number /*4*/; color?: string; highlightColor?: string /*'#ffd54a'*/; fontSize?: number; fontFamily?: string /*'Montserrat, sans-serif'*/}",
+  "example": "import {CaptionKaraoke} from './blocks/caption-karaoke/CaptionKaraoke.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionKaraoke captions={captions} maxWordsPerPage={4} />"
+}

@@ -1,0 +1,9 @@
+Hello {{.Name}},
+
+The credit balance of {{.OrgName}} is running low: {{.Balance}} credits left.
+
+Add credits: {{.Link}}
+
+Runs that need more credits than the balance holds will not start.
+
+-- {{.FooterNote}}

@@ -1,0 +1,43 @@
+{
+  "offline": {
+    "title": "Sei offline",
+    "body": "ReelBolt ha bisogno di una connessione. L'esecuzione dei flussi di lavoro, gli aggiornamenti in tempo reale e il caricamento dei file avvengono sul server, quindi qui non c'è una modalità offline. Riconnettiti e ricarica la pagina per continuare.",
+    "retry": "Riprova"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "body": "Non riusciamo a trovare questa pagina. Potrebbe essere stata spostata, oppure il link potrebbe contenere un errore.",
+    "back": "Torna alla dashboard"
+  },
+  "invite": {
+    "role": "{role, select, owner {proprietario} admin {amministratore} member {membro} billing {fatturazione} other {{role}}}",
+    "welcomeTitle": "Benvenuto",
+    "joined": "Sei entrato in {org} come {role}.",
+    "joinFailedTitle": "Impossibile unirsi",
+    "joinFailedBody": "Non è stato possibile accettare questo invito.",
+    "checking": "Controllo dell'invito in corso…",
+    "expiredTitle": "Questo invito è scaduto",
+    "goneTitle": "Questo invito non è più valido",
+    "errorTitle": "Non siamo riusciti a controllare questo invito",
+    "expiredBody": "Gli inviti restano validi per sette giorni. Chiedi a chi ti ha invitato di inviarne uno nuovo.",
+    "goneBody": "Potrebbe essere stato revocato, già usato, oppure lo spazio di lavoro potrebbe essere stato eliminato. Chiedi a chi ti ha invitato di inviarne uno nuovo.",
+    "errorBody": "Riprova tra un momento.",
+    "retry": "Riprova",
+    "goToSignIn": "Vai all'accesso",
+    "summary": "{hasInviter, select, yes {{inviter} ha invitato <b>{email}</b> a unirsi a {org} come {role}.} other {Sei stato invitato come <b>{email}</b> (ruolo {role}).}}",
+    "openUntil": "Questo invito è valido fino al {date}.",
+    "join": "Unisciti a {org}",
+    "wrongAccount": "Questo invito è stato inviato a {invited}, ma hai effettuato l'accesso come {current}.",
+    "signOut": "Esci",
+    "signInAs": "Accedi come {email} per accettare questo invito.",
+    "needAccount": "Per unirti ti serve un account ReelBolt per {email}. Creane uno con quell'indirizzo, poi apri di nuovo questo link.",
+    "signIn": "Accedi",
+    "haveAccount": "Ho già un account"
+  },
+  "role": "{role, select, owner {proprietario} admin {amministratore} member {membro} billing {fatturazione} other {{role}}}",
+  "editorSoon": {
+    "title": "Video editor",
+    "body": "Il video editor arriverà presto. Questa alpha 0.1 non lo include.",
+    "back": "Torna ai progetti"
+  }
+}

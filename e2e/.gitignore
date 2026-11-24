@@ -1,0 +1,12 @@
+node_modules/
+.auth/
+test-results/
+playwright-report/
+.env.local
+.env*.local
+
+# Perf artefacts: a HAR and the browser storageState carry session cookies. measure.mjs
+# refuses an --out inside the repository; this is the second lock.
+perf/out/
+perf/**/*.har
+perf/**/state.json

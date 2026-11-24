@@ -1,0 +1,139 @@
+{
+  "dismiss": "Dismiss",
+  "live": {
+    "title": "Running now",
+    "titleCount": "Running now ({count})",
+    "empty": "Nothing is running. Start an app and you will see its progress here.",
+    "run": "Run an app",
+    "subline": "{project}{kind, select, running { - {elapsed}} queued { - waiting for a free slot} other {}}",
+    "stepProgress": "Step progress"
+  },
+  "attention": {
+    "dismiss": "Dismiss these failed run warnings",
+    "one": "A run needs your attention",
+    "many": "{count} runs need your attention",
+    "inProject": "in {project}, {ago}",
+    "prompt": "Why did the run of \"{name}\" in project \"{project}\" fail? Execution id {id}. Explain the likely cause and what I should change.",
+    "why": "Why did it fail?",
+    "open": "Open run"
+  },
+  "renders": {
+    "title": "Latest videos",
+    "empty": "Finished videos land here with a thumbnail and a play button."
+  },
+  "recent": {
+    "title": "Recent runs",
+    "empty": "No finished runs yet.",
+    "produced": "Made a video"
+  },
+  "continue": {
+    "title": "Continue where you left off",
+    "all": "All projects",
+    "running": "running",
+    "stats": "{files, plural, one {# file} other {# files}}, {workflows, plural, one {# app} other {# apps}}, {renders, plural, one {# video} other {# videos}} incl. earlier versions",
+    "empty": "Empty project",
+    "line": "{summary} - {ago}"
+  },
+  "caps": {
+    "chat": {
+      "label": "Chat model",
+      "hint": "Runs every agent and the assistant"
+    },
+    "transcription": {
+      "label": "Speech to text",
+      "hint": "Transcribes footage for editing"
+    },
+    "vision": {
+      "label": "Vision model",
+      "hint": "Describes shots in your footage"
+    },
+    "speech": {
+      "label": "Voiceover",
+      "hint": "Narration for promo videos"
+    },
+    "video": {
+      "label": "Video generation",
+      "hint": "Generated b-roll, paid per clip"
+    },
+    "embedding": {
+      "label": "Embeddings",
+      "hint": "Search file contents by meaning"
+    },
+    "image": {
+      "label": "Image generation",
+      "hint": "Pictures from a written description, paid per image"
+    },
+    "imageEdit": {
+      "label": "Image editing",
+      "hint": "Change a picture you already have; the other picture tools fall back to it"
+    },
+    "segmentation": {
+      "label": "Subject cut-outs",
+      "hint": "Cuts a person or an object out of a picture, so the editor can move it on its own"
+    },
+    "depth": {
+      "label": "Depth maps",
+      "hint": "Reads how far away each part of a picture is"
+    }
+  },
+  "setup": {
+    "optionalTitle": "Optional providers not set up",
+    "optionalList": "{list}.",
+    "optionalBody": "Everything core works without them; connect these providers to unlock the extra features listed above.",
+    "open": "Open inference settings",
+    "title": "Finish setup ({done} of {total})",
+    "providers": "Providers",
+    "optional": "optional",
+    "available": "Provider available",
+    "prompt": "Help me finish setting up inference providers. Missing defaults: {missing}.",
+    "ask": "Ask the assistant how"
+  },
+  "firstVideo": {
+    "header": "{material, select, idea {Five short clips from your phone are enough for a first cut. Your shot list is ready.} code {You built it. Now show it in a video.} other {{persona, select, creator {The footage is already on your phone. Get a first cut while you plan the next video.} business {You did not start this to become a video editor. Your first video starts here.} educator {Your best lessons deserve a shorter cut. Record the point in a few short takes and get a tight clip.} nonprofit {You have the stories and the clips. Tell the first one.} software {You shipped it. Now show it in a video.} agency {First cuts should not eat the margin. Start one here.} other {You have a story. Make the video.}}}}",
+    "title": "Your first video",
+    "listLabel": "Three steps to your first video",
+    "done": " (done)",
+    "next": " (next)",
+    "addTitle": "{material, select, code {Add your code} any {Add what you start from} other {Add your clips}}",
+    "addBody": "{material, select, code {Connect the repository, or upload the code as a zip.} idea {Film the five clips on your shot list, then drop them in.} any {Clips you already shot, or the source code of an app you built.} other {Drop in what you already shot. Several different shots make a real edit.}}",
+    "briefTitle": "Say what it is for",
+    "briefBody": "One or two sentences: who the video is for and what it should show.",
+    "briefExample": "{persona, select, creator {For example: “The best moments of this trip, for my followers.”} business {For example: “Our new autumn menu, for people who live nearby.”} educator {For example: “The one idea of this lesson, for new students.”} nonprofit {For example: “What last weekend's clean-up achieved, for our supporters.”} software {For example: “What is new in this release, for people who already use the app.”} agency {For example: “A first cut of the client's launch, for their social channels.”} other {For example: “What happened and why it matters, for people who were not there.”}}",
+    "runTitle": "Press Run",
+    "runBody": "You get a first cut to react to. Minutes for a small job, sometimes half an hour for a big one. You can leave the page while it works.",
+    "start": "Start your first video",
+    "ctaRun": "Say what it is for and press Run",
+    "shotList": "See your shot list"
+  },
+  "page": {
+    "greeting": "{part, select, night {Still up} morning {Good morning} afternoon {Good afternoon} other {Good evening}}",
+    "greetingName": "{greeting}, {name}",
+    "loading": "Loading your studio...",
+    "overview": "Here is what is happening across your projects.",
+    "newProject": "New project",
+    "askAssistant": "Ask the assistant",
+    "askPrompt": "What can I do from the dashboard? Suggest the most useful next step given my projects and recent runs.",
+    "loadFailed": "Could not load your projects",
+    "checkConnection": "Check your connection and try again.",
+    "retry": "Retry",
+    "summary": "Summary",
+    "figRunning": "Running now",
+    "figPassed": "Passed this week",
+    "figFailed": "Failed this week",
+    "figRenders": "Videos",
+    "figSources": "Source files",
+    "nudges": "Ask the assistant",
+    "slow": "This is taking longer than usual. Still trying.",
+    "backProjects": "Go to your projects"
+  },
+  "nudge": {
+    "draftLabel": "Suggest an app for the footage in \"{project}\"",
+    "draftPrompt": "Look at the files in my project \"{project}\" (id {id}) and draft a workflow that turns them into a finished video. Propose it and wait for my confirmation before creating anything.",
+    "uploadLabel": "What should I upload to \"{project}\"?",
+    "uploadPrompt": "I created the project \"{project}\" (id {id}) but it has no files yet. What footage, audio and reference material should I add for a good result?",
+    "promoLabel": "Plan a promo video from a one-line brief",
+    "promoPrompt": "I want to make a promotional video. Ask me the few questions you need, then propose a project setup and workflow.",
+    "failuresLabel": "What went wrong in my failed runs this week?",
+    "failuresPrompt": "Look at my failed workflow executions from the last 7 days and tell me the common causes and the fixes."
+  }
+}

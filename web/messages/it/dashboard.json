@@ -1,0 +1,139 @@
+{
+  "dismiss": "Chiudi",
+  "live": {
+    "title": "In esecuzione ora",
+    "titleCount": "In esecuzione ora ({count})",
+    "empty": "Non c'è nulla in corso. Avvia un'app e vedrai qui i progressi.",
+    "run": "Avvia un'app",
+    "subline": "{project}{kind, select, running { - {elapsed}} queued { - in attesa di uno slot libero} other {}}",
+    "stepProgress": "Avanzamento del passaggio"
+  },
+  "attention": {
+    "dismiss": "Chiudi questi avvisi sulle esecuzioni non riuscite",
+    "one": "Un'esecuzione richiede la tua attenzione",
+    "many": "{count} esecuzioni richiedono la tua attenzione",
+    "inProject": "in {project}, {ago}",
+    "prompt": "Perché l'esecuzione di \"{name}\" nel progetto \"{project}\" non è riuscita? Id esecuzione {id}. Spiegami la causa più probabile e cosa dovrei cambiare.",
+    "why": "Perché non è riuscita?",
+    "open": "Apri esecuzione"
+  },
+  "renders": {
+    "title": "Ultimi video",
+    "empty": "I video finiti compaiono qui con una miniatura e un pulsante di riproduzione."
+  },
+  "recent": {
+    "title": "Esecuzioni recenti",
+    "empty": "Nessuna esecuzione terminata.",
+    "produced": "Ha fatto un video"
+  },
+  "continue": {
+    "title": "Riprendi da dove avevi lasciato",
+    "all": "Tutti i progetti",
+    "running": "in esecuzione",
+    "stats": "{files, plural, one {# file} other {# file}}, {workflows, plural, one {# app} other {# app}}, {renders, plural, one {# video} other {# video}} comprese le versioni precedenti",
+    "empty": "Progetto vuoto",
+    "line": "{summary} - {ago}"
+  },
+  "caps": {
+    "chat": {
+      "label": "Modello di chat",
+      "hint": "Esegue ogni agente e l'assistente"
+    },
+    "transcription": {
+      "label": "Da voce a testo",
+      "hint": "Trascrive i filmati per il montaggio"
+    },
+    "vision": {
+      "label": "Modello di visione",
+      "hint": "Descrive le inquadrature dei tuoi filmati"
+    },
+    "speech": {
+      "label": "Voce narrante",
+      "hint": "Narrazione per i video promozionali"
+    },
+    "video": {
+      "label": "Generazione video",
+      "hint": "B-roll generato, a pagamento per clip"
+    },
+    "embedding": {
+      "label": "Embedding",
+      "hint": "Cerca nel contenuto dei file per significato"
+    },
+    "image": {
+      "label": "Generazione di immagini",
+      "hint": "Immagini da una descrizione scritta, a pagamento per immagine"
+    },
+    "imageEdit": {
+      "label": "Modifica immagini",
+      "hint": "Modifica un'immagine che hai già; gli altri strumenti per le immagini ripiegano su questo"
+    },
+    "segmentation": {
+      "label": "Ritagli del soggetto",
+      "hint": "Ritaglia una persona o un oggetto da un'immagine, così l'editor può spostarlo da solo"
+    },
+    "depth": {
+      "label": "Mappe di profondità",
+      "hint": "Legge la distanza di ogni parte di un'immagine"
+    }
+  },
+  "setup": {
+    "optionalTitle": "Provider facoltativi non configurati",
+    "optionalList": "{list}.",
+    "optionalBody": "Tutte le funzionalità principali funzionano anche senza; collega questi provider per sbloccare le funzionalità extra elencate sopra.",
+    "open": "Apri le impostazioni di inferenza",
+    "title": "Completa la configurazione ({done} di {total})",
+    "providers": "Provider",
+    "optional": "facoltativo",
+    "available": "Provider disponibile",
+    "prompt": "Aiutami a completare la configurazione dei provider di inferenza. Impostazioni predefinite mancanti: {missing}.",
+    "ask": "Chiedi all'assistente come fare"
+  },
+  "firstVideo": {
+    "header": "{material, select, idea {Cinque clip brevi girate con lo smartphone bastano per un primo montaggio. Il tuo elenco di riprese è pronto.} code {L'hai creato. Ora fallo vedere in un video.} other {{persona, select, creator {Le riprese sono già sul tuo smartphone. Ottieni un primo montaggio mentre pensi al prossimo video.} business {Non hai aperto la tua attività per fare il montatore. Il tuo primo video parte da qui.} educator {Le tue lezioni migliori meritano un montaggio più breve. Registra il punto in qualche ripresa breve e ottieni una clip essenziale.} nonprofit {Hai le storie e le clip. Racconta la prima.} software {L'hai rilasciato. Ora fallo vedere in un video.} agency {I primi montaggi non devono mangiarsi il margine. Iniziane uno qui.} other {Hai una storia. Fai il video.}}}}",
+    "title": "Il tuo primo video",
+    "listLabel": "Tre passaggi per il tuo primo video",
+    "done": " (fatto)",
+    "next": " (prossimo)",
+    "addTitle": "{material, select, code {Aggiungi il tuo codice} any {Aggiungi il materiale di partenza} other {Aggiungi le tue clip}}",
+    "addBody": "{material, select, code {Collega il repository oppure carica il codice come file zip.} idea {Gira le cinque clip del tuo elenco, poi trascinale qui.} any {Le clip che hai già girato, oppure il codice sorgente di un'app che hai creato.} other {Trascina quello che hai già girato. Con più riprese diverse il montaggio viene meglio.}}",
+    "briefTitle": "Di' a cosa serve",
+    "briefBody": "Una o due frasi: per chi è il video e cosa deve mostrare.",
+    "briefExample": "{persona, select, creator {Per esempio: “I momenti migliori di questo viaggio, per i miei follower.”} business {Per esempio: “Il nostro nuovo menu d'autunno, per chi abita in zona.”} educator {Per esempio: “L'idea centrale di questa lezione, per i nuovi studenti.”} nonprofit {Per esempio: “Cosa ha ottenuto la pulizia dello scorso weekend, per chi ci sostiene.”} software {Per esempio: “Le novità di questa versione, per chi usa già l'app.”} agency {Per esempio: “Un primo montaggio del lancio del cliente, per i suoi canali social.”} other {Per esempio: “Cosa è successo e perché conta, per chi non c'era.”}}",
+    "runTitle": "Premi Avvia",
+    "runBody": "Ottieni un primo montaggio su cui dire la tua. Pochi minuti per un lavoro piccolo, a volte mezz'ora per uno grande. Puoi lasciare la pagina mentre lavora.",
+    "start": "Inizia il tuo primo video",
+    "ctaRun": "Di' a cosa serve e premi Avvia",
+    "shotList": "Vedi il tuo elenco di riprese"
+  },
+  "page": {
+    "greeting": "{part, select, night {Ancora sveglio} morning {Buongiorno} afternoon {Buon pomeriggio} other {Buonasera}}",
+    "greetingName": "{greeting}, {name}",
+    "loading": "Caricamento del tuo studio…",
+    "overview": "Ecco cosa sta succedendo nei tuoi progetti.",
+    "newProject": "Nuovo progetto",
+    "askAssistant": "Chiedi all'assistente",
+    "askPrompt": "Cosa posso fare dalla dashboard? Suggeriscimi il prossimo passo più utile in base ai miei progetti e alle esecuzioni recenti.",
+    "loadFailed": "Impossibile caricare i tuoi progetti",
+    "checkConnection": "Controlla la connessione e riprova.",
+    "retry": "Riprova",
+    "summary": "Riepilogo",
+    "figRunning": "In esecuzione ora",
+    "figPassed": "Riuscite questa settimana",
+    "figFailed": "Non riuscite questa settimana",
+    "figRenders": "Video",
+    "figSources": "File sorgente",
+    "nudges": "Chiedi all'assistente",
+    "slow": "Sta richiedendo più tempo del solito. Stiamo ancora provando.",
+    "backProjects": "Vai ai tuoi progetti"
+  },
+  "nudge": {
+    "draftLabel": "Suggerisci un'app per il materiale in \"{project}\"",
+    "draftPrompt": "Guarda i file del mio progetto \"{project}\" (id {id}) e prepara un flusso di lavoro che li trasformi in un video finito. Proponimelo e aspetta la mia conferma prima di creare qualsiasi cosa.",
+    "uploadLabel": "Cosa dovrei caricare in \"{project}\"?",
+    "uploadPrompt": "Ho creato il progetto \"{project}\" (id {id}) ma non ha ancora file. Quali filmati, audio e materiali di riferimento dovrei aggiungere per ottenere un buon risultato?",
+    "promoLabel": "Pianifica un video promozionale da un brief di una riga",
+    "promoPrompt": "Voglio realizzare un video promozionale. Fammi le poche domande che ti servono, poi proponi la configurazione del progetto e un flusso di lavoro.",
+    "failuresLabel": "Cosa è andato storto nelle mie esecuzioni non riuscite questa settimana?",
+    "failuresPrompt": "Guarda le mie esecuzioni di flussi di lavoro non riuscite negli ultimi 7 giorni e dimmi le cause più comuni e come risolverle."
+  }
+}

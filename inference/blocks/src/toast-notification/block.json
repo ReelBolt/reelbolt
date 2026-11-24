@@ -1,0 +1,31 @@
+{
+  "id": "toast-notification",
+  "version": "1.0.0",
+  "title": "Toast notification",
+  "category": "devices",
+  "description": "Notification card that slides in, holds and slides out; use for success messages and alerts in UI scenes.",
+  "tags": [
+    "toast",
+    "notification",
+    "ui",
+    "alert"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-toast-notification",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      5,
+      25,
+      58
+    ]
+  },
+  "props": "{children?: ReactNode; title?: string; message?: string; startFrame?: number /*10*/; holdFrames?: number /*60*/; position?: \"top-right\"|\"top-left\"|\"bottom-right\"|\"bottom-left\"; accent?: string; font?: string}",
+  "example": "import {ToastNotification} from './blocks/toast-notification/ToastNotification.tsx';\n<ToastNotification title=\"Saved\" message=\"All changes synced\" />"
+}

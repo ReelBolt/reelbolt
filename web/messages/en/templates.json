@@ -1,0 +1,11 @@
+{
+  "picker": {
+    "needsProfile": "This template needs an approved brand and product profile.",
+    "setUpProfile": "Set up your profile",
+    "heading": "Start from a template",
+    "intro": "Pick a ready-made workflow and adjust it, or skip this and build your own below.",
+    "ariaLabel": "Templates",
+    "asksForBrief": "Asks for your brief",
+    "useTemplate": "Use this template"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "beforeAfter": {
+    "before": "Prima",
+    "after": "Dopo",
+    "rawLabel": "Le riprese grezze di “{title}”",
+    "finishedLabel": "“{title}”, il video finito",
+    "madeWith": "Una coppia vera, fatta con ReelBolt: “{title}”, {recipe}.",
+    "facts": {
+      "source": "{time} di riprese in ingresso",
+      "output": "{time} di video finito",
+      "cuts": "{count, plural, one {# taglio} other {# tagli}}"
+    }
+  },
+  "trust": {
+    "title": "Cosa è vero oggi",
+    "items": {
+      "noCard": {
+        "title": "Nessuna carta richiesta",
+        "body": "Inizi con la prova gratuita senza inserire dati di pagamento."
+      },
+      "firstVideo": {
+        "title": "Il tuo primo video è offerto da noi",
+        "body": "{credits} crediti quando verifichi la tua email, oltre ai {trialCredits} crediti della prova, da usare entro {days, plural, one {# giorno} other {# giorni}}. Vengono dati una volta per persona, e non sono disponibili da alcune connessioni o con un indirizzo email temporaneo. Le esportazioni di prova sono a {resolution} con filigrana."
+      },
+      "reviewed": {
+        "title": "Ogni montaggio viene rivisto",
+        "body": "Ogni montaggio viene valutato prima che tu lo veda; se il punteggio è basso, torna indietro per un altro giro. Sottotitoli, miniature e testo del post vengono fatti in un solo passaggio."
+      },
+      "refund": {
+        "title": "Se sbagliamo noi, i crediti tornano a te",
+        "body": "Se un passaggio fallisce per un problema nostro, i crediti trattenuti per quel passaggio vengono restituiti."
+      },
+      "speed": {
+        "title": "Quanto ci vuole",
+        "body": "Pochi minuti per un lavoro piccolo, a volte mezz'ora per uno grande."
+      },
+      "alpha": {
+        "title": "Alpha pubblica, detto chiaramente",
+        "body": "ReelBolt è in alpha pubblica. Aspettati qualche spigolo: le cose possono cambiare."
+      }
+    }
+  },
+  "samples": {
+    "title": "Video veri, fatti qui",
+    "intro": "Ogni video qui sotto è stato fatto con ReelBolt ed è mostrato con la ricetta che lo ha prodotto.",
+    "recipe": "Ricetta: {recipe}",
+    "videoLabel": "“{title}”, fatto con ReelBolt"
+  },
+  "testimonials": {
+    "title": "Cosa dice chi lo usa"
+  },
+  "founder": {
+    "title": "Una nota dal fondatore"
+  }
+}

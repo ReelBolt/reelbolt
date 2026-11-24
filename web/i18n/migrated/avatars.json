@@ -1,0 +1,7 @@
+{
+  "globs": [
+    "components/avatars/**/*.tsx",
+    "app/(app)/settings/avatar-library/layout.tsx",
+    "app/(app)/settings/avatar-library/page.tsx"
+  ]
+}

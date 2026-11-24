@@ -1,0 +1,9 @@
+Hello{{if .Name}} {{.Name}}{{end}},
+
+One of your community recipes is not available in the ReelBolt gallery: {{if eq .Reason "content"}}it did not meet our content guidelines{{else if eq .Reason "unsafe"}}it was flagged as unsafe{{else if eq .Reason "copyright"}}it raised a copyright concern{{else if eq .Reason "low_quality"}}it did not meet our quality bar{{else if eq .Reason "preview"}}its preview video could not be prepared{{else if eq .Reason "safety"}}a safety review took it down{{else}}it did not meet the community recipe guidelines{{end}}.
+
+Open "My recipes" in ReelBolt to see its status. You can fix the recipe and publish it again unless it was removed.
+{{if .Link}}
+{{.Link}}
+{{end}}
+-- {{.FooterNote}}

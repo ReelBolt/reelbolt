@@ -1,0 +1,79 @@
+/* VF13 / VF14: the editor's icon, panel and empty-state primitives. Sizes come from the density tokens in app/global.css. */
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.glyph[data-color='dimmed'] {
+  color: var(--mantine-color-dimmed);
+}
+
+.iconButton {
+  --ai-size: var(--rb-icon-h, 32px);
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.emptyCompact {
+  min-height: 0;
+  padding: 8px;
+}
+
+.dense {
+  --ai-size: var(--rb-icon-dense-h, 24px);
+}
+
+.empty {
+  padding: var(--mantine-spacing-md);
+  min-height: 120px;
+  justify-content: center;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.panelHeader {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--rb-ed-line);
+}
+
+.panelFlow {
+  height: auto;
+  min-height: auto;
+  flex: 0 0 auto;
+}
+
+/* In flow mode the parent scrolls: the body takes its natural height and never shrinks into what follows. */
+.panelFlow > .panelBody {
+  flex: 0 0 auto;
+  min-height: auto;
+}
+
+.panelBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  padding: 8px;
+}
+
+.panelScroll {
+  overflow: auto;
+}
+
+/* A finger needs a 44 px target: every icon button grows on a coarse pointer, dense ones included. */
+@media (pointer: coarse) {
+  .iconButton,
+  .dense {
+    --ai-size: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

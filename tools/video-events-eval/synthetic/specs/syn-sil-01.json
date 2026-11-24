@@ -1,0 +1,70 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-sil-01",
+ "videoType": "silent",
+ "frames": 540,
+ "theme": {
+  "bg": "#1c2430"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#1c2430",
+   "bgB": "#26323f",
+   "deco": "dots",
+   "accent": "#8fa6bd",
+   "decoOpacity": 0.08
+  }
+ ],
+ "drift": true,
+ "elements": [
+  {
+   "kind": "text",
+   "id": "lab",
+   "name": "faint label",
+   "text": "quiet harbour",
+   "x": 260,
+   "y": 220,
+   "w": 460,
+   "h": 60,
+   "color": "#9fb3c8",
+   "peak": 0.55,
+   "fontSize": 52,
+   "scene": 0,
+   "vis": [
+    {
+     "in": 150,
+     "out": 500,
+     "fade": 50,
+     "fadeOut": 40
+    }
+   ]
+  },
+  {
+   "kind": "circle",
+   "id": "dot",
+   "name": "lone dot",
+   "x": 120,
+   "y": 420,
+   "w": 36,
+   "h": 36,
+   "color": "#d9a441",
+   "scene": 0,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "moves": [
+    {
+     "start": 400,
+     "end": 470,
+     "x": 780,
+     "y": 420
+    }
+   ]
+  }
+ ]
+}

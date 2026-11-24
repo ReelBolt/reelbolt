@@ -1,0 +1,19 @@
+{
+  "globs": [
+    "components/projects/ProjectCard.tsx",
+    "components/projects/ProjectForm.tsx",
+    "components/projects/ProjectSections.tsx",
+    "components/projects/ProjectVoicesTab.tsx",
+    "components/projects/ProjectPronunciationTab.tsx",
+    "components/projects/ProjectRepositoryIndicator.tsx",
+    "components/projects/StatusBadge.tsx",
+    "components/projects/VoiceLibraryBrowser.tsx",
+    "components/files/*.tsx",
+    "components/files/*.ts",
+    "components/workflow-apps/*.tsx",
+    "components/workflow-apps/*.ts",
+    "components/change-requests/*.tsx",
+    "components/change-requests/*.ts",
+    "app/(app)/projects/**/*.tsx"
+  ]
+}

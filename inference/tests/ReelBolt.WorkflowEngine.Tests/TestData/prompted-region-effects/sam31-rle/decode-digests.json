@@ -1,0 +1,33 @@
+{
+  "_comment": "Decoded-mask digests for the real fal-ai/sam-3-1/video-rle replay pack. sha256 covers the whole decoded frame stack as FFV1 gray8 would store it: frameCount frames of width x height bytes, row-major, 255 = object. Reproduced byte for byte by the sibling's committed mattes (trials/mattes/<run>/<clip>.mkv) at pack-writing time; a decoder change that moves any pixel must fail PromptedRegionFixturesTests, not drift silently.",
+  "width": 768,
+  "height": 1344,
+  "rleLayout": "start length pairs, 0-based, row-major over a width-wide frame, 255 = object",
+  "fixtures": {
+    "R1-tabby": {
+      "response": "R1-tabby/response.json",
+      "clip": "clips/cat-tabby.mp4",
+      "prompt": "cat",
+      "frameCount": 120,
+      "emptyFrames": 0,
+      "decodedMaskSha256": "51d10d82a2a105976432607b52a5f720acd72dde73461251671709a7bdff39c1"
+    },
+    "R1-turn-a": {
+      "response": "R1-turn-a/response.json",
+      "clip": "clips/cat-turn-a.mp4",
+      "prompt": "cat",
+      "frameCount": 158,
+      "emptyFrames": 14,
+      "decodedMaskSha256": "8f8b0df3e2d2849319068bc97b2528d39ae36e23d2305e8117b0951812001887"
+    },
+    "R10-tabby": {
+      "response": "R10-tabby/response.json",
+      "clip": "clips/cat-tabby.mp4",
+      "prompt": "",
+      "pointPromptSeed": true,
+      "frameCount": 120,
+      "emptyFrames": 0,
+      "decodedMaskSha256": "8adcc115be48cf567a6964b4bf07187fda47fddf6a352b8ab774cfa74ff67614"
+    }
+  }
+}

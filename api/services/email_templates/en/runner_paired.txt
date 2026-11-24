@@ -1,0 +1,10 @@
+Hello {{.Name}},
+
+A computer was just paired as a runner for {{.OrgName}}: {{.DeviceName}}.
+
+Review or revoke it: {{.Link}}
+
+If you did not expect this, revoke the runner and change your password now. A paired
+runner can download and process the media of this workspace.
+
+-- {{.FooterNote}}

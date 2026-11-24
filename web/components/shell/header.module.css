@@ -1,0 +1,21 @@
+/* Header fit on a phone (lib/breakpoints.ts PHONE_QUERY, under 600 px): burger, mark, feedback, activity,
+   assistant, theme and account are seven 44 px targets. Tight gaps keep them on ONE row at 360 px, so the
+   theme toggle stays on screen and the account button never wraps below the bar. */
+.start,
+.end {
+  min-width: 0;
+}
+
+.end > * {
+  flex-shrink: 0;
+}
+
+@media (max-width: 599.98px), (max-height: 499.98px) and (pointer: coarse) {
+  .start {
+    gap: var(--mantine-spacing-xs);
+  }
+
+  .end {
+    gap: 2px;
+  }
+}

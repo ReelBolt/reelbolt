@@ -1,0 +1,64 @@
+{
+  "alpha": {
+    "notice": "ReelBolt {version} — public alpha. Expect rough edges; things may change.",
+    "dismiss": "Dismiss the alpha notice"
+  },
+  "trademark": "ReelBolt™ is a trademark of Tommaso Celano.",
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "userMenu": {
+    "labelWithEmail": "Account menu, {email}",
+    "label": "Account menu",
+    "account": "Account",
+    "billing": "Plan & billing",
+    "logout": "Logout"
+  },
+  "org": {
+    "workspace": "Workspace",
+    "switchFailed": "Could not switch workspace.",
+    "switch": "Switch workspace",
+    "loadFailed": "Could not load workspaces",
+    "loading": "Loading workspaces…"
+  },
+  "install": {
+    "button": "Install app",
+    "dismiss": "Dismiss install prompt"
+  },
+  "nav": {
+    "skip": "Skip to main content",
+    "toggle": "Toggle navigation",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "editor": "Editor",
+    "agents": "Agents (advanced)",
+    "styles": "Styles",
+    "publishing": "Publishing",
+    "runners": "Runners",
+    "account": "Account",
+    "data": "Your data",
+    "usage": "Usage",
+    "billing": "Plan & billing",
+    "notifications": "Notifications",
+    "brandLibraries": "Brand libraries",
+    "avatarLibrary": "Avatar library",
+    "orgSettings": "Settings",
+    "members": "Members",
+    "providers": "Providers",
+    "sectionMore": "More",
+    "sectionSettings": "Settings",
+    "sectionWorkspace": "Workspace",
+    "videoEditorSoon": "Video editor · Coming soon",
+    "apiKeys": "API keys"
+  },
+  "titles": {
+    "dashboard": "Dashboard",
+    "agents": "Agents",
+    "agent": "Agent",
+    "styles": "Styles"
+  },
+  "offline": {
+    "banner": "You are offline. What you see may be out of date."
+  }
+}

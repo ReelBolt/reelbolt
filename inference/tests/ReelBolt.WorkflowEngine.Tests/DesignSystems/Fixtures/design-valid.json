@@ -1,0 +1,170 @@
+{
+  "schema": "reelbolt.design-system/1",
+  "name": "Acme Product Design System",
+  "color": {
+    "primary": {
+      "$type": "color",
+      "$value": { "hex": "#2563eb", "colorSpace": "srgb" },
+      "$description": "Primary brand colour",
+      "$extensions": {
+        "com.reelbolt": {
+          "prov": { "method": "static", "importer": "css", "loc": "tokens.css:12" },
+          "conf": 0.95,
+          "locked": true
+        }
+      }
+    },
+    "secondary": { "$type": "color", "$value": { "hex": "#7c3aed", "colorSpace": "srgb" } },
+    "surface": { "$type": "color", "$value": { "hex": "#ffffff", "colorSpace": "srgb" } },
+    "on-surface": { "$type": "color", "$value": { "hex": "#111827", "colorSpace": "srgb" } },
+    "background": { "$type": "color", "$value": { "hex": "#f9fafb", "colorSpace": "srgb" } },
+    "border": { "$type": "color", "$value": { "hex": "#e5e7eb", "colorSpace": "srgb" } },
+    "accent": { "$type": "color", "$value": { "hex": "#f59e0b", "colorSpace": "srgb" } },
+    "danger": { "$type": "color", "$value": { "hex": "#dc2626", "colorSpace": "srgb" } },
+    "success": { "$type": "color", "$value": { "hex": "#16a34a", "colorSpace": "srgb" } },
+    "warning": { "$type": "color", "$value": { "hex": "#d97706", "colorSpace": "srgb" } },
+    "brand": {
+      "primary": { "$type": "color", "$value": { "hex": "#1d4ed8", "colorSpace": "srgb" } },
+      "secondary": { "$type": "color", "$value": { "hex": "#6d28d9", "colorSpace": "srgb" } }
+    }
+  },
+  "typography": {
+    "family": {
+      "primary": { "$type": "fontFamily", "$value": ["Inter", "sans-serif"] },
+      "secondary": { "$type": "fontFamily", "$value": ["Montserrat", "sans-serif"] }
+    },
+    "size": {
+      "xs": { "$type": "dimension", "$value": { "value": 12, "unit": "px" } },
+      "sm": { "$type": "dimension", "$value": { "value": 14, "unit": "px" } },
+      "md": { "$type": "dimension", "$value": { "value": 16, "unit": "px" } },
+      "lg": { "$type": "dimension", "$value": { "value": 20, "unit": "px" } },
+      "xl": { "$type": "dimension", "$value": { "value": 28, "unit": "px" } },
+      "xxl": { "$type": "dimension", "$value": { "value": 40, "unit": "px" } }
+    },
+    "weight": {
+      "regular": { "$type": "fontWeight", "$value": 400 },
+      "medium": { "$type": "fontWeight", "$value": 500 },
+      "bold": { "$type": "fontWeight", "$value": 700 }
+    },
+    "line-height": {
+      "normal": { "$type": "number", "$value": 1.5 }
+    },
+    "letter-spacing": {
+      "normal": { "$type": "dimension", "$value": { "value": 0, "unit": "em" } }
+    },
+    "heading": {
+      "h1": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": ["Inter", "sans-serif"],
+          "fontSize": { "value": 40, "unit": "px" },
+          "fontWeight": 700,
+          "lineHeight": 1.2,
+          "letterSpacing": { "value": -0.5, "unit": "px" }
+        }
+      }
+    }
+  },
+  "spacing": {
+    "xs": { "$type": "dimension", "$value": { "value": 4, "unit": "px" } },
+    "sm": { "$type": "dimension", "$value": { "value": 8, "unit": "px" } },
+    "md": { "$type": "dimension", "$value": { "value": 16, "unit": "px" } },
+    "lg": { "$type": "dimension", "$value": { "value": 24, "unit": "px" } },
+    "xl": { "$type": "dimension", "$value": { "value": 32, "unit": "px" } },
+    "xxl": { "$type": "dimension", "$value": { "value": 48, "unit": "px" } }
+  },
+  "radius": {
+    "sm": { "$type": "dimension", "$value": { "value": 4, "unit": "px" } },
+    "md": { "$type": "dimension", "$value": { "value": 8, "unit": "px" } },
+    "lg": { "$type": "dimension", "$value": { "value": 16, "unit": "px" } },
+    "full": { "$type": "dimension", "$value": { "value": 9999, "unit": "px" } }
+  },
+  "shadow": {
+    "sm": {
+      "$type": "shadow",
+      "$value": {
+        "color": { "hex": "#00000033", "colorSpace": "srgb" },
+        "offsetX": { "value": 0, "unit": "px" },
+        "offsetY": { "value": 1, "unit": "px" },
+        "blur": { "value": 2, "unit": "px" },
+        "spread": { "value": 0, "unit": "px" },
+        "inset": false
+      }
+    },
+    "lg": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": { "hex": "#0000001a", "colorSpace": "srgb" },
+          "offsetX": { "value": 0, "unit": "px" },
+          "offsetY": { "value": 10, "unit": "px" },
+          "blur": { "value": 15, "unit": "px" },
+          "spread": { "value": -3, "unit": "px" }
+        },
+        {
+          "color": { "hex": "#0000000d", "colorSpace": "srgb" },
+          "offsetY": { "value": 4, "unit": "px" },
+          "blur": { "value": 6, "unit": "px" }
+        }
+      ]
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": { "$type": "duration", "$value": { "value": 100, "unit": "ms" } },
+      "normal": { "$type": "duration", "$value": { "value": 200, "unit": "ms" } },
+      "slow": { "$type": "duration", "$value": { "value": 0.4, "unit": "s" } }
+    },
+    "easing": {
+      "standard": { "$type": "cubicBezier", "$value": [0.2, 0, 0, 1] },
+      "decelerate": { "$type": "cubicBezier", "$value": [0, 0, 0.2, 1] }
+    }
+  },
+  "component": {
+    "button": {
+      "padding-x": { "$type": "dimension", "$value": { "value": 16, "unit": "px" } },
+      "radius": { "$type": "dimension", "$value": "{radius.md}" },
+      "background": { "$type": "color", "$value": "{color.primary}" }
+    },
+    "card": {
+      "background": { "$type": "color", "$value": "{color.surface}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.sm}" },
+      "typography": { "$type": "typography", "$value": "{typography.heading.h1}" }
+    }
+  },
+  "modes": {
+    "dark": {
+      "color.surface": { "hex": "#111827", "colorSpace": "srgb" },
+      "color.background": { "hex": "#030712", "colorSpace": "srgb" },
+      "color.border": { "hex": "#374151", "colorSpace": "srgb" },
+      "color.on-surface": { "hex": "#f9fafb", "colorSpace": "srgb" }
+    }
+  },
+  "voice": {
+    "summary": "Confident, plain and helpful. We explain what happens next and never oversell.",
+    "tone": ["confident", "warm"],
+    "do": ["Use short sentences.", "Name the outcome before the mechanism."],
+    "dont": ["Do not promise a result we cannot measure.", "Do not use jargon."],
+    "taglines": ["Make the cut.", "From brief to film."],
+    "vocabulary": ["take", "timeline", "render"]
+  },
+  "assets": {
+    "logo": {
+      "fileRef": "project-file:0f9a6a80-1e2b-4c3d-8f10-9a7b6c5d4e3f",
+      "variants": [
+        { "name": "light", "fileRef": "project-file:0f9a6a80-1e2b-4c3d-8f10-9a7b6c5d4e3f" },
+        { "name": "dark", "fileRef": "project-file:0f9a6a80-1e2b-4c3d-8f10-9a7b6c5d4e3f" }
+      ]
+    },
+    "icon": {
+      "fileRef": "project-file:0f9a6a80-1e2b-4c3d-8f10-9a7b6c5d4e3f",
+      "variants": [
+        { "name": "mark", "fileRef": "project-file:0f9a6a80-1e2b-4c3d-8f10-9a7b6c5d4e3f" }
+      ]
+    }
+  },
+  "fonts": {
+    "licence": { "Inter": "attested", "Montserrat": "unknown" },
+    "resolved": { "Inter": "Inter", "Montserrat": "Montserrat" }
+  }
+}

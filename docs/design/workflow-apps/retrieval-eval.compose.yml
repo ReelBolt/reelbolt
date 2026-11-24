@@ -1,0 +1,30 @@
+# Scratch services for the retrieval eval (docs/design/workflow-apps/retrieval-eval.md). Not part of the product stack.
+# Run with its own project name so it never touches another stack:
+#   docker compose -p retrieval-eval -f docs/design/workflow-apps/retrieval-eval.compose.yml up -d
+#   ... run the eval ...
+#   docker compose -p retrieval-eval -f docs/design/workflow-apps/retrieval-eval.compose.yml down -v
+# Everything binds 127.0.0.1 only. Tags match docker-compose.yml (TEI cpu-1.8, Qdrant v1.19.1).
+name: retrieval-eval
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    ports:
+      - "127.0.0.1:${EVAL_QDRANT_HTTP_PORT:-16333}:6333"
+      - "127.0.0.1:${EVAL_QDRANT_GRPC_PORT:-16334}:6334"
+  embeddings:
+    image: ghcr.io/huggingface/text-embeddings-inference:${EMBEDDINGS_IMAGE_TAG:-cpu-1.8}
+    command: ["--model-id", "${EMBEDDINGS_MODEL:-Qwen/Qwen3-Embedding-0.6B}", "--port", "80", "--auto-truncate", "--max-batch-tokens", "4096"]
+    ports:
+      - "127.0.0.1:${EVAL_EMBEDDINGS_PORT:-19003}:80"
+    volumes:
+      - eval-embeddings-hf:/data
+  reranker:
+    image: ghcr.io/huggingface/text-embeddings-inference:${RERANKER_IMAGE_TAG:-cpu-1.8}
+    command: ["--model-id", "${RERANKER_MODEL:-BAAI/bge-reranker-v2-m3}", "--port", "80", "--auto-truncate"]
+    ports:
+      - "127.0.0.1:${EVAL_RERANKER_PORT:-19004}:80"
+    volumes:
+      - eval-reranker-hf:/data
+volumes:
+  eval-embeddings-hf:
+  eval-reranker-hf:

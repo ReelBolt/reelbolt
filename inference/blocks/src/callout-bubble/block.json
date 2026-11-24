@@ -1,0 +1,31 @@
+{
+  "id": "callout-bubble",
+  "version": "1.0.0",
+  "title": "Callout bubble",
+  "category": "shapes",
+  "description": "Speech or annotation bubble with a pointer that pops in; use to label or comment on part of the frame.",
+  "tags": [
+    "callout",
+    "speech bubble",
+    "annotation",
+    "label"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-callout-bubble",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      3,
+      12,
+      40
+    ]
+  },
+  "props": "{children?: ReactNode; text?: string; position?: [number,number]; pointer?: \"bottom-left\"|\"bottom-right\"|\"top-left\"|\"top-right\"; startFrame?: number /*5*/; background?: string; color?: string; fontSize?: number /*44*/; font?: string}",
+  "example": "import {CalloutBubble} from './blocks/callout-bubble/CalloutBubble.tsx';\n<CalloutBubble text=\"Look here\" position={[0.5,0.4]} />"
+}

@@ -1,0 +1,83 @@
+{
+  "name": "transform-scaleY-static-accepted",
+  "description": "A media clip with a width scale and its own vertical scale is accepted.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "6f1b2c3d-0000-4000-8000-000000000002",
+    "projectId": "6f1b2c3d-0000-4000-8000-000000000001",
+    "name": "Contract fixture",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "id": "6f1b2c3d-0000-4000-8000-0000000000b3",
+            "type": "mediaClip",
+            "name": "Clip 02",
+            "recordIn": 0,
+            "recordOut": 100,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "7d3c2b1a-0f9e-4d8c-b7a6-5f4e3d2c1b02"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "transform": {
+              "scale": {
+                "value": 1.5,
+                "keys": null
+              },
+              "scaleY": {
+                "value": 0.75,
+                "keys": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a2",
+        "kind": "audio",
+        "name": "Audio",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": []
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

@@ -1,0 +1,44 @@
+# Pinned toolchain that builds, packages and signs the Windows runner release on
+# Linux (no Windows machine, no hosted runner). Everything unsigned works with
+# zero secrets; signing material is passed at `docker run` time, never baked in.
+#
+#   docker build -f runner/build/windows/Dockerfile.toolchain -t reelbolt-windows-toolchain runner/build/windows
+#
+# Pins: base image by digest, Go/Node by sha256 of the tarball, jsign by sha256
+# of the jar. The MSI is built by wixl (msitools 0.103 from the Ubuntu archive): WiX 6
+# cannot bind an MSI on Linux (needs msi.dll/wixnative.exe), see runner.wixl.wxs. apt packages come from the digest-pinned
+# Ubuntu 24.04 archive snapshot of the day; they are not individually pinned.
+FROM ubuntu:24.04@sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac
+
+ARG GO_VERSION=1.26.10
+ARG GO_SHA256=ccfe7ae822d2c2f41f4fe7c956199967a4dac22d0ee0d2b2bfdb440aab3b20c5
+ARG NODE_VERSION=22.23.4
+ARG NODE_SHA256=1805bcd35e6815559bd2eb97db438d3fdb0eb3a5e6a977b7c1badca76337e9ce
+ARG JSIGN_VERSION=7.1
+ARG JSIGN_SHA256=cfb48b07fdd2ee199bfc9e71d8dccdde67a799c4793602e446c7a101be62b3c4
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates curl xz-utils bzip2 git make nasm diffutils pkg-config gnupg \
+      gcc g++ gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 binutils-mingw-w64-x86-64 \
+      wixl default-jre-headless osslsigncode msitools perl-base p7zip-full file \
+    && update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix \
+    && update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL -o /tmp/go.tgz "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
+    && echo "${GO_SHA256}  /tmp/go.tgz" | sha256sum -c - \
+    && tar -C /usr/local -xzf /tmp/go.tgz && rm /tmp/go.tgz
+RUN curl -fsSL -o /tmp/node.txz "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" \
+    && echo "${NODE_SHA256}  /tmp/node.txz" | sha256sum -c - \
+    && tar -C /usr/local --strip-components=1 -xJf /tmp/node.txz && rm /tmp/node.txz
+RUN mkdir -p /opt/jsign && curl -fsSL -o /opt/jsign/jsign.jar \
+      "https://repo1.maven.org/maven2/net/jsign/jsign/${JSIGN_VERSION}/jsign-${JSIGN_VERSION}.jar" \
+    && echo "${JSIGN_SHA256}  /opt/jsign/jsign.jar" | sha256sum -c -
+
+ENV PATH=/usr/local/go/bin:$PATH \
+    GOFLAGS=-buildvcs=false GOTOOLCHAIN=local GOCACHE=/tmp/gocache GOPATH=/tmp/gopath \
+    JSIGN_JAR=/opt/jsign/jsign.jar
+# Per-run state (HOME, caches) lives in /tmp so the container can run as the caller's uid.
+ENV HOME=/tmp/home
+WORKDIR /work

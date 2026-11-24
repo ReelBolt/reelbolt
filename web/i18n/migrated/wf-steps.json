@@ -1,0 +1,29 @@
+{
+  "globs": [
+    "components/workflows/ForEachStepConfig.tsx",
+    "components/workflows/ParallelStepConfig.tsx",
+    "components/workflows/AgentStepOptions.tsx",
+    "components/workflows/PinInsertStepConfig.tsx",
+    "components/workflows/ExtractFrameStepConfig.tsx",
+    "components/workflows/AudioGenerateStepConfig.tsx",
+    "components/workflows/ImageGenerateStepConfig.tsx",
+    "components/workflows/ConditionalStepConfig.tsx",
+    "components/workflows/DesignSystemStepConfig.tsx",
+    "components/workflows/ReviewLoopStepConfig.tsx",
+    "components/workflows/ExtractStepConfig.tsx",
+    "components/workflows/config-kit.tsx",
+    "components/workflows/SchemaDrivenStepConfigForm.tsx",
+    "components/workflows/TimelineRenderStepConfig.tsx",
+    "components/workflows/ThumbnailGenerateStepConfig.tsx",
+    "components/workflows/VoiceoverStepConfig.tsx",
+    "components/workflows/CaptionStyleFields.tsx",
+    "components/workflows/VideoCompileReframeFields.tsx",
+    "components/workflows/VideoGenerateStepConfig.tsx",
+    "components/workflows/VideoGenerateAvatarSection.tsx",
+    "components/workflows/RoomStepConfigEditor.tsx",
+    "components/workflows/StepConfigPanel.tsx",
+    "components/workflows/StepConfigSheet.tsx",
+    "components/workflows/VideoAnalyzeStepConfig.tsx",
+    "components/workflows/VideoCompileStepConfig.tsx"
+  ]
+}

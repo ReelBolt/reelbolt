@@ -1,0 +1,36 @@
+{
+  "id": "caption-pop-word",
+  "version": "1.0.0",
+  "title": "Caption pop word",
+  "category": "captions",
+  "description": "Use for punchy short-form captions that show one big word at a time, popping in as it is spoken. The `captions` prop is a @remotion/captions Caption[].",
+  "tags": [
+    "caption",
+    "subtitle",
+    "pop",
+    "tiktok",
+    "one word"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "@remotion/captions"
+  ],
+  "sharedFiles": [
+    "_shared/captions.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-caption-pop-word",
+    "durationInFrames": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      20,
+      50,
+      80
+    ]
+  },
+  "props": "{captions: Caption[]; color?: string; accentColor?: string /*'#ff4d6d'*/; fontSize?: number; uppercase?: boolean /*true*/; fontFamily?: string /*'Anton, sans-serif'*/}",
+  "example": "import {CaptionPopWord} from './blocks/caption-pop-word/CaptionPopWord.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionPopWord captions={captions} accentColor=\"#ff4d6d\" />"
+}

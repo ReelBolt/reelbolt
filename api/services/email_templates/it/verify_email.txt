@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Conferma il tuo indirizzo email per completare la creazione del tuo account ReelBolt:
+
+{{.Link}}
+{{if .MarketingOptIn}}
+Verificando questo indirizzo confermi anche l'iscrizione alle email di marketing di ReelBolt che hai richiesto.
+{{end}}
+Questo link scade tra {{.ExpiresIn}}. Se non ti sei registrato tu, puoi ignorare questa email.
+
+-- {{.FooterNote}}

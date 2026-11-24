@@ -1,0 +1,21 @@
+{
+  "workflows.node.audio.maxCredits": "Credit cap shown on the node ('Max N crediti'); money wording, owner to confirm.",
+  "workflows.node.audio.noLimit": "'Nessun limite di spesa' tells the user spend is uncapped; money claim, owner to confirm.",
+  "workflows.node.generate.spends": "'Spende fino a N crediti': per-step spend ceiling in credits; owner to confirm.",
+  "workflows.node.generate.setLimit": "Prompts the user to set a spend limit before running; money wording.",
+  "workflows.regenerate.title": "Says video clip generation is 'a pagamento' (paid); a pricing claim, owner to confirm.",
+  "workflows.regenerate.billedByProvider": "States generation is billed by the provider and identical clips can be reused for free; billing claim.",
+  "workflows.regenerate.upperBound": "'Limite massimo: N crediti' upper bound of the run cost; money wording, owner to confirm.",
+  "workflows.regenerate.noEstimate": "Says the cost cannot be estimated from saved settings; estimate wording.",
+  "workflows.stepType.VideoGenerate.description": "'a pagamento, con un limite di spesa': paid-step claim.",
+  "workflows.stepType.ImageGenerate.description": "'a pagamento, con un limite di spesa': paid-step claim.",
+  "workflows.node.image.maxCredits": "Credit cap shown on the node ('Max N crediti'); money wording, owner to confirm.",
+  "workflows.node.image.noLimit": "'Nessun limite di spesa' tells the user spend is uncapped; money claim, owner to confirm.",
+  "workflows.stepType.AudioGenerate.description": "'a pagamento, con un limite di spesa': paid-step claim.",
+  "workflows.stepType.DesignSystem.description": "'(gratis)' claims the step is free; owner to confirm.",
+  "workflows.stepType.ExtractFrame.description": "'(gratis)' claims the step is free; owner to confirm.",
+  "workflows.stepType.PinInsert.description": "'(gratis)' claims the step is free; owner to confirm.",
+  "stepResults.creditsCharged": "'Crediti addebitati' label for credits charged per step; credit wording.",
+  "workflows.regenerate.spendsMoney": "'Rigenerare costa denaro per ogni clip': states real money is spent per clip; owner to confirm.",
+  "workflows.regenerate.regenerate": "Button 'Rigenera (costa denaro)' repeats the real-money claim on the action."
+}

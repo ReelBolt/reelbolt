@@ -1,0 +1,6 @@
+{
+  "globs": [
+    "app/(app)/publishing/**/*.tsx",
+    "components/publishing/*.tsx"
+  ]
+}

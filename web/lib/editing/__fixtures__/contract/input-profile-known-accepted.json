@@ -1,0 +1,124 @@
+{
+  "name": "input-profile-known-accepted",
+  "description": "A media clip may carry any camera profile id; null or absent means no input transform.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "3c9a1e7b-0000-4000-8000-000000000001",
+    "projectId": "3c9a1e7b-0000-4000-8000-000000000002",
+    "name": "Camera profiles",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "3c9a1e7b-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b1",
+            "type": "mediaClip",
+            "name": "iPhone",
+            "recordIn": 0,
+            "recordOut": 100,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c1"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "inputProfile": "appleLog"
+          },
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b2",
+            "type": "mediaClip",
+            "name": "Sony",
+            "recordIn": 100,
+            "recordOut": 200,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c2"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "inputProfile": "sonySLog3"
+          },
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b3",
+            "type": "mediaClip",
+            "name": "ARRI",
+            "recordIn": 200,
+            "recordOut": 300,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c3"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "inputProfile": "arriLogC4"
+          },
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b4",
+            "type": "mediaClip",
+            "name": "Null profile",
+            "recordIn": 300,
+            "recordOut": 400,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c4"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "inputProfile": null
+          },
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b5",
+            "type": "mediaClip",
+            "name": "No profile",
+            "recordIn": 400,
+            "recordOut": 500,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c5"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null
+          }
+        ]
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

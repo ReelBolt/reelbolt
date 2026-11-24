@@ -1,0 +1,54 @@
+{
+  "form": {
+    "network": "Non riusciamo a raggiungere il server. Controlla la connessione e riprova.",
+    "fixFields": "Correggi i campi evidenziati.",
+    "server": "Qualcosa è andato storto da parte nostra. Scrivici a <link>{email}</link> e ce ne occupiamo noi.",
+    "name": "Nome",
+    "email": "Email",
+    "company": "Azienda",
+    "firstName": "Nome (facoltativo)",
+    "optional": "facoltativo",
+    "topic": "Argomento",
+    "message": "Messaggio",
+    "enterpriseIntro": "Per i team più grandi possiamo concordare quanto segue. Ogni voce è disponibile su accordo: dicci di cosa hai bisogno e lo definiamo insieme.",
+    "enterpriseItems": {
+      "sso": "Single sign-on",
+      "capacity": "Capacità dedicata",
+      "selfHosted": "Una licenza di self-hosting"
+    },
+    "byArrangement": "disponibile su accordo",
+    "website": "Sito web",
+    "sending": "Invio in corso…",
+    "submit": "Invia messaggio",
+    "topics": {
+      "general": "Domanda generale",
+      "enterprise": "Enterprise",
+      "billing": "Fatturazione",
+      "runner": "Rendering sul mio computer"
+    },
+    "validation": {
+      "nameRequired": "Inserisci il tuo nome.",
+      "nameLength": "Il nome deve avere tra 2 e 100 caratteri.",
+      "emailRequired": "Inserisci il tuo indirizzo email.",
+      "emailInvalid": "Inserisci un indirizzo email valido.",
+      "companyLength": "Il nome dell'azienda può avere al massimo 100 caratteri.",
+      "topicInvalid": "Scegli un argomento dall'elenco.",
+      "messageRequired": "Scrivi un messaggio.",
+      "messageLength": "Il messaggio deve avere tra 20 e 5000 caratteri.",
+      "invalid": "Invio non valido."
+    }
+  },
+  "subscribeNotice": "Controlla la posta per confermare l'iscrizione.",
+  "page": {
+    "title": "Contatti",
+    "intro": "Raccontaci cosa vuoi realizzare e da quale materiale parti. Ti mostriamo cosa ne fa ReelBolt.",
+    "otherWays": "Altri modi per raggiungerci"
+  },
+  "thanks": {
+    "title": "Grazie, il tuo messaggio è in viaggio",
+    "body": "Qualcuno del nostro team lo leggerà e ti risponderà. Il nostro tempo di risposta obiettivo è: {time}.",
+    "home": "Torna alla home",
+    "seeFeatures": "Scopri cosa fa",
+    "sooner": "Ti serve una risposta prima?"
+  }
+}

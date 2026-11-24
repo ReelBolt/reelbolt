@@ -1,0 +1,16 @@
+/* Coarse pointers (a finger): every trim mode is a 44 x 44 target. */
+.trimMode {
+  min-width: 0;
+}
+
+@media (pointer: coarse) {
+  .trimMode {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* The on state of a toolbar toggle: the tint alone is 1.13:1 against an off chip, the bar is above 3:1 (WCAG 1.4.11). */
+.stateOn {
+  box-shadow: inset 0 -2px 0 var(--rb-ed-fg-muted);
+}

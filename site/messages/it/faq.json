@@ -1,0 +1,103 @@
+{
+  "failedRunPolicy": "Se un'esecuzione fallisce per un problema da parte nostra, i crediti del passaggio fallito vengono restituiti e puoi riprendere senza pagare di nuovo i passaggi già completati.",
+  "home": {
+    "0": {
+      "q": "Cosa produce davvero ReelBolt?",
+      "a": "Video brevi e finiti a partire da quello che hai già: montaggi dei momenti migliori dalle riprese grezze, storie con voce narrante, clip con sottotitoli, video di testimonianze e, per i team software, video promozionali costruiti a partire dal prodotto stesso. Ottieni un file video esportato pronto da pubblicare, e se vuoi cambiare qualcosa puoi aprirlo prima nell'editor."
+    },
+    "1": {
+      "q": "Per chi è ReelBolt?",
+      "a": "Per chiunque abbia una storia da raccontare e non abbia il tempo di montarla: creator, piccole attività, formatori, organizzazioni non profit, team software e agenzie. Non serve saper montare né saper fare grafica. Se riesci a girare qualche clip con il telefono e a dire a cosa serve il video, puoi usarlo."
+    },
+    "2": {
+      "q": "Devo fornire io le riprese o crea il video da zero?",
+      "a": "La maggior parte dei video parte dalle riprese che hai già girato, che ReelBolt monta in un video finito. I team software possono partire anche dal codice del loro prodotto, senza nessuna ripresa. Sui piani che includono il video generato può aggiungere clip e b-roll che non hai mai girato. Nella prova gratuita nessuna ricetta crea un video partendo solo da un testo o solo da foto."
+    },
+    "3": {
+      "q": "Devo saper montare video?",
+      "a": "No. Descrivi cosa vuoi e gli agenti si occupano di script, montaggio, voce narrante, titoli e color grading. Se ti piace montare, ogni video finito si apre come una timeline che puoi modificare tu, ma è del tutto facoltativo."
+    },
+    "4": {
+      "q": "In cosa è diverso da un creatore di video basato su template?",
+      "a": "Gli strumenti a template mettono il tuo logo dentro l'animazione di qualcun altro. ReelBolt costruisce il video a partire dalle tue riprese, dalle tue parole e dal tuo brand kit, così ciò che vedono gli spettatori è la tua storia e non una di repertorio."
+    },
+    "5": {
+      "q": "Chi controlla la qualità?",
+      "a": "Un agente revisore valuta ogni bozza rispetto al brief prima che tu la veda, e le bozze che non bastano tornano in produzione. Sui piani con le stanze di montaggio, anche più editor AI e un regista valutano insieme le decisioni importanti prima del montaggio."
+    },
+    "6": {
+      "q": "Dove sono i miei dati e quali modelli AI vengono usati?",
+      "a": "Sul servizio ospitato, i tuoi progetti, le tue riprese e i video finiti restano nel tuo spazio di lavoro, e i servizi AI ricevono solo ciò che serve a un lavoro. Sui piani che lo includono puoi collegare il tuo account di un provider AI e scegliere quale modello usa ogni agente. Con una licenza di self-hosting Enterprise puoi anche far girare l'intera piattaforma sulla tua infrastruttura."
+    },
+    "7": {
+      "q": "Può aggiungere una voce narrante?",
+      "a": "Sì. ReelBolt scrive una narrazione adatta al montaggio e la fa leggere con una voce a tua scelta, o con una voce clonata una volta che chi parla ha registrato il proprio consenso. Può aggiungere sottotitoli e didascalie, tradurre la narrazione per i doppiaggi e correggere una battuta sbagliata registrandola di nuovo con la voce clonata. Il movimento delle labbra in camera non cambia."
+    },
+    "8": {
+      "q": "Può generare riprese che non ho, e quanto costa?",
+      "a": "Sì, sui piani che includono il video generato. Un regista delle inquadrature pianifica clip brevi come stacchi, un cold open o una scheda finale, e vengono generate entro un tetto di spesa che imposti tu. Il video generato usa crediti e la stima mostra il massimo che può costare prima di iniziare."
+    },
+    "9": {
+      "q": "Può sfocare targhe o altri dettagli riservati nelle mie riprese?",
+      "a": "Sì. Indica l'oggetto, per esempio una targa, un badge o uno schermo, e ReelBolt lo trova, lo segue mentre la camera si muove e lo sfoca, lo pixelizza o lo copre. Controlla il risultato prima di pubblicare, perché nessuno strumento automatico può garantire di aver preso ogni fotogramma."
+    },
+    "10": {
+      "q": "Posso modificare io il montaggio?",
+      "a": "Sì. Ogni video finito si apre nell'editor della timeline, dove puoi tagliare, spostare clip, rimontare dalla trascrizione, fare il color grading, mixare l'audio e aggiungere sottotitoli. Puoi anche passare il montaggio a un'altra app di editing, oppure chiedere suggerimenti all'assistente e accettarli o rifiutarli."
+    },
+    "11": {
+      "q": "Quanto ci vuole per un video?",
+      "a": "Pochi minuti per un lavoro piccolo, a volte mezz'ora per uno grande. Dipende dalla lunghezza delle tue riprese e da quanto chiedi. Puoi seguire l'avanzamento di ogni esecuzione e, una volta che una ricetta funziona, rilanciarla su riprese nuove richiede un clic."
+    },
+    "12": {
+      "q": "Cosa non sa ancora fare ReelBolt?",
+      "a": "È pensato per video brevi, di circa un minuto e mezzo o meno. Non realizza lunghi video con un presentatore né caroselli di immagini, e non può ancora rimontare un video finito in un altro formato. Più inquadrature diverse danno un vero montaggio, mentre un'unica ripresa lunga può solo essere accorciata. ReelBolt è in alpha pubblica: aspettati qualche spigolo."
+    }
+  },
+  "pricing": {
+    "0": {
+      "q": "C'è una garanzia di rimborso?",
+      "a": "Sì. Se sei un nuovo cliente pagante, puoi chiedere il rimborso completo del primo pagamento dell'abbonamento o di una ricarica di crediti entro due settimane dal pagamento, scrivendo a {email}. Ricevi indietro l'intero importo pagato, senza detrarre i crediti già usati; i crediti concessi da quel pagamento vengono ritirati, e il rimborso è uno per cliente. {policy} Il testo completo è nei Termini."
+    },
+    "1": {
+      "q": "Cos'è il prezzo di lancio?",
+      "a": "Durante l'alpha pubblica, i nuovi abbonati ottengono metà prezzo sul loro piano. È un'offerta promozionale, aperta ai nuovi abbonati fino a fine gennaio. Si applica automaticamente al checkout, senza alcun codice da inserire. I prezzi potranno cambiare in futuro, con preavviso, come spiegano i Termini."
+    },
+    "2": {
+      "q": "Come faccio a sapere quanto costerà un'esecuzione prima che parta?",
+      "a": "Prima di ogni esecuzione vedi una stima: più o meno quanti crediti userà, e di solito un intervallo tra un valore basso e uno alto. Quando ci sono abbastanza esecuzioni passate alla risoluzione che hai scelto, l'intervallo si basa su quelle. Il video generato è mostrato come importo \"fino a\". Vedi anche un importo separato che il tuo saldo deve avere per far partire l'esecuzione."
+    },
+    "3": {
+      "q": "Cosa usa crediti e cosa è gratis?",
+      "a": "I crediti pagano i passaggi dei flussi di lavoro, gli strumenti AI dell'editor di immagini, i suggerimenti sulla timeline, le grafiche progettate, il video generato e la chat con l'assistente oltre la quota mensile. Riassunti dei file, indicizzazione e ricerca, spazio compreso nel piano, importazione ed esportazione del brand, lavoro svolto con il tuo provider AI e lavoro svolto sulla tua macchina collegata sono gratuiti. Nei piani a postazione, ogni postazione aggiunge i suoi crediti a un unico gruppo condiviso dallo spazio di lavoro."
+    },
+    "4": {
+      "q": "Cosa succede se un'esecuzione fallisce?",
+      "a": "{policy} Se fallisce per colpa dell'input, per esempio un file che non si riesce a leggere, i crediti restano spesi. Puoi chiedere all'assistente perché un'esecuzione è fallita."
+    },
+    "5": {
+      "q": "Come cambia il costo a seconda della risoluzione di output?",
+      "a": "Scegli la risoluzione quando avvii un'esecuzione, fino alla più alta consentita dal tuo piano. La risoluzione si misura sul lato corto, quindi i video verticali e orizzontali sono trattati allo stesso modo. Una risoluzione più alta usa più crediti di render, una più bassa ne usa meno, e la stima riflette la risoluzione che scegli."
+    },
+    "6": {
+      "q": "Posso disdire o cambiare piano?",
+      "a": "Sì. I proprietari dello spazio di lavoro e i membri con il ruolo di fatturazione gestiscono il piano da Piano e fatturazione. La disdetta ha effetto alla fine del periodo che hai pagato, e fino ad allora puoi annullarla con Mantieni il mio piano. Un upgrade ha effetto quando il pagamento va a buon fine, con il prezzo calcolato in proporzione, e i nuovi crediti arrivano alla conferma del pagamento. Un downgrade parte dal periodo di fatturazione successivo. Puoi avere un solo cambio di piano in attesa alla volta."
+    },
+    "7": {
+      "q": "Come funzionano i codici promo e le offerte?",
+      "a": "Inserisci un codice nella pagina Piano e fatturazione del tuo spazio di lavoro; serve un indirizzo email verificato. Per un codice sconto, il prezzo che pagherai viene dal checkout e ti è mostrato prima di confermare. Alcuni codici aggiungono invece crediti gratuiti. I crediti di una promozione scadono e si spendono prima degli altri tuoi crediti. Quando è attiva un'offerta automatica, compare come badge sui piani a cui si applica."
+    },
+    "8": {
+      "q": "Cosa succede quando finisco i crediti?",
+      "a": "L'esecuzione viene rifiutata prima di iniziare, invece di fallire a metà, e vedi cosa serviva e cosa ti resta. Su un piano a pagamento puoi comprare un pacchetto di crediti da Piano e fatturazione in qualsiasi momento; i crediti dei pacchetti scadono dopo il periodo indicato in questa pagina. Niente si ricarica in automatico."
+    },
+    "9": {
+      "q": "Posso usare il mio provider AI o fare il render sul mio computer?",
+      "a": "Sui piani che lo includono, collega il tuo account di un provider AI e scegli quale modello usa ogni agente. Quell'uso non costa crediti ReelBolt, perché paghi direttamente il provider. Anche il rendering e il lavoro sui media su una macchina Windows o Linux collegata al tuo spazio di lavoro non costano crediti, mentre le chiamate ai modelli e la fatturazione restano su ReelBolt. Il download self-service per collegare una macchina non è ancora disponibile, quindi oggi la maggior parte delle esecuzioni usa la capacità di ReelBolt."
+    },
+    "10": {
+      "q": "Le mie riprese vengono usate per addestrare modelli AI?",
+      "a": "No. Non addestriamo modelli sui tuoi contenuti e non li vendiamo. Quando ReelBolt usa la propria capacità AI, al provider del modello arriva solo ciò che serve a quel lavoro. Se il tuo materiale deve restare con te, collega il tuo account di un provider AI, oppure chiedici del self-hosting."
+    }
+  }
+}

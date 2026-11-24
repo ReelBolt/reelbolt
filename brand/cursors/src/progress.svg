@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- progress: static busy arc travelling clockwise; the head sits on the tangent and points away from the ring body, into the gap -->
+  <g transform="translate(16 16) scale(0.94) translate(-16 -16)">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25.24 20.31 A10.2 10.2 0 1 1 17.42 5.9" stroke="#2E1065" stroke-width="5"/>
+    <path d="M25.24 20.31 A10.2 10.2 0 1 1 17.42 5.9" stroke="#F5F3F8" stroke-width="2.2"/>
+  </g>
+  <path d="M23.56 6.76 L17.86 1.32 L16.58 10.43 Z" fill="#A855F7" stroke="#2E1065" stroke-width="1.3" stroke-linejoin="round"/>
+  </g>
+</svg>

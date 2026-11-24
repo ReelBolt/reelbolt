@@ -1,0 +1,34 @@
+{
+  "id": "zoom-through",
+  "version": "1.0.0",
+  "title": "Zoom through",
+  "category": "transitions",
+  "description": "Old scene zooms past the camera while the new one settles in; use to dive into a new topic or detail.",
+  "tags": [
+    "transition",
+    "zoom",
+    "scale",
+    "dive"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-zoom-through",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; zoom?: number /*3*/; maxBlur?: number /*12*/}",
+  "example": "import {ZoomThrough} from './blocks/zoom-through/ZoomThrough.tsx';\n<ZoomThrough from={<SceneA />} to={<SceneB />} startFrame={40} zoom={3} />"
+}

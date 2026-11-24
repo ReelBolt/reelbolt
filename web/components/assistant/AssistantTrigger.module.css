@@ -1,0 +1,37 @@
+/* A quiet ring while the assistant is writing in the background. The words carry the meaning (the
+   button's accessible name); the ring is only a glance cue, and it holds still for people who ask
+   for less motion. */
+.writing {
+  position: relative;
+}
+
+.writing::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--mantine-color-violet-6);
+  opacity: 0.7;
+  pointer-events: none;
+  animation: writingPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes writingPulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .writing::after {
+    animation: none;
+    opacity: 0.6;
+  }
+}

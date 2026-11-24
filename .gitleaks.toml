@@ -1,0 +1,67 @@
+# gitleaks configuration for the public ReelBolt tree.
+#
+# Used by tools/open-source-export/export.sh (private repo) and by the secret-scan job of the
+# public repository's CI. It extends gitleaks' default rules and allowlists ONLY the files below,
+# each triaged by hand: synthetic fixtures such as test signing keys of the form 0123456789abcdef...
+# (entropy-rule hits only). Provider-shaped literals (Stripe, GitHub, AWS, Slack, JWT and the like) are never
+# allowlisted: the test sources build them at run time so no file holds a literal of that shape. It records paths and rules, never values.
+#
+# A new finding anywhere else fails the gate and has to be triaged before it ships. Do not widen a
+# path to a directory: a real secret added next to a fixture must still be caught.
+title = "ReelBolt gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Synthetic fixtures: placeholder keys, tokens, cache keys and object keys in unit tests and test scripts (reviewed one by one; none is a live credential)."
+targetRules = ["generic-api-key"]
+paths = [
+  '''^api/handlers/auth/auth_test\.go$''',
+  '''^api/handlers/mcp_scope_routes_test\.go$''',
+  '''^api/handlers/auth/signup_test\.go$''',
+  '''^api/middleware/auth_test\.go$''',
+  '''^api/services/jwt_service_test\.go$''',
+  '''^api/services/runner_token_test\.go$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/Agents/AssistantProviderTestToolTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/Billing/BillingControllerTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/DesignSystems/Api/FigmaImportRouteTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/ImageJobCapabilityTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/InferenceApiOnBehalfOfTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/InferenceProvidersControllerVideoGenerationTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/MediaDerivativeOwnershipVideoTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/MiniMaxVideoGenerationClientTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/OnBehalfOfTokenIssuerOrgTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/ResolvedVideoGenerationProviderTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/Services/AssistantReplySanitizerTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/StorageQuotaCrossReplicaPostgresTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/VideoCompileStepExecutorTests\.cs$''',
+  '''^infra/scripts/model-catalog/local-load\.sh$''',
+  '''^infra/scripts/tests/rehearsal-rollback\.sh$''',
+  '''^infra/scripts/tests/tls-wiring\.test\.sh$''',
+  '''^runner/internal/telemetry/telemetry_test\.go$''',
+  '''^tools/stripe-catalog-sync/test/safety\.test\.mjs$''',
+  '''^web/app/\(app\)/settings/billing/page\.test\.tsx$''',
+  '''^web/components/org/api-keys/WebhooksPanel\.test\.tsx$''',
+  '''^sandbox/cmd/runner-gateway/pool_nodes_test\.go$''',
+  '''^infra/scripts/pool-isolation-verify\.sh$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/Services/OperatorFailureDigestTests\.cs$''',
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/Marketplace/MarketplacePublishTests\.cs$''',
+  '''^docs-site/versioned_inventory\.json$''',
+  '''^api/config/config_test\.go$''',
+]
+
+[[allowlists]]
+description = "Synthetic test inputs: a fake bearer token against a local test proxy, and a curl against a loopback URL (no credential in either)."
+targetRules = ["curl-auth-header", "curl-auth-user"]
+paths = [
+  '''^nginx/tests/render-reload\.sh$''',
+  '''^nginx/tests/forwarded-headers\.sh$''',
+]
+
+[[allowlists]]
+description = "False positive: tuple deconstruction of a test helper result, no client id."
+targetRules = ["linkedin-client-id"]
+paths = [
+  '''^inference/tests/ReelBolt\.WorkflowEngine\.Tests/SocialPublishing/SocialLinkedInAdapterTests\.cs$''',
+]

@@ -1,0 +1,238 @@
+# Isolated e2e stack: a second, minimal copy of ReelBolt that runs next to the developer's default
+# stack. Always layered on top of docker-compose.yml, always under its own project name, and always
+# driven through e2e/scripts/up-isolated.sh (which generates the env file this reads):
+#
+#   docker compose -p <project> --env-file e2e/.stack/<project>/.env \
+#     -f docker-compose.yml -f docker-compose.e2e.yml up -d --build --wait
+#
+# What changes against the base file, and why (see e2e/README.md):
+#   - nothing collides with another stack: no fixed container_name, no infra host port, qdrant on a
+#     named volume instead of the shared ./data/qdrant bind mount, garage.toml generated per stack;
+#   - the only published ports are nginx (127.0.0.1:APP_PORT, 127.0.0.1:HTTPS_PORT), the Paddle
+#     mock (127.0.0.1:PADDLE_MOCK_PORT) and, with `up-isolated.sh --provider stripe`, the Stripe
+#     fake (127.0.0.1:STRIPE_MOCK_PORT);
+#   - E2E_BUILD_NETWORK (default `default`) sets the build network of the images this stack builds;
+#     `host` works around a BuildKit resolver that cannot reach the host's DNS (IPv6-only upstream);
+#   - billing and signup are on, and the Inference API talks to the Paddle mock instead of Paddle
+#     (E2E_BILLING_PROVIDER=stripe, set by `up-isolated.sh --provider stripe`, makes Stripe the active
+#     provider and points it at the `stripe-mock` service, profile `stripe`; the default is Paddle);
+#   - the default `up` starts postgres, garage, rabbitmq, qdrant, inference, go-api, web, nginx and
+#     paddle-mock only. `site` (profile e2e-site) and `workflow-engine` (profile e2e-engine) are
+#     opt-in; everything else is parked under a profile nobody enables.
+#
+# FORBIDDEN in this stack: sandbox-executor (at startup it deletes every rf-sbx-* container and unknown
+# sandbox dirs on the HOST and creates the global network sandbox-net) and autoheal (restarts any
+# labelled container on the host). Both sit under the `e2e-forbidden` profile; never enable it.
+
+services:
+  postgres:
+    container_name: !reset null
+    ports: !reset []
+
+  garage:
+    ports: !reset []
+    volumes: !override
+      - ${E2E_GARAGE_TOML:?run e2e/scripts/up-isolated.sh, which generates garage.toml for this stack}:/etc/garage.toml:ro
+      - garagedata:/data
+      - garagemeta:/meta
+
+  rabbitmq:
+    ports: !reset []
+
+  qdrant:
+    volumes: !override
+      - qdrantdata:/qdrant/storage
+
+  inference:
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+    environment:
+      Billing__Enabled: "true"
+      # The mock, inside the compose network. Without this override the provider calls
+      # sandbox-api.paddle.com.
+      Billing__Paddle__BaseUrl: http://paddle-mock:8080
+      Billing__Paddle__ApiKey: e2e-mock-key
+      Billing__Paddle__Environment: sandbox
+      # Empty on purpose: with no client token the dashboard follows the hosted checkoutUrl (the mock's
+      # /checkout page) instead of loading Paddle.js from cdn.paddle.com.
+      Billing__Paddle__ClientToken: ""
+      Billing__Paddle__WebhookSecret: ${PADDLE_WEBHOOK_SECRET:?run e2e/scripts/up-isolated.sh}
+      Billing__Paddle__TopUpPriceIds__500: pri_e2e_topup_500
+      Billing__Paddle__TopUpPriceIds__1000: pri_e2e_topup_1000
+      Billing__Paddle__TopUpPriceIds__3000: pri_e2e_topup_3000
+      # Lost-webhook recovery, fast enough for a spec: a change unconfirmed for 8 s is reconciled by
+      # the sweep (every 4 s, first one 5 s after start) instead of the production 10 min / 5 min.
+      # Which provider takes new checkouts: `paddle` (default) or `stripe` (binds case-insensitively).
+      # The Stripe block below is inert while it is paddle: no key and no secret, so the provider is not
+      # configured and the Stripe options are not validated.
+      Billing__Provider: ${E2E_BILLING_PROVIDER:-paddle}
+      Billing__Stripe__ApiKey: ${STRIPE_API_KEY:-}
+      Billing__Stripe__WebhookSecret: ${STRIPE_WEBHOOK_SECRET:-}
+      Billing__Stripe__BaseUrl: ${E2E_STRIPE_BASE_URL:-https://api.stripe.com}
+      Billing__Stripe__ReturnBaseUrl: http://localhost:${APP_PORT:?run e2e/scripts/up-isolated.sh}
+      Billing__Stripe__PortalConfigurationId: ${E2E_STRIPE_PORTAL_CONFIGURATION_ID:-}
+      Billing__Stripe__ManagedPayments: "${E2E_STRIPE_MANAGED_PAYMENTS:-true}"
+      Billing__Stripe__TopUpPriceIds__500: price_e2e_topup_500
+      Billing__Stripe__TopUpPriceIds__1000: price_e2e_topup_1000
+      Billing__Stripe__TopUpPriceIds__3000: price_e2e_topup_3000
+      # Checkout branding: the production defaults, so the recorded POST /v1/checkout/sessions carries the real
+      # branding_settings and the Stripe fake validates and shows them (e2e/stripe-mock/server.mjs).
+      Billing__Stripe__Branding__BackgroundColor: "#0B0B12"
+      Billing__Stripe__Branding__ButtonColor: "#7C3AED"
+      Billing__Stripe__Branding__BorderStyle: rectangular
+      Billing__Stripe__Branding__FontFamily: chakra_petch
+      Billing__Stripe__Branding__DisplayName: ReelBolt
+      Billing__Stripe__Branding__LogoUrl: https://reelbolt.ai/brand/stripe-logo.png
+      Billing__Stripe__Branding__IconUrl: https://reelbolt.ai/brand/stripe-icon.png
+      Billing__Reconcile__StuckAfterSeconds: ${E2E_RECONCILE_STUCK_AFTER_SECONDS:-8}
+      Billing__Reconcile__SweepIntervalSeconds: ${E2E_RECONCILE_SWEEP_SECONDS:-4}
+      Billing__Reconcile__StartupDelaySeconds: "5"
+      PlatformDocs__Enabled: "false"
+
+  # The design-system import-worker restores NuGet packages at build time like inference does.
+  import-worker:
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+
+  go-api:
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+    environment:
+      SIGNUP_ENABLED: "true"
+      PUBLIC_BASE_URL: http://localhost:${APP_PORT:?run e2e/scripts/up-isolated.sh}
+
+  web:
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+    ports: !reset []
+    environment:
+      - NODE_ENV=production
+      # No inspector: the base file's default would open 9229 in this container.
+      - NODE_OPTIONS=
+      - SIGNUP_ENABLED=true
+
+  nginx:
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+    # Same file as nginx/nginx.conf except the public-auth rate limit (5r/m in production), which
+    # up-isolated.sh raises: the seed and every spec log in from 127.0.0.1. Merged by target path.
+    volumes:
+      - ${E2E_NGINX_CONF:?run e2e/scripts/up-isolated.sh}:/etc/nginx/nginx.conf:ro
+    # No autoheal label: autoheal is host-wide, and this stack must not be restarted by another one's.
+    labels: !reset {}
+    ports: !override
+      - "127.0.0.1:${APP_PORT:?run e2e/scripts/up-isolated.sh}:80"
+      - "127.0.0.1:${HTTPS_PORT:?run e2e/scripts/up-isolated.sh}:443"
+    # nginx resolves upstreams per request (resolver 127.0.0.11), so services that are not running
+    # here (site, docs, workflow-engine, mcp) only make their own routes 502.
+    depends_on: !override
+      web:
+        condition: service_healthy
+        restart: true
+      go-api:
+        condition: service_healthy
+        restart: true
+      inference:
+        condition: service_healthy
+        restart: true
+
+  paddle-mock:
+    image: node:26-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: ["node", "/app/server.mjs"]
+    environment:
+      PORT: "8080"
+      PADDLE_API_KEY: e2e-mock-key
+      PADDLE_WEBHOOK_SECRET: ${PADDLE_WEBHOOK_SECRET:?run e2e/scripts/up-isolated.sh}
+      WEBHOOK_URL: http://inference:8080/api/v1/billing/webhooks/paddle
+      PUBLIC_URL: http://localhost:${PADDLE_MOCK_PORT:?run e2e/scripts/up-isolated.sh}
+      APP_PUBLIC_URL: http://localhost:${APP_PORT:?run e2e/scripts/up-isolated.sh}
+      WEBHOOK_DELAY_MS: "300"
+    volumes:
+      - ./e2e/paddle-mock:/app:ro
+    ports:
+      - "127.0.0.1:${PADDLE_MOCK_PORT:?run e2e/scripts/up-isolated.sh}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1:8080/__mock/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - reelbolt
+
+  # The Stripe fake (e2e/stripe-mock/server.mjs): same pattern as paddle-mock, behind the `stripe` profile,
+  # which `up-isolated.sh --provider stripe` enables. Every amount it serves is read from the canonical
+  # plans.catalog.json, mounted read-only. Defaults keep `docker compose config` valid without the
+  # Stripe variables, so the Paddle stack is unchanged.
+  stripe-mock:
+    profiles: ["stripe"]
+    image: node:26-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: ["node", "/app/server.mjs"]
+    environment:
+      PORT: "8080"
+      STRIPE_API_KEY: ${STRIPE_API_KEY:-sk_test_e2e_mock_unset}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-whsec_e2e_unset}
+      WEBHOOK_URL: http://inference:8080/api/v1/billing/webhooks/stripe
+      PUBLIC_URL: http://localhost:${STRIPE_MOCK_PORT:-29201}
+      APP_PUBLIC_URL: http://localhost:${APP_PORT:?run e2e/scripts/up-isolated.sh}
+      WEBHOOK_DELAY_MS: "300"
+      CATALOG_PATH: /catalog/plans.catalog.json
+    volumes:
+      - ./e2e/stripe-mock:/app:ro
+      - ./inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json:/catalog/plans.catalog.json:ro
+    ports:
+      - "127.0.0.1:${STRIPE_MOCK_PORT:-29201}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1:8080/__mock/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - reelbolt
+
+  # ---------------------------------------------------------------- opt-in (E2E_PROFILES)
+
+  site:
+    profiles: !override ["e2e-site"]
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+    ports: !reset []
+
+  workflow-engine:
+    profiles: !override ["e2e-engine"]
+    build:
+      network: ${E2E_BUILD_NETWORK:-default}
+
+  # ---------------------------------------------------------------- never in this stack
+
+  sandbox-executor:
+    profiles: !override ["e2e-forbidden"]
+  sandbox-runtime:
+    profiles: !override ["e2e-forbidden"]
+  autoheal:
+    profiles: !override ["e2e-forbidden"]
+
+  whisper:
+    profiles: !override ["e2e-off"]
+  embeddings:
+    profiles: !override ["e2e-off"]
+  mcp:
+    profiles: !override ["e2e-off"]
+  docs:
+    profiles: !override ["e2e-off"]
+  runner-gateway:
+    profiles: !override ["e2e-off"]
+  decision:
+    profiles: !override ["e2e-off"]
+  comfyui:
+    profiles: !override ["e2e-off"]
+  caddy:
+    profiles: !override ["e2e-off"]
+
+volumes:
+  qdrantdata:

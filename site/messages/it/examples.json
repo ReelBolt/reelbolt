@@ -1,0 +1,33 @@
+{
+  "page": {
+    "eyebrow": "Esempio",
+    "title": "Guarda ReelBolt al lavoro prima di registrarti",
+    "lead": "Non hai ancora filmati né un montatore? Questo è il film di lancio di ReelBolt. Mostra il prodotto che fa il lavoro.",
+    "secondary": "Scopri cos'altro fa"
+  },
+  "film": {
+    "caption": "Il film è in inglese e parte senza audio finché non lo attivi. Dura circa un minuto.",
+    "unavailable": "Il film di esempio al momento non è disponibile. Torna presto, oppure leggi cosa fa ReelBolt nella pagina delle funzionalità."
+  },
+  "inside": {
+    "eyebrow": "Cosa stai guardando",
+    "title": "Cosa mostra il film",
+    "intro": "Il film si apre su un fondatore alla scrivania, di notte, che chiede a un assistente AI un video di lancio. Poi mostra cosa succede, dentro il prodotto:",
+    "items": [
+      "Le richieste dell'assistente in esecuzione, ognuna autorizzata prima di partire.",
+      "La stanza di montaggio che lavora sui passaggi del film.",
+      "I take e una vera timeline che puoi aprire e modificare.",
+      "L'editor di immagini e il logo."
+    ],
+    "note": "È un solo film, fatto dal team dietro ReelBolt: non è il risultato di un cliente."
+  },
+  "next": {
+    "title": "Fai il tuo",
+    "body": "Puoi portare il tuo prodotto, i tuoi filmati e il tuo brand. Se non hai ancora filmati, puoi partire dal solo prodotto.",
+    "recipes": "Sfoglia le ricette video da copiare"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "examples": "Esempio"
+  }
+}

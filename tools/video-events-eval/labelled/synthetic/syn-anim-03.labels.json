@@ -1,0 +1,155 @@
+{
+ "clip": "syn-anim-03",
+ "videoType": "animation",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 300,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "speech_start",
+   "frame": 10,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev2",
+   "type": "appear",
+   "frame": 23,
+   "region": [
+    160,
+    160,
+    200,
+    140
+   ],
+   "note": "panel a reaches half of its peak opacity"
+  },
+  {
+   "id": "ev3",
+   "type": "camera_move_start",
+   "frame": 42,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom begins"
+  },
+  {
+   "id": "ev4",
+   "type": "speech_end",
+   "frame": 70,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev5",
+   "type": "camera_move_stop",
+   "frame": 89,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom at rest"
+  },
+  {
+   "id": "ev6",
+   "type": "appear",
+   "frame": 106,
+   "region": [
+    600,
+    330,
+    220,
+    120
+   ],
+   "note": "dim panel reaches half of its peak opacity"
+  },
+  {
+   "id": "ev7",
+   "type": "camera_move_start",
+   "frame": 132,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom begins"
+  },
+  {
+   "id": "ev8",
+   "type": "camera_move_stop",
+   "frame": 189,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom at rest"
+  },
+  {
+   "id": "ev9",
+   "type": "disappear",
+   "frame": 207,
+   "region": [
+    600,
+    330,
+    220,
+    120
+   ],
+   "note": "dim panel drops below half of its peak opacity"
+  },
+  {
+   "id": "ev10",
+   "type": "transition",
+   "frame": 210,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "scene 1 cut: first frame of new scene"
+  },
+  {
+   "id": "ev11",
+   "type": "speech_start",
+   "frame": 218,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev12",
+   "type": "text_in",
+   "frame": 220,
+   "region": [
+    330,
+    250,
+    300,
+    80
+   ],
+   "note": "alert title reaches half of its peak opacity"
+  },
+  {
+   "id": "ev13",
+   "type": "hit",
+   "frame": 240,
+   "region": [
+    220,
+    400,
+    560,
+    40
+   ],
+   "note": "bar shake begins"
+  },
+  {
+   "id": "ev14",
+   "type": "speech_end",
+   "frame": 285,
+   "note": "voice-over phrase offset"
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- razor: scalpel-style blade with violet bevel, spine line and rivet, collar and grooved handle; drawn upright, rotated 42.3deg so the cutting tip lands on the hotspot (6,27) -->
+  <g transform="rotate(42.3 16 16)" stroke="#2E1065" stroke-width="1.7" stroke-linejoin="round">
+    <rect x="13.7" y="1.4" width="4.6" height="12.4" rx="1.6" fill="#F5F3F8"/>
+    <path d="M13.7 5 H18.3 M13.7 7.6 H18.3 M13.7 10.2 H18.3" fill="none" stroke-width="1" stroke-linecap="round"/>
+    <rect x="12.4" y="13" width="7.2" height="2.8" rx="1" fill="#C4B5FD"/>
+    <path d="M12.8 15.8 H19.2 V25.2 L16 30.9 C14.2 28.6 12.8 24 12.8 15.8 Z" fill="#F5F3F8"/>
+    <path d="M13.3 18 H15.5 L16 29.9 C14.5 27.8 13.3 24 13.3 18 Z" fill="#A855F7" stroke="none"/>
+    <path d="M17.5 17.6 V24" fill="none" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="16.3" cy="17.6" r="0.9" fill="#C4B5FD" stroke-width="0.8"/>
+  </g>
+</svg>

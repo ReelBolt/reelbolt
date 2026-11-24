@@ -1,0 +1,9 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Una delle tue ricette della community non è disponibile nella galleria di ReelBolt: {{if eq .Reason "content"}}non rispetta le nostre linee guida sui contenuti{{else if eq .Reason "unsafe"}}è stata segnalata come non sicura{{else if eq .Reason "copyright"}}ha sollevato un problema di copyright{{else if eq .Reason "low_quality"}}non raggiunge il nostro livello di qualità{{else if eq .Reason "preview"}}non è stato possibile preparare il video di anteprima{{else if eq .Reason "safety"}}una verifica di sicurezza l'ha rimossa{{else}}non rispetta le linee guida per le ricette della community{{end}}.
+
+Apri "Le mie ricette" in ReelBolt per vedere lo stato. Puoi correggere la ricetta e pubblicarla di nuovo, a meno che non sia stata rimossa.
+{{if .Link}}
+{{.Link}}
+{{end}}
+-- {{.FooterNote}}

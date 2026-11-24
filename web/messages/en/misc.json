@@ -1,0 +1,43 @@
+{
+  "offline": {
+    "title": "You're offline",
+    "body": "ReelBolt needs a connection. Workflow execution, live progress updates, and file uploads all happen on the server in real time, so there's no offline mode to fall back to here. Reconnect and reload to keep working.",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page could not be found. It may have moved, or the link may be mistyped.",
+    "back": "Back to the dashboard"
+  },
+  "invite": {
+    "role": "{role, select, owner {owner} admin {admin} member {member} billing {billing} other {{role}}}",
+    "welcomeTitle": "Welcome",
+    "joined": "You joined {org} as {role}.",
+    "joinFailedTitle": "Could not join",
+    "joinFailedBody": "This invitation could not be accepted.",
+    "checking": "Checking this invitation…",
+    "expiredTitle": "This invitation has expired",
+    "goneTitle": "This invitation is no longer valid",
+    "errorTitle": "We could not check this invitation",
+    "expiredBody": "Invitations stay open for seven days. Ask whoever invited you to send a new one.",
+    "goneBody": "It may have been revoked, already used, or the workspace may have been deleted. Ask whoever invited you to send a new one.",
+    "errorBody": "Try again in a moment.",
+    "retry": "Try again",
+    "goToSignIn": "Go to sign in",
+    "summary": "{hasInviter, select, yes {{inviter} invited <b>{email}</b> to join {org} as {role}.} other {You have been invited as <b>{email}</b> (the {role} role).}}",
+    "openUntil": "This invitation is open until {date}.",
+    "join": "Join {org}",
+    "wrongAccount": "This invitation was sent to {invited}, but you are signed in as {current}.",
+    "signOut": "Sign out",
+    "signInAs": "Sign in as {email} to accept this invitation.",
+    "needAccount": "You will need a ReelBolt account for {email} before you can join. Create one with that address, then open this link again.",
+    "signIn": "Sign in",
+    "haveAccount": "I already have an account"
+  },
+  "role": "{role, select, owner {owner} admin {admin} member {member} billing {billing} other {{role}}}",
+  "editorSoon": {
+    "title": "Video editor",
+    "body": "The video editor is coming soon. This 0.1 alpha ships without it.",
+    "back": "Back to projects"
+  }
+}

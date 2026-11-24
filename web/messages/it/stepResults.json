@@ -1,0 +1,50 @@
+{
+  "status": {
+    "Pending": "In attesa",
+    "Running": "In corso",
+    "Completed": "Fatto",
+    "Failed": "Non riuscito",
+    "Skipped": "Saltato"
+  },
+  "failureCode": "Codice dell'errore: <b>{code}</b>",
+  "reusedFromRun": "Riusato da un'esecuzione precedente, quindi questo passaggio è terminato subito.",
+  "keptFromEarlier": "Mantenuto dal video che stai modificando: questo passaggio non ha dovuto ripartire.",
+  "took": "Durata",
+  "creditsCharged": "Crediti addebitati",
+  "tokensUsed": "Token usati",
+  "reusedFromCache": "riusato dalla cache{saved, select, none {} other {, risparmiati {saved}}}",
+  "inputTokensLive": "Token di input (in tempo reale)",
+  "outputTokensLive": "Token di output (in tempo reale)",
+  "tabs": {
+    "overview": "Panoramica",
+    "data": "Dati",
+    "discussion": "Discussione",
+    "activity": "Attività"
+  },
+  "errorDetailsAria": "Il passaggio ha dettagli sull'errore",
+  "whatWentWrong": "Cosa è andato storto",
+  "attempt": "Tentativo",
+  "finished": "Terminato",
+  "openCutInEditor": "Apri questo montaggio nell'editor",
+  "seeEveryClip": "Vedi ogni clip, titolo e suono su una timeline",
+  "openInEditor": "Apri nell'editor",
+  "videoFromStep": "Video di questo passaggio",
+  "downloadVideo": "Scarica il video",
+  "noOutput": "Nessun risultato disponibile",
+  "timelineManifest": "Manifest della timeline disponibile per l'ispezione nello studio",
+  "roomTranscriptArtifact": "Artefatto della trascrizione della stanza",
+  "stepArtifact": "Artefatto del passaggio",
+  "loadingArtifact": "Caricamento dell'artefatto...",
+  "artifactError": "Impossibile caricare l'artefatto: {error}",
+  "artifactJson": "JSON dell'artefatto",
+  "inputJson": "JSON di input",
+  "outputJson": "JSON di output",
+  "noStructuredData": "Nessun dato strutturato disponibile per questo passaggio.",
+  "noUpdates": "Ancora nessun aggiornamento per questo passaggio.",
+  "fidelity": {
+    "mismatch": "Non corrisponde all'oggetto",
+    "mismatchHint": "Questa ripresa non somiglia al tuo oggetto. Se l'inquadratura ha un'altra ripresa, il montaggio usa quella.",
+    "unavailable": "Non verificata",
+    "unavailableHint": "Non è stato possibile confrontare questa ripresa con le immagini del tuo oggetto."
+  }
+}

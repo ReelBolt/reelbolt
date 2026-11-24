@@ -1,0 +1,9 @@
+{
+  "article": {
+    "breadcrumb": "Breadcrumb",
+    "blog": "Blog",
+    "published": "Published",
+    "updated": "Updated",
+    "readingTime": "{minutes} min read"
+  }
+}

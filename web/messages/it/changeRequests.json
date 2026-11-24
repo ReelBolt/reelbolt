@@ -1,0 +1,208 @@
+{
+  "button": "Richiedi modifiche",
+  "filmButton": "Richiedi modifiche al video",
+  "modalTitle": "Modifica: {label}",
+  "intro": "Scegli cosa cambiare. Tutto il resto resta com'era e paghi solo ciò che viene rifatto.",
+  "introDirect": "Scegli cosa cambiare. Tutto il resto resta com'era e paghi solo ciò che viene rifatto.",
+  "scopeItems": "{kind, select, line {Scegli le battute} clip {Scegli le clip} take {Scegli i take} scene {Scegli le scene} other {Scegli gli elementi}}",
+  "scopeAll": "{kind, select, line {Tutte le battute} clip {Tutte le clip} take {Tutti i take} scene {Tutte le scene} other {Tutti gli elementi}}",
+  "pickItems": "{kind, select, line {Quali battute?} clip {Quali clip?} take {Quali take?} scene {Quali scene?} other {Quali elementi?}}",
+  "noItems": "Questo passaggio non ha nulla che tu possa cambiare una parte alla volta.",
+  "keepAsIs": "Lascia com'è",
+  "voicePlaceholder": "Mantieni la voce attuale",
+  "sayItLabel": "Come deve suonare",
+  "sayItHelp": "Per una parola letta male: scrivi la parola, poi la stessa parola con l'accento sulla sillaba da enfatizzare, ad esempio Novara e Novàra.",
+  "sayItTerm": "Parola",
+  "sayItHow": "Come si pronuncia",
+  "sayItAdd": "Aggiungi una parola",
+  "sayItRemove": "Rimuovi",
+  "instruction": "Aggiungi una nota (facoltativa)",
+  "instructionRewrite": "Cosa deve cambiare nella scena che hai scelto? (facoltativo se scrivi tu il nuovo testo)",
+  "instructionRewritePlaceholder": "Ad esempio: rendi la scena 2 più calma.",
+  "instructionPlaceholder": "Una nota conservata con questa modifica. Da sola non cambia nulla.",
+  "redone": "Verrà rifatto",
+  "reused": "Riutilizzato (gratis)",
+  "nothingChosen": "Scegli almeno una modifica.",
+  "noLines": "Scegli almeno una battuta.",
+  "priceAboutOne": "Circa {low} crediti.",
+  "priceAboutRange": "Circa da {low} a {high} crediti.",
+  "thisPart": "Questa parte: {credits} crediti",
+  "shortfall": "Potresti non avere abbastanza crediti",
+  "shortfallBody": "Questa modifica potrebbe richiedere più crediti di quelli che hai adesso.",
+  "topUp": "Ricarica i crediti",
+  "estimating": "Calcolo del prezzo…",
+  "confirm": "Conferma e rifai",
+  "cancel": "Annulla",
+  "historyTitle": "Modifiche a questa esecuzione",
+  "historyChangedFrom": "Modificata a partire dall'esecuzione",
+  "historyOwnRun": "Questa esecuzione è una modifica di",
+  "historyRedone": "{count, plural, one {# rifatto} other {# rifatti}}",
+  "historyReused": "{count, plural, one {# riutilizzato} other {# riutilizzati}}",
+  "historyCost": "{credits} crediti",
+  "historyOpen": "Apri esecuzione",
+  "lineWord": "battuta",
+  "costNotes": {
+    "script": "Cambiare il copione è l'opzione più costosa: tutto ciò che viene dopo viene rifatto."
+  },
+  "keys": {
+    "text": {
+      "label": "Nuovo testo"
+    },
+    "voiceId": {
+      "label": "Voce"
+    },
+    "speed": {
+      "label": "Velocità",
+      "help": "1 è normale."
+    },
+    "prompt": {
+      "label": "Nuova descrizione",
+      "help": "Descrivi cosa vuoi al suo posto."
+    },
+    "videoPrompt": {
+      "label": "Nuova descrizione della clip",
+      "help": "Descrivi cosa deve mostrare la clip."
+    },
+    "audioPrompt": {
+      "label": "Nuova descrizione",
+      "help": "Descrivi la musica o il suono che vuoi al suo posto."
+    },
+    "voiceover": {
+      "label": "Nuova voce narrante",
+      "help": "Cosa viene detto su questa scena."
+    },
+    "onScreenText": {
+      "label": "Testo a schermo",
+      "help": "Una riga di testo per volta, fino a 6 righe."
+    },
+    "visualDescription": {
+      "label": "Cosa mostra la scena"
+    },
+    "retake": {
+      "label": "Crea un nuovo take",
+      "help": "Ottieni una nuova versione anche se la descrizione resta uguale."
+    },
+    "audioRetake": {
+      "label": "Crea una nuova versione",
+      "help": "Crea una nuova versione, anche se nient'altro cambia."
+    },
+    "durationSec": {
+      "label": "Durata",
+      "unit": "secondi"
+    },
+    "overlayText": {
+      "label": "Testo sull'immagine",
+      "help": "Lascia vuoto per mantenere il testo attuale."
+    },
+    "atTimeSec": {
+      "label": "Momento nel video",
+      "help": "Il momento del video da cui viene presa l'immagine.",
+      "unit": "secondi"
+    },
+    "overlayPosition": {
+      "label": "Dove va il testo"
+    },
+    "overlayFontColor": {
+      "label": "Colore del testo"
+    },
+    "overlayBoxColor": {
+      "label": "Riquadro dietro il testo"
+    }
+  },
+  "values": {
+    "overlayPosition": {
+      "None": "Nessun testo",
+      "LowerThird": "Terzo inferiore",
+      "UpperThird": "Terzo superiore",
+      "Center": "Centro"
+    },
+    "overlayFontColor": {
+      "white": "Bianco",
+      "black": "Nero",
+      "yellow": "Giallo"
+    },
+    "overlayBoxColor": {
+      "black045": "Nero, trasparente",
+      "black06": "Nero, quasi pieno",
+      "white04": "Bianco, trasparente",
+      "none": "Nessun riquadro"
+    }
+  },
+  "status": {
+    "ready": "Pronto",
+    "failed": "Non riuscito",
+    "skipped": "Saltato"
+  },
+  "itemTake": "Take {n}",
+  "itemClip": "Clip {n}",
+  "itemClipTake": "Clip {clip}, take {take}",
+  "range": "Tra {min} e {max}.",
+  "rangeUnit": "Tra {min} e {max} {unit}.",
+  "seconds": "{n} s",
+  "scope": "Ambito",
+  "takesGroup": "{name}: take",
+  "errors": {
+    "range": "{who}: {label} deve essere tra {min} e {max}.",
+    "tooManyLines": "{who}: {label} ha più di {max} righe.",
+    "tooLong": "{who}: {label} è più lungo di {max} caratteri.",
+    "chooseOption": "{who}: scegli una delle opzioni elencate per {label}.",
+    "giveBoth": "{who}: indica sia la parola sia come si pronuncia.",
+    "atMostWords": "{who}: al massimo {max} parole.",
+    "whoThisChange": "Questa modifica",
+    "whoAll": "{kind, select, line {Tutte le battute} clip {Tutte le clip} take {Tutti i take} scene {Tutte le scene} other {Tutti gli elementi}}",
+    "whoItem": "{kind, select, line {Battuta {id}} clip {Clip {id}} take {Take {id}} scene {Scena {id}} other {Elemento {id}}}"
+  },
+  "refusals": {
+    "stepNotCompleted": {
+      "title": "Questo passaggio non è finito",
+      "message": "Si può modificare solo un passaggio che è finito."
+    },
+    "useComposition": {
+      "title": "Modifica invece il video",
+      "message": "Questo passaggio si modifica dal pannello \"Modifica questo video\"."
+    },
+    "notEntitled": {
+      "title": "Non incluso nel tuo piano",
+      "message": "Il tuo piano non include la modifica dei singoli passaggi. Un piano a pagamento che la include è nell'elenco dei piani."
+    },
+    "checkRequest": "Controlla la tua richiesta"
+  },
+  "history": {
+    "waiting": "In attesa di iniziare",
+    "working": "In lavorazione",
+    "finished": "Completata",
+    "failed": "Non riuscita",
+    "stopped": "Interrotta"
+  },
+  "historyAll": "tutti",
+  "seePlans": "Vedi i piani",
+  "addToChanges": "Aggiungi alle modifiche",
+  "updateChange": "Aggiorna questa modifica",
+  "requestNow": "Richiedi subito questa modifica",
+  "historyFilmTarget": "Il video",
+  "historyItemsOf": "{label} ({kind, select, line {{count, plural, one {# battuta} other {# battute}}} clip {{count, plural, one {# clip} other {# clip}}} take {{count, plural, one {# take} other {# take}}} scene {{count, plural, one {# scena} other {# scene}}} other {{count, plural, one {# elemento} other {# elementi}}}})",
+  "set": {
+    "title": "Le tue modifiche",
+    "count": "{count, plural, one {# modifica} other {# modifiche}}",
+    "review": "Controlla le modifiche",
+    "editLabel": "Modifica la richiesta per {label}",
+    "removeLabel": "Togli la modifica a {label}",
+    "submit": "{count, plural, one {Richiedi # modifica} other {Richiedi # modifiche}}",
+    "maxReached": "In una richiesta puoi mettere al massimo {max} modifiche.",
+    "summaryAll": "Tutto il passaggio",
+    "summaryChanging": "Cambia: {changes}",
+    "summaryNote": "La tua nota: {text}",
+    "fieldsTitle": "Campi e impostazioni dell'app"
+  },
+  "panel": {
+    "title": "Modifica questo video",
+    "videoTitle": "Il video stesso",
+    "othersTitle": "Altre modifiche",
+    "othersHint": "Per cambiare la narrazione, le clip o la musica, scegli un passaggio nell'elenco dei passaggi e premi Richiedi modifiche.",
+    "aloneOnly": "Queste opzioni valgono quando il video viene modificato da solo.",
+    "notCombinable": "Qui il video non si può modificare insieme ad altri passaggi. Richiedi la modifica del video separatamente, oppure toglila da questa richiesta.",
+    "videoUnavailable": "Il video non si può modificare in questo momento. Svuota la nota sul video per inviare le altre modifiche.",
+    "tooMany": "Una richiesta può contenere al massimo {max} modifiche. Togline una per aggiungere una nota sul video."
+  },
+  "historyOwnRunLink": "l'esecuzione originale"
+}

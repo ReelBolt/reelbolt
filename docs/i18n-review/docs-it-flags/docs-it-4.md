@@ -1,0 +1,7 @@
+- editor/*: "Restore" (version / recovered edits) -> "Recupera" : glossary maps "redo" to "ripristina", so Restore avoids a clash; dashboard strings may differ
+- editor/index.md: "Playhead" -> "testina" : glossary gap, common Italian editor term
+- editor/index.md: "Captions" and "Subtitles" -> both "Sottotitoli" : glossary has one term for caption/subtitle
+- editor/index.md: "Look" (phone tab, colour looks) -> "Aspetto" / "look" : glossary gap
+- editor/index.md: "Deliver" workspace -> "Consegna" : glossary gap; must match dashboard
+- editor/index.md: "Trim" -> "Rifila" and "Nudge" -> "Sposta" : glossary gap; must match dashboard
+- editor/index.md: "Drag clips with your finger (beta)" -> "(sperimentale)" : glossary forbids "beta" as a user-facing word

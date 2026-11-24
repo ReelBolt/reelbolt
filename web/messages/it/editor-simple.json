@@ -1,0 +1,124 @@
+{
+  "shell": {
+    "simple": "Semplice",
+    "full": "Completo",
+    "switchLabel": "Layout dell'editor",
+    "switchHint": "Semplice mostra l'essenziale. Completo mostra ogni pagina e strumento. La timeline è la stessa in entrambi.",
+    "backToAllTimelines": "Torna a tutte le timeline",
+    "allTimelines": "Tutte le timeline",
+    "saved": "Salvato",
+    "retry": "Riprova",
+    "signIn": "Accedi",
+    "keyboardShortcuts": "Scorciatoie da tastiera",
+    "export": "Esporta",
+    "intro": "Questo è l'editor semplice: l'essenziale per un primo video. Ogni pagina e strumento è nell'editor completo, a un clic di distanza.",
+    "openFull": "Apri l'editor completo",
+    "dismissIntro": "Nascondi questa nota",
+    "places": "Sezioni",
+    "place": {
+      "edit": "Modifica",
+      "look": "Aspetto",
+      "export": "Esporta"
+    },
+    "backToTasks": "Indietro",
+    "aiTools": "Strumenti AI",
+    "needsFullTitle": "{action} si trova nell'editor completo",
+    "needsFullBody": "La timeline resta com'è."
+  },
+  "timeline": {
+    "deleteSelected": "Elimina le clip selezionate"
+  },
+  "tasks": {
+    "lead": "Cosa vuoi fare? Scegli un'attività, oppure seleziona una clip sulla timeline per modificarla.",
+    "leadEmpty": "Inizia trascinando un file da Media sulla timeline. Poi scegli un'attività qui.",
+    "selectHint": "Seleziona una clip per accorciarla, spostarla o cambiarne velocità, dimensione e volume.",
+    "silence": {
+      "title": "Rimuovi i silenzi",
+      "hint": "Trova le parti silenziose e le taglia in un solo passaggio. Gratis."
+    },
+    "captions": {
+      "title": "Aggiungi i sottotitoli",
+      "hint": "Scrive i sottotitoli da ciò che viene detto. Leggere il parlato usa crediti; prima vedi il prezzo."
+    },
+    "title": {
+      "title": "Aggiungi un titolo",
+      "hint": "Parole sull'immagine, alla posizione di riproduzione."
+    },
+    "beats": {
+      "title": "Taglia sulla musica",
+      "hint": "Trova i battiti nella musica e allinea i tagli. Gratis."
+    },
+    "sound": {
+      "title": "Sistema l'audio",
+      "hint": "Volume delle tracce, musica che si abbassa sotto la voce, voce più pulita, voce fuori campo."
+    },
+    "format": {
+      "title": "Cambia il formato",
+      "hint": "Verticale, quadrato o orizzontale, e la frequenza dei fotogrammi."
+    },
+    "tighten": {
+      "title": "Stringi il montaggio",
+      "hint": "Un assistente propone dei tagli. Prima vedi il prezzo e accetti solo ciò che ti piace."
+    }
+  },
+  "ask": {
+    "label": "Chiedi una modifica",
+    "helper": "Quale assistente",
+    "go": "Continua",
+    "helpers": {
+      "recut": "Montaggio",
+      "graphics": "Titoli",
+      "grade": "Colore",
+      "sfx": "Audio",
+      "review": "Controlla il video"
+    },
+    "placeholders": {
+      "recut": "Chiedi una modifica, ad esempio: taglia le pause nella prima metà",
+      "graphics": "Chiedi una modifica, ad esempio: aggiungi un titolo con il nome del prodotto",
+      "grade": "Chiedi una modifica, ad esempio: rendilo più caldo",
+      "sfx": "Chiedi una modifica, ad esempio: aggiungi un whoosh a ogni taglio",
+      "review": "Chiedi un controllo, ad esempio: l'inizio è troppo lento?"
+    }
+  },
+  "selection": {
+    "split": "Dividi qui",
+    "duplicate": "Duplica",
+    "remove": "Elimina",
+    "captionLead": "Un sottotitolo si modifica insieme agli altri, così le parole restano a tempo.",
+    "openCaptions": "Apri i sottotitoli",
+    "thisItem": "Questo elemento",
+    "otherItem": "{name} si modifica nell'editor completo. Qui viene riprodotto ed esportato così com'è.",
+    "openInFull": "Apri nell'editor completo",
+    "fullWorkLead": "Questa clip contiene lavoro fatto nell'editor completo: {list}.",
+    "fullWorkNote": "Si vede nell'immagine e nell'esportazione. Modificalo nell'editor completo.",
+    "work": {
+      "colour": "{count, plural, one {# passaggio di colore} other {# passaggi di colore}}",
+      "mask": "una maschera",
+      "keyer": "una chiave green screen",
+      "effects": "{count, plural, one {# effetto} other {# effetti}}",
+      "cornerPin": "un corner pin",
+      "stabilize": "stabilizzazione",
+      "reframe": "un reinquadramento",
+      "crop": "un ritaglio",
+      "reverse": "riproduzione al contrario",
+      "freeze": "un fermo immagine",
+      "animation": "animazione"
+    },
+    "animatedNote": "Animato nell'editor completo. Modificalo lì.",
+    "many": "{count, plural, one {# clip selezionata} other {# clip selezionate}}",
+    "manyHint": "Seleziona una sola clip per cambiarne immagine, velocità o volume."
+  },
+  "panel": {
+    "tasks": "E adesso",
+    "selection": "Clip",
+    "selectionMany": "{count, plural, one {# clip} other {# clip}}",
+    "look": "Aspetto",
+    "export": "Esporta",
+    "captions": "Sottotitoli",
+    "title": "Titolo",
+    "sound": "Audio",
+    "format": "Formato e frequenza dei fotogrammi",
+    "ask": "Suggerimenti",
+    "trackVolume": "Volume {name}"
+  }
+}

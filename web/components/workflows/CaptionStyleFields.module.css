@@ -1,0 +1,82 @@
+/*
+ * The caption fonts the workflow engine burns with (inference/fonts/captions, SIL OFL 1.1), served
+ * from public/ as small Latin WOFF2 subsets so the picker can show each one without any third-party
+ * CDN — this works offline in the dev stack. A face is only downloaded when a sample uses it.
+ */
+@font-face {
+  font-family: 'ReelBolt Caption Inter';
+  src: url('/app/fonts/captions/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ReelBolt Caption Montserrat';
+  src: url('/app/fonts/captions/Montserrat-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ReelBolt Caption Poppins';
+  src: url('/app/fonts/captions/Poppins-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ReelBolt Caption Bebas Neue';
+  src: url('/app/fonts/captions/BebasNeue-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ReelBolt Caption Anton';
+  src: url('/app/fonts/captions/Anton-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+.fontCard {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--mantine-color-default-border);
+  background: var(--mantine-color-body);
+  cursor: var(--rb-cursor-pointer);
+}
+.fontCard[aria-checked='true'] {
+  border-color: var(--mantine-color-violet-6);
+  box-shadow: 0 0 0 1px var(--mantine-color-violet-6);
+}
+.fontCard:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-5);
+  outline-offset: 2px;
+}
+.sample {
+  display: block;
+  font-size: 22px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--mantine-radius-sm);
+  background: linear-gradient(135deg, #3b4a5a 0%, #8a9aa8 45%, #d9c7a3 100%);
+  margin-inline: auto;
+}
+.previewCaption {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  text-align: center;
+  line-height: 1.25;
+}
+.previewText {
+  padding: 0.1em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

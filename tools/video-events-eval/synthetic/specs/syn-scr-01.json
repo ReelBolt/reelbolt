@@ -1,0 +1,258 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-scr-01",
+ "videoType": "screen",
+ "frames": 360,
+ "theme": {
+  "bg": "#dfe3e8"
+ },
+ "area": [
+  0,
+  70,
+  960,
+  470
+ ],
+ "chrome": {
+  "bar": "#dfe3e8",
+  "tabOn": "#ffffff",
+  "tabOff": "#c9ced6",
+  "url": "#ffffff",
+  "text": "#222"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "tab": "Dashboard",
+   "url": "https://app.example.test/dash",
+   "bg": "#ffffff"
+  },
+  {
+   "from": 280,
+   "trans": "cut",
+   "tab": "Settings",
+   "url": "https://app.example.test/settings",
+   "bg": "#eef2f7"
+  }
+ ],
+ "elements": [
+  {
+   "kind": "text",
+   "id": "lab",
+   "name": "email label",
+   "text": "Email",
+   "x": 80,
+   "y": 110,
+   "w": 120,
+   "h": 30,
+   "color": "#444",
+   "scene": 0,
+   "fontSize": 22,
+   "weight": 600,
+   "vis": [
+    {
+     "in": 0
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "inp",
+   "name": "input",
+   "x": 80,
+   "y": 150,
+   "w": 420,
+   "h": 46,
+   "color": "#f4f6f8",
+   "scene": 0,
+   "border": "2px solid #b8c0cc",
+   "radius": 8,
+   "vis": [
+    {
+     "in": 0
+    }
+   ]
+  },
+  {
+   "kind": "typed",
+   "id": "ty",
+   "name": "typed email",
+   "text": "hello@example.com",
+   "x": 94,
+   "y": 160,
+   "w": 221,
+   "h": 28,
+   "color": "#111",
+   "cpf": 3,
+   "vis": [
+    {
+     "in": 30,
+     "fade": 0
+    }
+   ],
+   "scene": 0,
+   "fontSize": 22
+  },
+  {
+   "kind": "rect",
+   "id": "btn",
+   "name": "submit button",
+   "x": 520,
+   "y": 150,
+   "w": 150,
+   "h": 46,
+   "color": "#2b7cff",
+   "scene": 0,
+   "label": "Send",
+   "skip": [
+    "hit"
+   ],
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "hits": [
+    {
+     "kind": "press",
+     "frame": 100
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "toast",
+   "name": "toast",
+   "x": 700,
+   "y": 90,
+   "w": 230,
+   "h": 56,
+   "color": "#222",
+   "scene": 0,
+   "label": "Saved",
+   "fontSize": 20,
+   "vis": [
+    {
+     "in": 104,
+     "out": 190,
+     "slide": [
+      260,
+      0
+     ],
+     "fade": 10
+    }
+   ]
+  },
+  {
+   "kind": "list",
+   "id": "ls",
+   "name": "message list",
+   "x": 80,
+   "y": 240,
+   "w": 600,
+   "h": 400,
+   "rows": [
+    "Message 01",
+    "Message 02",
+    "Message 03",
+    "Message 04",
+    "Message 05",
+    "Message 06",
+    "Message 07",
+    "Message 08",
+    "Message 09",
+    "Message 10",
+    "Message 11",
+    "Message 12",
+    "Message 13",
+    "Message 14"
+   ],
+   "rowH": 50,
+   "color": "#333",
+   "clip": [
+    80,
+    240,
+    600,
+    270
+   ],
+   "scene": 0,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "moves": [
+    {
+     "start": 200,
+     "end": 260,
+     "x": 80,
+     "y": 90
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "modal",
+   "name": "dialog",
+   "x": 300,
+   "y": 190,
+   "w": 360,
+   "h": 200,
+   "color": "#ffffff",
+   "scene": 1,
+   "border": "2px solid #2b7cff",
+   "label": "Saved settings",
+   "textColor": "#222",
+   "fontSize": 24,
+   "vis": [
+    {
+     "in": 300,
+     "out": 345,
+     "fade": 6
+    }
+   ]
+  },
+  {
+   "kind": "cursor",
+   "id": "cur",
+   "name": "cursor",
+   "x": 800,
+   "y": 400,
+   "w": 24,
+   "h": 24,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "moves": [
+    {
+     "start": 12,
+     "end": 30,
+     "x": 90,
+     "y": 175
+    },
+    {
+     "start": 60,
+     "end": 88,
+     "x": 595,
+     "y": 175
+    },
+    {
+     "start": 110,
+     "end": 135,
+     "x": 780,
+     "y": 440
+    }
+   ],
+   "clicks": [
+    100
+   ],
+   "color": "#fff",
+   "skip": [
+    "move_stop"
+   ]
+  }
+ ]
+}

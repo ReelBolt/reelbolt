@@ -1,0 +1,5 @@
+{
+  "editor-helpers-2.text.removeDucking": "'Rimuovi l'abbassamento' for ducking removal; 'ducking' has no settled Italian term in the glossary.",
+  "editor-helpers-2.fmt.noSpareFootage": "'Make room' is quoted as the UI action name; confirm its Italian label ('Fai spazio') matches the button.",
+  "editor-helpers-2.fmt.addedToCuts": "'cut' rendered as 'taglio' to match editor.json (addToAllCuts)."
+}

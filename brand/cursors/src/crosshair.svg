@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- crosshair: precise thin cross with a violet centre -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M16 4 V28 M4 16 H28" stroke="#2E1065" stroke-width="4.4"/>
+    <path d="M16 4 V28 M4 16 H28" stroke="#F5F3F8" stroke-width="1.9"/>
+  </g>
+  <circle cx="16" cy="16" r="1.9" fill="#A855F7" stroke="#2E1065" stroke-width="0.8"/>
+</svg>

@@ -1,0 +1,201 @@
+{
+  "note": "Generated from brand/ by brand/scripts/runner-icons.mjs. Never edit these files by hand: edit the master in brand/ and re-run the generator (docs/brand.md).",
+  "generator": "brand/scripts/runner-icons.mjs",
+  "outputDir": "runner/assets/icons",
+  "platforms": [
+    "windows-x64",
+    "linux-x64",
+    "linux-arm64"
+  ],
+  "deferred": {
+    "macos-apple-silicon": "Not built: decision D26 drops macOS from the runner. The deferred set is trayTemplate.png (16x16) + trayTemplate@2x.png (32x32) from brand/tray-template.svg, monochrome status variants, and AppIcon.icns. See the README in this directory."
+  },
+  "sources": {
+    "mark.svg": "6cc987e401e2fe43c61a795383c5888aca66b6212215b0bdfe9548e5662f9fa6",
+    "app-icon.svg": "2c6f543351dab7b9232051549c4c39c8b708bef3a416b2121ccee6af037af0f5"
+  },
+  "outputs": [
+    {
+      "file": "tray.ico",
+      "bytes": 9622,
+      "sha256": "487a6bc8af644701647665dd5760a106c8db311053a7e3f88099855060610e46",
+      "format": "ico",
+      "source": "mark.svg",
+      "sizes": [
+        16,
+        20,
+        24,
+        32
+      ],
+      "dimensions": "16/20/24/32 px"
+    },
+    {
+      "file": "tray-busy.ico",
+      "bytes": 9622,
+      "sha256": "df8c89b5006a73d7e364ef27e9a003b6c381b4faaae3553c14603609453ebd79",
+      "format": "ico",
+      "source": "mark.svg + busy badge",
+      "sizes": [
+        16,
+        20,
+        24,
+        32
+      ],
+      "dimensions": "16/20/24/32 px"
+    },
+    {
+      "file": "tray-paused.ico",
+      "bytes": 9622,
+      "sha256": "e3ed3dfe11c0e15f8ba1970639c49fb201e06f2624070c1cedbbc6677e255e14",
+      "format": "ico",
+      "source": "mark.svg + paused badge",
+      "sizes": [
+        16,
+        20,
+        24,
+        32
+      ],
+      "dimensions": "16/20/24/32 px"
+    },
+    {
+      "file": "tray-error.ico",
+      "bytes": 9622,
+      "sha256": "0fed8f4bc79f2497905f8a45679ff5d861024abf9ed789ea6e9c6a7294a3c9cb",
+      "format": "ico",
+      "source": "mark.svg + error badge",
+      "sizes": [
+        16,
+        20,
+        24,
+        32
+      ],
+      "dimensions": "16/20/24/32 px"
+    },
+    {
+      "file": "tray-unpaired.ico",
+      "bytes": 9622,
+      "sha256": "71f112784d47d9eb2c15c29513f402549065ffa05c5fa825370a9406c8cc616e",
+      "format": "ico",
+      "source": "mark.svg + unpaired badge",
+      "sizes": [
+        16,
+        20,
+        24,
+        32
+      ],
+      "dimensions": "16/20/24/32 px"
+    },
+    {
+      "file": "app.ico",
+      "bytes": 304886,
+      "sha256": "382ce3a7750d4ba45b0a1e11e2d91da1248f73dd58337bf1944ae84cc97ab68d",
+      "format": "ico",
+      "source": "app-icon.svg",
+      "sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        256
+      ],
+      "dimensions": "16/24/32/48/64/256 px"
+    },
+    {
+      "file": "tray-22.png",
+      "bytes": 476,
+      "sha256": "821a055db49047d465064f5746b8364c347df80d3a1860759906043268102e30",
+      "format": "png",
+      "source": "mark.svg",
+      "dimensions": "22x22"
+    },
+    {
+      "file": "tray-busy-22.png",
+      "bytes": 554,
+      "sha256": "83fb1259660cc2a1a9a336f849f1f63c0cc1afb4f5dbd69cce333340acc62462",
+      "format": "png",
+      "source": "mark.svg + busy badge",
+      "dimensions": "22x22"
+    },
+    {
+      "file": "tray-paused-22.png",
+      "bytes": 589,
+      "sha256": "b5c3dcb5f2d9ac1929fea5d5cebbef03ab996d5072338452e3144424f3db3942",
+      "format": "png",
+      "source": "mark.svg + paused badge",
+      "dimensions": "22x22"
+    },
+    {
+      "file": "tray-error-22.png",
+      "bytes": 563,
+      "sha256": "554104595a84ca195b66b5394708086174dfdbbf9e697883c2ab6f6324d164f7",
+      "format": "png",
+      "source": "mark.svg + error badge",
+      "dimensions": "22x22"
+    },
+    {
+      "file": "tray-unpaired-22.png",
+      "bytes": 619,
+      "sha256": "013efcb69db1eb449d1802ad20f7da981753d87db3b7ce4b397bc794383bc18a",
+      "format": "png",
+      "source": "mark.svg + unpaired badge",
+      "dimensions": "22x22"
+    },
+    {
+      "file": "tray-24.png",
+      "bytes": 484,
+      "sha256": "64e9fcdc768289dafc206b8b76e231d14386ed536055e3606683b5cdf43af4ef",
+      "format": "png",
+      "source": "mark.svg",
+      "dimensions": "24x24"
+    },
+    {
+      "file": "tray-busy-24.png",
+      "bytes": 561,
+      "sha256": "b25e9ee24a35027e505542ac4afcef34fcd324ce8808bdb24c99a9b979fa485f",
+      "format": "png",
+      "source": "mark.svg + busy badge",
+      "dimensions": "24x24"
+    },
+    {
+      "file": "tray-paused-24.png",
+      "bytes": 582,
+      "sha256": "a9de45a1f428d68d2c59b5848d85e7de5eb88df9ebbd164d38aba70bc766cd54",
+      "format": "png",
+      "source": "mark.svg + paused badge",
+      "dimensions": "24x24"
+    },
+    {
+      "file": "tray-error-24.png",
+      "bytes": 569,
+      "sha256": "9b6ce7c995ec0e6d007b2c0bbb85a44fa3771e91f3f807e2ea805a778e647def",
+      "format": "png",
+      "source": "mark.svg + error badge",
+      "dimensions": "24x24"
+    },
+    {
+      "file": "tray-unpaired-24.png",
+      "bytes": 632,
+      "sha256": "50ebe2bb0376acfb2184ae4c2ae32edec892b070713670c7387f47b558562459",
+      "format": "png",
+      "source": "mark.svg + unpaired badge",
+      "dimensions": "24x24"
+    },
+    {
+      "file": "reelbolt-runner-256.png",
+      "bytes": 6409,
+      "sha256": "8387a2f007155fc3a0af9f311905b2ac2482bf86e944f529b2f3a344a18b4a81",
+      "format": "png",
+      "source": "app-icon.svg",
+      "dimensions": "256x256"
+    },
+    {
+      "file": "reelbolt-runner-512.png",
+      "bytes": 17146,
+      "sha256": "22580ac903c27c221d29e10ff59b2339b56a1338ef586327ba5a9d2e1887deeb",
+      "format": "png",
+      "source": "app-icon.svg",
+      "dimensions": "512x512"
+    }
+  ]
+}

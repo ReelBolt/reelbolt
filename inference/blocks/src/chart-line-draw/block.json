@@ -1,0 +1,36 @@
+{
+  "id": "chart-line-draw",
+  "version": "1.0.0",
+  "title": "Line chart draw-on",
+  "category": "charts",
+  "description": "Use to show a trend over time: a smooth line with area fill that draws itself left to right. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+  "tags": [
+    "chart",
+    "line",
+    "trend",
+    "growth",
+    "data"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-chart-line-draw",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      35,
+      80
+    ]
+  },
+  "props": "{values: number[]; labels?: string[]; title?: string; color?: string /*'#34d399'*/; startFrame?: number /*5*/; durationInFrames?: number /*50*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+  "example": "import {ChartLineDraw} from './blocks/chart-line-draw/ChartLineDraw.tsx';\n<ChartLineDraw title=\"Revenue\" values={[3, 5, 4, 8, 12]} labels={[\"Jan\", \"\", \"\", \"\", \"May\"]} />"
+}

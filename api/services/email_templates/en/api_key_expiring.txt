@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+Your API key {{.FileName}} in workspace {{.OrgName}} expires on {{.ExpiryDate}}.
+
+To avoid interruption, create a new key, switch your integration to it, then revoke the old one.
+
+Open API keys:
+
+{{.Link}}
+
+-- {{.FooterNote}}

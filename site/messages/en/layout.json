@@ -1,0 +1,72 @@
+{
+  "skipToContent": "Skip to content",
+  "brand": {
+    "tagline": "AI video team"
+  },
+  "cta": {
+    "startFree": "Start free",
+    "talkToUs": "Talk to us"
+  },
+  "nav": {
+    "howItWorks": "How it works",
+    "features": "Features",
+    "teams": "Teams",
+    "pricing": "Pricing",
+    "recipes": "Recipes",
+    "blog": "Blog",
+    "docs": "Docs",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "header": {
+    "signIn": "Sign in",
+    "appComingSoon": "App · Coming soon",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "contact": "Contact",
+    "madeFor": "Made for",
+    "howItWorks": "How it works",
+    "features": "Features",
+    "examples": "Example",
+    "pricing": "Pricing",
+    "recipes": "Recipes",
+    "blog": "Blog",
+    "docs": "Documentation",
+    "desktopRunner": "Desktop runner",
+    "whatYouGet": "What you get",
+    "faq": "FAQ",
+    "about": "About",
+    "signIn": "Sign in",
+    "appComingSoon": "App · Coming soon",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "acceptableUse": "Acceptable use",
+    "refunds": "Refunds and cancellation",
+    "runnerEula": "Runner EULA",
+    "cookiePreferences": "Cookie preferences",
+    "disclosure": "{name} makes finished videos from the materials you bring: your footage, your words and your brand. Running it means sending some of your material to third-party APIs: AI providers for generation, a storage and hosting provider for your files, and a payment provider for billing. Google is one of them, used only for optional sign-in and Drive sync. Our <privacy>privacy policy</privacy> describes what is sent to each provider and why. We do not use Google APIs or any other third-party AI service to generate non-consensual intimate imagery (NCII) or any sexually explicit content.",
+    "copyright": "© {year} {name}. All rights reserved.",
+    "version": "ReelBolt {version}",
+    "alpha": "ReelBolt {version} — public alpha. Expect rough edges; things may change.",
+    "privacyTelemetry": "Privacy and telemetry"
+  },
+  "contactAddress": {
+    "responseTime": "Response time: {value}"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch language to {language}"
+  },
+  "errorpage": {
+    "heading": "Something went wrong loading this page",
+    "body": "This is on our side, not yours. Try again, and if it keeps happening, tell us and we will look into it.",
+    "retry": "Try again",
+    "home": "Back to the home page",
+    "contact": "Contact us"
+  }
+}

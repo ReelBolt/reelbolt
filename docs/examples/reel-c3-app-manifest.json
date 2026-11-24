@@ -1,0 +1,112 @@
+{
+  "version": 2,
+  "title": "Reel with AI b-roll",
+  "tagline": "Your footage cut into a reel, with AI b-roll shots you size and price.",
+  "category": "footage",
+  "inputs": [
+    {
+      "kind": "files",
+      "role": "video",
+      "label": "Your video",
+      "min": 1,
+      "max": 20
+    },
+    {
+      "kind": "files",
+      "role": "music",
+      "label": "Your music track",
+      "min": 0,
+      "max": 1,
+      "more": true
+    },
+    {
+      "kind": "input",
+      "id": "mostClips",
+      "type": "number",
+      "label": "Most b-roll clips",
+      "default": 4,
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "help": "The most AI clips made. Each costs credits."
+    },
+    {
+      "kind": "input",
+      "id": "mostCredits",
+      "type": "number",
+      "label": "Most credits to spend",
+      "default": 1667,
+      "min": 1,
+      "max": 100000,
+      "step": 1,
+      "help": "The most credits the b-roll may cost this run (4 shots at 2 takes fit the default). The estimate shows the cost."
+    },
+    {
+      "kind": "input",
+      "id": "takes",
+      "type": "number",
+      "label": "Takes per shot",
+      "default": 1,
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "unit": "takes",
+      "more": true,
+      "help": "Versions of each shot to choose from. Needs at least as many clips."
+    },
+    {
+      "kind": "input",
+      "id": "videoModel",
+      "type": "model",
+      "label": "Video model",
+      "capability": "VideoGeneration",
+      "more": true
+    },
+    {
+      "kind": "input",
+      "id": "beat",
+      "type": "choice",
+      "label": "Cut on the beat",
+      "default": "Off",
+      "more": true,
+      "options": [
+        {
+          "value": "Off",
+          "label": "Off"
+        },
+        {
+          "value": "Beat",
+          "label": "On the beat"
+        },
+        {
+          "value": "Bar",
+          "label": "On the bar"
+        }
+      ]
+    },
+    {
+      "kind": "input",
+      "id": "music",
+      "type": "toggle",
+      "label": "Background music",
+      "default": false,
+      "more": true,
+      "help": "Mixes a track from your music files under the film."
+    },
+    {
+      "kind": "input",
+      "id": "mute",
+      "type": "toggle",
+      "label": "Mute the clips' own sound",
+      "default": false,
+      "more": true
+    }
+  ],
+  "requestTemplate": "Plan at most {{input.mostClips}} b-roll shots.",
+  "result": {
+    "kind": "video"
+  },
+  "advanced": {
+    "allowGraph": true
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "actions": {
+    "checkPlan": "Controlla piano e saldo",
+    "dashboard": "Vai alla dashboard"
+  },
+  "reference": {
+    "copied": "Copiato",
+    "copy": "Copia riferimento"
+  },
+  "confirmation": {
+    "confirmingTitle": "Conferma del pagamento",
+    "notConfirmedTitle": "Non ancora confermato",
+    "pendingCopy": {
+      "confirming": "Stiamo confermando il pagamento con il provider di pagamento. Di solito ci vogliono pochi secondi.",
+      "pending": "Il provider di pagamento non l'ha ancora confermato. Piano e crediti si aggiornano appena lo fa, di solito entro un minuto; puoi lasciare questa pagina.",
+      "neutral": "Qui non siamo riusciti a confermarlo. Piano e crediti si aggiornano quando arriva la notifica del provider di pagamento; controlla Fatturazione tra un minuto."
+    },
+    "titleConfirmed": "Pagamento confermato",
+    "titleAbandoned": "Checkout non completato",
+    "breadcrumbDashboard": "Dashboard",
+    "breadcrumbCheckout": "Checkout",
+    "confirming": "Stiamo confermando il pagamento. Di solito ci vogliono pochi secondi.",
+    "success": "Il tuo pagamento è confermato",
+    "plan": "Piano: {plan} ({status})",
+    "creditsAvailable": "{credits} crediti disponibili ora",
+    "creditsAvailableAdded": "{credits} crediti disponibili ora — crediti aggiunti",
+    "abandoned": "Il checkout non è stato completato. Non è stato addebitato nulla.",
+    "backToBilling": "Torna alla fatturazione"
+  },
+  "page": {
+    "metaTitle": "Checkout",
+    "title": "Conferma del pagamento",
+    "breadcrumbDashboard": "Dashboard",
+    "breadcrumbCheckout": "Checkout",
+    "referenceTitle": "Il riferimento della tua transazione",
+    "referenceQuote": "Indicalo se ci contatti per questo pagamento. Identifica la transazione presso il provider di pagamento.",
+    "referenceNone": "Questo link non conteneva un riferimento di transazione. Se hai pagato, il provider di pagamento ne mette uno nella conferma che ti invia. Non ti serve perché l'addebito venga applicato.",
+    "nextTitle": "Cosa fare dopo",
+    "nextConfirmed": "Fatturazione mostra il piano e il saldo dei crediti attualmente in vigore.",
+    "nextPending": "Fatturazione mostra il piano e il saldo dei crediti attualmente in vigore, quindi è lì che compare la modifica quando arriva la notifica. Se non c'è ancora, significa che la notifica non è arrivata, non che il pagamento sia fallito."
+  },
+  "paddleReturn": {
+    "received": "Pagamento ricevuto",
+    "plan": "Piano: {plan} ({status})",
+    "credits": "{credits} crediti disponibili ora",
+    "titleSlow": "Ancora nessuna modifica da vedere",
+    "titleNeutral": "Non ancora confermato",
+    "titleWaiting": "In attesa della conferma del pagamento",
+    "neutral": "Questa pagina non può dire se un pagamento è andato a buon fine. Il tuo piano e i tuoi crediti si aggiornano quando arriva la notifica del provider di pagamento; controlla Fatturazione tra un minuto.",
+    "waiting": "Hai appena lasciato la pagina del provider di pagamento. Stiamo aspettando la sua notifica, che di solito arriva entro pochi secondi, e questa pagina si aggiorna da sola quando arriva.",
+    "slow": "Non vediamo ancora nessuna modifica. Aggiorna tra un attimo o controlla Fatturazione, che mostra sempre ciò che è in vigore."
+  }
+}

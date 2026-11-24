@@ -1,0 +1,73 @@
+{
+  "title": "Contatti marketing",
+  "sync": {
+    "title": "Sincronizzazione contatti Brevo",
+    "disabled": "La sincronizzazione dei contatti è disattivata.",
+    "notConfigured": "Brevo non è configurato, quindi non viene inviato nulla.",
+    "campaignActive": "Una campagna è in corso. La sincronizzazione riprende al termine.",
+    "lastRun": "Ultima esecuzione: {time}",
+    "neverRun": "La sincronizzazione non è ancora stata eseguita.",
+    "runOk": "Riuscita",
+    "runFailed": "Non riuscita ({code})",
+    "runFailedNoCode": "Non riuscita",
+    "lastReconcile": "Ultimo controllo notturno: {time}",
+    "neverReconciled": "Il controllo notturno non è ancora stato eseguito.",
+    "synced": "Sincronizzati",
+    "waiting": "In attesa",
+    "failed": "Non riusciti",
+    "syncNow": "Sincronizza ora",
+    "requested": "Sincronizzazione richiesta. I conteggi si aggiornano a breve.",
+    "errDisabled": "La sincronizzazione è disattivata, quindi non può essere avviata.",
+    "errRateLimited": "Una sincronizzazione è stata richiesta da poco. Riprova tra un minuto.",
+    "errGeneric": "Impossibile avviare la sincronizzazione. Riprova.",
+    "loadError": "Impossibile caricare lo stato della sincronizzazione"
+  },
+  "table": {
+    "caption": "Contatti marketing",
+    "email": "Email",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "source": "Origine del nome",
+    "brevo": "Brevo",
+    "actions": "Azioni",
+    "noName": "Nessun nome",
+    "edit": "Modifica nome",
+    "editFor": "Modifica il nome di {email}",
+    "empty": "Nessun contatto corrisponde.",
+    "loadError": "Impossibile caricare i contatti",
+    "total": "{count, plural, one {# contatto} other {# contatti}}",
+    "page": "Pagine dei contatti",
+    "brevoError": "Errore: {code}",
+    "status": "Stato"
+  },
+  "filters": {
+    "search": "Cerca per email o nome",
+    "status": "Stato",
+    "all": "Tutti",
+    "optedIn": "Iscritti",
+    "pending": "In attesa di conferma",
+    "withdrawn": "Disiscritti"
+  },
+  "source": {
+    "Account": "Account",
+    "Form": "Modulo",
+    "Admin": "Admin"
+  },
+  "brevoState": {
+    "synced": "Sincronizzato",
+    "pending": "In attesa",
+    "failed": "Non riuscito",
+    "notAtBrevo": "Non presente su Brevo"
+  },
+  "edit": {
+    "title": "Modifica nome del contatto",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "hint": "Lascia vuoti entrambi i campi per rimuovere il nome.",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "invalid": "Questi nomi non sono validi. Controlla la lunghezza e i caratteri.",
+    "error": "Impossibile salvare il nome. Riprova.",
+    "saved": "Nome salvato"
+  }
+}

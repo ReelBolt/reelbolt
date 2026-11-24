@@ -1,0 +1,31 @@
+{
+  "id": "halftone",
+  "version": "1.0.0",
+  "title": "Halftone",
+  "category": "effects",
+  "description": "Use for a comic or print halftone dot look over a scene, strongest at the edges (stylised intros, comic-book beats). Render cost: masks and rotates a full-frame layer, about +0.36 s/frame at 1080p (roughly 5 minutes extra for a 30 s film), so apply it to short beats, not whole films.",
+  "tags": [
+    "halftone",
+    "dots",
+    "comic",
+    "overlay"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-halftone",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      0,
+      25,
+      50
+    ]
+  },
+  "props": "{children?: ReactNode; dotSize?: number /*18*/; color?: string; intensity?: number /*0.5*/; angle?: number /*45*/; drift?: number /*12*/; clearCenter?: number /*25*/}",
+  "example": "import {Halftone} from './blocks/halftone/Halftone.tsx';\n<Halftone dotSize={20}><Scene /></Halftone>"
+}

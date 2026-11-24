@@ -1,0 +1,10 @@
+/* Trimmed fixture: representative shadows, durations and the standard easing. */
+:root{
+--shadow-0:none;
+--shadow-1:0px 2px 1px -1px rgba(0,0,0,.2),0px 1px 1px 0px rgba(0,0,0,.14),0px 1px 3px 0px rgba(0,0,0,.12);
+--shadow-4:0px 2px 4px -1px rgba(0,0,0,.2),0px 4px 5px 0px rgba(0,0,0,.14),0px 1px 10px 0px rgba(0,0,0,.12);
+--shadow-tile-hover:0 4px 18px rgba(0,0,0,.15);
+--ease-standard:cubic-bezier(.4,0,.2,1);
+--dur-fast:.12s;
+--dur-base:.15s;
+}

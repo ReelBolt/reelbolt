@@ -1,0 +1,365 @@
+/*
+ * The assistant's permission card. One element for the life of a request: it opens as a card the
+ * person answers, and settles into one compact line they can expand again.
+ *
+ * Colour tokens are defined once here with light-dark() so both themes stay in lockstep, and they
+ * restate the chat panel's own (--asst-*) rather than reading them, so the card also looks right
+ * when it is rendered on its own. Contrast notes (WCAG AA):
+ *   --card-muted   gray-7 #495057 on white 8.9:1 · dark-1 on dark-6 as the chat panel's own muted text
+ *   risk lines     #991b1b on #fef2f2 / #92400e on #fffbeb · #fca5a5 / #fcd34d on their dark tints, all > 4.5:1
+ * Every risk and every change kind is carried by a glyph AND a word as well as colour.
+ */
+
+.root {
+  --card-muted: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
+  --card-border: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  --card-surface: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  --card-subtle: light-dark(var(--mantine-color-gray-0), color-mix(in srgb, var(--mantine-color-gray-0) 5%, transparent));
+  --card-accent: light-dark(var(--mantine-color-violet-7), var(--mantine-color-violet-3));
+  --card-accent-bg: light-dark(var(--mantine-color-violet-0), color-mix(in srgb, var(--mantine-color-violet-4) 16%, transparent));
+  --card-edge: light-dark(var(--mantine-color-violet-6), var(--mantine-color-violet-4));
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--mantine-radius-md);
+  background: var(--card-surface);
+  color: var(--mantine-color-text);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  animation: card-in 180ms ease-out;
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    animation: none;
+  }
+}
+
+/* The question being asked wears its risk on the leading edge. */
+.root[data-state='pending'] {
+  border-inline-start: 4px solid var(--card-edge);
+  box-shadow: none;
+}
+
+.root[data-state='pending'][data-risk='destructive'] {
+  --card-edge: light-dark(var(--mantine-color-red-6), var(--mantine-color-red-4));
+  --card-accent: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  --card-accent-bg: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-6) 14%, transparent));
+}
+
+.root[data-state='pending'][data-risk='paid'] {
+  --card-edge: light-dark(var(--mantine-color-orange-8), var(--mantine-color-orange-4));
+  --card-accent: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+  --card-accent-bg: light-dark(var(--mantine-color-orange-0), color-mix(in srgb, var(--mantine-color-orange-6) 14%, transparent));
+}
+
+/* A settled request is a quiet line, not another card competing with the reply. */
+.root[data-state]:not([data-state='pending']) {
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--card-subtle);
+}
+
+/* ---- Pending ------------------------------------------------------------------------------- */
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kindIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--mantine-radius-sm);
+  color: var(--card-accent);
+  background: var(--card-accent-bg);
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: var(--card-accent);
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 22px;
+  letter-spacing: -0.005em;
+  color: var(--mantine-color-text);
+}
+
+.project {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--card-muted);
+}
+
+.summary {
+  margin: 0;
+  color: var(--card-muted);
+}
+
+.changes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.change {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.changeText {
+  min-width: 0;
+  flex: 1;
+  /* Indentation and runs of spaces are part of what changed; never collapse them. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Glyph + word, so a change kind never depends on its colour. */
+.tag {
+  --tag-fg: var(--mantine-color-text);
+  --tag-bg: transparent;
+  --tag-line: var(--card-border);
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  min-width: 84px;
+  padding: 1px 8px 1px 6px;
+  border: 1px solid var(--tag-line);
+  border-radius: var(--mantine-radius-sm);
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.tag[data-kind='add'] {
+  --tag-fg: light-dark(var(--mantine-color-green-8), var(--mantine-color-green-3));
+  --tag-bg: light-dark(var(--mantine-color-green-0), color-mix(in srgb, var(--mantine-color-green-6) 14%, transparent));
+  --tag-line: light-dark(var(--mantine-color-green-6), var(--mantine-color-green-4));
+}
+
+.tag[data-kind='remove'] {
+  --tag-fg: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  --tag-bg: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-6) 14%, transparent));
+  --tag-line: light-dark(var(--mantine-color-red-6), var(--mantine-color-red-4));
+}
+
+.tag[data-kind='change'] {
+  --tag-fg: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+  --tag-bg: light-dark(var(--mantine-color-orange-0), color-mix(in srgb, var(--mantine-color-orange-6) 14%, transparent));
+  --tag-line: light-dark(var(--mantine-color-orange-8), var(--mantine-color-orange-4));
+}
+
+.tag[data-kind='info'] {
+  --tag-fg: var(--card-muted);
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 500;
+
+  & svg {
+    flex: none;
+    margin-top: 3px;
+  }
+}
+
+.note[data-tone='cost'] {
+  color: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+  background: light-dark(var(--mantine-color-orange-0), color-mix(in srgb, var(--mantine-color-orange-6) 14%, transparent));
+}
+
+.note[data-tone='danger'] {
+  color: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  background: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-6) 14%, transparent));
+}
+
+.problem {
+  margin: 0;
+  color: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* A fingertip is bigger than a pointer: 44px targets wherever the primary input is touch. */
+.button,
+.link {
+  @media (pointer: coarse) {
+    min-height: 44px;
+  }
+}
+
+.link {
+  align-self: flex-start;
+  margin-inline-start: -8px;
+}
+
+/* ---- Settled ------------------------------------------------------------------------------- */
+
+.line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+}
+
+button.line {
+  cursor: var(--rb-cursor-pointer);
+  border-radius: var(--mantine-radius-sm);
+
+  @media (pointer: coarse) {
+    min-height: 44px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
+}
+
+.stateIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--card-muted);
+}
+
+.root[data-state='done'] .stateIcon {
+  color: light-dark(var(--mantine-color-green-8), var(--mantine-color-green-3));
+}
+
+.root[data-state='failed'] .stateIcon {
+  color: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+}
+
+.lineText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.lineMain {
+  min-width: 0;
+}
+
+.lineTitle {
+  min-width: 0;
+  color: var(--card-muted);
+  font-size: 13px;
+}
+
+.auto {
+  flex: none;
+  padding: 0 8px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--mantine-radius-sm);
+  color: var(--card-muted);
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: none;
+  color: var(--card-muted);
+  transition: transform 150ms ease;
+
+  &[data-expanded] {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0 4px 28px;
+}
+
+.detailsTitle {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ---- The cards under one reply -------------------------------------------------------------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}

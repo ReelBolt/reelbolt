@@ -1,0 +1,133 @@
+{
+  "types": {
+    "workflowRun": "Esecuzione del flusso di lavoro",
+    "designSystemBuild": "Creazione del design system",
+    "revision": "Revisione del video",
+    "changeRequest": "Applicazione della modifica",
+    "graphic": "Creazione di una grafica",
+    "render": "Creazione del video",
+    "preview": "Preparazione di un'anteprima",
+    "loudness": "Controllo del volume",
+    "audition": "Preparazione di un'anteprima audio",
+    "objectAnalysis": "Ricerca dell'oggetto",
+    "audioCleanup": "Pulizia dell'audio",
+    "mediaAnalysis": "Analisi dei tuoi file",
+    "mediaPrep": "Preparazione dei tuoi file",
+    "cloudSync": "Sincronizzazione da Google Drive",
+    "hiddenRun": "Lavoro in background",
+    "upload": "Caricamento di un file",
+    "pictureOperation": "Modifica di un'immagine",
+    "proposal": "Ricerca di idee di montaggio",
+    "assistantWatch": "In attesa dell'assistente",
+    "avatarBuild": "Creazione di un avatar",
+    "generic": "Lavoro in background",
+    "subjectClip": "Creazione di una clip con i tuoi avatar"
+  },
+  "states": {
+    "waiting": "In attesa di uno slot libero",
+    "running": "In corso",
+    "done": "Completato",
+    "failed": "Non riuscito",
+    "cancelled": "Annullato",
+    "estimating": "Calcolo del costo",
+    "needsReview": "Completato, serve il tuo OK"
+  },
+  "toast": {
+    "done": "{label}: completato.",
+    "failed": "{label}: non riuscito.",
+    "cancelled": "{label}: annullato.",
+    "refunded": "I tuoi crediti sono stati restituiti.",
+    "open": "Apri",
+    "browserTitle": "ReelBolt",
+    "needsReview": "{label}: completato, serve il tuo OK.",
+    "switchLabel": "Avvisami quando finisce un lavoro in background"
+  },
+  "failure": {
+    "INSUFFICIENT_CREDITS": "Non hai abbastanza crediti per questa operazione.",
+    "NO_RUNNER_ONLINE": "Al momento nessun worker è disponibile. Riprova tra qualche minuto.",
+    "BUDGET_EXCEEDED": "Hai superato il limite di spesa.",
+    "CONTENT_MODERATION_PENDING": "Il contenuto è ancora in fase di controllo.",
+    "SOURCE_TOO_LARGE": "Il file è troppo grande.",
+    "SOURCE_TOO_LONG": "Il video è troppo lungo.",
+    "SCRATCH_BUSY": "Lo spazio di lavoro è occupato. Riprova tra un attimo.",
+    "EGRESS_REFUSED": "Non è stato possibile scaricare il file da quell'indirizzo.",
+    "RUN_RATE_LIMITED": "Troppe esecuzioni insieme. Attendi un momento e riprova.",
+    "generic": "Qualcosa è andato storto.",
+    "refunded": "I tuoi crediti sono stati restituiti.",
+    "kept": "I crediti usati fino all'errore sono stati trattenuti."
+  },
+  "cost": {
+    "held": "{count, plural, =1 {Circa {amount} credito trattenuto} other {Circa {amount} crediti trattenuti}}",
+    "used": "{count, plural, =1 {{amount} credito usato} other {{amount} crediti usati}}"
+  },
+  "progress": {
+    "step": "Passaggio {order} di {count}",
+    "label": "Avanzamento"
+  },
+  "cancel": {
+    "button": "Annulla",
+    "question": "Fermare questo lavoro?",
+    "confirm": "Sì, fermalo",
+    "keep": "Continua",
+    "failed": "Impossibile fermarlo. Potrebbe essere già finito."
+  },
+  "row": {
+    "open": "Apri",
+    "dismiss": "Nascondi"
+  },
+  "indicator": {
+    "label": "Attività in background, {count} in corso"
+  },
+  "tray": {
+    "title": "Attività in background",
+    "needsReview": "Serve il tuo OK",
+    "running": "In corso ora",
+    "finished": "Terminati di recente",
+    "clear": "Cancella i terminati",
+    "empty": "Non c'è nulla in corso. I rendering, le analisi e le modifiche con l'IA che avvii compaiono qui.",
+    "apply": "Applica",
+    "discard": "Scarta"
+  },
+  "editor": {
+    "needsReview": "{tool} ha finito, ma la clip è cambiata nel frattempo. Applicalo a ciò che resta, oppure scartalo.",
+    "audioCleanupReady": "{tool}: l'audio pulito è pronto. Applicalo, oppure scartalo.",
+    "proposalReady": "{tool}: i suggerimenti sono pronti. Aprili per rivederli, oppure scartali.",
+    "pictureNeedsReview": "{tool} ha finito, ma il livello per cui è stato creato è stato eliminato. Il risultato è conservato, nascosto. Mostralo, oppure scartalo.",
+    "openToDecide": "{tool} attende il tuo OK. Apri l'editor per applicarlo o scartarlo."
+  },
+  "stages": {
+    "cuttingCaptionCues": "Taglio dei sottotitoli",
+    "cuttingToTheBeat": "Montaggio a tempo di musica",
+    "done": "Completato",
+    "encoding": "Codifica del video",
+    "extractingTheFrame": "Scelta del fotogramma",
+    "generatingTimelineManifest": "Preparazione della timeline",
+    "loadingTimeline": "Caricamento della timeline",
+    "mixingTheSoundOfInsertedAssets": "Mixaggio dell'audio",
+    "placingGeneratedClips": "Posizionamento dei nuovi clip",
+    "publishingTheFrame": "Salvataggio del fotogramma",
+    "publishingTheThumbnail": "Salvataggio della miniatura",
+    "readingTheTrackedScreens": "Lettura degli schermi",
+    "reservingTheGenerationBudget": "Riserva dei crediti",
+    "resolvingAnalysisArtifact": "Lettura dell'analisi",
+    "resolvingBackgroundMusic": "Scelta della musica",
+    "resolvingCensoredRegions": "Ricerca delle aree da nascondere",
+    "resolvingColorGradePlan": "Pianificazione dei colori",
+    "resolvingEditorialDecision": "Pianificazione del montaggio",
+    "resolvingMotionGraphicsPlan": "Pianificazione delle grafiche",
+    "resolvingPickupLines": "Preparazione delle battute aggiuntive",
+    "resolvingPicturesAndVideosOverTheFilm": "Preparazione degli elementi sovrapposti",
+    "resolvingRegionEffects": "Preparazione degli effetti",
+    "resolvingScreenInserts": "Preparazione degli inserti schermo",
+    "resolvingSoundEffectsPlan": "Pianificazione degli effetti sonori",
+    "resolvingTheContent": "Lettura del contenuto",
+    "resolvingTheSourceVideo": "Lettura del video originale",
+    "resolvingVoiceoverLines": "Preparazione della voce narrante",
+    "reusingCachedResult": "Riutilizzo di un risultato precedente",
+    "selectingTheThumbnailMoment": "Scelta del momento per la miniatura",
+    "settingTheLoudness": "Regolazione del volume",
+    "uploadingCompiledVideo": "Caricamento del video",
+    "uploadingRender": "Caricamento del video",
+    "writingEditDecisionList": "Scrittura della lista di montaggio"
+  }
+}

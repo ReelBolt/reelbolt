@@ -1,0 +1,34 @@
+{
+  "id": "lower-third-minimal",
+  "version": "1.0.0",
+  "title": "Lower third: minimal",
+  "category": "titles",
+  "description": "Text only over a thin drawn line; use for clean, documentary-style credits.",
+  "tags": [
+    "lower third",
+    "name",
+    "minimal",
+    "clean"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-lower-third-minimal",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      6,
+      14,
+      40
+    ]
+  },
+  "props": "{name: string; subtitle?: string; lineColor?: string /*'#ffffff'*/; textColor?: string; fontFamily?: string /*'Inter, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+  "example": "import {LowerThirdMinimal} from './blocks/lower-third-minimal/LowerThirdMinimal.tsx';\n<LowerThirdMinimal name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- eyedropper: rubber bulb, collar, glass barrel with violet sample; drawn upright, rotated 45deg, tip on the hotspot (4,28) -->
+  <g transform="rotate(45 16 16)" stroke="#2E1065" stroke-width="1.7" stroke-linejoin="round">
+    <rect x="12.4" y="0.8" width="7.2" height="10" rx="3.4" fill="#F5F3F8"/>
+    <rect x="11" y="10.4" width="10" height="3.6" rx="1" fill="#C4B5FD"/>
+    <path d="M13.2 14 H18.8 V25 L16.9 33 H15.1 L13.2 25 Z" fill="#F5F3F8"/>
+    <path d="M13.2 21.5 H18.8 V25 L16.9 33 H15.1 L13.2 25 Z" fill="#A855F7" stroke-width="1.2"/>
+  </g>
+</svg>

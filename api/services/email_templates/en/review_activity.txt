@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+A guest left a note or decision on a shared review of {{.FileName}} in {{.ProjectName}} (workspace {{.OrgName}}).
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+Open the project:
+
+{{.Link}}
+
+-- {{.FooterNote}}

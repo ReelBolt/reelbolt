@@ -1,0 +1,203 @@
+version: 2
+
+updates:
+  # Actions are pinned to full commit SHAs; Dependabot bumps the SHA and its version comment.
+  # The same ecosystem covers the local composite action under .github/actions.
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /.github/actions/free-disk-space
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: gomod
+    directory: /api
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(api)"
+
+  - package-ecosystem: gomod
+    directory: /sandbox
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(sandbox)"
+
+  - package-ecosystem: gomod
+    directory: /runner
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(runner)"
+
+  - package-ecosystem: nuget
+    directory: /inference
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(inference)"
+    groups:
+      # These ship as one coordinated wave; separate PRs just create conflicts.
+      # OpenAI/Azure.AI.OpenAI/Anthropic are in the same set: bumped alone they
+      # can build green and throw TypeLoadException at runtime (see the comment
+      # in ReelBolt.Shared.csproj) — OpenAI 2.14.0 did exactly that.
+      microsoft-extensions:
+        patterns:
+          - "Microsoft.Extensions.*"
+          - "Microsoft.Agents.*"
+          - "OpenAI"
+          - "Azure.AI.OpenAI"
+          - "Anthropic"
+      opentelemetry:
+        patterns:
+          - "OpenTelemetry*"
+    ignore:
+      # Both went commercial: FluentAssertions 8+ (replaced by the Apache-2.0
+      # AwesomeAssertions fork) and MassTransit 9+.
+      - dependency-name: "FluentAssertions"
+      - dependency-name: "MassTransit*"
+        versions: [">= 9"]
+
+  - package-ecosystem: npm
+    directory: /web
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(web)"
+    groups:
+      mantine:
+        patterns:
+          - "@mantine/*"
+      # react and react-dom must always land on the same version.
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(site)"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+
+  # The Remotion project the sandbox renders with. Remotion refuses to mix
+  # versions across its packages, so they only ever move as one group.
+  - package-ecosystem: npm
+    directory: /sandbox/template
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(sandbox-template)"
+    groups:
+      remotion:
+        patterns:
+          - "remotion"
+          - "@remotion/*"
+      # #145 bumped react-dom to 19 alone while react stayed 18, which npm
+      # rejects (react-dom's peer is the matching react major). The template
+      # renders model-authored code, so the React major is a deliberate wave —
+      # same group as web/ and site/ so it is at least proposed as one PR.
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      # fiber 9 and drei 10 both require React 19 (#206 failed its Docker
+      # build on exactly that peer conflict), so they can only ever move with
+      # the react group above. Grouping them keeps the proposal honest about it.
+      react-three:
+        patterns:
+          - "@react-three/*"
+
+  # The Docusaurus site under /docs/. It was not listed, so Dependabot opened
+  # no version-update PRs for it and its security updates for transitive
+  # packages (serialize-javascript, uuid, both reachable only through
+  # @docusaurus/*) kept failing with security_update_not_possible, because
+  # the fix is a Docusaurus bump nothing was proposing.
+  - package-ecosystem: npm
+    directory: /docs-site
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(docs-site)"
+    groups:
+      docusaurus:
+        patterns:
+          - "@docusaurus/*"
+
+  # The desktop runner's window (Vite + React, embedded into the Wails
+  # binary). It was not listed either, so its security updates arrived only
+  # as one-off alert PRs (#247, #248) that jumped vitest a major without the
+  # vite.config.ts change the new major needs. vitest and its @vitest/*
+  # packages must share one version, and Mantine refuses mixed versions
+  # across its packages.
+  - package-ecosystem: npm
+    directory: /runner/frontend
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(runner-ui)"
+    groups:
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      mantine:
+        patterns:
+          - "@mantine/*"
+      # react and react-dom must always land on the same version.
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+
+  # The brand render scripts (see docs/brand.md). Dev-only tooling run by
+  # hand, but sharp bundles libvips, which ships its own security fixes.
+  - package-ecosystem: npm
+    directory: /brand
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(brand)"
+
+  # The MCP server: a thin proxy to the Inference API's assistant tools.
+  - package-ecosystem: npm
+    directory: /mcp
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(mcp)"
+
+  - package-ecosystem: docker
+    directories:
+      - /api
+      - /web
+      - /site
+      - /sandbox
+      - /nginx
+      - /inference/src/ReelBolt.Inference.Api
+      - /inference/src/ReelBolt.WorkflowEngine
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "deps(docker)"

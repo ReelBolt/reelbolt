@@ -1,0 +1,19 @@
+{
+  "auth.terms.pleaseAccept": "Legal-adjacent",
+  "auth.terms.alsoUpdated": "Legal-adjacent",
+  "auth.terms.termsUpdated": "Legal-adjacent",
+  "auth.terms.privacyUpdatedAgain": "Legal-adjacent",
+  "auth.terms.privacyTitle": "Legal-adjacent",
+  "auth.terms.privacyBody": "Legal-adjacent; reworded 2026-11-11 to fit any Privacy-only update",
+  "auth.terms.introFirst": "Legal-adjacent",
+  "auth.terms.introUpdated": "Legal-adjacent",
+  "auth.terms.acceptVersion": "Legal-adjacent",
+  "auth.terms.acceptCurrent": "Legal-adjacent",
+  "shell.trademark": "Legal-adjacent trademark notice",
+  "outputs.takes.deleteAllBody": "Destructive confirm; 'take' kept as the editors' word",
+  "outputs.takes.deleteOneBody": "Destructive confirm",
+  "styles.page.deleteBody": "Destructive confirm",
+  "auth.signup.accept": "Legal-adjacent consent wording at signup",
+  "auth.signup.termsRequired": "Legal-adjacent consent wording at signup",
+  "auth.signup.termsUpdated": "Legal-adjacent consent wording at signup"
+}

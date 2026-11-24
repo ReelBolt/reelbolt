@@ -1,0 +1,33 @@
+{
+  "trigger": "Segnala un bug o invia un feedback",
+  "triggerShort": "Feedback",
+  "errorAction": "Segnala un bug",
+  "reportProblem": "Segnala un problema",
+  "onUs": "Questo errore è nostro. Per questo passaggio non ti è stato addebitato nulla.",
+  "dialog": {
+    "title": "Segnala un bug / Invia un feedback",
+    "sendFailed": "Impossibile inviare la segnalazione.",
+    "thanks": "Grazie: la tua segnalazione è arrivata al team.",
+    "close": "Chiudi",
+    "kindLabel": "Tipo di segnalazione",
+    "kindBug": "Bug",
+    "kindFeedback": "Feedback",
+    "whatHappened": "Cosa è successo?",
+    "maxChars": "Fino a {max} caratteri.",
+    "attachedTitle": "Cosa verrà allegato",
+    "attachedHint": "Tutto quello che trovi qui sotto viene inviato insieme al messaggio. Togli ciò che preferisci non condividere.",
+    "shareDiagnostics": "Condividi la diagnostica",
+    "shareDiagnosticsHint": "Aggiunge lo stato del menu e del layout di questa schermata, i nomi di impostazioni e cookie salvati (senza parti personali), la dimensione dello schermo, la famiglia di browser e sistema operativo e la versione dell'app. Nessun dato personale.",
+    "nothingAttached": "Non verrà allegato altro.",
+    "sendTitle": "Esattamente ciò che invieremo",
+    "allRemoved": "Hai tolto tutti gli allegati: verrà inviato solo il tuo messaggio.",
+    "cancel": "Annulla",
+    "send": "Invia",
+    "field": {
+      "page": "La pagina in cui ti trovi",
+      "projectId": "L'id del progetto",
+      "executionId": "L'id dell'esecuzione",
+      "assistantTurns": "Gli ultimi messaggi dell'assistente"
+    }
+  }
+}

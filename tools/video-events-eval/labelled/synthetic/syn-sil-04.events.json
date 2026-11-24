@@ -1,0 +1,36 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "appear-ev1",
+   "frame": 75,
+   "label": "appear"
+  },
+  {
+   "name": "move_start-ev2",
+   "frame": 203,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev3",
+   "frame": 328,
+   "label": "move stop"
+  },
+  {
+   "name": "text_in-ev4",
+   "frame": 415,
+   "label": "text in"
+  },
+  {
+   "name": "transition-ev5",
+   "frame": 440,
+   "label": "transition"
+  },
+  {
+   "name": "text_out-ev6",
+   "frame": 546,
+   "label": "text out"
+  }
+ ]
+}

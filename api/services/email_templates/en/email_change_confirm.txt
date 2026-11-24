@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+An administrator asked to change the email address you use to sign in to ReelBolt to {{.NewEmail}}. Nothing changes unless you confirm it.
+
+Open this page to confirm the change or cancel it:
+
+{{.Link}}
+
+This link expires in {{.ExpiresIn}} and can be used once. If you did not expect this, do not confirm. Cancel the request on that page, or simply ignore this email.
+
+-- {{.FooterNote}}

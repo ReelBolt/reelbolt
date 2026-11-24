@@ -1,0 +1,9 @@
+{
+  "globs": [
+    "components/billing/*.tsx",
+    "app/(app)/settings/billing/page.tsx",
+    "app/(app)/checkout/page.tsx",
+    "components/assistant/AssistantCreditsNotice.tsx",
+    "lib/billing-msg.ts"
+  ]
+}

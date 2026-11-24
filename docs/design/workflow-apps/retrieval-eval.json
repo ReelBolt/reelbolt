@@ -1,0 +1,1780 @@
+{
+ "version": 1,
+ "description": "Retrieval eval set for the platform documentation search (docs/design/workflow-apps.md 7.5). Gold = docPath#section (the ## heading text; stable under re-chunking). gold: any-of acceptable sections that exist today. pendingGold: sections of the assistant knowledge base (lane 3b-2) that do not exist yet; a query with empty gold is pending-kb and is excluded from the metrics until its pendingGold documents exist. Gold was chosen by reading the corpus, not by running the retriever.",
+ "queries": [
+  {
+   "type": "goal",
+   "locale": "it",
+   "query": "Ci serve un video esplicativo di circa 60 secondi sul portale note spese, in italiano, 16:9, con una voce che racconta. Usa il nostro design system.",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template",
+    "user-guide/recipes/voiceover.md#Voiceover for a promo made from code"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile (`quick-win-promo-ds`)"
+   ],
+   "source": "G01",
+   "id": "Q001"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "15 sec vertical reel about our timeline feature, with a voice pls",
+   "gold": [
+    "user-guide/workflows/templates.md#Quick vertical reel (`cinematic-feature-spotlight`)"
+   ],
+   "source": "G02",
+   "id": "Q002"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "We launch Monday. Need a proper launch trailer, around 45 seconds, landscape, dramatic.",
+   "gold": [
+    "user-guide/workflows/templates.md#Narrated launch trailer (`story-arc-launch-trailer`)"
+   ],
+   "source": "G03",
+   "id": "Q003"
+  },
+  {
+   "type": "goal",
+   "locale": "es",
+   "query": "Quiero un video promo de mi app pero la versión más barata, mi código es enorme.",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code, lighter (`lean-context-promo`)"
+   ],
+   "source": "G04",
+   "id": "Q004"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "30s square video for LinkedIn showing what our app does, no voiceover",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code (`quick-win-promo`)",
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template"
+   ],
+   "source": "G05",
+   "id": "Q005"
+  },
+  {
+   "type": "goal",
+   "locale": "de",
+   "query": "Mach bitte ein 20-Sekunden-Reel im Hochformat mit unserem Markenprofil, ohne Ton.",
+   "gold": [
+    "user-guide/workflows/templates.md#Choosing a template: quick guide",
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile (`quick-win-promo-ds`)"
+   ],
+   "source": "G06",
+   "id": "Q006"
+  },
+  {
+   "type": "goal",
+   "locale": "fr",
+   "query": "Une vidéo promo avec nos couleurs de marque et des fonds animés générés par IA, c'est possible ?",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code with AI backgrounds (`quick-win-promo-plates`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile with AI backgrounds (`quick-win-promo-plates-ds`)"
+   ],
+   "source": "G07",
+   "id": "Q007"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "60 second promo for our app with a narrator, landscape",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Variations of a promo from code",
+    "user-guide/recipes/voiceover.md#Voiceover for a promo made from code"
+   ],
+   "source": "G08",
+   "id": "Q008"
+  },
+  {
+   "type": "goal",
+   "locale": "pt",
+   "query": "Faz um vídeo do nosso app com o perfil de marca, por favor.",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile (`quick-win-promo-ds`)"
+   ],
+   "source": "G09",
+   "id": "Q009"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "vertical reel of our app w/ some cool animated ai backgrounds",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code with AI backgrounds (`quick-win-promo-plates`)"
+   ],
+   "source": "G10",
+   "id": "Q010"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Explainer for our Blazor admin tool, about 90 seconds, landscape, calm voiceover.",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Variations of a promo from code",
+    "user-guide/recipes/voiceover.md#Voiceover for a promo made from code"
+   ],
+   "source": "G11",
+   "id": "Q011"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "cut my interview down to the best 2 minutes",
+   "gold": [
+    "user-guide/workflows/templates.md#Highlight edit from footage (`video-derush-edit`)",
+    "user-guide/recipes/derush-edit.md#The derush workflow"
+   ],
+   "source": "G12",
+   "id": "Q012"
+  },
+  {
+   "type": "goal",
+   "locale": "it",
+   "query": "Abbiamo già il video dell'app in inglese, rifallo in italiano.",
+   "gold": [
+    "user-guide/workflows/templates.md#Dubbed video in another language (`video-derush-edit-dub`)",
+    "user-guide/recipes/voiceover.md#Dubbing into another language"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#The same video in another language"
+   ],
+   "source": "G13",
+   "id": "Q013"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "add name tags and the key points on screen, 6 clips from our panel",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with titles and callouts (`video-derush-edit-graphics`)",
+    "user-guide/recipes/motion-graphics-overlays.md#The motion graphics workflow"
+   ],
+   "source": "G14",
+   "id": "Q014"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Highlight edit of the event footage with the music track I uploaded under it, 90s.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Background music recipe"
+   ],
+   "source": "G15",
+   "id": "Q015"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "make the footage edit more upbeat, add some music",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Make the music or sound effects instead of uploading them"
+   ],
+   "source": "G16",
+   "id": "Q016"
+  },
+  {
+   "type": "goal",
+   "locale": "es",
+   "query": "Subí mis whooshes y clics, ponlos en los cortes del video.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with sound effects (`video-derush-edit-sfx`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Sound effects recipe"
+   ],
+   "source": "G17",
+   "id": "Q017"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Here's my wedding footage. Make the best possible film out of it, take your time.",
+   "gold": [
+    "user-guide/workflows/templates.md#Highlight edit, decided by an editing team (`video-derush-edit-room`)",
+    "user-guide/recipes/derush-edit.md#Variation: a panel of editors (edit room)"
+   ],
+   "source": "G18",
+   "id": "Q018"
+  },
+  {
+   "type": "goal",
+   "locale": "de",
+   "query": "Alle meine Clips sollen aussehen wie aus einem Film, warm und einheitlich.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with a colour grade (`video-derush-edit-grade-room`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Colour grade recipe"
+   ],
+   "source": "G19",
+   "id": "Q019"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "edit the clips, put titles on and mix my track under it",
+   "gold": [
+    "user-guide/recipes/music-sfx-and-grade.md#Combining music, effects and grade in one workflow",
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)"
+   ],
+   "source": "G20",
+   "id": "Q020"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Tell a 45 second story about our product using these clips plus our app, vertical, with narration",
+   "gold": [
+    "user-guide/workflows/templates.md#Narrated product story (`narrated-story`)"
+   ],
+   "source": "G21",
+   "id": "Q021"
+  },
+  {
+   "type": "goal",
+   "locale": "fr",
+   "query": "Coupe mes rushs puis ajoute une voix off et des sous-titres, 1 minute 30.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with narration and captions (`video-derush-edit-voiceover`)",
+    "user-guide/recipes/voiceover.md#Captions from the narration"
+   ],
+   "source": "G22",
+   "id": "Q022"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Dub my product walkthrough into Spanish with subtitles",
+   "gold": [
+    "user-guide/workflows/templates.md#Dubbed video in another language (`video-derush-edit-dub`)",
+    "user-guide/recipes/voiceover.md#Dubbing into another language"
+   ],
+   "source": "G23",
+   "id": "Q023"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "fix the bits where I stumble using my own voice",
+   "gold": [
+    "user-guide/workflows/templates.md#Fix flubbed lines in a talking-head video (`video-derush-edit-pickups`)",
+    "user-guide/recipes/voiceover.md#Pickups in the presenter's own voice"
+   ],
+   "source": "G24",
+   "id": "Q024"
+  },
+  {
+   "type": "goal",
+   "locale": "es",
+   "query": "Corta mi grabación, ponle un color uniforme y una voz en off que explique el producto.",
+   "gold": [
+    "user-guide/recipes/voiceover.md#Voiceover for edited footage",
+    "user-guide/workflows/templates.md#Footage edit with a colour grade (`video-derush-edit-grade-room`)"
+   ],
+   "source": "G25",
+   "id": "Q025"
+  },
+  {
+   "type": "goal",
+   "locale": "pt",
+   "query": "Quero dublar o meu vídeo para japonês.",
+   "gold": [
+    "user-guide/workflows/templates.md#Dubbed video in another language (`video-derush-edit-dub`)",
+    "user-guide/recipes/voiceover.md#Dubbing into another language"
+   ],
+   "source": "G26",
+   "id": "Q026"
+  },
+  {
+   "type": "goal",
+   "locale": "de",
+   "query": "Aus den Interview-Clips mit unserem Kunden soll ein 45-Sekunden-Testimonial werden, mit Namenseinblendung.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with titles and callouts (`video-derush-edit-graphics`)",
+    "user-guide/recipes/motion-graphics-overlays.md#The motion graphics workflow"
+   ],
+   "source": "G27",
+   "id": "Q027"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "I'd like a short AI-made opening shot and a closing card on my video",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)",
+    "user-guide/recipes/generated-b-roll.md#The generated b-roll workflow"
+   ],
+   "source": "G28",
+   "id": "Q028"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "need an ai generated shot of a city at night for my intro",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)",
+    "user-guide/recipes/generated-b-roll.md#The generated b-roll workflow"
+   ],
+   "source": "G29",
+   "id": "Q029"
+  },
+  {
+   "type": "goal",
+   "locale": "it",
+   "query": "Voglio delle inquadrature create con l'AI nel mio video.",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)",
+    "user-guide/recipes/generated-b-roll.md#The generated b-roll workflow"
+   ],
+   "source": "G30",
+   "id": "Q030"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "I need a cover image for my reel",
+   "gold": [
+    "user-guide/workflows/step-types.md#Grab a frame step (`ExtractFrame`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Honest declines"
+   ],
+   "source": "G31",
+   "id": "Q031"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "I have 12 photos from the event, make a slideshow video with calm music, 40 seconds",
+   "gold": [
+    "user-guide/recipes/music-sfx-and-grade.md#Prerequisites for music and sound effects",
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)"
+   ],
+   "source": "G32",
+   "id": "Q032"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "build our brand profile from the code and design files",
+   "gold": [
+    "user-guide/design-system.md#Building a brand and product profile"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Build brand and product profile (`product-profile-from-code`)"
+   ],
+   "source": "G33",
+   "id": "Q033"
+  },
+  {
+   "type": "goal",
+   "locale": "it",
+   "query": "Costruisci il profilo del brand dal nostro codice Blazor, abbiamo già una bozza.",
+   "gold": [
+    "user-guide/design-system.md#Building a brand and product profile"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Build brand and product profile (`product-profile-from-code`)"
+   ],
+   "source": "G34",
+   "id": "Q034"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Make a 30 second video for our release notes, the changelog is in the project",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template",
+    "user-guide/workflows/templates.md#Promo video from your code (`quick-win-promo`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Silent promo for a social network or release notes"
+   ],
+   "source": "G35",
+   "id": "Q035"
+  },
+  {
+   "type": "goal",
+   "locale": "es",
+   "query": "Haz el video con nuestro design system.",
+   "gold": [
+    "user-guide/design-system.md#What a brand and product profile is"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#The brand profile is missing, a draft or unapproved"
+   ],
+   "source": "G36",
+   "id": "Q036"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "the license plates in my dashcam video need to be hidden the whole time",
+   "gold": [
+    "user-guide/recipes/track-and-censor.md#Build the track-and-censor workflow"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Blur one object through the whole clip (`video-region-effect`)"
+   ],
+   "source": "G37",
+   "id": "Q037"
+  },
+  {
+   "type": "goal",
+   "locale": "fr",
+   "query": "Floute le visage de la personne à gauche dans toute la vidéo.",
+   "gold": [
+    "user-guide/recipes/track-and-censor.md#Build the track-and-censor workflow"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Blur one object through the whole clip (`video-region-effect`)"
+   ],
+   "source": "G38",
+   "id": "Q038"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Put the screen recording of our dashboard on the laptop in my office clip",
+   "gold": [
+    "user-guide/workflows/templates.md#Green-screen insert (`green-screen-insert`)",
+    "user-guide/recipes/tracked-screen-insert.md#Put one of your own videos on the screen (no AI needed)"
+   ],
+   "source": "G39",
+   "id": "Q039"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "just add subtitles to my finished video, nothing else",
+   "gold": [
+    "user-guide/editor/index.md#Subtitles",
+    "user-guide/recipes/voiceover.md#Captions from the narration"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Subtitles only"
+   ],
+   "source": "G40",
+   "id": "Q040"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "can you make a talking avatar presenter for our product video?",
+   "gold": [
+    "user-guide/index.md#What ReelBolt can make for you"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Honest declines"
+   ],
+   "source": "G41",
+   "id": "Q041"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Make an Instagram carousel for our launch",
+   "gold": [
+    "user-guide/index.md#What ReelBolt can make for you"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Honest declines"
+   ],
+   "source": "G42",
+   "id": "Q042"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "I recorded 3 screen recordings of our product, make a demo with captions explaining what's going on, 1 minute",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with narration and captions (`video-derush-edit-voiceover`)",
+    "user-guide/recipes/voiceover.md#Captions from the narration"
+   ],
+   "source": "G43",
+   "id": "Q043"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "I have the vertical video, can you make a landscape version of it?",
+   "gold": [
+    "user-guide/workflows/editing-styles.md#How the video shape works"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Honest declines"
+   ],
+   "source": "G44",
+   "id": "Q044"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Mix real screens from our code with my demo footage in one trailer",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Variations of a promo from code"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Mixing code and footage"
+   ],
+   "source": "G45",
+   "id": "Q045"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "make me a video",
+   "gold": [
+    "user-guide/getting-started.md#The starter workflow every new ReelBolt project gets",
+    "user-guide/workflows/templates.md#Choosing a template: quick guide"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#When to ask first"
+   ],
+   "source": "G46",
+   "id": "Q046"
+  },
+  {
+   "type": "goal",
+   "locale": "it",
+   "query": "Fammi un video per Instagram.",
+   "gold": [
+    "user-guide/workflows/templates.md#Choosing a template: quick guide"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#When to ask first"
+   ],
+   "source": "G47",
+   "id": "Q047"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Need the same ad for Instagram, YouTube and LinkedIn",
+   "gold": [
+    "user-guide/workflows/editing-styles.md#How the video shape works"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#When to ask first"
+   ],
+   "source": "G48",
+   "id": "Q048"
+  },
+  {
+   "type": "goal",
+   "locale": "pt",
+   "query": "Preciso de um vídeo de onboarding mostrando o passo a passo do app para novos clientes.",
+   "gold": [
+    "user-guide/recipes/promo-from-code.md#Choosing a promo template",
+    "user-guide/workflows/templates.md#Promo video from your code (`quick-win-promo`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Narration on a plain code promo"
+   ],
+   "source": "G49",
+   "id": "Q049"
+  },
+  {
+   "type": "goal",
+   "locale": "en",
+   "query": "Need something for the launch",
+   "gold": [
+    "user-guide/workflows/templates.md#Choosing a template: quick guide"
+   ],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#When to ask first"
+   ],
+   "source": "G50",
+   "id": "Q050"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "What does the Agent step do and which settings does it have?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Agent step (`Agent`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Agent"
+   ],
+   "id": "Q051"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "How does a review loop decide whether to redo the work, and what is minScore?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Review loop step (`ReviewLoop`)",
+    "user-guide/workflows/execution-and-outputs.md#Review loops"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#ReviewLoop"
+   ],
+   "id": "Q052"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "How do I make a workflow jump to a different step depending on the previous result?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Conditional step (`Conditional`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Conditional"
+   ],
+   "id": "Q053"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Run an agent once for each item in a list from the previous step",
+   "gold": [
+    "user-guide/workflows/step-types.md#For-each step (`ForEach`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#ForEach"
+   ],
+   "id": "Q054"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Run several agents at the same time on the same input",
+   "gold": [
+    "user-guide/workflows/step-types.md#Parallel step (`Parallel`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Parallel"
+   ],
+   "id": "Q055"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Shrink an earlier result so later AI steps read less and cost less",
+   "gold": [
+    "user-guide/workflows/step-types.md#Extract step (`Extract`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Extract"
+   ],
+   "id": "Q056"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "What does the video analysis step find in my footage?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Analyze video step (`VideoAnalyze`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#VideoAnalyze"
+   ],
+   "id": "Q057"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Which step produces the finished edited video file?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Compile video step (`VideoCompile`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#VideoCompile"
+   ],
+   "id": "Q058"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "What is the EditRoom step and how many editors sit on the panel?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Edit room step (`EditRoom`)",
+    "user-guide/workflows/rooms.md#Edit room"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#EditRoom"
+   ],
+   "id": "Q059"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "GraphicsRoom step: which artists does the panel have?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Graphics room step (`GraphicsRoom`)",
+    "user-guide/workflows/rooms.md#Graphics room"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#GraphicsRoom"
+   ],
+   "id": "Q060"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "How does the ColorGradeRoom pick one look for the whole video?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Color grade room step (`ColorGradeRoom`)",
+    "user-guide/workflows/rooms.md#Colour grade room"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#ColorGradeRoom"
+   ],
+   "id": "Q061"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "When do I use a DailiesRoom step with several takes of each clip?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Dailies room step (`DailiesRoom`)",
+    "user-guide/workflows/rooms.md#Dailies room"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#DailiesRoom"
+   ],
+   "id": "Q062"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Which step pays a video generation service, and how do I cap the spend?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Generate video step (`VideoGenerate`)",
+    "user-guide/recipes/generated-b-roll.md#Spending caps for generated clips"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#VideoGenerate"
+   ],
+   "id": "Q063"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Save the last frame of a clip as an image to start the next clip from it",
+   "gold": [
+    "user-guide/workflows/step-types.md#Grab a frame step (`ExtractFrame`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#ExtractFrame"
+   ],
+   "id": "Q064"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Make new music or a sound effect from a written description",
+   "gold": [
+    "user-guide/workflows/step-types.md#Generate music or sound step (`AudioGenerate`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Make the music or sound effects instead of uploading them"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#AudioGenerate"
+   ],
+   "id": "Q065"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Which step decides what appears on the tracked phone or laptop screens?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Put on screens step (`PinInsert`)",
+    "user-guide/recipes/tracked-screen-insert.md#Put an earlier step's video on the screens"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#PinInsert"
+   ],
+   "id": "Q066"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Turn written lines into spoken audio with a speech service",
+   "gold": [
+    "user-guide/workflows/step-types.md#Voiceover step (`Voiceover`)",
+    "user-guide/recipes/voiceover.md#Prerequisites for a voiceover"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Voiceover"
+   ],
+   "id": "Q067"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Turn an editor timeline into a finished video file in a workflow",
+   "gold": [
+    "user-guide/workflows/step-types.md#Render timeline step (`TimelineRender`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#TimelineRender"
+   ],
+   "id": "Q068"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "VideoCompile",
+   "gold": [
+    "user-guide/workflows/step-types.md#Compile video step (`VideoCompile`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#VideoCompile"
+   ],
+   "id": "Q069"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "PinInsert step settings",
+   "gold": [
+    "user-guide/workflows/step-types.md#Put on screens step (`PinInsert`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#PinInsert"
+   ],
+   "id": "Q070"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "what is a step type and which ones exist",
+   "gold": [
+    "user-guide/concepts.md#Steps and step types in a ReelBolt workflow"
+   ],
+   "id": "Q071"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "how does one step refer to the result of an earlier step",
+   "gold": [
+    "user-guide/workflows/step-types.md#How steps refer to each other"
+   ],
+   "pendingGold": [
+    "assistant-kb/how-steps-connect.md#Extract references and why Previous is a trap"
+   ],
+   "id": "Q072"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "settings every step has like stepOrder",
+   "gold": [
+    "user-guide/workflows/step-types.md#Settings every step has"
+   ],
+   "id": "Q073"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "why does my compile step read the wrong step with Previous",
+   "gold": [
+    "user-guide/recipes/music-sfx-and-grade.md#Pitfalls with music, effects and grade",
+    "user-guide/workflows/step-types.md#How steps refer to each other"
+   ],
+   "pendingGold": [
+    "assistant-kb/how-steps-connect.md#Extract references and why Previous is a trap"
+   ],
+   "id": "Q074"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "Which template is the starter promo that every new project gets?",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code (`quick-win-promo`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your code (`quick-win-promo`)"
+   ],
+   "id": "Q075"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "promo template that spends fewer AI tokens on a huge codebase",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code, lighter (`lean-context-promo`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your code (lighter) (`lean-context-promo`)"
+   ],
+   "id": "Q076"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "short narrated feature spotlight with reveal transitions for social media",
+   "gold": [
+    "user-guide/workflows/templates.md#Quick vertical reel (`cinematic-feature-spotlight`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Quick vertical reel (cinematic-feature-spotlight) (`cinematic-feature-spotlight`)"
+   ],
+   "id": "Q077"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "trailer shaped as set-up, rising tension, payoff reveal and launch call to action",
+   "gold": [
+    "user-guide/workflows/templates.md#Narrated launch trailer (`story-arc-launch-trailer`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Narrated launch trailer (`story-arc-launch-trailer`)"
+   ],
+   "id": "Q078"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "basic footage editing template that keeps only the good parts",
+   "gold": [
+    "user-guide/workflows/templates.md#Highlight edit from footage (`video-derush-edit`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Highlight edit from footage (`video-derush-edit`)"
+   ],
+   "id": "Q079"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "highlight edit where a panel of AI editors decides what to keep",
+   "gold": [
+    "user-guide/workflows/templates.md#Highlight edit, decided by an editing team (`video-derush-edit-room`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Highlight edit, decided by an editing team (`video-derush-edit-room`)"
+   ],
+   "id": "Q080"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "add titles, lower-thirds and callouts to an edited video",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with titles and callouts (`video-derush-edit-graphics`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with titles and callouts (`video-derush-edit-graphics`)"
+   ],
+   "id": "Q081"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "titles designed by a panel of AI artists with layout, timing, copy",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with titles, designed by a graphics team (`video-derush-edit-graphics-room`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with titles, designed by a graphics team (`video-derush-edit-graphics-room`)"
+   ],
+   "id": "Q082"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "put a music bed under my edited footage",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with background music (`video-derush-edit-music`)"
+   ],
+   "id": "Q083"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "add whooshes, clicks and stingers at chosen moments",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with sound effects (`video-derush-edit-sfx`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with sound effects (`video-derush-edit-sfx`)"
+   ],
+   "id": "Q084"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "give the whole edit a warm or filmic look",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with a colour grade (`video-derush-edit-grade-room`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with a colour grade (`video-derush-edit-grade-room`)"
+   ],
+   "id": "Q085"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "cutaways, cold open or end card made by an AI video generator",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)"
+   ],
+   "id": "Q086"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "narration written after the cut with captions burned in",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with narration and captions (`video-derush-edit-voiceover`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with narration and captions (`video-derush-edit-voiceover`)"
+   ],
+   "id": "Q087"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "re-record the sentences the presenter flubbed in a cloned voice",
+   "gold": [
+    "user-guide/workflows/templates.md#Fix flubbed lines in a talking-head video (`video-derush-edit-pickups`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Fix flubbed lines in a talking-head video (`video-derush-edit-pickups`)"
+   ],
+   "id": "Q088"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "make a version of the edit in another language with a translator agent",
+   "gold": [
+    "user-guide/workflows/templates.md#Dubbed video in another language (`video-derush-edit-dub`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Dubbed video in another language (`video-derush-edit-dub`)"
+   ],
+   "id": "Q089"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "write the story first and then cut my clips to the script",
+   "gold": [
+    "user-guide/workflows/templates.md#Narrated product story (`narrated-story`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Narrated product story (`narrated-story`)"
+   ],
+   "id": "Q090"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "two takes of every generated clip with a panel choosing the best",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI b-roll, best take chosen by a panel (`video-derush-edit-dailies`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Footage edit with AI b-roll, best take chosen by a panel (`video-derush-edit-dailies`)"
+   ],
+   "id": "Q091"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "promo with generated abstract background plates",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code with AI backgrounds (`quick-win-promo-plates`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your code with AI backgrounds (`quick-win-promo-plates`)"
+   ],
+   "id": "Q092"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "show a screen recording on the green screen of a laptop in my clip",
+   "gold": [
+    "user-guide/workflows/templates.md#Green-screen insert (`green-screen-insert`)"
+   ],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Green-screen insert (`green-screen-insert`)"
+   ],
+   "id": "Q093"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "template key quick-win-promo-ds",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile (`quick-win-promo-ds`)"
+   ],
+   "id": "Q094"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "template key quick-win-promo-plates-ds",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Promo video from your profile with AI backgrounds (`quick-win-promo-plates-ds`)"
+   ],
+   "id": "Q095"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "template key product-profile-from-code",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Build brand and product profile (`product-profile-from-code`)"
+   ],
+   "id": "Q096"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "template key video-subtitles",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/goal-to-recipe.md#Subtitles only"
+   ],
+   "id": "Q097"
+  },
+  {
+   "type": "template",
+   "locale": "en",
+   "query": "template key video-region-effect",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/recipes.md#Blur one object through the whole clip (`video-region-effect`)"
+   ],
+   "id": "Q098"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "how to blur licence plates in a video",
+   "gold": [
+    "user-guide/recipes/track-and-censor.md#Build the track-and-censor workflow"
+   ],
+   "id": "Q099"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "limits of automatic censoring, can the vision AI miss objects",
+   "gold": [
+    "user-guide/recipes/track-and-censor.md#Limits of automatic censoring"
+   ],
+   "id": "Q100"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "blur only the speedometer using a text prompt and segmentation",
+   "gold": [
+    "user-guide/recipes/prompted-region-effects.md#Worked example: blur the speedometer",
+    "user-guide/recipes/prompted-region-effects.md#Step 2 — add the effect in `VideoCompile`"
+   ],
+   "id": "Q101"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "what does following an object with AI segmentation cost per frame",
+   "gold": [
+    "user-guide/recipes/prompted-region-effects.md#What it costs"
+   ],
+   "id": "Q102"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "my screen recording fades to black on the tracked phone",
+   "gold": [
+    "user-guide/recipes/tracked-screen-insert.md#When your screen recording fades to black"
+   ],
+   "id": "Q103"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "the green screen still shows green in the final video",
+   "gold": [
+    "user-guide/recipes/tracked-screen-insert.md#Why a tracked screen insert was not applied"
+   ],
+   "id": "Q104"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "different videos on different screens of one clip",
+   "gold": [
+    "user-guide/recipes/tracked-screen-insert.md#Different videos on different screens"
+   ],
+   "id": "Q105"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "tighten a talking-head interview by removing false starts and pauses",
+   "gold": [
+    "user-guide/recipes/derush-edit.md#The derush workflow",
+    "user-guide/recipes/derush-edit.md#How to run a derush edit"
+   ],
+   "id": "Q106"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "derush run fails with EMPTY_KEEP",
+   "gold": [
+    "user-guide/recipes/derush-edit.md#Pitfalls of a derush edit"
+   ],
+   "id": "Q107"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "what generated clips cost and the caps that protect me",
+   "gold": [
+    "user-guide/recipes/generated-b-roll.md#What generated clips cost",
+    "user-guide/recipes/generated-b-roll.md#Spending caps for generated clips"
+   ],
+   "id": "Q108"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "does sending my footage frames to the video generation provider leave my control",
+   "gold": [
+    "user-guide/recipes/generated-b-roll.md#Privacy: sending your own footage to the provider"
+   ],
+   "id": "Q109"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "titles do not appear, no graphics at all in the output",
+   "gold": [
+    "user-guide/recipes/motion-graphics-overlays.md#Pitfalls with motion graphics"
+   ],
+   "id": "Q110"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "cut the video to the beat of the music",
+   "gold": [
+    "user-guide/recipes/music-sfx-and-grade.md#Cutting to the beat of the music"
+   ],
+   "id": "Q111"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "clone a voice with consent for the voiceover",
+   "gold": [
+    "user-guide/recipes/voiceover.md#Cloning a voice (with consent)"
+   ],
+   "id": "Q112"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "burn captions into the picture from the narration",
+   "gold": [
+    "user-guide/recipes/voiceover.md#Captions from the narration"
+   ],
+   "id": "Q113"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "a free local speech service for narration",
+   "gold": [
+    "user-guide/recipes/voiceover.md#A free, local speech service"
+   ],
+   "id": "Q114"
+  },
+  {
+   "type": "recipe",
+   "locale": "en",
+   "query": "the narration is longer than the picture at the end of the video",
+   "gold": [
+    "user-guide/recipes/voiceover.md#Narration at the end of the video"
+   ],
+   "id": "Q115"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "how do I run a workflow and what does the confirmation box show",
+   "gold": [
+    "user-guide/getting-started.md#Running a workflow in ReelBolt",
+    "user-guide/workflows/execution-and-outputs.md#Starting a run"
+   ],
+   "id": "Q116"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "where do I find the finished video after a run",
+   "gold": [
+    "user-guide/getting-started.md#Finding the finished video in ReelBolt",
+    "user-guide/workflows/execution-and-outputs.md#Where the results end up"
+   ],
+   "id": "Q117"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "what is the brief I type when I click Run",
+   "gold": [
+    "user-guide/concepts.md#Your brief for a run (Require a brief before each run)"
+   ],
+   "pendingGold": [
+    "assistant-kb/writing-a-brief.md#What the brief is"
+   ],
+   "id": "Q118"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "pick an editing style like fast social reel before running",
+   "gold": [
+    "user-guide/workflows/editing-styles.md#Choosing a style and shape when you run a workflow",
+    "user-guide/workflows/editing-styles.md#The built-in styles"
+   ],
+   "id": "Q119"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "choose 4k resolution for a run and what it costs",
+   "gold": [
+    "user-guide/workflows/editing-styles.md#Choosing the resolution of a run",
+    "user-guide/account/choosing-resolution.md#Choose a resolution for a run"
+   ],
+   "id": "Q120"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "how do I resume a failed run without starting over",
+   "gold": [
+    "user-guide/workflows/execution-and-outputs.md#Resuming a run"
+   ],
+   "id": "Q121"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "a rerun reused an old result, what is the step cache",
+   "gold": [
+    "user-guide/workflows/execution-and-outputs.md#Reusing earlier results (the step cache)",
+    "user-guide/concepts.md#The step cache: when a rerun reuses earlier results"
+   ],
+   "id": "Q122"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "what will a run cost before I start it",
+   "gold": [
+    "user-guide/account/reading-the-estimate.md#Read the estimate",
+    "user-guide/account/plans-and-credits.md#What a run will cost before you start it"
+   ],
+   "id": "Q123"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "ask for a change to a finished animated video in plain words",
+   "gold": [
+    "user-guide/workflows/request-changes.md#Asking for a change to a video"
+   ],
+   "id": "Q124"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "how do I import my design files to build a brand profile",
+   "gold": [
+    "user-guide/design-system.md#Importing your design files",
+    "user-guide/design-system.md#Building a brand and product profile"
+   ],
+   "id": "Q125"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "which agents can render Remotion",
+   "gold": [
+    "user-guide/workflows/agents.md#Which agents can render Remotion"
+   ],
+   "id": "Q126"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "choose a different model for one agent",
+   "gold": [
+    "user-guide/workflows/choosing-models.md#Pick a model for an agent"
+   ],
+   "id": "Q127"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "what does the assistant cost and what is free",
+   "gold": [
+    "user-guide/account/what-the-assistant-costs.md#What is free",
+    "user-guide/account/what-the-assistant-costs.md#What uses credits"
+   ],
+   "id": "Q128"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "my run is refused because the workspace is out of credits",
+   "gold": [
+    "user-guide/troubleshooting.md#A run is refused because the workspace is out of credits"
+   ],
+   "id": "Q129"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "a step stays queued and never starts",
+   "gold": [
+    "user-guide/troubleshooting.md#A workflow run seems stuck in Running or Queued"
+   ],
+   "id": "Q130"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "how do I add a template to my project",
+   "gold": [
+    "user-guide/workflows/templates.md#How to add a template to a project"
+   ],
+   "id": "Q131"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "difference between a picture editor and a video editor",
+   "gold": [
+    "user-guide/editor/thumbnails.md#A picture editor and a video editor are not the same thing"
+   ],
+   "id": "Q132"
+  },
+  {
+   "type": "howto",
+   "locale": "en",
+   "query": "generate captions from the transcript in the editor",
+   "gold": [
+    "user-guide/editor/index.md#Subtitles"
+   ],
+   "id": "Q133"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "it",
+   "query": "Come aggiungo musica di sottofondo al mio montaggio?",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with background music (`video-derush-edit-music`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Background music recipe"
+   ],
+   "id": "Q134"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "it",
+   "query": "Come sfoco le targhe delle auto in un video?",
+   "gold": [
+    "user-guide/recipes/track-and-censor.md#Build the track-and-censor workflow"
+   ],
+   "id": "Q135"
+  },
+  {
+   "type": "howto",
+   "locale": "it",
+   "query": "Cosa fa lo step Voiceover?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Voiceover step (`Voiceover`)"
+   ],
+   "id": "Q136"
+  },
+  {
+   "type": "howto",
+   "locale": "it",
+   "query": "Dove trovo il video finito dopo l'esecuzione?",
+   "gold": [
+    "user-guide/getting-started.md#Finding the finished video in ReelBolt",
+    "user-guide/workflows/execution-and-outputs.md#Where the results end up"
+   ],
+   "id": "Q137"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "it",
+   "query": "Quanto costa un'esecuzione prima di avviarla?",
+   "gold": [
+    "user-guide/account/reading-the-estimate.md#Read the estimate",
+    "user-guide/account/plans-and-credits.md#What a run will cost before you start it"
+   ],
+   "id": "Q138"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "¿Qué hace el paso VideoAnalyze con mi metraje?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Analyze video step (`VideoAnalyze`)"
+   ],
+   "id": "Q139"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "Quiero poner una grabación de pantalla sobre la pantalla verde de un portátil",
+   "gold": [
+    "user-guide/workflows/templates.md#Green-screen insert (`green-screen-insert`)",
+    "user-guide/recipes/tracked-screen-insert.md#Put one of your own videos on the screen (no AI needed)"
+   ],
+   "id": "Q140"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "¿Cómo reanudo una ejecución fallida sin empezar de cero?",
+   "gold": [
+    "user-guide/workflows/execution-and-outputs.md#Resuming a run"
+   ],
+   "id": "Q141"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "Plantilla para añadir clips de b-roll generados por IA",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with AI-generated b-roll (`video-derush-edit-broll`)"
+   ],
+   "id": "Q142"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "¿Cuánto cuestan los clips generados y cómo limito el gasto?",
+   "gold": [
+    "user-guide/recipes/generated-b-roll.md#What generated clips cost",
+    "user-guide/recipes/generated-b-roll.md#Spending caps for generated clips"
+   ],
+   "id": "Q143"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Wie funktioniert der Schritt ReviewLoop und was ist minScore?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Review loop step (`ReviewLoop`)"
+   ],
+   "id": "Q144"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Welche Vorlage schneidet mein Rohmaterial zu einem Highlight-Video?",
+   "gold": [
+    "user-guide/workflows/templates.md#Highlight edit from footage (`video-derush-edit`)"
+   ],
+   "id": "Q145"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Wie füge ich meinem Film eine Sprachausgabe mit Untertiteln hinzu?",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with narration and captions (`video-derush-edit-voiceover`)",
+    "user-guide/recipes/voiceover.md#Captions from the narration"
+   ],
+   "id": "Q146"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Was kostet ein Lauf, bevor ich ihn starte?",
+   "gold": [
+    "user-guide/account/reading-the-estimate.md#Read the estimate",
+    "user-guide/account/plans-and-credits.md#What a run will cost before you start it"
+   ],
+   "id": "Q147"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Wie ändere ich das Modell eines Agenten?",
+   "gold": [
+    "user-guide/workflows/choosing-models.md#Pick a model for an agent"
+   ],
+   "id": "Q148"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Comment doubler ma vidéo dans une autre langue ?",
+   "gold": [
+    "user-guide/workflows/templates.md#Dubbed video in another language (`video-derush-edit-dub`)",
+    "user-guide/recipes/voiceover.md#Dubbing into another language"
+   ],
+   "id": "Q149"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Quelle étape sauvegarde une image d'une vidéo ?",
+   "gold": [
+    "user-guide/workflows/step-types.md#Grab a frame step (`ExtractFrame`)"
+   ],
+   "id": "Q150"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Comment choisir un style de montage comme reel social rapide ?",
+   "gold": [
+    "user-guide/workflows/editing-styles.md#The built-in styles",
+    "user-guide/workflows/editing-styles.md#Choosing a style and shape when you run a workflow"
+   ],
+   "id": "Q151"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Que se passe-t-il quand je n'ai plus de crédits ?",
+   "gold": [
+    "user-guide/troubleshooting.md#A run is refused because the workspace is out of credits",
+    "user-guide/account/plans-and-credits.md#What to do when the balance runs low"
+   ],
+   "id": "Q152"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Ajouter des titres et des légendes animées à ma vidéo",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with titles and callouts (`video-derush-edit-graphics`)",
+    "user-guide/recipes/motion-graphics-overlays.md#The motion graphics workflow"
+   ],
+   "id": "Q153"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "it",
+   "query": "Qual è il modello per una promo dal codice più economica?",
+   "gold": [
+    "user-guide/workflows/templates.md#Promo video from your code, lighter (`lean-context-promo`)"
+   ],
+   "id": "Q154"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "es",
+   "query": "¿Qué es el caché de pasos y cuándo se reutiliza un resultado?",
+   "gold": [
+    "user-guide/workflows/execution-and-outputs.md#Reusing earlier results (the step cache)",
+    "user-guide/concepts.md#The step cache: when a rerun reuses earlier results"
+   ],
+   "id": "Q155"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "de",
+   "query": "Wie klone ich eine Stimme mit Einwilligung für die Sprachausgabe?",
+   "gold": [
+    "user-guide/recipes/voiceover.md#Cloning a voice (with consent)"
+   ],
+   "id": "Q156"
+  },
+  {
+   "type": "paraphrase",
+   "locale": "fr",
+   "query": "Étalonnage des couleurs : quel modèle pour un look uniforme ?",
+   "gold": [
+    "user-guide/workflows/templates.md#Footage edit with a colour grade (`video-derush-edit-grade-room`)",
+    "user-guide/recipes/music-sfx-and-grade.md#Colour grade recipe"
+   ],
+   "id": "Q157"
+  },
+  {
+   "type": "howto",
+   "locale": "it",
+   "query": "Cos'è una stanza (room) e quando conviene usarla?",
+   "gold": [
+    "user-guide/workflows/rooms.md#What a room is",
+    "user-guide/workflows/rooms.md#Rooms cost more than a single step"
+   ],
+   "id": "Q158"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Which step makes a thumbnail image for the video without calling a model?",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#ThumbnailGenerate"
+   ],
+   "id": "Q159"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "What does the Revise step do to a finished animated video?",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#Revise"
+   ],
+   "id": "Q160"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "Which step designs a graphic as layers for the picture editor?",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#DesignGraphic"
+   ],
+   "id": "Q161"
+  },
+  {
+   "type": "step",
+   "locale": "en",
+   "query": "What does the DesignSystem step produce and what does it require from the project?",
+   "gold": [],
+   "pendingGold": [
+    "assistant-kb/step-cards.md#DesignSystem"
+   ],
+   "id": "Q162"
+  }
+ ]
+}

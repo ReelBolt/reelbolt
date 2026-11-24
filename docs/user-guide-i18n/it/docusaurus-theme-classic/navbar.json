@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "Documentazione di ReelBolt",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "ReelBolt",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.User guide": {
+    "message": "Guida utente",
+    "description": "Navbar item with label User guide"
+  },
+  "item.label.Release notes": {
+    "message": "Note di rilascio",
+    "description": "Navbar item with label Release notes"
+  },
+  "item.label.Open ReelBolt": {
+    "message": "Apri ReelBolt",
+    "description": "Navbar item with label Open ReelBolt"
+  }
+}

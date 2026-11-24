@@ -1,0 +1,167 @@
+{
+ "clip": "syn-scr-04",
+ "videoType": "screen",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 400,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "text_in",
+   "frame": 15,
+   "region": [
+    40,
+    100,
+    156,
+    28
+   ],
+   "note": "first command reaches half of its peak opacity"
+  },
+  {
+   "id": "ev2",
+   "type": "text_in",
+   "frame": 60,
+   "region": [
+    40,
+    140,
+    300,
+    28
+   ],
+   "note": "output line one reaches half of its peak opacity"
+  },
+  {
+   "id": "ev3",
+   "type": "text_in",
+   "frame": 66,
+   "region": [
+    40,
+    170,
+    300,
+    28
+   ],
+   "note": "output line two reaches half of its peak opacity"
+  },
+  {
+   "id": "ev4",
+   "type": "text_in",
+   "frame": 72,
+   "region": [
+    40,
+    200,
+    300,
+    28
+   ],
+   "note": "output line three reaches half of its peak opacity"
+  },
+  {
+   "id": "ev5",
+   "type": "move_start",
+   "frame": 121,
+   "region": [
+    850,
+    479,
+    24,
+    24
+   ],
+   "note": "cursor starts moving"
+  },
+  {
+   "id": "ev6",
+   "type": "hit",
+   "frame": 150,
+   "region": [
+    780,
+    140,
+    24,
+    24
+   ],
+   "note": "cursor click (ripple starts)"
+  },
+  {
+   "id": "ev7",
+   "type": "text_out",
+   "frame": 160,
+   "region": [
+    40,
+    200,
+    300,
+    28
+   ],
+   "note": "output line three drops below half of its peak opacity"
+  },
+  {
+   "id": "ev8",
+   "type": "text_in",
+   "frame": 170,
+   "region": [
+    40,
+    240,
+    143,
+    28
+   ],
+   "note": "second command reaches half of its peak opacity"
+  },
+  {
+   "id": "ev9",
+   "type": "hit",
+   "frame": 250,
+   "region": [
+    700,
+    110,
+    180,
+    60
+   ],
+   "note": "pass badge scale pop"
+  },
+  {
+   "id": "ev10",
+   "type": "appear",
+   "frame": 254,
+   "region": [
+    700,
+    110,
+    180,
+    60
+   ],
+   "note": "pass badge reaches half of its peak opacity"
+  },
+  {
+   "id": "ev11",
+   "type": "appear",
+   "frame": 290,
+   "region": [
+    700,
+    300,
+    200,
+    50
+   ],
+   "note": "faint hint reaches half of its peak opacity"
+  },
+  {
+   "id": "ev12",
+   "type": "move_start",
+   "frame": 301,
+   "region": [
+    780,
+    141,
+    24,
+    24
+   ],
+   "note": "cursor starts moving"
+  },
+  {
+   "id": "ev13",
+   "type": "hit",
+   "frame": 340,
+   "region": [
+    760,
+    330,
+    24,
+    24
+   ],
+   "note": "cursor click (ripple starts)"
+  }
+ ]
+}

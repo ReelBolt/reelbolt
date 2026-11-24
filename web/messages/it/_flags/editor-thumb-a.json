@@ -1,0 +1,9 @@
+{
+  "editor-thumbnail-a.layers.blendMode.multiply": "Blend-mode names kept in English (Multiply, Screen, Overlay) as in Italian design tools; confirm.",
+  "editor-thumbnail-a.layers.blendMode.soft-light": "Luce soffusa / Luce intensa: Photoshop-IT names; confirm against product tone.",
+  "editor-thumbnail-a.editor.tools.hand": "'Muoviti nel canvas' for the pan tool; 'canvas' kept as editor word.",
+  "editor-thumbnail-a.resultBar.tryAgain": "'Riprova' vs glossary; ok but check next to 'Annulla'.",
+  "editor-thumbnail-a.layers.flipH": "'Rifletti' for flip; alternative 'Capovolgi'.",
+  "editor-thumbnail-a.brush.erase": "'Rub out' (brush erases mask paint) rendered 'Cancella'.",
+  "editor-thumbnail-a.layers.roleName.overlay": "Overlay kept in English as an editor word."
+}

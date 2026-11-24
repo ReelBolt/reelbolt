@@ -1,0 +1,6 @@
+{
+  "editor-helpers-1.deliver.fitWarning": "Italian 'aggiunge bande nere' for letterbox; check the wording for a video audience.",
+  "editor-helpers-1.deliver.statusWord.Running": "'In render' for 'Rendering'; glossary avoids 'renderizzare'.",
+  "editor-helpers-1.deliver.refusal.tooMany": "'esecuzioni' follows the glossary for 'runs'; the sentence may read better as 'render in corso'.",
+  "editor-helpers-1.shell.refusalTitle": "'Modifica rifiutata' for 'Edit refused'; confirm tone."
+}

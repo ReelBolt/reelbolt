@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow apps: low-fidelity wireframes</title>
+<style>
+  :root { --line:#c9ccd3; --bg:#f6f7f9; --card:#fff; --ink:#1c1e24; --muted:#6b7080; --accent:#594ae2; --warn:#b45309; --bad:#c92a2a; --ok:#15803d; }
+  body { font:14px/1.4 system-ui, sans-serif; color:var(--ink); background:var(--bg); margin:24px; }
+  h1 { font-size:20px } h2 { font-size:16px; margin:32px 0 8px }
+  .note { color:var(--muted); max-width:70ch }
+  .screen { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px; margin:8px 0 }
+  .phone { width:360px }
+  .row { display:flex; gap:12px; flex-wrap:wrap }
+  .col { flex:1 1 280px; min-width:260px }
+  .card { border:1px solid var(--line); border-radius:8px; padding:10px; flex:1 1 200px; min-width:200px }
+  .thumb { height:70px; background:repeating-linear-gradient(45deg,#eceef2,#eceef2 8px,#f6f7f9 8px,#f6f7f9 16px); border-radius:4px; margin-bottom:6px }
+  .badge { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:1px 8px; font-size:12px; color:var(--muted) }
+  .btn { display:inline-block; border:1px solid var(--accent); color:var(--accent); border-radius:6px; padding:6px 12px; margin:2px 0; min-height:32px }
+  .btn.primary { background:var(--accent); color:#fff }
+  .field { display:flex; justify-content:space-between; gap:8px; align-items:center; border-bottom:1px dashed var(--line); padding:8px 0 }
+  .field span:first-child { color:var(--muted); min-width:96px }
+  .result { height:160px; border:1px dashed var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--muted) }
+  .err { color:var(--bad) } .warn { color:var(--warn) } .ok { color:var(--ok) }
+  .canvas { height:150px; background:#14161c; color:#cfd3dc; border-radius:6px; padding:10px; font-size:12px }
+  .node { display:inline-block; border:1px solid #3a3f4c; border-radius:6px; padding:4px 8px; margin:4px; background:#1d2028 }
+  .toggle { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden } .toggle span { padding:4px 10px } .toggle .on { background:var(--accent); color:#fff }
+  .sticky { position:sticky; bottom:0; background:var(--card); border-top:1px solid var(--line); padding:8px; margin:8px -12px -12px }
+</style>
+</head>
+<body>
+<h1>Workflow apps: low-fidelity wireframes</h1>
+<p class="note">Companion to <code>docs/design/workflow-apps.md</code> section 5. Plain-language labels only: no step types, model names or ids. Layout and content, not final visual design (the final look uses the editor's <code>--rb-ed-*</code> tokens).</p>
+
+<h2>1. Gallery (desktop)</h2>
+<div class="screen">
+  <div class="row" style="justify-content:space-between"><strong>Project: Northwind Staffing portal</strong><span class="btn primary">+ Start from a recipe</span></div>
+  <p><strong>Your apps</strong> &nbsp; filter: <span class="badge">All</span> <span class="badge">Promo</span> <span class="badge">Footage</span> <span class="badge">Brand</span></p>
+  <div class="row">
+    <div class="card"><div class="thumb"></div><strong>Explainer video</strong><br>A narrated walkthrough of your product.<br><span class="badge">Uses credits and a voice</span><br><small class="ok">&#10003; Finished 2h ago</small><br><span class="btn">Open</span></div>
+    <div class="card"><div class="thumb"></div><strong>Highlight edit</strong><br>Tight cut from your clips.<br><span class="badge">No credits</span><br><small class="err">! Failed</small><br><span class="btn">Open</span></div>
+    <div class="card"><div class="thumb"></div><strong>Brand profile</strong><br>Build it once, reuse it in every video.<br><span class="badge">Uses credits</span><br><small>Not run yet</small><br><span class="btn">Open</span></div>
+  </div>
+  <p><strong>Start from a recipe</strong></p>
+  <div class="row">
+    <div class="card"><strong>Quick vertical reel</strong><br><span class="badge">Uses credits and a voice</span><br><small class="ok">&#10003; Your code is here</small><br><span class="btn">Use this recipe</span></div>
+    <div class="card"><strong>Narrated launch trailer</strong><br><span class="badge">Uses credits and a voice</span><br><small class="ok">&#10003; Your code is here</small><br><span class="btn">Use this recipe</span></div>
+    <div class="card"><strong>Dubbed video</strong><br><span class="badge">Uses credits and a voice</span><br><small class="warn">! <u>Add video clips</u> &gt;</small><br><span class="btn">Use this recipe</span></div>
+  </div>
+  <div class="row"><div class="card" style="flex:0 1 220px"><strong>Custom workflow</strong><br><small>Advanced: build your own steps</small></div></div>
+</div>
+
+<h2>2. App run page (desktop)</h2>
+<div class="screen">
+  <div class="row" style="justify-content:space-between"><strong>&lt; Apps &nbsp; Explainer video</strong><span class="toggle" role="radiogroup" aria-label="View"><span class="on" role="radio" aria-checked="true">App</span><span role="radio" aria-checked="false">Advanced</span></span></div>
+  <div class="row">
+    <div class="col">
+      <div class="field"><span>Language</span><span>Italiano &#9662;</span></div>
+      <div class="field"><span>Length</span><span>30s &nbsp;<strong>[60s]</strong>&nbsp; 90s</span></div>
+      <div class="field"><span>Shape</span><span><strong>[16:9]</strong> (9:16) (1:1)</span></div>
+      <div class="field"><span>Narration</span><span>[x] Narrated &nbsp; Voice: Aria &#9662;</span></div>
+      <div class="field"><span>Style</span><span>Corporate explainer &#9662;</span></div>
+      <div class="field"><span>Design</span><span>Northwind Staffing design v6 &nbsp;<u>Change</u></span></div>
+      <div class="field"><span>Anything else?</span><span>keep the intro under 5 seconds</span></div>
+      <p role="status"><span class="ok">&#10003; Ready: Voice is set up</span><br><span class="warn">! Check: Aria may not speak Italian well</span></p>
+      <p><span class="btn primary">Run &middot; about 40 credits</span><br><small>usually 30 to 55 &middot; 1080p &middot; why? &#9662;</small></p>
+    </div>
+    <div class="col">
+      <div class="result">Your video will appear here</div>
+      <p><span class="btn">Download</span> <span class="btn">Edit in the editor</span> <span class="btn">Change one thing and re-run</span> <span class="btn">Ask the assistant</span></p>
+      <strong>Runs</strong><br><small>Today 10:12 &nbsp; &#10003; Finished &nbsp; 60s &nbsp; open<br>Today 09:40 &nbsp; ! Failed &nbsp; open</small>
+    </div>
+  </div>
+</div>
+
+<h2>3. App run page (phone, below 768 px)</h2>
+<div class="screen phone">
+  <div class="row" style="justify-content:space-between"><strong>&lt; Apps &nbsp; Explainer video</strong><span>( &hellip; )</span></div>
+  <small>Overflow menu: Edit steps (advanced)</small>
+  <div class="field"><span>Language</span><span>Italiano &#9662;</span></div>
+  <div class="field"><span>Length</span><span>(30) <strong>[60]</strong> (90)</span></div>
+  <div class="field"><span>Shape</span><span><strong>[16:9]</strong> (9:16) (1:1)</span></div>
+  <div class="field"><span>Narration</span><span>[x] Aria &gt;</span></div>
+  <div class="field"><span>Style</span><span>Corporate &gt;</span></div>
+  <div class="field"><span>Design</span><span>Northwind Staffing v6</span></div>
+  <div class="field"><span>Anything else?</span><span>[..........]</span></div>
+  <div class="result" style="height:90px">Last result</div>
+  <small>Runs: Today 10:12 &#10003; Finished</small>
+  <div class="sticky"><small class="warn" role="status">! Check the Italian voice</small><span class="btn primary" style="display:block;text-align:center;min-height:48px">Run &middot; about 40 credits</span><small style="display:block;text-align:center">usually 30 to 55</small></div>
+</div>
+
+<h2>4. Graph, "Advanced" (desktop)</h2>
+<div class="screen">
+  <div class="row" style="justify-content:space-between"><strong>&lt; Apps &nbsp; Explainer video</strong><span class="toggle" role="radiogroup" aria-label="View"><span role="radio" aria-checked="false">App</span><span class="on" role="radio" aria-checked="true">Advanced</span></span></div>
+  <p><span class="btn">+ Add step</span> <span class="btn">Fit (F)</span> <span class="btn">Auto layout</span> &nbsp; <span class="btn">App inputs (8 shown) &gt;</span></p>
+  <div class="row">
+    <div class="col" style="flex:3"><div class="canvas">
+      <span class="node">1 Check profile</span>&rarr;<span class="node">2 Plan scenes</span>&rarr;<span class="node">3 Plan animation</span><br>
+      <span class="node">4 Write script</span>&rarr;<span class="node">5 Record voice</span>&rarr;<span class="node">6 Plan shots</span>&rarr;<span class="node">7 Build</span>&rarr;<span class="node">8 Review</span> (loops back to 7)<br>
+      <small>badges: No credits / Uses credits / Uses a voice</small></div></div>
+    <div class="col" style="flex:1"><div class="card"><strong>Step 4: Write script</strong><br><small>What it uses from your brief: language, length, narration</small><br><small>(later) Show as an app input</small></div></div>
+  </div>
+  <p role="status"><small class="warn">Checks: 1 thing to review (the Italian voice) &nbsp; <u>Details</u></small></p>
+  <p><small>Colours here are placeholders; the build uses the editor's --rb-ed-* tokens and re-checks contrast on every new pairing.</small></p>
+</div>
+</body>
+</html>

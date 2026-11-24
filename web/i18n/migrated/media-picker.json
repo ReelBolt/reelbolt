@@ -1,0 +1,1 @@
+{ "globs": ["components/shared/media/**/*.{ts,tsx}"] }

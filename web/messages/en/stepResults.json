@@ -1,0 +1,50 @@
+{
+  "status": {
+    "Pending": "Waiting",
+    "Running": "Working",
+    "Completed": "Done",
+    "Failed": "Failed",
+    "Skipped": "Skipped"
+  },
+  "failureCode": "Failure code: <b>{code}</b>",
+  "reusedFromRun": "Reused from an earlier run, so this step finished instantly.",
+  "keptFromEarlier": "Kept from the video being changed: this step did not need to run again.",
+  "took": "Took",
+  "creditsCharged": "Credits charged",
+  "tokensUsed": "Tokens Used",
+  "reusedFromCache": "reused from cache{saved, select, none {} other {, saved {saved}}}",
+  "inputTokensLive": "Input Tokens (live)",
+  "outputTokensLive": "Output Tokens (live)",
+  "tabs": {
+    "overview": "Overview",
+    "data": "Data",
+    "discussion": "Discussion",
+    "activity": "Activity"
+  },
+  "errorDetailsAria": "Step has error details",
+  "whatWentWrong": "What went wrong",
+  "attempt": "Attempt",
+  "finished": "Finished",
+  "openCutInEditor": "Open this cut in the editor",
+  "seeEveryClip": "See every clip, title and sound on a timeline",
+  "openInEditor": "Open in Editor",
+  "videoFromStep": "Video from this step",
+  "downloadVideo": "Download video",
+  "noOutput": "No output available",
+  "timelineManifest": "Timeline manifest available for studio inspection",
+  "roomTranscriptArtifact": "Room Transcript Artifact",
+  "stepArtifact": "Step Artifact",
+  "loadingArtifact": "Loading artifact...",
+  "artifactError": "Could not load artifact: {error}",
+  "artifactJson": "Artifact JSON",
+  "inputJson": "Input JSON",
+  "outputJson": "Output JSON",
+  "noStructuredData": "No structured data available for this step.",
+  "noUpdates": "No updates yet for this step.",
+  "fidelity": {
+    "mismatch": "Does not match the object",
+    "mismatchHint": "This take does not look like your object. If the shot has another take, the edit uses that one instead.",
+    "unavailable": "Not checked",
+    "unavailableHint": "This take could not be compared with your object's pictures."
+  }
+}

@@ -1,0 +1,11 @@
+Hello,
+
+{{.InviterName}} invited you to join {{.OrgName}} on ReelBolt as {{.Role}}.
+
+Accept the invitation:
+
+{{.Link}}
+
+This invitation expires in {{.ExpiresIn}}.
+
+-- {{.FooterNote}}

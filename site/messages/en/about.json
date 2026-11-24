@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "About"
+  },
+  "mission": {
+    "eyebrow": "Mission",
+    "title": "Good stories deserve to be seen",
+    "p1": "People do the hard part first: the work, the lesson, the event, the product. Then the story stays in a camera roll. Not because they do not know video works, but because making one means money they would rather spend elsewhere, or a weekend they do not have.",
+    "p2": "We think that trade-off should not exist. ReelBolt is an AI video team for anyone with a story to tell and no time to tell it. You drop in the clips you already shot and say what the video is for; it finds the story, edits the footage, adds the captions and graphics, and hands you a finished video. Not a template with your logo dropped in. It is a video built from the thing you actually made.",
+    "p3": "And when you work with others, it works the way a team does: in a shared workspace, where the projects, the footage and the finished cuts belong to the team rather than to one person’s account, with roles, invitations and a credit pool the whole workspace draws from. The people who own billing see the billing; the people who make the video make it.",
+    "p4": "Curious what that covers in practice? <link>See the features</link>."
+  },
+  "approach": {
+    "title": "How we think about it",
+    "p1": "Most AI video tools are impressive for thirty seconds and useless for a real story, because they invent things. That is fine for a mood piece and fatal when the video is about you: a video that shows something that is not true costs you more than no video at all.",
+    "p2": "So ReelBolt is built the other way round. AI makes the creative decisions, but the video is built from your real footage and your own words, and for software teams from the real product. Generated b-roll, where your plan includes it, is planned around your edit under a spending cap you set. The last agent in the chain is a reviewer whose only job is to reject work that is not good enough yet, and you can still open the result in the editor and change it.",
+    "l1": "Every video is built from your real footage and your own words",
+    "l2": "Creative judgment from AI, grounded in your own material",
+    "l3": "Every draft scored and reworked before a person is asked to look at it"
+  },
+  "ownership": {
+    "title": "You keep the keys",
+    "p1": "Videos get made from unreleased work, private recordings and material nobody wants spread around. So you choose how much stays with you: connect your own AI provider account, render on a machine you own, or, with an Enterprise self-hosting license, run the whole platform inside your own environment.",
+    "p2": "You decide which models see your material. We do not train AI models on your content, and we do not sell it.",
+    "l1": "Your own AI provider account, on the plans that include it",
+    "l2": "Rendering on a machine you own, at no credit cost",
+    "l3": "Self-hosting for teams whose security rules require it"
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "Want to talk through whether ReelBolt fits the way you work? <link>Send us a note</link> and we will get back to you."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "about": "About"
+  }
+}

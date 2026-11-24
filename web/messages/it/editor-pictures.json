@@ -1,0 +1,79 @@
+{
+  "defaultName": {
+    "youtube": "Miniatura senza titolo",
+    "square": "Quadrato senza titolo",
+    "post": "Post senza titolo",
+    "story": "Story senza titolo",
+    "landscape": "Orizzontale senza titolo",
+    "custom": "Immagine senza titolo"
+  },
+  "shapes": {
+    "youtube": {
+      "label": "Miniatura YouTube",
+      "hint": "16:9, {width} × {height}"
+    },
+    "square": {
+      "label": "Quadrato",
+      "hint": "{width} × {height}"
+    },
+    "post": {
+      "label": "Post",
+      "hint": "4:5, {width} × {height}"
+    },
+    "story": {
+      "label": "Story",
+      "hint": "9:16, {width} × {height}"
+    },
+    "landscape": {
+      "label": "Orizzontale",
+      "hint": "16:9, {width} × {height}"
+    },
+    "custom": {
+      "label": "Personalizzato",
+      "hint": "Dimensioni tue"
+    }
+  },
+  "createFailed": "Non è stato possibile creare l'immagine.",
+  "uploadFailedWith": "Non è stato possibile caricare la foto: {message}",
+  "uploadFailed": "Non è stato possibile caricare la foto. Controlla la connessione e riprova.",
+  "openFailed": "Non è stato possibile aprire l'immagine.",
+  "renameFailed": "Non è stato possibile rinominare l'immagine.",
+  "duplicateFailed": "Non è stato possibile duplicare l'immagine.",
+  "deleteFailed": "Non è stato possibile eliminare l'immagine.",
+  "startTitle": "Crea un'immagine",
+  "newPicture": "Nuova immagine",
+  "shapeLabel": "Formato dell'immagine",
+  "width": "Larghezza",
+  "widthPx": "Larghezza in pixel",
+  "height": "Altezza",
+  "heightPx": "Altezza in pixel",
+  "pxSuffix": " px",
+  "nameLabel": "Nome della nuova immagine",
+  "fromPhoto": "Parti da una foto",
+  "fromImageLabel": "Parti da una delle tue immagini",
+  "pickImage": "Scegli un'immagine",
+  "noImages": "Nessuna immagine in questo progetto",
+  "openInEditor": "Apri nell'editor di immagini",
+  "uploadPhoto": "Carica una foto",
+  "uploadProgress": "Avanzamento del caricamento",
+  "yourPictures": "Le tue immagini",
+  "search": "Cerca tra le tue immagini",
+  "loadFailed": "Non è stato possibile caricare le immagini di questo progetto: {reason}",
+  "tryAgain": "Riprova tra un attimo.",
+  "emptyTitle": "Ancora nessuna immagine",
+  "emptyBody": "Scegli un'immagine qui sopra per creare una miniatura: ritaglia le persone, aggiungi testo, usa gli strumenti AI ed esporta per YouTube o Photoshop.",
+  "open": "Apri {name}",
+  "meta": "{count, plural, one {# livello} other {# livelli}} · Modificata {when}",
+  "more": "Altro per {name}",
+  "rename": "Rinomina",
+  "duplicate": "Duplica",
+  "startAnother": "Crea una nuova immagine da questa foto",
+  "deletePicture": "Elimina immagine",
+  "renameTitle": "Rinomina immagine",
+  "pictureName": "Nome dell'immagine",
+  "pictureNameHint": "Lascia vuoto per usare il nome file della foto.",
+  "cancel": "Annulla",
+  "saveName": "Salva nome",
+  "deleteTitle": "Eliminare questa immagine?",
+  "deleteMessage": "“{name}” e i suoi livelli vengono eliminati per sempre. La foto da cui è nata e le immagini che ne hai salvato restano nei file del tuo progetto."
+}

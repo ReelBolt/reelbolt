@@ -1,0 +1,708 @@
+{
+  "stepTypes": {
+    "Agent": "Agente",
+    "Conditional": "Ramo condizionale",
+    "ForEach": "Per ogni elemento",
+    "ReviewLoop": "Ciclo di revisione",
+    "Parallel": "In parallelo",
+    "Extract": "Estrai",
+    "VideoAnalyze": "Analizza video",
+    "VideoCompile": "Monta video",
+    "VideoGenerate": "Genera video",
+    "Voiceover": "Voce narrante",
+    "EditRoom": "Stanza di montaggio",
+    "GraphicsRoom": "Stanza grafica",
+    "ColorGradeRoom": "Stanza del colore",
+    "ThumbnailGenerate": "Miniatura",
+    "Revise": "Modifiche",
+    "DesignGraphic": "Progetta una grafica",
+    "DailiesRoom": "Stanza dailies",
+    "TimelineRender": "Esporta la timeline",
+    "DesignSystem": "Profilo di brand e prodotto",
+    "ExtractFrame": "Cattura un fotogramma",
+    "AudioGenerate": "Genera musica o suoni",
+    "ImageGenerate": "Genera o modifica un'immagine",
+    "PinInsert": "Metti sugli schermi",
+    "VideoEnhance": "Migliora il video"
+  },
+  "stepTypeDescriptions": {
+    "Agent": "Un agente AI svolge un compito, come scrivere la narrazione o scegliere le clip",
+    "Conditional": "Prosegui in una direzione o in un'altra in base a un risultato precedente",
+    "ForEach": "Ripete un passaggio per ogni elemento di un elenco",
+    "ReviewLoop": "Controlla il risultato e rifà i passaggi precedenti finché non è abbastanza buono",
+    "Parallel": "Esegue più agenti contemporaneamente e unisce il loro lavoro",
+    "Extract": "Riduce i risultati precedenti a ciò che serve al passaggio AI successivo",
+    "VideoAnalyze": "Guarda il tuo filmato: trova inquadrature, pause e cosa viene detto",
+    "VideoCompile": "Assembla il video finale dalle clip scelte",
+    "VideoGenerate": "Genera nuove clip video da una descrizione (a pagamento, con un limite di spesa)",
+    "Voiceover": "Legge la narrazione ad alta voce con una voce AI",
+    "EditRoom": "Un team di montatori AI discute il filmato e concorda un unico montaggio",
+    "GraphicsRoom": "Un team di designer AI concorda titoli e grafiche",
+    "ColorGradeRoom": "Un team di coloristi AI concorda un unico look colore",
+    "ThumbnailGenerate": "Sceglie il fotogramma migliore del filmato e lo salva come immagine",
+    "Revise": "Applica le modifiche che hai chiesto a un video finito e lo esporta di nuovo.",
+    "DesignGraphic": "Progetta una grafica per un'immagine, come un titolo, un badge o un cartellino del prezzo.",
+    "DailiesRoom": "Un team di giudici AI confronta le riprese generate di ogni inquadratura e sceglie la migliore",
+    "TimelineRender": "Trasforma una timeline dell'editor in un file video finito",
+    "DesignSystem": "Legge i tuoi file di design e la struttura dell'app e ne ricava un profilo di brand e prodotto usato dai passaggi successivi (gratis)",
+    "ExtractFrame": "Salva un fotogramma di un video come immagine, da riusare come immagine, copertina o primo fotogramma di una nuova clip (gratis)",
+    "AudioGenerate": "Genera musica o un effetto sonoro da una descrizione (a pagamento, con un limite di spesa)",
+    "ImageGenerate": "Crea immagini da una descrizione, o modifica un'immagine con un'istruzione (a pagamento, con un limite di spesa)",
+    "PinInsert": "Applica un video o un'immagine sugli schermi tracciati del tuo filmato, senza un modello AI (gratis)",
+    "VideoEnhance": "Migliora l'immagine: più grande, più fluida, più pulita o meno a scatti"
+  },
+  "agentGroups": {
+    "Analysis": "Analisi",
+    "Translation": "Traduzione",
+    "Production": "Produzione",
+    "Quality": "Qualità",
+    "FileProcessing": "Elaborazione file",
+    "Extract": "Estrazione",
+    "Video": "Video",
+    "Custom": "Personalizzato"
+  },
+  "auth": {
+    "sessionEnded": "La sessione è scaduta. Accedi per continuare.",
+    "oauthProvider": {
+      "google": "Continua con Google",
+      "github": "Continua con GitHub",
+      "other": "Continua con {provider}"
+    },
+    "oauthError": {
+      "oauth_email_unverified": "Questo account non ha un indirizzo email verificato, quindi non puoi usarlo per accedere qui.",
+      "oauth_no_account": "Non esiste ancora un account ReelBolt per questo indirizzo. Chiedi all'amministratore del tuo spazio di lavoro di invitarti, poi accedi con lo stesso indirizzo.",
+      "oauth_account_unverified": "Esiste un account con questo indirizzo, ma la sua email non è mai stata confermata. Confermala dall'email che ti abbiamo inviato, oppure reimposta la password con \"Password dimenticata?\", poi riprova.",
+      "oauth_rate_limited": "Da questa rete sono stati creati troppi account di recente. Riprova più tardi.",
+      "oauth_delete_blocked": "Il tuo account non è stato eliminato: sei l'unico proprietario di un team che ha ancora altri membri. Nomina un altro proprietario o rimuovi prima i membri, poi riprova.",
+      "oauth_no_workspace": "Per questo account non è disponibile nessuno spazio di lavoro. Contatta l'assistenza.",
+      "oauth_failed": "Non è stato possibile completare l'accesso. Riprova, oppure accedi con email e password."
+    },
+    "passwordMin": "La password deve avere almeno {count} caratteri",
+    "passwordMax": "La password può avere al massimo {count} byte",
+    "wait": {
+      "short": "un po' di tempo",
+      "minute": "circa un minuto",
+      "minutes": "circa {count} minuti",
+      "hour": "circa 1 ora",
+      "hours": "circa {count} ore",
+      "day": "un giorno o più"
+    },
+    "signupRateLimit": "Da questa rete sono stati creati troppi account di recente. Riprova tra {wait}. Se sei su una rete condivisa (un ufficio, una scuola o un evento) e non puoi aspettare, scrivi a {email} e ti aiutiamo a iniziare."
+  },
+  "account": {
+    "deletionCancelledTitle": "Bentornato",
+    "deletionCancelledMessage": "Il tuo account non è più in programma per l'eliminazione. Non è stato rimosso nulla.",
+    "waitMinutes": "tra {count, plural, one {# minuto} other {# minuti}}",
+    "waitHours": "tra {count, plural, one {# ora} other {# ore}}",
+    "providerFallback": "il tuo servizio di accesso"
+  },
+  "runStatus": {
+    "Queued": "In coda",
+    "Running": "In esecuzione",
+    "Passed": "Completata",
+    "Failed": "Non riuscita",
+    "Cancelled": "Annullata",
+    "Stopped": "Fermata",
+    "NeedsAttention": "Da controllare"
+  },
+  "runSummary": {
+    "warningFallback": "Qualcosa richiede la tua attenzione",
+    "warnings": {
+      "designSystem": "Il design del tuo brand potrebbe non essere stato usato",
+      "narrationDropped": "Manca una parte della voce narrante",
+      "narrationMostlyDropped": "Manca la maggior parte della voce narrante",
+      "noProgramAudio": "Il video non ha audio",
+      "musicNoTracks": "Non è stata aggiunta nessuna musica",
+      "sfxNoClips": "Non è stato aggiunto nessun effetto sonoro",
+      "targetLengthMissed": "Il video non ha la durata che hai chiesto",
+      "voiceProviderUnhealthy": "La voce narrante potrebbe non funzionare",
+      "voiceProviderFallback": "È stata usata una voce narrante di riserva"
+    },
+    "runNamed": "Esecuzione {number}",
+    "runUnnamed": "Esecuzione",
+    "runDated": "{head} · {date}",
+    "timeLeftLess": "Manca meno di un minuto",
+    "timeLeftMinutes": "Mancano circa {minutes} min",
+    "timeLeftHoursMinutes": "Mancano circa {hours} h {minutes} min",
+    "timeLeftHours": "Mancano circa {hours} h",
+    "shapeVertical": "Verticale 9:16",
+    "shapeSquare": "Quadrato 1:1",
+    "shapeLandscape169": "Orizzontale 16:9",
+    "shapePortrait45": "Ritratto 4:5",
+    "shapePortrait": "Ritratto",
+    "shapeLandscape": "Orizzontale",
+    "frameSize": "{shape} · {width}×{height}",
+    "stage": {
+      "final": "Finale",
+      "draft": "Bozza",
+      "inProgress": "In corso"
+    },
+    "renderTitleRun": "{name}, esecuzione {number}",
+    "draftSuffix": " (bozza)",
+    "downloadFallback": "render"
+  },
+  "agentRoles": {
+    "CodeStructureAnalyzer": {
+      "role": "Capisce come è fatta la tua app",
+      "progress": "Sto capendo come è fatta la tua app…"
+    },
+    "DependencyAnalyzer": {
+      "role": "Elenca gli strumenti che usa la tua app",
+      "progress": "Sto elencando gli strumenti che usa la tua app…"
+    },
+    "ComponentInventoryAnalyzer": {
+      "role": "Trova le schermate e le parti della tua app",
+      "progress": "Sto trovando le schermate e le parti della tua app…"
+    },
+    "RouteAndApiAnalyzer": {
+      "role": "Mappa le pagine della tua app",
+      "progress": "Sto mappando le pagine della tua app…"
+    },
+    "StyleAndThemeExtractor": {
+      "role": "Coglie l'aspetto del tuo brand",
+      "progress": "Sto cogliendo l'aspetto del tuo brand…"
+    },
+    "RemotionComponentTranslator": {
+      "role": "Ricrea le tue schermate per il video",
+      "progress": "Sto ricreando le tue schermate per il video…"
+    },
+    "AnimationStrategyAgent": {
+      "role": "Pianifica l'animazione",
+      "progress": "Sto pianificando l'animazione…"
+    },
+    "ScriptwriterAgent": {
+      "role": "Scrive il copione",
+      "progress": "Sto scrivendo il copione…"
+    },
+    "DirectorAgent": {
+      "role": "Pianifica le scene",
+      "progress": "Sto pianificando le scene…"
+    },
+    "AuthorAgent": {
+      "role": "Costruisce ed esporta il video",
+      "progress": "Sto costruendo ed esportando il video…"
+    },
+    "ReviewAgent": {
+      "role": "Controlla la qualità",
+      "progress": "Sto controllando la qualità…"
+    },
+    "CompositionReviser": {
+      "role": "Applica le tue modifiche",
+      "progress": "Sto applicando le tue modifiche…"
+    },
+    "GraphicDesigner": {
+      "role": "Disegna la tua grafica",
+      "progress": "Sto disegnando la tua grafica…"
+    },
+    "VideoStoryEditor": {
+      "role": "Sceglie le clip migliori",
+      "progress": "Sto scegliendo le clip migliori…"
+    },
+    "VideoEditDirector": {
+      "role": "Guida il team di montaggio",
+      "progress": "Il team sta decidendo il montaggio…"
+    },
+    "MotionGraphicsPlanner": {
+      "role": "Aggiunge titoli e grafiche",
+      "progress": "Sto pianificando titoli e grafiche…"
+    },
+    "MotionGraphicsDirector": {
+      "role": "Guida il team grafico",
+      "progress": "Il team sta decidendo titoli e grafiche…"
+    },
+    "MusicSupervisor": {
+      "role": "Sceglie la musica",
+      "progress": "Sto scegliendo la musica…"
+    },
+    "SoundDesigner": {
+      "role": "Aggiunge effetti sonori",
+      "progress": "Sto aggiungendo effetti sonori…"
+    },
+    "Colorist": {
+      "role": "Imposta l'aspetto dei colori",
+      "progress": "Sto impostando l'aspetto dei colori…"
+    },
+    "ColorGradeDirector": {
+      "role": "Guida il team del colore",
+      "progress": "Il team sta decidendo l'aspetto dei colori…"
+    },
+    "ShotDirector": {
+      "role": "Pianifica nuove inquadrature generate con AI",
+      "progress": "Sto pianificando nuove inquadrature…"
+    },
+    "VideoReviewAgent": {
+      "role": "Guarda e controlla il montaggio",
+      "progress": "Sto controllando il montaggio…"
+    },
+    "NarrationWriter": {
+      "role": "Scrive la voce narrante",
+      "progress": "Sto scrivendo la voce narrante…"
+    },
+    "NarrationTranslator": {
+      "role": "Traduce la voce narrante",
+      "progress": "Sto traducendo la voce narrante…"
+    },
+    "TakeSelector": {
+      "role": "Valuta le riprese generate",
+      "progress": "Sto valutando le riprese generate…"
+    },
+    "DailiesDirector": {
+      "role": "Guida la revisione delle riprese e sceglie quelle da tenere",
+      "progress": "La giuria sta scegliendo le riprese migliori…"
+    },
+    "PickupPlanner": {
+      "role": "Pianifica le battute da registrare di nuovo",
+      "progress": "Sto pianificando le battute da registrare di nuovo…"
+    },
+    "ExtractTransform": {
+      "role": "Prepara i dati",
+      "progress": "Sto preparando i dati…"
+    },
+    "VideoTransform": {
+      "role": "Elabora il video",
+      "progress": "Sto elaborando il video…"
+    },
+    "FileSummarizerAgent": {
+      "role": "Riassume i tuoi file",
+      "progress": "Sto riassumendo i tuoi file…"
+    },
+    "Assistant": {
+      "role": "Risponde alle tue domande",
+      "progress": "Sto pensando…"
+    }
+  },
+  "stepRoles": {
+    "Conditional": {
+      "role": "Sceglie quale strada prendere",
+      "progress": "Sto scegliendo quale strada prendere…"
+    },
+    "ForEach": {
+      "role": "Ripete un passaggio per ogni elemento",
+      "progress": "Sto lavorando su ogni elemento…"
+    },
+    "ReviewLoop": {
+      "role": "Controlla il risultato e riprova se serve",
+      "progress": "Sto controllando il risultato…"
+    },
+    "Parallel": {
+      "role": "Esegue più agenti insieme",
+      "progress": "Sto eseguendo più agenti insieme…"
+    },
+    "Extract": {
+      "role": "Prepara i dati",
+      "progress": "Sto preparando i dati…"
+    },
+    "VideoAnalyze": {
+      "role": "Guarda i tuoi filmati",
+      "progress": "Sto guardando i tuoi filmati…"
+    },
+    "VideoCompile": {
+      "role": "Mette insieme il video finale",
+      "progress": "Sto mettendo insieme il video…"
+    },
+    "VideoGenerate": {
+      "role": "Genera nuove clip video",
+      "progress": "Sto generando nuove clip…"
+    },
+    "Voiceover": {
+      "role": "Registra la voce narrante",
+      "progress": "Sto registrando la voce narrante…"
+    },
+    "EditRoom": {
+      "role": "Un team di montaggio sceglie le clip migliori",
+      "progress": "Il team di montaggio sta scegliendo le clip…"
+    },
+    "GraphicsRoom": {
+      "role": "Un team grafico disegna i titoli",
+      "progress": "Il team grafico sta disegnando i titoli…"
+    },
+    "ColorGradeRoom": {
+      "role": "Un team del colore imposta l'aspetto",
+      "progress": "Il team del colore sta impostando l'aspetto…"
+    },
+    "ThumbnailGenerate": {
+      "role": "Crea un'immagine di anteprima",
+      "progress": "Sto creando l'anteprima…"
+    },
+    "Revise": {
+      "role": "Applica le tue modifiche",
+      "progress": "Sto applicando le tue modifiche…"
+    },
+    "DesignGraphic": {
+      "role": "Disegna la tua grafica",
+      "progress": "Sto disegnando la tua grafica…"
+    },
+    "DailiesRoom": {
+      "role": "Una giuria sceglie le migliori riprese generate",
+      "progress": "La giuria sta scegliendo le riprese migliori…"
+    },
+    "TimelineRender": {
+      "role": "Esporta la tua timeline montata",
+      "progress": "Sto esportando la tua timeline…"
+    },
+    "DesignSystem": {
+      "role": "Crea il profilo del tuo brand e del prodotto",
+      "progress": "Sto creando il profilo del tuo brand e del prodotto…"
+    },
+    "ExtractFrame": {
+      "role": "Estrae un fotogramma da un video",
+      "progress": "Sto estraendo il fotogramma…"
+    },
+    "AudioGenerate": {
+      "role": "Genera musica o effetti sonori",
+      "progress": "Sto generando l'audio…"
+    },
+    "ImageGenerate": {
+      "role": "Genera o modifica immagini",
+      "progress": "Sto creando l'immagine…"
+    },
+    "PinInsert": {
+      "role": "Mette contenuti sugli schermi tracciati",
+      "progress": "Sto fissando gli schermi…"
+    },
+    "VideoEnhance": {
+      "role": "Migliora la qualità dell'immagine",
+      "progress": "Sto migliorando il video…"
+    }
+  },
+  "customRole": {
+    "role": "Esegue il tuo agente AI personalizzato",
+    "progress": "Sto eseguendo il tuo agente personalizzato…"
+  },
+  "agentDescriptions": {
+    "CodeStructureAnalyzer": "Impara le schermate della tua app e come sono collegate.",
+    "DependencyAnalyzer": "Individua i framework e le librerie con cui è fatta la tua app.",
+    "ComponentInventoryAnalyzer": "Elenca i pulsanti, le schede e le viste che vale la pena mostrare.",
+    "RouteAndApiAnalyzer": "Mappa le pagine e i percorsi che uno spettatore può seguire.",
+    "StyleAndThemeExtractor": "Coglie i tuoi colori, i font e lo stile visivo.",
+    "RemotionComponentTranslator": "Ricostruisce le tue schermate come scene video animate.",
+    "AnimationStrategyAgent": "Pianifica come si muove ogni scena e come passa alla successiva.",
+    "DirectorAgent": "Decide l'ordine delle inquadrature, il ritmo e i momenti chiave della storia.",
+    "ScriptwriterAgent": "Scrive la storia e le parole sullo schermo.",
+    "AuthorAgent": "Assembla le scene ed esporta il video finito.",
+    "ReviewAgent": "Controlla il risultato e chiede correzioni quando serve.",
+    "FileSummarizerAgent": "Scrive un breve riassunto di ogni file che carichi.",
+    "ExtractTransform": "Riduce i risultati precedenti a ciò che serve al passaggio successivo.",
+    "VideoStoryEditor": "Sceglie i momenti migliori dei tuoi filmati.",
+    "VideoTransform": "Si occupa dei tuoi filmati: li guarda, li taglia ed esporta il video.",
+    "MotionGraphicsPlanner": "Aggiunge titoli, sottotitoli e callout.",
+    "VideoReviewAgent": "Guarda il montaggio e chiede correzioni quando serve.",
+    "MusicSupervisor": "Sceglie un brano musicale e il suo volume.",
+    "VideoEditDirector": "Guida la discussione sul montaggio e fa il taglio finale.",
+    "MotionGraphicsDirector": "Guida la discussione sulla grafica e approva il design.",
+    "Colorist": "Sceglie l'aspetto dei colori del tuo video.",
+    "ColorGradeDirector": "Guida la discussione sul colore e sceglie l'aspetto finale.",
+    "SoundDesigner": "Aggiunge whoosh, click e altri effetti sonori.",
+    "Assistant": "Risponde alle domande e ti aiuta a configurare tutto.",
+    "ShotDirector": "Pianifica inquadrature generate in più, come b-roll e schermate finali.",
+    "NarrationWriter": "Scrive il copione della voce narrante del tuo video.",
+    "PickupPlanner": "Pianifica le battute da registrare di nuovo per correggere gli errori nei dialoghi.",
+    "NarrationTranslator": "Traduce la voce narrante in un'altra lingua.",
+    "CompositionReviser": "Applica le modifiche che chiedi a un video già finito.",
+    "GraphicDesigner": "Disegna una singola grafica per un'immagine (un titolo, un badge, un cartellino prezzo o una forma) con sfondo trasparente.",
+    "TakeSelector": "Confronta le riprese generate dall'AI per ogni inquadratura e dice quale funziona meglio.",
+    "DailiesDirector": "Guida la revisione delle riprese e annota quale tenere per ogni inquadratura."
+  },
+  "agentGroupTitles": {
+    "Analysis": "Capire la tua app",
+    "Translation": "Trasformare le schermate in scene",
+    "Production": "Realizzare il video",
+    "Video": "Montare i tuoi filmati",
+    "Quality": "Controllare il risultato",
+    "FileProcessing": "Leggere i tuoi file",
+    "Extract": "Dietro le quinte",
+    "Custom": "I tuoi agenti"
+  },
+  "billing": {
+    "creditCount": "{amount} {count, plural, one {credito} other {crediti}}",
+    "needsLine": "Servono {amount} {count, plural, one {credito} other {crediti}} disponibili per iniziare; il costo può essere più alto.",
+    "approx": "≈ {amount} crediti",
+    "approxRange": "≈ {low}–{high} crediti",
+    "headlineRange": "{head} (di solito {low}–{high})",
+    "fixedLine": "Più fino a {amount} crediti per il video generato, calcolati sul massimo di clip che può ordinare.",
+    "fixedLineLoop": "{line} Può essere ordinato di nuovo se la revisione chiede un altro passaggio.",
+    "fixedLineReviewReruns": "Più fino a {amount} crediti se la revisione rifà passaggi precedenti (una riga della voce narrante, un'inquadratura generata, il copione) e per l'eventuale video generato, calcolati sul massimo che può ordinare.",
+    "spread": {
+      "review_loop_repeats": "Il passaggio di revisione può rimandare il montaggio per un altro giro.",
+      "footage_length": "Analizzare e tagliare i filmati costa di più per le clip più lunghe.",
+      "foreach_items_unknown": "Un passaggio ripetuto viene eseguito una volta per elemento, e il numero di elementi si conosce solo durante l'esecuzione.",
+      "own_provider_free": "I passaggi che usano la tua chiave del provider non vengono addebitati."
+    },
+    "basis": {
+      "History": "dalle tue esecuzioni passate di questo passaggio",
+      "StepTypeHistory": "dalle tue esecuzioni passate di questo tipo di passaggio",
+      "Default": "un valore tipico, non la tua cronologia",
+      "NotCharged": "non addebitato",
+      "AgentTypeHistory": "dalle tue esecuzioni passate di questo tipo di agente",
+      "OwnProvider": "con la tua chiave del provider, non addebitato",
+      "AudioGeneration": "calcolato in base alle riprese e alla durata richieste da questo passaggio"
+    },
+    "basisPastRuns": "Basato su {count, plural, one {# esecuzione passata} other {# esecuzioni passate}} di questo flusso di lavoro.",
+    "basisStepHistory": "Basato su quanto sono costati questi passaggi in questo spazio di lavoro.",
+    "basisFirstRun": "È la prima esecuzione, quindi è una stima approssimativa basata sui valori tipici di questi passaggi.",
+    "basisHistory": "Basato su quanto sono effettivamente costate le esecuzioni in questo spazio di lavoro. Il totale reale dovrebbe rientrare in questo intervallo.",
+    "basisNoHistory": "Questo spazio di lavoro non ha ancora esecuzioni concluse da cui misurare, quindi questi sono valori tipici per questi passaggi e non la tua cronologia. La prima esecuzione mostrerà il costo reale.",
+    "stepNotCharged": "{name}: non addebitato",
+    "stepUpTo": "{name}: fino a {amount} crediti",
+    "stepRange": "{name}: {range}{again} ({basis})",
+    "stepAgain": ", può essere eseguito di nuovo dopo la revisione",
+    "chargeNone": "Nessun addebito",
+    "chargeTiny": "Meno di {amount} crediti"
+  },
+  "usageKinds": {
+    "LlmInputTokens": "Token in ingresso",
+    "LlmOutputTokens": "Token in uscita",
+    "LlmCachedInputTokens": "Token in ingresso in cache",
+    "EmbeddingTokens": "Token di embedding",
+    "AsrAudioSeconds": "Secondi trascritti",
+    "TtsInputBytes": "Byte di voce",
+    "VideoGenSeconds": "Secondi di video generati",
+    "RenderOutputSeconds": "Secondi di video generati",
+    "EncodeOutputSeconds": "Secondi codificati",
+    "AnalyzeMediaSeconds": "Secondi di media analizzati",
+    "StorageGbDay": "GB-giorno archiviati",
+    "ImageGenImages": "Immagini generate",
+    "ImageEditImages": "Immagini modificate",
+    "SegmentationImages": "Immagini segmentate",
+    "DepthImages": "Immagini con mappa di profondità",
+    "MusicGenMinutes": "Minuti di musica generati",
+    "SoundEffectGenSeconds": "Secondi di effetti sonori generati",
+    "VideoSegmentationFrames": "Fotogrammi video segmentati",
+    "ModerationCalls": "Chiamate di moderazione",
+    "RerankSearches": "Ricerche con riordino",
+    "WebSearches": "Ricerche web",
+    "AudioCleanupMinutes": "Minuti di pulizia audio",
+    "VideoEnhanceSeconds": "Secondi di video migliorati",
+    "VideoEnhanceComputeSeconds": "Secondi di calcolo per interpolazione"
+  },
+  "usageModes": {
+    "Platform": "Provider di ReelBolt",
+    "Byo": "I tuoi provider",
+    "Runner": "I tuoi runner"
+  },
+  "usageDash": "—",
+  "files": {
+    "acceptedNote": "Formati accettati: video (MP4, MOV, WebM), audio (MP3, WAV, M4A), immagini (JPG, PNG, WebP) e documenti di testo (TXT, MD, PDF, JSON). I file grandi vanno bene: il limite è lo spazio di archiviazione del tuo piano.",
+    "uploadTooLarge": "Il server ha rifiutato questo file perché è troppo grande per questo percorso di caricamento. Prova con un file più piccolo o riprova: di solito i file grandi vengono caricati direttamente nello spazio di archiviazione.",
+    "uploadUnfinished": "Il caricamento non è terminato. Controlla la connessione e riprova.",
+    "deleteQuotaMany": "{count, plural, one {# foto è stata mantenuta} other {# foto sono state mantenute}} perché le copie nelle immagini richiedono più spazio di quello che ti resta nel piano. Elimina qualche immagine o libera spazio, poi riprova.",
+    "deleteAllFailed": "{count} su {total} non riusciti.",
+    "deleteOthers": "{count, plural, one {# altro file non è stato eliminato} other {# altri file non sono stati eliminati}}.",
+    "thisFile": "Questo file",
+    "deleteInUseByAvatar": "\"{file}\" è un file dell'avatar \"{name}\"{others, plural, =0 {} one { e di # altro avatar} other { e di altri # avatar}}. Prima toglilo dall'avatar, oppure elimina l'avatar.",
+    "timeNever": "mai",
+    "timeUnknown": "sconosciuto",
+    "timeJustNow": "adesso",
+    "timeMinutes": "{count} min fa",
+    "timeHours": "{count} h fa",
+    "timeDays": "{count} g fa",
+    "elapsedSeconds": "{s} s",
+    "elapsedMinutes": "{m} min {s} s",
+    "elapsedHours": "{h} h {m} min"
+  },
+  "storage": {
+    "usageOf": "{used} di {limit} usati",
+    "usageUnlimited": "{used} usati · Illimitato"
+  },
+  "compute": {
+    "routingNote": "Usiamo le tue macchine collegate per il lavoro sui media quando sono online; tutto il resto gira su ReelBolt.",
+    "scopeNote": "Scegli dove gira il tuo lavoro sui media, come render, composizioni e analisi video.",
+    "options": {
+      "Auto": {
+        "label": "Automatico (predefinito)",
+        "description": "Usa una macchina collegata quando ce n'è una online; altrimenti lo esegue ReelBolt."
+      },
+      "CloudOnly": {
+        "label": "Non usare le mie macchine",
+        "description": "Lo esegue sempre ReelBolt."
+      },
+      "PreferRunner": {
+        "label": "Preferisci le mie macchine",
+        "description": "Usa una macchina collegata quando ce n'è una online; altrimenti lo esegue ReelBolt."
+      },
+      "RunnerOnly": {
+        "label": "Solo le mie macchine",
+        "description": "Gira solo sulle tue macchine collegate; se nessuna è online il passaggio si ferma con un messaggio chiaro.",
+        "warning": "I render video richiedono una macchina che abbia segnalato un runtime per container. Una macchina senza non può occuparsene, quindi qui un render non riesce invece di girare altrove. È l'unica scelta che trasforma una macchina offline in un'esecuzione non riuscita invece che in una in coda."
+      }
+    },
+    "availNone": "Questo spazio di lavoro non ha macchine collegate, quindi per ora non si può eseguire nulla su una macchina.",
+    "availOffline": "Questo spazio di lavoro ha {paired, plural, one {# macchina collegata} other {# macchine collegate}}, nessuna ha dato segno di vita negli ultimi minuti.",
+    "availOnline": "Questo spazio di lavoro ha {paired, plural, one {# macchina collegata} other {# macchine collegate}}, di cui {online} online negli ultimi minuti.",
+    "ranOnNamed": "Eseguito su {name}",
+    "ranOnYours": "Eseguito sulla tua macchina",
+    "tipRunner": "Una macchina collegata a questo spazio di lavoro ha eseguito questo passaggio{details}. ReelBolt non l'ha eseguito sulla piattaforma.",
+    "detailDevice": "dispositivo {id}",
+    "detailJob": "job {id}",
+    "ranCloud": "Eseguito nel cloud di ReelBolt",
+    "tipCloud": "Uno dei worker di ReelBolt ha eseguito questo passaggio, non una macchina collegata a questo spazio di lavoro e non il server che ha gestito l'esecuzione.",
+    "ranServer": "Eseguito su questo server",
+    "tipServer": "Il server che ha gestito questa esecuzione ha eseguito il passaggio da solo. Non è stata coinvolta nessuna macchina collegata né nessun worker cloud.",
+    "tipChip": "Almeno un passaggio di questa esecuzione è girato su una macchina collegata a questo spazio di lavoro. Apri l'esecuzione per vedere quale passaggio e dove sono girati gli altri."
+  },
+  "runners": {
+    "dockerTip": "Esegue il render dei tuoi video in un container Docker su questa macchina.",
+    "podmanTip": "Esegue il render dei tuoi video in un container Podman su questa macchina.",
+    "containerMode": " Modalità: {mode}.",
+    "noContainer": "Nessun container",
+    "noContainerTip": "Questa macchina non ha segnalato nessun runtime per container, quindi può solo comporre ed estrarre video. I render video richiedono Docker o Podman.",
+    "unknownContainerTip": "Il runtime per container segnalato da questa macchina.",
+    "videoRenders": "Render video",
+    "videoRendersTip": "Questa macchina dice di poter fare il render dei video, il che richiede un runtime per container verificato.",
+    "compileOnly": "Solo composizione",
+    "compileOnlyTip": "Questa macchina dice di poter solo comporre ed estrarre video. I render video non le verranno inviati.",
+    "slots": "{count, plural, one {# job alla volta} other {# job alla volta}}",
+    "slotsTip": "Il massimo di job che questa macchina accetta insieme, come ha segnalato alla connessione.",
+    "sharesModel": "Condivide un modello",
+    "sharesModels": "{count, plural, one {Condivide # modello} other {Condivide # modelli}}",
+    "sharesTip": "Questa macchina dice di permettere al tuo spazio di lavoro di usare un modello AI che gira su di lei. Le richieste passano dall'app desktop e non si usano crediti.",
+    "videoTools": "Strumenti video {version}",
+    "videoToolsTip": "La versione degli strumenti video che questa macchina dice di eseguire.",
+    "never": "mai",
+    "unknown": "sconosciuto",
+    "relLess": "meno di un minuto",
+    "relMinutes": "{count, plural, one {# minuto} other {# minuti}}",
+    "relHours": "{count, plural, one {# ora} other {# ore}}",
+    "relDays": "{count, plural, one {# giorno} other {# giorni}}",
+    "relPast": "{amount} fa",
+    "relFuture": "tra {amount}",
+    "notReported": "Non segnalata",
+    "platform": "{os} ({arch})",
+    "supportedPlatforms": "Windows (x64) e Linux (x64 o arm64). macOS non è supportato."
+  },
+  "verdicts": {
+    "NotEnoughData": "Dati insufficienti",
+    "KeepShadow": "Resta in Shadow",
+    "TryGate": "Si può provare Gate"
+  },
+  "calibrationTryGate": "Ogni domanda supera la soglia con acceptAt {value} o più.",
+  "feedbackFields": {
+    "page": "La pagina in cui ti trovi",
+    "projectId": "L'ID del progetto",
+    "executionId": "L'ID dell'esecuzione",
+    "assistantTurns": "Gli ultimi messaggi dell'assistente"
+  },
+  "videoGenerate": {
+    "maxSpend": "La spesa massima (crediti) deve essere maggiore di 0",
+    "promptRequired": "Il prompt inline è obbligatorio",
+    "promptTooLong": "Il prompt inline può avere al massimo {max} caratteri",
+    "promptControl": "Il prompt inline contiene caratteri di controllo non supportati",
+    "takesRange": "Le riprese devono essere tra 1 e 64",
+    "maxClipsRange": "Il numero massimo di clip deve essere tra 1 e 64",
+    "takesExceed": "Le riprese non possono superare il numero massimo di clip",
+    "duration": "La durata deve essere maggiore di 0",
+    "planRequired": "L'origine del piano richiede un riferimento a un passaggio di pianificazione",
+    "pollRange": "L'intervallo di controllo deve essere tra {min} e {max} secondi",
+    "timeoutRange": "Il timeout deve essere tra {min} e {max} secondi",
+    "timeoutBelowPoll": "Il timeout deve essere almeno pari all'intervallo di controllo",
+    "planSource": "Il piano deve provenire dal passaggio precedente o da un passaggio specifico",
+    "planOrder": "Il piano con un passaggio specifico richiede un numero d'ordine del passaggio",
+    "analysisSource": "L'analisi deve provenire dal passaggio precedente o da un passaggio specifico",
+    "analysisOrder": "L'analisi con un passaggio specifico richiede un numero d'ordine del passaggio",
+    "stepPrefix": "Passaggio {number}: {error}"
+  },
+  "hooks": {
+    "prefsFailTitle": "Non è stato possibile cambiare l'impostazione",
+    "prefsFailBody": "Non è cambiato nulla. Riprova tra un attimo.",
+    "streamParse": "Impossibile leggere i dati dell'evento {eventType}.",
+    "streamInterrupted": "Flusso in tempo reale interrotto. Riconnessione in corso...",
+    "workflowParse": "Impossibile leggere i dati di un evento del flusso di lavoro.",
+    "workflowInterrupted": "Flusso di eventi interrotto. Riconnessione in corso...",
+    "stage": {
+      "Queued": "in attesa di iniziare",
+      "Probing": "lettura del file",
+      "Proxy": "creazione della copia di riproduzione",
+      "Filmstrip": "creazione della striscia di anteprime",
+      "Peaks": "lettura dell'audio",
+      "KeyframeIndex": "indicizzazione dei fotogrammi",
+      "Stabilize": "preparazione della copia stabilizzata",
+      "Done": "pronto",
+      "Skipped": "niente da preparare",
+      "Failed": "non è stato possibile prepararlo"
+    },
+    "progressDone": "Il file è pronto.",
+    "progressSkipped": "Per questo file non c'è niente da preparare.",
+    "progressFailed": "Non è stato possibile preparare questo file.",
+    "progressActive": "Preparazione del file: {stage}{percent}.",
+    "progressPercent": " ({percent}%)"
+  },
+  "org": {
+    "personal": "Personale"
+  },
+  "notificationCategories": {
+    "jobSucceeded": "Operazione completata",
+    "jobFailed": "Operazione non riuscita",
+    "fileCreated": "File aggiunto",
+    "graphicsEdited": "Grafica della miniatura modificata",
+    "reviewActivity": "Note e decisioni di revisione",
+    "avatarRetention": "Avatar in scadenza",
+    "socialPublishing": "Post social pubblicato o non riuscito"
+  },
+  "appBriefFields": {
+    "language": "Lingua",
+    "sourceLanguage": "Lingua di origine",
+    "lengthSec": "Durata",
+    "format": "Formato",
+    "resolution": "Qualità",
+    "stylePreset": "Stile",
+    "tone": "Tono",
+    "designSystem": "Design",
+    "voice": "Voce narrante",
+    "avatar": "Avatar"
+  },
+  "appInput": {
+    "filesWithRole": "File: {role}",
+    "files": "File",
+    "notes": "Note"
+  },
+  "appCostClass": {
+    "NoCredits": "Nessun credito",
+    "UsesCredits": "Usa crediti",
+    "UsesCreditsAndAVoice": "Usa crediti e una voce",
+    "UsesCreditsAndAIShots": "Usa crediti e riprese AI"
+  },
+  "billingActions": {
+    "choose_plan_or_topup": "Scegli un piano oppure un pacchetto di crediti, non entrambi.",
+    "plan_not_purchasable": "Questo piano al momento non si può acquistare su questa installazione. Contatta l'assistenza se pensavi di poterlo acquistare.",
+    "already_subscribed": "Questo spazio di lavoro ha già un piano. Cambialo da Piano e fatturazione.",
+    "below_min_seats": "Questo piano richiede almeno {count} postazioni.",
+    "below_min_seats_unknown": "Sono meno postazioni di quelle previste dal piano.",
+    "too_many_seats": "I piani self-service arrivano fino a {count} postazioni. Contattaci per averne di più.",
+    "too_many_seats_unknown": "Sono più postazioni di quelle consentite da un piano self-service. Contattaci per averne di più.",
+    "topup_requires_paid_plan": "Le ricariche di crediti sono disponibili solo con i piani a pagamento. Scegli prima un piano: i crediti inclusi vengono assegnati ogni mese.",
+    "unknown_topup_pack": "Questo pacchetto di crediti non è più in vendita. Scegli una delle dimensioni elencate in questa pagina.",
+    "no_billing_customer": "Questa organizzazione non ha ancora acquistato nulla, quindi non ci sono fatture da aprire. Acquista prima un piano o dei crediti.",
+    "not_a_per_seat_subscription": "Il piano attuale non è fatturato per postazione.",
+    "no_subscription": "Questo spazio di lavoro non ha un piano a pagamento da cambiare. Scegli un piano qui sotto per abbonarti.",
+    "cancel_scheduled": "Il tuo piano è in programma per la cancellazione. Scegli prima Mantieni il mio piano, poi cambialo.",
+    "no_change": "Questo spazio di lavoro è già su quel piano e con quel numero di postazioni.",
+    "unknown_plan": "Questo piano non è più in vendita. Ricarica la pagina per vedere i piani disponibili.",
+    "plan_not_self_serve": "Questo piano non si può acquistare dalla dashboard. Contattaci per passare a questo piano.",
+    "billing_provider_refused": "Il fornitore di pagamenti ha rifiutato questa modifica. Riprova più tardi oppure usa il pulsante di gestione in questa pagina.",
+    "subscription_pending": "Un nuovo piano è in fase di conferma. Aspetta un minuto, poi ricarica la pagina.",
+    "change_pending": "L'ultima modifica è ancora in fase di conferma. Aggiorna la pagina tra un minuto, poi riprova.",
+    "downgrade_scheduled": "Mantieni prima il piano attuale, poi cambialo.",
+    "billing_not_configured": "Su questa installazione non è configurato nessun fornitore di pagamenti, quindi qui non si può acquistare nulla.",
+    "billing_provider_error": "Il fornitore di pagamenti non ha completato la richiesta. Non è stato addebitato né modificato nulla. Riprova tra un attimo.",
+    "promo_code_invalid": "Questo codice non è valido.",
+    "annual_unavailable": "La fatturazione annuale non è disponibile per questo piano.",
+    "interval_change_not_supported": "Un piano annuale non si può passare a mensile da qui. Annullalo al rinnovo, poi abbonati con pagamento mensile.",
+    "invalid_interval": "Scegli la fatturazione mensile o annuale.",
+    "promo_already_redeemed": "Questo spazio di lavoro ha già usato quel codice.",
+    "promo_rate_limited": "Troppi tentativi. Riprova più tardi.",
+    "fallback": "Qualcosa è andato storto nel contattare il fornitore di pagamenti. Non è stato addebitato nulla."
+  },
+  "run": {
+    "attempts": "{count, plural, one {# tentativo} other {# tentativi}}",
+    "code": "Codice: {code}"
+  },
+  "segmentationModels": {
+    "falAiSam31Image": "SAM 3.1 — ritaglia ciò che descrivi o clicchi",
+    "falAiEvfSam": "EVF-SAM — ritaglia ciò che descrivi",
+    "falAiSam2Image": "SAM 2 — ritaglia ciò che descrivi",
+    "falAiBirefnetV2": "BiRefNet — ritaglia il soggetto principale"
+  },
+  "providers": {
+    "localRunnerTag": "sul mio computer"
+  }
+}

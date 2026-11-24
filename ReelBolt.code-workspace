@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "api"
+		},
+		{
+			"path": "inference"
+		},
+		{
+			"path": "nginx"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"path": "sandbox"
+		}
+	],
+	"settings": {}
+}

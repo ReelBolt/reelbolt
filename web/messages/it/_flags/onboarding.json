@@ -1,0 +1,6 @@
+{
+  "onboarding.tour.learnMore": "Kept the 'opens in a new tab' hint for screen readers; 'Scopri di più' vs 'Leggi la guida', confirm.",
+  "onboarding.checklist.title": "'Getting started' rendered 'Per iniziare'; dismiss/close labels quote it, keep them in sync.",
+  "onboarding.menu.takeTheTour": "'Fai il tour' (informal imperative); 'tour' kept as the common Italian word.",
+  "onboarding.tour.finish": "'Fine' for the last-step button; alternative 'Concludi'."
+}

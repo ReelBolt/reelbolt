@@ -1,0 +1,88 @@
+{
+  "note": "Floors are the typed precision/recall at +/-2 frames achieved on the 16 synthetic clips (incl. 2 speech, 2 music) minus 0.05; speech-only clips must predict 0 beats. Regenerate with: gate.py --record results/synthetic/events.json",
+  "tolFrames": 2,
+  "all": {
+    "minPrecision": 0.72,
+    "minRecall": 0.8
+  },
+  "byVideoType": {
+    "animation": {
+      "minPrecision": 0.55,
+      "minRecall": 0.79
+    },
+    "music": {
+      "minPrecision": 0.93,
+      "minRecall": 0.95
+    },
+    "screen": {
+      "minPrecision": 0.43,
+      "minRecall": 0.46
+    },
+    "silent": {
+      "minPrecision": 0.95,
+      "minRecall": 0.9
+    },
+    "speech": {
+      "minPrecision": 0.95,
+      "minRecall": 0.89
+    }
+  },
+  "byType": {
+    "appear": {
+      "minPrecision": 0.56,
+      "minRecall": 0.6
+    },
+    "beat": {
+      "minPrecision": 0.93,
+      "minRecall": 0.95
+    },
+    "camera_move_start": {
+      "minPrecision": 0.95,
+      "minRecall": 0.95
+    },
+    "camera_move_stop": {
+      "minPrecision": 0.95,
+      "minRecall": 0.95
+    },
+    "disappear": {
+      "minPrecision": 0.38,
+      "minRecall": 0.45
+    },
+    "hit": {
+      "minPrecision": 0.5,
+      "minRecall": 0.53
+    },
+    "move_start": {
+      "minPrecision": 0.65,
+      "minRecall": 0.62
+    },
+    "move_stop": {
+      "minPrecision": 0.25,
+      "minRecall": 0.81
+    },
+    "speech_end": {
+      "minPrecision": 0.95,
+      "minRecall": 0.89
+    },
+    "speech_start": {
+      "minPrecision": 0.95,
+      "minRecall": 0.89
+    },
+    "text_in": {
+      "minPrecision": 0.52,
+      "minRecall": 0.58
+    },
+    "text_out": {
+      "minPrecision": 0.13,
+      "minRecall": 0.62
+    },
+    "transition": {
+      "minPrecision": 0.87,
+      "minRecall": 0.87
+    }
+  },
+  "maxBeatsOnNoBeatClips": 0,
+  "untypedAllF1": {
+    "minF1": 0.78
+  }
+}

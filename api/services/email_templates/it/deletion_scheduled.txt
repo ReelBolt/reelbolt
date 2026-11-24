@@ -1,0 +1,9 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Il tuo account ReelBolt verrà eliminato il giorno {{.DeletionDate}}. Fino ad allora puoi cambiare idea: accedi e l'eliminazione viene annullata.
+
+{{.Link}}
+
+Dopo quella data progetti, file e flussi di lavoro vengono rimossi definitivamente. I dati di fatturazione che dobbiamo conservare per legge restano archiviati senza il tuo indirizzo email.
+
+-- {{.FooterNote}}

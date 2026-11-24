@@ -1,0 +1,171 @@
+{
+  "section": {
+    "title": "Migliora",
+    "hint": "Fai sembrare migliore il video di questa clip. L'originale resta nel progetto.",
+    "pick": "Cosa vuoi fare?",
+    "noChoice": "Scegline una per vedere quanto costa.",
+    "how": "Come",
+    "keepGrain": "Mantieni la grana della pellicola",
+    "planHeight": "Il tuo piano arriva a {height}p. Passa a un piano superiore per sceglierlo.",
+    "aiLimit": "Il rallentatore con l'AI arriva a 4x.",
+    "needsPicture": "Migliora funziona su una clip video in una traccia immagine."
+  },
+  "choice": {
+    "upscale": "Immagine più nitida",
+    "interpolate": "Rallentatore fluido",
+    "denoise": "Riduci il rumore",
+    "motionBlur": "Sfocatura di movimento",
+    "extend": "Estendi l'immagine"
+  },
+  "choiceHint": {
+    "upscale": "Rende l'immagine più grande e nitida.",
+    "interpolate": "Aggiunge fotogrammi intermedi perché il rallentatore sia fluido.",
+    "denoise": "Toglie grana e puntini dalle riprese scure o con poca luce.",
+    "motionBlur": "Aggiunge una sfocatura naturale ai movimenti veloci.",
+    "extend": "Aggiunge immagine attorno alla clip perché riempia una forma diversa."
+  },
+  "engine": {
+    "Local": "Veloce (gratis)",
+    "Hosted": "AI (usa crediti)"
+  },
+  "upscale": {
+    "x2": "2x più grande",
+    "x4": "4x più grande",
+    "h1080": "A 1080p",
+    "h2160": "A 4K"
+  },
+  "multiplier": {
+    "2": "2x",
+    "4": "4x",
+    "8": "8x"
+  },
+  "strength": {
+    "Light": "Leggero",
+    "Strong": "Forte"
+  },
+  "shutter": {
+    "light": "Leggera",
+    "natural": "Naturale",
+    "strong": "Forte"
+  },
+  "extend": {
+    "aiOnly": "Estendi usa l'AI e i crediti.",
+    "mode": {
+      "aspect": "Forma",
+      "sides": "Lati su misura"
+    },
+    "aspect": {
+      "16:9": "Orizzontale 16:9",
+      "9:16": "Verticale 9:16",
+      "1:1": "Quadrato 1:1",
+      "4:5": "4:5"
+    },
+    "sides": {
+      "hint": "Scegli i lati che ricevono nuova immagine. Crescono tutti della stessa quantità.",
+      "amount": "Quanto aggiungere (percentuale)",
+      "left": "Sinistra",
+      "right": "Destra",
+      "top": "Alto",
+      "bottom": "Basso",
+      "required": "Aggiungi immagine almeno su un lato."
+    },
+    "prompt": {
+      "label": "Cosa devono mostrare i nuovi bordi? (facoltativo)",
+      "description": "Parole semplici, fino a {max} caratteri. Lascia vuoto per continuare la scena in modo naturale."
+    }
+  },
+  "estimate": {
+    "checking": "Controllo il prezzo...",
+    "free": "Gratis",
+    "credits": "Circa {credits, number} {credits, plural, one {credito} other {crediti}}",
+    "line": "{cost}. Il nuovo video è {width} per {height} a {fps} fotogrammi al secondo, circa {size} MB, e richiede circa {time}.",
+    "lineShort": "{cost}.",
+    "seconds": "{seconds} secondi",
+    "minutes": "{minutes} minuti"
+  },
+  "start": "Avvia",
+  "cancel": "Annulla",
+  "running": "Ci sto lavorando...",
+  "progress": "Ci sto lavorando... {percent}%",
+  "cancelled": "Fermato. Nella timeline non è cambiato nulla.",
+  "statusChip": "In miglioramento",
+  "readyChip": "Serve il tuo OK",
+  "done": "Pronto. Confronta, poi applicalo alla clip.",
+  "compareTitle": "Prima e dopo",
+  "before": "Prima",
+  "after": "Dopo",
+  "play": "Riproduci entrambi",
+  "pause": "Pausa",
+  "apply": "Applica",
+  "applyAgain": "Applica di nuovo",
+  "applied": "Applicato alla clip. Un annulla lo rimette com'era.",
+  "useOriginal": "Usa l'originale",
+  "reverted": "Il video originale è tornato.",
+  "needsOk": {
+    "title": "Pronto - serve il tuo OK",
+    "body": "La clip che hai migliorato non è più nella timeline. Il nuovo video è salvato nei tuoi file.",
+    "applyToClip": "Applica a questa clip",
+    "keep": "Tieni solo nei file"
+  },
+  "consent": {
+    "title": "Inviare questo video a un servizio esterno?",
+    "body": "Il miglioramento con l'AI invia l'immagine di questo video a un servizio video esterno per elaborarla. Vale solo per questo progetto. Veloce non invia mai nulla.",
+    "check": "Accetto di inviare i video di questo progetto a un servizio esterno per il miglioramento con l'AI",
+    "cancel": "Non ora",
+    "confirm": "Accetta e avvia",
+    "failed": "Non siamo riusciti a salvare la tua scelta. Riprova."
+  },
+  "refusal": {
+    "credits": "Ti servono altri {missing} crediti.",
+    "creditsPlain": "Non hai abbastanza crediti.",
+    "plan": "Il tuo piano non lo include. Guarda i piani per sbloccarlo.",
+    "planVideo": "Il tuo piano non include il miglioramento video. Guarda i piani per sbloccarlo.",
+    "planResolution": "Il tuo piano non arriva a questa dimensione. Scegline una più piccola o guarda i piani.",
+    "consent": "Prima accetta di inviare il video a un servizio esterno.",
+    "tooLong": "Questo video è troppo lungo per essere migliorato.",
+    "tooLongMax": "Questo video è troppo lungo. Il massimo che possiamo migliorare è {seconds} secondi.",
+    "tooShort": "Questo video è troppo corto per essere esteso. Usa una clip più lunga.",
+    "tooShortMin": "Questo video è troppo corto per essere esteso. Usa una clip di almeno {seconds} secondi.",
+    "busy": "Hai molte operazioni in corso. Aspetta un attimo e riprova.",
+    "unavailable": "Al momento non è disponibile. Prova Veloce o riprova più tardi.",
+    "notVideo": "Funziona solo sui video.",
+    "notFound": "Non troviamo questo video nel progetto.",
+    "other": "Non è andata a buon fine. Riprova.",
+    "addCredits": "Aggiungi crediti",
+    "seePlans": "Vedi i piani",
+    "notMeasured": "Non siamo ancora riusciti a misurare questo video. Riprova tra un momento.",
+    "email": "Prima verifica il tuo indirizzo email, poi riprova.",
+    "invalid": "Questa scelta non è consentita per questo video. Scegli un'altra opzione."
+  },
+  "failure": {
+    "ENHANCE_DURATION_MISMATCH": "Il nuovo video è uscito di durata diversa, quindi non l'abbiamo usato. I crediti sono stati rimborsati. Riprova.",
+    "timeout": "Ci ha messo troppo ed è stato fermato. Riprova.",
+    "failed": "Non è andata a buon fine. Nella timeline non è cambiato nulla. Riprova.",
+    "ENHANCE_SOURCE_CHANGED": "L'immagine è cambiata mentre veniva migliorata, quindi non abbiamo usato il risultato. I crediti sono stati rimborsati. Riprova.",
+    "tooLong": "Questo video è troppo lungo per essere migliorato.",
+    "tooShort": "Questo video è troppo corto per essere esteso. Usa una clip più lunga.",
+    "submitUnknown": "Non abbiamo potuto confermare che sia partito. Potrebbe essere stato creato comunque, e i crediti restano trattenuti finché non viene chiuso. Controlla i tuoi file prima di riprovare.",
+    "contentBlocked": "Il testo per i nuovi bordi non può essere usato. Modificalo e riprova.",
+    "configInvalid": "Questa estensione non è possibile per questo video: ha già quella forma, oppure un lato dovrebbe crescere più della metà. Scegline un'altra.",
+    "noVideo": "In questo file non c'è nessuna immagine da migliorare.",
+    "outputTooLarge": "Il nuovo video sarebbe troppo grande. Scegli una dimensione più piccola.",
+    "fpsTooHigh": "Il nuovo video avrebbe troppi fotogrammi al secondo. Scegli un moltiplicatore più piccolo.",
+    "notLarger": "Questo video è già di quella dimensione o più grande. Scegli una dimensione maggiore.",
+    "invalid": "Questa scelta non è consentita per questo video. Scegli un'altra opzione.",
+    "processing": "Non siamo riusciti a elaborare questo video. Prova con un'altra clip.",
+    "service": "Il servizio AI al momento non è disponibile. Prova Veloce o riprova più tardi.",
+    "stillRunning": "È ancora in corso. Aspetta che finisca.",
+    "outputUnavailable": "Non è stato possibile salvare il nuovo video. Riprova."
+  },
+  "pool": {
+    "action": "Migliora...",
+    "title": "Migliora {name}",
+    "added": "Fatto. Il nuovo video è nei tuoi file.",
+    "close": "Chiudi"
+  },
+  "applyLabel": "Migliora clip",
+  "useOriginalLabel": "Usa il video originale",
+  "forClip": "Questo è il lavoro per {name}.",
+  "otherJob": "Sto migliorando {name}",
+  "otherJobReady": "{name} è pronto - serve il tuo OK"
+}

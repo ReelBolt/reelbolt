@@ -1,0 +1,105 @@
+{
+  "hero": {
+    "title": "Tu hai una storia. ReelBolt ne fa un video.",
+    "eyebrow": "Team video AI · per chi ha una storia da raccontare",
+    "intro": "Carica le clip che hai già girato e di' a cosa serve il video. Un team video AI lo monta e lo rivede prima che tu lo veda, e aggiunge i sottotitoli quando li chiedi. Non serve saper montare e non parti da una timeline vuota.",
+    "support": "Nessuna carta richiesta. Il tuo primo video è offerto da noi.",
+    "seeFeatures": "Scopri cosa fa",
+    "liveRender": "Render dal vivo"
+  },
+  "useCases": {
+    "scrollLeft": "Scorri i tipi di video a sinistra",
+    "scrollRight": "Scorri i tipi di video a destra",
+    "items": {
+      "highlights": "Montaggi dei momenti migliori",
+      "stories": "Storie con voce narrante",
+      "subtitles": "Clip con sottotitoli",
+      "testimonials": "Video di testimonianze",
+      "lessons": "Clip di lezioni",
+      "launches": "Video di lancio",
+      "thumbnails": "Miniature e testo del post"
+    }
+  },
+  "page": {
+    "beforeAfter": {
+      "title": "Da un rullino pieno a un montaggio finito",
+      "intro": "La parte difficile è la timeline vuota; reagire a un primo montaggio è la parte facile.",
+      "before": {
+        "summary": "Un rullino pieno di clip. Una timeline vuota. Un fine settimana andato.",
+        "points": {
+          "0": "Pause lunghe, false partenze e la stessa frase registrata più volte",
+          "1": "Clip nell'ordine in cui le hai girate, non in quello della storia",
+          "2": "Sottotitoli, copertina e testo del post ancora da fare"
+        }
+      },
+      "after": {
+        "summary": "Un montaggio finito, senza tempi morti, nel formato che ogni canale richiede.",
+        "points": {
+          "0": "Tempi morti, false partenze e take ripetuti eliminati, con ogni taglio a fine frase",
+          "1": "Sottotitoli quando li attivi, e i file dei sottotitoli da caricare",
+          "2": "Orizzontale, verticale, quadrato o ritratto, scelto prima dell'esecuzione",
+          "3": "Una bozza valutata prima che tu la vedessi, e che puoi ancora cambiare"
+        }
+      }
+    },
+    "steps": {
+      "drop": {
+        "title": "Carica quello che hai",
+        "description": "Carica le clip che hai già girato. Qualche inquadratura diversa rende meglio di un'unica ripresa lunga. Vanno bene anche le registrazioni dello schermo e i file del brand, e i team software possono collegare il loro codice."
+      },
+      "say": {
+        "title": "Di' a cosa serve",
+        "description": "Scegli una ricetta, per esempio un montaggio dei momenti migliori o una storia con voce narrante, e spiega in una frase a cosa serve il video e chi lo guarderà."
+      },
+      "review": {
+        "title": "Ricevi un montaggio già rivisto, che puoi cambiare",
+        "description": "Un team video AI lo monta e valuta la bozza prima che tu la veda. Se il punteggio è basso, la bozza torna indietro per un altro giro. Poi cambi una battuta, una clip o tutto il montaggio nell'editor."
+      }
+    },
+    "features": {
+      "team": {
+        "title": "Un'intera squadra di produzione, a richiesta",
+        "description": "Montatore, sceneggiatore, motion designer, colorist e sound designer lavorano insieme sul tuo video. Un revisore valuta ogni bozza e rimanda indietro quelle deboli prima che tu le veda."
+      },
+      "footage": {
+        "title": "Le tue riprese grezze, già montate",
+        "description": "Carica clip non montate e ricevi un montaggio asciutto. Pause, inciampi e take più deboli spariscono, i tagli cadono a fine frase e la storia resta intatta."
+      },
+      "editor": {
+        "title": "Un vero editor, quando ti serve",
+        "description": "Apri qualsiasi video finito come timeline modificabile. Taglia, rimonta dalla trascrizione, fai il color grading, mixa e aggiungi sottotitoli, con salvataggio automatico e cronologia delle versioni. L'editor è in anteprima anticipata."
+      },
+      "brand": {
+        "title": "Il tuo brand, ovunque",
+        "description": "Dai a ReelBolt un PDF del brand o un export di design e lui costruisce un brand kit con i tuoi colori, i tuoi font e il tuo tono. Una libreria del brand condivisa mantiene coerente ogni progetto, e ogni modifica la approvi tu."
+      },
+      "voice": {
+        "title": "Una voce narrante a tua scelta",
+        "description": "La narrazione è scritta per adattarsi al montaggio e letta con una voce stock, o con una voce clonata una volta che chi parla ha registrato il proprio consenso. Sottotitoli e didascalie sono inclusi."
+      },
+      "broll": {
+        "title": "B-roll entro un budget che decidi tu",
+        "description": "Stacchi, cold open e schede finali sono pianificati a partire dal tuo montaggio e generati entro un tetto di spesa che imposti tu. Ogni inquadratura ha più take e si tiene il migliore. Sui piani {plans}."
+      }
+    },
+    "how": {
+      "title": "Tre passaggi per un video finito",
+      "intro": "Tu porti le clip e il motivo. ReelBolt fa il lavoro che va dal rullino all'esportazione, e l'ultima parola resta a te.",
+      "detail": "Vuoi il dettaglio di ogni passaggio? <link>Guarda tutte le funzionalità</link>."
+    },
+    "inside": {
+      "title": "Tutto ciò che farebbe un team video interno",
+      "link": "Scopri tutto quello che fa ReelBolt"
+    },
+    "faq": {
+      "title": "Domande frequenti",
+      "deciding": "Hai ancora dubbi? <link>Leggi cosa stiamo costruendo e perché</link>."
+    },
+    "start": {
+      "title": "Premi play su qualcosa di finito",
+      "bodySignup": "Crea uno spazio di lavoro gratuito, carica le tue clip e guarda il primo montaggio. Nessuna carta richiesta. Il tuo primo video è offerto da noi.",
+      "bodyContact": "Raccontaci cosa vuoi realizzare e da quale materiale parti. Ti mostriamo cosa ne fa ReelBolt.",
+      "pricing": "Vedi i prezzi"
+    }
+  }
+}

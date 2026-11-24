@@ -1,0 +1,311 @@
+{
+ "clip": "syn-mus-02",
+ "videoType": "music",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 720,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "beat",
+   "frame": 21,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev2",
+   "type": "beat",
+   "frame": 35,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev3",
+   "type": "beat",
+   "frame": 49,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev4",
+   "type": "beat",
+   "frame": 63,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev5",
+   "type": "beat",
+   "frame": 77,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev6",
+   "type": "beat",
+   "frame": 91,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev7",
+   "type": "beat",
+   "frame": 105,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev8",
+   "type": "beat",
+   "frame": 119,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev9",
+   "type": "beat",
+   "frame": 134,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev10",
+   "type": "beat",
+   "frame": 148,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev11",
+   "type": "beat",
+   "frame": 162,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev12",
+   "type": "beat",
+   "frame": 176,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev13",
+   "type": "beat",
+   "frame": 190,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev14",
+   "type": "beat",
+   "frame": 204,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev15",
+   "type": "beat",
+   "frame": 218,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev16",
+   "type": "beat",
+   "frame": 232,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev17",
+   "type": "beat",
+   "frame": 246,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev18",
+   "type": "beat",
+   "frame": 260,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev19",
+   "type": "beat",
+   "frame": 274,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev20",
+   "type": "beat",
+   "frame": 288,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev21",
+   "type": "beat",
+   "frame": 302,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev22",
+   "type": "beat",
+   "frame": 316,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev23",
+   "type": "beat",
+   "frame": 330,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev24",
+   "type": "beat",
+   "frame": 344,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev25",
+   "type": "beat",
+   "frame": 359,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev26",
+   "type": "beat",
+   "frame": 373,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev27",
+   "type": "beat",
+   "frame": 387,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev28",
+   "type": "beat",
+   "frame": 401,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev29",
+   "type": "beat",
+   "frame": 415,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev30",
+   "type": "beat",
+   "frame": 429,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev31",
+   "type": "beat",
+   "frame": 443,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev32",
+   "type": "beat",
+   "frame": 457,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev33",
+   "type": "beat",
+   "frame": 471,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev34",
+   "type": "beat",
+   "frame": 485,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev35",
+   "type": "beat",
+   "frame": 499,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev36",
+   "type": "beat",
+   "frame": 513,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev37",
+   "type": "beat",
+   "frame": 527,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev38",
+   "type": "beat",
+   "frame": 541,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev39",
+   "type": "beat",
+   "frame": 555,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev40",
+   "type": "beat",
+   "frame": 569,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev41",
+   "type": "beat",
+   "frame": 584,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev42",
+   "type": "beat",
+   "frame": 598,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev43",
+   "type": "beat",
+   "frame": 612,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev44",
+   "type": "beat",
+   "frame": 626,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev45",
+   "type": "beat",
+   "frame": 640,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev46",
+   "type": "beat",
+   "frame": 654,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev47",
+   "type": "beat",
+   "frame": 668,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev48",
+   "type": "beat",
+   "frame": 682,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev49",
+   "type": "beat",
+   "frame": 696,
+   "note": "kick drum onset"
+  },
+  {
+   "id": "ev50",
+   "type": "beat",
+   "frame": 710,
+   "note": "kick drum onset"
+  }
+ ]
+}

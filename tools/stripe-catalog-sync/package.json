@@ -1,0 +1,17 @@
+{
+  "name": "reelbolt-stripe-catalog-sync",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Idempotent, dry-run-by-default sync of the ReelBolt price catalog to a Stripe account.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "stripe-catalog-sync": "./sync.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "sync": "node sync.mjs"
+  }
+}

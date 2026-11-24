@@ -1,0 +1,9 @@
+Hello,
+
+Someone asked to receive ReelBolt product news, tips and offers at this email address. Confirm the subscription here:
+
+{{.Link}}
+
+If this wasn't you, ignore this email: nothing will be sent to you.
+
+-- {{.FooterNote}}

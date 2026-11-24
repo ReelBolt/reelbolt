@@ -1,0 +1,83 @@
+{
+ "clip": "syn-sil-04",
+ "videoType": "silent",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 570,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "appear",
+   "frame": 75,
+   "region": [
+    140,
+    300,
+    90,
+    90
+   ],
+   "note": "teal circle reaches half of its peak opacity"
+  },
+  {
+   "id": "ev2",
+   "type": "move_start",
+   "frame": 203,
+   "region": [
+    141,
+    300,
+    90,
+    90
+   ],
+   "note": "teal circle starts moving"
+  },
+  {
+   "id": "ev3",
+   "type": "move_stop",
+   "frame": 328,
+   "region": [
+    620,
+    300,
+    90,
+    90
+   ],
+   "note": "teal circle is at rest again"
+  },
+  {
+   "id": "ev4",
+   "type": "text_in",
+   "frame": 415,
+   "region": [
+    280,
+    120,
+    440,
+    60
+   ],
+   "note": "slow caption reaches half of its peak opacity"
+  },
+  {
+   "id": "ev5",
+   "type": "transition",
+   "frame": 440,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "scene 1 cut: first frame of new scene"
+  },
+  {
+   "id": "ev6",
+   "type": "text_out",
+   "frame": 546,
+   "region": [
+    280,
+    120,
+    440,
+    60
+   ],
+   "note": "slow caption drops below half of its peak opacity"
+  }
+ ]
+}

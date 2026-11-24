@@ -1,0 +1,18 @@
+ReelBolt operator digest{{with .Digest}}, last {{.WindowHours}} hours (to {{.GeneratedAt}}){{end}}
+{{with .Digest}}
+RUNS BY FINAL STATUS
+{{range .Runs}}  {{.Label}}: {{.Count}}
+{{else}}  none finished in the window
+{{end}}
+PLATFORM FAILURES (refunded steps)
+{{range .Groups}}  {{.Code}} / {{.StepType}}: {{.Count}} step(s), {{.Organizations}} organization(s), first {{.First}}, last {{.Last}}
+{{else}}  none
+{{end}}{{if .Failures}}
+Latest failures:
+{{range .Failures}}  {{.Time}} {{.StepType}} {{.Code}} run {{.RunID}}: {{.Error}}
+{{end}}{{if .FailuresOmitted}}  ... and {{.FailuresOmitted}} more not listed
+{{end}}{{end}}
+FEEDBACK REPORTS: {{.FeedbackCount}}
+{{range .Feedback}}  {{.Time}} [{{.Kind}}] {{.Text}}
+{{end}}{{end}}
+-- {{.FooterNote}}

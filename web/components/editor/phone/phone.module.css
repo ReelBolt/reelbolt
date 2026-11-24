@@ -1,0 +1,262 @@
+/* The phone surface (RM.6). Every control is 44x44 CSS px or larger; no text under 12 px. */
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  /* The viewer yields first on a short screen (it scrolls inside itself); the strip never drops under its own content and the dock stays on screen. */
+  grid-template-rows: auto minmax(0, auto) minmax(min-content, 1fr) auto;
+  grid-template-areas: 'header' 'viewer' 'strip' 'dock';
+  height: 100dvh;
+  min-height: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  padding-top: var(--rb-safe-top, 0px);
+  padding-left: var(--rb-safe-left, 0px);
+  padding-right: var(--rb-safe-right, 0px);
+  background: var(--rb-ed-studio-bg);
+  color: var(--mantine-color-text);
+  /* Touch density, whatever the pointer reports: every icon button and control on the phone is 44 px. */
+  --rb-icon-h: 44px;
+  --rb-icon-dense-h: 44px;
+  --rb-control-h: 44px;
+  --rb-row-h: 48px;
+  /* The dock is 56 px + its 1 px rule + the home-bar inset; a bottom sheet ends exactly above it so the dock stays tappable. */
+  --rb-dock-h: calc(57px + var(--rb-safe-bottom, 0px));
+  --rb-phone-viewer-bg: #0b0b0e; /* the viewer is always dark */
+  --rb-phone-viewer-chip-fg: #fff;
+}
+
+.shellHeader { grid-area: header; min-width: 0; }
+.shellViewer { grid-area: viewer; min-width: 0; min-height: 0; overflow: hidden; overscroll-behavior: contain; background: var(--rb-phone-viewer-bg); display: flex; flex-direction: column; }
+.shellStrip { grid-area: strip; min-width: 0; min-height: 160px; display: flex; flex-direction: column; background: var(--rb-ed-inspector-bg); }
+.shellDock { grid-area: dock; min-width: 0; }
+.stripBody { flex: 1 1 auto; min-height: 160px; overflow-y: auto; overflow-x: hidden; }
+
+/* The picture box = the viewer's own header + padding (64 px) + the canvas area. The canvas area is about 16:9 of the width, shrinks
+   with short screens (the strip and dock keep their room), never under 90 px; mini is that minimum. On a short screen the picture box gives
+   way first; the transport under it never scrolls away, so Play stays on screen. */
+.shellPicture { position: relative; flex: 0 1 auto; min-height: 0; display: flex; flex-direction: column; height: calc(64px + max(90px, min(54.7vw, 100dvh - 560px))); overflow: hidden; }
+.shell[data-viewer-mode='mini'] .shellPicture { height: 160px; }
+.shellTransport { flex: 0 0 auto; min-width: 0; overflow: hidden; background: var(--rb-ed-header-bg); border-top: 1px solid var(--rb-ed-line); }
+
+.viewerSize, .viewerGrow {
+  position: absolute; top: 4px; right: 4px; z-index: 5;
+  width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px; color: var(--rb-phone-viewer-chip-fg); background: rgba(0, 0, 0, 0.55);
+}
+.viewerGrow { right: auto; left: 4px; }
+.showViewer {
+  grid-area: viewer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; font-size: 14px; background: var(--rb-ed-header-bg); border-bottom: 1px solid var(--rb-ed-line);
+}
+
+/* landscape phone: viewer left (~38%), strip right, dock a left rail, header 44 px */
+.shell[data-landscape='true'] {
+  --rb-dock-h: 0px;
+  grid-template-columns: 64px minmax(0, 38%) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas: 'header header header' 'dock viewer strip';
+}
+.shell[data-landscape='true'] .shellPicture,
+.shell[data-landscape='true'][data-viewer-mode='mini'] .shellPicture { height: max(184px, min(100%, calc(52dvh + 64px))); width: 100%; }
+.shell[data-landscape='true'] .shellPicture { flex: 0 0 auto; }
+.shell[data-landscape='true'] .shellViewer { overflow: auto; }
+
+/* header */
+.header {
+  display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 4px;
+  background: var(--rb-ed-header-bg); border-bottom: 1px solid var(--rb-ed-line); min-width: 0;
+}
+.header[data-landscape='true'] { height: 44px; }
+.headerName { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; line-height: 1.15; }
+.headerTitle { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.headerSub { display: flex; align-items: center; gap: 6px; min-width: 0; height: 16px; overflow: hidden; }
+.saveText { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; color: var(--mantine-color-dimmed); }
+.saveText[data-status='saved'] { color: var(--mantine-color-dimmed); }
+.saveText:not([data-status='saved']) { color: var(--mantine-color-orange-text); }
+
+/* dock */
+.dock {
+  display: flex; align-items: stretch; justify-content: space-around;
+  background: var(--rb-ed-header-bg); border-top: 1px solid var(--rb-ed-line);
+  padding-bottom: var(--rb-safe-bottom, 0px); min-width: 0;
+}
+.dock[data-orientation='rail'] { flex-direction: column; justify-content: flex-start; height: 100%; border-top: 0; border-right: 1px solid var(--rb-ed-line); overflow-y: auto; padding-bottom: 0; }
+.dockItem {
+  flex: 1 1 0; min-width: 44px; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-size: 12px; line-height: 1.1; color: var(--mantine-color-dimmed); padding: 0 2px; text-align: center; overflow-wrap: anywhere;
+}
+.dock[data-orientation='rail'] .dockItem { flex: 0 0 auto; min-height: 56px; width: 100%; }
+.dockItem[aria-pressed='true'] { color: var(--mantine-color-violet-light-color); background: var(--mantine-color-violet-light); }
+
+/* sheet */
+.sheetBackdrop { position: fixed; inset: 0; z-index: 249; background: rgba(0, 0, 0, 0.45); }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: var(--rb-dock-h, 0px); z-index: 250;
+  display: flex; flex-direction: column; min-height: 0;
+  background: var(--rb-ed-inspector-bg); color: var(--mantine-color-text);
+  border-top: 1px solid var(--rb-ed-line); border-radius: 14px 14px 0 0;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.3);
+  height: var(--rb-sheet-h, 45dvh);
+  max-height: calc(100dvh - var(--rb-safe-top, 0px) - var(--rb-dock-h, 0px));
+  padding-left: var(--rb-safe-left, 0px);
+  padding-right: var(--rb-safe-right, 0px);
+  transition: height 160ms ease;
+  overflow: hidden;
+}
+.sheet[data-side='right'] {
+  left: auto; top: 0; bottom: 0; right: 0; width: min(420px, 55vw); height: auto; max-height: none; padding-bottom: var(--rb-safe-bottom, 0px); border-radius: 0; border-top: 0; border-left: 1px solid var(--rb-ed-line);
+  padding-right: var(--rb-safe-right, 0px);
+}
+.sheetBar { flex: 0 0 auto; display: flex; align-items: center; padding-right: 4px; }
+.grabber { display: flex; align-items: center; justify-content: center; flex: 1 1 auto; min-width: 0; width: auto; min-height: 44px; flex-direction: column; gap: 2px; border: 0; background: transparent; touch-action: none; cursor: grab; padding: 0; }
+.grabberPill { width: 40px; height: 4px; border-radius: 2px; background: var(--mantine-color-gray-5); }
+.sheetTitleRow { display: flex; align-items: center; gap: 2px; padding: 0 4px 0 14px; }
+.sheetTitle { flex: 1; margin: 0; font-size: 15px; font-weight: 600; }
+.sheetFooter { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; padding: 8px 14px 8px; border-top: 1px solid var(--mantine-color-default-border); background: inherit; }
+.sheetFooter:empty { display: none; }
+.sheetFooter button { min-height: 44px; }
+.sheetBody { flex: 1 1 auto; min-height: 0; overflow: auto; display: flex; flex-direction: column; }
+
+/* undo snackbar */
+.snackbar {
+  position: fixed; left: calc(8px + var(--rb-safe-left, 0px)); right: calc(8px + var(--rb-safe-right, 0px)); bottom: calc(56px + 52px + 8px + var(--rb-safe-bottom, 0px)); z-index: 300;
+  display: flex; align-items: center; gap: 8px; padding: 2px 4px 2px 14px; border-radius: 8px;
+  background: var(--mantine-color-dark-7); color: var(--mantine-color-gray-0); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+.snackbarText { flex: 1; font-size: 14px; }
+
+/* escape-hatch note */
+.note { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; white-space: nowrap; padding: 4px 8px; font-size: 12px; background: var(--mantine-color-blue-light); border-bottom: 1px solid var(--rb-ed-line); }
+.noteText { flex: 1 1 0; min-width: 0; overflow: hidden; white-space: normal; line-height: 16px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+/* One notice at a time on the strip: the sound-tracks offer goes first, the phone note comes back after it. */
+.shellStrip:has([data-testid='link-migration-banner']) .note { display: none; }
+.linkBanner { display: flex; align-items: center; gap: 6px; padding: 4px 8px; font-size: 12px; background: var(--mantine-color-blue-light); border-bottom: 1px solid var(--rb-ed-line); flex-shrink: 0; }
+.linkBannerText { flex: 1 1 0; min-width: 0; overflow: hidden; line-height: 16px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+/* The box is a column so the viewer fills it (the canvas area grows from a zero basis); its desktop floor would cut the frame on a phone. */
+.shellPicture [data-testid='program-canvas-area'] { min-height: 0 !important; }
+/* the picture's own header keeps clear of the viewer size button (44 px at the right edge) */
+.shellPicture [data-testid='viewer-header'] { padding-right: 52px !important; }
+
+.actionBar { display: flex; align-items: center; gap: 4px; height: 52px; box-sizing: border-box; padding: 4px 8px; border-top: 1px solid var(--rb-ed-line); background: var(--rb-ed-header-bg); flex: 0 0 auto; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.actionBar::-webkit-scrollbar { display: none; }
+.actionBtn { position: relative; flex: 1 0 44px; min-width: 44px; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; padding: 0 2px; border-radius: 8px; border: 0; background: transparent; color: inherit; font-size: 12px; line-height: 1.1; white-space: nowrap; cursor: pointer; }
+.actionBtn:disabled { opacity: 0.4; cursor: default; }
+.actionBtn[aria-pressed='true'] { background: var(--mantine-color-violet-light); }
+.actionBtnDanger { color: var(--mantine-color-red-text); }
+/* destructive actions sit 8 px clear of the neutral ones (the bar's own gap is 4 px, so 4 px more) */
+.actionGap { flex: 0 0 4px; }
+.actionBadge { position: absolute; top: 0; right: 2px; min-width: 16px; height: 16px; padding: 0 3px; box-sizing: border-box; border-radius: 8px; background: var(--mantine-color-violet-6); color: #fff; font-size: 12px; line-height: 16px; text-align: center; }
+.sheetStack { display: flex; flex-direction: column; gap: 12px; padding: 4px 14px 14px; }
+.sheetRow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sheetGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.sheetHint { font-size: 12px; color: var(--mantine-color-dimmed); margin: 0; }
+.sheetProblem { font-size: 12px; color: var(--mantine-color-red-text); margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet { transition: none; }
+}
+
+/* The clip strip (RM.4): a centre-locked, touch-first view of the same timeline. */
+.strip { display: flex; flex-direction: column; flex: 1 1 auto; height: 100%; min-height: 160px; min-width: 0; background: var(--rb-ed-inspector-bg); }
+.stripBar { display: flex; align-items: center; flex: 0 0 auto; min-height: 44px; border-bottom: 1px solid var(--rb-ed-line); }
+.stripStep {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  width: 44px; height: 44px; min-width: 44px; min-height: 44px; color: var(--mantine-color-text);
+}
+.stripChip { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-width: 56px; height: 44px; padding: 0 12px; font-size: 14px; font-weight: 600; border: 1px solid var(--mantine-color-default-border); border-radius: 8px; color: var(--mantine-color-text); }
+.stripFit {
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  min-width: 44px; min-height: 44px; padding: 0 10px; font-size: 14px; font-weight: 600; color: var(--mantine-color-text);
+}
+.stripFit:disabled { opacity: 0.4; }
+.stripStep:disabled, .stripStep[data-disabled] { opacity: 0.4; }
+.stripReadout { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 10px; overflow: hidden; }
+.stripTimecode { flex: 0 0 auto; font: 600 14px ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.stripDescription { flex: 1 1 auto; min-width: 0; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.85; }
+.stripSurface { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; touch-action: none; overscroll-behavior: contain; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.stripHandle { position: absolute; touch-action: none; cursor: ew-resize; z-index: 2; }
+.stripHandleBar { position: absolute; top: 4px; bottom: 4px; border-radius: 3px; background: var(--rb-clip-selected, #ffd43b); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45); }
+.stripPickup { position: absolute; z-index: 3; border: 2px solid var(--rb-clip-selected, #ffd43b); background: rgba(255, 212, 59, 0.25); border-radius: 4px; pointer-events: none; }
+
+/* Add media sheet (RM.8) */
+.mediaGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.mediaTile { display: flex; flex-direction: column; min-width: 0; padding: 8px; border: 1px solid var(--rb-ed-line); border-radius: 8px; background: var(--rb-ed-inspector-bg); }
+.mediaTilePicture { position: relative; display: block; width: 100%; min-height: 88px; border-radius: 6px; overflow: hidden; touch-action: pan-y; }
+.mediaScrubLabel { position: absolute; top: 4px; left: 4px; z-index: 1; padding: 2px 8px; border-radius: 4px; background: rgba(0, 0, 0, 0.75); color: #fff; pointer-events: none; }
+.mediaTileMenu { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; min-width: 44px; margin-top: 6px; border: 1px solid var(--rb-ed-line); border-radius: 8px; font-size: 14px; }
+.binChips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.binChip { flex: 0 0 auto; min-height: 44px; min-width: 44px; padding: 0 14px; border: 1px solid var(--rb-ed-line); border-radius: 22px; font-size: 14px; white-space: nowrap; }
+.binChip[data-active='true'] { background: var(--mantine-color-violet-light); color: var(--mantine-color-violet-light-color); border-color: var(--mantine-color-violet-light-color); }
+
+/* Audio and Captions sheets (RM.11, RM.12) */
+.audioTrack { display: flex; flex-direction: column; gap: 4px; padding: 8px 0; border-top: 1px solid var(--rb-ed-line); }
+.audioTrackName { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wordFlow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.wordChip {
+  min-height: 44px; min-width: 44px; padding: 0 12px; font: inherit; font-size: 15px; color: var(--mantine-color-text);
+  background: var(--mantine-color-default); border: 1px solid var(--rb-ed-line); border-radius: 8px; touch-action: manipulation;
+}
+.wordChip[data-selected='true'] { background: var(--mantine-color-red-light); border-color: var(--mantine-color-red-6); }
+.wordHandle {
+  position: relative; display: inline-block; flex: 0 0 auto; width: 44px; height: 44px; touch-action: none; cursor: ew-resize;
+}
+.wordHandle::after {
+  content: ''; position: absolute; top: 8px; left: 14px; width: 16px; height: 28px; border-radius: 8px; background: var(--mantine-color-red-6);
+}
+.captionRow { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 2px 8px; padding: 8px 0; border-top: 1px solid var(--rb-ed-line); }
+.captionText { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; word-break: break-word; }
+.captionActions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Every Mantine control on the phone is 44 px high, whatever size prop a panel asked for. */
+.shell :is(:global(.mantine-Button-root), :global(.mantine-Input-input), :global(.mantine-SegmentedControl-root), :global(.mantine-Select-input)),
+.shell :is(:global(.mantine-Switch-root), :global(.mantine-Checkbox-root)),
+.sheet :is(:global(.mantine-Switch-root), :global(.mantine-Checkbox-root)),
+.sheet :is(:global(.mantine-Button-root), :global(.mantine-Input-input), :global(.mantine-SegmentedControl-root), :global(.mantine-Select-input)) {
+  min-height: 44px;
+}
+
+/* keyboard focus: a 2px violet ring on the raw buttons */
+.dockItem:focus-visible, .actionBtn:focus-visible, .grabber:focus-visible, .wordChip:focus-visible, .binChip:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-filled); outline-offset: -2px;
+}
+
+/* Panel tabs hosted in a sheet (the Edit sheet's Inspector, Assist, Settings, Versions, Compare): 44 px targets. */
+.sheet :is(:global(.mantine-Tabs-tab)) { min-height: 44px; min-width: 44px; }
+
+/* The picture phone shell: the dock is pinned to the bottom edge and the sheet ends right above it, like the video phone shell. */
+.pictureShell { display: contents; --rb-dock-h: calc(57px + var(--rb-safe-bottom, 0px)); }
+.pictureShell .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 250; }
+.pictureShell[data-landscape] { --rb-dock-h: 0px; }
+.pictureShell[data-landscape] .dock { position: static; }
+
+/* The status line under the action bar: playback details at the left, the "Early preview" label at the right (D2+). */
+.statusRow { display: flex; align-items: center; gap: 8px; min-width: 0; padding-right: 8px; }
+.statusRowMain { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.statusRowMain [data-testid='playback-details-toggle'] { display: block; min-width: 0; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* The label never shrinks: the playback details give way first. */
+.statusRowLabel { flex: 0 0 auto; display: flex; }
+
+/* A phone in either orientation: the preview chip shows its dot (the words stay its name and open on a tap), and the header's controls stay
+   on one row so they can never take the picture's height. */
+.shellPicture [data-testid='parity-badge'] :global(.mantine-Badge-label) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.shellPicture [data-testid='viewer-header'] { flex-wrap: nowrap !important; overflow-x: auto; }
+.shellPicture [data-testid='viewer-header'] > * { flex-shrink: 0; }
+/* The chip and the way back from the Simple preview come first, so the tools are what slides under the size button. */
+.shellPicture [data-testid='viewer-header'] > :is([data-testid='parity-badge'], [data-testid='preview-use-live'], [data-testid='preview-live-retry']) { order: -1; }
+
+/* Where the header row would cost the picture too much (mini size; most phones with their browser bars): it sits over the picture and only its controls take touches. */
+.shell[data-viewer-mode='mini']:not([data-landscape='true']) .shellPicture [data-testid='viewer-header'] { position: absolute; top: 0; left: 0; right: 0; z-index: 4; pointer-events: none; }
+.shell[data-viewer-mode='mini']:not([data-landscape='true']) .shellPicture [data-testid='viewer-header'] > * { pointer-events: auto; }
+@media (orientation: portrait) and (max-height: 740px) {
+  .shell:not([data-landscape='true']) .shellPicture [data-testid='viewer-header'] { position: absolute; top: 0; left: 0; right: 0; z-index: 4; pointer-events: none; }
+  .shell:not([data-landscape='true']) .shellPicture [data-testid='viewer-header'] > * { pointer-events: auto; }
+}
+
+/* A short portrait phone (iPhone SE with its browser bars): the picture comes first, the notices wait for a taller screen. */
+@media (orientation: portrait) and (max-height: 640px) {
+  .shell:not([data-landscape='true']) .note,
+  .shell:not([data-landscape='true']) [data-testid='link-migration-banner'] { display: none; }
+}

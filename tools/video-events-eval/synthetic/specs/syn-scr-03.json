@@ -1,0 +1,255 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-scr-03",
+ "videoType": "screen",
+ "frames": 480,
+ "theme": {
+  "bg": "#cfd8e8"
+ },
+ "area": [
+  0,
+  70,
+  960,
+  470
+ ],
+ "chrome": {
+  "bar": "#dfe3e8",
+  "tabOn": "#ffffff",
+  "tabOff": "#c9ced6",
+  "url": "#ffffff",
+  "text": "#222"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "tab": "Inbox",
+   "url": "https://mail.example.test/inbox",
+   "bg": "#f3f7fd"
+  },
+  {
+   "from": 240,
+   "trans": "wipe",
+   "dur": 18,
+   "tab": "Orders",
+   "url": "https://mail.example.test/orders",
+   "bg": "#fdf6ec"
+  }
+ ],
+ "elements": [
+  {
+   "kind": "list",
+   "id": "ls",
+   "name": "inbox list",
+   "x": 60,
+   "y": 100,
+   "w": 700,
+   "h": 900,
+   "rows": [
+    "Subject line 01",
+    "Subject line 02",
+    "Subject line 03",
+    "Subject line 04",
+    "Subject line 05",
+    "Subject line 06",
+    "Subject line 07",
+    "Subject line 08",
+    "Subject line 09",
+    "Subject line 10",
+    "Subject line 11",
+    "Subject line 12",
+    "Subject line 13",
+    "Subject line 14",
+    "Subject line 15",
+    "Subject line 16",
+    "Subject line 17",
+    "Subject line 18",
+    "Subject line 19",
+    "Subject line 20",
+    "Subject line 21",
+    "Subject line 22",
+    "Subject line 23",
+    "Subject line 24"
+   ],
+   "rowH": 54,
+   "color": "#2b3a55",
+   "clip": [
+    60,
+    100,
+    700,
+    400
+   ],
+   "scene": 0,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "skip": [
+    "move_stop"
+   ],
+   "moves": [
+    {
+     "start": 40,
+     "end": 100,
+     "x": 60,
+     "y": -200
+    },
+    {
+     "start": 130,
+     "end": 160,
+     "x": 60,
+     "y": -420
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "tip",
+   "name": "low contrast tooltip",
+   "x": 600,
+   "y": 400,
+   "w": 220,
+   "h": 50,
+   "color": "#c8d3e6",
+   "scene": 0,
+   "peak": 0.45,
+   "label": "Hint",
+   "textColor": "#2b3a55",
+   "vis": [
+    {
+     "in": 170,
+     "out": 220,
+     "fade": 14
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "toast",
+   "name": "toast",
+   "x": 640,
+   "y": 90,
+   "w": 280,
+   "h": 56,
+   "color": "#2b3a55",
+   "scene": 0,
+   "label": "New mail",
+   "vis": [
+    {
+     "in": 185,
+     "out": 232,
+     "slide": [
+      0,
+      -200
+     ],
+     "fade": 8
+    }
+   ]
+  },
+  {
+   "kind": "text",
+   "id": "h",
+   "name": "orders heading",
+   "text": "Orders",
+   "x": 70,
+   "y": 100,
+   "w": 300,
+   "h": 50,
+   "color": "#7a4a10",
+   "scene": 1,
+   "fontSize": 40,
+   "vis": [
+    {
+     "in": 262,
+     "fade": 6
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "chip",
+   "name": "status chip",
+   "x": 70,
+   "y": 180,
+   "w": 160,
+   "h": 50,
+   "color": "#e8a33d",
+   "scene": 1,
+   "label": "Shipped",
+   "skip": [
+    "disappear"
+   ],
+   "vis": [
+    {
+     "in": 300,
+     "out": 420,
+     "fade": 0
+    }
+   ],
+   "hits": [
+    {
+     "kind": "pop",
+     "frame": 330
+    }
+   ]
+  },
+  {
+   "kind": "typed",
+   "id": "ty",
+   "name": "search typing",
+   "text": "order 4471",
+   "x": 300,
+   "y": 190,
+   "w": 130,
+   "h": 28,
+   "color": "#7a4a10",
+   "cpf": 3,
+   "vis": [
+    {
+     "in": 360,
+     "fade": 0
+    }
+   ],
+   "scene": 1,
+   "fontSize": 26,
+   "quiet": true
+  },
+  {
+   "kind": "cursor",
+   "id": "cur",
+   "name": "cursor",
+   "x": 800,
+   "y": 450,
+   "w": 24,
+   "h": 24,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "moves": [
+    {
+     "start": 20,
+     "end": 40,
+     "x": 400,
+     "y": 300
+    },
+    {
+     "start": 200,
+     "end": 225,
+     "x": 300,
+     "y": 210
+    }
+   ],
+   "clicks": [
+    228
+   ],
+   "color": "#fff",
+   "skip": [
+    "move_stop"
+   ]
+  }
+ ]
+}

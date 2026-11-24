@@ -1,0 +1,50 @@
+# The runner gateway under the app's own host: wss://<host>/runner/v1/connect and the opt-in
+# crash collector at /runner/telemetry/v1/reports (docs/runner-protocol.md). Every ReelBolt
+# address lives under one host, so these are paths rather than a runner.<domain> server.
+#
+# Rendered by docker-entrypoint.sh into conf.d/runner-locations.inc when UPSTREAM_RUNNER_GATEWAY
+# is set (an empty file otherwise) and included by the main server blocks. Runners authenticate
+# with a signed Ed25519 hello inside the protocol, so there is NO cookie -> Authorization
+# translation here, any Authorization header a client sends is stripped, and the staging
+# basic-auth front door does not apply: a desktop app cannot answer it.
+#
+# Heartbeats are every 15 s and the gateway declares a runner dead after 45 s, so a 120 s idle
+# timeout never cuts a healthy socket (Cloudflare's own WebSocket idle limit is 100 s).
+location = /runner/v1/connect {
+    auth_basic off;
+    client_max_body_size 1m;
+    proxy_pass ${UPSTREAM_RUNNER_GATEWAY}/v1/connect;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization "";
+    proxy_set_header Cookie "";
+    proxy_buffering off;
+    proxy_cache off;
+    proxy_read_timeout 120s;
+    proxy_send_timeout 120s;
+}
+
+# Opt-in crash reports (sandbox/cmd/runner-gateway/telemetry.go): small JSON documents, POST only,
+# no credential of any kind. The gateway validates, logs and counts each one and stores nothing;
+# the body cap and rate limit here are the first of two.
+location = /runner/telemetry/v1/reports {
+    auth_basic off;
+    limit_except POST { deny all; }
+    limit_req zone=runner_telemetry burst=10 nodelay;
+    client_max_body_size 64k;
+    proxy_pass ${UPSTREAM_RUNNER_GATEWAY}/telemetry/v1/reports;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization "";
+    proxy_set_header Cookie "";
+    proxy_read_timeout 15s;
+    proxy_send_timeout 15s;
+}

@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+The video job in {{.ProjectName}} (workspace {{.OrgName}}) failed.
+{{if .ErrorDetail}}
+Reason: {{.ErrorDetail}}
+{{end}}
+Open the run:
+
+{{.Link}}
+
+-- {{.FooterNote}}

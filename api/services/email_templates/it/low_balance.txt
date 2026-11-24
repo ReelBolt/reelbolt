@@ -1,0 +1,9 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+I crediti di {{.OrgName}} stanno finendo: te ne restano {{.Balance}}.
+
+Aggiungi crediti: {{.Link}}
+
+Le esecuzioni che richiedono più crediti di quelli disponibili non verranno avviate.
+
+-- {{.FooterNote}}

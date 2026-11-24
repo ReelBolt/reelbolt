@@ -1,0 +1,1137 @@
+@import '@mantine/core/styles.css';
+@import '@mantine/notifications/styles.css';
+@import '@mantine/dropzone/styles.css';
+
+/* ReactFlow custom styling. Status colours for the graph (run page + builder). Contrast measured:
+   text-on-fill pairs in graph tokens note of the T-103 report (>= 4.5:1 both schemes). */
+/* Per-scheme values, not light-dark(): custom properties holding light-dark() resolved (double quotes keep clip-colour-source.test.ts's first-match scan on the editor block) as light on xyflow's wrapper in dark mode. */
+:root[data-mantine-color-scheme="light"] {
+    --rb-flow-running: #6d28d9;
+    --rb-flow-done: #2b7a43;
+    --rb-flow-failed: #c92a2a;
+    --rb-flow-skipped: #8a5a00;
+    --rb-flow-pending: #5c6068;
+    --rb-flow-on-fill: #ffffff;
+    --rb-flow-surface: var(--mantine-color-white);
+    --rb-flow-line: var(--mantine-color-gray-4);
+}
+:root[data-mantine-color-scheme="dark"] {
+    --rb-flow-running: #a78bfa;
+    --rb-flow-done: #6fcf8a;
+    --rb-flow-failed: #ff8787;
+    --rb-flow-skipped: #f5b942;
+    --rb-flow-pending: #9a9fab;
+    --rb-flow-on-fill: #14161a;
+    --rb-flow-surface: var(--mantine-color-dark-7);
+    --rb-flow-line: var(--mantine-color-dark-4);
+}
+
+/* html + doubled class: outranks @xyflow/react's own .react-flow / .react-flow.dark defaults whatever the load order. */
+html .react-flow.react-flow {
+    background: var(--mantine-color-body);
+    --xy-edge-stroke-default: var(--rb-flow-line);
+    --xy-handle-background-color-default: var(--rb-flow-pending);
+    --xy-handle-border-color-default: var(--rb-flow-surface);
+    --xy-minimap-background-color-default: var(--rb-flow-surface);
+    --xy-minimap-mask-background-color-default: light-dark(rgba(20, 22, 26, 0.08), rgba(0, 0, 0, 0.4));
+    --xy-controls-button-background-color-default: var(--rb-flow-surface);
+    --xy-controls-button-background-color-hover-default: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+    --xy-controls-button-color-hover-default: var(--mantine-color-text);
+    --xy-controls-button-border-color-default: var(--rb-flow-line);
+    --xy-attribution-background-color-default: transparent;
+    --xy-node-background-color-default: var(--rb-flow-surface);
+    --xy-node-color-default: var(--mantine-color-text);
+    --xy-node-border-default: 1px solid var(--rb-flow-line);
+    --xy-node-boxshadow-hover-default: none;
+    --xy-node-boxshadow-selected-default: 0 0 0 2px var(--rb-flow-running);
+    --xy-node-border-radius-default: var(--mantine-radius-xs);
+    --xy-controls-button-color-default: var(--mantine-color-text);
+    --xy-background-pattern-dots-color-default: var(--rb-flow-line);
+}
+
+.react-flow__controls,
+.react-flow__minimap {
+    border: 1px solid var(--rb-flow-line);
+    border-radius: var(--mantine-radius-xs);
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.react-flow__attribution {
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-dimmed);
+}
+
+html .react-flow .react-flow__controls-button {
+    background: var(--rb-flow-surface);
+    color: var(--mantine-color-text);
+    border-bottom: 1px solid var(--rb-flow-line);
+}
+
+html .react-flow .react-flow__controls-button svg {
+    fill: currentColor;
+}
+
+/* xyflow's own stylesheet loads later and sets #999 (2.8:1 on white); one more class keeps this link on the dimmed text colour. */
+.react-flow .react-flow__attribution a {
+    color: var(--mantine-color-dimmed);
+}
+
+.react-flow__node {
+    transition: box-shadow 0.2s ease;
+}
+
+/* Cheap fallback so a hovered node's expanding body paints above its siblings even before
+   FlowchartBuilder's pin/expand state promotes node.zIndex. Do NOT set `transform` here —
+   React Flow writes the node's actual position into `transform`, so overriding it fights the
+   library's own positioning and causes jitter (especially mid-drag). */
+.react-flow__node:hover {
+    z-index: 10;
+}
+
+.react-flow__edge {
+    transition: all 0.3s ease;
+}
+
+.react-flow__edge-path {
+    stroke-width: 2px;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 5;
+    animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
+
+/* Pulse animation for running nodes */
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--rb-flow-running) 70%, transparent);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px color-mix(in srgb, var(--rb-flow-running) 0%, transparent);
+    }
+}
+
+/* Gradient backgrounds */
+.gradient-violet {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.gradient-yellow {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.gradient-cyan {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+}
+
+.gradient-pink {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+}
+/* Project tabs: one sideways-scrolling row. A tab never shrinks below its label (Mantine's
+   flex item defaults to shrink, which printed labels over each other), never wraps, and keeps a
+   44 px touch target. Icons are dropped on phones to save width. */
+.project-tabs-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+}
+
+.project-tabs-list::-webkit-scrollbar {
+    display: none;
+}
+
+.project-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-height: 44px;
+    scroll-snap-align: center;
+}
+
+.tab-icon {
+    display: inline-flex;
+}
+
+@media (max-width: 599.98px) {
+    .tab-icon {
+        display: none;
+    }
+}
+
+/* Editor surfaces (video timeline studio + Editor page cards). Light by default, dark under
+   Mantine's dark scheme, so the editor follows the app theme instead of being hard-coded dark. */
+:root {
+  --rb-ed-surface: var(--mantine-color-white);
+  --rb-ed-studio-bg: var(--mantine-color-gray-0);
+  --rb-ed-studio-fg: var(--mantine-color-dark-7);
+  --rb-ed-header-bg: var(--mantine-color-white);
+  --rb-ed-pane-bg: var(--mantine-color-gray-1);
+  --rb-ed-inspector-bg: var(--mantine-color-white);
+  --rb-ed-line: rgba(0, 0, 0, 0.09);
+  --rb-ed-line-strong: rgba(0, 0, 0, 0.14);
+  --rb-ed-subtle: rgba(0, 0, 0, 0.025);
+  --rb-ed-chip-bg: rgba(0, 0, 0, 0.05);
+  --rb-ed-ruler-bg: rgba(248, 249, 250, 0.96);
+  --rb-ed-tick: rgba(0, 0, 0, 0.35);
+  --rb-ed-lane: rgba(0, 0, 0, 0.035);
+  --rb-ed-dashed: rgba(0, 0, 0, 0.2);
+  --rb-ed-thumb-bg: var(--mantine-color-gray-2);
+  --rb-ed-curve-grid: rgba(0, 0, 0, 0.2);
+  /* T-002: inactive page labels (band + tablet rail); 8.2:1 on the white header. Never --mantine-color-dimmed. */
+  --rb-ed-fg-muted: #495057;
+  /* VF1: timeline clip colours. Every fill carries white text at >= 4.5:1 (AA) and the selection ring (a
+     non-text mark, drawn inside the clip) holds >= 3:1 against every fill; contrast.test.ts fails below that. */
+  --rb-clip-video: #3f51c7;
+  --rb-clip-audio: #0f7a5a;
+  --rb-clip-title: #7a3fb5;
+  --rb-clip-adjustment: #5b6270;
+  --rb-clip-generator: #586070;
+  --rb-clip-compound: #4a5060;
+  --rb-clip-caption: #8a5a00;
+  --rb-clip-transition: #b34f0d;
+  --rb-clip-insert: #0b7285;
+  --rb-clip-muted: #666b75;
+  --rb-clip-text: #ffffff;
+  --rb-clip-selected: #ffd43b;
+  /* The dark chip behind timeline badges and job labels (white text on it holds AA). */
+  --rb-clip-chip: #15171c;
+  /* W2: picture-handle marks. The picture is the same in either theme, so these do not follow it: every handle
+     is a light core inside a dark halo, which reads on a white frame and a black one alike. */
+  --rb-ed-handle-core: #f8f9fa;
+  --rb-ed-handle-halo: #14171c;
+}
+
+[data-mantine-color-scheme='dark'] {
+  --rb-ed-surface: #101218;
+  --rb-ed-studio-bg: #0a0b0f;
+  --rb-ed-studio-fg: #e6e8ee;
+  --rb-ed-header-bg: #12141a;
+  --rb-ed-pane-bg: #0d0e14;
+  --rb-ed-inspector-bg: #101218;
+  --rb-ed-line: rgba(255, 255, 255, 0.08);
+  --rb-ed-line-strong: rgba(255, 255, 255, 0.12);
+  --rb-ed-subtle: rgba(255, 255, 255, 0.02);
+  --rb-ed-chip-bg: rgba(0, 0, 0, 0.4);
+  --rb-ed-ruler-bg: rgba(20, 20, 25, 0.95);
+  --rb-ed-tick: rgba(255, 255, 255, 0.35);
+  --rb-ed-lane: rgba(0, 0, 0, 0.18);
+  --rb-ed-dashed: rgba(255, 255, 255, 0.2);
+  --rb-ed-thumb-bg: #0b0d12;
+  --rb-ed-curve-grid: rgba(255, 255, 255, 0.25);
+  /* T-002: inactive page labels on #12141a (over 10:1). */
+  --rb-ed-fg-muted: #c1c4cc;
+  --rb-clip-video: #4a5ddb;
+  --rb-clip-audio: #12805f;
+  --rb-clip-title: #8548c4;
+  --rb-clip-adjustment: #5f6675;
+  --rb-clip-generator: #616a7a;
+  --rb-clip-compound: #555c6b;
+  --rb-clip-caption: #8f5f00;
+  --rb-clip-transition: #b8530a;
+  --rb-clip-insert: #0b7589;
+  --rb-clip-muted: #454952;
+  --rb-clip-text: #ffffff;
+  --rb-clip-selected: #ffd43b;
+  /* The dark chip behind timeline badges and job labels (white text on it holds AA). */
+  --rb-clip-chip: #15171c;
+}
+
+/* VF13: density tokens. `data-ed-density` is set on the editor root (EditorSurface). Comfortable is the default; compact packs
+   the controls on a fine pointer; a coarse pointer (data-ed-touch) always gets 44 px hit areas and 48 px rows. */
+[data-editor-surface] {
+  /* VF15: the editor's dimmed text clears WCAG AA (4.5:1) on every editor surface in both schemes; Mantine's own
+     `dimmed` is about 3.3:1 on the light panes. Everything that says c="dimmed" reads this inside the editor. */
+  --rb-text-dim: #596170;
+  --mantine-color-dimmed: var(--rb-text-dim);
+  --rb-control-h: 36px;
+  --rb-icon-h: 32px;
+  --rb-row-h: 40px;
+  --rb-panel-text: 14px;
+  --rb-icon-dense-h: 24px;
+}
+
+/* VF15: no pointer target in the editor is smaller than 24 px (WCAG 2.2 target size): icon buttons and slider thumbs. */
+[data-editor-surface] .mantine-ActionIcon-root {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+/* Reduced motion: the editor's menus, popovers, dialogs, drawers, collapsing panels and toasts appear without
+   sliding or fading (spinners keep turning: they say that work is happening). */
+@media (prefers-reduced-motion: reduce) {
+  body:has([data-editor-surface]) :is(.mantine-Popover-dropdown, .mantine-Menu-dropdown, .mantine-Select-dropdown, .mantine-Tooltip-tooltip, .mantine-Modal-content, .mantine-Modal-overlay, .mantine-Drawer-content, .mantine-Drawer-overlay, .mantine-Collapse-root, .mantine-Notification-root),
+  [data-editor-surface] :is(.mantine-Collapse-root, .mantine-Progress-section) {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* A coarse pointer: buttons, fields and segmented controls reach 44 px whatever size a panel asked for. */
+[data-editor-surface][data-ed-touch='true'] :is(.mantine-Button-root, .mantine-Input-input, .mantine-SegmentedControl-root) {
+  min-height: 44px;
+}
+
+/* Panel tabs (icon-only when the pane is narrow) are finger targets too. */
+[data-editor-surface][data-ed-touch='true'] .mantine-Tabs-tab {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Menus, popovers and dialogs are portalled out of the editor surface, so they do not inherit its touch tokens:
+   on a coarse pointer the editor's icons, menu items and fields in them reach 44 px too. */
+@media (pointer: coarse) {
+  body:has([data-editor-surface]) {
+    --rb-icon-h: 44px;
+    --rb-control-h: 44px;
+    --rb-icon-dense-h: 28px;
+  }
+
+  body:has([data-editor-surface]) .mantine-Menu-item {
+    min-height: 44px;
+  }
+
+  body:has([data-editor-surface]) :is(.mantine-Popover-dropdown, .mantine-Modal-content, .mantine-Drawer-content) :is(.mantine-Button-root, .mantine-Input-input, .mantine-SegmentedControl-root) {
+    min-height: 44px;
+  }
+}
+
+[data-editor-surface] .mantine-Checkbox-root {
+  --checkbox-size: 24px !important;
+}
+
+/* A coarse pointer: a checkbox, radio or switch row is a 44 px target, not just its 24 px box. */
+[data-editor-surface][data-ed-touch='true'] :is(.mantine-Checkbox-root, .mantine-Radio-root, .mantine-Switch-root) {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+[data-editor-surface] .mantine-Slider-thumb,
+[data-editor-surface] .mantine-RangeSlider-thumb {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+[data-mantine-color-scheme='dark'] [data-editor-surface] {
+  --rb-text-dim: #a4abbb;
+  /* Editor notes are written as c="orange.8|9" / c="yellow.8", a fixed dark shade. The themed 8/9
+     steps are dark ramps, unreadable on the dark editor (1.4-1.7:1); the lighter steps give 9-12:1. */
+  --mantine-color-orange-8: var(--mantine-color-orange-3);
+  --mantine-color-orange-9: var(--mantine-color-orange-3);
+  --mantine-color-yellow-8: var(--mantine-color-yellow-3);
+}
+
+[data-editor-surface][data-ed-density='compact'] {
+  --rb-control-h: 28px;
+  --rb-icon-h: 28px;
+  --rb-row-h: 32px;
+  --rb-panel-text: 13px;
+}
+
+[data-editor-surface][data-ed-touch='true'] {
+  --rb-icon-dense-h: 28px;
+  --rb-control-h: 44px;
+  --rb-icon-h: 44px;
+  --rb-row-h: 48px;
+  --rb-panel-text: 14px;
+}
+
+/* VF17: safe areas. The editor routes ask for viewport-fit=cover (their layouts' `viewport`), so the notch,
+   the rounded corners and the home bar are reported through env(safe-area-inset-*). The insets are read once
+   into --rb-safe-*, and everything pinned to a screen edge inside the editor (the app header above it, the
+   editor's own bars, the phone dock, dialogs and sheets, toasts) pads or offsets by them. Outside the editor
+   the variables are 0 and nothing changes. */
+:root {
+  --rb-safe-top: 0px;
+  --rb-safe-right: 0px;
+  --rb-safe-bottom: 0px;
+  --rb-safe-left: 0px;
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  body:has([data-editor-surface]) {
+    --rb-safe-top: env(safe-area-inset-top, 0px);
+    --rb-safe-right: env(safe-area-inset-right, 0px);
+    --rb-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --rb-safe-left: env(safe-area-inset-left, 0px);
+  }
+}
+
+/* The app header is fixed to the top edge: it grows by the top inset and pads its content below the notch, and
+   the space reserved for it (what the page content, the alpha banner and the editor are placed under) grows with it. */
+body:has([data-editor-surface]):not(:has([data-layout='phone'])) .mantine-AppShell-root {
+  --app-shell-header-offset: calc(var(--app-shell-header-height, 60px) + var(--rb-safe-top)) !important;
+}
+
+body:has([data-editor-surface]) .mantine-AppShell-header {
+  height: calc(var(--app-shell-header-height, 60px) + var(--rb-safe-top));
+  padding-top: var(--rb-safe-top);
+  padding-left: var(--rb-safe-left);
+  padding-right: var(--rb-safe-right);
+}
+
+/* Dialogs and bottom sheets keep their last control above the home bar; toasts stay inside the corners. */
+body:has([data-editor-surface]) .mantine-Drawer-body,
+body:has([data-editor-surface]) .mantine-Modal-body {
+  padding-bottom: calc(var(--mantine-spacing-md) + var(--rb-safe-bottom));
+}
+
+body:has([data-editor-surface]) .mantine-Notifications-root {
+  margin-top: var(--rb-safe-top);
+  margin-right: var(--rb-safe-right);
+  margin-bottom: var(--rb-safe-bottom);
+  margin-left: var(--rb-safe-left);
+}
+
+/* VF15: a visible focus ring on every interactive control inside the editor, for keyboard focus only. */
+[data-editor-surface] :is(button, a[href], input, select, textarea, [role='button'], [role='tab'], [role='slider'], [role='switch'], [role='menuitem'], [tabindex]:not([tabindex='-1'])):focus-visible {
+  outline: 2px solid var(--mantine-color-violet-filled);
+  outline-offset: 2px;
+}
+
+/* ---- ReelBolt dashboard skin ("bold but calm"). Tokens first; component rules use Mantine's static classes. ---- */
+:root {
+  /* Brand (site accent tokens). */
+  --rb-accent: #a855f7;
+  --rb-accent-strong: #6d28d9;
+  --rb-accent-ink: #c4b5fd;
+  --rb-accent-deep: #2e1065;
+  /* Ink bar (header) is the site paper in both schemes. */
+  --rb-ink: #0b0b12;
+  --rb-ink-text: #f5f3f8;
+  --rb-ink-dimmed: #a79fb4;
+  --rb-ink-surface: #15131d;
+  --rb-ink-raised: #1d1927;
+  --rb-ink-line: #2e2a3a;
+  --rb-font-display: var(--font-display-face), 'Chakra Petch', Inter, sans-serif;
+  --rb-font-mono: var(--font-mono-face), 'JetBrains Mono', ui-monospace, monospace;
+}
+:root[data-mantine-color-scheme='light'] {
+  --rb-body: #faf9fc;
+  --rb-surface: #ffffff;
+  --rb-surface-raised: #f1eff6;
+  --rb-border: #d6d2e1;
+  --rb-border-strong: #6f6a7d;
+  /* Status text/tint pairs: run state colours for any panel (text on tint, both >= 4.5:1). */
+  --rb-status-running: #5b21b6;
+  --rb-status-running-bg: #ebe3fe;
+  --rb-status-done: #265839;
+  --rb-status-done-bg: #dceee1;
+  --rb-status-failed: #a61f37;
+  --rb-status-failed-bg: #ffe0e3;
+  --rb-status-warn: #7a4a00;
+  --rb-status-warn-bg: #fdf0cf;
+  --rb-focus: #6d28d9;
+  /* Control shapes (control-shape-restyle: variant B "blade", applied app-wide). Consumed by the
+     .mantine-Slider-* / .mantine-RangeSlider-* / .mantine-Switch-* rules at the end of this file
+     and by the Mantine theme overrides in app/theme.ts. Track height is a size scale (xs 12, sm 14,
+     md 18, lg 22, xl 26) that Mantine's own --slider-size-* vars read, so every `size` prop keeps
+     working and dense editor rows stay dense; the thumb is always exactly 2 x the track, which is
+     Mantine's invariant and what makes the fill end at the knob and the knob reach both ends.
+     Geometry is theme-independent by design, so it repeats in both scheme blocks. Colour aliases
+     (--rb-surface, --rb-ink, --rb-ink-text, --rb-focus, --rb-accent-*) keep the control palette from
+     drifting. Disabled pairs stay below 3:1 on purpose (WCAG 1.4.11 inactive exemption); every other
+     pair is measured by docs/design/control-shapes/contrast.mjs. */
+  --rb-control-slant: 15deg;
+  --rb-control-track-h: 18px;
+  --rb-control-track-h-xs: 12px;
+  --rb-control-track-h-sm: 14px;
+  --rb-control-track-h-md: 18px;
+  --rb-control-track-h-lg: 22px;
+  --rb-control-track-h-xl: 26px;
+  --rb-control-track-radius: 3px;
+  --rb-control-thumb-size: 36px;
+  --rb-control-thumb-radius: 3px;
+  --rb-control-thumb-rim: 1px;
+  --rb-control-track-bg: #8c849a;
+  --rb-control-track-bg-disabled: #d6d2e1;
+  --rb-control-fill-bg: #4c1d95;
+  --rb-control-fill-bg-disabled: #b9b3c8;
+  --rb-control-thumb-bg: var(--rb-surface);
+  --rb-control-thumb-rim-color: var(--rb-accent-deep);
+  --rb-control-glow: 0 0 10px 2px color-mix(in srgb, var(--rb-control-focus) 40%, transparent);
+  --rb-control-focus: var(--rb-focus);
+  --rb-control-focus-halo: var(--rb-ink-text);
+  --rb-control-hit: 44px;
+  --rb-control-switch-w: 46px;
+  --rb-control-switch-h: 26px;
+  --rb-control-switch-w-xs: 36px;
+  --rb-control-switch-h-xs: 20px;
+  --rb-control-switch-thumb-xs: 14px;
+  --rb-control-switch-w-sm: 46px;
+  --rb-control-switch-h-sm: 26px;
+  --rb-control-switch-thumb-sm: 18px;
+  --rb-control-switch-w-md: 54px;
+  --rb-control-switch-h-md: 30px;
+  --rb-control-switch-thumb-md: 22px;
+  --rb-control-switch-w-lg: 64px;
+  --rb-control-switch-h-lg: 36px;
+  --rb-control-switch-thumb-lg: 28px;
+  --rb-control-switch-w-xl: 78px;
+  --rb-control-switch-h-xl: 44px;
+  --rb-control-switch-thumb-xl: 36px;
+  --rb-control-switch-radius: 3px;
+  --rb-control-switch-thumb: 18px;
+  --rb-control-switch-off-bg: #8c849a;
+  --rb-control-switch-on-bg: var(--rb-accent-strong);
+  --rb-control-switch-thumb-bg: var(--rb-surface);
+}
+:root[data-mantine-color-scheme='dark'] {
+  --rb-body: #0b0b12;
+  --rb-surface: #15131d;
+  --rb-surface-raised: #1d1927;
+  --rb-border: #2e2a3a;
+  --rb-border-strong: #6f6a7d;
+  --rb-status-running: #c4b5fd;
+  --rb-status-running-bg: #2a1a4d;
+  --rb-status-done: #92c7a2;
+  --rb-status-done-bg: #14261b;
+  --rb-status-failed: #fa9aa6;
+  --rb-status-failed-bg: #3a1220;
+  --rb-status-warn: #f2c45c;
+  --rb-status-warn-bg: #33270a;
+  --rb-focus: #c4b5fd;
+  /* Control shapes (control-shape-restyle: variant B "blade", applied app-wide). Geometry repeats
+     the light block on purpose (it is theme-independent); only the palette differs. Same aliasing
+     and disabled-exemption notes as the light block. */
+  --rb-control-slant: 15deg;
+  --rb-control-track-h: 18px;
+  --rb-control-track-h-xs: 12px;
+  --rb-control-track-h-sm: 14px;
+  --rb-control-track-h-md: 18px;
+  --rb-control-track-h-lg: 22px;
+  --rb-control-track-h-xl: 26px;
+  --rb-control-track-radius: 3px;
+  --rb-control-thumb-size: 36px;
+  --rb-control-thumb-radius: 3px;
+  --rb-control-thumb-rim: 1px;
+  --rb-control-track-bg: #6a6478;
+  --rb-control-track-bg-disabled: #2e2a3a;
+  --rb-control-fill-bg: #c4b5fd;
+  --rb-control-fill-bg-disabled: #4f4a5d;
+  --rb-control-thumb-bg: var(--rb-ink);
+  --rb-control-thumb-rim-color: var(--rb-accent-ink);
+  --rb-control-glow: 0 0 10px 2px color-mix(in srgb, var(--rb-control-focus) 40%, transparent);
+  --rb-control-focus: var(--rb-focus);
+  --rb-control-focus-halo: var(--rb-ink);
+  --rb-control-hit: 44px;
+  --rb-control-switch-w: 46px;
+  --rb-control-switch-h: 26px;
+  --rb-control-switch-w-xs: 36px;
+  --rb-control-switch-h-xs: 20px;
+  --rb-control-switch-thumb-xs: 14px;
+  --rb-control-switch-w-sm: 46px;
+  --rb-control-switch-h-sm: 26px;
+  --rb-control-switch-thumb-sm: 18px;
+  --rb-control-switch-w-md: 54px;
+  --rb-control-switch-h-md: 30px;
+  --rb-control-switch-thumb-md: 22px;
+  --rb-control-switch-w-lg: 64px;
+  --rb-control-switch-h-lg: 36px;
+  --rb-control-switch-thumb-lg: 28px;
+  --rb-control-switch-w-xl: 78px;
+  --rb-control-switch-h-xl: 44px;
+  --rb-control-switch-thumb-xl: 36px;
+  --rb-control-switch-radius: 3px;
+  --rb-control-switch-thumb: 18px;
+  --rb-control-switch-off-bg: #6a6478;
+  --rb-control-switch-on-bg: var(--rb-accent);
+  --rb-control-switch-thumb-bg: var(--rb-ink);
+}
+body { background: var(--rb-body); }
+
+/* Nav: the active item is a solid accent tab with an inset ink-text bar (white on #7c3aed 5.7:1, bar vs tab >= 3:1). */
+.mantine-NavLink-root[data-active] {
+  background: var(--mantine-color-violet-6);
+  color: #ffffff;
+  box-shadow: inset 3px 0 0 var(--rb-ink-text);
+}
+.mantine-NavLink-root[data-active]:hover { background: var(--mantine-color-violet-7); }
+.mantine-NavLink-root[data-active] :is(.mantine-NavLink-label, .mantine-NavLink-section, .mantine-NavLink-description) { color: #ffffff; }
+
+/* Focus. Mantine draws its own ring on controls (.mantine-focus-auto / -always, primary-filled colour = 2.4:1 in dark) and shows
+   input focus only by switching --input-bd. Both are re-pointed at --rb-focus (7.1:1 light, 9.95:1 dark); `html` out-ranks Mantine's rules. */
+html :where(a, button, [tabindex]):focus-visible,
+html .mantine-focus-auto:focus-visible,
+html .mantine-focus-always:focus {
+  outline: 2px solid var(--rb-focus);
+  outline-offset: 2px;
+}
+html .mantine-Input-input[data-variant='default'] { --input-bd-focus: var(--rb-focus); }
+html .mantine-Input-input:focus,
+html .mantine-Input-input:focus-within {
+  outline: 2px solid var(--rb-focus);
+  outline-offset: 1px;
+}
+/* Resting input border at 3:1+. Written as --input-bd (not border-color) and only while idle, so Mantine's :focus and [data-error]
+   rules keep control of the focus and error borders. */
+html .mantine-Input-input[data-variant='default']:not(:focus, :focus-within, [data-error], [data-success]) { --input-bd: var(--rb-border-strong); }
+
+/* Messages. Dark Mantine uses red-8 / green-8 (1.7:1 here); red-4 / green-4 clear 4.5:1 on every dark surface. */
+html:root[data-mantine-color-scheme='dark'] {
+  --mantine-color-error: var(--mantine-color-red-4);
+  --mantine-color-success: var(--mantine-color-green-4);
+}
+/* Placeholder: dimmed-level in light (gray-5 was 3.2:1). */
+html:root[data-mantine-color-scheme='light'] { --mantine-color-placeholder: var(--mantine-color-gray-6); }
+
+/* Disabled controls: no fill, dashed border, muted but readable label, so they cannot be mistaken for secondary buttons. */
+.mantine-Button-root:is(:disabled, [data-disabled]) {
+  background: transparent;
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2));
+  border: 1px dashed light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+}
+
+/* A "white" button on a tinted panel in dark mode becomes an outlined ink button (e.g. "Why did it fail?"). */
+:root[data-mantine-color-scheme='dark'] .mantine-Button-root[data-variant='white'] {
+  background: var(--rb-ink-surface);
+  color: var(--rb-accent-ink);
+  border: 1px solid var(--rb-accent-ink);
+}
+
+/* Badges: mono, never ellipsized (PLAN CREDITS on phone, role badges in tablet tables). */
+.mantine-Badge-root { max-width: none; flex-shrink: 0; letter-spacing: 0.04em; }
+.mantine-Badge-label { overflow: visible; text-overflow: clip; }
+
+/* Floating layers: hairline border, no shadow. */
+:is(.mantine-Popover-dropdown, .mantine-Menu-dropdown, .mantine-Select-dropdown, .mantine-Combobox-dropdown, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notification-root, .mantine-Spotlight-content) {
+  box-shadow: none;
+  border: 1px solid var(--rb-border-strong);
+}
+/* Destructive menu items: Mantine paints them red-6 (2.9:1 on the dark surface); red-4 clears 4.5:1 there. */
+:root[data-mantine-color-scheme='dark'] .mantine-Menu-item[style*='--mantine-color-red-6'] { color: var(--mantine-color-red-4); }
+.mantine-Tooltip-tooltip { border: 1px solid var(--rb-border-strong); box-shadow: none; }
+.mantine-Modal-title, .mantine-Drawer-title { font-family: var(--rb-font-display); font-weight: 700; }
+
+/* Tabs: underline in the accent, mono-free so long tab labels stay readable. */
+.mantine-Tabs-tab[data-active] { border-color: var(--mantine-color-violet-6); }
+
+/* Segmented control: the selected label sits on the solid violet indicator, so it reads white (7.1:1), not Mantine's black (2.9:1). */
+.mantine-SegmentedControl-label[data-active] { color: var(--mantine-color-white); }
+
+/* Selection controls: solid accent when on, visible 3:1 border when off. */
+html :is(.mantine-Checkbox-input, .mantine-Radio-radio, .mantine-Switch-track):not(:checked) { border-color: var(--rb-border-strong); }
+
+/* Table rows: hairline dividers, header row on a raised surface. */
+.mantine-Table-thead .mantine-Table-tr, .mantine-Table-thead { background: var(--rb-surface-raised); }
+.mantine-Table-tr[data-hover]:hover, .mantine-Table-tbody .mantine-Table-tr:hover { background: var(--rb-surface-raised); }
+
+/* Skeletons and code: flat, on the raised surface. */
+.mantine-Skeleton-root::after { background: var(--rb-surface-raised); }
+:is(.mantine-Code-root, .mantine-Kbd-root) { font-family: var(--rb-font-mono); background: var(--rb-surface-raised); border: 1px solid var(--rb-border); }
+
+/* Password eye toggle: 44px square on touch pointers (WCAG 2.5.8) for every PasswordInput. */
+@media (pointer: coarse) {
+  .mantine-PasswordInput-visibilityToggle {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Header fit on a narrow phone: five 44px controls plus the wordmark do not fit 360-390px, so the mark
+   stays and the wordmark becomes screen-reader-only (it still names the brand). */
+@media (max-width: 30em) {
+    .touch-targets .brand-wordmark {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+}
+
+/* Skip link (C12): first tab stop on every app page, visible only while focused. */
+.skip-link {
+    position: absolute;
+    left: 8px;
+    top: -100px;
+    z-index: 1000;
+    padding: 10px 16px;
+    background: var(--rb-ink);
+    color: var(--rb-ink-text);
+    border: 2px solid var(--rb-accent);
+    border-radius: 4px;
+    font-size: 14px;
+}
+.skip-link:focus {
+    top: 8px;
+}
+
+/* Phone touch targets (launch-reliability T-004): on a phone every control in the app chrome and the
+   pages under it is at least 44x44 CSS px. Opt-in via the .touch-targets class (AppShell and the auth
+   layout); the editor sizes its own controls and does not carry it. Inline-text links are left alone. */
+@media (max-width: 64em), (pointer: coarse) {
+    .touch-targets {
+        --nav-toggle-min-height: 44px;
+        --nav-link-min-height: 44px;
+    }
+
+    :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notifications-root) :is(.mantine-Button-root, .mantine-ActionIcon-root, .mantine-CloseButton-root, .mantine-Burger-root, .mantine-NavLink-root, .mantine-SegmentedControl-label, .mantine-Chip-label, .mantine-Switch-track):not(.mantine-Button-inner, .mantine-Button-label) {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notifications-root) :is(.mantine-Input-input, .mantine-Select-input, .mantine-Textarea-input, .mantine-PasswordInput-innerInput) {
+        min-height: 44px;
+    }
+
+    /* Height only: a min-width here would let a tab shrink below its label inside the scrolling tab row. */
+    :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notifications-root) :is(.mantine-Tabs-tab, .mantine-UnstyledButton-root) {
+        min-height: 44px;
+    }
+
+    .touch-targets a.touch-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .touch-targets .touch-icon {
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Checkbox and radio rows: the 44px is the row (the label is part of the hit area), never the
+       20px control box, which would overlap the start of the label text (A17). */
+    .touch-targets :is(.mantine-Checkbox-body, .mantine-Radio-body) {
+        min-height: 44px;
+        align-items: center;
+    }
+
+    /* The run graph's zoom buttons and the library attribution (kept, but readable and tappable). */
+    .react-flow .react-flow__controls .react-flow__controls-button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .react-flow .react-flow__panel.react-flow__attribution {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+    /* Badges default to 9-10px text (size xs/sm); nothing a phone user must read is under 12px. */
+    :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content) .mantine-Badge-label {
+        font-size: 12px;
+    }
+
+    /* Stand-alone links and menu rows (not links inside a paragraph). */
+    .touch-targets :is(.mantine-Menu-item, .mantine-Anchor-root) {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Touch: portaled Menu dropdown rows (account menu, row menus) are 44px targets on a coarse pointer, in
+   and out of the editor (the editor-only rule above covers only body:has([data-editor-surface])). */
+@media (pointer: coarse) {
+  .mantine-Menu-dropdown .mantine-Menu-item {
+    min-height: 44px;
+  }
+}
+
+/* ---- Control shapes: variant B "blade" (control-shape-restyle, applied app-wide). ----
+   Presentation only. The pointer target is Mantine's track container, which is never transformed,
+   so the whole track stays draggable and the slant leaves no dead zone at the ends. Geometry and
+   colour come from the --rb-control-* tokens above; no literal colour appears in these rules. */
+
+/* Size scale: Mantine's own --slider-size-{xs..xl} pick the track height, and the thumb follows at
+   2 x the track through the token, so every existing `size` prop keeps its meaning. */
+html .mantine-Slider-root,
+html .mantine-RangeSlider-root {
+  --slider-size-xs: var(--rb-control-track-h-xs);
+  --slider-size-sm: var(--rb-control-track-h-sm);
+  --slider-size-md: var(--rb-control-track-h-md);
+  --slider-size-lg: var(--rb-control-track-h-lg);
+  --slider-size-xl: var(--rb-control-track-h-xl);
+  --rb-control-track-h: var(--slider-size);
+  --rb-control-track-radius: calc(var(--slider-size) / 6);
+  --rb-control-thumb-radius: calc(var(--slider-size) / 6);
+  --rb-control-thumb-size: calc(var(--slider-size) * 2);
+}
+
+/* The track is the skew carrier: the bar, both thumbs and the marks are its children, so they share
+   one slanted centre line and both thumbs still reach the visual ends. */
+html .mantine-Slider-track,
+html .mantine-RangeSlider-track {
+  height: var(--rb-control-track-h);
+  transform: skewX(var(--rb-control-slant));
+  transform-origin: center;
+}
+
+html .mantine-Slider-track::before,
+html .mantine-RangeSlider-track::before {
+  background-color: var(--rb-control-track-bg);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-track-radius);
+}
+html .mantine-Slider-track[data-disabled]::before,
+html .mantine-RangeSlider-track[data-disabled]::before {
+  background-color: var(--rb-control-track-bg-disabled);
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+html .mantine-Slider-bar,
+html .mantine-RangeSlider-bar {
+  background-color: var(--rb-control-fill-bg);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-track-radius);
+}
+html .mantine-Slider-bar[data-disabled],
+html .mantine-RangeSlider-bar[data-disabled] {
+  background-color: var(--rb-control-fill-bg-disabled);
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+html .mantine-Slider-thumb,
+html .mantine-RangeSlider-thumb {
+  width: var(--rb-control-thumb-size);
+  height: var(--rb-control-thumb-size);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-thumb-radius);
+  background-color: var(--rb-control-thumb-bg);
+  box-shadow: none;
+}
+
+/* Invisible 44 px extension of the thumb: the finger target, larger than the visible knob. */
+html .mantine-Slider-thumb::after,
+html .mantine-RangeSlider-thumb::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--rb-control-hit);
+  height: var(--rb-control-hit);
+  transform: translate(-50%, -50%);
+}
+
+/* Mantine hides a disabled thumb; keep a muted knob so a disabled slider has the same anatomy as a
+   disabled switch. The muted pairs sit below 3:1 by design (inactive exemption). */
+html .mantine-Slider-thumb[data-disabled],
+html .mantine-RangeSlider-thumb[data-disabled] {
+  display: flex;
+  background-color: var(--rb-control-track-bg);
+  border-width: calc(var(--rb-control-thumb-rim) / 2);
+  border-color: var(--rb-control-track-bg-disabled);
+  box-shadow: none;
+}
+
+/* B's glow exists only on the active thumb (hovered, dragging or focused), never at rest. */
+html .mantine-Slider-thumb:hover,
+html .mantine-Slider-thumb[data-dragging],
+html .mantine-RangeSlider-thumb:hover,
+html .mantine-RangeSlider-thumb[data-dragging] {
+  box-shadow: var(--rb-control-glow);
+}
+
+/* Two-tone focus ring: a solid halo band next to the thumb plus an outer outline. An outline is
+   painted after the transform, so the ring follows the slanted shape (never a glow-only cue). */
+html .mantine-Slider-thumb:focus-visible,
+html .mantine-RangeSlider-thumb:focus-visible {
+  outline: 2px solid var(--rb-control-focus);
+  outline-offset: 4px;
+  box-shadow:
+    0 0 0 2px var(--rb-control-focus-halo),
+    var(--rb-control-glow);
+}
+
+/* Dense rows: shrink the ring, not the row. thumb + 8 px is 44 px at md and 32 px at xs, so the
+   ring fits the editor's 32 px compact rows and 44 px touch rows without growing either. */
+html [data-editor-surface] .mantine-Slider-thumb:focus-visible,
+html [data-editor-surface] .mantine-RangeSlider-thumb:focus-visible {
+  outline: 2px solid var(--rb-control-focus);
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 2px var(--rb-control-focus-halo),
+    var(--rb-control-glow);
+}
+
+/* ---- Switch: the track is the skew carrier; the thumb and its label are its children. ---- */
+html .mantine-Switch-root {
+  --switch-height-xs: var(--rb-control-switch-h-xs);
+  --switch-height-sm: var(--rb-control-switch-h-sm);
+  --switch-height-md: var(--rb-control-switch-h-md);
+  --switch-height-lg: var(--rb-control-switch-h-lg);
+  --switch-height-xl: var(--rb-control-switch-h-xl);
+  --switch-width-xs: var(--rb-control-switch-w-xs);
+  --switch-width-sm: var(--rb-control-switch-w-sm);
+  --switch-width-md: var(--rb-control-switch-w-md);
+  --switch-width-lg: var(--rb-control-switch-w-lg);
+  --switch-width-xl: var(--rb-control-switch-w-xl);
+  --switch-thumb-size-xs: var(--rb-control-switch-thumb-xs);
+  --switch-thumb-size-sm: var(--rb-control-switch-thumb-sm);
+  --switch-thumb-size-md: var(--rb-control-switch-thumb-md);
+  --switch-thumb-size-lg: var(--rb-control-switch-thumb-lg);
+  --switch-thumb-size-xl: var(--rb-control-switch-thumb-xl);
+  --rb-control-switch-h: var(--switch-height);
+  --rb-control-switch-w: var(--switch-width);
+  --rb-control-switch-thumb: var(--switch-thumb-size);
+  --switch-track-label-padding: calc((var(--switch-height) - var(--switch-thumb-size)) / 2) !important;
+}
+
+html .mantine-Switch-root .mantine-Switch-track {
+  width: var(--rb-control-switch-w);
+  min-width: var(--rb-control-switch-w);
+  height: var(--rb-control-switch-h);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-switch-radius);
+  background-color: var(--rb-control-switch-off-bg);
+  transform: skewX(var(--rb-control-slant));
+  transform-origin: center;
+  overflow: visible;
+}
+html .mantine-Switch-input:checked + .mantine-Switch-track {
+  background-color: var(--rb-control-switch-on-bg);
+}
+html .mantine-Switch-root .mantine-Switch-thumb {
+  width: var(--rb-control-switch-thumb);
+  height: var(--rb-control-switch-thumb);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-switch-radius);
+  background-color: var(--rb-control-switch-thumb-bg);
+}
+html .mantine-Switch-input:focus-visible + .mantine-Switch-track {
+  outline: 2px solid var(--rb-control-focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--rb-control-focus-halo);
+}
+html .mantine-Switch-root:hover .mantine-Switch-thumb,
+html .mantine-Switch-input:focus-visible + .mantine-Switch-track .mantine-Switch-thumb {
+  box-shadow: var(--rb-control-glow);
+}
+html .mantine-Switch-input:disabled + .mantine-Switch-track {
+  background-color: var(--rb-control-track-bg-disabled);
+  border-color: var(--rb-control-track-bg-disabled);
+}
+html .mantine-Switch-input:checked:disabled + .mantine-Switch-track {
+  background-color: var(--rb-control-fill-bg-disabled);
+}
+html .mantine-Switch-input:disabled + .mantine-Switch-track .mantine-Switch-thumb {
+  background-color: var(--rb-control-track-bg);
+  border-color: var(--rb-control-track-bg-disabled);
+  box-shadow: none;
+}
+/* Mantine paints a disabled switch label gray-5 (2.8:1 on the light page); dimmed is 6.0/7.7:1. */
+html .mantine-Switch-labelWrapper .mantine-Switch-label[data-disabled] {
+  color: var(--mantine-color-dimmed);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .mantine-Slider-thumb,
+  html .mantine-RangeSlider-thumb,
+  html .mantine-Switch-thumb,
+  html .mantine-Switch-track,
+  html .mantine-Switch-trackLabel {
+    transition: none !important;
+  }
+}
+
+/* Touch: the visible control keeps its B shape and the labelled row around it is the 44 px target.
+   On a fine pointer the row is the thumb itself, so desktop density does not grow by a row. */
+@media (pointer: coarse) {
+  html .mantine-Slider-root,
+  html .mantine-RangeSlider-root,
+  html .mantine-Slider-trackContainer,
+  html .mantine-RangeSlider-trackContainer {
+    min-height: var(--rb-control-hit);
+  }
+  html .mantine-Slider-thumb:focus-visible,
+  html .mantine-RangeSlider-thumb:focus-visible {
+    outline-offset: 2px;
+  }
+}
+
+/* The switch keeps the blade shape inside the launch-reliability touch containers too: the
+   `.touch-targets` rule forces `.mantine-Switch-track` to 44 px on a coarse pointer *and* on any
+   window at or below 64em. One extra class (`-root`) out-ranks it, and the labelled `<label>` body
+   carries the 44 px target instead of the track. */
+@media (max-width: 64em), (pointer: coarse) {
+  html :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notifications-root) .mantine-Switch-root .mantine-Switch-track {
+    min-width: var(--rb-control-switch-w);
+    min-height: var(--rb-control-switch-h);
+  }
+  html :is(.touch-targets, .mantine-Modal-content, .mantine-Drawer-content, .mantine-Notifications-root) .mantine-Switch-body {
+    min-height: var(--rb-control-hit);
+  }
+}
+
+/* ─── Branded pointer set ─────────────────────────────────────────────────────────────────────
+   One token per cursor, holding the whole chain: @1x, @2x, then the catalog's standard keyword.
+   The keyword is required — with images blocked or a browser that refuses the PNG, the rule falls
+   back to that keyword, never to nothing. Dashed under /app because the dashboard is served
+   under that basePath and Next does not rewrite absolute url() paths. Artwork and hotspots come
+   from brand/cursors (docs/design/cursors.md); never edit the PNGs or hand-write a url() in a
+   component — consume these tokens. */
+:root {
+  --rb-cursor-default: url('/app/cursors/default.png') 6 2, url('/app/cursors/default@2x.png') 12 4, default;
+  --rb-cursor-pointer: url('/app/cursors/pointer.png') 12 2, url('/app/cursors/pointer@2x.png') 24 4, pointer;
+  --rb-cursor-text: url('/app/cursors/text.png') 16 16, url('/app/cursors/text@2x.png') 32 32, text;
+  --rb-cursor-not-allowed: url('/app/cursors/not-allowed.png') 16 16, url('/app/cursors/not-allowed@2x.png') 32 32, not-allowed;
+  --rb-cursor-progress: url('/app/cursors/progress.png') 16 16, url('/app/cursors/progress@2x.png') 32 32, progress;
+  --rb-cursor-grab: url('/app/cursors/grab.png') 16 16, url('/app/cursors/grab@2x.png') 32 32, grab;
+  --rb-cursor-grabbing: url('/app/cursors/grabbing.png') 16 16, url('/app/cursors/grabbing@2x.png') 32 32, grabbing;
+  --rb-cursor-move: url('/app/cursors/move.png') 16 16, url('/app/cursors/move@2x.png') 32 32, move;
+  --rb-cursor-resize-ew: url('/app/cursors/resize-ew.png') 16 16, url('/app/cursors/resize-ew@2x.png') 32 32, ew-resize;
+  --rb-cursor-resize-ns: url('/app/cursors/resize-ns.png') 16 16, url('/app/cursors/resize-ns@2x.png') 32 32, ns-resize;
+  --rb-cursor-resize-nwse: url('/app/cursors/resize-nwse.png') 16 16, url('/app/cursors/resize-nwse@2x.png') 32 32, nwse-resize;
+  --rb-cursor-resize-nesw: url('/app/cursors/resize-nesw.png') 16 16, url('/app/cursors/resize-nesw@2x.png') 32 32, nesw-resize;
+  --rb-cursor-razor: url('/app/cursors/razor.png') 6 27, url('/app/cursors/razor@2x.png') 12 54, crosshair;
+  --rb-cursor-trim-left: url('/app/cursors/trim-left.png') 13 16, url('/app/cursors/trim-left@2x.png') 26 32, ew-resize;
+  --rb-cursor-trim-right: url('/app/cursors/trim-right.png') 19 16, url('/app/cursors/trim-right@2x.png') 38 32, ew-resize;
+  --rb-cursor-ripple: url('/app/cursors/ripple.png') 16 16, url('/app/cursors/ripple@2x.png') 32 32, ew-resize;
+  --rb-cursor-slip: url('/app/cursors/slip.png') 16 16, url('/app/cursors/slip@2x.png') 32 32, ew-resize;
+  --rb-cursor-slide: url('/app/cursors/slide.png') 16 16, url('/app/cursors/slide@2x.png') 32 32, ew-resize;
+  --rb-cursor-pan: url('/app/cursors/pan.png') 16 16, url('/app/cursors/pan@2x.png') 32 32, grab;
+  --rb-cursor-scrub: url('/app/cursors/scrub.png') 16 16, url('/app/cursors/scrub@2x.png') 32 32, ew-resize;
+  --rb-cursor-mask-draw: url('/app/cursors/mask-draw.png') 16 16, url('/app/cursors/mask-draw@2x.png') 32 32, crosshair;
+  --rb-cursor-mask-brush: url('/app/cursors/mask-brush.png') 4 28, url('/app/cursors/mask-brush@2x.png') 8 56, crosshair;
+  --rb-cursor-eyedropper: url('/app/cursors/eyedropper.png') 5 28, url('/app/cursors/eyedropper@2x.png') 10 56, crosshair;
+  --rb-cursor-keyframe: url('/app/cursors/keyframe.png') 16 16, url('/app/cursors/keyframe@2x.png') 32 32, pointer;
+  --rb-cursor-zoom-in: url('/app/cursors/zoom-in.png') 13 13, url('/app/cursors/zoom-in@2x.png') 26 26, zoom-in;
+  --rb-cursor-zoom-out: url('/app/cursors/zoom-out.png') 13 13, url('/app/cursors/zoom-out@2x.png') 26 26, zoom-out;
+  --rb-cursor-crosshair: url('/app/cursors/crosshair.png') 16 16, url('/app/cursors/crosshair@2x.png') 32 32, crosshair;
+}
+
+/* Touch is a cursor-free surface, and a forced-colors user is relying on the OS cursor for
+   contrast: in both cases every token collapses to its keyword, so all the rules below keep the
+   exact cursor the platform would have shown. */
+@media (pointer: coarse), (forced-colors: active) {
+  :root {
+    --rb-cursor-default: default;
+    --rb-cursor-pointer: pointer;
+    --rb-cursor-text: text;
+    --rb-cursor-not-allowed: not-allowed;
+    --rb-cursor-progress: progress;
+    --rb-cursor-grab: grab;
+    --rb-cursor-grabbing: grabbing;
+    --rb-cursor-move: move;
+    --rb-cursor-resize-ew: ew-resize;
+    --rb-cursor-resize-ns: ns-resize;
+    --rb-cursor-resize-nwse: nwse-resize;
+    --rb-cursor-resize-nesw: nesw-resize;
+    --rb-cursor-razor: crosshair;
+    --rb-cursor-trim-left: ew-resize;
+    --rb-cursor-trim-right: ew-resize;
+    --rb-cursor-ripple: ew-resize;
+    --rb-cursor-slip: ew-resize;
+    --rb-cursor-slide: ew-resize;
+    --rb-cursor-pan: grab;
+    --rb-cursor-scrub: ew-resize;
+    --rb-cursor-mask-draw: crosshair;
+    --rb-cursor-mask-brush: crosshair;
+    --rb-cursor-eyedropper: crosshair;
+    --rb-cursor-keyframe: pointer;
+    --rb-cursor-zoom-in: zoom-in;
+    --rb-cursor-zoom-out: zoom-out;
+    --rb-cursor-crosshair: crosshair;
+  }
+}
+
+/* The branded arrow is the app's resting pointer; every rule below only opts a surface into a
+   more specific one, and any component rule (class or inline) still outranks these. */
+html,
+body {
+  cursor: var(--rb-cursor-default);
+}
+
+/* Interactive elements. Zero specificity on purpose: a component that knows better (a drag grip,
+   a trim handle, a phone control) keeps its own rule. */
+:where(a[href], button, [role='button'], [role='link'], [role='tab'], [role='menuitem'], [role='option'], summary, label[for], select) {
+  cursor: var(--rb-cursor-pointer);
+}
+
+/* Mantine's own styles set the stock hand/not-allowed at class specificity, and this file loads
+   after them, so these class selectors win where the zero-specificity rule above cannot. */
+.mantine-Button-root:not(:disabled):not([data-disabled]),
+.mantine-ActionIcon-root:not(:disabled):not([data-disabled]),
+.mantine-UnstyledButton-root:not(:disabled):not([data-disabled]),
+.mantine-Anchor-root,
+.mantine-Pagination-control:not(:disabled):not([data-disabled]),
+.mantine-NativeSelect-input:not(:disabled):not([data-disabled]),
+.mantine-Select-input:not(:disabled):not([data-disabled]),
+.mantine-Combobox-option:not([data-combobox-disabled]):not([data-disabled]):not(:disabled),
+.mantine-Menu-item:not([data-disabled]):not(:disabled) {
+  cursor: var(--rb-cursor-pointer);
+}
+.mantine-Button-root:disabled,
+.mantine-Button-root[data-disabled],
+.mantine-ActionIcon-root:disabled,
+.mantine-ActionIcon-root[data-disabled],
+.mantine-Pagination-control:disabled,
+.mantine-Pagination-control[data-disabled],
+.mantine-Input-input:disabled,
+.mantine-Input-input[data-disabled],
+.mantine-Combobox-option[data-combobox-disabled],
+.mantine-Combobox-option[data-disabled],
+.mantine-Menu-item[data-disabled],
+.mantine-Menu-item:disabled {
+  cursor: var(--rb-cursor-not-allowed);
+}
+
+/* Native I-beam stays native inside editable text: the caret affordance matters more than the
+   brand (Owner Phase-3 rule). Element specificity, so a component rule still wins. */
+:where(
+  input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='reset']):not([type='range']):not([type='color']):not([type='file']):not([type='image']),
+  textarea,
+  [contenteditable=''],
+  [contenteditable='true'],
+  [contenteditable='plaintext-only']
+) {
+  cursor: text;
+}
+
+/* App-wide touch rule (goal-chooser-and-app-navigation T-002). AppShell sets data-app-touch="true" on <body>
+   (useAppTouchAttribute) on the phone class and on a coarse-pointer tablet, everywhere but the editor, which
+   sizes its own controls. Body, not the shell root, because menus, dialogs and drawers are portalled out of the
+   shell. Desktop (fine pointer, wider than 1100 px) never gets the attribute and keeps its compact sizes. */
+body[data-app-touch='true'] {
+  /* The 12 px floor: Mantine's xs/sm text scale and its Badge/Button small sizes never go below it. */
+  --mantine-font-size-xs: 0.75rem;
+  --badge-fz-xs: 0.75rem;
+  --badge-fz-sm: 0.75rem;
+  --button-fz-xs: 0.75rem;
+  --button-fz-sm: 0.8125rem;
+  --button-fz-compact-xs: 0.75rem;
+  --button-fz-compact-sm: 0.75rem;
+}
+
+body[data-app-touch='true'] :is(.mantine-Badge-root, .mantine-Badge-label) {
+  font-size: max(12px, var(--badge-fz, 12px));
+}
+
+body[data-app-touch='true'] :is(.mantine-Button-root, .mantine-ActionIcon-root, .mantine-CloseButton-root, .mantine-Tabs-tab, .mantine-Chip-label):not(.mantine-Button-inner, .mantine-Button-label) {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* A Badge that is a button or link (component="button" / "a", or an onClick one) is a target too. */
+body[data-app-touch='true'] :is(button, a, [role='button']).mantine-Badge-root {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The checkbox row is the target (label included); the box itself stays a legible 24 px. */
+body[data-app-touch='true'] .mantine-Checkbox-root {
+  --checkbox-size: 24px;
+}
+body[data-app-touch='true'] .mantine-Checkbox-body {
+  min-height: 44px;
+  align-items: center;
+}

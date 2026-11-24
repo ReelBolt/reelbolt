@@ -1,0 +1,422 @@
+{
+  "stepList": {
+    "addStep": "Add Step"
+  },
+  "stepCard": {
+    "moveUp": "Move up",
+    "moveStepUp": "Move step up",
+    "moveDown": "Move down",
+    "moveStepDown": "Move step down",
+    "deleteStep": "Delete step",
+    "stepLabel": "Step label",
+    "untitled": "(Untitled)",
+    "configureAria": "Step {number}, {type}: {label}",
+    "configure": "Configure {type}",
+    "advanced": "Advanced",
+    "cacheModeLabel": "Cache Mode",
+    "cacheModeDescription": "Override cross-execution step-result caching for this step",
+    "cacheDefault": "Default (built-in policy)",
+    "cacheAlways": "Always cache",
+    "cacheNever": "Never cache",
+    "editorialNote": "This step makes an editorial decision. Consider Never cache so a rerun always gets a fresh judgment instead of a replayed one.",
+    "inputMappingLabel": "Input Mapping JSON",
+    "inputMappingDescription": "JSON object mapping step inputs from previous step outputs"
+  },
+  "flow": {
+    "true": "True",
+    "false": "False",
+    "loopWithScore": "≤{max} score >= {score}",
+    "loop": "≤{max}"
+  },
+  "builder": {
+    "proposedStep": "Proposed step",
+    "ghostMeta": "Step {number} · {type}",
+    "removeConfirm": "Remove step {number}?",
+    "addStep": "Add Step",
+    "autoLayout": "Auto Layout"
+  },
+  "node": {
+    "agent": {
+      "aiStep": "AI step",
+      "chooseAgent": "Choose an agent",
+      "detail": "Agent: {name}",
+      "noAgent": "No agent chosen yet. Open Settings to pick one."
+    },
+    "audio": {
+      "music": "Music",
+      "soundEffect": "Sound effect",
+      "takes": "{count} takes",
+      "maxCredits": "Max {credits} credits",
+      "noLimit": "No spending limit",
+      "describe": "Describe the audio to generate.",
+      "kind": "Generate audio",
+      "namePlaceholder": "Name this step (e.g. Opening theme)"
+    },
+    "image": {
+      "generate": "Make pictures",
+      "edit": "Edit a picture",
+      "pictures": "{count} pictures",
+      "maxCredits": "Max {credits} credits",
+      "noLimit": "No spending limit",
+      "describe": "Describe the picture to make.",
+      "describeEdit": "Say what to change in the picture.",
+      "chooseSource": "Choose the picture to edit.",
+      "needsPermission": "Allow sending the picture away to edit it.",
+      "kind": "Generate picture",
+      "namePlaceholder": "Name this step (e.g. Hero picture)"
+    },
+    "seconds": "{seconds} s",
+    "conditional": {
+      "kind": "Decision",
+      "namePlaceholder": "Name this decision",
+      "ifYes": "If yes → step {step}",
+      "ifNo": "If no → step {step}",
+      "noCondition": "No condition set yet. Open Settings."
+    },
+    "designSystem": {
+      "readsDesign": "Reads design files",
+      "productStructure": "Product structure",
+      "chooseOne": "Choose at least one thing to read.",
+      "combines": "Combines results",
+      "readStep": "Read step {step}",
+      "chooseEarlier": "Choose which earlier step read your files: this step combines nothing without it.",
+      "needsBrand": "Needs brand",
+      "needsProfile": "Needs product profile",
+      "chooseOneRequired": "Choose at least one: a profile the step requires, or it always fails.",
+      "kind": "Brand & product profile",
+      "namePlaceholder": "Name this step (e.g. Read my brand and app)"
+    },
+    "extractFrame": {
+      "atTime": "At {seconds} s",
+      "first": "First frame",
+      "last": "Last frame",
+      "saved": "Saved to Files",
+      "chooseVideo": "Choose which video the frame is taken from.",
+      "nothingBefore": "Nothing comes before this step: pick an uploaded video instead.",
+      "kind": "Grab a frame",
+      "namePlaceholder": "Name this step (e.g. Grab the last frame)"
+    },
+    "extract": {
+      "prepares": "Prepares the data",
+      "operation": {
+        "Project": "Keeps the key details",
+        "Resolve": "Looks up chosen items",
+        "Files": "Reads project files"
+      },
+      "kind": "Prepare data"
+    },
+    "forEach": {
+      "kind": "Repeat",
+      "upTo": "Up to {count, plural, one {# time} other {# times}}"
+    },
+    "parallel": {
+      "kind": "Together",
+      "agents": "{count, plural, one {# agent} other {# agents}}",
+      "noAgents": "No agents chosen yet. Open Settings."
+    },
+    "pinInsert": {
+      "everyScreen": "Every screen",
+      "skips": "Skips what fails",
+      "chooseWhat": "Choose what goes on each screen.",
+      "addAnalyze": "Add an Analyze step that tracks the screens before this step.",
+      "kind": "Put on screens",
+      "namePlaceholder": "Name this step (e.g. Put the demo on the phone)"
+    },
+    "reviewLoop": {
+      "needs": "Needs {score}/10",
+      "tries": "{count, plural, one {Up to # try} other {Up to # tries}}",
+      "redo": "Redo from step {step}",
+      "kind": "Quality check",
+      "namePlaceholder": "Name this check"
+    },
+    "thumbnail": {
+      "sizeAria": "{width} by {height} pixels",
+      "at": "At {seconds} s",
+      "atAria": "Taken at {seconds} seconds",
+      "best": "Best moment",
+      "whole": "Whole frame",
+      "text": "Text",
+      "kind": "Thumbnail image",
+      "namePlaceholder": "Name this step (e.g. Make the cover image)",
+      "addWatch": "Add a Watch footage step above this one: the frame is taken from what it measured."
+    },
+    "timeline": {
+      "savedAs": "Saved as {name}",
+      "revision": "Revision {revision}",
+      "frames": "Frames {from}–{to}",
+      "loudness": "Loudness normalised",
+      "kind": "Timeline render",
+      "namePlaceholder": "Name this step (e.g. Render the final cut)",
+      "chooseTimeline": "Choose the editor timeline to render: the step has nothing to render without one."
+    },
+    "analyze": {
+      "transcribes": "Transcribes speech",
+      "describes": "Describes each shot",
+      "music": "Music",
+      "sfx": "Sound effects",
+      "kind": "Watch footage",
+      "namePlaceholder": "Name this step (e.g. Watch raw footage)",
+      "clips": "{count} clips",
+      "noVideo": "No video chosen",
+      "oneUploaded": "1 uploaded clip",
+      "fromStep": "Video from step {step}",
+      "fromPrevious": "Video from the previous step",
+      "chooseVideo": "Choose which video to use. Open Settings."
+    },
+    "compile": {
+      "about": "About {seconds} s",
+      "narration": "Narration",
+      "captions": "Captions",
+      "music": "Music",
+      "sfx": "Sound effects",
+      "titles": "Titles",
+      "colour": "Colour look",
+      "aiClips": "New AI clips",
+      "kind": "Final video",
+      "namePlaceholder": "Name this step (e.g. Cut the final edit)"
+    },
+    "generate": {
+      "fromPrompt": "From your prompt",
+      "fromPlan": "From a shot plan",
+      "spends": "Spends up to {credits} credits",
+      "kind": "New clips",
+      "namePlaceholder": "Name this step (e.g. Generate hero shot)",
+      "setLimit": "Set a spending limit before running. Open Settings."
+    },
+    "voiceover": {
+      "unconfiguredLabel": "Voiceover source: not set up yet. Choose the step that writes the narration",
+      "unconfiguredSummary": "Narration step not chosen",
+      "stepFallback": "Step {step}",
+      "typedLines": "{count, plural, one {# typed line} other {# typed lines}}",
+      "sourceLabel": "Voiceover source: {text}",
+      "fromStep": "Narration from step {step}",
+      "planLabel": "Voiceover source: narration written in step {step} ({label})",
+      "pickup": "Re-recorded lines",
+      "script": "From the script",
+      "kind": "Voiceover",
+      "namePlaceholder": "Name this step (e.g. Record narration)"
+    },
+    "shell": {
+      "defaultNamePlaceholder": "Name this step",
+      "ariaLabel": "Step {number}, {type}: {label}",
+      "untitled": "(untitled)",
+      "deleteStep": "Delete step",
+      "deleteStepAria": "Delete step {number}",
+      "nameAria": "Step {number} name",
+      "openSettingsAria": "Open settings for step {number}",
+      "settings": "Settings"
+    },
+    "videoEnhance": {
+      "kind": "Enhance video",
+      "namePlaceholder": "Name this step (e.g. Make it sharper)",
+      "saved": "Saved to Files",
+      "chooseSource": "Choose which video is enhanced.",
+      "nothingBefore": "Nothing comes before this step: pick an uploaded file instead.",
+      "needsPermission": "Allow sending the video away, or choose the free option.",
+      "free": "Free",
+      "credits": "Uses credits"
+    },
+    "audioCleanup": {
+      "kind": "Clean up audio",
+      "namePlaceholder": "Name this step (e.g. Remove the wind noise)",
+      "saved": "Saved to Files",
+      "chooseSource": "Choose which recording the audio is taken from.",
+      "nothingBefore": "Nothing comes before this step: pick an uploaded file instead.",
+      "needsPermission": "Allow sending the audio away, or choose a free fix.",
+      "free": "Free",
+      "credits": "Uses credits"
+    }
+  },
+  "stepTypeSelector": {
+    "label": "Step Type"
+  },
+  "agentPicker": {
+    "outBadge": "out",
+    "placeholder": "Select agent",
+    "ariaLabel": "Agent",
+    "toolsShort": "{count}t",
+    "group": {
+      "Analysis": "Analysis",
+      "Translation": "Translation",
+      "Production": "Production",
+      "Quality": "Quality",
+      "FileProcessing": "File Processing",
+      "Extract": "Extract",
+      "Video": "Video",
+      "Custom": "Custom"
+    }
+  },
+  "silentRun": {
+    "title": "This video will have no voiceover",
+    "body": "This workflow has no Voiceover step, so the film is silent. Add a Voiceover step to narrate it."
+  },
+  "voiceStatus": {
+    "noService": {
+      "title": "No voice service is set up",
+      "body": "This step cannot make any audio until an admin adds a speech service."
+    },
+    "failing": {
+      "title": "Narration will probably fail",
+      "body": "The voice service{providerName, select, none {} other { ({providerName})}} failed its last connection check. Ask your admin to fix it, or pick another speech service below."
+    },
+    "fallback": {
+      "title": "Using a backup voice service",
+      "body": "The default voice service failed its last connection check, so {providerName} will be used instead. The voice may sound different."
+    },
+    "anotherOne": "another one"
+  },
+  "addStep": {
+    "title": "Add Workflow Step",
+    "intro": "Choose a step type to add to your workflow",
+    "loadingAgent": "Loading built-in agent…",
+    "dailiesRoomDescription": "A team of AI judges compares the generated takes of each shot and keeps the best one"
+  },
+  "run": {
+    "titleNamed": "Run “{name}”?",
+    "title": "Run this workflow?",
+    "briefLabel": "Your brief",
+    "briefRequired": "Required. Tell the AI what video you want: topic, tone, length, format, anything it should know.",
+    "briefOptional": "Optional. Tell the AI what video you want: topic, tone, length, format, anything it should know.",
+    "briefPlaceholder": "e.g. A 20-second vertical teaser for our new timeline feature, upbeat, ending on the sign-up link.",
+    "briefMissing": "Please write a short brief",
+    "whatWillHappen": "What will happen ({count, plural, one {# step} other {# steps}})",
+    "cancel": "Cancel",
+    "start": "Start run"
+  },
+  "regenerate": {
+    "title": "This workflow generates paid video clips",
+    "billedByProvider": "Video generation is billed by the provider. If identical clips were already generated, they can be reused at no cost instead of generating them again.",
+    "spendsMoney": "Regenerating spends money on every clip.",
+    "upperBound": "Upper bound: {credits} credits (the sum of the video steps' Max spend caps; the real cost is usually lower).",
+    "noEstimate": "The cost cannot be estimated from the saved step settings.",
+    "cancel": "Cancel",
+    "regenerate": "Regenerate (costs money)",
+    "runAndReuse": "{action} and reuse previous clips",
+    "defaultAction": "Run"
+  },
+  "stepType": {
+    "Agent": {
+      "label": "Agent",
+      "description": "An AI agent does one job, like writing the narration or picking clips"
+    },
+    "Conditional": {
+      "label": "Conditional Branch",
+      "description": "Go one way or another depending on an earlier result"
+    },
+    "ForEach": {
+      "label": "For Each",
+      "description": "Repeat a step for each item in a list"
+    },
+    "ReviewLoop": {
+      "label": "Review Loop",
+      "description": "Check the result and redo earlier steps until it is good enough"
+    },
+    "Parallel": {
+      "label": "Parallel",
+      "description": "Run several agents at the same time and combine their work"
+    },
+    "Extract": {
+      "label": "Extract",
+      "description": "Trim earlier results down to what the next AI step needs"
+    },
+    "VideoAnalyze": {
+      "label": "Analyze Video",
+      "description": "Watch your footage: find shots, pauses and what is said"
+    },
+    "VideoCompile": {
+      "label": "Compile Video",
+      "description": "Put the final video together from the chosen clips"
+    },
+    "VideoGenerate": {
+      "label": "Generate Video",
+      "description": "Generate new video clips from a description (paid, with a spending limit)"
+    },
+    "Voiceover": {
+      "label": "Voiceover",
+      "description": "Read narration aloud with an AI voice"
+    },
+    "EditRoom": {
+      "label": "Edit Room",
+      "description": "A team of AI editors discusses the footage and agrees on one cut"
+    },
+    "GraphicsRoom": {
+      "label": "Graphics Room",
+      "description": "A team of AI designers agrees on titles and graphics"
+    },
+    "ColorGradeRoom": {
+      "label": "Color Grade Room",
+      "description": "A team of AI colourists agrees on one colour look"
+    },
+    "ThumbnailGenerate": {
+      "label": "Make Thumbnail",
+      "description": "Pick the best frame from your footage and save it as an image"
+    },
+    "Revise": {
+      "label": "Changes",
+      "description": "Makes the changes you asked for to a finished video and renders it again."
+    },
+    "DesignGraphic": {
+      "label": "Design a graphic",
+      "description": "Designs one graphic for a picture, such as a title, badge or price tag."
+    },
+    "DailiesRoom": {
+      "label": "Dailies Room",
+      "description": "A team of AI judges compares the generated takes of each shot and picks the best one"
+    },
+    "TimelineRender": {
+      "label": "Render Timeline",
+      "description": "Turn a timeline from the editor into a finished video file"
+    },
+    "DesignSystem": {
+      "label": "Brand & product profile",
+      "description": "Reads your design files and app structure into a brand and product profile the later steps use (free)"
+    },
+    "ExtractFrame": {
+      "label": "Grab a frame",
+      "description": "Save one frame of a video as an image, to reuse as a picture, a cover or the first frame of a new clip (free)"
+    },
+    "AudioGenerate": {
+      "label": "Generate music or sound",
+      "description": "Generate music or a sound effect from a description (paid, with a spending limit)"
+    },
+    "ImageGenerate": {
+      "label": "Generate or edit a picture",
+      "description": "Make pictures from a description, or change one picture by an instruction (paid, with a spending limit)"
+    },
+    "PinInsert": {
+      "label": "Put on screens",
+      "description": "Put a video or image on the tracked screens of your footage, without an AI model (free)"
+    },
+    "VideoEnhance": {
+      "label": "Enhance video",
+      "description": "Sharpen the picture: make it bigger, smoother, cleaner or less choppy"
+    },
+    "AudioCleanup": {
+      "label": "Clean up audio",
+      "description": "Fix hum, wind, hiss, echo or a rough voice, or keep only the voice or remove music"
+    }
+  },
+  "outputSchema": {
+    "copyExpression": "Copy expression",
+    "stepFallback": "Step {number}",
+    "noPrevious": "No previous steps with output schemas available",
+    "heading": "Available Output Fields from Previous Steps",
+    "noFields": "No schema fields available"
+  },
+  "transcript": {
+    "turnOf": "Turn {turn} of {total}",
+    "turn": "Turn {turn}",
+    "director": "Director",
+    "truncated": "Truncated. The full text of this turn is in the saved transcript.",
+    "thinking": "The room is thinking",
+    "heading": "Edit Room Discussion",
+    "turnsOf": "{count} of {total} turns",
+    "turns": "{count, plural, one {# turn} other {# turns}}",
+    "empty": "No room discussion recorded for this step yet.",
+    "hideFull": "Hide full transcript artifact",
+    "viewFull": "View full transcript artifact",
+    "loadingFull": "Loading full transcript…",
+    "fullError": "Could not load full transcript: {error}",
+    "fullLabel": "Full room transcript"
+  }
+}

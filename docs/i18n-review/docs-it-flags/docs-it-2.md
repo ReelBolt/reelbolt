@@ -1,0 +1,12 @@
+- workflows/request-changes.md: "derush edit" -> "montaggio derush" : term kept as used by editors; no glossary entry
+- workflows/request-changes.md: "take" -> "take" : kept as editors' loanword (clip/take); glossary gap
+- workflows/request-changes.md: quoted English error messages ("Nothing in the video was changed", ...) left in English : unknown whether the app strings are translated; align with dashboard catalogue
+- workflows/agents.md: "panel" -> "panel" : loanword kept (alt "gruppo di esperti"); same for "room" steps
+- workflows/agents.md: "lower-thirds" -> "terzi inferiori" : editor term, check
+- workflows/execution-and-outputs.md: "Needs attention" -> "Richiede attenzione" : align with dashboard catalogue
+- workflows/execution-and-outputs.md: run statuses Queued/Running -> "In coda"/"In corso", Finished/Failed/Stopped -> "Terminata/Fallita/Interrotta" : align with dashboard
+- workflows/execution-and-outputs.md: "Stop" -> "Interrompi", "Resume" -> "Riprendi", "Run again" -> "Esegui di nuovo" : button labels, align with dashboard
+- workflows/step-types.md: builder labels (Agente, Ciclo di revisione, Ramo condizionale, Per ogni, In parallelo, Estrai, Analizza video, Monta video, Room di montaggio/grafiche/color grading/dailies, Genera video, Miniatura, Renderizza timeline, Cattura un fotogramma, Genera musica o suono, Metti sugli schermi) : translated from English builder labels; must match dashboard catalogue
+- workflows/step-types.md: "dailies" -> "dailies" : film-industry loanword kept
+- workflows/step-types.md: "seat" -> "posto" ; "persona" kept in code : informal rendering of panel seats
+- workflows/step-types.md: "ducking" kept as English technical term (musicGainDb row)

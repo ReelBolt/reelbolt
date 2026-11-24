@@ -1,0 +1,9 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+L'esportazione dei tuoi dati ReelBolt è pronta:
+
+{{.Link}}
+
+Il link per il download scade tra {{.ExpiresIn}}.
+
+-- {{.FooterNote}}

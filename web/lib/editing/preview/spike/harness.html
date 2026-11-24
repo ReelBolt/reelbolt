@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+  T-200 — demuxer measurement harness page.  REMOVABLE (see README.md).
+
+  Loaded only by the spike's own static server (`serve.mjs`) and by the Playwright driver
+  (`run-spike.mjs`).  Never reachable from the product surface — that is what the drift test
+  in `web/app/spike/spike-isolation.test.ts` asserts.
+
+  ⚠ THE IMPORT MAP IS NOT OPTIONAL, AND THE TICKET SAID IT WOULD BE.
+  mediabunny 1.61.0's browser entry is NOT loadable as a raw native ES module: its static
+  import chain index.js → source.js → node.js ends in `export * as fs from 'node:fs/promises'`,
+  and the `node:` scheme is rejected by the browser before any request is made
+  (see `browser-node-fs-shim.mjs` for the exact console error and the full trace).  The
+  import map below reproduces mediabunny's OWN `package.json` `browser` field, which maps
+  that specifier to `false` for bundlers.  It rewrites nothing else, and the shimmed module
+  is unreachable from the demuxing path.  mp4box needs no entry at all.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Inline empty icon: stops Chromium's automatic /favicon.ico 404, which would
+         otherwise be the only console error in an otherwise clean run and could mask a
+         real one. -->
+    <link rel="icon" href="data:," />
+    <title>T-200 — demuxer harness (mediabunny vs mp4box)</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "node:fs/promises": "./browser-node-fs-shim.mjs"
+        }
+      }
+    </script>
+    <style>
+      body { font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; margin: 24px; }
+      #log { white-space: pre-wrap; }
+      .err { color: #b00; }
+    </style>
+  </head>
+  <body>
+    <h1>T-200 — demuxer harness</h1>
+    <p>
+      Fixture: <a href="./fixtures/proxy-1080p-12s.mp4">proxy-1080p-12s.mp4</a>. This page
+      measures; it renders nothing. The Playwright driver calls <code>window.runSpike()</code>.
+    </p>
+    <div id="log"></div>
+    <script type="module" src="./harness.mjs"></script>
+  </body>
+</html>

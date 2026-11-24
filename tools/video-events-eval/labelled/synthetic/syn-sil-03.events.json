@@ -1,0 +1,26 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "appear-ev1",
+   "frame": 130,
+   "label": "appear"
+  },
+  {
+   "name": "hit-ev2",
+   "frame": 330,
+   "label": "hit"
+  },
+  {
+   "name": "move_start-ev3",
+   "frame": 382,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev4",
+   "frame": 439,
+   "label": "move stop"
+  }
+ ]
+}

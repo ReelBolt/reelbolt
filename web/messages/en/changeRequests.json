@@ -1,0 +1,208 @@
+{
+  "button": "Request changes",
+  "filmButton": "Request changes to the video",
+  "modalTitle": "Change: {label}",
+  "intro": "Pick what to change. Everything else stays exactly as it was, and you are only charged for what is redone.",
+  "introDirect": "Choose what to change. Everything else stays exactly as it was, and you are only charged for what is redone.",
+  "scopeItems": "{kind, select, line {Choose lines} clip {Choose clips} take {Choose takes} scene {Choose scenes} other {Choose items}}",
+  "scopeAll": "{kind, select, line {All lines} clip {All clips} take {All takes} scene {All scenes} other {All items}}",
+  "pickItems": "{kind, select, line {Which lines?} clip {Which clips?} take {Which takes?} scene {Which scenes?} other {Which items?}}",
+  "noItems": "This step has nothing you can change one at a time.",
+  "keepAsIs": "Keep as it is",
+  "voicePlaceholder": "Keep the current voice",
+  "sayItLabel": "How it should sound",
+  "sayItHelp": "For a word that is read wrongly: write the word, then the same word with an accent on the syllable to stress, for example Novara and Novàra.",
+  "sayItTerm": "Word",
+  "sayItHow": "How to say it",
+  "sayItAdd": "Add a word",
+  "sayItRemove": "Remove",
+  "instruction": "Add a note (optional)",
+  "instructionRewrite": "What should change in the scene you picked? (optional if you write the new text yourself)",
+  "instructionRewritePlaceholder": "For example: make scene 2 calmer.",
+  "instructionPlaceholder": "A note kept with this change. It does not change anything by itself.",
+  "redone": "Will be redone",
+  "reused": "Reused (free)",
+  "nothingChosen": "Choose at least one change.",
+  "noLines": "Choose at least one line.",
+  "priceAboutOne": "About {low} credits.",
+  "priceAboutRange": "About {low} to {high} credits.",
+  "thisPart": "This part: {credits} credits",
+  "shortfall": "You may not have enough credits",
+  "shortfallBody": "This change may need more credits than you have right now.",
+  "topUp": "Top up credits",
+  "estimating": "Working out the price…",
+  "confirm": "Confirm and redo",
+  "cancel": "Cancel",
+  "historyTitle": "Changes to this run",
+  "historyChangedFrom": "Changed from run",
+  "historyOwnRun": "This run is a change of",
+  "historyRedone": "{count, plural, one {# redone} other {# redone}}",
+  "historyReused": "{count, plural, one {# reused} other {# reused}}",
+  "historyCost": "{credits} credits",
+  "historyOpen": "Open run",
+  "lineWord": "line",
+  "costNotes": {
+    "script": "Changing the script is the most expensive option: everything after it is made again."
+  },
+  "keys": {
+    "text": {
+      "label": "New wording"
+    },
+    "voiceId": {
+      "label": "Voice"
+    },
+    "speed": {
+      "label": "Speed",
+      "help": "1 is normal."
+    },
+    "prompt": {
+      "label": "New description",
+      "help": "Describe what you want instead."
+    },
+    "videoPrompt": {
+      "label": "New description of the clip",
+      "help": "Describe what the clip should show."
+    },
+    "audioPrompt": {
+      "label": "New description",
+      "help": "Describe the music or sound you want instead."
+    },
+    "voiceover": {
+      "label": "New narration",
+      "help": "What is said over this scene."
+    },
+    "onScreenText": {
+      "label": "Text on screen",
+      "help": "One line per row, up to 6 lines."
+    },
+    "visualDescription": {
+      "label": "What the scene shows"
+    },
+    "retake": {
+      "label": "Make a fresh take",
+      "help": "You get a new version even if the description stays the same."
+    },
+    "audioRetake": {
+      "label": "Make a new version",
+      "help": "Make a new version, even if nothing else changes."
+    },
+    "durationSec": {
+      "label": "Length",
+      "unit": "seconds"
+    },
+    "overlayText": {
+      "label": "Text on the picture",
+      "help": "Leave empty to keep the current text."
+    },
+    "atTimeSec": {
+      "label": "Moment in the video",
+      "help": "Which moment of the video the picture is taken from.",
+      "unit": "seconds"
+    },
+    "overlayPosition": {
+      "label": "Where the text goes"
+    },
+    "overlayFontColor": {
+      "label": "Text colour"
+    },
+    "overlayBoxColor": {
+      "label": "Box behind the text"
+    }
+  },
+  "values": {
+    "overlayPosition": {
+      "None": "No text",
+      "LowerThird": "Lower third",
+      "UpperThird": "Upper third",
+      "Center": "Centre"
+    },
+    "overlayFontColor": {
+      "white": "White",
+      "black": "Black",
+      "yellow": "Yellow"
+    },
+    "overlayBoxColor": {
+      "black045": "Black, see-through",
+      "black06": "Black, mostly solid",
+      "white04": "White, see-through",
+      "none": "No box"
+    }
+  },
+  "status": {
+    "ready": "Ready",
+    "failed": "Failed",
+    "skipped": "Skipped"
+  },
+  "itemTake": "Take {n}",
+  "itemClip": "Clip {n}",
+  "itemClipTake": "Clip {clip}, take {take}",
+  "range": "Between {min} and {max}.",
+  "rangeUnit": "Between {min} and {max} {unit}.",
+  "seconds": "{n}s",
+  "scope": "Scope",
+  "takesGroup": "{name}: takes",
+  "errors": {
+    "range": "{who}: {label} must be between {min} and {max}.",
+    "tooManyLines": "{who}: {label} has more than {max} lines.",
+    "tooLong": "{who}: {label} is longer than {max} characters.",
+    "chooseOption": "{who}: choose one of the listed options for {label}.",
+    "giveBoth": "{who}: give both the word and how to say it.",
+    "atMostWords": "{who}: at most {max} words.",
+    "whoThisChange": "This change",
+    "whoAll": "{kind, select, line {All lines} clip {All clips} take {All takes} scene {All scenes} other {All items}}",
+    "whoItem": "{kind, select, line {Line {id}} clip {Clip {id}} take {Take {id}} scene {Scene {id}} other {Item {id}}}"
+  },
+  "refusals": {
+    "stepNotCompleted": {
+      "title": "This step did not finish",
+      "message": "Only a step that finished can be changed."
+    },
+    "useComposition": {
+      "title": "Change the video instead",
+      "message": "This step is changed from the \"Change this video\" panel."
+    },
+    "notEntitled": {
+      "title": "Not part of your plan",
+      "message": "Your plan does not include changing single steps. A paid plan that does is on the plans list."
+    },
+    "checkRequest": "Check your request"
+  },
+  "history": {
+    "waiting": "Waiting to start",
+    "working": "Working",
+    "finished": "Finished",
+    "failed": "Failed",
+    "stopped": "Stopped"
+  },
+  "historyAll": "all",
+  "seePlans": "See plans",
+  "addToChanges": "Add to changes",
+  "updateChange": "Update this change",
+  "requestNow": "Request this change now",
+  "historyFilmTarget": "The video",
+  "historyItemsOf": "{label} ({kind, select, line {{count, plural, one {# line} other {# lines}}} clip {{count, plural, one {# clip} other {# clips}}} take {{count, plural, one {# take} other {# takes}}} scene {{count, plural, one {# scene} other {# scenes}}} other {{count, plural, one {# item} other {# items}}}})",
+  "set": {
+    "title": "Your changes",
+    "count": "{count, plural, one {# change} other {# changes}}",
+    "review": "Review changes",
+    "editLabel": "Edit the change to {label}",
+    "removeLabel": "Remove the change to {label}",
+    "submit": "{count, plural, one {Request # change} other {Request # changes}}",
+    "maxReached": "You can put up to {max} changes in one request.",
+    "summaryAll": "The whole step",
+    "summaryChanging": "Changing: {changes}",
+    "summaryNote": "Your note: {text}",
+    "fieldsTitle": "App fields and settings"
+  },
+  "panel": {
+    "title": "Change this video",
+    "videoTitle": "The video itself",
+    "othersTitle": "Other changes",
+    "othersHint": "To change the narration, clips or music, pick a step in the list of steps and choose Request changes.",
+    "aloneOnly": "These options apply when the video is changed on its own.",
+    "notCombinable": "The video cannot be changed together with other steps here. Request the video change on its own, or remove it from this request.",
+    "videoUnavailable": "The video cannot be changed right now. Clear your note about the video to send the other changes.",
+    "tooMany": "A request can hold up to {max} changes. Remove one to add a note about the video."
+  },
+  "historyOwnRunLink": "the original run"
+}

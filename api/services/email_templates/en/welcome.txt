@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+Your ReelBolt account has been created.
+{{if .TempPassword}}
+Your temporary password is: {{.TempPassword}}
+
+Please change your password on first login.
+{{end}}{{if .Link}}
+Sign in: {{.Link}}
+{{end}}
+-- {{.FooterNote}}

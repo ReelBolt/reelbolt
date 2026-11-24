@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- pointer: pointing hand, index finger up, violet fingertip on the hotspot (12,2) -->
+  <g fill="#2E1065" stroke="#2E1065" stroke-width="3.4" stroke-linejoin="round"><rect x="10.1" y="3.2" width="3.8" height="16" rx="1.9"/><rect x="14.8" y="11.6" width="3.2" height="8.4" rx="1.6"/><rect x="18.9" y="12.6" width="3.2" height="8.4" rx="1.6"/><rect x="23" y="14" width="3.2" height="8.4" rx="1.6"/><path d="M10.1 15 H26.2 V22 Q26.2 26.4 21.799999999999997 26.4 H14.5 Q10.1 26.4 10.1 22 Z"/><g transform="translate(11.4 22.8) rotate(-58)"><rect x="-2" y="-9" width="4" height="10" rx="2"/></g></g>
+  <g fill="#F5F3F8"><rect x="10.1" y="3.2" width="3.8" height="16" rx="1.9"/><rect x="14.8" y="11.6" width="3.2" height="8.4" rx="1.6"/><rect x="18.9" y="12.6" width="3.2" height="8.4" rx="1.6"/><rect x="23" y="14" width="3.2" height="8.4" rx="1.6"/><path d="M10.1 15 H26.2 V22 Q26.2 26.4 21.799999999999997 26.4 H14.5 Q10.1 26.4 10.1 22 Z"/><g transform="translate(11.4 22.8) rotate(-58)"><rect x="-2" y="-9" width="4" height="10" rx="2"/></g></g>
+  <path d="M14.35 14 V19.2 M18.45 14 V19.2 M22.55 14 V19.2" fill="none" stroke="#2E1065" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="12" cy="5.6" r="1.5" fill="#A855F7"/>
+  <path d="M16.6 22.2 V24 M20.8 22.2 V24 M24.4 22.2 V24" stroke="#C4B5FD" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+</svg>

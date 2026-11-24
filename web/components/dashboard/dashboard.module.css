@@ -1,0 +1,338 @@
+.panel {
+  border: 1px solid var(--rb-border);
+  background: var(--rb-surface);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-md);
+  min-width: 0;
+
+  @media (min-width: 48em) {
+    padding: var(--mantine-spacing-lg);
+  }
+}
+
+.panelHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-sm);
+}
+
+.panelTitle {
+  font-family: var(--rb-font-display);
+  font-size: var(--mantine-font-size-md);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.layout {
+  display: grid;
+  gap: var(--mantine-spacing-md);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+
+  @media (min-width: 1100.02px) {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: grid;
+  gap: var(--mantine-spacing-md);
+  min-width: 0;
+}
+
+.hero {
+  position: relative;
+  padding: 20px 24px;
+  border: 1px solid var(--rb-border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-md);
+  margin-bottom: var(--mantine-spacing-lg);
+
+  @media (min-width: 62em) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.greeting {
+  font-family: var(--rb-font-display);
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+/* Key figures: one quiet row, not four bordered tiles. */
+.figures {
+  display: grid;
+  /* Phone: two equal columns, so a tile label never gets a third of the width. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--mantine-spacing-md) var(--mantine-spacing-lg);
+
+  @media (min-width: 48em) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+  }
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.figureValue {
+  font-family: var(--rb-font-display);
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.figureLabel {
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mantine-color-dimmed);
+  overflow-wrap: anywhere;
+
+  @media (min-width: 48em) {
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+}
+
+/* The secondary text of a tile ("11 earlier versions", "4.2 MB"): its own quiet line, sentence case. */
+.figureHint {
+  font-size: var(--mantine-font-size-xs);
+  line-height: 1.35;
+  color: var(--mantine-color-dimmed);
+  overflow-wrap: anywhere;
+
+  @media (min-width: 48em) {
+    white-space: nowrap;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+  min-height: 56px;
+  padding: 10px 8px;
+  margin-inline: -8px;
+  border-radius: var(--mantine-radius-md);
+  color: inherit;
+  text-decoration: none;
+  transition: background 160ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+a.row:hover {
+  background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+}
+
+a.row:active {
+  transform: scale(0.995);
+}
+
+a.row:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-5);
+  outline-offset: 1px;
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.divided > .row + .row {
+  border-top: 1px solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
+  border-radius: 0;
+}
+
+.statusDot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--mantine-radius-md);
+}
+
+.live {
+  background: var(--mantine-color-blue-5);
+  box-shadow: 0 0 0 0 light-dark(rgb(34 139 230 / 45%), rgb(77 171 247 / 45%));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live {
+    animation: pulse 1.8s cubic-bezier(0.32, 0.72, 0, 1) infinite;
+  }
+}
+
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 8px rgb(34 139 230 / 0%); }
+  100% { box-shadow: 0 0 0 0 rgb(34 139 230 / 0%); }
+}
+
+.attention {
+  border-color: light-dark(var(--mantine-color-red-2), color-mix(in srgb, var(--mantine-color-red-8) 55%, transparent));
+  background: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-9) 18%, var(--mantine-color-dark-7)));
+}
+
+.projectThumb {
+  flex: none;
+  width: 84px;
+}
+
+/* "Your first video": three steps in a row on a wide screen, stacked on a phone. */
+.railSteps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block: 1px solid var(--rb-border);
+}
+
+.railStep {
+  min-width: 0;
+}
+
+.railStep + .railStep {
+  border-top: 1px solid var(--rb-border);
+}
+
+.railLink {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-height: 44px;
+  height: 100%;
+  padding: 14px;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.railLink:hover {
+  text-decoration: underline;
+}
+
+.railMark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--rb-border-strong);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 700;
+}
+
+.railMark[data-state='done'] {
+  border-color: transparent;
+  background: var(--mantine-color-green-filled);
+  color: var(--mantine-color-white);
+}
+
+.railMark[data-state='next'] {
+  border-color: var(--rb-accent-strong);
+}
+
+.railText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nudge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+  cursor: var(--rb-cursor-pointer);
+  background: light-dark(var(--mantine-color-violet-0), color-mix(in srgb, var(--mantine-color-violet-9) 22%, var(--mantine-color-dark-7)));
+  border: 1px solid light-dark(var(--mantine-color-violet-1), color-mix(in srgb, var(--mantine-color-violet-7) 40%, transparent));
+  border-radius: var(--mantine-radius-md);
+  transition: transform 160ms cubic-bezier(0.32, 0.72, 0, 1), border-color 160ms;
+}
+
+.nudge:hover {
+  border-color: var(--mantine-color-violet-4);
+}
+
+.nudge:active {
+  transform: scale(0.99);
+}
+
+.nudge:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-5);
+  outline-offset: 2px;
+}
+
+.nudgeIcon {
+  flex: none;
+  color: var(--mantine-color-violet-6);
+}
+
+/* Hero ornament: corner brackets on the greeting block (decorative, non-interactive). */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 3px solid light-dark(var(--rb-accent-strong), var(--rb-accent));
+  pointer-events: none;
+}
+
+.hero::before {
+  top: -3px;
+  left: -3px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.hero::after {
+  bottom: -3px;
+  right: -3px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Dismiss X: 44px target on touch. */
+.dismiss {
+  min-width: 28px;
+  min-height: 28px;
+}
+@media (pointer: coarse) {
+  .dismiss {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Hints that only make sense with a finger (e.g. "Swipe to browse"). */
+.touchOnly {
+  display: none;
+
+  @media (pointer: coarse) {
+    display: block;
+  }
+}

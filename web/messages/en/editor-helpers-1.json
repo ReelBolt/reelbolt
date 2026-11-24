@@ -1,0 +1,104 @@
+{
+  "deliver": {
+    "statusWord": {
+      "Queued": "Waiting",
+      "Running": "Rendering",
+      "Passed": "Finished",
+      "Failed": "Did not finish",
+      "Cancelled": "Stopped"
+    },
+    "fitWarning": "This shape will crop or letterbox your picture: your timeline is {aspect} and {format} is not.",
+    "statusLine": {
+      "latest": "Last render: your latest edit",
+      "behind": "Last render: before your latest edits ({count, plural, one {# change} other {# changes}} since)"
+    },
+    "estimate": {
+      "credits": "About {credits, number} {credits, plural, one {credit} other {credits}}",
+      "withMinutes": "{credits}, about {minutes, number} min",
+      "underMinute": "{credits}, under 1 min"
+    },
+    "missing": "{missing, plural, one {You need # more credit} other {You need # more credits}}",
+    "saveFailure": {
+      "conflict": "This timeline was changed somewhere else, so your edits here are not saved.",
+      "offline": "You are offline, so your latest edits are not saved yet.",
+      "saving": "Your latest edits are still saving. Try again in a moment.",
+      "generic": "Your latest edits could not be saved."
+    },
+    "refusal": {
+      "notConnected": "The render could not start. Check your connection and try again.",
+      "unreadable": "The render settings could not be read. Reload the page and try again.",
+      "needCredits": "{missing, plural, one {You need # more credit to render this.} other {You need # more credits to render this.}}",
+      "notEnoughCredits": "You do not have enough credits to render this.",
+      "planLacks": "Your plan does not include {feature, select, none {this render format} other {this render option ({feature})}}. Choose another format or pick a plan that does.",
+      "forbidden": "You cannot start a render on this timeline.",
+      "notFound": "This timeline could not be found. It may have been deleted.",
+      "tooMany": "Too many runs are going at once. Wait for one to finish, then start the render again.",
+      "serverError": "The render could not start because of a problem on our side. Try again in a moment.",
+      "startFailed": "The render could not start. Try again in a moment."
+    },
+    "notes": {
+      "kind": {
+        "MediaClip": "Clip",
+        "TitleClip": "Title",
+        "GeneratorClip": "Generator",
+        "InsertClip": "Insert",
+        "Caption": "Caption",
+        "Transition": "Transition",
+        "CompoundClip": "Compound clip",
+        "MulticamClip": "Multicam clip",
+        "AdjustmentClip": "Adjustment clip"
+      },
+      "skippedLine": "{prefix}: {message}",
+      "skippedPart": "{count, plural, one {# item was left out of this render} other {# items were left out of this render}}",
+      "warningsPart": "{count, plural, one {# note} other {# notes}}",
+      "summaryBoth": "{skipped} · {warnings}"
+    },
+    "failureFallback": "This render did not finish. Check that the media in your timeline is still in the project, then try again.",
+    "sizeLine": {
+      "aboutMb": "About {size} MB",
+      "aboutGb": "About {size} GB"
+    }
+  },
+  "shell": {
+    "refusalTitle": "Edit refused"
+  },
+  "panels": {
+    "versions": {
+      "rule": "Auto-saved checkpoints are kept for 30 days. Name a version to keep it forever.",
+      "cause": {
+        "named": "Named version",
+        "beforeRestore": "Before you restored",
+        "beforeRender": "Before a render",
+        "beforeProposal": "Before an AI suggestion",
+        "duplicate": "Copied from another timeline",
+        "import": "Imported",
+        "original": "Original version",
+        "auto": "Auto-saved checkpoint"
+      },
+      "retention": {
+        "forever": "kept forever",
+        "today": "deleted today",
+        "inDays": "{days, plural, one {deleted in # day} other {deleted in # days}}"
+      },
+      "session": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "label": "{day} {range}"
+      }
+    }
+  },
+  "phone": {
+    "readiness": {
+      "processing": "Processing preview",
+      "ready": "Ready",
+      "notReady": "Preview not ready - you can still add it"
+    },
+    "upload": {
+      "queued": "Waiting to upload",
+      "uploading": "Uploading {progress, number}%",
+      "done": "Added",
+      "error": "Did not upload",
+      "quota": "Not uploaded: your storage is full"
+    }
+  }
+}

@@ -1,0 +1,207 @@
+/* The welcome flow: one question per screen, large one-click cards, 44px targets everywhere. */
+.shell {
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-block: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+  display: grid;
+  gap: var(--mantine-spacing-lg);
+  min-width: 0;
+}
+
+.progress {
+  margin: 0;
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--rb-font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.title:focus {
+  outline: none;
+}
+
+.lead {
+  margin: var(--mantine-spacing-xs) 0 0;
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-md);
+  max-width: 38rem;
+}
+
+.cards {
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40em) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Material choices read as a plain divided list, not a row of cards. */
+.cards[data-list] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  border-block: 1px solid var(--rb-border);
+}
+
+.cards[data-list] .card {
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.cards[data-list] .card + .card {
+  border-top: 1px solid var(--rb-border);
+}
+
+.cards[data-list] .card:hover:not(:disabled),
+.cards[data-list] .card[aria-pressed='true'] {
+  box-shadow: none;
+  background: var(--rb-surface);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  min-height: 88px;
+  padding: var(--mantine-spacing-md);
+  border: 1px solid var(--rb-border-strong);
+  border-radius: var(--mantine-radius-md);
+  background: var(--rb-surface);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: var(--rb-cursor-pointer);
+}
+
+.card:hover:not(:disabled),
+.card[aria-pressed='true'] {
+  border-color: var(--rb-accent-strong);
+  box-shadow: inset 0 0 0 1px var(--rb-accent-strong);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--rb-focus, var(--rb-accent-strong));
+  outline-offset: 2px;
+}
+
+.card:disabled {
+  opacity: 0.6;
+  cursor: var(--rb-cursor-default);
+}
+
+.cardTitle {
+  font-size: var(--mantine-font-size-md);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cardBody {
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-sm);
+  line-height: 1.4;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+}
+
+.footerMain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mantine-spacing-xs);
+}
+
+/*
+ * On a phone the seven audience cards stack well past one screen, which left Continue and "Skip
+ * for now" about a screen and a half down: the one click a preselected audience needs was off
+ * screen, and so was the way out. Below the two-column breakpoint the actions stay at the bottom of
+ * the viewport while the cards scroll behind them.
+ */
+@media (max-width: 39.99em) {
+  .footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    margin-inline: calc(var(--mantine-spacing-md) * -1);
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+    padding-bottom: calc(var(--mantine-spacing-sm) + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--rb-border);
+    background: var(--mantine-color-body);
+  }
+}
+
+/* Longer translations wrap inside the button instead of being clipped (44px stays the minimum). */
+.shell :global(.mantine-Button-root) {
+  height: auto;
+  min-height: 44px;
+  padding-block: var(--mantine-spacing-xs);
+}
+
+.shell :global(.mantine-Button-label) {
+  white-space: normal;
+  text-align: center;
+}
+
+.shots {
+  display: grid;
+  gap: var(--mantine-spacing-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: shot;
+}
+
+.shot {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mantine-spacing-sm);
+  min-height: 44px;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  border: 1px solid var(--rb-border);
+  border-radius: var(--mantine-radius-md);
+  background: var(--rb-surface);
+  counter-increment: shot;
+}
+
+.shot::before {
+  content: counter(shot);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rb-surface-raised);
+  font-weight: 700;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.busy {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+  min-height: 44px;
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-sm);
+}

@@ -1,0 +1,628 @@
+# Third-party notices: npm packages
+
+Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from the lockfiles and package metadata at commit `e0ffe67ef` (2026-10-24). Licence texts are in [licences.md](licences.md). Not legal advice. Entries marked `confirm` are listed in the TODO section of the root notices file.
+
+
+
+#### BSD-2-Clause (29 packages)
+
+- **Copyright (c) 2011 Gary Court.**: uri-js@4.4.1
+- **Copyright (c) 2012-2018 (c) Mihai Bazon <mihai.bazon@gmail.com>**: terser@5.51.2
+- **Copyright (c) 2015, Scott Motte**: dotenv@17.3.1
+- **Copyright (c) 2015, Yeoman team**: stringify-object@3.3.0
+- **Copyright (c) 2016-2018 Kornel Lesiński**: http-cache-semantics@4.3.0
+- **Copyright (c) Felix Böhm**: cheerio-select@2.1.0, css-select@4.3.0, css-select@5.2.2, css-what@6.2.2, domelementtype@2.3.0, domhandler@4.3.1, domhandler@5.0.3, domutils@2.8.0, domutils@3.2.2, entities@2.2.0, entities@4.5.0, entities@6.0.1, nth-check@2.1.1
+- **Copyright (c) Google**: configstore@6.0.0, update-notifier@6.0.2
+- **Copyright (c) JS Foundation and other contributors, https://js.foundation**: eslint-scope@5.1.1, esprima@4.0.1
+- **Copyright (c) Julian Viereck and Contributors,**: regjsparser@0.13.3
+- **Copyright (c) Nick Fitzgerald**: glob-to-regexp@0.4.1
+- **Copyright (c) Remy Rylan**: json-schema-typed@8.0.2
+- **Copyright (c) the authors of esrecurse (npm maintainer: constellation)**: esrecurse@4.3.0
+- **Copyright (c) the authors of estraverse (npm maintainer: constellation)**: estraverse@4.3.0
+- **Copyright (c) the authors of estraverse (npm maintainer: nzakas)**: estraverse@5.3.0
+- **Copyright (c) the authors of esutils (npm maintainer: constellation)**: esutils@2.0.3
+
+#### BSD-3-Clause (27 packages)
+
+- **Copyright (c) 2005-2015, The Dojo Foundation**: json-schema@0.4.0
+- **Copyright (c) 2006, Ivan Sagalaev**: highlight.js@10.7.3
+- **Copyright (c) 2008 Fair Oaks Labs, Inc**: ieee754@1.2.1
+- **Copyright (c) 2008, Fair Oaks Labs, Inc**: @xtuc/ieee754@1.2.0
+- **Copyright (c) 2009-2011, Mozilla Foundation and contributors**: source-map-js@1.2.2, source-map@0.6.1, source-map@0.7.6, source-map@0.8.0
+- **Copyright (c) 2010-2021 Mike Bostock**: d3-ease@3.0.1
+- **Copyright (c) 2011-2020, Sideway Inc, and project contributors**: @hapi/hoek@9.3.0
+- **Copyright (c) 2011-2021, Gary Court until https://github.com/garycourt/uri-js/commit/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae**: fast-uri@3.1.8
+- **Copyright (c) 2012-2020, Sideway Inc, and project contributors**: @hapi/topo@5.1.0
+- **Copyright (c) 2012-2022, Project contributors**: joi@17.13.8
+- **Copyright (c) 2014 Yahoo! Inc**: serialize-javascript@7.1.2
+- **Copyright (c) 2014, GMO GlobalSign**: asn1js@3.0.10
+- **Copyright (c) 2014, GlobalSign**: pkijs@3.4.1
+- **Copyright (c) 2014, Hugh Kennedy**: flat@5.0.2
+- **Copyright (c) 2014, Nathan LaFreniere and other [contributors](https://github.com/ljharb/qs/graphs/contributors)**: qs@6.16.0
+- **Copyright (c) 2014-2016, Michael Bostock**: rw@1.3.3
+- **Copyright (c) 2015, Yahoo! Inc.**: hoist-non-react-statics@3.3.2
+- **Copyright (c) 2016-2022, Peculiar Ventures**: bytestreamjs@2.0.1
+- **Copyright (c) 2018, React Community**: react-transition-group@4.4.5
+- **Copyright (c) 2019, Sideway Inc, and project contributors**: secure-json-parse@4.1.0
+- **Copyright (c) 2019-2020, Sideway, Inc. and Project contributors**: @sideway/address@4.1.5
+- **Copyright (c) 2019-2020, Sideway. Inc, and project contributors**: @sideway/formula@3.0.1, @sideway/pinpoint@2.0.0
+- **Copyright (c) 2022 WebGPU Developers**: @webgpu/types@0.1.69
+
+#### ISC (76 packages)
+
+- **Copyright (c) 2010-2021 Mike Bostock**: d3-axis@3.0.0, d3-brush@3.0.0, d3-chord@3.0.1, d3-dispatch@3.0.1, d3-drag@3.0.0, d3-force@3.0.0, d3-hierarchy@3.1.2, d3-interpolate@3.0.1, d3-polygon@3.0.1, d3-quadtree@3.0.1, d3-random@3.0.1, d3-scale@4.0.2, d3-selection@3.0.0, d3-time-format@4.1.0, d3-timer@3.0.1, d3-transition@3.0.1, d3-zoom@3.0.0
+- **Copyright (c) 2010-2022 Mike Bostock**: d3-color@3.1.0, d3-shape@3.2.0, d3-time@3.1.0
+- **Copyright (c) 2010-2023 Mike Bostock**: d3-array@3.2.4, d3@7.9.0
+- **Copyright (c) 2010-2024 Mike Bostock**: d3-geo@3.1.1, d3-scale-chromatic@3.1.0
+- **Copyright (c) 2010-2026 Mike Bostock**: d3-format@3.1.2
+- **Copyright (c) 2011-2022 Isaac Z. Schlueter, Ben Noordhuis, and Contributors**: graceful-fs@4.2.10, graceful-fs@4.2.11
+- **Copyright (c) 2012-2023 Mike Bostock**: d3-contour@4.0.2
+- **Copyright (c) 2013-2021 Mike Bostock**: d3-dsv@3.0.1
+- **Copyright (c) 2014, Euank <euank@euank.com>**: parse-numeric-range@1.3.0
+- **Copyright (c) 2015 Calvin Metcalf**: minimalistic-assert@1.0.1
+- **Copyright (c) 2015 Glen Maddern**: postcss-modules-extract-imports@3.1.0
+- **Copyright (c) 2015, 2019 Elan Shanker**: glob-parent@5.1.2
+- **Copyright (c) 2015, 2019 Elan Shanker, 2021 Blaine Bublitz <blaine.bublitz@gmail.com>, Eric Schoffstall <yo@contra.io> and other contributors**: glob-parent@6.0.2
+- **Copyright (c) 2015, Contributors**: signal-exit@3.0.7
+- **Copyright (c) 2015, Dan Flettre <fletd01@yahoo.com>**: github-slugger@1.5.0
+- **Copyright (c) 2015, Glen Maddern**: postcss-modules-scope@3.2.1, postcss-modules-values@4.0.0
+- **Copyright (c) 2015, Rebecca Turner**: write-file-atomic@3.0.3
+- **Copyright (c) 2015, Wes Todd**: setprototypeof@1.2.0
+- **Copyright (c) 2015-2020, Matteo Collina <matteo.collina@gmail.com>**: fastq@1.20.3
+- **Copyright (c) 2015-2022 Mike Bostock**: d3-path@3.1.0
+- **Copyright (c) 2016, Contributors**: ansi-align@3.0.1
+- **Copyright (c) 2016, Mark Wubben**: common-path-prefix@3.0.0
+- **Copyright (c) 2016-2021 Mike Bostock**: d3-fetch@3.0.1
+- **Copyright (c) 2018 Glen Maddern**: icss-utils@5.1.0
+- **Copyright (c) 2018 Kilian Valkhof**: electron-to-chromium@1.5.444, electron-to-chromium@1.5.452
+- **Copyright (c) 2018, Mapbox**: potpack@1.0.2
+- **Copyright (c) 2018-2021 Observable, Inc**: d3-delaunay@6.0.4
+- **Copyright (c) 2019 Elan Shanker, Paul Miller (https://paulmillr.com)**: anymatch@3.1.3
+- **Copyright (c) 2019, Shahar Or**: get-own-enumerable-property-symbols@3.0.2
+- **Copyright (c) 2020, Stefan Terdell**: zod-to-json-schema@3.25.2
+- **Copyright (c) 2021 Mike Bostock**: internmap@2.0.3
+- **Copyright (c) 2021, Andrea Giammarchi, @WebReflection**: @ungap/structured-clone@1.4.0
+- **Copyright (c) 2021, Mapbox**: delaunator@5.0.1
+- **Copyright (c) 2021-2024 Oleksii Raspopov, Kostiantyn Denysov, Anton Verinov**: picocolors@1.1.1
+- **Copyright (c) 2025, webdiscus**: ansis@3.17.0
+- **Copyright (c) Felix Boehm**: boolbase@1.0.0
+- **Copyright (c) Isaac Z. Schlueter**: inherits@2.0.4
+- **Copyright (c) Isaac Z. Schlueter and Contributors**: ini@1.3.8, ini@2.0.0, isexe@2.0.0, lru-cache@5.1.1, lru-cache@6.0.0, minimatch@3.1.5, once@1.4.0, proto-list@1.2.4, semver@6.3.1, semver@7.5.3, semver@7.8.5, which@2.0.2, wrappy@1.0.2, yallist@3.1.1, yallist@4.0.0
+- **Copyright (c) Selwyn**: css-declaration-sorter@7.4.0
+
+#### MIT (1353 packages)
+
+- **Copyright (c) (https://github.com/onlxltd/bonjour-service) (c) 2021 ON LX Limited**: bonjour-service@1.4.4
+- **Copyright (c) 2009-2014 TJ Holowaychuk <tj@vision-media.ca>**: express@4.22.3, express@5.3.0
+- **Copyright (c) 2009-2016 stats.js authors**: stats.js@0.17.0
+- **Copyright (c) 2010 Benjamin Thomas, Robert Kieffer**: mime@1.6.0
+- **Copyright (c) 2010 Sencha Inc**: serve-index@1.9.2, serve-static@1.16.3, serve-static@2.2.1
+- **Copyright (c) 2010, 2011, Chris Winberry <chris@winberry.net>.**: htmlparser2@6.1.0, htmlparser2@8.0.2
+- **Copyright (c) 2010-2012 Tween.js authors**: @tweenjs/tween.js@23.1.3
+- **Copyright (c) 2010-2016 Charlie Robbins, Jarrett Cruger & the Contributors**: http-proxy@1.18.1
+- **Copyright (c) 2010-2019 Juriy "kangax" Zaytsev**: html-minifier-terser@6.1.0, html-minifier-terser@7.2.0
+- **Copyright (c) 2010-2020 Robert Kieffer and other contributors**: uuid@11.1.1
+- **Copyright (c) 2010-2020 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller**: fsevents@2.3.3
+- **Copyright (c) 2010-2026 three.js authors**: three@0.186.1
+- **Copyright (c) 2011 Alexander Shtuchkin**: iconv-lite@0.4.24, iconv-lite@0.6.3, iconv-lite@0.7.3
+- **Copyright (c) 2011 Dominic Tarr**: config-chain@1.1.13, rc@1.2.8
+- **Copyright (c) 2011 Einar Otto Stangvik <einaros@gmail.com>**: ws@7.5.13, ws@8.21.0, ws@8.22.0
+- **Copyright (c) 2011 Eugene Kalinin**: sitemap@7.1.3
+- **Copyright (c) 2011 Felix Geisendörfer (felix@debuggable.com)**: require-like@0.1.2
+- **Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>**: commander@10.0.1, commander@2.20.3, commander@5.1.0, commander@7.2.0, commander@8.3.0
+- **Copyright (c) 2011 VMware, Inc**: sockjs@0.3.24
+- **Copyright (c) 2011 by Ashima Arts (Simplex noise)**: glsl-noise@0.0.0
+- **Copyright (c) 2011 by Beau Gunderson**: ip-address@10.7.3
+- **Copyright (c) 2011-2015 by Vitaly Puzrin**: js-yaml@4.3.2
+- **Copyright (c) 2011-2016 Heather Arthur <fayearthur@gmail.com>**: color-convert@2.0.1
+- **Copyright (c) 2011-2017 whitequark <whitequark@whitequark.org>**: ipaddr.js@1.9.1, ipaddr.js@2.5.0
+- **Copyright (c) 2011-2024 JP Richardson**: fs-extra@11.4.1
+- **Copyright (c) 2011:**: retry@0.13.1
+- **Copyright (c) 2012 Barnesandnoble.com, llc, Donavon West, Domenic Denicola, Brian Cavalier**: immediate@3.0.6
+- **Copyright (c) 2012 Ben Newman <bn@cs.stanford.edu>**: recast@0.23.21
+- **Copyright (c) 2012 Heather Arthur**: @img/colour@1.1.0
+- **Copyright (c) 2012 James Halliday**: resolve@1.22.12
+- **Copyright (c) 2012 James Halliday, Josh Duff, and other contributors**: deepmerge@4.3.1
+- **Copyright (c) 2012 Lea Verou**: prismjs@1.30.0
+- **Copyright (c) 2012 Pierre Curto**: eval@0.1.8
+- **Copyright (c) 2012 Raynos**: duplexer@0.1.2
+- **Copyright (c) 2012 TJ Holowaychuk**: send@0.19.2, send@1.2.1
+- **Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>**: fresh@0.5.2, fresh@2.0.0, inline-style-parser@0.2.7
+- **Copyright (c) 2012-2013 TJ Holowaychuk**: escape-html@1.0.3
+- **Copyright (c) 2012-2014 Chris Pettitt**: @dagrejs/dagre@3.1.1, @dagrejs/graphlib@4.0.5
+- **Copyright (c) 2012-2014 Federico Romero**: negotiator@0.6.3, negotiator@0.6.4, negotiator@1.1.0
+- **Copyright (c) 2012-2014 Roman Shtylman <shtylman@gmail.com>**: cookie@0.7.2
+- **Copyright (c) 2012-2014 TJ Holowaychuk <tj@vision-media.ca>**: bytes@3.0.0, bytes@3.1.2, range-parser@1.2.0, range-parser@1.2.1, range-parser@1.3.0
+- **Copyright (c) 2012-2014 by various contributors (see AUTHORS)**: @babel/parser@7.24.1, @babel/parser@7.29.9
+- **Copyright (c) 2012-2015, JP Richardson <jprichardson@gmail.com>**: jsonfile@6.2.1
+- **Copyright (c) 2012-2017 by Ingvar Stepanyan**: acorn-jsx@5.3.2
+- **Copyright (c) 2012-2018 Aseem Kishore, and [others]**: json5@2.2.3
+- **Copyright (c) 2012-2018 The Debounce Contributors. See CONTRIBUTORS**: debounce@1.2.1
+- **Copyright (c) 2012-2019 Paul Miller (https://paulmillr.com), Elan Shanker**: chokidar@3.6.0
+- **Copyright (c) 2012-2019 Thorsten Lorenz, Paul Miller (https://paulmillr.com)**: readdirp@3.6.0
+- **Copyright (c) 2012-2020 by various contributors (see AUTHORS)**: acorn-walk@8.3.5
+- **Copyright (c) 2012-2022 by various contributors (see AUTHORS)**: acorn@8.18.0, acorn@8.19.0
+- **Copyright (c) 2012–2020 Domenic Denicola <d@domenic.me>**: opener@1.5.2
+- **Copyright (c) 2012–2024 LearnBoost <tj@learnboost.com> and other contributors;**: cookie-signature@1.2.2
+- **Copyright (c) 2013 - 2014 fengmk2 <fengmk2@gmail.com>**: address@2.0.3
+- **Copyright (c) 2013 Andrey Popp**: react-textarea-autosize@8.5.9
+- **Copyright (c) 2013 Andrey Sitnik <andrey@sitnik.es>**: autoprefixer@10.6.1, postcss@8.5.23, postcss@8.5.28, postcss@8.5.29
+- **Copyright (c) 2013 Aria Minaei**: dom-converter@0.2.0, pretty-error@4.0.0
+- **Copyright (c) 2013 Ben Newman <bn@cs.stanford.edu>**: ast-types@0.16.1
+- **Copyright (c) 2013 Dominic Tarr**: json-buffer@3.0.1
+- **Copyright (c) 2013 James Halliday**: object-inspect@1.13.4
+- **Copyright (c) 2013 James Halliday (mail@substack.net)**: shell-quote@1.12.0
+- **Copyright (c) 2013 Jonathan Ong <me@jongleberry.com>**: compressible@2.0.18, merge-descriptors@1.0.3, on-finished@2.4.1
+- **Copyright (c) 2013 Jordan Harband**: object-keys@1.1.1
+- **Copyright (c) 2013 José F. Romaniello**: selfsigned@5.5.0
+- **Copyright (c) 2013 Julian Gruber &lt;julian@juliangruber.com&gt;**: balanced-match@1.0.2
+- **Copyright (c) 2013 Julian Gruber <julian@juliangruber.com>**: brace-expansion@1.1.21
+- **Copyright (c) 2013 Kael Zhang <i@kael.me>, contributors**: ignore@5.3.2
+- **Copyright (c) 2013 Raynos**: function-bind@1.1.2
+- **Copyright (c) 2013 Roman Shtylman**: router@2.2.0
+- **Copyright (c) 2013 TJ Holowaychuk <tj@vision-media.ca>**: batch@0.6.1
+- **Copyright (c) 2013 Thorsten Lorenz**: convert-source-map@2.0.0
+- **Copyright (c) 2013 Troy Goode <troygoode@gmail.com>**: cors@2.8.6
+- **Copyright (c) 2013, Jean-Philippe Monette <contact@jpmonette.net>**: feed@4.2.2
+- **Copyright (c) 2013-2014 Jonathan Ong <me@jongleberry.com>**: raw-body@2.5.3, raw-body@3.0.2
+- **Copyright (c) 2013-2014 Rico Sta. Cruz**: nprogress@0.2.0
+- **Copyright (c) 2013-2014 TJ Holowaychuk <tj@vision-media.ca>**: methods@1.1.2
+- **Copyright (c) 2013-2017 Jared Hanson**: utils-merge@1.0.1
+- **Copyright (c) 2013-2018, Viacheslav Lotsmanov**: deep-extend@0.6.0
+- **Copyright (c) 2013-2019 Ivan Nikulin (ifaaan@gmail.com, https://github.com/inikulin)**: parse5-htmlparser2-tree-adapter@7.1.0, parse5@7.3.0
+- **Copyright (c) 2013-Present Aditya Yadav, http://netroy.in**: image-size@2.0.4
+- **Copyright (c) 2013-Present Algolia**: @algolia/abtesting@1.25.0, @algolia/client-abtesting@5.59.0, @algolia/client-analytics@5.59.0, @algolia/client-common@5.59.0, @algolia/client-insights@5.59.0, @algolia/client-personalization@5.59.0, @algolia/client-query-suggestions@5.59.0, @algolia/client-search@5.59.0, @algolia/ingestion@1.59.0, @algolia/monitoring@1.59.0, @algolia/recommend@5.59.0, @algolia/requester-browser-xhr@5.59.0, @algolia/requester-fetch@5.59.0, @algolia/requester-node-http@5.59.0, algoliasearch@5.59.0
+- **Copyright (c) 2013-present, Facebook, Inc**: invariant@2.2.4, prop-types@15.8.1
+- **Copyright (c) 2013–2016 Domenic Denicola <d@domenic.me>**: path-is-inside@1.0.2
+- **Copyright (c) 2013–2025 Denis Pushkarev (zloirock.ru)**: core-js-compat@3.50.0, core-js@3.50.0
+- **Copyright (c) 2014 - present node-modules and other contributors**: detect-port@2.1.0
+- **Copyright (c) 2014 Andrey Sitnik <andrey@sitnik.es> and other contributors**: browserslist@4.29.3
+- **Copyright (c) 2014 Aria Minaei**: utila@0.4.0
+- **Copyright (c) 2014 Arnout Kazemier**: eventemitter3@4.0.7
+- **Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)**: array-flatten@1.1.1, camel-case@4.1.2, dot-case@3.0.4, lower-case@2.0.2, no-case@3.0.4, param-case@3.0.4, pascal-case@3.1.2, path-to-regexp@0.1.13, path-to-regexp@1.9.0, path-to-regexp@3.3.0, path-to-regexp@8.4.2, snake-case@3.0.4
+- **Copyright (c) 2014 Dave Justice**: is-core-module@2.17.0
+- **Copyright (c) 2014 Douglas Christopher Wilson**: content-disposition@0.5.2, media-typer@0.3.0, on-headers@1.1.0
+- **Copyright (c) 2014 Evan Wallace**: source-map-support@0.5.21
+- **Copyright (c) 2014 Forbes Lindesay**: is-promise@2.2.2, is-promise@4.0.0
+- **Copyright (c) 2014 James Talmage <james.talmage@jrtechnical.com>**: cli-table3@0.6.5
+- **Copyright (c) 2014 Jameson Little**: base64-js@1.5.1
+- **Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>**: accepts@1.3.8, accepts@2.0.0, body-parser@1.20.8, body-parser@2.3.0, compression@1.8.2, mime-db@1.52.0, mime-db@1.54.0, mime-types@2.1.18, mime-types@2.1.35, mime-types@3.0.2, parseurl@1.3.3, statuses@1.5.0, statuses@2.0.2, type-is@1.6.18, type-is@2.1.0
+- **Copyright (c) 2014 Jonathan Ong me@jongleberry.com**: destroy@1.2.0, ee-first@1.1.1, http-errors@1.8.1, http-errors@2.0.1, mime-db@1.33.0
+- **Copyright (c) 2014 Jordan Harband**: object.assign@4.1.7
+- **Copyright (c) 2014 Maxime Thirouin**: postcss-calc@9.0.1
+- **Copyright (c) 2014 Maxime Thirouin & Ian Storm Taylor**: postcss-font-variant@5.0.0
+- **Copyright (c) 2014 Mu-An Chiou**: emojilib@2.4.0
+- **Copyright (c) 2014 Nathan Rajlich <nathan@tootallnate.net>**: util-deprecate@1.0.2
+- **Copyright (c) 2014 Petka Antonov**: to-fast-properties@2.0.0
+- **Copyright (c) 2014 Stefan Thomas**: extend@3.0.2
+- **Copyright (c) 2014 Sébastien Balayn**: caniuse-api@3.0.0
+- **Copyright (c) 2014 TJ Holowaychuk <tj@vision-media.ca>**: debug@2.6.9
+- **Copyright (c) 2014 The cheeriojs contributors**: dom-serializer@1.4.1, dom-serializer@2.0.0
+- **Copyright (c) 2014 Titus Wormer <tituswormer@gmail.com>**: emoticon@4.1.0, remark-parse@11.0.0, remark-stringify@11.0.0
+- **Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell**: js-tokens@4.0.0
+- **Copyright (c) 2014-2015, Jon Schlinkert**: extend-shallow@2.0.1
+- **Copyright (c) 2014-2016 Douglas Christopher Wilson**: etag@1.8.1, proxy-addr@2.0.8
+- **Copyright (c) 2014-2016 Mohammad Younes**: rtlcss@4.3.0
+- **Copyright (c) 2014-2016, Jon Schlinkert**: is-extglob@2.1.1
+- **Copyright (c) 2014-2017 Douglas Christopher Wilson**: content-disposition@0.5.4, content-disposition@2.0.1, depd@1.1.2, forwarded@0.2.0, media-typer@1.1.1, vary@1.1.2
+- **Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca>**: debug@4.4.3
+- **Copyright (c) 2014-2017 by Vitaly Puzrin and Andrei Tuputcyn**: pako@2.1.0
+- **Copyright (c) 2014-2017, Jon Schlinkert**: is-glob@4.0.3, is-plain-object@2.0.4, isobject@3.0.1, kind-of@6.0.3
+- **Copyright (c) 2014-2018 Calvin Metcalf, Jordan Harband**: lie@3.3.0
+- **Copyright (c) 2014-2018 Douglas Christopher Wilson**: depd@2.0.0
+- **Copyright (c) 2014-2018 Suguru Motegi**: neo-async@2.6.2
+- **Copyright (c) 2014-2018, Jon Schlinkert**: clone-deep@4.0.1, normalize-path@3.0.0
+- **Copyright (c) 2014-2019 Luís Couto <hello@luiscouto.pt>**: babel-loader@9.2.1
+- **Copyright (c) 2014-2020 Benjamin Tan <https://ofcr.se/>**: regjsgen@0.8.0
+- **Copyright (c) 2014-2020 Teambition**: merge2@1.4.1
+- **Copyright (c) 2014-2022 Douglas Christopher Wilson <doug@somethingdoug.com>**: finalhandler@1.3.2, finalhandler@2.1.1
+- **Copyright (c) 2014-2023 Daniel Bugl**: node-emoji@2.2.0
+- **Copyright (c) 2014-present Nicolò Ribaudo and other contributors**: @babel/helper-define-polyfill-provider@0.6.8, babel-plugin-polyfill-corejs2@0.4.17, babel-plugin-polyfill-corejs3@0.13.0, babel-plugin-polyfill-corejs3@0.14.2, babel-plugin-polyfill-regenerator@0.6.8
+- **Copyright (c) 2014-present Sebastian McKenzie and other contributors**: @babel/code-frame@7.29.7, @babel/compat-data@7.29.7, @babel/core@7.29.7, @babel/generator@7.29.8, @babel/helper-annotate-as-pure@7.29.7, @babel/helper-compilation-targets@7.29.7, @babel/helper-create-class-features-plugin@7.29.7, @babel/helper-create-regexp-features-plugin@7.29.7, @babel/helper-globals@7.29.7, @babel/helper-member-expression-to-functions@7.29.7, @babel/helper-module-imports@7.29.7, @babel/helper-module-transforms@7.29.7, @babel/helper-optimise-call-expression@7.29.7, @babel/helper-plugin-utils@7.29.7, @babel/helper-remap-async-to-generator@7.29.7, @babel/helper-replace-supers@7.29.7, @babel/helper-skip-transparent-expression-wrappers@7.29.7, @babel/helper-string-parser@7.29.7, @babel/helper-validator-identifier@7.29.7, @babel/helper-validator-option@7.29.7, @babel/helper-wrap-function@7.29.7, @babel/helpers@7.29.10, @babel/helpers@7.29.7, @babel/plugin-bugfix-firefox-class-in-computed-class-key@7.29.7, @babel/plugin-bugfix-safari-class-field-initializer-scope@7.29.7, @babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.29.7, @babel/plugin-bugfix-safari-rest-destructuring-rhs-array@7.29.7, @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.29.7, @babel/plugin-bugfix-v8-static-class-fields-redefine-readonly@7.29.7, @babel/plugin-proposal-private-property-in-object@7.21.0-placeholder-for-preset-env.2, @babel/plugin-syntax-dynamic-import@7.8.3, @babel/plugin-syntax-import-assertions@7.29.7, @babel/plugin-syntax-import-attributes@7.29.7, @babel/plugin-syntax-jsx@7.29.7, @babel/plugin-syntax-typescript@7.29.7, @babel/plugin-syntax-unicode-sets-regex@7.18.6, @babel/plugin-transform-arrow-functions@7.29.7, @babel/plugin-transform-async-generator-functions@7.29.7, @babel/plugin-transform-async-to-generator@7.29.7, @babel/plugin-transform-block-scoped-functions@7.29.7, @babel/plugin-transform-block-scoping@7.29.7, @babel/plugin-transform-class-properties@7.29.7, @babel/plugin-transform-class-static-block@7.29.7, @babel/plugin-transform-classes@7.29.7, @babel/plugin-transform-computed-properties@7.29.7, @babel/plugin-transform-destructuring@7.29.7, @babel/plugin-transform-dotall-regex@7.29.7, @babel/plugin-transform-duplicate-keys@7.29.7, @babel/plugin-transform-duplicate-named-capturing-groups-regex@7.29.7, @babel/plugin-transform-dynamic-import@7.29.7, @babel/plugin-transform-explicit-resource-management@7.29.7, @babel/plugin-transform-exponentiation-operator@7.29.7, @babel/plugin-transform-export-namespace-from@7.29.7, @babel/plugin-transform-for-of@7.29.7, @babel/plugin-transform-function-name@7.29.7, @babel/plugin-transform-json-strings@7.29.7, @babel/plugin-transform-literals@7.29.7, @babel/plugin-transform-logical-assignment-operators@7.29.7, @babel/plugin-transform-member-expression-literals@7.29.7, @babel/plugin-transform-modules-amd@7.29.7, @babel/plugin-transform-modules-commonjs@7.29.7, @babel/plugin-transform-modules-systemjs@7.29.8, @babel/plugin-transform-modules-umd@7.29.7, @babel/plugin-transform-named-capturing-groups-regex@7.29.7, @babel/plugin-transform-new-target@7.29.7, @babel/plugin-transform-nullish-coalescing-operator@7.29.7, @babel/plugin-transform-numeric-separator@7.29.7, @babel/plugin-transform-object-rest-spread@7.29.7, @babel/plugin-transform-object-super@7.29.7, @babel/plugin-transform-optional-catch-binding@7.29.7, @babel/plugin-transform-optional-chaining@7.29.7, @babel/plugin-transform-parameters@7.29.7, @babel/plugin-transform-private-methods@7.29.7, @babel/plugin-transform-private-property-in-object@7.29.7, @babel/plugin-transform-property-literals@7.29.7, @babel/plugin-transform-react-constant-elements@7.29.7, @babel/plugin-transform-react-display-name@7.29.7, @babel/plugin-transform-react-jsx-development@7.29.7, @babel/plugin-transform-react-jsx@7.29.7, @babel/plugin-transform-react-pure-annotations@7.29.7, @babel/plugin-transform-regenerator@7.29.8, @babel/plugin-transform-regexp-modifiers@7.29.7, @babel/plugin-transform-reserved-words@7.29.7, @babel/plugin-transform-runtime@7.29.7, @babel/plugin-transform-shorthand-properties@7.29.7, @babel/plugin-transform-spread@7.29.8, @babel/plugin-transform-sticky-regex@7.29.7, @babel/plugin-transform-template-literals@7.29.7, @babel/plugin-transform-typeof-symbol@7.29.7, @babel/plugin-transform-typescript@7.29.9, @babel/plugin-transform-unicode-escapes@7.29.7, @babel/plugin-transform-unicode-property-regex@7.29.7, @babel/plugin-transform-unicode-regex@7.29.7, @babel/plugin-transform-unicode-sets-regex@7.29.7, @babel/preset-env@7.29.7, @babel/preset-react@7.29.7, @babel/preset-typescript@7.29.7, @babel/runtime@7.28.6, @babel/runtime@7.29.7, @babel/template@7.29.7, @babel/traverse@7.29.10, @babel/traverse@7.29.8, @babel/types@7.24.0, @babel/types@7.29.8
+- **Copyright (c) 2014-present, Jon Schlinkert**: @11ty/gray-matter@1.0.0, braces@3.0.3, fill-range@7.1.1, is-number@7.0.0, micromatch@4.0.8
+- **Copyright (c) 2014–present Olivier Lalonde <olalonde@gmail.com>, James Talmage <james@talmage.io>, Ruben Verborgh**: follow-redirects@1.16.1
+- **Copyright (c) 2015 Algolia**: algoliasearch-helper@3.30.0
+- **Copyright (c) 2015 Andres Suarez <zertosh@gmail.com>**: loose-envify@1.4.0
+- **Copyright (c) 2015 Andrey Okonetchnikov**: attr-accept@4.0.1
+- **Copyright (c) 2015 Aria Minaei**: renderkid@3.0.0
+- **Copyright (c) 2015 Bogdan Chadkin <trysound@yandex.ru>**: postcss-minify-params@6.1.0, postcss-normalize-charset@6.0.2
+- **Copyright (c) 2015 Brian Donovan**: lines-and-columns@1.2.4
+- **Copyright (c) 2015 Calvin Metcalf**: process-nextick-args@2.0.1
+- **Copyright (c) 2015 David Clark**: cosmiconfig@8.3.6, tabbable@6.5.0
+- **Copyright (c) 2015 Dmitry Ivanov**: color-name@1.1.4
+- **Copyright (c) 2015 Douglas Christopher Wilson**: content-type@1.0.5, content-type@2.1.0
+- **Copyright (c) 2015 Douglas Christopher Wilson <doug@somethingdoug.com>**: unpipe@1.0.0
+- **Copyright (c) 2015 JD Ballard**: error-ex@1.3.4, is-arrayish@0.2.1
+- **Copyright (c) 2015 Jason Quense**: dom-helpers@5.2.1
+- **Copyright (c) 2015 Javier Blanco**: path-parse@1.0.7
+- **Copyright (c) 2015 Jordan Harband**: define-properties@1.2.1
+- **Copyright (c) 2015 Joyent Inc.**: chrome-trace-event@1.0.4
+- **Copyright (c) 2015 Juho Vepsalainen**: webpack-merge@5.10.0, webpack-merge@6.0.1
+- **Copyright (c) 2015 Kiko Beats**: emojis-list@3.0.0
+- **Copyright (c) 2015 Mark Dalgleish <mark.john.dalgleish@gmail.com>**: postcss-modules-local-by-default@4.2.0
+- **Copyright (c) 2015 Mathias Buus**: multicast-dns@7.2.5
+- **Copyright (c) 2015 Steven Chim**: http-proxy-middleware@2.0.10
+- **Copyright (c) 2015 Tim Caswell (https://github.com/creationix) and other**: http-parser-js@0.5.10
+- **Copyright (c) 2015 Titus Wormer <mailto:tituswormer@gmail.com>**: longest-streak@3.1.0, stringify-entities@4.0.4, trim-lines@3.0.1
+- **Copyright (c) 2015 Titus Wormer <tituswormer@gmail.com>**: bail@2.0.2, ccount@2.0.1, character-entities-html4@2.1.0, character-entities-legacy@3.0.0, character-entities@2.0.2, character-reference-invalid@2.0.1, collapse-white-space@2.1.0, fault@1.0.4, fault@2.0.1, mdast-util-to-string@4.0.0, unified@11.0.5, unist-util-is@6.0.1, unist-util-position@5.0.0, unist-util-visit@5.1.0, vfile@6.0.3
+- **Copyright (c) 2015 Unshift.io, Arnout Kazemier, the Contributors**: requires-port@1.0.0
+- **Copyright (c) 2015, 2017, Jon Schlinkert**: strip-bom-string@1.0.0
+- **Copyright (c) 2015, David Bonnet <david@bonnet.cc>**: astring@1.9.0
+- **Copyright (c) 2015, Jon Schlinkert**: is-extendable@0.1.1
+- **Copyright (c) 2015-20 [these people](https://github.com/Rich-Harris/estree-walker/graphs/contributors)**: estree-walker@3.0.3
+- **Copyright (c) 2015-2017 Evgeny Poberezkin**: ajv@6.15.0
+- **Copyright (c) 2015-2021 Evgeny Poberezkin**: ajv@8.20.0
+- **Copyright (c) 2015-2021 by Roman Dvornov**: csso@5.0.5
+- **Copyright (c) 2015-2024 Matteo Collina**: reusify@1.1.0
+- **Copyright (c) 2015-present Algolia, Inc**: search-insights@2.17.3
+- **Copyright (c) 2015-present, Jon Schlinkert**: pretty-time@1.1.0, shallow-clone@3.0.1, to-regex-range@5.0.1
+- **Copyright (c) 2016 Agamnentzar**: ag-psd@31.0.3
+- **Copyright (c) 2016 Airbnb**: babel-plugin-dynamic-import-node@2.3.3
+- **Copyright (c) 2016 Douglas Christopher Wilson**: encodeurl@2.0.0
+- **Copyright (c) 2016 Douglas Christopher Wilson <doug@somethingdoug.com>**: toidentifier@1.0.1
+- **Copyright (c) 2016 Espen Hovlandsdal**: registry-auth-token@5.1.1
+- **Copyright (c) 2016 Evgeny Poberezkin**: ajv-keywords@3.5.2, ajv-keywords@5.1.0
+- **Copyright (c) 2016 Jaume Sanchez**: meshline@3.3.1
+- **Copyright (c) 2016 Jordan Harband**: has-symbols@1.1.0
+- **Copyright (c) 2016 Justineo <justice360@gmail.com>**: postcss-discard-overridden@6.0.2
+- **Copyright (c) 2016 Mathias Buus**: dns-packet@5.6.1
+- **Copyright (c) 2016 Matthias Müller <MattDiMu@users.noreply.github.com>**: postcss-replace-overflow-wrap@4.0.0
+- **Copyright (c) 2016 Piotr Witek <piotrek.witek@gmail.com> (http://piotrwitek.github.io)**: utility-types@3.11.0
+- **Copyright (c) 2016 Thomas Watson Steen**: ci-info@3.9.0
+- **Copyright (c) 2016 Titus Wormer <tituswormer@gmail.com>**: comma-separated-tokens@2.0.3, hast-util-parse-selector@4.0.0, hast-util-whitespace@3.0.0, html-void-elements@3.0.0, is-alphabetical@2.0.1, is-alphanumerical@2.0.1, is-decimal@2.0.1, is-hexadecimal@2.0.1, lowlight@1.20.0, mdast-util-to-hast@13.2.1, rehype-raw@7.0.0, space-separated-tokens@2.0.2, trough@2.2.0, unist-util-stringify-position@4.0.0, unist-util-visit-parents@6.0.2, vfile-location@5.0.3, web-namespaces@2.0.1, zwitch@2.0.4
+- **Copyright (c) 2016 Zeit, Inc**: ms@2.0.0
+- **Copyright (c) 2016 rhysd**: remark-emoji@4.0.1
+- **Copyright (c) 2016, 2018 Linus Unnebäck**: buffer-from@1.1.2
+- **Copyright (c) 2016-2017 Yousuf Almarzooqi**: xml-js@1.6.11
+- **Copyright (c) 2016-2019, Peculiar Ventures**: pvutils@1.2.0
+- **Copyright (c) 2016-2021 Thomas Watson Steen**: is-ci@3.0.1
+- **Copyright (c) 2016-2022 by Roman Dvornov**: css-tree@2.2.1, css-tree@2.3.1
+- **Copyright (c) 2016-2025 Arseny Kapoulkine**: meshoptimizer@1.0.1
+- **Copyright (c) 2016-present Vercel, Inc**: styled-jsx@5.1.6
+- **Copyright (c) 2017 @yomotsu**: camera-controls@3.1.2
+- **Copyright (c) 2017 AUTHOR_NAME <AUTHOR_EMAIL>**: postcss-page-break@3.0.4
+- **Copyright (c) 2017 Alberto Leal <mailforalberto@gmail.com> (github.com/dashed)**: shallowequal@1.1.0
+- **Copyright (c) 2017 Andrey Sitnik <andrey@sitnik.es>**: nanoid@6.0.1
+- **Copyright (c) 2017 Andrey Sitnik <andrey@sitnik.ru>**: nanoid@3.3.19, nanoid@3.3.20
+- **Copyright (c) 2017 Anton Korzunov**: aria-hidden@1.2.6, react-remove-scroll@2.7.2, react-style-singleton@2.2.3, use-callback-ref@1.3.3, use-sidecar@1.1.3
+- **Copyright (c) 2017 Compositor and Vercel, Inc**: @mdx-js/react@3.1.1
+- **Copyright (c) 2017 Compositor, Inc. and Vercel, Inc**: @mdx-js/mdx@3.1.1
+- **Copyright (c) 2017 Eric Wendelin and other contributors**: error-stack-parser@2.1.4, stackframe@1.3.4
+- **Copyright (c) 2017 Evgeny Poberezkin**: fast-deep-equal@3.1.3, fast-json-stable-stringify@2.1.0, json-schema-traverse@0.4.1, json-schema-traverse@1.0.0
+- **Copyright (c) 2017 Ilya Kantor**: detect-node-es@1.1.0, detect-node@2.1.0
+- **Copyright (c) 2017 JS Foundation and other contributors**: webpack-sources@3.6.0
+- **Copyright (c) 2017 JakubPawlowicz.com**: clean-css@5.3.3
+- **Copyright (c) 2017 Kat Marchán**: json-parse-even-better-errors@2.3.1
+- **Copyright (c) 2017 Kent C. Dodds**: cross-env@7.0.3
+- **Copyright (c) 2017 Mauro Bringolf**: @webassemblyjs/floating-point-hex-parser@1.13.2
+- **Copyright (c) 2017 Maxime Thirouin**: postcss-selector-not@8.0.1
+- **Copyright (c) 2017 Menglin "Mark" Xu <mark@remarkablemark.org>**: style-to-object@1.0.14
+- **Copyright (c) 2017 Oleg Dutchenko <dutchenko.o.dev@gmail.com>**: sort-css-media-queries@2.2.0
+- **Copyright (c) 2017 Sergey Rubanov (https://github.com/chicoxyzzy)**: node-releases@2.0.57, node-releases@2.0.58
+- **Copyright (c) 2017 Smooth Code**: @svgr/babel-plugin-add-jsx-attribute@8.0.0, @svgr/babel-plugin-remove-jsx-attribute@8.0.0, @svgr/babel-plugin-remove-jsx-empty-expression@8.0.0, @svgr/babel-plugin-replace-jsx-attribute-value@8.0.0, @svgr/babel-plugin-svg-dynamic-title@8.0.0, @svgr/babel-plugin-svg-em-dimensions@8.0.0, @svgr/babel-plugin-transform-react-native-svg@8.1.0, @svgr/babel-plugin-transform-svg-component@8.0.0, @svgr/babel-preset@8.1.0, @svgr/core@8.1.0, @svgr/hast-util-to-babel-ast@8.0.0, @svgr/plugin-jsx@8.1.0, @svgr/plugin-svgo@8.1.0, @svgr/webpack@8.1.0
+- **Copyright (c) 2017 Titus Wormer <tituswormer@gmail.com>**: mdast-util-phrasing@4.1.0, remark-frontmatter@5.0.0
+- **Copyright (c) 2017, Jon Schlinkert**: section-matter@1.0.0
+- **Copyright (c) 2017, Ryan Zimmerman <opensrc@ryanzim.com>**: universalify@2.0.1
+- **Copyright (c) 2017-2018 Fredrik Nicol**: csstype@3.2.3
+- **Copyright (c) 2017-2023 Haydn Paterson (sinclair) <haydn.developer@gmail.com>**: @sinclair/typebox@0.27.12
+- **Copyright (c) 2017-2024 Peculiar Ventures, LLC**: pvtsutils@1.3.6
+- **Copyright (c) 2017-2026 Peculiar Ventures, LLC**: @peculiar/utils@2.0.3
+- **Copyright (c) 2017-present by Andrea Giammarchi - @WebReflection**: html-escaper@2.0.2
+- **Copyright (c) 2017-present, Jon Schlinkert**: picomatch@2.3.2
+- **Copyright (c) 2017-present, Yuxi (Evan) You**: launch-editor@2.14.1
+- **Copyright (c) 2018 Filip Skokan**: jose@6.2.12
+- **Copyright (c) 2018 Formidable Labs**: react-fast-compare@3.2.2
+- **Copyright (c) 2018 Framer B.V**: framer-motion@12.35.0, framer-motion@13.4.6
+- **Copyright (c) 2018 Garrett Johnson**: three-mesh-bvh@0.8.3
+- **Copyright (c) 2018 Jed Watson**: classnames@2.5.1
+- **Copyright (c) 2018 LitoMore**: is-yarn-global@0.4.1
+- **Copyright (c) 2018 Logan Smyth <loganfsmyth@gmail.com>**: gensync@1.0.0-beta.2
+- **Copyright (c) 2018 Made With MOXY Lda <hello@moxy.studio>**: cross-spawn@7.0.6
+- **Copyright (c) 2018 Marcos Gonçalves**: react-loadable-ssr-addon-v5-slorber@1.0.3
+- **Copyright (c) 2018 Mathias Buus**: thunky@1.1.0
+- **Copyright (c) 2018 Michael Mclaughlin**: big.js@5.2.2
+- **Copyright (c) 2018 Nearform**: prism-react-renderer@2.4.1
+- **Copyright (c) 2018 Nikita Skovoroda <chalkerx@gmail.com>**: safer-buffer@2.1.2
+- **Copyright (c) 2018 Param Aggarwal**: react-dropzone@20.1.2
+- **Copyright (c) 2018 Sven Sauleau <sven@sauleau.com>**: @webassemblyjs/ast@1.14.1, @webassemblyjs/helper-api-error@1.13.2, @webassemblyjs/helper-buffer@1.14.1, @webassemblyjs/helper-numbers@1.13.2, @webassemblyjs/helper-wasm-bytecode@1.13.2, @webassemblyjs/helper-wasm-section@1.14.1, @webassemblyjs/ieee754@1.13.2, @webassemblyjs/utf8@1.13.2, @webassemblyjs/wasm-edit@1.14.1, @webassemblyjs/wasm-gen@1.14.1, @webassemblyjs/wasm-opt@1.14.1, @webassemblyjs/wasm-parser@1.14.1, @webassemblyjs/wast-printer@1.14.1
+- **Copyright (c) 2018 Szymon Marczak**: @szmarczak/http-timer@5.0.1, defer-to-connect@2.0.1, http2-wrapper@2.2.1, resolve-alpn@1.2.1
+- **Copyright (c) 2018 Terkel Gjervig Nielsen**: prompts@2.4.2, sisteransi@1.0.5
+- **Copyright (c) 2018 ZEIT, Inc**: serve-handler@6.1.7
+- **Copyright (c) 2018-2022 Guy Bedford**: es-module-lexer@2.3.2
+- **Copyright (c) 2018-present Paul Henschel <drcmda@gmail.com>**: @use-gesture/core@10.3.1, @use-gesture/react@10.3.1
+- **Copyright (c) 2018-present Paul Henschel, react-spring, all contributors**: @react-spring/animated@10.1.2, @react-spring/core@10.1.2, @react-spring/rafz@10.1.2, @react-spring/shared@10.1.2, @react-spring/types@10.1.2, @react-spring/web@10.1.2
+- **Copyright (c) 2019**: pkce-challenge@5.0.1
+- **Copyright (c) 2019 Alexander Reardon**: tiny-invariant@1.3.3, tiny-warning@1.0.3
+- **Copyright (c) 2019 Conor Hastings**: react-syntax-highlighter@16.1.1
+- **Copyright (c) 2019 Jordan Harband**: side-channel-weakmap@1.0.2, side-channel@1.1.1
+- **Copyright (c) 2019 Justin Ridgewell <jridgewell@google.com>**: @jridgewell/resolve-uri@3.1.2
+- **Copyright (c) 2019 Paul Henschel**: zustand@4.5.7, zustand@5.0.11, zustand@5.0.15
+- **Copyright (c) 2019 ProtectWise**: troika-three-text@0.52.4, troika-three-utils@0.52.4, troika-worker-utils@0.52.0
+- **Copyright (c) 2019 Richie Bendall**: char-regex@1.0.2
+- **Copyright (c) 2019 Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com), Paul Miller (https://paulmillr.com)**: is-binary-path@2.1.0
+- **Copyright (c) 2019 Szymon Marczak**: cacheable-lookup@7.0.0
+- **Copyright (c) 2019 Tim van Scherpenzeel**: webgl-constants@1.1.1
+- **Copyright (c) 2019 Yunus Gaziev <yunusga@yandex.ru>**: postcss-sort-media-queries@5.2.0
+- **Copyright (c) 2019-2023 webkid GmbH**: @reactflow/background@11.3.14, @reactflow/controls@11.2.14, @reactflow/core@11.11.4, @reactflow/minimap@11.7.14, @reactflow/node-resizer@2.2.14, @reactflow/node-toolbar@1.3.14, reactflow@11.11.4
+- **Copyright (c) 2019-2025 Poimandres**: react-use-measure@2.1.7
+- **Copyright (c) 2019-2025 webkid GmbH**: @xyflow/react@12.10.1, @xyflow/react@12.11.6, @xyflow/system@0.0.75, @xyflow/system@0.0.82
+- **Copyright (c) 2020**: @peculiar/asn1-cms@2.10.0, @peculiar/asn1-csr@2.10.0, @peculiar/asn1-ecc@2.10.0, @peculiar/asn1-pfx@2.10.0, @peculiar/asn1-pkcs8@2.10.0, @peculiar/asn1-pkcs9@2.10.0, @peculiar/asn1-rsa@2.10.0, @peculiar/asn1-schema@2.10.0, @peculiar/asn1-x509-attr@2.10.0, @peculiar/asn1-x509@2.10.0
+- **Copyright (c) 2020 Anton Korzunov**: get-nonce@1.0.1
+- **Copyright (c) 2020 Arjun Barrett**: fflate@0.6.11
+- **Copyright (c) 2020 Babel**: @babel/preset-modules@0.1.6-no-external-plugins
+- **Copyright (c) 2020 Dmitry Semigradsky <semigradskyd@gmail.com>**: postcss-attribute-case-insensitive@7.0.1
+- **Copyright (c) 2020 Evan Wallace**: esbuild@0.28.1
+- **Copyright (c) 2020 Evgeny Poberezkin**: ajv-formats@3.0.1
+- **Copyright (c) 2020 Ivan Menshykov <ivan.menshykov@gmail.com>**: postcss-clamp@4.1.0
+- **Copyright (c) 2020 James M Snell and the Piscina contributors**: tinypool@2.2.0
+- **Copyright (c) 2020 Jordan Harband**: call-bind@1.0.9, get-intrinsic@1.3.0
+- **Copyright (c) 2020 Menglin "Mark" Xu <mark@remarkablemark.org>**: style-to-js@1.1.21
+- **Copyright (c) 2020 Roland Groza**: file-selector@5.0.1
+- **Copyright (c) 2020 Roman Dvornov <rdvornov@gmail.com>**: @discoveryjs/json-ext@0.5.7
+- **Copyright (c) 2020 ScriptedAlchemy LLC (Zack Jackson) Zhou Shaw (zhouxiao)**: @module-federation/error-codes@0.22.0
+- **Copyright (c) 2020 Tim van Scherpenzeel**: detect-gpu@5.0.70
+- **Copyright (c) 2020 Titus Wormer <tituswormer@gmail.com>**: estree-util-attach-comments@3.0.0, estree-util-build-jsx@3.0.1, estree-util-is-identifier-name@3.0.0, mdast-util-frontmatter@2.0.1, mdast-util-gfm-autolink-literal@2.0.1, mdast-util-gfm-table@2.0.0, mdast-util-gfm-task-list-item@2.0.0, mdast-util-mdx-expression@2.0.1, mdast-util-mdx-jsx@3.2.0, mdast-util-mdx@3.0.0, mdast-util-mdxjs-esm@2.0.1, micromark-extension-directive@3.0.2, micromark-extension-frontmatter@2.0.0, micromark-extension-gfm-autolink-literal@2.1.0, micromark-extension-gfm-strikethrough@2.1.0, micromark-extension-gfm-tagfilter@2.0.0, micromark-extension-gfm-task-list-item@2.1.0, micromark-extension-gfm@3.0.0, micromark-extension-mdx-jsx@3.0.2, micromark-extension-mdx-md@2.0.0, micromark-extension-mdxjs-esm@3.0.0, micromark-extension-mdxjs@3.0.0, remark-mdx@3.1.1
+- **Copyright (c) 2020 Vadim @streamich Dalecky**: hyperdyperid@1.2.0, thingies@2.6.1
+- **Copyright (c) 2020 Vercel, Inc**: ms@2.1.3
+- **Copyright (c) 2020 Vlad Shilov omgovich@ya.ru**: colord@2.10.0
+- **Copyright (c) 2020 react-spring**: @react-three/drei@10.7.9
+- **Copyright (c) 2020-2026 Paweł Kuna**: @tabler/icons-react@3.48.0, @tabler/icons-react@3.49.0, @tabler/icons@3.48.0, @tabler/icons@3.49.0
+- **Copyright (c) 2020-present Sudhanshu Yadav**: react-number-format@5.4.5
+- **Copyright (c) 2021 - present, Yusuke Wada and Hono contributors**: hono@4.13.13
+- **Copyright (c) 2021 Dulin Marat**: html-entities@2.6.0
+- **Copyright (c) 2021 Jason Johnston**: bidi-js@1.0.3, webgl-sdf-generator@1.1.1
+- **Copyright (c) 2021 JonnyBurger**: @remotion/media-utils@4.0.542
+- **Copyright (c) 2021 Marc Görtz <https://marcgoertz.de/>**: postcss-opacity-percentage@3.0.0
+- **Copyright (c) 2021 Martin Heidegger**: @leichtgewicht/ip-codec@2.0.5
+- **Copyright (c) 2021 Paul Henschel**: suspend-react@0.1.3
+- **Copyright (c) 2021 Remco Haszing**: estree-util-value-to-estree@3.5.0
+- **Copyright (c) 2021 Sébastien Lorber**: combine-promises@1.2.0
+- **Copyright (c) 2021 Titus Wormer <tituswormer@gmail.com>**: esast-util-from-estree@2.0.0, estree-util-visit@2.0.0, micromark-extension-gfm-footnote@2.1.0, unist-util-position-from-estree@2.0.0
+- **Copyright (c) 2021 Vercel, Inc**: arg@5.0.2
+- **Copyright (c) 2021 Vitaly Rtishchev**: @mantine/core@9.7.1, @mantine/core@9.7.2, @mantine/dropzone@9.7.2, @mantine/form@9.7.2, @mantine/hooks@9.7.1, @mantine/hooks@9.7.2, @mantine/notifications@9.7.2, @mantine/store@9.7.2
+- **Copyright (c) 2021, Lee Byron**: @slorber/remark-comment@1.0.0
+- **Copyright (c) 2021-2023 Poimandres**: three-stdlib@2.36.1
+- **Copyright (c) 2021-present Floating UI contributors**: @floating-ui/core@1.8.0, @floating-ui/dom@1.8.0, @floating-ui/react-dom@2.1.9, @floating-ui/react@0.27.20, @floating-ui/utils@0.2.12
+- **Copyright (c) 2021-present Nick K**: form-data-encoder@2.1.4
+- **Copyright (c) 2021-present Tanner Linsley**: @tanstack/react-virtual@3.14.9, @tanstack/virtual-core@3.17.7
+- **Copyright (c) 2021-present Toyobayashi**: @emnapi/core@1.11.3, @emnapi/runtime@1.11.3, @emnapi/wasi-threads@1.2.3
+- **Copyright (c) 2022 - present, Yusuke Wada and Hono contributors**: @hono/node-server@2.1.4
+- **Copyright (c) 2022 Andrey Sitnik <andrey@sitnik.es> and other contributors**: update-browserslist-db@1.3.3, update-browserslist-db@1.3.4
+- **Copyright (c) 2022 Anton Kastritskiy**: lilconfig@3.1.3
+- **Copyright (c) 2022 Ben Blackmore and contributors**: connect-history-api-fallback@2.0.0
+- **Copyright (c) 2022 Inspect JS**: has-property-descriptors@1.0.2, supports-preserve-symlinks-flag@1.0.0
+- **Copyright (c) 2022 Jordan Harband**: gopd@1.2.0
+- **Copyright (c) 2022 Paul Miller (https://paulmillr.com)**: @noble/hashes@1.8.0
+- **Copyright (c) 2022 Poimandres**: tunnel-rat@0.1.2
+- **Copyright (c) 2022 Romain Menke, Antonio Laguna <antonio@laguna.es>**: @csstools/cascade-layer-name-parser@2.0.5, @csstools/css-calc@2.1.4, @csstools/css-color-parser@3.1.0, @csstools/css-parser-algorithms@3.0.5, @csstools/css-tokenizer@3.0.4, @csstools/media-query-list-parser@4.0.3
+- **Copyright (c) 2022 Romain Menke, Antonio Laguna <antonio@laguna.es>, PostCSS**: @csstools/postcss-media-minmax@2.0.9
+- **Copyright (c) 2022 The Cheerio contributors**: cheerio@1.0.0-rc.12
+- **Copyright (c) 2022 Titus Wormer <tituswormer@gmail.com>**: esast-util-from-js@2.0.1, estree-util-to-js@2.0.0
+- **Copyright (c) 2022 WorkOS**: @radix-ui/number@1.1.3, @radix-ui/primitive@1.1.7, @radix-ui/react-accessible-icon@1.1.15, @radix-ui/react-accordion@1.2.20, @radix-ui/react-alert-dialog@1.1.23, @radix-ui/react-arrow@1.1.15, @radix-ui/react-aspect-ratio@1.1.15, @radix-ui/react-avatar@1.2.6, @radix-ui/react-checkbox@1.3.11, @radix-ui/react-collapsible@1.1.20, @radix-ui/react-collection@1.1.15, @radix-ui/react-compose-refs@1.1.5, @radix-ui/react-context-menu@2.3.7, @radix-ui/react-context@1.2.2, @radix-ui/react-dialog@1.1.23, @radix-ui/react-direction@1.1.4, @radix-ui/react-dismissable-layer@1.1.19, @radix-ui/react-dropdown-menu@2.1.24, @radix-ui/react-focus-guards@1.1.6, @radix-ui/react-focus-scope@1.1.16, @radix-ui/react-form@0.1.16, @radix-ui/react-hover-card@1.1.23, @radix-ui/react-id@1.1.4, @radix-ui/react-label@2.1.15, @radix-ui/react-menu@2.1.24, @radix-ui/react-menubar@1.1.24, @radix-ui/react-navigation-menu@1.2.22, @radix-ui/react-one-time-password-field@0.1.16, @radix-ui/react-password-toggle-field@0.1.11, @radix-ui/react-popover@1.1.23, @radix-ui/react-popper@1.3.7, @radix-ui/react-portal@1.1.17, @radix-ui/react-presence@1.1.10, @radix-ui/react-primitive@2.1.10, @radix-ui/react-progress@1.1.16, @radix-ui/react-radio-group@1.4.7, @radix-ui/react-roving-focus@1.1.19, @radix-ui/react-scroll-area@1.2.18, @radix-ui/react-select@2.3.7, @radix-ui/react-separator@1.1.15, @radix-ui/react-slider@1.4.7, @radix-ui/react-slot@1.3.3, @radix-ui/react-switch@1.3.7, @radix-ui/react-tabs@1.1.21, @radix-ui/react-toast@1.2.23, @radix-ui/react-toggle-group@1.1.19, @radix-ui/react-toggle@1.1.18, @radix-ui/react-toolbar@1.1.19, @radix-ui/react-tooltip@1.2.16, @radix-ui/react-use-callback-ref@1.1.4, @radix-ui/react-use-controllable-state@1.2.6, @radix-ui/react-use-effect-event@0.0.5, @radix-ui/react-use-escape-keydown@1.1.5, @radix-ui/react-use-is-hydrated@0.1.3, @radix-ui/react-use-layout-effect@1.1.4, @radix-ui/react-use-previous@1.1.4, @radix-ui/react-use-rect@1.1.4, @radix-ui/react-use-size@1.1.4, @radix-ui/react-visually-hidden@1.2.11, @radix-ui/rect@1.1.3, radix-ui@1.6.7
+- **Copyright (c) 2022-2025 Poimandres**: its-fine@2.1.1
+- **Copyright (c) 2022-present Bytedance, Inc. and its affiliates**: @rspack/binding@1.7.11, @rspack/core@1.7.11, @rspack/lite-tapable@1.1.0, @rspack/plugin-react-refresh@1.6.1
+- **Copyright (c) 2022-present Toyobayashi**: @tybys/wasm-util@0.10.4
+- **Copyright (c) 2023 Ben Gubler <nebrelbug@gmail.com>**: eta@2.2.0
+- **Copyright (c) 2023 Damon Oehlman &lt;damon.oehlman@gmail.com&gt;**: wildcard@2.0.1
+- **Copyright (c) 2023 JonnyBurger**: @remotion/paths@4.0.542
+- **Copyright (c) 2023 Jordan Harband**: define-data-property@1.1.4
+- **Copyright (c) 2023 MONOGRID**: @monogrid/gainmap-js@3.4.0
+- **Copyright (c) 2023 Nathan Friedly, Vedant K**: express-rate-limit@8.7.1
+- **Copyright (c) 2023 Titus Wormer <tituswormer@gmail.com>**: devlop@1.1.0
+- **Copyright (c) 2023 Vercel, Inc**: swr@2.5.1
+- **Copyright (c) 2023-present zhanghang(2heal1)**: @module-federation/sdk@0.22.0, @module-federation/webpack-bundler-runtime@0.22.0
+- **Copyright (c) 2023-present zhouxiao(zhoushaw)**: @module-federation/runtime-core@0.22.0, @module-federation/runtime-tools@0.22.0, @module-federation/runtime@0.22.0
+- **Copyright (c) 2024 Anthropic, PBC**: @modelcontextprotocol/sdk@1.32.1
+- **Copyright (c) 2024 AnyRoad**: react-json-view-lite@2.5.0
+- **Copyright (c) 2024 Colin McDonnell**: @standard-schema/spec@1.1.0
+- **Copyright (c) 2024 ECMAScript Shims**: dunder-proto@1.0.1, math-intrinsics@1.1.0
+- **Copyright (c) 2024 Jordan Harband**: call-bind-apply-helpers@1.0.2, call-bound@1.0.4, es-define-property@1.0.1, es-errors@1.3.0, es-object-atoms@1.1.2, side-channel-list@1.0.1, side-channel-map@1.0.1
+- **Copyright (c) 2024 Justin Ridgewell <justin@ridgewell.name>**: @jridgewell/gen-mapping@0.3.13, @jridgewell/remapping@2.3.5, @jridgewell/source-map@0.3.11, @jridgewell/sourcemap-codec@1.6.0, @jridgewell/trace-mapping@0.3.31
+- **Copyright (c) 2024 [Motion](https://motion.dev) B.V**: motion-dom@12.35.0, motion-dom@13.4.5, motion-utils@12.29.2, motion-utils@13.3.0
+- **Copyright (c) 2025 AgentbaseAI Inc**: @assistant-ui/core@0.3.21, @assistant-ui/react-data-stream@0.12.33, @assistant-ui/react-markdown@0.14.17, @assistant-ui/react@0.15.22, @assistant-ui/store@0.3.15, @assistant-ui/tap@0.9.19, assistant-cloud@0.2.3, assistant-stream@0.3.45, safe-content-frame@0.0.31
+- **Copyright (c) 2025 Colin McDonnell**: zod@4.6.7, zod@4.6.5
+- **Copyright (c) 2025 Jordan Harband**: get-proto@1.0.1
+- **Copyright (c) 2025 Nicolò Ribaudo**: acorn-import-phases@1.0.4
+- **Copyright (c) 2025 Robert Eisele**: fraction.js@5.3.4
+- **Copyright (c) 2026 Arjun Barrett**: fflate@0.8.3
+- **Copyright (c) 2026 Espen Hovlandsdal <espen@hovlandsdal.com>**: eventsource-parser@3.1.1
+- **Copyright (c) Algolia, Inc.**: @algolia/autocomplete-core@1.19.12, @algolia/autocomplete-core@1.19.2, @algolia/autocomplete-plugin-algolia-insights@1.19.12, @algolia/autocomplete-plugin-algolia-insights@1.19.2, @algolia/autocomplete-shared@1.19.12, @algolia/autocomplete-shared@1.19.2, @docsearch/core@4.7.0, @docsearch/css@4.7.0, @docsearch/react@4.7.0
+- **Copyright (c) Andarist**: use-latest@1.3.0
+- **Copyright (c) Anton Korzunov**: react-remove-scroll-bar@2.3.8
+- **Copyright (c) Ben Briggs <beneb.info@gmail.com> (http://beneb.info)**: cssnano-preset-advanced@6.1.2, cssnano-preset-default@6.1.2, cssnano-utils@4.0.2, cssnano@6.1.2, postcss-colormin@6.1.0, postcss-convert-values@6.1.0, postcss-discard-comments@6.0.2, postcss-discard-duplicates@6.0.3, postcss-discard-empty@6.0.3, postcss-discard-unused@6.0.5, postcss-merge-idents@6.0.3, postcss-merge-longhand@6.0.5, postcss-merge-rules@6.1.1, postcss-minify-gradients@6.0.3, postcss-minify-selectors@6.0.4, postcss-normalize-display-values@6.0.2, postcss-normalize-positions@6.0.2, postcss-normalize-repeat-style@6.0.2, postcss-normalize-string@6.0.2, postcss-normalize-timing-functions@6.0.2, postcss-normalize-unicode@6.1.0, postcss-normalize-url@6.0.2, postcss-normalize-whitespace@6.0.2, postcss-ordered-values@6.0.2, postcss-reduce-idents@6.0.3, postcss-reduce-initial@6.1.0, postcss-reduce-transforms@6.0.2, postcss-selector-parser@7.1.6, postcss-svgo@6.0.3, postcss-unique-selectors@6.0.4, postcss-zindex@6.0.2, stylehacks@6.1.1
+- **Copyright (c) Bogdan Chadkin <trysound@yandex.ru>**: postcss-minify-font-values@6.1.0, postcss-value-parser@4.2.0
+- **Copyright (c) DABH**: @colors/colors@1.5.0
+- **Copyright (c) Denis Malinochkin**: @nodelib/fs.scandir@2.1.5, @nodelib/fs.stat@2.0.5, @nodelib/fs.walk@1.2.8, fast-glob@3.3.3
+- **Copyright (c) Espen Hovlandsdal**: react-markdown@10.1.0
+- **Copyright (c) EventSource GitHub organisation**: eventsource@3.0.7
+- **Copyright (c) Facebook, Inc. and its affiliates**: @docusaurus/babel@3.10.2, @docusaurus/bundler@3.10.2, @docusaurus/core@3.10.2, @docusaurus/cssnano-preset@3.10.2, @docusaurus/logger@3.10.2, @docusaurus/mdx-loader@3.10.2, @docusaurus/module-type-aliases@3.10.2, @docusaurus/plugin-client-redirects@3.10.2, @docusaurus/plugin-content-blog@3.10.2, @docusaurus/plugin-content-docs@3.10.2, @docusaurus/plugin-content-pages@3.10.2, @docusaurus/plugin-css-cascade-layers@3.10.2, @docusaurus/plugin-debug@3.10.2, @docusaurus/plugin-google-analytics@3.10.2, @docusaurus/plugin-google-gtag@3.10.2, @docusaurus/plugin-google-tag-manager@3.10.2, @docusaurus/plugin-sitemap@3.10.2, @docusaurus/plugin-svgr@3.10.2, @docusaurus/preset-classic@3.10.2, @docusaurus/theme-classic@3.10.2, @docusaurus/theme-common@3.10.2, @docusaurus/theme-search-algolia@3.10.2, @docusaurus/theme-translations@3.10.2, @docusaurus/types@3.10.2, @docusaurus/utils-common@3.10.2, @docusaurus/utils-validation@3.10.2, @docusaurus/utils@3.10.2, jest-worker@27.5.1, react-is@16.13.1
+- **Copyright (c) Fedor Indutny**: handle-thing@2.0.1, hpack.js@2.1.6, http-deceiver@1.2.7, select-hose@2.0.0, spdy-transport@3.0.0, spdy@4.0.2, wbuf@1.7.3
+- **Copyright (c) Fedor Indutny, 2015**: obuf@1.1.2
+- **Copyright (c) Feross Aboukhadijeh**: queue-microtask@1.2.3, run-parallel@1.2.0, safe-buffer@5.1.2, safe-buffer@5.2.1, typedarray-to-buffer@3.1.5
+- **Copyright (c) Feross Aboukhadijeh, and other contributors**: buffer@6.0.3
+- **Copyright (c) Hugh Kennedy**: is-typedarray@1.0.0
+- **Copyright (c) JS Foundation and other contributors**: copy-webpack-plugin@11.0.0, css-loader@6.11.0, css-loader@7.1.4, css-minimizer-webpack-plugin@5.0.1, enhanced-resolve@5.26.0, file-loader@6.2.0, html-webpack-plugin@5.6.8, loader-utils@2.0.4, mini-css-extract-plugin@2.10.2, minimizer-webpack-plugin@5.13.0, null-loader@4.0.1, postcss-loader@7.3.4, schema-utils@3.3.0, schema-utils@4.5.0, style-loader@4.0.0, tapable@2.3.3, terser-webpack-plugin@5.6.1, url-loader@4.1.1, watchpack@2.5.2, webpack-bundle-analyzer@4.10.2, webpack-dev-middleware@7.4.6, webpack-dev-server@5.2.6, webpack@5.105.0, webpack@5.111.1
+- **Copyright (c) James Halliday**: concat-map@0.0.1, minimist@1.2.6, minimist@1.2.8
+- **Copyright (c) Jared Wray**: cacheable-request@10.2.14, keyv@4.5.4
+- **Copyright (c) Jens Taylor**: imurmurhash@0.1.4
+- **Copyright (c) Jonathan Ong <me@jongleberry.com>**: merge-descriptors@2.0.0
+- **Copyright (c) Jonny Burger**: @remotion/captions@4.0.542, @remotion/codemods@4.0.542, @remotion/elevenlabs@4.0.542, @remotion/licensing@4.0.542, @remotion/openai-whisper@4.0.542, @remotion/streaming@4.0.542, @remotion/studio-server@4.0.542, @remotion/studio-shared@4.0.542, @remotion/studio@4.0.542, @remotion/timeline-utils@4.0.542, @remotion/zod-types@4.0.542
+- **Copyright (c) Jordan Harband and contributors**: hasown@2.0.4, set-function-length@1.2.2
+- **Copyright (c) Jorge Bucaran <<https://jorgebucaran.com>>**: classcat@5.0.5, colorette@2.0.20
+- **Copyright (c) Joyent, Inc. and other Node contributors**: @algolia/events@4.0.1, events@3.3.0
+- **Copyright (c) Julian Gruber**: isarray@0.0.1, isarray@1.0.0
+- **Copyright (c) Kevin Mårtensson <kevinmartensson@gmail.com> (github.com/kevva)**: @pnpm/npm-conf@3.0.3, dir-glob@3.0.1, shebang-command@2.0.0
+- **Copyright (c) Kir Belevich**: svgo@3.3.5
+- **Copyright (c) LongYinan**: @napi-rs/wasm-runtime@1.0.7
+- **Copyright (c) Luke Edwards**: @polka/url@1.0.0-next.29, sirv@2.0.4
+- **Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (https://lukeed.com)**: mrmime@2.0.1
+- **Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)**: clsx@2.1.1, dequal@2.0.3, escalade@3.2.0, kleur@3.0.3, klona@2.0.6, totalist@3.0.1
+- **Copyright (c) Masaki Komagata**: eastasianwidth@0.2.0
+- **Copyright (c) Mateusz Burzyński**: use-isomorphic-layout-effect@1.2.1
+- **Copyright (c) Mathias Bynens <https://mathiasbynens.be/>**: cssesc@3.0.0, emoji-regex@8.0.0, emoji-regex@9.2.2, he@1.2.0, jsesc@3.1.0, punycode@2.3.1, regenerate-unicode-properties@10.3.0, regenerate@1.4.2, regexpu-core@6.5.2, unicode-canonical-property-names-ecmascript@2.0.1, unicode-emoji-modifier-base@1.0.0, unicode-match-property-ecmascript@2.0.0, unicode-match-property-value-ecmascript@2.2.1, unicode-property-aliases-ecmascript@2.2.0
+- **Copyright (c) Matteo Collina and Undici contributors**: undici-types@8.9.0
+- **Copyright (c) Meta Platforms, Inc. and affiliates**: @jest/schemas@29.6.3, @jest/types@29.6.3, jest-util@29.7.0, jest-worker@29.7.0, react-dom@19.2.4, react-dom@19.3.0, react-refresh@0.18.0, react@19.2.4, react@19.3.0, scheduler@0.27.0, scheduler@0.28.0, use-sync-external-store@1.6.0, use-sync-external-store@1.7.0
+- **Copyright (c) Michael Jackson 2016-2018**: resolve-pathname@3.0.0, value-equal@1.0.1
+- **Copyright (c) Microsoft Corporation**: @types/body-parser@1.19.6, @types/bonjour@3.5.13, @types/connect-history-api-fallback@1.5.4, @types/connect@3.4.38, @types/d3-array@3.2.2, @types/d3-axis@3.0.6, @types/d3-brush@3.0.6, @types/d3-chord@3.0.6, @types/d3-color@3.1.3, @types/d3-contour@3.0.6, @types/d3-delaunay@6.0.4, @types/d3-dispatch@3.0.7, @types/d3-drag@3.0.7, @types/d3-dsv@3.0.7, @types/d3-ease@3.0.2, @types/d3-fetch@3.0.7, @types/d3-force@3.0.10, @types/d3-format@3.0.4, @types/d3-geo@3.1.0, @types/d3-hierarchy@3.1.7, @types/d3-interpolate@3.0.4, @types/d3-path@3.1.1, @types/d3-polygon@3.0.2, @types/d3-quadtree@3.0.6, @types/d3-random@3.0.3, @types/d3-scale-chromatic@3.1.0, @types/d3-scale@4.0.9, @types/d3-selection@3.0.11, @types/d3-selection@3.0.12, @types/d3-shape@3.1.8, @types/d3-time-format@4.0.3, @types/d3-time@3.0.4, @types/d3-timer@3.0.2, @types/d3-transition@3.0.9, @types/d3-zoom@3.0.8, @types/d3@7.4.3, @types/debug@4.1.13, @types/dom-mediacapture-transform@0.1.12, @types/dom-webcodecs@0.1.13, @types/draco3d@1.4.10, @types/eslint-scope@3.7.7, @types/eslint@9.6.1, @types/estree-jsx@1.0.5, @types/estree@1.0.9, @types/express-serve-static-core@4.19.9, @types/express@4.17.25, @types/geojson@7946.0.16, @types/hast@3.0.4, @types/hast@3.0.5, @types/history@4.7.11, @types/html-minifier-terser@6.1.0, @types/http-cache-semantics@4.2.0, @types/http-errors@2.0.5, @types/http-proxy@1.17.17, @types/istanbul-lib-coverage@2.0.6, @types/istanbul-lib-report@3.0.3, @types/istanbul-reports@3.0.4, @types/json-schema@7.0.15, @types/mdast@4.0.4, @types/mdx@2.0.14, @types/mime@1.3.5, @types/ms@2.1.0, @types/node@17.0.45, @types/node@26.6.4, @types/node@26.6.5, @types/offscreencanvas@2019.7.3, @types/prismjs@1.26.6, @types/qs@6.15.1, @types/range-parser@1.2.7, @types/react-dom@19.3.0, @types/react-reconciler@0.28.9, @types/react-router-config@5.0.11, @types/react-router-dom@5.3.3, @types/react-router@5.1.20, @types/react-syntax-highlighter@15.5.13, @types/react@19.2.14, @types/react@19.3.0, @types/retry@0.12.2, @types/sax@1.2.7, @types/send@0.17.6, @types/send@1.2.1, @types/serve-index@1.9.4, @types/serve-static@1.15.10, @types/sockjs@0.3.36, @types/stats.js@0.17.4, @types/three@0.183.1, @types/unist@2.0.11, @types/unist@3.0.3, @types/webxr@0.5.24, @types/ws@8.18.2, @types/yargs-parser@21.0.3, @types/yargs@17.0.35
+- **Copyright (c) Microsoft Corporation.**: tsyringe@4.10.0
+- **Copyright (c) Next.js Team**: @next/env@16.3.8
+- **Copyright (c) Node.js contributors.**: core-util-is@1.0.3, readable-stream@2.3.8, readable-stream@3.6.2, string_decoder@1.1.1, string_decoder@1.3.0
+- **Copyright (c) OpenJS Foundation and other contributors <https://openjsf.org/>**: lodash@4.18.1
+- **Copyright (c) Paul Henschel**: @react-three/fiber@9.8.1
+- **Copyright (c) Peculiar Ventures.**: @peculiar/x509@1.14.3
+- **Copyright (c) Pooya Parsa <pooya@pi0.io>**: consola@3.4.2, jiti@1.21.7, std-env@3.10.0, webpackbar@7.0.0
+- **Copyright (c) PostCSS**: postcss-color-hex-alpha@10.0.0, postcss-custom-media@11.0.6, postcss-custom-properties@14.0.6, postcss-custom-selectors@8.0.5
+- **Copyright (c) React Training 2015-2019**: react-router-dom@5.3.4, react-router@5.3.4
+- **Copyright (c) React Training 2016-2018**: history@4.10.1, react-router-config@5.1.1
+- **Copyright (c) Renaud ROHLINGER**: stats-gl@2.4.2
+- **Copyright (c) Rich Harris**: svg-parser@2.1.0
+- **Copyright (c) Sami Samhuri**: format@0.2.2
+- **Copyright (c) Sindre Sorhus**: is-regexp@1.0.0, type-fest@2.19.0
+- **Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)**: @sindresorhus/is@4.6.0, @sindresorhus/is@5.6.0, ansi-regex@6.4.0, ansi-styles@6.2.3, binary-extensions@2.3.0, boxen@6.2.1, boxen@7.1.1, bundle-name@4.1.1, camelcase@6.3.0, camelcase@7.0.1, chalk@5.6.2, cli-boxes@3.0.0, copy-text-to-clipboard@3.2.2, crypto-random-string@4.0.0, decompress-response@6.0.0, default-browser-id@5.0.1, default-browser@5.5.1, define-lazy-prop@3.0.0, dot-prop@6.0.1, escape-goat@4.0.0, escape-string-regexp@4.0.0, escape-string-regexp@5.0.0, execa@5.1.1, find-cache-dir@4.0.0, find-up@6.3.0, get-stream@6.0.1, global-dirs@3.0.1, globby@13.2.2, gzip-size@6.0.0, has-yarn@3.0.0, html-tags@3.3.1, import-fresh@3.3.1, is-docker@2.2.1, is-docker@3.0.0, is-inside-container@1.0.0, is-installed-globally@0.4.0, is-network-error@1.3.2, is-npm@6.1.0, is-plain-obj@3.0.0, is-plain-obj@4.1.0, is-stream@2.0.1, is-wsl@3.1.1, latest-version@7.0.0, locate-path@7.2.0, lowercase-keys@3.0.0, markdown-extensions@2.0.0, mimic-response@3.1.0, mimic-response@4.0.0, normalize-url@8.1.1, onetime@5.1.2, open@10.2.0, open@8.4.2, p-cancelable@3.0.0, p-limit@4.0.0, p-locate@6.0.0, p-map@4.0.0, p-queue@6.6.2, p-retry@6.2.1, package-json@8.1.1, parse-json@5.2.0, path-exists@5.0.0, pkg-dir@7.0.0, pupa@3.3.0, registry-url@6.0.1, responselike@3.0.0, run-applescript@7.1.0, semver-diff@4.0.0, slash@4.0.0, srcset@4.0.0, string-width@5.1.2, strip-ansi@7.2.0, strip-json-comments@3.1.1, supports-color@8.1.1, tagged-tag@1.0.0, type-fest@1.4.0, type-fest@5.10.0, unique-string@3.0.0, widest-line@4.0.1, wrap-ansi@8.1.0, wsl-utils@0.1.0, xdg-basedir@5.1.0, yocto-queue@1.2.2
+- **Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)**: aggregate-error@3.1.0, ansi-regex@5.0.1, ansi-styles@4.3.0, array-union@2.1.0, callsites@3.1.0, chalk@4.1.2, clean-stack@2.2.0, define-lazy-prop@2.0.0, globby@11.1.0, got@12.6.1, has-flag@4.0.0, import-lazy@4.0.0, indent-string@4.0.0, is-fullwidth-code-point@3.0.0, is-obj@1.0.1, is-obj@2.0.0, is-path-inside@3.0.3, is-wsl@2.2.0, leven@3.1.0, mimic-fn@2.1.0, npm-run-path@4.0.1, object-assign@4.1.1, p-finally@1.0.0, p-timeout@3.2.0, parent-module@1.0.1, path-key@3.1.1, path-type@4.0.0, quick-lru@5.1.1, resolve-from@4.0.0, shebang-regex@3.0.0, skin-tone@2.0.0, slash@3.0.0, string-width@4.2.3, strip-ansi@6.0.1, strip-final-newline@2.0.0, strip-json-comments@2.0.1, supports-color@7.2.0
+- **Copyright (c) Stephen Sugden <me@stephensugden.com> (stephensugden.com)**: merge-stream@2.0.0
+- **Copyright (c) Steven Vachon <contact@svachon.com> (svachon.com)**: relateurl@0.2.7
+- **Copyright (c) TJ Holowaychuk**: cookie-signature@1.0.7
+- **Copyright (c) Titus Wormer**: html-url-attributes@3.0.1, micromark-factory-space@1.1.0, micromark-util-character@1.2.0, micromark-util-symbol@1.1.0, micromark-util-types@1.1.0, recma-build-jsx@1.0.0, recma-jsx@1.0.1, recma-parse@1.0.0, recma-stringify@1.0.0, rehype-recma@1.0.0
+- **Copyright (c) Titus Wormer <mailto:tituswormer@gmail.com>**: parse-entities@4.0.2, property-information@7.1.0, property-information@7.2.0
+- **Copyright (c) Titus Wormer <tituswormer@gmail.com>**: decode-named-character-reference@1.3.0, estree-util-scope@1.0.1, hast-util-from-parse5@8.0.3, hast-util-raw@9.1.0, hast-util-to-estree@3.1.3, hast-util-to-jsx-runtime@2.3.6, hast-util-to-parse5@8.0.1, hastscript@9.0.1, markdown-table@3.0.4, mdast-util-directive@3.1.1, mdast-util-find-and-replace@3.0.2, mdast-util-from-markdown@2.0.3, mdast-util-from-markdown@2.1.0, mdast-util-gfm-footnote@2.1.0, mdast-util-gfm-strikethrough@2.0.1, mdast-util-gfm@3.1.0, mdast-util-to-markdown@2.1.3, mdast-util-to-markdown@2.2.0, micromark-core-commonmark@2.0.4, micromark-extension-gfm-table@2.1.2, micromark-extension-mdx-expression@3.0.1, micromark-factory-destination@2.0.1, micromark-factory-label@2.0.1, micromark-factory-mdx-expression@2.0.3, micromark-factory-space@2.1.0, micromark-factory-title@2.0.1, micromark-factory-whitespace@2.0.1, micromark-util-character@2.1.1, micromark-util-chunked@2.0.1, micromark-util-classify-character@2.0.1, micromark-util-combine-extensions@2.0.1, micromark-util-decode-numeric-character-reference@2.0.2, micromark-util-decode-string@2.0.1, micromark-util-edit-map@1.0.0, micromark-util-encode@2.0.1, micromark-util-events-to-acorn@2.0.3, micromark-util-html-tag-name@2.0.1, micromark-util-normalize-identifier@2.0.1, micromark-util-resolve-all@2.0.1, micromark-util-sanitize-uri@2.0.1, micromark-util-subtokenize@2.1.0, micromark-util-symbol@2.0.1, micromark-util-types@2.0.3, micromark@4.0.3, refractor@5.0.0, remark-directive@3.0.1, remark-gfm@4.0.1, remark-rehype@11.1.2, vfile-message@4.0.3
+- **Copyright (c) Tobias Koppers @sokra**: loader-runner@4.3.2
+- **Copyright (c) Vsevolod Strukchinsky <floatdrop@gmail.com> (github.com/floatdrop)**: require-from-string@2.0.2
+- **Copyright (c) Yangshun Tay**: infima@0.2.0-alpha.45
+- **Copyright (c) jQuery Foundation and other contributors <https://jquery.org/>**: lodash.debounce@4.0.8, lodash.memoize@4.1.2, lodash.uniq@4.5.0
+- **Copyright (c) mrdoob**: three@0.170.0, three@0.172.0
+- **Copyright (c) the authors of @esbuild/aix-ppc64 (npm maintainer: esbuild)**: @esbuild/aix-ppc64@0.28.1
+- **Copyright (c) the authors of @esbuild/android-arm (npm maintainer: esbuild)**: @esbuild/android-arm@0.28.1
+- **Copyright (c) the authors of @esbuild/android-arm64 (npm maintainer: esbuild)**: @esbuild/android-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/android-x64 (npm maintainer: esbuild)**: @esbuild/android-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/darwin-arm64 (npm maintainer: esbuild)**: @esbuild/darwin-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/darwin-x64 (npm maintainer: esbuild)**: @esbuild/darwin-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/freebsd-arm64 (npm maintainer: esbuild)**: @esbuild/freebsd-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/freebsd-x64 (npm maintainer: esbuild)**: @esbuild/freebsd-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-arm (npm maintainer: esbuild)**: @esbuild/linux-arm@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-arm64 (npm maintainer: esbuild)**: @esbuild/linux-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-ia32 (npm maintainer: esbuild)**: @esbuild/linux-ia32@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-loong64 (npm maintainer: esbuild)**: @esbuild/linux-loong64@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-mips64el (npm maintainer: esbuild)**: @esbuild/linux-mips64el@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-ppc64 (npm maintainer: esbuild)**: @esbuild/linux-ppc64@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-riscv64 (npm maintainer: esbuild)**: @esbuild/linux-riscv64@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-s390x (npm maintainer: esbuild)**: @esbuild/linux-s390x@0.28.1
+- **Copyright (c) the authors of @esbuild/linux-x64 (npm maintainer: esbuild)**: @esbuild/linux-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/netbsd-arm64 (npm maintainer: esbuild)**: @esbuild/netbsd-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/netbsd-x64 (npm maintainer: esbuild)**: @esbuild/netbsd-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/openbsd-arm64 (npm maintainer: esbuild)**: @esbuild/openbsd-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/openbsd-x64 (npm maintainer: esbuild)**: @esbuild/openbsd-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/openharmony-arm64 (npm maintainer: esbuild)**: @esbuild/openharmony-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/sunos-x64 (npm maintainer: esbuild)**: @esbuild/sunos-x64@0.28.1
+- **Copyright (c) the authors of @esbuild/win32-arm64 (npm maintainer: esbuild)**: @esbuild/win32-arm64@0.28.1
+- **Copyright (c) the authors of @esbuild/win32-ia32 (npm maintainer: esbuild)**: @esbuild/win32-ia32@0.28.1
+- **Copyright (c) the authors of @esbuild/win32-x64 (npm maintainer: esbuild)**: @esbuild/win32-x64@0.28.1
+- **Copyright (c) the authors of @next/swc-darwin-arm64 (npm maintainer: vercel-release-bot)**: @next/swc-darwin-arm64@16.3.8
+- **Copyright (c) the authors of @next/swc-darwin-x64 (npm maintainer: vercel-release-bot)**: @next/swc-darwin-x64@16.3.8
+- **Copyright (c) the authors of @next/swc-linux-arm64-gnu (npm maintainer: vercel-release-bot)**: @next/swc-linux-arm64-gnu@16.3.8
+- **Copyright (c) the authors of @next/swc-linux-arm64-musl (npm maintainer: vercel-release-bot)**: @next/swc-linux-arm64-musl@16.3.8
+- **Copyright (c) the authors of @next/swc-linux-x64-gnu (npm maintainer: vercel-release-bot)**: @next/swc-linux-x64-gnu@16.3.8
+- **Copyright (c) the authors of @next/swc-linux-x64-musl (npm maintainer: vercel-release-bot)**: @next/swc-linux-x64-musl@16.3.8
+- **Copyright (c) the authors of @next/swc-win32-arm64-msvc (npm maintainer: vercel-release-bot)**: @next/swc-win32-arm64-msvc@16.3.8
+- **Copyright (c) the authors of @next/swc-win32-x64-msvc (npm maintainer: vercel-release-bot)**: @next/swc-win32-x64-msvc@16.3.8
+- **Copyright (c) the authors of @pnpm/config.env-replace (npm maintainer: pnpmuser)**: @pnpm/config.env-replace@1.1.0
+- **Copyright (c) the authors of @pnpm/network.ca-file (npm maintainer: pnpmuser)**: @pnpm/network.ca-file@1.0.2
+- **Copyright (c) the authors of @rspack/binding-darwin-arm64 (npm maintainer: hardfist)**: @rspack/binding-darwin-arm64@1.7.11
+- **Copyright (c) the authors of @rspack/binding-darwin-x64 (npm maintainer: hardfist)**: @rspack/binding-darwin-x64@1.7.11
+- **Copyright (c) the authors of @rspack/binding-linux-arm64-gnu (npm maintainer: hardfist)**: @rspack/binding-linux-arm64-gnu@1.7.11
+- **Copyright (c) the authors of @rspack/binding-linux-arm64-musl (npm maintainer: hardfist)**: @rspack/binding-linux-arm64-musl@1.7.11
+- **Copyright (c) the authors of @rspack/binding-linux-x64-gnu (npm maintainer: hardfist)**: @rspack/binding-linux-x64-gnu@1.7.11
+- **Copyright (c) the authors of @rspack/binding-linux-x64-musl (npm maintainer: hardfist)**: @rspack/binding-linux-x64-musl@1.7.11
+- **Copyright (c) the authors of @rspack/binding-wasm32-wasi (npm maintainer: hardfist)**: @rspack/binding-wasm32-wasi@1.7.11
+- **Copyright (c) the authors of @rspack/binding-win32-arm64-msvc (npm maintainer: hardfist)**: @rspack/binding-win32-arm64-msvc@1.7.11
+- **Copyright (c) the authors of @rspack/binding-win32-ia32-msvc (npm maintainer: hardfist)**: @rspack/binding-win32-ia32-msvc@1.7.11
+- **Copyright (c) the authors of @rspack/binding-win32-x64-msvc (npm maintainer: hardfist)**: @rspack/binding-win32-x64-msvc@1.7.11
+- **Copyright (c) the authors of client-only (npm maintainer: sebmarkbage)**: client-only@0.0.1
+- **Copyright (c) the authors of kiwi-schema (npm maintainer: evanw)**: kiwi-schema@0.5.0
+- **Copyright (c) the authors of maath (npm maintainer: gsimone)**: maath@0.10.8
+- **Copyright (c) the authors of next (npm maintainer: vercel-release-bot)**: next@16.3.8
+- **Copyright (c) the authors of react-loadable**: react-loadable@6.0.0
+- **Copyright (c) the authors of use-composed-ref (npm maintainer: andarist)**: use-composed-ref@1.4.0
+
+#### 0BSD (2 packages)
+
+- **Copyright (c) Microsoft Corporation**: tslib@1.14.1, tslib@2.8.1
+
+#### Apache-2.0 (60 packages)
+
+- **Copyright (c) 2010-2021 James Coglan**: faye-websocket@0.11.4
+- **Copyright (c) 2010-2026 James Coglan**: websocket-driver@0.7.5
+- **Copyright (c) 2012 The Obvious Corporation**: @webassemblyjs/leb128@1.13.2
+- **Copyright (c) 2014-2020 James Coglan**: websocket-extensions@0.1.4
+- **Copyright (c) 2017 Dailymotion (http://www.dailymotion.com)**: hls.js@1.6.15
+- **Copyright (c) 2023 Vercel, Inc**: @ai-sdk/provider@4.0.18
+- **Copyright (c) Daniel Wirtz**: @xtuc/long@4.2.2
+- **Copyright (c) Eyas Sharaiha**: schema-dts@1.1.5
+- **Copyright (c) Google Draco Team**: draco3d@1.5.7
+- **Copyright (c) Lovell Fuller**: @img/sharp-darwin-arm64@0.35.5, @img/sharp-darwin-x64@0.35.5, @img/sharp-freebsd-wasm32@0.35.5, @img/sharp-linux-arm64@0.35.5, @img/sharp-linux-arm@0.35.5, @img/sharp-linux-ppc64@0.35.5, @img/sharp-linux-riscv64@0.35.5, @img/sharp-linux-s390x@0.35.5, @img/sharp-linux-x64@0.35.5, @img/sharp-linuxmusl-arm64@0.35.5, @img/sharp-linuxmusl-x64@0.35.5, @img/sharp-webcontainers-wasm32@0.35.5, detect-libc@2.1.2, sharp@0.35.5
+- **Copyright (c) Microsoft Corp.**: typescript@5.9.3
+- **Copyright (c) Paddle.com Market Ltd.**: @paddle/paddle-js@1.6.5
+- **Copyright (c) Roman Viskin**: promise-worker-transferable@1.0.4
+- **Copyright (c) Ron Buckton**: reflect-metadata@0.2.2
+- **Copyright (c) Scott Taylor**: react-helmet-async@1.3.0
+- **Copyright (c) ehmicky**: human-signals@2.1.0
+- **Copyright (c) mahdyar**: ansi-html-community@0.0.8
+- **Copyright (c) mediapipe@google.com**: @mediapipe/tasks-vision@0.10.17
+- **Copyright (c) streamich**: @jsonjoy.com/base64@1.1.2, @jsonjoy.com/base64@17.67.0, @jsonjoy.com/buffers@1.2.1, @jsonjoy.com/buffers@17.67.0, @jsonjoy.com/codegen@1.0.0, @jsonjoy.com/codegen@17.67.0, @jsonjoy.com/fs-core@4.80.0, @jsonjoy.com/fs-fsa@4.80.0, @jsonjoy.com/fs-node-builtins@4.80.0, @jsonjoy.com/fs-node-to-fsa@4.80.0, @jsonjoy.com/fs-node-utils@4.80.0, @jsonjoy.com/fs-node@4.80.0, @jsonjoy.com/fs-print@4.80.0, @jsonjoy.com/fs-snapshot@4.80.0, @jsonjoy.com/json-pack@1.21.0, @jsonjoy.com/json-pack@17.67.0, @jsonjoy.com/json-pointer@1.0.2, @jsonjoy.com/json-pointer@17.67.0, @jsonjoy.com/util@1.9.0, @jsonjoy.com/util@17.67.0, glob-to-regex.js@1.3.1, memfs@4.80.0, tree-dump@1.1.0
+- **Copyright (c) the authors of @dimforge/rapier3d-compat (npm maintainer: sebcrozet)**: @dimforge/rapier3d-compat@0.12.0
+- **Copyright (c) the authors of baseline-browser-mapping (npm maintainer: tonypconway)**: baseline-browser-mapping@2.11.24, baseline-browser-mapping@2.11.25, baseline-browser-mapping@2.11.27, baseline-browser-mapping@2.11.28
+- **Copyright (c) 강동윤**: @swc/helpers@0.5.23
+
+#### Apache-2.0 AND LGPL-3.0-or-later (3 packages)
+
+- **Copyright (c) Lovell Fuller**: @img/sharp-win32-arm64@0.35.5, @img/sharp-win32-ia32@0.35.5, @img/sharp-win32-x64@0.35.5
+
+#### Apache-2.0 AND LGPL-3.0-or-later AND MIT (1 packages)
+
+- **Copyright (c) Lovell Fuller**: @img/sharp-wasm32@0.35.5
+
+#### BlueOak-1.0.0 (1 packages)
+
+- **Copyright (c) Isaac Z. Schlueter**: sax@1.6.1
+
+#### CC-BY-4.0 (3 packages)
+
+- **Copyright (c) Ben Briggs**: caniuse-lite@1.0.30001810, caniuse-lite@1.0.30001814, caniuse-lite@1.0.30001815
+
+#### CC0-1.0 (3 packages)
+
+- **Copyright (c) Mozilla Developer Network**: mdn-data@2.0.28, mdn-data@2.0.30
+- **Copyright (c) Sara Lissette**: highlightjs-vue@1.0.0
+
+#### LGPL-3.0-or-later (10 packages)
+
+- **Copyright (c) Lovell Fuller**: @img/sharp-libvips-darwin-arm64@1.3.4, @img/sharp-libvips-darwin-x64@1.3.4, @img/sharp-libvips-linux-arm64@1.3.4, @img/sharp-libvips-linux-arm@1.3.4, @img/sharp-libvips-linux-ppc64@1.3.4, @img/sharp-libvips-linux-riscv64@1.3.4, @img/sharp-libvips-linux-s390x@1.3.4, @img/sharp-libvips-linux-x64@1.3.4, @img/sharp-libvips-linuxmusl-arm64@1.3.4, @img/sharp-libvips-linuxmusl-x64@1.3.4
+
+#### MIT-0 (62 packages)
+
+- **Copyright (c) CSS Tools Contributors**: cssdb@8.12.0
+- **Copyright (c) CSSTools Contributors**: @csstools/color-helpers@5.1.0, @csstools/postcss-alpha-function@1.0.1, @csstools/postcss-cascade-layers@5.0.2, @csstools/postcss-color-function-display-p3-linear@1.0.1, @csstools/postcss-color-function@4.0.12, @csstools/postcss-color-mix-function@3.0.12, @csstools/postcss-color-mix-variadic-function-arguments@1.0.2, @csstools/postcss-content-alt-text@2.0.8, @csstools/postcss-contrast-color-function@2.0.12, @csstools/postcss-exponential-functions@2.0.9, @csstools/postcss-font-format-keywords@4.0.0, @csstools/postcss-gamut-mapping@2.0.11, @csstools/postcss-gradients-interpolation-method@5.0.12, @csstools/postcss-hwb-function@4.0.12, @csstools/postcss-ic-unit@4.0.4, @csstools/postcss-initial@2.0.1, @csstools/postcss-is-pseudo-class@5.0.3, @csstools/postcss-light-dark-function@2.0.11, @csstools/postcss-logical-float-and-clear@3.0.0, @csstools/postcss-logical-overflow@2.0.0, @csstools/postcss-logical-overscroll-behavior@2.0.0, @csstools/postcss-logical-resize@3.0.0, @csstools/postcss-logical-viewport-units@3.0.4, @csstools/postcss-media-queries-aspect-ratio-number-values@3.0.5, @csstools/postcss-nested-calc@4.0.0, @csstools/postcss-normalize-display-values@4.0.1, @csstools/postcss-oklab-function@4.0.12, @csstools/postcss-position-area-property@1.0.0, @csstools/postcss-progressive-custom-properties@4.2.1, @csstools/postcss-property-rule-prelude-list@1.0.0, @csstools/postcss-random-function@2.0.1, @csstools/postcss-relative-color-syntax@3.0.12, @csstools/postcss-scope-pseudo-class@4.0.1, @csstools/postcss-sign-functions@1.1.4, @csstools/postcss-stepped-value-functions@4.0.9, @csstools/postcss-syntax-descriptor-syntax-production@1.0.1, @csstools/postcss-system-ui-font-family@1.0.0, @csstools/postcss-text-decoration-shorthand@4.0.3, @csstools/postcss-trigonometric-functions@4.0.9, @csstools/postcss-unset-value@4.0.0, @csstools/selector-resolve-nested@3.1.0, @csstools/selector-specificity@5.0.0, @csstools/utilities@2.0.0, css-blank-pseudo@7.0.1, css-has-pseudo@7.0.3, css-prefers-color-scheme@10.0.0, postcss-color-functional-notation@7.0.12, postcss-color-rebeccapurple@10.0.0, postcss-dir-pseudo-class@9.0.1, postcss-double-position-gradients@6.0.4, postcss-focus-visible@10.0.1, postcss-focus-within@9.0.1, postcss-gap-properties@6.0.0, postcss-image-set-function@7.0.0, postcss-lab-function@7.0.12, postcss-logical@8.1.0, postcss-nesting@13.0.2, postcss-overflow-shorthand@6.0.0, postcss-place@10.0.0, postcss-preset-env@10.6.1, postcss-pseudo-class-any-link@10.0.1
+
+#### MPL-2.0 (4 packages)
+
+- **Copyright (c) Vanilagy**: @mediabunny/aac-encoder@1.61.3, @mediabunny/flac-encoder@1.61.3, @mediabunny/mp3-encoder@1.61.3, mediabunny@1.61.3
+
+#### OFL-1.1 (2 packages)
+
+- **Copyright (c) 2024 The Geist Project Authors (https://github.com/vercel/geist-font) Geist-Italic[wght].ttf: Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font)**: @fontsource-variable/geist@5.3.0
+- **Copyright (c) 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git) GeistMono-Italic[wght].ttf: Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)**: @fontsource-variable/geist-mono@5.3.0
+
+#### Python-2.0 (1 packages)
+
+- **Copyright (c) the authors of argparse (npm maintainer: vitaly)**: argparse@2.0.1
+
+#### Unlicense (3 packages)
+
+- **Copyright (c) Vladimir Agafonkin**: robust-predicates@3.0.2
+- **Copyright (c) the authors of fs-monkey (npm maintainer: streamich)**: fs-monkey@1.0.3
+- **Copyright (c) the authors of memfs (npm maintainer: streamich)**: memfs@3.4.3
+
+
+Holder provenance (npm): licence file: 1440, registry author field (confirm): 136, npm maintainer (confirm): 63, unknown (confirm): 1.
+
+

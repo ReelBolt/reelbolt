@@ -1,0 +1,1399 @@
+{
+  "keymap": {
+    "groups": {
+      "Transport": "Transport",
+      "Navigate": "Navigate",
+      "Marks": "Marks",
+      "Tools": "Tools",
+      "Edit": "Edit",
+      "Compose": "Compose",
+      "Pages": "Pages"
+    },
+    "actions": {
+      "playPause": "Play / pause",
+      "playInToOut": "Play in to out",
+      "shuttleReverse": "Shuttle reverse",
+      "stop": "Stop",
+      "shuttleForward": "Shuttle forward",
+      "frameBack": "Back one frame",
+      "frameForward": "Forward one frame",
+      "frameBack10": "Back ten frames",
+      "frameForward10": "Forward ten frames",
+      "previousEdit": "Previous edit",
+      "nextEdit": "Next edit",
+      "previousMarker": "Previous marker",
+      "nextMarker": "Next marker",
+      "goToStart": "Go to start",
+      "goToEnd": "Go to end",
+      "markIn": "Mark in",
+      "markOut": "Mark out",
+      "clearInOut": "Clear in and out",
+      "addMarker": "Add marker",
+      "toolBlade": "Blade tool",
+      "toolSelect": "Select tool",
+      "toolHand": "Hand tool",
+      "toolTransform": "Picture handles on the viewer (move, resize, rotate)",
+      "trimRipple": "Trim mode: ripple (default)",
+      "trimRoll": "Trim mode: roll",
+      "trimSlip": "Trim mode: slip",
+      "trimSlide": "Trim mode: slide",
+      "toggleSnapping": "Snapping on/off",
+      "toggleEventsLane": "Events lane on/off",
+      "toggleEventSnap": "Snap to events on/off",
+      "actOnEvent": "Act on the event at the playhead",
+      "deleteSelection": "Delete selection (closes the gap)",
+      "liftSelection": "Lift selection (leaves a gap)",
+      "bladeAtPlayhead": "Cut at playhead",
+      "nudgeBack": "Nudge left one frame",
+      "nudgeForward": "Nudge right one frame",
+      "nudgeBack10": "Nudge left ten frames",
+      "nudgeForward10": "Nudge right ten frames",
+      "copyClips": "Copy clips",
+      "cutClips": "Cut clips (copy, then delete)",
+      "pasteClips": "Paste clips at the playhead",
+      "duplicateClips": "Duplicate clips",
+      "moveTrackUp": "Move clip to the track above",
+      "moveTrackDown": "Move clip to the track below",
+      "linkClips": "Link selected clips (picture and sound)",
+      "unlinkClips": "Unlink selected clips",
+      "deselect": "Deselect",
+      "undo": "Undo",
+      "redo": "Redo",
+      "selectAll": "Select all",
+      "selectForward": "Select forward from playhead",
+      "selectBackward": "Select backward from playhead",
+      "selectAllOnTrack": "Select all on track",
+      "toolMask": "Mask tool",
+      "toolReframe": "Reframe tool",
+      "toolCornerPin": "Corner pin tool",
+      "maskShapeNext": "Mask: switch between rectangle and ellipse",
+      "maskInvert": "Mask: invert",
+      "composeRemoveEntry": "Compose: remove the selected entry",
+      "composeEntryPrevious": "Compose: previous entry",
+      "composeEntryNext": "Compose: next entry",
+      "addAdjustmentClip": "Add adjustment clip",
+      "placeOver": "Place over (picture-in-picture)",
+      "pageMedia": "Go to Media",
+      "pageCut": "Go to Cut",
+      "pageEdit": "Go to Edit",
+      "pageCompose": "Go to Compose",
+      "pageColour": "Go to Colour",
+      "pageAudio": "Go to Audio",
+      "pageDeliver": "Go to Deliver",
+      "toggleViewerMode": "Viewer: switch between Source and Record",
+      "viewerFullscreen": "Viewer: full screen",
+      "commandPalette": "Command palette",
+      "placeInsert": "Place the source: insert",
+      "placeOverwrite": "Place the source: overwrite",
+      "placeAppend": "Place the source: add to end",
+      "placeOnTop": "Place the source: place on top"
+    }
+  },
+  "transitions": {
+    "fade": "Fade",
+    "dissolve": "Dissolve",
+    "fadeblack": "Dip to black",
+    "fadewhite": "Dip to white",
+    "fadegrays": "Fade grays",
+    "distance": "Distance",
+    "pixelize": "Pixelize",
+    "wipeleft": "Wipe left",
+    "wiperight": "Wipe right",
+    "wipeup": "Wipe up",
+    "wipedown": "Wipe down",
+    "wipetl": "Wipe top left",
+    "wipetr": "Wipe top right",
+    "wipebl": "Wipe bottom left",
+    "wipebr": "Wipe bottom right",
+    "slideleft": "Slide left",
+    "slideright": "Slide right",
+    "slideup": "Slide up",
+    "slidedown": "Slide down",
+    "smoothleft": "Smooth left",
+    "smoothright": "Smooth right",
+    "smoothup": "Smooth up",
+    "smoothdown": "Smooth down",
+    "circlecrop": "Circle crop",
+    "rectcrop": "Rectangle crop",
+    "circleopen": "Circle open",
+    "circleclose": "Circle close",
+    "vertopen": "Vertical open",
+    "vertclose": "Vertical close",
+    "horzopen": "Horizontal open",
+    "horzclose": "Horizontal close",
+    "diagtl": "Diagonal top left",
+    "diagtr": "Diagonal top right",
+    "diagbl": "Diagonal bottom left",
+    "diagbr": "Diagonal bottom right",
+    "hlslice": "Slice left slice",
+    "hrslice": "Slice right slice",
+    "vuslice": "Slice up slice",
+    "vdslice": "Slice down slice",
+    "radial": "Radial",
+    "zoomin": "Zoomin",
+    "squeezev": "Squeeze v",
+    "squeezeh": "Squeeze h",
+    "hblur": "Hblur",
+    "unknown": "{type}",
+    "parity": {
+      "faithful": "Faithful: the preview matches the export.",
+      "approximate": "Approximate: the preview shows a dissolve; the export applies the real {name}."
+    },
+    "reason": {
+      "tooShort": "One of the two clips is too short to hold a transition.",
+      "noHandle": "The next clip has no spare footage before its start for a blend. Use Make room to trim its start.",
+      "hasRoom": "This cut already has room for that transition.",
+      "frozen": "A frozen clip has no footage before its start to make room from.",
+      "tooLittle": "The next clip is only {length, plural, one {# frame} other {# frames}} long; trimming {trim, plural, one {# frame} other {# frames}} off its start would leave too little. Pick a shorter transition.",
+      "cannotTrimStart": "The next clip cannot be trimmed from its start here.",
+      "notEnoughFootage": "The next clip does not have enough footage to trim that far.",
+      "cannotTrimThatFar": "The next clip cannot be trimmed that far."
+    }
+  },
+  "motion": {
+    "zoomIn": {
+      "label": "Zoom in",
+      "hint": "Slowly pushes in."
+    },
+    "zoomOut": {
+      "label": "Zoom out",
+      "hint": "Starts close and pulls back."
+    },
+    "pop": {
+      "label": "Pop",
+      "hint": "Pops in with a small bounce."
+    },
+    "slideLeft": {
+      "label": "Slide from left",
+      "hint": "Slides in from the left edge."
+    },
+    "slideRight": {
+      "label": "Slide from right",
+      "hint": "Slides in from the right edge."
+    },
+    "slideTop": {
+      "label": "Slide from top",
+      "hint": "Slides in from the top edge."
+    },
+    "slideBottom": {
+      "label": "Slide from bottom",
+      "hint": "Slides in from the bottom edge."
+    },
+    "fade": {
+      "label": "Fade",
+      "hint": "Fades the picture in or out."
+    },
+    "kenBurns": {
+      "label": "Ken Burns",
+      "hint": "A slow zoom and drift across the whole clip."
+    },
+    "strength": {
+      "howMuch": "How much",
+      "howBig": "How big",
+      "distance": "Distance"
+    }
+  },
+  "looks": {
+    "names": {
+      "Warm": "Warm",
+      "Cool": "Cool",
+      "Filmic": "Filmic",
+      "Vibrant": "Vibrant",
+      "Muted": "Muted",
+      "Mono": "Mono",
+      "tealOrange": "Teal & orange"
+    },
+    "strengths": {
+      "Subtle": "Subtle",
+      "Normal": "Normal",
+      "Strong": "Strong"
+    },
+    "shadows": {
+      "Neutral": "Neutral",
+      "Lifted": "Lifted",
+      "Deepened": "Deepened"
+    },
+    "highlights": {
+      "Neutral": "Neutral",
+      "Softened": "Softened",
+      "Brightened": "Brightened"
+    },
+    "fix": {
+      "brightness": {
+        "label": "Brightness",
+        "hint": "Lighter or darker, in stops"
+      },
+      "contrast": {
+        "label": "Contrast",
+        "hint": "Flatter or punchier"
+      },
+      "saturation": {
+        "label": "Saturation",
+        "hint": "Colour amount"
+      },
+      "warmth": {
+        "label": "Warmth",
+        "hint": "Cooler or warmer"
+      },
+      "tint": {
+        "label": "Tint",
+        "hint": "Greener or more magenta"
+      }
+    }
+  },
+  "graphics": {
+    "template": {
+      "plain": {
+        "label": "Plain (centred)",
+        "hint": "Large text in the middle of the picture."
+      },
+      "lowerThird": {
+        "label": "Lower third",
+        "hint": "Smaller text near the bottom, like a name caption."
+      },
+      "boxed": {
+        "label": "Boxed",
+        "hint": "Text on a solid box so it stays readable on any picture."
+      },
+      "outline": {
+        "label": "Outline",
+        "hint": "Text with a dark outline."
+      },
+      "card": {
+        "label": "Card",
+        "hint": "Text on a full-screen card."
+      }
+    },
+    "position": {
+      "topLeft": "Top left",
+      "topCenter": "Top centre",
+      "topRight": "Top right",
+      "middleLeft": "Middle left",
+      "center": "Centre",
+      "middleRight": "Middle right",
+      "bottomLeft": "Bottom left",
+      "bottomCenter": "Bottom centre",
+      "bottomRight": "Bottom right"
+    },
+    "color": {
+      "Black": "Black",
+      "White": "White",
+      "Grey": "Grey",
+      "Red": "Red",
+      "Orange": "Orange",
+      "Yellow": "Yellow",
+      "Green": "Green",
+      "Teal": "Teal",
+      "Blue": "Blue",
+      "Purple": "Purple",
+      "Pink": "Pink",
+      "Navy": "Navy"
+    },
+    "add": {
+      "title": "Add title",
+      "colorCard": "Add colour card"
+    }
+  },
+  "common": {
+    "raw": "{text}"
+  },
+  "aiOps": {
+    "erase": {
+      "title": "Erase",
+      "summary": "Paint over something with the brush and remove it, filling the gap to match.",
+      "action": "Erase the painted area"
+    },
+    "fill": {
+      "title": "Fill",
+      "summary": "Paint over an area with the brush and describe what should appear there instead.",
+      "action": "Fill the painted area",
+      "promptLabel": "What should appear",
+      "promptPlaceholder": "a clear blue sky",
+      "needsPrompt": "Describe what should appear."
+    },
+    "expand": {
+      "title": "Expand",
+      "summary": "Grow the picture to a new shape (a 9:16 reel cover, a square post) and let the AI continue the scene.",
+      "action": "Expand the picture",
+      "promptLabel": "What is out there (optional)",
+      "promptPlaceholder": "more of the same street"
+    },
+    "replaceBackground": {
+      "title": "New background",
+      "summary": "Keep the subject and replace everything behind it.",
+      "action": "Replace the background",
+      "promptLabel": "New background",
+      "promptPlaceholder": "a neon-lit city at night",
+      "needsPrompt": "Describe the new background."
+    },
+    "relight": {
+      "title": "Relight",
+      "summary": "Change the lighting on the picture.",
+      "action": "Relight the picture",
+      "promptLabel": "Lighting (optional)",
+      "promptPlaceholder": "warm light from the left, like a sunset"
+    },
+    "upscale": {
+      "title": "Upscale",
+      "summary": "Make the picture sharper and larger.",
+      "action": "Upscale the picture"
+    },
+    "instruct": {
+      "title": "Edit with words",
+      "summary": "Describe a change and the AI makes it.",
+      "action": "Make the change",
+      "promptLabel": "What to change",
+      "promptPlaceholder": "make the shirt red",
+      "needsPrompt": "Describe what to change."
+    },
+    "generate": {
+      "title": "Create a picture",
+      "summary": "Make a new picture from a description. It is added behind your other layers.",
+      "action": "Create the picture",
+      "promptLabel": "Describe it",
+      "promptPlaceholder": "a dramatic mountain at sunrise, wide shot",
+      "needsPrompt": "Describe the picture you want."
+    },
+    "removeBackground": {
+      "title": "Remove background",
+      "summary": "Cut the main subject out of the picture, with soft edges.",
+      "action": "Remove the background"
+    },
+    "param": {
+      "top": "Top (px)",
+      "right": "Right (px)",
+      "bottom": "Bottom (px)",
+      "left": "Left (px)",
+      "factor": "Make it",
+      "width": "Width (px)",
+      "height": "Height (px)"
+    },
+    "shapes": {
+      "reel": "Reel / story",
+      "feed": "Feed post",
+      "square": "Square",
+      "landscape": "Landscape video",
+      "portrait": "Portrait",
+      "classic": "Classic",
+      "tall": "Tall photo",
+      "wide": "Wide photo"
+    },
+    "expandSummary": {
+      "chooseShape": "Choose a shape.",
+      "grows": "The picture grows until it is {aspect}.",
+      "already": "The picture is already {aspect}. Choose another shape.",
+      "vertical": "Adds picture above and below: {width} × {height} becomes about {width} × {to}.",
+      "horizontal": "Adds picture on the left and right: {width} × {height} becomes about {to} × {height}."
+    },
+    "blocker": {
+      "selectLayer": "Select a layer first.",
+      "textLayer": "Text layers have no pixels to edit. Select a picture layer.",
+      "paintFirst": "Paint over the area on the picture first.",
+      "expandSide": "Choose how far to expand on at least one side."
+    }
+  },
+  "aiTools": {
+    "groups": {
+      "cutOut": "Cut out",
+      "fixChange": "Fix and change",
+      "sizeLight": "Size and light",
+      "makeNew": "Make something new"
+    },
+    "subject": {
+      "title": "Cut out a subject",
+      "description": "Click a person or thing, drag a box around it, or name it, and it becomes its own layer."
+    },
+    "designGraphic": {
+      "title": "Design a graphic",
+      "description": "Describe a title, badge, price tag, arrow or shape and an AI designer draws it as a new layer with a transparent background."
+    }
+  },
+  "exportFormats": {
+    "png": {
+      "description": "Best quality, keeps see-through areas. Good for YouTube and for editing later."
+    },
+    "jpeg": {
+      "description": "Small file that every site accepts. See-through areas become your background colour, or white."
+    },
+    "webp": {
+      "description": "Smaller than PNG at the same look, and keeps see-through areas."
+    },
+    "avif": {
+      "description": "The smallest files. Only some browsers can make them."
+    },
+    "psd": {
+      "description": "Opens in Photoshop and Photopea with every layer kept, named and in order. Text becomes flattened pixels."
+    },
+    "ora": {
+      "description": "Opens in GIMP and Krita with every layer kept. Text becomes flattened pixels."
+    }
+  },
+  "canvasSize": {
+    "hints": {
+      "16x9": "YouTube",
+      "9x16": "Shorts, Reels",
+      "1x1": "Square",
+      "4x5": "Instagram",
+      "4x3": "Classic",
+      "3x2": "Photo",
+      "2x3": "Poster",
+      "21x9": "Cinema"
+    }
+  },
+  "graphicPanel": {
+    "placement": {
+      "center": "Centre",
+      "top": "Top",
+      "bottom": "Bottom",
+      "left": "Left",
+      "right": "Right",
+      "topLeft": "Top left",
+      "topRight": "Top right",
+      "bottomLeft": "Bottom left",
+      "bottomRight": "Bottom right"
+    },
+    "status": {
+      "Queued": "Waiting to start",
+      "Running": "Designing",
+      "Passed": "Done",
+      "Failed": "Did not work",
+      "Cancelled": "Stopped"
+    },
+    "blocker": {
+      "sayChange": "Say what should change.",
+      "describe": "Describe the graphic you want.",
+      "tooLong": "Keep the description under {max, number} characters.",
+      "frame": "Width and height must each be between {min, number} and {max, number} pixels."
+    },
+    "cost": {
+      "billingOff": "Billing is off on this installation.",
+      "aboutOne": "About {low, plural, one {# credit} other {# credits}}.",
+      "aboutRange": "About {low, number}–{high, number} credits.",
+      "aboutOneUnaffordable": "About {low, plural, one {# credit} other {# credits}}. You have {balance, plural, one {# credit} other {# credits}}.",
+      "aboutRangeUnaffordable": "About {low, number}–{high, number} credits. You have {balance, plural, one {# credit} other {# credits}}."
+    },
+    "error": {
+      "empty": "The graphic could not be designed.",
+      "infrastructure": "The designer could not start on this installation, so no graphic was made. Try again in a moment, or ask whoever runs ReelBolt to check that designing is set up."
+    }
+  },
+  "newPicture": {
+    "shapes": {
+      "youtube": {
+        "label": "YouTube thumbnail",
+        "hint": "16:9, 1280 × 720"
+      },
+      "square": {
+        "label": "Square",
+        "hint": "1080 × 1080"
+      },
+      "post": {
+        "label": "Post",
+        "hint": "4:5, 1080 × 1350"
+      },
+      "story": {
+        "label": "Story",
+        "hint": "9:16, 1080 × 1920"
+      },
+      "landscape": {
+        "label": "Landscape",
+        "hint": "16:9, 1920 × 1080"
+      },
+      "custom": {
+        "label": "Custom",
+        "hint": "Your own size"
+      }
+    },
+    "defaultName": {
+      "youtube": "Untitled thumbnail",
+      "square": "Untitled square",
+      "post": "Untitled post",
+      "story": "Untitled story",
+      "landscape": "Untitled landscape",
+      "custom": "Untitled picture"
+    }
+  },
+  "credits": {
+    "amount": "{credits, plural, one {# credit} other {# credits}}",
+    "about": "about {credits, plural, one {# credit} other {# credits}}",
+    "used": "Used {credits, plural, one {# credit} other {# credits}}",
+    "runWithPrice": "{action}, {price}",
+    "needsMore": "This needs more credits. Add credits to run it.",
+    "needs": "This needs {credits, plural, one {# credit} other {# credits}}. Add credits to run it.",
+    "needsMoreHave": "This needs more credits. You have {balance, plural, one {# credit} other {# credits}}. Add credits to run it.",
+    "needsHave": "This needs {credits, plural, one {# credit} other {# credits}}. You have {balance, plural, one {# credit} other {# credits}}. Add credits to run it.",
+    "noProviderAdmin": "Picture tools are not set up in this workspace yet.",
+    "noProviderMember": "Ask your workspace admin to set up picture tools."
+  },
+  "resultBar": {
+    "empty": "{title} finished, but nothing new came back.",
+    "options": "{title} found {n} options. Showing option 1.",
+    "oneLayer": "{title} added a new layer, \"{name}\". Your original is untouched.",
+    "manyLayers": "{title} added {n} new layers. Your originals are untouched.",
+    "cost": "It cost {credits, plural, one {# credit} other {# credits}}.",
+    "free": "No credits were charged.",
+    "option": "Option {index} of {total}"
+  },
+  "maskSave": {
+    "conflict": "This picture was changed somewhere else. Your mask is kept here; reload to continue.",
+    "storageFull": "The mask could not be saved because your storage is full. Free some space and try again.",
+    "sizeMismatch": "The mask does not match the size of this layer, so it was not saved.",
+    "gone": "This layer is no longer there, so the mask could not be saved.",
+    "failed": "The mask could not be saved. Check your connection and try again; your painting is kept.",
+    "paintFirst": "Paint over the area you want to change first."
+  },
+  "text": {
+    "defaultTitle": "Your title",
+    "problem": {
+      "typeText": "Type some text.",
+      "tooLong": "Text can be at most {max, number} characters (it is {length, number}).",
+      "chooseFont": "Choose a font.",
+      "alignment": "Alignment must be left, centre or right.",
+      "chooseColor": "Choose a text colour.",
+      "colorTooLong": "A colour value is too long.",
+      "chooseOutlineColor": "Choose an outline colour.",
+      "chooseShadowColor": "Choose a shadow colour.",
+      "range": {
+        "fontSize": "Font size must be between {min, number} and {max, number}.",
+        "weight": "Weight must be between {min, number} and {max, number}.",
+        "lineHeight": "Line height must be between {min, number} and {max, number}.",
+        "letterSpacing": "Letter spacing must be between {min, number} and {max, number}.",
+        "outlineWidth": "Outline width must be between {min, number} and {max, number}.",
+        "shadowBlur": "Shadow blur must be between {min, number} and {max, number}.",
+        "shadowOffset": "Shadow offset must be between {min, number} and {max, number}.",
+        "wrapWidth": "Wrap width must be between {min, number} and {max, number}."
+      }
+    },
+    "fonts": {
+      "ChakraPetch": "ReelBolt display face",
+      "JetBrainsMono": "ReelBolt monospace",
+      "Anton": "Tall, condensed headline",
+      "BebasNeue": "Condensed capitals",
+      "Oswald": "Strong condensed sans",
+      "Montserrat": "Clean geometric sans",
+      "Poppins": "Friendly geometric sans",
+      "Inter": "Neutral interface sans",
+      "RobotoCondensed": "Compact and legible",
+      "ArchivoBlack": "Heavy grotesque",
+      "PlayfairDisplay": "High-contrast serif",
+      "PermanentMarker": "Hand-drawn marker",
+      "Bangers": "Comic-book headline"
+    }
+  },
+  "handoff": {
+    "apps": {
+      "other": "Another editor",
+      "cuts": "Cuts only (EDL)"
+    },
+    "fileTypes": {
+      "otio": "OpenTimelineIO (.otio)",
+      "fcpxml": "Final Cut Pro XML (.fcpxml)",
+      "edl": "Cuts only (.edl)"
+    },
+    "formats": {
+      "otio": "OpenTimelineIO",
+      "edl": "CMX3600 EDL",
+      "srt": "SRT captions",
+      "vtt": "WebVTT captions",
+      "fcpxml": "Final Cut Pro XML"
+    },
+    "summary": {
+      "otio": "The whole edit, lossless. Another ReelBolt project, or a tool that reads OpenTimelineIO, opens it as it is.",
+      "edl": "Cuts only: where each video clip starts and ends. No effects, titles, audio levels or captions.",
+      "srt": "The captions as subtitles, with their timing.",
+      "vtt": "The captions as web subtitles, with their timing.",
+      "fcpxml": "A Final Cut Pro or DaVinci Resolve project of the cuts, with audio and roles when you ask for them."
+    },
+    "lines": {
+      "videoCut": "{n, plural, one {# video cut} other {# video cuts}}",
+      "videoClip": "{n, plural, one {# video clip} other {# video clips}}",
+      "audioClip": "{n, plural, one {# audio clip} other {# audio clips}}",
+      "title": "{n, plural, one {# title} other {# titles}}",
+      "caption": "{n, plural, one {# caption} other {# captions}}",
+      "marker": "{n, plural, one {# marker} other {# markers}}"
+    },
+    "media": {
+      "url": "Your media is not inside the file. It points at the files in this project by link, so the other app needs access to ReelBolt, or you relink the media there.",
+      "none": "The file names no media, so it opens anywhere."
+    },
+    "size": {
+      "value": "{value, number} {unit}",
+      "noFiles": "No media files",
+      "files": "{n, plural, one {# file} other {# files}}, {size}"
+    },
+    "overCap": "The video files add up to {size}, more than a package can hold ({cap}). Download the list of files instead and copy the originals yourself.",
+    "mediaChoice": {
+      "zip": "Include the video files",
+      "manifest": "List files only"
+    },
+    "howTo": {
+      "unzip": "Unzip the whole package and keep the cut and the media folder side by side.",
+      "unzipList": "Unzip the whole package and keep the cut list and the media folder side by side.",
+      "premiere": "In Premiere Pro choose File, Import and pick the cut. If it asks for media, choose Locate and pick the file with the same name.",
+      "premiereOpen": "Should open in Premiere Pro. Tell us if it does not.",
+      "resolve": "In DaVinci Resolve choose File, Import, Timeline. If clips show as offline, right-click them and choose Relink Selected Clips, then pick the media folder.",
+      "resolveOpen": "Should open in DaVinci Resolve. Tell us if it does not.",
+      "fcp": "In Final Cut Pro choose File, Import, XML and pick the cut. If a clip is missing, choose File, Relink Files.",
+      "fcpOpen": "Should open in Final Cut Pro. Tell us if it does not.",
+      "other": "Import the cut as a timeline. Every clip is matched by its file name, so please do not rename the files.",
+      "otherOpen": "Should open in editors that read OpenTimelineIO. Tell us if it does not.",
+      "cuts": "Import the cut list as an EDL. It holds the cuts of one video track only, with no effects, titles or audio.",
+      "cutsOpen": "Should open in editors that read EDL files. Tell us if it does not."
+    },
+    "failure": {
+      "checking": "Some of your videos are still being checked. Try again shortly.",
+      "tooLarge": "The video files are too big for one package. Choose \"List files only\" instead.",
+      "busy": "Two packages are already being prepared for you. Wait for one to finish, then try again.",
+      "notFound": "This timeline could not be found. Reload the page and try again.",
+      "signedOut": "Your session has ended. Sign in again to continue.",
+      "generic": "The package could not be prepared. Try again in a moment."
+    },
+    "offline": {
+      "notFound": "No file with this name in the project",
+      "ambiguous": "Two files share this name; pick one",
+      "durationMismatch": "The file's length differs from the clip",
+      "other": "This file could not be matched"
+    },
+    "matched": {
+      "id": "Same file as the export",
+      "nameAndDuration": "Matched by name and length",
+      "name": "Matched by name"
+    },
+    "headline": {
+      "nothingOffline": "{matched, plural, one {# file} other {# files}} matched. Nothing is offline.",
+      "someOffline": "{matched, plural, one {# file} other {# files}} matched, {offline} offline."
+    },
+    "relinkLabel": "Relink offline clip"
+  },
+  "trim": {
+    "selectClip": "Select a clip first.",
+    "wholeNumber": "Use a whole number of frames.",
+    "onlyMedia": "Only a media clip has a source in-point.",
+    "inBeforeStart": "The in-point cannot be before the start of the source.",
+    "inAlready": "That is already the in-point.",
+    "inLeaveFrame": "The in-point has to leave at least one frame in the clip.",
+    "sourceShort": "The source is only {n, plural, one {# frame} other {# frames}} long, so the in-point has to be before frame {n}.",
+    "pastEnd": "That would run past the end of the source ({n, plural, one {# frame} other {# frames}}). Choose an earlier in-point.",
+    "setIn": "Set in-point to frame {value, number}",
+    "inSpeed": "That in-point cannot be hit exactly at {rate}x speed. Try a nearby frame.",
+    "durationMin": "The clip has to be at least one frame long.",
+    "outAfterStart": "The out-point has to be after the clip starts.",
+    "durationAlready": "That is already the duration.",
+    "outAlready": "That is already the out-point.",
+    "atMost": "The source only has {available, plural, one {# frame} other {# frames}} after the in-point, so this clip can be at most {most, plural, one {# frame} other {# frames}} long.",
+    "setDuration": "Set duration to {n, plural, one {# frame} other {# frames}}",
+    "setOut": "Set out-point to frame {value, number}",
+    "impossible": "That length is not possible here."
+  },
+  "phone": {
+    "selectClip": "Select a clip first.",
+    "locked": "A locked track cannot be edited. Unlock it first.",
+    "alreadyFirst": "This clip is already first on its track.",
+    "alreadyLast": "This clip is already last on its track.",
+    "cannotSwap": "That clip cannot swap places with its neighbour here.",
+    "alreadyThere": "That is already where it is.",
+    "trimStart": "Trim start {delta}f",
+    "trimEnd": "Trim end {delta}f",
+    "linkedCannotFollow": "The linked sound cannot follow that change. Use Edit sound separately to change just this clip.",
+    "startLimit": "The start cannot move that way: the clip is at the limit of its source or its neighbour.",
+    "endLimit": "The end cannot move that way: the clip is at the limit of its source or its neighbour.",
+    "selectMedia": "Select a video or sound clip first.",
+    "alreadySpeed": "The clip is already at that speed.",
+    "retimeLabel": "Retime {rate}x",
+    "pictureSoundSilent": "The sound of a clip on a picture track is not played. Use Extract audio, then set the volume there.",
+    "setVolume": "Set volume"
+  },
+  "deferred": {
+    "selectClip": "Select a clip first.",
+    "noNext": "There is no clip after this one on its track.",
+    "gapBefore": "There is a gap before the next clip. Close the gap first.",
+    "differentFiles": "The two clips come from different files.",
+    "notContinuous": "The second clip does not carry on from where the first one stops in the file.",
+    "differentKind": "The two clips are not the same kind.",
+    "noGap": "There is no gap after this clip to fill.",
+    "frozen": "A frozen frame has no speed to change. Drag its end to make it longer.",
+    "fills": "The clip now fills the gap.",
+    "speedBecomes": "Speed becomes {percent, number}%",
+    "onlyReplaceable": "Only a video, picture or sound clip can be replaced this way.",
+    "shorter": "That file is shorter than the clip."
+  },
+  "clipActions": {
+    "selectClip": "Select a clip first.",
+    "noTrackAbove": "There is no track above to move it to.",
+    "noTrackBelow": "There is no track below to move it to.",
+    "locked": "A locked track cannot be edited. Unlock it first.",
+    "spotTaken": "There is already a clip in that spot on the next track, so it stays where it is.",
+    "cannotJoin": "These two clips cannot be joined. Only the two halves of a split that have not been changed since can be put back together.",
+    "noGapAfter": "There is no gap after this clip to fill."
+  },
+  "clipboard": {
+    "pickTrack": "Pick a track to paste onto first.",
+    "noKindTrack": "There is no {kind} track there to paste onto. Select a track with room for every copied clip.",
+    "noRoom": "There is no room on {track} at that point. Move the playhead to empty space, or use Duplicate to make room.",
+    "selectClip": "Select a clip first.",
+    "noRoomDuplicate": "There is not enough room after the clip on {track} to duplicate it. Close the gap or move the next clip first."
+  },
+  "freeze": {
+    "selectVideo": "Select a video clip first.",
+    "videoOnly": "Freeze frame works on video clips.",
+    "already": "This clip is already a frozen frame.",
+    "locked": "This track is locked.",
+    "playhead": "Move the playhead inside the clip."
+  },
+  "transcriptMove": {
+    "nothing": "Nothing to move.",
+    "inside": "The target is inside the material being moved.",
+    "already": "The material is already there.",
+    "unknownTrack": "Unknown track.",
+    "noClip": "No media clip lies inside that span on this track."
+  },
+  "poolInsert": {
+    "notThere": "That clip is no longer on the timeline.",
+    "footageOnly": "Only footage clips have sound to extract.",
+    "alreadyAudio": "This clip is already on an audio track.",
+    "freeze": "A freeze frame has no sound to extract.",
+    "append": "Append {name}",
+    "insert": "Insert {name}",
+    "appendSound": "Append {name} with its sound",
+    "insertSound": "Insert {name} with its sound",
+    "unknownLength": "Length unknown until the file is prepared, so it goes in at 5 seconds. Trim it once the file is ready."
+  },
+  "place": {
+    "cannot": "This source cannot be put on the timeline.",
+    "needTrack": "Add an unlocked {kind} track first.",
+    "mode": {
+      "insert": "Insert",
+      "overwrite": "Overwrite",
+      "append": "Add to end",
+      "placeOnTop": "Place on top"
+    },
+    "trackKind": {
+      "video": "video",
+      "audio": "audio"
+    },
+    "trackName": {
+      "video": "Video {n}",
+      "audio": "Audio {n}"
+    }
+  },
+  "time": {
+    "typeATime": "Type a time, like 1215 for 00:00:12:15.",
+    "dropFrame": "Drop-frame timecode is not supported. Use colons, like 00:00:12:15.",
+    "numbersOnly": "Use numbers only, like 00:00:12:15.",
+    "form": "Use the form hours:minutes:seconds:frames, like 00:00:12:15.",
+    "tooManyDigits": "That is too many digits. Use up to 8, like 00001215.",
+    "minutes": "Minutes go up to 59.",
+    "seconds": "Seconds go up to 59.",
+    "frames": "Frames go up to {max, number} at this frame rate.",
+    "formats": {
+      "landscape": "Landscape 16:9 1080p",
+      "landscape4k": "4K landscape",
+      "vertical": "Vertical 9:16",
+      "square": "Square 1:1",
+      "portrait": "Portrait 4:5"
+    }
+  },
+  "bins": {
+    "nothingDrop": "Nothing to drop.",
+    "notInBin": "That clip is not in any bin.",
+    "binGone": "That bin no longer exists.",
+    "alreadyIn": "That clip is already in this bin.",
+    "tooDeep": "Bins cannot be nested any deeper."
+  },
+  "units": {
+    "opacity": "Opacity is between 0% and 100%. The old value is kept.",
+    "fadeNegative": "A fade cannot be negative. The old value is kept.",
+    "fadeTooLongOut": "That fade is longer than the room left on this clip ({room}, because the fade out takes the rest). The old value is kept.",
+    "fadeTooLongIn": "That fade is longer than the room left on this clip ({room}, because the fade in takes the rest). The old value is kept.",
+    "speed": "Speed is between {min}x and {max}x. The old speed is kept.",
+    "clipIsNow": "Clip is now {duration}",
+    "volume": "Volume is between 0% and {max, number}%. The old volume is kept."
+  },
+  "undo": {
+    "undoTitle": "Could not undo",
+    "undoMessage": "That change cannot be taken back because the timeline changed since. Nothing was altered.",
+    "redoTitle": "Could not redo",
+    "redoMessage": "That change cannot be applied again because the timeline changed since. Nothing was altered."
+  },
+  "history": {
+    "clearInOut": "Clear in/out",
+    "setInOut": "Set in/out",
+    "insert": "Insert {name}",
+    "overwrite": "Overwrite {name}",
+    "extract": "Extract (ripple delete)",
+    "trim": "Trim {mode} ({edge}) {delta}f",
+    "blade": "Blade at {frame}",
+    "deleteGap": "Delete gap at {frame}",
+    "closeGaps": "Close gaps",
+    "move": "Move to {frame}",
+    "addMarker": "Add marker {name}",
+    "editMarker": "Edit marker",
+    "removeMarker": "Remove marker",
+    "append": "Append {name}",
+    "replaceWith": "Replace with {name}",
+    "fitToFill": "Fit to fill {from}–{to}",
+    "place": "Place {name}",
+    "joinClips": "Join clips",
+    "nudge": "Nudge {delta}f",
+    "addTrack": "Add {kind} track",
+    "removeTrack": "Remove track",
+    "moveTrack": "Move track",
+    "setTrack": "Set track {key}",
+    "timelineSettings": "Change timeline settings",
+    "setKey": "Set {param} key at {frame}",
+    "removeKey": "Remove {param} key at {frame}",
+    "moveKey": "Move {param} key to {frame}",
+    "retime": "Retime {rate}×",
+    "addTransition": "Add {type} transition",
+    "removeTransition": "Remove transition",
+    "setColorGroup": "Set colour group {name}",
+    "removeColorGroup": "Remove colour group",
+    "setSequence": "Set sequence {name}",
+    "removeSequence": "Remove sequence",
+    "setBus": "Set bus {name}",
+    "removeBus": "Remove bus",
+    "edit": "Edit",
+    "setProperty": "Set {key}",
+    "reorderLayers": "Reorder layers",
+    "setVolume": "Set volume",
+    "relink": "Relink offline clip",
+    "addTitle": "Add title",
+    "addColorCard": "Add colour card",
+    "movePicture": "Move picture",
+    "originalSize": "Original size"
+  },
+  "sync": {
+    "readOnly": "This timeline is read-only here because it was changed elsewhere. Reload to keep editing.",
+    "changedElsewhereNotSaved": "This timeline was changed elsewhere. Your edits here are not saved.",
+    "serverRejected": "The server rejected the document.",
+    "tooLargeToSave": "The document is too large to save.",
+    "offlineKept": "You are offline. Edits are kept on this device and saved when the connection returns.",
+    "reconnecting": "Reconnecting — checking the timeline for changes made elsewhere…",
+    "stillOffline": "Still offline. Edits are kept on this device.",
+    "overlap": "Your edits overlap with changes made elsewhere.",
+    "otherTab": "This timeline is open in another tab.",
+    "movedToTab": "Editing moved to another tab.",
+    "unconfirmed": "The last save could not be confirmed. It will try again.",
+    "reason": {
+      "changedElsewhere": "This timeline was changed in another tab or by someone else.",
+      "tooLarge": "The timeline is too large to save.",
+      "noAccess": "You no longer have access to this project.",
+      "gone": "This timeline no longer exists. It may have been deleted.",
+      "serverRetry": "The server could not save the timeline. It will try again.",
+      "refused": "The server refused the timeline.",
+      "unreachable": "The server could not be reached. Check your connection.",
+      "more": "And {n, plural, one {# more problem} other {# more problems}}.",
+      "moreOne": "And 1 more problem."
+    },
+    "requestFailed": "The save request failed.",
+    "place": {
+      "tracks": "track",
+      "items": "clip",
+      "sequences": "sequence",
+      "buses": "bus",
+      "markers": "marker",
+      "angles": "angle",
+      "transitions": "transition",
+      "keys": "keyframe",
+      "colorGroups": "colour group",
+      "line": "{place} {n, number}"
+    },
+    "state": {
+      "memoryOnly": "Edits are held in memory only",
+      "signInAgain": "Sign in again to keep saving",
+      "viewOnly": "View only",
+      "saved": "Saved",
+      "dirty": "Unsaved changes{memory}",
+      "saving": "Saving…",
+      "retrying": "Can’t reach the server. Trying again…{memory}",
+      "invalid": "Not saved. {why}",
+      "invalidDefault": "Not saved. This edit breaks a timeline rule.",
+      "tooLarge": "Not saved. This timeline is too large to save. Remove some media or clips, then try again.",
+      "rejected": "Not saved. The server refused this change.",
+      "rejectedWhy": "Not saved. The server refused this change. {why}",
+      "conflict": "Not saved. This timeline was changed somewhere else.",
+      "noPermission": "Not saved. You no longer have permission to change this timeline.",
+      "deleted": "Not saved. This timeline was deleted.",
+      "error": "Not saved. The server had a problem.{memory}",
+      "offline": "You are offline. {n, plural, one {# change} other {# changes}} will save when you are back{memory}",
+      "reconnecting": "Back online. Checking for changes…",
+      "otherTab": "Open in another tab",
+      "takenOver": "Editing moved to another tab",
+      "memorySuffix": " · Edits are held in memory only"
+    }
+  },
+  "parity": {
+    "badSpeed": "A speed of {rate}× is not previewed (the preview plays this clip at normal speed); the render applies it.",
+    "slow": "Slow motion ({rate}×): the preview shows the new timing, but the sound's pitch changes and frames are not blended. The final render is exact.",
+    "fast": "Fast motion ({rate}×): the preview shows the new timing, but the sound's pitch changes and frames are not blended. The final render is exact.",
+    "opticalFlow": "Frames are not blended in the preview; the render blends them.",
+    "stabilizeFailed": "The stabilised preview is not available; the preview shows the unstabilised picture. The export still stabilises the clip.",
+    "stabilizePreparing": "Stabilised preview is being prepared.",
+    "stabilizePreparingPercent": "Stabilised preview is being prepared ({percent}%).",
+    "stabilizeReady": "Stabilised preview of the whole source; the export stabilises just this clip's span, so the first and last second can differ slightly.",
+    "stabilize": "Stabilisation is a two-pass render effect; the preview shows the unstabilised picture.",
+    "cornerPin": "The corner pin is previewed as a true perspective warp; edges may differ by a pixel.",
+    "mask": "The shape mask is previewed with the export's soft edge. On a rotated clip the export places it in the turned frame, so it sits in a different spot; with blur or pixelate its edges differ slightly.",
+    "reframe": "The picture is cropped around the subject to fit the video shape, as in the export; edges may differ by a pixel.",
+    "regionEffects": "The object is not loaded yet, so the preview shows the clip without its effects; the export applies them.",
+    "regionEffectsClose": "The effect follows the object's outline from a small copy of the mask; blur and colours are close to the export but not identical.",
+    "effects": "Some effects are render-only; the preview shows the others.",
+    "segmentationApprox": "The preview follows a box around the object; the render follows its exact outline.",
+    "segmentationOutlineClose": "The outline comes from a small copy of the mask, so its edges are close to the export but not identical.",
+    "outlinePreparing": "Outline preview still preparing, showing a box.",
+    "segmentationNoBox": "The object mask is not loaded yet, so the preview shows the unmasked picture dimmed; the effect applies in the render.",
+    "segmentationUncovered": "The object mask does not cover this part of the clip; the render refuses it until the mask covers the whole clip.",
+    "effectsApprox": "Blur, pixelate, mono and vignette preview on the GPU in the clip's on-canvas geometry at reduced resolution. Rotated clips, softer picture edges and a smaller export differ: the render's blur and pixel size are fixed in output pixels, so a smaller export looks stronger.",
+    "lutLoading": "A LUT file is still loading; the preview shows the grade without it until it arrives.",
+    "lutFailed": "The LUT file could not be loaded, so the preview shows the clip without it.",
+    "gradeNodesFold": "More than 16 corrections: the preview grades the first 16 exactly and folds the rest into one approximate step. Corrections past 16 that use curves, a LUT or a secondary are not shown.",
+    "sharpenApprox": "Sharpen previews at the render's strength; at a smaller preview size the edge detail is slightly softer.",
+    "grainApprox": "Film grain previews with the same strength but a different pattern.",
+    "primaries": "Primaries preview through the GPU with the renderer's formulas; swscale and ffmpeg's own filters round differently.",
+    "keyframedTransform": "Keyframed transform: the curve is identical, but the preview and the render sample sub-pixel geometry differently.",
+    "transformCrop": "Transform/crop preview uses GPU bilinear sampling; the render uses swscale.",
+    "cutStackGain": "Cut, stacking, gain, fades, reverse and hold are previewed as rendered.",
+    "titleTemplate": "The \"{template}\" template is previewed with its position, box and border; the text is rasterised by the browser, not by drawtext, so metrics may differ.",
+    "titleText": "Title text is rasterised by the browser, not by drawtext; metrics may differ.",
+    "captionText": "Caption text is rasterised by the browser; styling is approximate.",
+    "colorGenerator": "A colour generator previews as its colour, as rendered.",
+    "blendMode": "The blend mode is previewed with the render's own formulas; colours can differ by one level where the clip is partly transparent.",
+    "barsGenerator": "The bars generator draws the render's HD colour bars; the grey ramp's steps can sit a pixel off.",
+    "adjustmentApplied": "An adjustment clip grades and applies its effects to everything below it, as rendered.",
+    "testGenerator": "Bars/test generators preview as a flat colour; the render draws the real pattern.",
+    "insert": "The insert is previewed as a perspective warp; edges may differ by a pixel.",
+    "adjustment": "An adjustment clip grades the layers below it only in the render.",
+    "dissolve": "A dissolve is previewed as the same opacity ramp the render applies.",
+    "otherTransition": "A {type} transition previews as a dissolve; the render applies the real wipe.",
+    "xfadeExact": "A {type} transition is previewed with the render's own transition maths.",
+    "xfadeDissolve": "A dissolve transition is previewed with the render's transition maths; the grain pattern differs a little from the render because the GPU computes it slightly differently.",
+    "xfadeDistance": "A distance transition is previewed with the render's transition maths; the render measures colour distance in YUV and the viewer in RGB, so the edge differs a little.",
+    "xfadeFadegrays": "A fadegrays transition is previewed with the render's transition maths; the render greys by luma and the viewer by an RGB average, so the grey differs a little.",
+    "xfadeHblur": "An hblur transition is previewed with the render's transition maths; the viewer samples a very wide blur at 64 points, so the blur is slightly coarser than the render.",
+    "compound": "A compound clip previews through the flattener (lib/editing/structure/flatten.ts, the renderer's own rules); its contents keep their own parity.",
+    "multicam": "A multicam clip previews as its angle runs, cut where the render cuts, with the sound from the source chosen for it (the program, one angle, or none).",
+    "unknownKind": "Unknown item kind.",
+    "denoiseLeveler": "Denoise and the leveler are not previewed; the render applies them.",
+    "busesFallback": "These buses cannot be set up in the preview, so the tracks play straight to the master here; the render uses the buses.",
+    "dynamicsApprox": "Compressor, gate, limiter and de-esser are heard in the preview approximately. Preview is close to the delivered sound; the render is exact.",
+    "busesApprox": "Bus routing and gain are heard in the preview approximately. Preview is close to the delivered sound; the render is exact."
+  },
+  "honesty": {
+    "preparing": "Preparing preview…",
+    "noFrame": "This clip has no picture at this point of its source.",
+    "missing": "A layer has no picture at this frame yet.",
+    "noProxy": "This clip has no proxy yet, so the preview reads its original file, which may stutter or fail to open.",
+    "sessionUnavailable": "The preview session is unavailable.",
+    "simpleGrade": "The simple preview shows the grade's primaries approximately.",
+    "singleClip": "Single-clip preview.",
+    "simpleFallback": "Simple preview: {reason} Your edits are still exact in the final render.",
+    "simpleDefaultReason": "one clip at a time, from its small copy.",
+    "lineWithTitle": "{title}: {reason}",
+    "reducedQuality": "Reduced quality: {reason}",
+    "verdictNotReady": "Preview not ready",
+    "verdictRender": "Render required ({n})",
+    "verdictSimple": "Simple preview",
+    "verdictApproxN": "Approximate preview ({n})",
+    "verdictApprox": "Approximate preview",
+    "verdictFaithful": "Preview faithful",
+    "noun": {
+      "mediaClip": "Clip",
+      "titleClip": "Title",
+      "caption": "Caption",
+      "generatorClip": "Generator",
+      "insertClip": "Insert",
+      "adjustmentClip": "Adjustment",
+      "transition": "Transition",
+      "compoundClip": "Compound clip",
+      "multicamClip": "Multicam clip",
+      "item": "Item"
+    },
+    "aClip": "A clip",
+    "itemTitle": "{noun} \"{name}\""
+  },
+  "readiness": {
+    "prepareFailed": "the file could not be converted. It may be damaged or in a format we cannot read.",
+    "openFailed": "this clip's media could not be opened for preview. Its format may not be supported in this browser.",
+    "requestFailed": "we could not reach the server to prepare it.",
+    "offline": "the file is not available right now, so there is nothing to preview.",
+    "original": "Plays from the original file",
+    "ready": "Ready",
+    "preparingPercent": "Preparing preview {percent, number}%",
+    "preparing": "Preparing preview",
+    "failed": "Preview failed: {reason}",
+    "sourceOffline": "Source offline: {reason}"
+  },
+  "device": {
+    "phone": "this is a phone",
+    "software": "the browser draws with software graphics",
+    "cores": "it has {n, plural, one {# processor core} other {# processor cores}}",
+    "memory": "it has about {n} GB of memory",
+    "autoReduced": "The preview is drawn at a smaller size because {reasons}.",
+    "quality": {
+      "auto": "Auto",
+      "full": "Full",
+      "half": "Half",
+      "quarter": "Quarter"
+    }
+  },
+  "preview3s": {
+    "included": "Included",
+    "unavailable": "This preview is not available right now.",
+    "forThisPreview": "{missing} for this preview.",
+    "button": "Preview 3 s",
+    "buttonPrice": "Preview 3 s ({price})",
+    "waiting": "Waiting to start",
+    "rendering": "Rendering your preview",
+    "didNotFinish": "The preview did not finish. Try again.",
+    "sorry": "The preview could not be made. Try again.",
+    "gone": "This preview is gone. Make a new one."
+  },
+  "previewSession": {
+    "needsApis": "The live compositor needs WebCodecs and WebGL2, and this browser offers neither.",
+    "noWebgl": "This browser is not giving the editor graphics acceleration, so the live preview cannot run and the viewer plays a single clip at a time over its small copy. Layers above the top clip, titles and audio mixing are not previewed. Turn on graphics acceleration (hardware acceleration) in the browser settings, then choose Try live preview again.",
+    "webglFailed": "The live preview could not start on this device, so the viewer plays a single clip at a time over its small copy. Layers above the top clip, titles and audio mixing are not previewed. Choose Try live preview again.",
+    "userChoice": "You are on the simple preview, so the viewer plays a single clip at a time over its small copy. Layers above the top clip, titles and audio mixing are not previewed.",
+    "contextLost": "The graphics context was lost. Reconnecting…",
+    "contextFailed": "The graphics context was lost and the live preview could not be rebuilt. Choose Try live preview again.",
+    "needsCanvas": "The viewer needs a WebGL2 canvas to composite, and none could be created.",
+    "neither": "This browser has neither WebCodecs nor a video element to fall back to.",
+    "software": "This browser draws with software graphics, so the preview is scaled down to keep up.",
+    "adaptive": "Playing at a smaller size so every effect keeps up. Pause to see the full picture.",
+    "noMedia": "This source has no proxy yet and no original the preview can read.",
+    "hdr": "Preview shows this HDR clip approximately; the delivered file is converted to standard colours before grading.",
+    "hdrNote": "HDR clip"
+  },
+  "humanize": {
+    "s401": "Your session has ended. Sign in again to continue.",
+    "s402": "You do not have enough credits for that.",
+    "s403": "You do not have access to that.",
+    "s404": "That no longer exists. It may have been deleted.",
+    "s409": "This changed somewhere else. Reload and try again.",
+    "s413": "That is too large.",
+    "s429": "Too many requests. Wait a moment and try again.",
+    "s5xx": "Something went wrong on our side. Try again in a moment.",
+    "noRender": "Make a full render first.",
+    "censoredSeed": "This video hides part of the picture, and the editor cannot carry that over, so no timeline was made.",
+    "checking": "Your video is still being checked. Try again in a moment.",
+    "linkLimit": "This timeline has too many share links. Turn one off, then try again.",
+    "network": "Could not reach the server. Check your connection and try again."
+  },
+  "refusal": {
+    "refused": "The edit was refused.",
+    "lockedUnnamed": "The track you are editing is locked. Unlock it to change its clips.",
+    "locked": "The track {track} is locked. Unlock it to change its clips.",
+    "noItem": "That clip is no longer on the timeline.",
+    "noTrack": "That track is no longer on the timeline.",
+    "noMarker": "That marker no longer exists.",
+    "gainRange": "Clip gain must be between {min} and {max} dB.",
+    "fields": {
+      "name": "Name",
+      "enabled": "Enabled",
+      "text": "Text",
+      "fontSize": "Font size",
+      "fontFamily": "Font",
+      "color": "Colour",
+      "language": "Language",
+      "playbackRate": "Speed",
+      "sourceIn": "Source in",
+      "gainDb": "Clip gain",
+      "transform": "Transform",
+      "crop": "Crop",
+      "reverse": "Reverse",
+      "hold": "Freeze frame",
+      "fadeInFrames": "Fade in",
+      "fadeOutFrames": "Fade out",
+      "transitionType": "Transition type",
+      "easing": "Easing",
+      "generatorType": "Generator type",
+      "generatorConfig": "Generator settings",
+      "assetRef": "Source",
+      "grade": "Colour grade",
+      "mask": "Mask",
+      "keyer": "Keyer",
+      "effects": "Effects",
+      "regionEffects": "Region effects",
+      "stabilize": "Stabilise",
+      "reframe": "Reframe",
+      "retimeQuality": "Retime quality",
+      "cornerPin": "Corner pin",
+      "matte": "Matte",
+      "quad": "Quad",
+      "template": "Template",
+      "channelMap": "Channel map",
+      "sequenceId": "Sequence",
+      "activeAngleId": "Angle",
+      "cuts": "Cuts",
+      "angles": "Angles",
+      "positionX": "Position X",
+      "positionY": "Position Y",
+      "scale": "Scale",
+      "rotation": "Rotation",
+      "opacity": "Opacity",
+      "height": "Height",
+      "locked": "Lock",
+      "mute": "Mute",
+      "solo": "Solo",
+      "busId": "Bus",
+      "pan": "Pan",
+      "eq": "EQ",
+      "dynamics": "Dynamics",
+      "denoise": "Noise reduction",
+      "leveler": "Leveller"
+    }
+  },
+  "mediaAnalysis": {
+    "queued": "Waiting to start",
+    "running": "Working on it",
+    "failed": "It did not work. Try again.",
+    "none": "Not done yet",
+    "kinds": {
+      "silence": "Silence",
+      "shots": "Shots",
+      "motion": "Motion",
+      "transcript": "Transcript",
+      "events": "Events"
+    },
+    "summary": {
+      "silence": "{n, plural, one {# quiet stretch} other {# quiet stretches}}",
+      "shots": "{n, plural, one {# shot} other {# shots}}",
+      "motion": "{n, number} s of still picture",
+      "words": "{n, plural, one {# word} other {# words}}",
+      "wordsRough": "{n, plural, one {# word} other {# words}}, {rough, number} timed roughly",
+      "events": "{n, plural, one {# event} other {# events}}",
+      "eventsByType": "{n, plural, one {# event} other {# events}}: {types}"
+    },
+    "err402": "You do not have enough credits for the transcript. Free analysis can still run.",
+    "err409": "The transcript is not available for this file right now.",
+    "err404": "That file is no longer in the project.",
+    "err403": "You can only view this project, so analysis cannot run.",
+    "errStart": "The analysis could not start. Try again in a moment."
+  },
+  "assist": {
+    "included": "Included: this workspace uses its own AI provider, so no credits are used.",
+    "price": "Asking costs about {credits, plural, one {# credit} other {# credits}}.",
+    "left": "{left} of {limit} suggestions left this hour.",
+    "allUsed": "You have used all {limit} suggestions for this hour.",
+    "allUsedWait": "You have used all {limit} suggestions for this hour. Try again in about {mins, plural, one {# minute} other {# minutes}}.",
+    "unaffordableMore": "This needs more credits. Add credits to ask.",
+    "unaffordable": "This needs about {credits, plural, one {# credit} other {# credits}}. Add credits to ask.",
+    "unaffordableMoreHave": "This needs more credits. You have {balance, plural, one {# credit} other {# credits}}. Add credits to ask.",
+    "unaffordableHave": "This needs about {credits, plural, one {# credit} other {# credits}}. You have {balance, plural, one {# credit} other {# credits}}. Add credits to ask.",
+    "rate": "You have reached this hour's limit of suggestions.",
+    "rateWait": "You have reached this hour's limit of suggestions. Try again in about {mins, plural, one {# minute} other {# minutes}}.",
+    "failedDefault": "The assistant did not give a usable answer.",
+    "failedUsed": "{message} {credits, plural, one {# credit} other {# credits}} used for the attempt.",
+    "failedFree": "{message} Nothing was charged.",
+    "timeout": "The AI took too long to answer. You were not charged; please try again.",
+    "expired": "This suggestion expired before it was collected. You were not charged; please ask again.",
+    "busy": "You already have suggestions being prepared. Wait for one to finish, then try again.",
+    "needsAnalysis": "Analyse this footage first so the helper has something to go on. You were not charged.",
+    "noProvider": "No chat provider is configured for this agent. An admin can add one under Admin → Inference providers.",
+    "lengthOnly": "Cutting by length only: analyse this footage first for a smarter cut.",
+    "grounding": "Used {what} of {with} of {total, plural, one {# clip} other {# clips}}",
+    "what": {
+      "transcriptAndShots": "the spoken words and shots",
+      "transcriptOnly": "the spoken words",
+      "shots": "the shots"
+    },
+    "helperUnavailable": "This helper is not available for this range."
+  },
+  "proposal": {
+    "userClips": "This would change {n, plural, one {# clip} other {# clips}} you made yourself — review them in the ghost diff and confirm first.",
+    "userClipOne": "This would change 1 clip you made yourself — review them in the ghost diff and confirm first."
+  },
+  "vo": {
+    "secure": "Recording needs a secure (HTTPS) connection.",
+    "noMic": "This browser does not give pages access to a microphone.",
+    "noRecorder": "This browser cannot record audio (no MediaRecorder).",
+    "noFormat": "This browser cannot record any audio format the editor accepts.",
+    "limit": "The recording reached its limit (30 minutes or 200 MB), so it was stopped and saved. Record the rest as a new take.",
+    "micDefault": "The microphone could not be opened.",
+    "blocked": "The browser blocked the microphone. Allow it from the lock icon beside the address, or upload a recording instead.",
+    "notFound": "No microphone was found. Plug one in, or upload a recording instead.",
+    "busy": "Another app is using the microphone. Close it and try again, or upload a recording instead.",
+    "unavailable": "That microphone is not available any more. Pick another one.",
+    "stopped": "The microphone stopped responding. Try again.",
+    "micLabel": "Microphone {n, number}",
+    "trackNew": "Voiceover"
+  },
+  "dsp": {
+    "compressor": "The preview uses the browser compressor: a fixed soft knee, its own attack and release curves (times above one second are capped at one second), and no sidechain filter. Settings are mapped so the loudness change is close; the render is exact.",
+    "limiter": "The preview uses a fast compressor and a hard clip at the ceiling, without the render's lookahead, so very fast peaks may sound slightly harsher.",
+    "gate": "The preview gate follows the same threshold, ratio, attack and release, but its smoothing curve differs from the render's gate.",
+    "deesser": "The preview de-esser turns down a band around 7 kHz when it gets loud. The render uses a different detector, so the amount of reduction is approximate.",
+    "busNote": "The buses could not be set up for the preview, so every track plays straight to the master here. The render still uses the buses.",
+    "heardApprox": "Heard in preview, approximately",
+    "heardAfter": "Heard after render only",
+    "previewNote": "Preview is close to the delivered sound; the render is exact.",
+    "busLoop": "A bus feeds itself.",
+    "busDeep": "Buses are nested too deeply.",
+    "stages": {
+      "gate": "Noise gate",
+      "deesser": "De-esser",
+      "compressor": "Compressor",
+      "limiter": "Limiter"
+    }
+  },
+  "subtitles": {
+    "typeFirst": "Type the caption text first.",
+    "alreadyHere": "There is already a caption here. Move the playhead to a free spot.",
+    "noRoom": "There is no room for a caption here. Move the playhead to a free spot.",
+    "notCaption": "That is not a caption.",
+    "beforeStart": "A caption cannot start before the beginning.",
+    "oneFrame": "A caption needs to stay on screen for at least one frame.",
+    "neighbour": "That would run into the neighbouring caption. Nudge that one first.",
+    "gone": "That caption is no longer on the timeline.",
+    "cueUnreadable": "Cue {n} has a time range that could not be read and was skipped.",
+    "cueEnds": "Cue {n} ends before it starts and was skipped.",
+    "cueEmpty": "Cue {n} has no text and was skipped.",
+    "noneFound": "No captions were found. This does not look like an SRT or WebVTT file.",
+    "tooMany": "The file has {n, plural, one {# caption} other {# captions}}; only the first {max, number} are used.",
+    "looks": {
+      "clean": "Clean",
+      "bold": "Bold",
+      "boxed": "On a box",
+      "outline": "Outlined",
+      "spotlight": "Yellow"
+    },
+    "trackName": "Subtitles"
+  },
+  "guest": {
+    "gone": "This link has expired or was turned off.",
+    "rate": "Too many requests. Try again in a minute.",
+    "saveFailed": "That could not be saved. Check what you typed and try again.",
+    "noteLimit": "This link has reached its limit for notes.",
+    "approved": "Approved by {name}, {when, date, ::MMMd}",
+    "changes": "{name} asked for changes",
+    "changesNote": "{name} asked for changes: {note}"
+  },
+  "openTimeline": {
+    "noMedia": "Edited video"
+  },
+  "open": {
+    "unplaced": {
+      "v1": "{n, plural, one {# video clip} other {# video clips}}",
+      "v2": "{n, plural, one {# screen insert} other {# screen inserts}}",
+      "v3": "{n, plural, one {# graphic} other {# graphics}}",
+      "a2": "{n, plural, one {# sound} other {# sounds}}",
+      "a3": "{n, plural, one {# music track} other {# music tracks}}",
+      "censor": "{n, plural, one {# censored stretch} other {# censored stretches}}",
+      "item": "{n, plural, one {# item} other {# items}}",
+      "sentence": "{total, plural, one {# item} other {# items}} from this run could not be placed on the timeline ({parts}). {total, plural, one {The timeline is open without it.} other {The timeline is open without them.}}",
+      "title": "Some items were left out"
+    }
+  },
+  "pool": {
+    "sort": {
+      "added": "Order added",
+      "newest": "Newest first",
+      "name": "Name (A to Z)",
+      "duration": "Longest first",
+      "size": "Largest first"
+    },
+    "state": {
+      "all": "Everything",
+      "starred": "Starred",
+      "flagged": "Flagged",
+      "unanalysed": "Not analysed yet"
+    },
+    "rule": {
+      "everything": "Everything in the pool",
+      "kinds": {
+        "video": "video",
+        "audio": "audio",
+        "image": "pictures"
+      },
+      "starred": "starred",
+      "notStarred": "not starred",
+      "flagged": "flagged",
+      "notFlagged": "not flagged",
+      "color": "{color} colour",
+      "tagged": "tagged {tags}",
+      "name": "name has \"{text}\""
+    }
+  },
+  "mediaFormat": {
+    "notAnalysed": "Not analysed",
+    "notProbed": "Not probed",
+    "noAnalysisMarks": "This source has not been analysed, so its duration and frame rate are unknown. Setting marks is disabled.",
+    "noTimebase": "This source has no probed duration and no probed frame rate, so its frames cannot be counted. Setting marks is disabled."
+  },
+  "takes": {
+    "gone": "That clip is no longer on the timeline.",
+    "tooLong": "This take is {take} s long but the clip needs {needed} s, so it would run into the footage after the take. Shorten the clip first, or pick a longer take."
+  },
+  "preset": {
+    "none": "No details.",
+    "noEffects": "No effects.",
+    "mastering": "Sets loudness {lufs} LUFS, peaks no higher than {peak} dB.",
+    "masteringRange": "Sets loudness {lufs} LUFS, peaks no higher than {peak} dB, loudness range {range}.",
+    "transition": "A {type} transition, {frames, plural, one {# frame} other {# frames}} long.",
+    "transitionEasing": "A {type} transition, {frames, plural, one {# frame} other {# frames}} long, {easing} easing.",
+    "adds": "Adds {effects}.",
+    "names": {
+      "social": "Social / streaming (−14 LUFS)",
+      "podcast": "Podcast (−16 LUFS)",
+      "broadcast": "Broadcast EBU R128 (−23 LUFS)"
+    }
+  },
+  "link": {
+    "nothing": "Nothing to link.",
+    "linked": "Linked {n, plural, one {# clip} other {# clips}}.",
+    "linkedAdded": "Linked {n, plural, one {# clip} other {# clips}}, added sound for {added, number}.",
+    "added": "Added sound for {added, number}."
+  },
+  "diff": {
+    "none": "No differences",
+    "counts": {
+      "added": "{n, number} added",
+      "removed": "{n, number} removed",
+      "moved": "{n, number} moved",
+      "trimmed": "{n, number} trimmed",
+      "changed": "{n, number} changed"
+    },
+    "tracks": "{n, plural, one {# track change} other {# track changes}}",
+    "settings": "settings changed",
+    "markers": "{n, plural, one {# marker change} other {# marker changes}}"
+  },
+  "frameHandles": {
+    "tracked": "Tracked windows follow the picture. Turn off tracking to move this by hand.",
+    "mask": "Mask",
+    "reframe": "Reframe",
+    "window": "Power window"
+  },
+  "fader": {
+    "pan": {
+      "left": "L{n, number}",
+      "right": "R{n, number}"
+    }
+  },
+  "review": {
+    "finishedRender": "Finished render"
+  },
+  "canvasErrors": {
+    "noExport": "This browser cannot export a canvas as an image.",
+    "maskImage": "The mask could not be turned into an image.",
+    "noMask": "This browser cannot draw a mask.",
+    "layerImage": "A layer image could not be loaded.",
+    "noDraw": "This browser cannot draw the picture."
+  },
+  "names": {
+    "title": "Title",
+    "colorCard": "Colour card",
+    "subtitles": "Subtitles",
+    "voiceover": "Voiceover",
+    "voiceoverShort": "VO",
+    "cameraAudio": "Camera audio",
+    "compound": "Compound clip",
+    "otherTakes": "Other takes",
+    "backgroundColor": "Background colour",
+    "editedVideo": "Edited video",
+    "stillImage": "Still image"
+  },
+  "exportSize": {
+    "bytes": "about {n, plural, one {# byte} other {# bytes}}",
+    "kb": "about {n, number} KB",
+    "mb": "about {n, number, ::.0} MB"
+  }
+}

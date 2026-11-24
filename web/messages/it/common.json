@@ -1,0 +1,42 @@
+{
+  "save": "Salva",
+  "cancel": "Annulla",
+  "delete": "Elimina",
+  "edit": "Modifica",
+  "close": "Chiudi",
+  "back": "Indietro",
+  "next": "Avanti",
+  "search": "Cerca",
+  "loading": "Caricamento…",
+  "retry": "Riprova",
+  "yes": "Sì",
+  "no": "No",
+  "copy": "Copia",
+  "copied": "Copiato",
+  "download": "Scarica",
+  "upload": "Carica",
+  "confirm": "Conferma",
+  "actions": "Azioni",
+  "name": "Nome",
+  "status": "Stato",
+  "created": "Creato",
+  "updated": "Aggiornato",
+  "optional": "Facoltativo",
+  "required": "Obbligatorio",
+  "learnMore": "Scopri di più",
+  "errors": {
+    "generic": "Qualcosa è andato storto. Riprova tra un attimo.",
+    "network": "Non riusciamo a raggiungere ReelBolt. Controlla la connessione e riprova.",
+    "notFound": "Non abbiamo trovato quello che cerchi.",
+    "forbidden": "Non hai il permesso di farlo.",
+    "unauthorized": "La sessione è terminata. Accedi di nuovo per continuare."
+  },
+  "language": {
+    "label": "Lingua",
+    "description": "La lingua di menu, pulsanti e messaggi.",
+    "saveFailed": "Non siamo riusciti a salvare la lingua. Riprova."
+  },
+  "meta": {
+    "description": "Video promozionali generati con l’AI"
+  }
+}

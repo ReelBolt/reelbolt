@@ -1,0 +1,64 @@
+{
+  "Version": 1,
+  "ProjectId": "5f1c9b40-6f4a-4c1e-9a7d-0d5b6f2e1a01",
+  "ExecutionId": "b7a2c3d4-5e6f-4a80-9b10-2c3d4e5f6071",
+  "OutputVideo": {
+    "Width": 320,
+    "Height": 180,
+    "Fps": 30.0,
+    "DurationSec": 2.0,
+    "StorageKey": "golden-parity/compile-output.mp4"
+  },
+  "Sources": [
+    {
+      "Index": 0,
+      "StorageKey": "golden-parity/fixture-source.mp4",
+      "DurationSec": 3.0,
+      "Width": 320,
+      "Height": 180,
+      "Fps": 30.0
+    }
+  ],
+  "Tracks": [
+    {
+      "Id": "track-video",
+      "Type": "video",
+      "Name": "Video",
+      "Index": 0,
+      "Items": [
+        {
+          "Id": "cut-1",
+          "TimelineStartSec": 0.0,
+          "TimelineEndSec": 1.0,
+          "SourceIndex": 0,
+          "SourceStartSec": 0.0,
+          "Label": "Cut 1"
+        },
+        {
+          "Id": "cut-2",
+          "TimelineStartSec": 1.0,
+          "TimelineEndSec": 2.0,
+          "SourceIndex": 0,
+          "SourceStartSec": 1.0,
+          "Label": "Cut 2"
+        }
+      ]
+    },
+    {
+      "Id": "track-music",
+      "Type": "music",
+      "Name": "Music",
+      "Index": 5,
+      "Items": [
+        {
+          "Id": "bed-1",
+          "TimelineStartSec": 0.0,
+          "TimelineEndSec": 2.0,
+          "TrackId": "trk-bed",
+          "TrackName": "bed.wav",
+          "BedDbfs": -6.0
+        }
+      ]
+    }
+  ]
+}

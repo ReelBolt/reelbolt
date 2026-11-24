@@ -1,0 +1,35 @@
+{
+  "id": "whip-blur",
+  "version": "1.0.0",
+  "title": "Whip blur",
+  "category": "transitions",
+  "description": "Fast whip pan between scenes with motion blur; use for quick travel or high-energy cuts.",
+  "tags": [
+    "transition",
+    "whip",
+    "pan",
+    "blur",
+    "motion"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-whip-blur",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*14*/; direction?: 'left'|'right' /*'left'*/; maxBlur?: number /*28*/}",
+  "example": "import {WhipBlur} from './blocks/whip-blur/WhipBlur.tsx';\n<WhipBlur from={<SceneA />} to={<SceneB />} startFrame={40} direction=\"left\" maxBlur={28} />"
+}

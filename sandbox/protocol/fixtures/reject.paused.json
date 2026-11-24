@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "type": "reject",
+  "id": "01J9ZQ0000000000000000C002",
+  "jobId": "7d1c2e0a-5b7e-4a43-9d57-3f0c1a9b2e11",
+  "sessionId": "0b6f3c58-91d2-4c7a-8e34-5a2d7f1e9c40",
+  "payload": {
+    "leaseEpoch": 3,
+    "jobToken": "FIXTURE.job.token",
+    "reason": "paused_by_user",
+    "message": "Runner is paused by the user"
+  }
+}

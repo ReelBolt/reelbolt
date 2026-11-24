@@ -1,0 +1,39 @@
+{
+  "id": "map-route-arc",
+  "version": "1.0.0",
+  "title": "Map route arc",
+  "category": "maps",
+  "description": "Use to show a journey or shipment between two cities: a great-circle route draws on with a travelling dot (offline).",
+  "tags": [
+    "map",
+    "route",
+    "arc",
+    "flight",
+    "shipping",
+    "world"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/geo.ts",
+    "_shared/worldData.ts",
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-map-route-arc",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      35,
+      80
+    ]
+  },
+  "props": "{from?: City /*Lisbon*/; to?: City /*Sao Paulo*/; landColor?: string; strokeColor?: string; routeColor?: string /*'#fbbf24'*/; textColor?: string; startFrame?: number /*12*/; durationInFrames?: number /*45*/; fontFamily?: string} // City = {name: string; lon: number; lat: number}",
+  "example": "import {MapRouteArc} from './blocks/map-route-arc/MapRouteArc.tsx';\n<MapRouteArc from={{name: \"Paris\", lon: 2.35, lat: 48.86}} to={{name: \"Tokyo\", lon: 139.7, lat: 35.7}} />"
+}

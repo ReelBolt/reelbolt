@@ -1,0 +1,10 @@
+{
+  "color": {
+    "$type": "color",
+    "base": { "blue": { "$value": "#1a73e8" } },
+    "brand": {
+      "primary": { "$value": "{color.brand.secondary}" },
+      "secondary": { "$value": "{color.base.blue}" }
+    }
+  }
+}

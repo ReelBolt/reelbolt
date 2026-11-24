@@ -1,0 +1,9 @@
+{
+  "article": {
+    "breadcrumb": "Percorso di navigazione",
+    "blog": "Blog",
+    "published": "Pubblicato il",
+    "updated": "Aggiornato il",
+    "readingTime": "{minutes} min di lettura"
+  }
+}

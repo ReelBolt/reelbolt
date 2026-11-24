@@ -1,0 +1,1236 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      editor_webkit:
+        description: 'editor-e2e: also run the iphone14webkit project'
+        type: boolean
+        default: false
+
+# A new push to a pull request supersedes its previous run. Main runs are never
+# cancelled, so the image publish and signing of a commit always completes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+# Every job runs on a GitHub-hosted runner (ubuntu-latest, ubuntu-24.04-arm,
+# windows-latest). There is no self-hosted pool and no runner switch, so fork pull
+# requests never touch infrastructure we own. Only the push-to-master `docker-publish`
+# job holds packages: write / id-token: write. GPU and model jobs are not part of
+# CI. See docs/ci.md.
+jobs:
+  # ── Which stacks does this change actually touch? ────────────────────────
+  # Every downstream job is gated on this so a copy tweak in /site doesn't
+  # rebuild seven Docker images. On push to main everything runs.
+  changes:
+    name: Detect changed stacks
+    runs-on: ubuntu-latest
+    # paths-filter lists a PR's files through the API, which on a private repo
+    # needs pull-requests: read on top of the workflow-wide contents: read.
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
+      sandbox: ${{ steps.filter.outputs.sandbox }}
+      runner: ${{ steps.filter.outputs.runner }}
+      inference: ${{ steps.filter.outputs.inference }}
+      web: ${{ steps.filter.outputs.web }}
+      site: ${{ steps.filter.outputs.site }}
+      brand: ${{ steps.filter.outputs.brand }}
+      docs: ${{ steps.filter.outputs.docs }}
+      plugin: ${{ steps.filter.outputs.plugin }}
+      nginx: ${{ steps.filter.outputs.nginx }}
+      docker: ${{ steps.filter.outputs.docker }}
+      runner-e2e: ${{ steps.filter.outputs['runner-e2e'] }}
+      editor-e2e: ${{ steps.filter.outputs['editor-e2e'] }}
+      shell: ${{ steps.filter.outputs.shell }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+      infra: ${{ steps.filter.outputs.infra }}
+      stripe-catalog: ${{ steps.filter.outputs['stripe-catalog'] }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: filter
+        with:
+          # On push events paths-filter diffs against the previous commit; the
+          # `predicate-quantifier` default ("some") is what we want here.
+          filters: |
+            api:
+              - 'api/**'
+              - '.golangci.yml'
+              # Go drift tests read these Inference API sources and fail when the Go copies differ
+              # (api/services/acquisition_vocabulary_drift_test.go, marketing_consent_test.go,
+              # api/models/runner_enum_drift_test.go). A PR that changes only the C# side must run them.
+              - 'inference/src/ReelBolt.Shared/Acquisition/**'
+              - 'inference/src/ReelBolt.Inference.Api/Services/Telemetry/AttributionSanitizer.cs'
+              - 'inference/src/ReelBolt.Inference.Api/Marketing/marketing-consent.wording.json'
+              - 'inference/src/ReelBolt.Shared/Data/Models/RunnerEnums.cs'
+            sandbox:
+              - 'sandbox/**'
+              - '.golangci.yml'
+            runner:
+              - 'runner/**'
+              # The capability tests read the protocol fixtures.
+              - 'sandbox/protocol/**'
+              - '.golangci.yml'
+            inference:
+              - 'inference/**'
+              # The C# contract corpus runner reads the shared golden fixtures.
+              - 'web/lib/editing/__fixtures__/contract/**'
+            web:
+              - 'web/**'
+            site:
+              - 'site/**'
+              # The site vendors the language registry and the `/` language picker.
+              - 'i18n/**'
+              # The site vendors the plan catalog the billing service owns.
+              - 'inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json'
+            brand:
+              - 'brand/**'
+              # The sync check also verifies the docs-site copy of the master.
+              - 'docs-site/static/img/logo.svg'
+            docs:
+              - 'docs/**'
+              - 'docs-site/**'
+              - '*.md'
+              - 'scripts/check-doc-links.mjs'
+            plugin:
+              - 'plugins/**'
+            nginx:
+              - 'nginx/**'
+              - 'i18n/pick-locale.js'
+            docker:
+              - '**/Dockerfile'
+              - 'docker-compose.yml'
+            # The e2e runner harness drives the gateway + worker + a sandbox-runtime
+            # container, so it is gated on the same stacks its evidence chain touches.
+            runner-e2e:
+              - 'sandbox/**'
+              - 'e2e/scripts/runner-harness.mjs'
+              - 'e2e/tests/runner.spec.ts'
+              - '.github/workflows/ci.yml'
+            # The editor v2 regression suite (e2e/tests/editor-v2) on its isolated stack.
+            editor-e2e:
+              - 'web/components/editor/**'
+              - 'web/lib/editing/**'
+              - 'web/lib/editor/**'
+              - 'inference/**/Edit*'
+              - '**/TimelineRender/**'
+              - 'e2e/tests/editor-v2/**'
+              - 'e2e/fixtures/editor-v2/**'
+              - 'e2e/scripts/editor-v2-stack.sh'
+              - 'e2e/playwright.editor-v2.config.ts'
+              - '.github/workflows/ci.yml'
+            shell:
+              - '**/*.sh'
+            workflows:
+              - '.github/workflows/**'
+            infra:
+              - 'infra/**'
+              # Read by the compose validation and the env-wiring test of infra-lint.
+              - '.env.example'
+              # The env-wiring test holds both env examples to the variable table of this runbook.
+              - 'docs/acquisition-tracking.md'
+            # The Stripe catalog sync tool derives its desired state from the plan catalog; the e2e Stripe fake
+            # has its own offline tests and prices everything from the same catalog.
+            stripe-catalog:
+              - 'tools/stripe-catalog-sync/**'
+              - 'e2e/stripe-mock/**'
+              - 'inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json'
+
+  # ── Go: api/, sandbox/ and runner/ are three separate modules ────────────
+  go:
+    name: Go · ${{ matrix.module }}
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.api == 'true' ||
+      needs.changes.outputs.sandbox == 'true' ||
+      needs.changes.outputs.runner == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [api, sandbox, runner]
+    defaults:
+      run:
+        working-directory: ${{ matrix.module }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          # Single source of truth for the Go version: each module's go.mod.
+          go-version-file: ${{ matrix.module }}/go.mod
+          # runner/ has no dependencies, hence no go.sum to key a cache on.
+          cache: ${{ matrix.module != 'runner' }}
+          cache-dependency-path: ${{ matrix.module }}/go.sum
+
+      - name: Download modules
+        run: go mod download
+
+      - name: Verify go.mod / go.sum are tidy
+        run: |
+          go mod tidy
+          git diff --exit-code -- go.mod go.sum
+
+      - name: gofmt
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            echo "::error::These files are not gofmt-clean:"
+            echo "$unformatted"
+            gofmt -d .
+            exit 1
+          fi
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: Build
+        run: go build ./...
+
+      - name: Cross-compile (runner ships on Windows and Linux arm64)
+        if: matrix.module == 'runner'
+        run: |
+          GOOS=windows GOARCH=amd64 go build ./...
+          GOOS=linux GOARCH=arm64 go build ./...
+
+      - name: Test
+        run: go test ./... -race -covermode=atomic -coverprofile=coverage.out
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: coverage-go-${{ matrix.module }}
+          path: ${{ matrix.module }}/coverage.out
+          if-no-files-found: ignore
+
+  # ── runner/ on Windows: the runtime detection is OS-specific ─────────────
+  runner-windows:
+    name: Go · runner (windows)
+    runs-on: windows-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.runner == 'true'
+    defaults:
+      run:
+        working-directory: runner
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: runner/go.mod
+          cache: false
+      - run: go vet ./...
+      - run: go test ./... -race
+
+  golangci-lint:
+    name: golangci-lint · ${{ matrix.module }}
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.api == 'true' ||
+      needs.changes.outputs.sandbox == 'true' ||
+      needs.changes.outputs.runner == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [api, sandbox, runner]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: ${{ matrix.module }}/go.mod
+          # runner/ has no dependencies, hence no go.sum to key a cache on.
+          cache: ${{ matrix.module != 'runner' }}
+          cache-dependency-path: ${{ matrix.module }}/go.sum
+
+      - uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        with:
+          version: v2.13.2
+          working-directory: ${{ matrix.module }}
+
+  # ── .NET 10: the three-project inference solution + its test project ──────
+  dotnet:
+    name: .NET · inference
+    runs-on: ubuntu-latest
+    needs: changes
+    if: github.event_name != 'pull_request' || needs.changes.outputs.inference == 'true'
+    defaults:
+      run:
+        working-directory: inference
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/free-disk-space
+
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('inference/**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore ReelBolt.sln
+
+      - name: Build (Release)
+        # Roslyn + the built-in .NET analyzers run as part of the build.
+        run: dotnet build ReelBolt.sln -c Release --no-restore
+
+      - name: Test
+        # These tests read the Power BI / Grafana SQL, release.sh and deploy-two-box.sh under infra/, which the
+        # public tree does not ship (the export keeps infra/ to an allowlist); where infra/powerbi is absent
+        # the filter leaves them out. The private repository runs every test.
+        env:
+          NO_INFRA_FILTER: ${{ hashFiles('infra/powerbi/**') == '' && 'FullyQualifiedName!~AcquisitionQueryFiles&FullyQualifiedName!~SoftOpenFunnelQueryTests&FullyQualifiedName!~PowerBiReadOnlyRoleScriptDriftTests&FullyQualifiedName!~DeployScripts_NeverNameTheWakerProfile&FullyQualifiedName!~A_fully_migrated_database_with_the_read_only_role_scripts_applied_passes_the_check' || '' }}
+        run: |
+          dotnet test ReelBolt.sln -c Release --no-build \
+            ${NO_INFRA_FILTER:+--filter "$NO_INFRA_FILTER"} \
+            --logger "trx;LogFileName=test-results.trx" \
+            --logger "console;verbosity=normal" \
+            --results-directory TestResults \
+            --collect:"XPlat Code Coverage"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dotnet-test-results
+          path: inference/TestResults/**
+          if-no-files-found: ignore
+
+  dotnet-format:
+    name: .NET format
+    runs-on: ubuntu-latest
+    needs: changes
+    if: github.event_name != 'pull_request' || needs.changes.outputs.inference == 'true'
+    # Blocking: the solution was run through `dotnet format` during the .NET 10
+    # upgrade and committed clean, so drift here is a real regression.
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: dotnet format --verify-no-changes
+        working-directory: inference
+        run: dotnet format ReelBolt.sln --verify-no-changes --severity warn
+
+  # ── Next.js: web (dashboard) and site (marketing) ────────────────────────
+  node:
+    name: Node · ${{ matrix.app }}
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.web == 'true' ||
+      needs.changes.outputs.site == 'true' ||
+      needs.changes.outputs.brand == 'true' ||
+      needs.changes.outputs.plugin == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [web, site]
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          # Matches the node:26-alpine base image both Dockerfiles build from.
+          node-version: '26'
+          cache: npm
+          cache-dependency-path: ${{ matrix.app }}/package-lock.json
+
+      - name: Pricing catalog drift
+        if: matrix.app == 'site'
+        working-directory: .
+        run: diff -u inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json site/lib/pricing/plans.catalog.json
+
+      # The site vendors the marketing-consent wording registry; every recorded
+      # consent cites a version, so the two copies must be byte-identical.
+      - name: Marketing consent wording drift
+        if: matrix.app == 'site'
+        working-directory: .
+        run: diff -u inference/src/ReelBolt.Inference.Api/Marketing/marketing-consent.wording.json site/lib/marketing/marketing-consent.wording.json
+
+      # The language registry and the `/` language picker are vendored (site, web, docs, api, nginx);
+      # the picker's shared test vectors run against the canonical file and both copies.
+      - name: i18n sync drift and picker vectors
+        if: matrix.app == 'site'
+        working-directory: .
+        run: |
+          node i18n/sync.mjs --check
+          node --test i18n/pick-locale.test.mjs
+
+      # One arm runs the repo-root check, like Pricing catalog drift above: the
+      # script is plain node, so no npm ci is needed before it.
+      - name: Brand sync check
+        if: matrix.app == 'web'
+        working-directory: .
+        run: node brand/scripts/sync.mjs --check
+
+      # The language registry (i18n/locales.json) is vendored byte-identically into every app.
+      - name: i18n registry drift
+        if: matrix.app == 'web'
+        working-directory: .
+        run: node i18n/sync.mjs --check
+
+      # The Claude Code plugin's run watcher: dependency-free node with its own
+      # tests against a fake server on 127.0.0.1 (no network, no browser). Needs
+      # no npm ci; the glob form is required because node 22+ does not recurse
+      # into a directory argument.
+      - name: Plugin tests
+        if: matrix.app == 'web'
+        working-directory: .
+        run: node --test "plugins/reelbolt/test/*.test.mjs"
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # hreflang, canonical, <html lang> and the sitemap alternates of the built site (site only).
+      - name: Site i18n build checks
+        if: matrix.app == 'site'
+        run: npm run test:build
+
+  # ── Stripe catalog sync and the e2e Stripe fake: dependency-free node, own tests ────
+  # Pure `node --test` (no npm ci, no network, no Stripe call). Runs when the tool, the fake or the plan
+  # catalog they read changes; skipped otherwise, which the `ci` aggregate accepts.
+  stripe-catalog-sync:
+    name: Stripe catalog sync
+    runs-on: ubuntu-latest
+    needs: changes
+    if: github.event_name != 'pull_request' || needs.changes.outputs.stripe-catalog == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+
+      - name: Catalog sync tests
+        working-directory: tools/stripe-catalog-sync
+        run: node --test
+
+      # Loopback only (a local receiver stands in for the Inference API's webhook endpoint); reads
+      # plans.catalog.json from the checkout. No docker, no Playwright.
+      - name: Stripe fake tests
+        run: node --test e2e/stripe-mock/server.test.mjs
+
+  # ── Docusaurus: the documentation site built from /docs ──────────────────
+  # `docusaurus build` fails on any broken internal link or Markdown link, so
+  # this is also the link check for the whole docs tree.
+  docs-site:
+    name: Docs site
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.docs == 'true'
+    defaults:
+      run:
+        working-directory: docs-site
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+          cache: npm
+          cache-dependency-path: docs-site/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        # Builds every locale in docs-site/locales.json: English at /docs/, Italian at /docs/it/.
+        # The postbuild guards check each one.
+        run: npm run build
+
+      - name: Translation script tests
+        run: npm run i18n:test
+
+      - name: Stale translations
+        # A gate: fails when an Italian page is stale, unstamped, orphaned or missing (the api/ folder is
+        # English-only on purpose). A PR that changes an English page re-translates it and runs i18n-stamp.mjs.
+        run: npm run i18n:stale -- --strict
+
+      - name: Dead documentation links
+        # Public tree only: the private repository links to documents the export keeps private, so the
+        # export gates it instead. The marker is the absence of tools/open-source-export (not a repository-slug
+        # comparison, because the export rewrites the slug and the guard would then run only in forks).
+        if: hashFiles('tools/open-source-export/export.sh') == ''
+        working-directory: ${{ github.workspace }}
+        run: node scripts/check-doc-links.mjs
+
+  # ── Container images: build everywhere, publish from a hosted job only ──
+  # Two jobs over one image matrix (YAML anchor `docker-images`):
+  # - `docker` builds every image (no push, no sign) on pull requests (including
+  #   forks), non-master pushes and pushes in forks. It holds `contents: read` only.
+  # - `docker-publish` runs instead of it on a push to main in ReelBolt/reelbolt, but ONLY while
+  #   the repository variable PUBLISH_IMAGES is the string 'true' (default: unset, so nothing is
+  #   pushed to GHCR). Publishing is a deliberate switch: the images carry GPL ffmpeg, which needs a
+  #   source offer first. It builds the
+  #   same images, pushes ghcr.io/reelbolt/reelbolt-<name>:<sha> and :main with
+  #   the BuildKit SBOM and provenance, and signs the digest keylessly with cosign
+  #   (GitHub OIDC). Only this job holds packages: write / id-token: write, so no
+  #   pull_request job can mint the OIDC token whose identity
+  #   (ci.yml@refs/heads/main) deploy.yml verifies. It must stay in this file:
+  #   a reusable workflow would change the Fulcio certificate identity. deploy.yml
+  #   pulls by SHA.
+  docker:
+    name: Docker · ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    needs: changes
+    permissions:
+      contents: read
+    # Everything the single job used to run on, minus the publish case below.
+    if: >-
+      !(github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'ReelBolt/reelbolt' && vars.PUBLISH_IMAGES == 'true') &&
+      (github.event_name != 'pull_request' ||
+       needs.changes.outputs.docker == 'true' ||
+       needs.changes.outputs.api == 'true' ||
+       needs.changes.outputs.sandbox == 'true' ||
+       needs.changes.outputs.inference == 'true' ||
+       needs.changes.outputs.web == 'true' ||
+       needs.changes.outputs.site == 'true' ||
+       needs.changes.outputs.docs == 'true' ||
+       needs.changes.outputs.nginx == 'true')
+    strategy: &docker-images
+      fail-fast: false
+      matrix:
+        include:
+          - name: go-api
+            context: ./api
+            file: ./api/Dockerfile
+          - name: inference-api
+            context: ./inference
+            file: ./inference/src/ReelBolt.Inference.Api/Dockerfile
+            # Same named context compose supplies: the /docs tree the assistant searches.
+            build_contexts: platform-docs=./docs
+          - name: docs-site
+            context: ./docs-site
+            file: ./docs-site/Dockerfile
+            target: production
+            # The user guide and its translations only: the developer docs are not published (docs/docs-site.md).
+            build_contexts: |
+              docs=./docs/user-guide
+              docs_i18n=./docs/user-guide-i18n
+          - name: workflow-engine
+            context: ./inference
+            file: ./inference/src/ReelBolt.WorkflowEngine/Dockerfile
+          - name: web
+            context: ./web
+            file: ./web/Dockerfile
+            target: production
+            # Public GA4 ID, inlined into the browser bundle at build time (repository variable,
+            # empty = no analytics). Consent gating is in the app.
+            # NEXT_PUBLIC_TELEMETRY_ENABLED is the same kind of build-time switch for the app's own
+            # funnel events and consent popup (docs/product-events.md): the deployed image is THIS
+            # image, so a .env on the host cannot turn it on. Repository variable, empty = off.
+            build_args: |
+              NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+              NEXT_PUBLIC_TELEMETRY_ENABLED=${{ vars.NEXT_PUBLIC_TELEMETRY_ENABLED }}
+              GIT_SHA=${{ github.sha }}
+          - name: site
+            context: ./site
+            file: ./site/Dockerfile
+            target: production
+            # The Dockerfile bakes this into the bundle at build time. Without it the ARG resolves
+            # to the empty string and the image would carry site-config's source default instead of
+            # the canonical origin; see docs/marketing-site.md.
+            build_args: |
+              NEXT_PUBLIC_SITE_URL=https://reelbolt.ai
+              NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          - name: mcp
+            context: ./mcp
+            file: ./mcp/Dockerfile
+          - name: sandbox-runtime
+            context: ./sandbox
+            file: ./sandbox/Dockerfile
+            target: sandbox-runtime
+            # The runtime image also ships to Apple-silicon / arm64 desktop runners. The arm64
+            # half is emulated here; the sandbox-runtime-arm64 job below renders natively.
+            platforms: linux/amd64,linux/arm64
+          - name: sandbox-executor
+            context: ./sandbox
+            file: ./sandbox/Dockerfile
+            target: control-plane
+          - name: runner-gateway
+            context: ./sandbox
+            file: ./sandbox/Dockerfile
+            target: runner-gateway
+          - name: worker
+            context: ./sandbox
+            file: ./sandbox/Dockerfile
+            target: worker
+          - name: nginx
+            context: ./nginx
+            file: ./nginx/Dockerfile
+          - name: import-worker
+            context: ./inference
+            file: ./inference/src/ReelBolt.ImportWorker/Dockerfile
+    steps:
+      - &docker-checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - &docker-free-disk
+        uses: ./.github/actions/free-disk-space
+
+      - &docker-qemu
+        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+        if: matrix.platforms != ''
+
+      - &docker-buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      # GHCR image paths must be lowercase; the owner is whoever runs this repository (the export
+      # rewrites the repository slug, not this).
+      - &docker-image-name
+        name: Resolve image name
+        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/reelbolt-${{ matrix.name }}" >> "$GITHUB_ENV"
+
+      # LICENSE, THIRD_PARTY_NOTICES.md and GPL-SOURCE-OFFER.md for /licenses/ in every image.
+      - &docker-legal
+        name: Prepare licence files
+        run: infra/scripts/prepare-legal-context.sh "$RUNNER_TEMP/legal"
+
+      - name: Build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          target: ${{ matrix.target }}
+          # Empty for every image except sandbox-runtime: the action then builds its default.
+          platforms: ${{ matrix.platforms }}
+          build-args: ${{ matrix.build_args }}
+          build-contexts: |
+            ${{ matrix.build_contexts }}
+            legal=${{ runner.temp }}/legal
+          push: false
+          load: false
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:main
+          # Attestations are only meaningful when pushing (docker-publish).
+          sbom: false
+          provenance: false
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,scope=${{ matrix.name }},mode=max
+
+  # Publish half of the split above: hosted main pushes only.
+  docker-publish:
+    name: Docker publish · ${{ matrix.name }}
+    # Main pushes in the upstream repository only; any other repository cannot push to its GHCR.
+    runs-on: ubuntu-latest
+    needs: changes
+    permissions:
+      contents: read
+      packages: write
+      id-token: write # keyless cosign signing
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'ReelBolt/reelbolt' && vars.PUBLISH_IMAGES == 'true'
+    strategy: *docker-images
+    steps:
+      - *docker-checkout
+      - *docker-free-disk
+      - *docker-qemu
+      - *docker-buildx
+      - *docker-image-name
+      - *docker-legal
+
+      - name: Image version
+        id: version
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+
+      # OCI labels: source, revision and created come from the repository and commit; the rest is set here.
+      - name: Image metadata
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=raw,value=${{ github.sha }}
+            type=raw,value=main
+          labels: |
+            org.opencontainers.image.title=reelbolt-${{ matrix.name }}
+            org.opencontainers.image.description=ReelBolt ${{ matrix.name }} image. ReelBolt code is AGPL-3.0-only. Third-party GPL programs may be included (FFmpeg, poppler-utils; sandbox images also the Remotion compositor FFmpeg); see /licenses/GPL-SOURCE-OFFER.md
+            org.opencontainers.image.licenses=AGPL-3.0-only
+            org.opencontainers.image.version=${{ steps.version.outputs.version }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+
+      # The gate builds the image once, locally (linux/amd64, not pushed), checks it, and produces its
+      # source bundle. Nothing is pushed unless every check passes.
+      - name: Build for the publication gate
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          target: ${{ matrix.target }}
+          platforms: linux/amd64
+          build-args: ${{ matrix.build_args }}
+          build-contexts: |
+            ${{ matrix.build_contexts }}
+            legal=${{ runner.temp }}/legal
+          push: false
+          load: true
+          tags: ${{ env.IMAGE }}:gate
+          labels: ${{ steps.meta.outputs.labels }}
+          sbom: false
+          provenance: false
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,scope=${{ matrix.name }},mode=max
+
+      - name: Source bundle (gate image)
+        run: infra/scripts/gpl-source-bundle.sh --out "$RUNNER_TEMP/bundles" "${IMAGE}:gate"
+
+      - name: Publication gate
+        run: infra/scripts/check-image-publish-gate.sh --image "${IMAGE}:gate" --bundle-dir "$RUNNER_TEMP/bundles"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          target: ${{ matrix.target }}
+          platforms: ${{ matrix.platforms }}
+          build-args: ${{ matrix.build_args }}
+          build-contexts: |
+            ${{ matrix.build_contexts }}
+            legal=${{ runner.temp }}/legal
+          push: true
+          load: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # SPDX SBOM and SLSA provenance as OCI attestations.
+          sbom: true
+          provenance: mode=max
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,scope=${{ matrix.name }},mode=max
+
+      # The gate above checked linux/amd64 only. For an image pushed with an arm64 manifest, read that
+      # manifest's labels from the registry and its filesystem (licenses, compositor hashes, package
+      # versions) WITHOUT running it. Not verified here: arm64 ffmpeg -buildconf (needs an arm64 runner);
+      # the Dockerfile guard ran during the arm64 build. Fails before the image is signed.
+      - name: Post-push check (linux/arm64)
+        if: contains(matrix.platforms, 'linux/arm64')
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: infra/scripts/check-image-publish-gate.sh --post-push "${IMAGE}@${DIGEST}" --platform linux/arm64
+
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Sign the pushed digest
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"
+
+      # The bundle for the pushed digest itself (same pinned packages as the gate image). Kept as a
+      # workflow artifact; the release procedure attaches it to the GitHub release.
+      - name: Source bundle (pushed digest)
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: infra/scripts/gpl-source-bundle.sh --out "$RUNNER_TEMP/bundles-published" "${IMAGE}@${DIGEST}"
+
+      - name: Upload source bundles
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gpl-source-${{ matrix.name }}
+          path: |
+            ${{ runner.temp }}/bundles
+            ${{ runner.temp }}/bundles-published
+          retention-days: 90
+
+  # ── sandbox-runtime on a native arm64 runner: build, then render one second ──
+  # GitHub-hosted arm64 runner: no QEMU emulation.
+  sandbox-runtime-arm64:
+    name: Docker · sandbox-runtime arm64 smoke render
+    runs-on: ubuntu-24.04-arm
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.docker == 'true' ||
+      needs.changes.outputs.sandbox == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/free-disk-space
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ./sandbox
+          file: ./sandbox/Dockerfile
+          target: sandbox-runtime
+          platforms: linux/arm64
+          push: false
+          load: true
+          tags: reelbolt-sandbox-runtime:arm64-smoke
+          cache-from: type=gha,scope=sandbox-runtime-arm64
+          cache-to: type=gha,scope=sandbox-runtime-arm64,mode=max
+
+      # Mirrors what the sandbox does: copy the template into a writable workspace, then render
+      # the template's LaunchPromo composition (no voiceover staged, so none is asked for) for one second at 320x180 with the stable headless-shell
+      # link (relative to the copied workspace). Fails if no mp4 is produced.
+      - name: Smoke render on arm64
+        run: |
+          docker run --rm --entrypoint sh reelbolt-sandbox-runtime:arm64-smoke -euc '
+            uname -m
+            cp -r /opt/remotion-template/. /tmp/ws
+            cd /tmp/ws
+            test -x node_modules/.remotion/headless-shell
+            npx remotion render src/index.ts LaunchPromo out/smoke.mp4 \
+              --props="{\"voiceoverSrc0\":\"\"}" \
+              --frames=0-29 --width=320 --height=180 \
+              --chromium-executable=/tmp/ws/node_modules/.remotion/headless-shell
+            test -s out/smoke.mp4
+          '
+
+  # ── Static analysis of the infrastructure files themselves ───────────────
+  infra-lint:
+    name: Infra lint
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.docker == 'true' ||
+      needs.changes.outputs.shell == 'true' ||
+      needs.changes.outputs.workflows == 'true' ||
+      needs.changes.outputs.nginx == 'true' ||
+      needs.changes.outputs.infra == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: No literal secrets in infra, compose or workflows
+        # Tripwire for pasted keys, passwords in URLs and private keys (docs/secrets.md).
+        run: bash infra/scripts/check-secrets.sh
+
+      - name: One version string (repo-root VERSION is the source)
+        # Fails on any surface drifting from VERSION, so a release cannot ship the site at
+        # one version and the API at another (infra/scripts/check-version.sh).
+        run: bash infra/scripts/check-version.sh
+
+      - name: Version check self-test
+        # Proves the check fails on drift, not merely that it passes on a clean tree.
+        run: bash infra/scripts/tests/check-version.test.sh
+
+      - name: Version-raised pre-flight self-test
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/check-version-raised.test.sh') != ''
+        # Throwaway git repos: released-at-HEAD, already released, raised, not raised, prerelease order.
+        run: bash infra/scripts/tests/check-version-raised.test.sh
+
+      - name: Image publication gate, source bundle and pin self-tests
+        # Fake docker: the gate fails on each missing label, licence file, non-free ffmpeg, drifted pin and bundle.
+        run: |
+          bash infra/scripts/tests/check-image-publish-gate.test.sh
+          bash infra/scripts/tests/gpl-source-bundle.test.sh
+          bash infra/scripts/tests/image-pins.test.sh
+          bash infra/scripts/tests/sandbox-compositor-guard.test.sh
+
+      - name: Pool node image and stage 0 kit self-test
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/pool-image-kit.test.sh') != ''
+        run: bash infra/scripts/tests/pool-image-kit.test.sh
+
+      - name: Staging scripts (WP F14)
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/run-tests.sh') != ''
+        # go-live-check and the org seeder run against a fake staging origin
+        # (infra/scripts/tests/fake_staging.py): CI holds no cloud account, so what is
+        # asserted here is the scripts' own logic, never a real environment's state. The
+        # X1 load/cost harness under infra/loadtest/ is tested by its own selftest. See
+        # docs/staging.md.
+        run: bash infra/scripts/tests/run-tests.sh
+
+      - name: Release path (both roles, health-gated record)
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/release-path.test.sh') != ''
+        # Drives infra/scripts/release.sh's deploy/verify state machine with a docker shim:
+        # .deploy.sha is written only after a healthy `up`, a failed deploy leaves it naming
+        # the live release, and a rollback that never comes up does not move the record.
+        run: bash infra/scripts/tests/release-path.test.sh
+
+      - name: Release slots (blue-green prepare, switch, retire, adopt)
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/release-slots.test.sh') != ''
+        # Drives release.sh's slot mode with a stateful docker shim: slot pick, failed prepare and
+        # switch, retire deadlines, rollback, prune protection, drift, lock, memory floor, adopt.
+        run: bash infra/scripts/tests/release-slots.test.sh
+
+      - name: Database pool budget
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/pool-budget.test.sh') != ''
+        # The pool defaults, release.sh's POOL_CAP_SUM and the max_connections bound must agree.
+        run: bash infra/scripts/tests/pool-budget.test.sh
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        # raven-actions/actionlint runs `npm install` in a plain `run:` step to fetch its
+        # downloader; a runner has no node/npm on PATH unless setup-node runs.
+        with:
+          node-version: '26'
+
+      # actionlint runs shellcheck over every `run:` block. When shellcheck is missing the action
+      # falls back to `sudo apt-get install`, and the pool's `runner` user has no passwordless
+      # sudo. Install the pinned release binary into the job's temp dir instead (hosted images
+      # already ship shellcheck, so this is a no-op there).
+      - name: Install shellcheck (pinned, checksum-verified)
+        env:
+          SHELLCHECK_VERSION: v0.11.0
+          SHELLCHECK_SHA256: b7af85e41cc99489dcc21d66c6d5f3685138f06d34651e6d34b42ec6d54fe6f6
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then
+            shellcheck --version
+            exit 0
+          fi
+          dir="$RUNNER_TEMP/shellcheck"
+          mkdir -p "$dir"
+          archive="$dir/shellcheck.tar.gz"
+          curl -fsSL -o "$archive" \
+            "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.gz"
+          echo "${SHELLCHECK_SHA256}  $archive" | sha256sum -c -
+          tar -xzf "$archive" -C "$dir" --strip-components=1 "shellcheck-${SHELLCHECK_VERSION}/shellcheck"
+          echo "$dir" >> "$GITHUB_PATH"
+          "$dir/shellcheck" --version
+
+      - name: Lint GitHub Actions workflows
+        uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7 # v2.2.0
+        with:
+          # pyflakes only lints `shell: python` run steps; this repo has none, and the action
+          # installs it with pipx, which the pool image does not ship. shellcheck stays on.
+          pyflakes: false
+
+      - name: ShellCheck
+        uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
+        with:
+          severity: warning
+
+      - name: nginx forwarded headers and subscribe rate-limit zones (static)
+        # Needs only sh/awk/grep: every location that sets proxy_set_header forwards the client
+        # address, Host is unchanged, and only token-carrying subscribe forwards use site_forward.
+        # The live half (docker build + throwaway containers) runs in the nginx-live job below.
+        run: sh nginx/tests/forwarded-headers.sh --static-only
+
+      - name: Hadolint
+        # One invocation over every Dockerfile; thresholds and rule exemptions
+        # live in .hadolint.yaml so local runs match CI exactly.
+        run: |
+          docker run --rm -v "$PWD:/repo" -w /repo hadolint/hadolint:v2.12.0-alpine \
+            hadolint --config .hadolint.yaml \
+              api/Dockerfile \
+              inference/src/ReelBolt.Inference.Api/Dockerfile \
+              inference/src/ReelBolt.WorkflowEngine/Dockerfile \
+              inference/src/ReelBolt.ImportWorker/Dockerfile \
+              web/Dockerfile \
+              site/Dockerfile \
+              docs-site/Dockerfile \
+              sandbox/Dockerfile \
+              nginx/Dockerfile
+
+      - name: Validate docker-compose.yml
+        # `docker compose config` resolves interpolation and schema-checks the
+        # file. .env.example supplies the variables a real .env would.
+        run: |
+          cp .env.example .env
+          # .env.example intentionally leaves these two empty and compose marks
+          # them required (`:?`), so supply throwaway values for the schema check.
+          # The leading newline matters: .env.example has no trailing newline.
+          {
+            printf '\n'
+            echo "JWT_SIGNING_KEY=ci-schema-check-signing-key-0123456789abcdef"
+            echo "SANDBOX_API_TOKEN=ci-schema-check-token"
+            echo "IMPORT_WORKER_TOKEN=ci-schema-check-token"
+          } >> .env
+          docker compose config --quiet
+          rm -f .env
+
+      - name: nginx Origin CA wiring in the box compose layers
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/tls-wiring.test.sh') != ''
+        # Renders the four box deploy paths (release.sh control/media, host.sh control/engine)
+        # with a throwaway env file and asserts the base docker-compose.yml nginx service passes
+        # TLS_CERT_FILE/TLS_KEY_FILE and bind-mounts ${TLS_CERT_DIR} read-only, so the Origin CA
+        # certificate reaches nginx on the control box and nowhere else.
+        run: bash infra/scripts/tests/tls-wiring.test.sh
+
+      - name: GA4 measurement ID reaches the site and web builds
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/analytics-build-args.test.sh') != ''
+        # NEXT_PUBLIC_* is inlined at build time: asserts the Dockerfile ARG, the compose build.args
+        # and the CI image matrix build_args all carry NEXT_PUBLIC_GA_MEASUREMENT_ID for site and web,
+        # and NEXT_PUBLIC_TELEMETRY_ENABLED for web.
+        run: bash infra/scripts/tests/analytics-build-args.test.sh
+
+      - name: New-user funnel switches reach their services
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/funnel-env-wiring.test.sh') != ''
+        # Static text check, no docker: docker-compose.yml passes every funnel switch to each
+        # service that reads it with the documented default, the site's relay token
+        # (SITE_FORWARD_TOKEN) reaches site, inference and nginx, no override layer resets a
+        # service environment, and both env examples document every variable, the signup switches
+        # and every row of the "Turn it on" table of docs/acquisition-tracking.md included.
+        run: bash infra/scripts/tests/funnel-env-wiring.test.sh
+
+      - name: Cloudflare rate-limit rule files
+        # Private-operations test: the public tree does not ship the file, so the step is skipped there.
+        if: hashFiles('infra/scripts/tests/cloudflare-rules.test.sh') != ''
+        # Nothing in the repository reads infra/cloudflare/rate-limit.*.rules.json; an operator
+        # applies one by hand and it replaces the whole phase. Checks the JSON shape, each plan's
+        # limits, and that the tracked-link files cover /l/* without dropping the form rules.
+        run: bash infra/scripts/tests/cloudflare-rules.test.sh
+
+  # ── nginx, live: the built image behind a header-echo upstream ───────────
+  # The live half of nginx/tests/forwarded-headers.sh (N-09): builds the nginx image on the
+  # runner's Docker and, in throwaway containers on private networks (nothing published),
+  # proves a client cannot choose the X-Real-IP an upstream sees, that a peer inside a
+  # Cloudflare range has CF-Connecting-IP honoured, that marketing path variants share the
+  # auth_public limit and that per-IP zones key IPv6 on the /64. The script removes every
+  # container, network and the image on exit.
+  nginx-live:
+    name: nginx · live forwarded headers and limits
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs.nginx == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Forwarded headers, realip and rate limits (live)
+        run: sh nginx/tests/forwarded-headers.sh
+
+      - name: Language choice at / (live)
+        run: sh nginx/tests/i18n-home.sh
+
+  # ── E13: the end-to-end runner harness (pair → route → execute → re-probe) ──
+  # Driven through the Playwright spec so it is a real e2e test in the gate. The
+  # harness is the D13 worker-smoke chain, and a leg whose preconditions are
+  # missing in the environment SKIPS loudly (a missing runtime-image digest, no
+  # network, no local images) rather than passing silently. On the Actions host
+  # every leg is expected to be runnable, so the spec runs --run-full via
+  # RUN_FULL=1: a skip there is a failure, not a pass.
+  runner-e2e:
+    name: E2E · runner harness
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs['runner-e2e'] == 'true'
+    defaults:
+      run:
+        working-directory: e2e
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/free-disk-space
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Pull the Go build and Postgres images
+        # The harness builds the gateway/worker/scaler in the Go image and runs
+        # a throwaway Postgres; it uses only local images and pulls nothing.
+        run: |
+          docker pull golang:1.26-alpine
+          docker pull postgres:17-alpine
+
+      - name: Build the sandbox-runtime image
+        # The container leg runs ffmpeg inside reelbolt-sandbox-runtime:local.
+        # That tag is built locally, never published, so it cannot be pulled:
+        # build it from the same Dockerfile target the docker job ships. Under
+        # RUN_FULL a missing image makes the leg skip and the run exit 2.
+        run: docker build --target sandbox-runtime -t reelbolt-sandbox-runtime:local ../sandbox
+
+      # The harness runs reelbolt-worker as a HOST binary, and the worker's
+      # capability probe runs the host's `ffmpeg -version`: without one it
+      # advertises no job types and the worker-ads leg fails. In production the
+      # worker runs inside the `worker` image, which carries ffmpeg; the hosted
+      # ubuntu image ships one. `infra/scripts/install-ffmpeg.sh` is a pinned,
+      # checksum-verified fallback (a no-op where one exists), as Infra lint
+      # does for shellcheck.
+      - name: Install ffmpeg and ffprobe (pinned, checksum-verified, no sudo)
+        run: bash "$GITHUB_WORKSPACE/infra/scripts/install-ffmpeg.sh"
+
+      - name: Run the runner harness
+        env:
+          RUN_FULL: '1'
+        run: npm test -- runner.spec.ts
+
+  # ── E2E: editor v2 regression suite on its isolated stack ────────────────
+  # e2e/scripts/editor-v2-stack.sh builds and starts compose project
+  # reelbolt-editor-remediation on http://localhost:18080 with random secrets
+  # in /tmp/editor-remediation/stack.env; the suite reads the local admin login
+  # from there itself (localhost only), so no secret is passed or printed here.
+  # Sized for the GitHub-hosted runner (4 vCPU, 16 GB RAM, ~14 GB free disk after the
+  # free-disk-space step): the stack plus Chromium needs roughly 8-10 GB of RAM and
+  # 8-10 GB of disk, Playwright runs at most 2 workers (EDITOR_E2E_WORKERS). See
+  # docs/ci.md "Resource budget".
+  # desktop + pixel7 always; iphone14webkit on workflow_dispatch with
+  # editor_webkit=true. Traces are switched off and only the HTML report is
+  # uploaded: traces and the storage state hold a session cookie.
+  editor-e2e:
+    name: E2E · editor v2
+    runs-on: ubuntu-latest
+    needs: changes
+    if: >-
+      github.event_name != 'pull_request' ||
+      needs.changes.outputs['editor-e2e'] == 'true'
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: e2e
+    env:
+      WEBKIT: ${{ github.event_name == 'workflow_dispatch' && inputs.editor_webkit && '1' || '0' }}
+      PLAYWRIGHT_HTML_OUTPUT_DIR: /tmp/editor-remediation/html-report
+      PLAYWRIGHT_HTML_OPEN: never
+      # The hosted runner has 4 vCPU / 16 GB shared with the compose stack: two workers at most.
+      EDITOR_E2E_WORKERS: '2'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/free-disk-space
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+
+      # Media fixtures and the pixel probes need ffmpeg/ffprobe: the same pinned,
+      # checksum-verified static build as the runner harness (a no-op where the
+      # image already ships one).
+      - name: Install ffmpeg and ffprobe (media fixtures, pixel probes)
+        run: bash "$GITHUB_WORKSPACE/infra/scripts/install-ffmpeg.sh"
+
+      - name: Install
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          browsers=(chromium)
+          if [ "$WEBKIT" = 1 ]; then browsers+=(webkit); fi
+          # Hosted runners have passwordless sudo but no browser libraries.
+          npx playwright install --with-deps "${browsers[@]}"
+
+      - name: Start the editor v2 stack
+        run: scripts/editor-v2-stack.sh up
+
+      - name: Run the editor v2 suite
+        run: |
+          projects=(--project=desktop --project=pixel7)
+          if [ "$WEBKIT" = 1 ]; then projects+=(--project=iphone14webkit); fi
+          npm run test:editor-v2 -- "${projects[@]}" --trace=off --reporter=list,html
+
+      - name: Strip traces from the HTML report
+        if: always()
+        run: |
+          if [ -d "$PLAYWRIGHT_HTML_OUTPUT_DIR" ]; then
+            find "$PLAYWRIGHT_HTML_OUTPUT_DIR" -type f \( -name '*.zip' -o -name '*.trace' -o -name 'storage-*.json' \) -print -delete
+          fi
+
+      - name: Upload the HTML report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: editor-e2e-html-report
+          path: /tmp/editor-remediation/html-report/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Tear down the editor v2 stack
+        if: always()
+        run: |
+          rc=0
+          scripts/editor-v2-stack.sh down || rc=$?
+          # Generated secrets, storage state and traces never outlive the job.
+          rm -rf /tmp/editor-remediation
+          exit "$rc"
+
+  # ── Single required check to point branch protection at ──────────────────
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      # `changes` is included so a failure there (which silently skips every
+      # downstream job) still fails the gate. `dotnet-format` is in the list
+      # because it is blocking (see its own comment and docs/ci.md); it used to
+      # be left out as "advisory", which made the single required check
+      # disagree with the documented policy.
+      - changes
+      - go
+      - golangci-lint
+      - runner-windows
+      - dotnet
+      - dotnet-format
+      - node
+      - stripe-catalog-sync
+      - docs-site
+      - docker
+      - docker-publish
+      - sandbox-runtime-arm64
+      - runner-e2e
+      - editor-e2e
+      - infra-lint
+      - nginx-live
+    steps:
+      - name: Fail if any required job failed or was cancelled
+        run: |
+          results='${{ join(needs.*.result, ' ') }}'
+          echo "Job results: $results"
+          for r in $results; do
+            case "$r" in
+              success|skipped) ;;
+              *) echo "::error::A required job finished with result '$r'"; exit 1 ;;
+            esac
+          done

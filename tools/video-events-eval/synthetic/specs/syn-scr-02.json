@@ -1,0 +1,202 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-scr-02",
+ "videoType": "screen",
+ "frames": 300,
+ "theme": {
+  "bg": "#1b1f27"
+ },
+ "area": [
+  0,
+  70,
+  960,
+  470
+ ],
+ "chrome": {
+  "bar": "#1b1f27",
+  "tabOn": "#2b313c",
+  "tabOff": "#14171d",
+  "url": "#2b313c",
+  "text": "#d8dee9"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "tab": "main.py",
+   "url": "editor://project/main.py",
+   "bg": "#1e222a"
+  },
+  {
+   "from": 190,
+   "trans": "cut",
+   "tab": "notes.md",
+   "url": "editor://project/notes.md",
+   "bg": "#272c36"
+  },
+  {
+   "from": 250,
+   "trans": "cut",
+   "tab": "run",
+   "url": "editor://project/run",
+   "bg": "#0e1116"
+  }
+ ],
+ "elements": [
+  {
+   "kind": "rect",
+   "id": "side",
+   "name": "sidebar",
+   "x": 0,
+   "y": 70,
+   "w": 180,
+   "h": 470,
+   "color": "#161a20",
+   "scene": 0,
+   "vis": [
+    {
+     "in": 0
+    }
+   ]
+  },
+  {
+   "kind": "typed",
+   "id": "l1",
+   "name": "code line one",
+   "text": "def main():",
+   "x": 200,
+   "y": 100,
+   "w": 143,
+   "h": 28,
+   "color": "#82aaff",
+   "cpf": 2,
+   "vis": [
+    {
+     "in": 20,
+     "fade": 0
+    }
+   ],
+   "scene": 0,
+   "mono": true
+  },
+  {
+   "kind": "typed",
+   "id": "l2",
+   "name": "code line two",
+   "text": "    print(\"ok\")",
+   "x": 200,
+   "y": 135,
+   "w": 195,
+   "h": 28,
+   "color": "#c3e88d",
+   "cpf": 2,
+   "vis": [
+    {
+     "in": 52,
+     "fade": 0
+    }
+   ],
+   "scene": 0,
+   "mono": true
+  },
+  {
+   "kind": "rect",
+   "id": "pop",
+   "name": "autocomplete popup",
+   "x": 330,
+   "y": 170,
+   "w": 260,
+   "h": 110,
+   "color": "#2f3542",
+   "scene": 0,
+   "border": "1px solid #555",
+   "label": "print()",
+   "fontSize": 20,
+   "vis": [
+    {
+     "in": 96,
+     "out": 150,
+     "fade": 4
+    }
+   ]
+  },
+  {
+   "kind": "typed",
+   "id": "n1",
+   "name": "notes text",
+   "text": "# Notes",
+   "x": 200,
+   "y": 100,
+   "w": 91,
+   "h": 28,
+   "color": "#ffcb6b",
+   "cpf": 4,
+   "vis": [
+    {
+     "in": 194,
+     "fade": 0
+    }
+   ],
+   "scene": 1,
+   "mono": true
+  },
+  {
+   "kind": "text",
+   "id": "ok",
+   "name": "run result",
+   "text": "Process finished",
+   "x": 200,
+   "y": 120,
+   "w": 400,
+   "h": 30,
+   "color": "#c3e88d",
+   "scene": 2,
+   "fontSize": 24,
+   "vis": [
+    {
+     "in": 258,
+     "fade": 3
+    }
+   ]
+  },
+  {
+   "kind": "cursor",
+   "id": "cur",
+   "name": "cursor",
+   "x": 700,
+   "y": 450,
+   "w": 24,
+   "h": 24,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "moves": [
+    {
+     "start": 6,
+     "end": 24,
+     "x": 215,
+     "y": 112
+    },
+    {
+     "start": 160,
+     "end": 178,
+     "x": 130,
+     "y": 74
+    }
+   ],
+   "clicks": [
+    90,
+    100,
+    182
+   ],
+   "color": "#fff",
+   "color2": "#ffcb6b",
+   "skip": [
+    "move_stop"
+   ]
+  }
+ ]
+}

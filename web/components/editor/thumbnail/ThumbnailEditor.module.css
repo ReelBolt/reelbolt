@@ -1,0 +1,144 @@
+/* The thumbnail editor's layout: tools | workspace | panel on a wide screen; the panel drops under the
+   workspace on a narrow one; and on a phone the tools become a row above the workspace.
+   `--stage-height` is measured by useStageFit so the whole editor fits the window (d6 N1); the
+   fallback covers the page chrome as measured at 1440 x 900 (222 px above, 37 px below). */
+
+.layout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 340px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stage {
+  position: relative;
+  min-width: 0;
+  height: var(--stage-height, calc(100dvh - 260px));
+  min-height: 420px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--mantine-color-default-border);
+}
+
+.panel {
+  min-width: 0;
+  max-height: var(--stage-height, calc(100dvh - 260px));
+  min-height: 420px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--mantine-color-default-border);
+  background: light-dark(var(--mantine-color-white), #101218);
+}
+
+.toolSeparator {
+  height: 1px;
+  margin: 2px 4px;
+  background: var(--mantine-color-default-border);
+}
+
+/* A medium window gives the workspace more room with a slimmer panel. */
+@media (max-width: 75em) {
+  .layout {
+    grid-template-columns: auto minmax(0, 1fr) 300px;
+  }
+}
+
+@media (max-width: 62em) {
+  .layout {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .panel {
+    grid-column: 1 / -1;
+    max-height: none;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .tools {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .toolSeparator {
+    width: 1px;
+    height: auto;
+    margin: 4px 2px;
+  }
+
+  .stage {
+    /* At most 56dvh, and never so tall that the stage and its zoom bar end below the window: useStageFit measures
+       where the stage starts (the 44 px tool row above it grew with the touch targets). */
+    height: min(56dvh, var(--stage-height-phone, 56dvh));
+    min-height: 300px;
+  }
+}
+
+/* The phone shell (R13.6): the tools become a row, the stage is pinned at 45 dvh (it shrinks to end above an open sheet,
+   see phoneStageHeight), and the panels live in a bottom sheet. The dock sits under the stage. */
+.layoutPhone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layoutPhone .tools {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.layoutPhone .toolSeparator {
+  width: 1px;
+  height: auto;
+  margin: 4px 2px;
+}
+
+.stagePhone {
+  position: relative;
+  min-width: 0;
+  height: 45dvh;
+  scroll-margin-top: 72px;
+  min-height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--mantine-color-default-border);
+}
+
+/* A landscape phone: the tools down the left, the stage beside them, the sheet a drawer on the right. */
+.layoutPhone[data-landscape] {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.layoutPhone[data-landscape] .tools {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.layoutPhone[data-landscape] .toolSeparator {
+  width: auto;
+  height: 1px;
+}
+
+.layoutPhone[data-landscape] .stagePhone {
+  flex: 1 1 0;
+  height: calc(100dvh - 120px);
+  min-height: 200px;
+}
+
+.layoutPhone[data-landscape][data-sheet] .stagePhone {
+  margin-right: min(420px, 55vw);
+}

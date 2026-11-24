@@ -1,0 +1,9 @@
+{
+  "color": {
+    "surface": {
+      "$type": "color",
+      "base": { "$value": "#eeeeee" },
+      "raised": { "$value": "#ffffff" }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{ "globs": [
+  "components/editor/thumbnail/ResultBar.tsx",
+  "components/editor/thumbnail/LayerMaskBar.tsx",
+  "components/editor/thumbnail/BrushPanel.tsx",
+  "components/editor/thumbnail/SubjectPanel.tsx",
+  "components/editor/thumbnail/CropDialog.tsx",
+  "components/editor/thumbnail/LayersPanel.tsx",
+  "components/editor/thumbnail/run-label-a.ts",
+  "components/editor/thumbnail/EditorCanvas.tsx",
+  "components/editor/thumbnail/ThumbnailEditor.tsx",
+  "components/editor/thumbnail/useEditorDocument.ts",
+  "components/editor/thumbnail/useLayerMaskEditing.ts"
+] }

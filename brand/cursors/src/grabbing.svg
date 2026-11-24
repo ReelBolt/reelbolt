@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- grabbing: closed fist seen from the back of the hand: knuckle row on top, thumb tucked at the side -->
+  <g fill="#2E1065" stroke="#2E1065" stroke-width="3.4" stroke-linejoin="round"><rect x="7.6" y="12" width="17.8" height="14.6" rx="5.8"/><circle cx="10.6" cy="11.6" r="2.15"/><circle cx="14.9" cy="10.6" r="2.15"/><circle cx="19.2" cy="11.2" r="2.15"/><circle cx="23.5" cy="12.6" r="2.15"/><rect x="7.6" y="11" width="17.8" height="6" rx="3"/><g transform="translate(8.2 21.5) rotate(-18)"><rect x="-4.4" y="-2.6" width="8.4" height="5.6" rx="2.8"/></g></g>
+  <g fill="#F5F3F8"><rect x="7.6" y="12" width="17.8" height="14.6" rx="5.8"/><circle cx="10.6" cy="11.6" r="2.15"/><circle cx="14.9" cy="10.6" r="2.15"/><circle cx="19.2" cy="11.2" r="2.15"/><circle cx="23.5" cy="12.6" r="2.15"/><rect x="7.6" y="11" width="17.8" height="6" rx="3"/><g transform="translate(8.2 21.5) rotate(-18)"><rect x="-4.4" y="-2.6" width="8.4" height="5.6" rx="2.8"/></g></g>
+  <path d="M12.2 11.4 V14.8 M16.5 11.4 V14.8 M20.8 11.4 V14.8" fill="none" stroke="#2E1065" stroke-width="1" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+@theme inline {
+  --color-brand-500: #6d28d9;
+  --font-sans: "Inter", sans-serif;
+  --text-xl: 1.25rem;
+  --spacing: 0.25rem;
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --animate-spin: spin 1s linear infinite;
+}

@@ -1,0 +1,15 @@
+{
+  "globs": [
+    "lib/editing/labels-msg.ts",
+    "lib/editor/labels-msg.ts",
+    "lib/editing/interchange/labels-msg.ts",
+    "lib/editing/sync/labels-msg.ts",
+    "lib/editing/preview/labels-msg.ts",
+    "lib/editing/reason-msg.ts",
+    "lib/editor/reason-msg.ts",
+    "lib/editing/api/labels-msg.ts",
+    "lib/editing/proposals/labels-msg.ts",
+    "lib/editing/summary-msg.ts",
+    "lib/editing/sentence.ts"
+  ]
+}

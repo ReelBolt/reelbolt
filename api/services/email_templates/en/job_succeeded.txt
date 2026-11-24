@@ -1,0 +1,9 @@
+Hello {{.Name}},
+
+The video job in {{.ProjectName}} (workspace {{.OrgName}}) has finished successfully.
+
+Open the run:
+
+{{.Link}}
+
+-- {{.FooterNote}}

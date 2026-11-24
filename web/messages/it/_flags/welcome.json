@@ -1,0 +1,19 @@
+{
+  "welcome.personas.creator.words": "The audience's own words for the problem (messaging brief); first person, not a customer quote. 'Giro' for 'I film', 'monto' for 'I edit'.",
+  "welcome.personas.business.words": "The audience's own words (messaging brief); 'montatore' for 'editor' (the person).",
+  "welcome.personas.educator.words": "The audience's own words (messaging brief).",
+  "welcome.personas.nonprofit.words": "The audience's own words (messaging brief).",
+  "welcome.personas.software.words": "The audience's own words (messaging brief); 'Rilasciamo' for 'We ship'.",
+  "welcome.personas.agency.words": "The audience's own words (messaging brief); 'first cuts' rendered 'primi montaggi'.",
+  "welcome.material.code.title": "Plain label for 'source code' as a starting point: 'Un'app o un sito che ho creato'.",
+  "welcome.shots.title": "'Film these five clips on your phone'; 'smartphone' used for 'phone' as in the tour copy.",
+  "welcome.shots.body": "'take' here is the user's own long shot, so 'ripresa' (the glossary keeps 'take' for generated attempts).",
+  "dashboard.firstVideo.header": "One emotional line per audience (messaging brief); no numbers. 'first cut' rendered 'primo montaggio'.",
+  "dashboard.firstVideo.runBody": "Speed fact from the messaging brief ('Minutes for a small job, sometimes half an hour for a big one'); meaning must not change.",
+  "dashboard.firstVideo.briefTitle": "Imperative 'Di'' with apostrophe, per the glossary.",
+  "onboarding.tourCard.title": "'New here? Take a look around' rendered 'Prima volta qui? Fai un giro'.",
+  "dashboard.firstVideo.briefExample": "Example briefs per audience (what to type on the run page); invented examples of a person's own request, not claims. Curly quotes kept around the example.",
+  "welcome.persona.body": "The audience only changes examples and tips (it does not choose the recipe); the sentence must not promise more",
+  "welcome.material.body": "This is the question that decides the first app",
+  "dashboard.firstVideo.addTitle": "'any' arm: neutral wording for a project whose starting material is not known ('materiale di partenza')"
+}

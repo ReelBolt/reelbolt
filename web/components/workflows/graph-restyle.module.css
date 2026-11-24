@@ -1,0 +1,102 @@
+/*
+ * The Advanced graph in the editor's design (docs/design/workflow-apps.md 4.5). The editor's --rb-ed-*
+ * tokens are consumed BY REFERENCE ONLY: none is defined, changed or added here, and no editor file is
+ * touched. Layout, sizes and the a11y contract of workflow-builder-ux/interaction-spec.md are unchanged.
+ */
+
+/* FlowchartBuilder: the canvas frame, in the editor's studio colours. */
+.canvas {
+  background: var(--rb-ed-studio-bg);
+  color: var(--rb-ed-studio-fg);
+  border: 1px solid var(--rb-ed-line-strong);
+  border-radius: var(--mantine-radius-md);
+}
+
+.toolbar {
+  background: var(--rb-ed-header-bg);
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-md);
+  padding: 4px;
+}
+
+/* StepNodeShell: card on the editor's surface; the per-type accent stays on the border. */
+.node {
+  background: var(--rb-ed-surface);
+  color: var(--rb-ed-studio-fg);
+  box-shadow: none;
+}
+
+.node:focus-visible {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 2px;
+}
+
+/* StepConfigSheet: the bottom sheet as the editor's inspector. */
+.sheetContent {
+  background: var(--rb-ed-inspector-bg);
+  color: var(--rb-ed-studio-fg);
+  border-top: 1px solid var(--rb-ed-line-strong);
+}
+
+/* The sheet is a flex column: header fixed, config body scrolls. Without this the Stack grew to its content height
+   (h="100%" has no definite parent), the whole dialog scrolled, and a Select's scroll-into-view carried the Done button
+   off screen. */
+.sheetContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheetBody {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sheetStack {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.sheetHeader {
+  border-bottom: 1px solid var(--rb-ed-line);
+}
+
+/* StepCard and WorkflowStepList (the phone step list). */
+.stepCard {
+  background: var(--rb-ed-surface);
+  border-color: var(--rb-ed-line);
+}
+
+.stepList {
+  background: var(--rb-ed-pane-bg);
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm);
+}
+
+/*
+ * Accessible text colours for text on the editor's greys (WCAG 1.4.3, >= 4.5:1 on --rb-ed-surface,
+ * --rb-ed-pane-bg and --rb-ed-studio-bg in both schemes). Mantine's default dimmed/red/orange text
+ * measured 3.0-3.6:1 on those greys in light mode. Computed light: #495057 7.35 on white / 6.6 on pane;
+ * #a11d1d 7.8 on white; #7c2d12 9.1 on white. Dark: #c1c4cc 11.0, #ffa3a3 8.4, #ffd98a 9.7.
+ */
+.muted { color: light-dark(#495057, #c1c4cc); }
+.bad { color: light-dark(#a11d1d, #ffa3a3); }
+.warn { color: light-dark(#7c2d12, #ffd98a); }
+
+/* Phone touch targets (44 px) for controls inside the app-view surfaces. */
+@media (max-width: 48em), (pointer: coarse) {
+  .touch { min-height: 44px; min-width: 44px; }
+}
+
+/* Motion: nothing here or in the app view slides or pulses for users who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  .calm :global(.mantine-SegmentedControl-indicator),
+  .calm :global(.mantine-Loader-root),
+  .calm :global(.mantine-Skeleton-root) {
+    transition: none;
+    animation: none;
+  }
+}

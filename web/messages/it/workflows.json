@@ -1,0 +1,422 @@
+{
+  "stepList": {
+    "addStep": "Aggiungi passaggio"
+  },
+  "stepCard": {
+    "moveUp": "Sposta su",
+    "moveStepUp": "Sposta il passaggio su",
+    "moveDown": "Sposta giù",
+    "moveStepDown": "Sposta il passaggio giù",
+    "deleteStep": "Elimina passaggio",
+    "stepLabel": "Nome del passaggio",
+    "untitled": "(Senza titolo)",
+    "configureAria": "Passaggio {number}, {type}: {label}",
+    "configure": "Configura {type}",
+    "advanced": "Avanzate",
+    "cacheModeLabel": "Modalità cache",
+    "cacheModeDescription": "Sostituisci la cache dei risultati tra esecuzioni per questo passaggio",
+    "cacheDefault": "Predefinita (criterio integrato)",
+    "cacheAlways": "Usa sempre la cache",
+    "cacheNever": "Non usare mai la cache",
+    "editorialNote": "Questo passaggio prende una decisione editoriale. Valuta di non usare mai la cache, così una nuova esecuzione ottiene sempre un giudizio nuovo invece di uno riproposto.",
+    "inputMappingLabel": "JSON di mappatura degli input",
+    "inputMappingDescription": "Oggetto JSON che mappa gli input del passaggio dai risultati dei passaggi precedenti"
+  },
+  "flow": {
+    "true": "Vero",
+    "false": "Falso",
+    "loopWithScore": "≤{max} punteggio >= {score}",
+    "loop": "≤{max}"
+  },
+  "builder": {
+    "proposedStep": "Passaggio proposto",
+    "ghostMeta": "Passaggio {number} · {type}",
+    "removeConfirm": "Rimuovere il passaggio {number}?",
+    "addStep": "Aggiungi passaggio",
+    "autoLayout": "Disposizione automatica"
+  },
+  "node": {
+    "agent": {
+      "aiStep": "Passaggio AI",
+      "chooseAgent": "Scegli un agente",
+      "detail": "Agente: {name}",
+      "noAgent": "Nessun agente scelto. Apri le impostazioni per sceglierne uno."
+    },
+    "audio": {
+      "music": "Musica",
+      "soundEffect": "Effetto sonoro",
+      "takes": "{count} riprese",
+      "maxCredits": "Max {credits} crediti",
+      "noLimit": "Nessun limite di spesa",
+      "describe": "Descrivi l'audio da generare.",
+      "kind": "Genera audio",
+      "namePlaceholder": "Dai un nome al passaggio (es. Tema iniziale)"
+    },
+    "image": {
+      "generate": "Crea immagini",
+      "edit": "Modifica un'immagine",
+      "pictures": "{count} immagini",
+      "maxCredits": "Max {credits} crediti",
+      "noLimit": "Nessun limite di spesa",
+      "describe": "Descrivi l'immagine da creare.",
+      "describeEdit": "Scrivi cosa cambiare nell'immagine.",
+      "chooseSource": "Scegli l'immagine da modificare.",
+      "needsPermission": "Consenti l'invio dell'immagine per poterla modificare.",
+      "kind": "Genera immagine",
+      "namePlaceholder": "Dai un nome al passaggio (es. Immagine principale)"
+    },
+    "seconds": "{seconds} s",
+    "conditional": {
+      "kind": "Decisione",
+      "namePlaceholder": "Dai un nome a questa decisione",
+      "ifYes": "Se sì → passaggio {step}",
+      "ifNo": "Se no → passaggio {step}",
+      "noCondition": "Nessuna condizione impostata. Apri le impostazioni."
+    },
+    "designSystem": {
+      "readsDesign": "Legge i file di design",
+      "productStructure": "Struttura del prodotto",
+      "chooseOne": "Scegli almeno una cosa da leggere.",
+      "combines": "Combina i risultati",
+      "readStep": "Lettura al passaggio {step}",
+      "chooseEarlier": "Scegli quale passaggio precedente ha letto i tuoi file: senza, questo passaggio non combina nulla.",
+      "needsBrand": "Richiede il brand",
+      "needsProfile": "Richiede il profilo prodotto",
+      "chooseOneRequired": "Scegline almeno uno: un profilo richiesto dal passaggio, altrimenti fallisce sempre.",
+      "kind": "Profilo di brand e prodotto",
+      "namePlaceholder": "Dai un nome al passaggio (es. Leggi il mio brand e la mia app)"
+    },
+    "extractFrame": {
+      "atTime": "A {seconds} s",
+      "first": "Primo fotogramma",
+      "last": "Ultimo fotogramma",
+      "saved": "Salvato nei file",
+      "chooseVideo": "Scegli da quale video prendere il fotogramma.",
+      "nothingBefore": "Prima di questo passaggio non c'è nulla: scegli invece un video caricato.",
+      "kind": "Cattura un fotogramma",
+      "namePlaceholder": "Dai un nome al passaggio (es. Cattura l'ultimo fotogramma)"
+    },
+    "extract": {
+      "prepares": "Prepara i dati",
+      "operation": {
+        "Project": "Mantiene i dettagli chiave",
+        "Resolve": "Cerca gli elementi scelti",
+        "Files": "Legge i file del progetto"
+      },
+      "kind": "Prepara i dati"
+    },
+    "forEach": {
+      "kind": "Ripeti",
+      "upTo": "Fino a {count, plural, one {# volta} other {# volte}}"
+    },
+    "parallel": {
+      "kind": "Insieme",
+      "agents": "{count, plural, one {# agente} other {# agenti}}",
+      "noAgents": "Nessun agente scelto. Apri le impostazioni."
+    },
+    "pinInsert": {
+      "everyScreen": "Ogni schermo",
+      "skips": "Salta ciò che non riesce",
+      "chooseWhat": "Scegli cosa va su ogni schermo.",
+      "addAnalyze": "Aggiungi prima di questo passaggio un passaggio Analizza che tracci gli schermi.",
+      "kind": "Inserisci negli schermi",
+      "namePlaceholder": "Dai un nome al passaggio (es. Metti la demo sul telefono)"
+    },
+    "reviewLoop": {
+      "needs": "Serve {score}/10",
+      "tries": "{count, plural, one {Fino a # tentativo} other {Fino a # tentativi}}",
+      "redo": "Rifai dal passaggio {step}",
+      "kind": "Controllo qualità",
+      "namePlaceholder": "Dai un nome a questo controllo"
+    },
+    "thumbnail": {
+      "sizeAria": "{width} per {height} pixel",
+      "at": "A {seconds} s",
+      "atAria": "Presa a {seconds} secondi",
+      "best": "Momento migliore",
+      "whole": "Fotogramma intero",
+      "text": "Testo",
+      "kind": "Miniatura",
+      "namePlaceholder": "Dai un nome al passaggio (es. Crea l'immagine di copertina)",
+      "addWatch": "Aggiungi sopra questo un passaggio Guarda il girato: il fotogramma viene preso da ciò che ha misurato."
+    },
+    "timeline": {
+      "savedAs": "Salvato come {name}",
+      "revision": "Revisione {revision}",
+      "frames": "Fotogrammi {from}–{to}",
+      "loudness": "Volume normalizzato",
+      "kind": "Render della timeline",
+      "namePlaceholder": "Dai un nome al passaggio (es. Render del montaggio finale)",
+      "chooseTimeline": "Scegli la timeline dell'editor da esportare: senza, il passaggio non ha nulla da esportare."
+    },
+    "analyze": {
+      "transcribes": "Trascrive il parlato",
+      "describes": "Descrive ogni inquadratura",
+      "music": "Musica",
+      "sfx": "Effetti sonori",
+      "kind": "Guarda il girato",
+      "namePlaceholder": "Dai un nome al passaggio (es. Guarda il girato grezzo)",
+      "clips": "{count} clip",
+      "noVideo": "Nessun video scelto",
+      "oneUploaded": "1 clip caricata",
+      "fromStep": "Video dal passaggio {step}",
+      "fromPrevious": "Video dal passaggio precedente",
+      "chooseVideo": "Scegli quale video usare. Apri le impostazioni."
+    },
+    "compile": {
+      "about": "Circa {seconds} s",
+      "narration": "Narrazione",
+      "captions": "Sottotitoli",
+      "music": "Musica",
+      "sfx": "Effetti sonori",
+      "titles": "Titoli",
+      "colour": "Look colore",
+      "aiClips": "Nuove clip AI",
+      "kind": "Video finale",
+      "namePlaceholder": "Dai un nome al passaggio (es. Monta il video finale)"
+    },
+    "generate": {
+      "fromPrompt": "Dal tuo prompt",
+      "fromPlan": "Da un piano di inquadrature",
+      "spends": "Spende fino a {credits} crediti",
+      "kind": "Nuove clip",
+      "namePlaceholder": "Dai un nome al passaggio (es. Genera l'inquadratura principale)",
+      "setLimit": "Imposta un limite di spesa prima di avviare. Apri le impostazioni."
+    },
+    "voiceover": {
+      "unconfiguredLabel": "Fonte della voce narrante: non ancora impostata. Scegli il passaggio che scrive la narrazione",
+      "unconfiguredSummary": "Passaggio di narrazione non scelto",
+      "stepFallback": "Passaggio {step}",
+      "typedLines": "{count, plural, one {# riga scritta} other {# righe scritte}}",
+      "sourceLabel": "Fonte della voce narrante: {text}",
+      "fromStep": "Narrazione dal passaggio {step}",
+      "planLabel": "Fonte della voce narrante: narrazione scritta nel passaggio {step} ({label})",
+      "pickup": "Righe registrate di nuovo",
+      "script": "Dal copione",
+      "kind": "Voce narrante",
+      "namePlaceholder": "Dai un nome al passaggio (es. Registra la narrazione)"
+    },
+    "shell": {
+      "defaultNamePlaceholder": "Dai un nome a questo passaggio",
+      "ariaLabel": "Passaggio {number}, {type}: {label}",
+      "untitled": "(senza titolo)",
+      "deleteStep": "Elimina passaggio",
+      "deleteStepAria": "Elimina il passaggio {number}",
+      "nameAria": "Nome del passaggio {number}",
+      "openSettingsAria": "Apri le impostazioni del passaggio {number}",
+      "settings": "Impostazioni"
+    },
+    "videoEnhance": {
+      "kind": "Migliora il video",
+      "namePlaceholder": "Dai un nome a questo passaggio (es. Rendilo più nitido)",
+      "saved": "Salvato nei File",
+      "chooseSource": "Scegli quale video migliorare.",
+      "nothingBefore": "Nulla viene prima di questo passaggio: scegli invece un file caricato.",
+      "needsPermission": "Consenti di inviare il video all'esterno, oppure scegli l'opzione gratuita.",
+      "free": "Gratis",
+      "credits": "Usa crediti"
+    },
+    "audioCleanup": {
+      "kind": "Pulisci l'audio",
+      "namePlaceholder": "Dai un nome a questo passaggio (es. Elimina il vento)",
+      "saved": "Salvato nei File",
+      "chooseSource": "Scegli da quale registrazione prendere l'audio.",
+      "nothingBefore": "Prima di questo passaggio non c'è nulla: scegli invece un file caricato.",
+      "needsPermission": "Consenti l'invio dell'audio all'esterno, oppure scegli una correzione gratuita.",
+      "free": "Gratis",
+      "credits": "Usa crediti"
+    }
+  },
+  "stepTypeSelector": {
+    "label": "Tipo di passaggio"
+  },
+  "agentPicker": {
+    "outBadge": "out",
+    "placeholder": "Seleziona agente",
+    "ariaLabel": "Agente",
+    "toolsShort": "{count}t",
+    "group": {
+      "Analysis": "Analisi",
+      "Translation": "Traduzione",
+      "Production": "Produzione",
+      "Quality": "Qualità",
+      "FileProcessing": "Elaborazione file",
+      "Extract": "Estrazione",
+      "Video": "Video",
+      "Custom": "Personalizzati"
+    }
+  },
+  "silentRun": {
+    "title": "Questo video non avrà la voce narrante",
+    "body": "Questo flusso di lavoro non ha un passaggio Voce narrante, quindi il video sarà muto. Aggiungi un passaggio Voce narrante per narrarlo."
+  },
+  "voiceStatus": {
+    "noService": {
+      "title": "Nessun servizio vocale configurato",
+      "body": "Questo passaggio non può creare audio finché un amministratore non aggiunge un servizio vocale."
+    },
+    "failing": {
+      "title": "La narrazione probabilmente fallirà",
+      "body": "Il servizio vocale{providerName, select, none {} other { ({providerName})}} non ha superato l'ultimo controllo della connessione. Chiedi al tuo amministratore di sistemarlo, oppure scegli un altro servizio vocale qui sotto."
+    },
+    "fallback": {
+      "title": "Uso di un servizio vocale di riserva",
+      "body": "Il servizio vocale predefinito non ha superato l'ultimo controllo della connessione, quindi verrà usato {providerName}. La voce potrebbe suonare diversa."
+    },
+    "anotherOne": "un altro"
+  },
+  "addStep": {
+    "title": "Aggiungi un passaggio",
+    "intro": "Scegli il tipo di passaggio da aggiungere al tuo flusso di lavoro",
+    "loadingAgent": "Caricamento dell'agente integrato…",
+    "dailiesRoomDescription": "Un team di giudici AI confronta le riprese generate di ogni inquadratura e tiene la migliore"
+  },
+  "run": {
+    "titleNamed": "Avviare “{name}”?",
+    "title": "Avviare questo flusso di lavoro?",
+    "briefLabel": "Il tuo brief",
+    "briefRequired": "Obbligatorio. Di' all'AI che video vuoi: argomento, tono, durata, formato, tutto ciò che deve sapere.",
+    "briefOptional": "Facoltativo. Di' all'AI che video vuoi: argomento, tono, durata, formato, tutto ciò che deve sapere.",
+    "briefPlaceholder": "es. Un teaser verticale di 20 secondi per la nostra nuova funzione timeline, vivace, che finisce con il link di registrazione.",
+    "briefMissing": "Scrivi un breve brief",
+    "whatWillHappen": "Cosa succederà ({count, plural, one {# passaggio} other {# passaggi}})",
+    "cancel": "Annulla",
+    "start": "Avvia esecuzione"
+  },
+  "regenerate": {
+    "title": "Questo flusso di lavoro genera clip video a pagamento",
+    "billedByProvider": "La generazione video è fatturata dal provider. Se clip identiche sono già state generate, puoi riusarle senza costi invece di generarle di nuovo.",
+    "spendsMoney": "Rigenerare costa denaro per ogni clip.",
+    "upperBound": "Limite massimo: {credits} crediti (la somma dei limiti di spesa dei passaggi video; il costo reale di solito è più basso).",
+    "noEstimate": "Il costo non può essere stimato dalle impostazioni salvate dei passaggi.",
+    "cancel": "Annulla",
+    "regenerate": "Rigenera (costa denaro)",
+    "runAndReuse": "{action} e riusa le clip precedenti",
+    "defaultAction": "Avvia"
+  },
+  "stepType": {
+    "Agent": {
+      "label": "Agente",
+      "description": "Un agente AI svolge un compito, come scrivere la narrazione o scegliere le clip"
+    },
+    "Conditional": {
+      "label": "Ramo condizionale",
+      "description": "Prendi una strada o l'altra in base a un risultato precedente"
+    },
+    "ForEach": {
+      "label": "Per ogni elemento",
+      "description": "Ripeti un passaggio per ogni elemento di un elenco"
+    },
+    "ReviewLoop": {
+      "label": "Ciclo di revisione",
+      "description": "Controlla il risultato e ripeti i passaggi precedenti finché non è abbastanza buono"
+    },
+    "Parallel": {
+      "label": "In parallelo",
+      "description": "Esegui più agenti nello stesso momento e unisci il loro lavoro"
+    },
+    "Extract": {
+      "label": "Estrai",
+      "description": "Riduci i risultati precedenti a ciò che serve al prossimo passaggio AI"
+    },
+    "VideoAnalyze": {
+      "label": "Analizza video",
+      "description": "Guarda il tuo girato: trova inquadrature, pause e cosa viene detto"
+    },
+    "VideoCompile": {
+      "label": "Monta video",
+      "description": "Monta il video finale a partire dalle clip scelte"
+    },
+    "VideoGenerate": {
+      "label": "Genera video",
+      "description": "Genera nuove clip video da una descrizione (a pagamento, con un limite di spesa)"
+    },
+    "Voiceover": {
+      "label": "Voce narrante",
+      "description": "Leggi la narrazione ad alta voce con una voce AI"
+    },
+    "EditRoom": {
+      "label": "Stanza di montaggio",
+      "description": "Un team di montatori AI discute il girato e concorda un unico montaggio"
+    },
+    "GraphicsRoom": {
+      "label": "Stanza grafica",
+      "description": "Un team di designer AI concorda titoli e grafiche"
+    },
+    "ColorGradeRoom": {
+      "label": "Stanza del colore",
+      "description": "Un team di coloristi AI concorda un unico look colore"
+    },
+    "ThumbnailGenerate": {
+      "label": "Miniatura",
+      "description": "Scegli il fotogramma migliore del girato e salvalo come immagine"
+    },
+    "Revise": {
+      "label": "Modifiche",
+      "description": "Applica le modifiche che hai chiesto a un video finito e lo esporta di nuovo."
+    },
+    "DesignGraphic": {
+      "label": "Progetta una grafica",
+      "description": "Disegna una grafica per un'immagine, come un titolo, un badge o un cartellino del prezzo."
+    },
+    "DailiesRoom": {
+      "label": "Stanza dailies",
+      "description": "Un team di giudici AI confronta le riprese generate di ogni inquadratura e sceglie la migliore"
+    },
+    "TimelineRender": {
+      "label": "Esporta la timeline",
+      "description": "Trasforma una timeline dell'editor in un file video finito"
+    },
+    "DesignSystem": {
+      "label": "Profilo di brand e prodotto",
+      "description": "Legge i tuoi file di design e la struttura dell'app in un profilo di brand e prodotto usato dai passaggi successivi (gratis)"
+    },
+    "ExtractFrame": {
+      "label": "Cattura un fotogramma",
+      "description": "Salva un fotogramma di un video come immagine, da riusare come immagine, copertina o primo fotogramma di una nuova clip (gratis)"
+    },
+    "AudioGenerate": {
+      "label": "Genera musica o suoni",
+      "description": "Genera musica o un effetto sonoro da una descrizione (a pagamento, con un limite di spesa)"
+    },
+    "ImageGenerate": {
+      "label": "Genera o modifica un'immagine",
+      "description": "Crea immagini da una descrizione, o modifica un'immagine con un'istruzione (a pagamento, con un limite di spesa)"
+    },
+    "PinInsert": {
+      "label": "Metti sugli schermi",
+      "description": "Inserisci un video o un'immagine negli schermi tracciati del tuo girato, senza un modello AI (gratis)"
+    },
+    "VideoEnhance": {
+      "label": "Migliora il video",
+      "description": "Migliora l'immagine: più grande, più fluida, più pulita o meno a scatti"
+    },
+    "AudioCleanup": {
+      "label": "Pulisci l'audio",
+      "description": "Elimina ronzio, vento, fruscio ed eco, migliora una voce, oppure tieni solo la voce o rimuovi la musica"
+    }
+  },
+  "outputSchema": {
+    "copyExpression": "Copia espressione",
+    "stepFallback": "Passaggio {number}",
+    "noPrevious": "Nessun passaggio precedente con schemi di output disponibili",
+    "heading": "Campi di output disponibili dai passaggi precedenti",
+    "noFields": "Nessun campo di schema disponibile"
+  },
+  "transcript": {
+    "turnOf": "Turno {turn} di {total}",
+    "turn": "Turno {turn}",
+    "director": "Regista",
+    "truncated": "Testo troncato. Il testo completo di questo turno è nella trascrizione salvata.",
+    "thinking": "La stanza sta ragionando",
+    "heading": "Discussione della stanza di montaggio",
+    "turnsOf": "{count} di {total} turni",
+    "turns": "{count, plural, one {# turno} other {# turni}}",
+    "empty": "Nessuna discussione della stanza registrata per questo passaggio.",
+    "hideFull": "Nascondi la trascrizione completa",
+    "viewFull": "Mostra la trascrizione completa",
+    "loadingFull": "Caricamento della trascrizione completa…",
+    "fullError": "Impossibile caricare la trascrizione completa: {error}",
+    "fullLabel": "Trascrizione completa della stanza"
+  }
+}

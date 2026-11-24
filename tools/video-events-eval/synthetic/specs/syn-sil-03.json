@@ -1,0 +1,73 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-sil-03",
+ "videoType": "silent",
+ "frames": 450,
+ "theme": {
+  "bg": "#efe9df"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#efe9df",
+   "bgB": "#e3dccd",
+   "deco": "stripes",
+   "accent": "#b9ad97",
+   "decoOpacity": 0.12
+  }
+ ],
+ "drift": true,
+ "elements": [
+  {
+   "kind": "rect",
+   "id": "box",
+   "name": "slow box",
+   "x": 200,
+   "y": 200,
+   "w": 220,
+   "h": 140,
+   "color": "#8a7f6a",
+   "scene": 0,
+   "peak": 0.6,
+   "vis": [
+    {
+     "in": 100,
+     "fade": 60
+    }
+   ],
+   "hits": [
+    {
+     "kind": "pop",
+     "frame": 330,
+     "amp": 0.15
+    }
+   ],
+   "moves": [
+    {
+     "start": 380,
+     "end": 440,
+     "x": 520,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "kind": "circle",
+   "id": "c",
+   "name": "pale circle",
+   "x": 700,
+   "y": 380,
+   "w": 80,
+   "h": 80,
+   "color": "#c9bfa8",
+   "scene": 0,
+   "vis": [
+    {
+     "in": 0
+    }
+   ]
+  }
+ ]
+}

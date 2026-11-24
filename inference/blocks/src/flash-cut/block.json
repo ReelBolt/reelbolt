@@ -1,0 +1,32 @@
+{
+  "id": "flash-cut",
+  "version": "1.0.0",
+  "title": "Flash cut",
+  "category": "transitions",
+  "description": "Hard cut hidden behind a quick colour flash; use for beats, impacts and camera-flash moments.",
+  "tags": [
+    "transition",
+    "flash",
+    "cut",
+    "impact"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [],
+  "previewComposition": {
+    "compositionId": "Block-flash-cut",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*10*/; color?: string /*'#ffffff'*/}",
+  "example": "import {FlashCut} from './blocks/flash-cut/FlashCut.tsx';\n<FlashCut from={<SceneA />} to={<SceneB />} startFrame={40} color=\"#ffffff\" />"
+}

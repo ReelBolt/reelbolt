@@ -1,0 +1,35 @@
+{
+  "id": "ink-reveal",
+  "version": "1.0.0",
+  "title": "Ink reveal",
+  "category": "transitions",
+  "description": "New scene spreads from a point through an organic wobbling clip-path; use for soft, artistic reveals.",
+  "tags": [
+    "transition",
+    "reveal",
+    "clip-path",
+    "ink",
+    "organic"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-ink-reveal",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*28*/; originX?: number /*50*/; originY?: number /*50*/; roughness?: number /*0.5*/; seed?: string /*'ink'*/}",
+  "example": "import {InkReveal} from './blocks/ink-reveal/InkReveal.tsx';\n<InkReveal from={<SceneA />} to={<SceneB />} startFrame={40} originX={50} originY={50} roughness={0.5} />"
+}

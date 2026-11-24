@@ -1,0 +1,34 @@
+{
+  "id": "lower-third-bar",
+  "version": "1.0.0",
+  "title": "Lower third: bar",
+  "category": "titles",
+  "description": "Solid name bar with an accent stripe in the lower left; use to introduce a speaker or place.",
+  "tags": [
+    "lower third",
+    "name",
+    "bar",
+    "speaker"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-lower-third-bar",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      6,
+      14,
+      40
+    ]
+  },
+  "props": "{name: string; subtitle?: string; accentColor?: string /*'#f43f5e'*/; barColor?: string /*'#0f172a'*/; textColor?: string; fontFamily?: string /*'Montserrat, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+  "example": "import {LowerThirdBar} from './blocks/lower-third-bar/LowerThirdBar.tsx';\n<LowerThirdBar name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+}

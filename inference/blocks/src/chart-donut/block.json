@@ -1,0 +1,36 @@
+{
+  "id": "chart-donut",
+  "version": "1.0.0",
+  "title": "Donut chart",
+  "category": "charts",
+  "description": "Use to show parts of a whole (shares, budget split): a donut that sweeps open with a total and a legend. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+  "tags": [
+    "chart",
+    "donut",
+    "pie",
+    "share",
+    "data"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-chart-donut",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      30,
+      80
+    ]
+  },
+  "props": "{data: {label: string; value: number; color?: string}[]; centerLabel?: string /*'Total'*/; palette?: string[]; startFrame?: number /*5*/; durationInFrames?: number /*45*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+  "example": "import {ChartDonut} from './blocks/chart-donut/ChartDonut.tsx';\n<ChartDonut data={[{label: \"Ads\", value: 40}, {label: \"Organic\", value: 60}]} />"
+}

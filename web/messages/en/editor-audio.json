@@ -1,0 +1,350 @@
+{
+  "duck": {
+    "updateLabel": "Update ducking",
+    "musicFallback": "music",
+    "duckLabel": "Duck music under voice",
+    "removeLabel": "Remove ducking",
+    "hint": "Lowers the music while someone is talking.",
+    "on": "Ducking: on ({track})",
+    "off": "Ducking: off",
+    "musicTrack": "Music track",
+    "voiceTracks": "Voice tracks",
+    "depth": "Lower the music by (dB)",
+    "attack": "Fade down (frames)",
+    "release": "Fade back up (frames)",
+    "duckAgain": "Duck again with these settings",
+    "upToDate": "Up to date",
+    "pickTracks": "Pick the music track and at least one voice track."
+  },
+  "loudness": {
+    "targets": {
+      "social": {
+        "label": "Social",
+        "hint": "Instagram, TikTok, YouTube"
+      },
+      "podcast": {
+        "label": "Podcast",
+        "hint": "Podcasts and talks"
+      },
+      "broadcast": {
+        "label": "Broadcast",
+        "hint": "TV and radio"
+      }
+    },
+    "noTrack": "There is no unmuted audio track to adjust.",
+    "matchLabel": "Match {target} loudness ({delta} dB)",
+    "moved": "Moved every audio track {direction, select, up {up} other {down}} by {db} dB. Measuring again…",
+    "where": "Where will it be heard?",
+    "summary": "{label}: {lufs} LUFS ({hint}). Measured on the whole mix, not the live meter.",
+    "measureLoudness": "Measure loudness",
+    "matchTarget": "Match target",
+    "confirm": "Measuring plays the mix through once and uses about {credits, plural, one {# credit} other {# credits}}.",
+    "measure": "Measure",
+    "notNow": "Not now",
+    "measured": "Measured {lufs} LUFS. {verdict}",
+    "nothing": "Nothing audible to measure yet.",
+    "verdict": {
+      "unmeasurable": "Nothing audible to measure yet.",
+      "on": "On target for {target}.",
+      "loud": "{db, number, ::.0} dB too loud for {target}.",
+      "quiet": "{db, number, ::.0} dB too quiet for {target}."
+    }
+  },
+  "audition": {
+    "note": "Clean voice and other sound processing are only fully heard in the final render. Audition makes a ten second sample around the playhead so you can hear them now.",
+    "run": "Audition around the playhead",
+    "player": "Audition"
+  },
+  "fader": {
+    "volumeAutomated": "Volume (automated base)",
+    "volume": "Volume",
+    "resetTooltip": "Reset to 0 dB",
+    "resetLabel": "Reset {label} volume to 0 dB",
+    "inputLabel": "{label} volume in dB",
+    "doubleClick": "Double-click to reset to 0 dB"
+  },
+  "cleanVoice": {
+    "label": "Clean voice",
+    "description": "Removes background noise and evens out the volume.",
+    "historyOn": "Clean voice on ({track})",
+    "historyOff": "Clean voice off ({track})"
+  },
+  "mixer": {
+    "title": "Mixer",
+    "advanced": "Advanced audio",
+    "noTracksHint": "Add one with Audio in the track headers on the timeline.",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "muteTrack": "Mute {track}",
+    "solo": "Solo",
+    "unsolo": "Unsolo",
+    "soloTrack": "Solo {track}",
+    "volumeLabel": "Volume {track}",
+    "pan": "Pan {value}",
+    "centreLabel": "Centre {track}",
+    "centreTip": "Double-click to centre",
+    "panTrack": "Pan {track}",
+    "panLabel": "Pan {track}",
+    "peakMeter": "Peak meter",
+    "db": "{value} dB",
+    "rumble": "Cut low rumble",
+    "rumbleHint": "Removes everything under {hz, number} Hz (traffic, handling noise).",
+    "lowCutHz": "Low cut Hz",
+    "eqLowCut": "EQ low cut",
+    "highCutHz": "High cut Hz",
+    "eqHighCut": "EQ high cut",
+    "bandHz": "Band Hz",
+    "eqBand": "EQ band",
+    "bandDb": "Band dB",
+    "eqBandGain": "EQ band gain",
+    "automationPoints": "{count, plural, one {# automation point} other {# automation points}}",
+    "loudness": "Loudness",
+    "livePreview": "Live preview (sampled)",
+    "liveReadout": "M {m} · S {s} · I {i} LUFS",
+    "truePeak": "TP≈ {value} dBTP",
+    "resetTip": "Restart the integrated measurement",
+    "resetMeter": "Reset loudness meter",
+    "lastRender": "Last render (authoritative)",
+    "renderReadout": "I {i} LUFS · TP {tp} dBTP · LRA {lra}",
+    "normalised": "normalised",
+    "noRender": "No finished render of this revision yet.",
+    "meterNote": "The live meter reads sampled analyser windows while the timeline plays; the render measures the whole mix with loudnorm.",
+    "ducking": "Ducking",
+    "audition": "Audition"
+  },
+  "processing": {
+    "note": "{note} Denoise and the leveler are heard after the render only.",
+    "compressor": "Compressor",
+    "limiter": "Limiter",
+    "gate": "Noise gate",
+    "deesser": "De-esser",
+    "denoise": "Denoise (FFT)",
+    "leveler": "Leveler",
+    "thresholdDb": "Threshold dB",
+    "ratio": "Ratio",
+    "attackMs": "Attack ms",
+    "releaseMs": "Release ms",
+    "makeupDb": "Make-up dB",
+    "ceilingDb": "Ceiling dB",
+    "intensity": "Intensity",
+    "strength": "Strength",
+    "kind": "Kind",
+    "speech": "Speech",
+    "dynamic": "Dynamic",
+    "targetDb": "Target dB",
+    "undo": {
+      "toggleCompressor": "Toggle compressor",
+      "compressorThreshold": "Compressor threshold",
+      "compressorRatio": "Compressor ratio",
+      "compressorAttack": "Compressor attack",
+      "compressorRelease": "Compressor release",
+      "compressorMakeup": "Compressor make-up",
+      "toggleLimiter": "Toggle limiter",
+      "limiterCeiling": "Limiter ceiling",
+      "toggleGate": "Toggle gate",
+      "gateThreshold": "Gate threshold",
+      "gateRatio": "Gate ratio",
+      "toggleDeesser": "Toggle de-esser",
+      "deesserIntensity": "De-esser intensity",
+      "toggleDenoise": "Toggle denoise",
+      "denoiseStrength": "Denoise strength",
+      "toggleLeveler": "Toggle leveler",
+      "levelerKind": "Leveler kind",
+      "levelerTarget": "Leveler target"
+    }
+  },
+  "buses": {
+    "master": "Master",
+    "title": "Buses and processing",
+    "phoneWhat": "Working with buses, automation and audio effects",
+    "phoneHint": "On a phone, the Audio panel sets volume, Duck music and Clean voice. Open this timeline on a tablet or computer for the rest.",
+    "advancedTitle": "Advanced audio",
+    "advancedHint": "Buses, compressor, gate, limiter, de-esser and automation recording are for expert mixing. The Mixer already has volume, pan, Clean voice and ducking.",
+    "showAdvanced": "Show advanced audio",
+    "routingNoteOk": "Bus routing, bus gain and the bus stages are heard in the preview. {note} Use Deliver to hear the final mix.",
+    "routingNoteFallback": "{note} ({reason}) Use Deliver to hear the final mix.",
+    "newBus": "New bus",
+    "newBusPlaceholder": "Dialogue",
+    "addBus": "Add bus",
+    "busName": "Bus name",
+    "removeBus": "Remove bus {name}",
+    "output": "Output",
+    "gainDb": "Gain dB",
+    "pan": "Pan",
+    "tracks": "Tracks",
+    "noTracks": "No audio tracks.",
+    "busRemovedTip": "The bus this track was routed to was removed; it feeds the master.",
+    "busRemoved": "bus removed",
+    "routeTo": "Route to",
+    "modes": {
+      "off": "Off",
+      "read": "Read",
+      "latch": "Latch"
+    },
+    "automationMode": "Automation mode",
+    "writing": "writing…",
+    "fader": "fader",
+    "automationFader": "Automation fader",
+    "db": "{value} dB",
+    "undo": {
+      "addBus": "Add bus {name}",
+      "renameBus": "Rename bus",
+      "removeBus": "Remove bus {name}",
+      "routeBus": "Route bus",
+      "busGain": "Bus gain",
+      "busPan": "Bus pan",
+      "withName": "{label} ({name})",
+      "automationPass": "Automation pass on {name}",
+      "routeTrack": "Route {name}",
+      "fader": "{name} fader"
+    }
+  },
+  "vo": {
+    "trackName": "Voiceover",
+    "recordLabel": "Record voiceover at {time}",
+    "retakeLabel": "Retake voiceover at {time}",
+    "saveFailed": "The take could not be saved.",
+    "addFailed": "The recording could not be added. Try an MP3, M4A, WAV or WebM file.",
+    "fileErrors": {
+      "unreadable": "This file could not be read as audio.",
+      "empty": "This file does not seem to hold any audio."
+    },
+    "title": "Voiceover",
+    "intro": "Records from your microphone onto a new audio track at the playhead. The take is saved to the project's files.",
+    "unavailableTitle": "Voiceover recording unavailable",
+    "unavailablePhone": "Recording is not available in this browser. Upload a voice file instead.",
+    "unavailable": "{reason} You can upload a recording instead.",
+    "microphone": "Microphone",
+    "level": "Microphone level",
+    "recording": "● recording from {time}",
+    "stop": "Stop and place",
+    "record": "Record at playhead",
+    "retake": "Retake",
+    "discard": "Discard",
+    "uploadVoice": "Upload a voice file",
+    "uploadRecording": "Upload a recording"
+  },
+  "job": {
+    "saveFirstFailed": "Your edits could not be saved first. Try again.",
+    "loudnessFailed": "The loudness could not be measured.",
+    "previewFailed": "The preview could not be made."
+  },
+  "cleanup": {
+    "title": "Clean voice",
+    "intro": "Make speech clearer. You hear the result before anything changes, and one click puts your original back.",
+    "pickClip": "Select a clip with sound to clean it.",
+    "readOnly": "This timeline is read-only, so it cannot be changed.",
+    "voiceHeading": "Clean the voice",
+    "basic": {
+      "label": "Basic",
+      "badge": "Free",
+      "hint": "Softens steady background noise like a fan or room hum. Does not remove sudden sounds, music or other voices."
+    },
+    "studio": {
+      "label": "Studio",
+      "badge": "Uses credits",
+      "hint": "Keeps the voice and removes almost everything else, even loud noise. Takes longer. It can make a voice sound slightly processed."
+    },
+    "noiseHeading": "Remove a noise",
+    "noiseHint": "Pick the one sound that bothers you.",
+    "noise": {
+      "hum": {
+        "label": "Hum",
+        "badge": "Free",
+        "hint": "Removes a steady low buzz from lights or mains power. Does not touch the voice or other sounds."
+      },
+      "wind": {
+        "label": "Wind",
+        "badge": "Free",
+        "hint": "Softens wind rumble on outdoor recordings. Does not remove sharp gusts completely."
+      },
+      "hiss": {
+        "label": "Hiss",
+        "badge": "Free",
+        "hint": "Softens the soft, steady hiss of a quiet room or an old microphone. Does not fix a muffled voice."
+      },
+      "echo": {
+        "label": "Echo",
+        "badge": "Free",
+        "hint": "Reduces the room echo that makes speech sound far away. Does not make a bad recording perfect."
+      },
+      "music": {
+        "label": "Music",
+        "badge": "Uses credits",
+        "hint": "Takes the background music out and keeps the talking. Very loud music may leave a trace."
+      }
+    },
+    "estimating": "Checking the cost…",
+    "estimateFree": "Free. It runs on our own servers.",
+    "estimateFreeCached": "Free. You already did this one.",
+    "estimateCredits": "About {credits} credits.",
+    "estimateCreditsOne": "About 1 credit.",
+    "estimateSeconds": "It takes about {seconds} seconds.",
+    "balance": "You have {balance} credits.",
+    "clean": "Clean it",
+    "cancel": "Cancel",
+    "running": "Cleaning your audio. This can take a minute.",
+    "consent": {
+      "title": "Send this audio to an outside service?",
+      "body": "This option sends the audio of this clip to an outside audio service for this project only, to be processed. The audio is stored nowhere but in your project. The free options never send anything.",
+      "remember": "We will remember your answer for this project on this device.",
+      "accept": "Send and clean",
+      "decline": "Not now"
+    },
+    "done": "Done. Listen, then decide.",
+    "nothing": "Nothing to remove, nothing changed.",
+    "nothingHum": "No hum found, nothing changed.",
+    "nothingWind": "No wind found, nothing changed.",
+    "nothingHiss": "No hiss found, nothing changed.",
+    "nothingEcho": "No echo found, nothing changed.",
+    "audition": {
+      "heading": "Before and after",
+      "before": "Before",
+      "after": "After",
+      "play": "Play",
+      "pause": "Pause",
+      "range": "The same {seconds} seconds of your clip, whichever you pick."
+    },
+    "apply": "Use the clean audio",
+    "applied": "The clean audio is on your timeline. You can undo it.",
+    "useOriginal": "Use original",
+    "reverted": "Your original audio is back.",
+    "useCleanAgain": "Use the clean audio again",
+    "errorRefusal": {
+      "credits": "You need {missing} more credits to do this. Nothing was charged.",
+      "creditsPlain": "You do not have enough credits to do this. Nothing was charged.",
+      "addCredits": "Add credits",
+      "plan": "Your plan does not include this option. Pick a plan that does.",
+      "seePlans": "See plans",
+      "egress": "This option needs your OK to send the audio to an outside service.",
+      "busy": "Too many jobs are running. Wait for one to finish, then try again.",
+      "notFound": "This clip's file could not be found. It may have been deleted.",
+      "other": "The cleanup could not start. Try again in a moment.",
+      "tooLong": "This clip is too long to clean. Try a shorter clip.",
+      "unavailable": "This option is not available for this clip right now. Try again later."
+    },
+    "errorFailed": "The cleanup did not finish. Nothing was changed. Try again.",
+    "errorTooLong": "The cleanup took too long. Nothing was changed. Try again.",
+    "tryAgain": "Try again"
+  },
+  "checks": {
+    "severity": {
+      "high": "Important",
+      "medium": "Worth a look",
+      "low": "Minor"
+    },
+    "title": "Sound checks on this render",
+    "loudnessQuiet": "The sound is quieter than the usual online level ({measured} LUFS, aiming for {limit}).",
+    "loudnessLoud": "The sound is louder than the usual online level ({measured} LUFS, aiming for {limit}).",
+    "loudnessGeneric": "The overall loudness is away from the usual online level.",
+    "rangeWide": "The volume changes a lot between quiet and loud parts ({measured} LU, usually {limit} or less).",
+    "rangeWideGeneric": "The volume changes a lot between quiet and loud parts.",
+    "peakHigh": "The loudest peak is close to the maximum ({measured} dBTP, usually {limit} or lower).",
+    "peakHighGeneric": "The loudest peak is close to the maximum.",
+    "clipping": "The sound may be distorted: the loudest peak reaches the maximum.",
+    "silence": "Part of the sound is silent from {from} s to {to} s.",
+    "silenceGeneric": "Part of the sound is silent.",
+    "noSound": "This render has no sound.",
+    "other": "The sound has something worth checking."
+  }
+}

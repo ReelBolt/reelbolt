@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+{{.FileName}}
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}{{if .ProjectName}}
+Project {{.ProjectName}} (workspace {{.OrgName}}).
+{{end}}
+{{.Link}}
+
+-- {{.FooterNote}}

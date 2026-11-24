@@ -1,0 +1,13 @@
+{
+  "adminLinks.steps.onboarded": "Funnel step 'Told us what they make' (the welcome question was answered); rendered as 'Ci ha detto cosa crea'",
+  "adminLinks.media.referral": "utm_medium 'referral' shown as 'Segnalazione'; the stored token stays 'referral'",
+  "adminLinks.media.owned": "utm_medium 'owned' (our own channels) shown as 'Canali propri'",
+  "adminLinks.table.botHits": "'automated' = link previews and crawlers, counted apart from clicks",
+  "adminLinks.note.captureOff": "Names the setting ATTRIBUTION_URL_CAPTURE_ENABLED and points at the privacy text; meaning must not change",
+  "adminLinks.personas.educator": "Persona 'educator' (coaches, teachers, course makers) rendered as 'Formatori'; align with the site's /for/educators page",
+  "adminLinks.note.clicks": "Clicks are openings, not unique people; mail scanners inflate email clicks. Meaning must not change",
+  "adminLinks.note.visitsOff": "Names the setting TELEMETRY_VISIT_INGEST_ENABLED",
+  "adminLinks.table.periodTooShort": "Shown instead of cost per signup when the period is shorter than the link's life",
+  "adminLinks.form.appLandingNote": "Why a link should not land on a page of the app: no cookie banner there",
+  "adminLinks.form.personaNoLongerOffered": "Label of an audience an older link still holds but the form no longer offers (today only 'Altro'); rendered as '{name} (non più disponibile)'"
+}

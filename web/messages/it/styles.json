@@ -1,0 +1,190 @@
+{
+  "axes": {
+    "pacing": {
+      "label": "Ritmo",
+      "description": "Quanto velocemente il video passa da un'inquadratura all'altra.",
+      "options": {
+        "slow": "Lento — lascia respirare i momenti",
+        "medium": "Medio — un ritmo naturale",
+        "fast": "Veloce — tagli rapidi, nessuna pausa morta",
+        "beatSynced": "A tempo — tagli a ritmo di musica"
+      }
+    },
+    "storytelling": {
+      "label": "Ordine della storia",
+      "description": "Come viene raccontato il video dall'inizio alla fine.",
+      "options": {
+        "chronological": "In ordine — come è successo",
+        "hookFirst": "Gancio prima — si apre con il momento migliore",
+        "problemSolution": "Prima il problema, poi la soluzione",
+        "montage": "Montaggio — momenti legati dall'atmosfera"
+      }
+    },
+    "editing": {
+      "label": "Tagli",
+      "description": "Come un'inquadratura si collega alla successiva.",
+      "options": {
+        "jumpCuts": "Jump cut — netti e incisivi",
+        "smooth": "Fluidi — passaggi morbidi",
+        "mixed": "Misti"
+      }
+    },
+    "tone": {
+      "label": "Tono",
+      "description": "La sensazione che il video deve lasciare.",
+      "options": {
+        "calm": "Calmo",
+        "upbeat": "Brioso",
+        "energetic": "Energico",
+        "serious": "Serio",
+        "playful": "Giocoso",
+        "inspirational": "Ispirante"
+      }
+    },
+    "captions": {
+      "label": "Sottotitoli",
+      "description": "Come appaiono i sottotitoli incorporati, quando il flusso di lavoro li aggiunge.",
+      "options": {
+        "clean": "Sottotitoli puliti",
+        "karaoke": "Le parole si illuminano mentre vengono pronunciate",
+        "punch": "Una parola grande alla volta",
+        "bold": "Parole grandi in grassetto, stile Reels/TikTok"
+      }
+    },
+    "color": {
+      "label": "Colore",
+      "description": "L'aspetto del colore, quando il flusso di lavoro corregge i filmati.",
+      "options": {
+        "natural": "Naturale",
+        "warm": "Caldo",
+        "cool": "Freddo",
+        "filmic": "Cinematografico",
+        "vibrant": "Vivace",
+        "muted": "Tenue",
+        "mono": "Bianco e nero"
+      }
+    },
+    "music": {
+      "label": "Energia della musica",
+      "description": "Quanto deve essere vivace la musica di sottofondo.",
+      "options": {
+        "low": "Bassa",
+        "medium": "Media",
+        "high": "Alta"
+      }
+    },
+    "graphics": {
+      "label": "Testo a schermo",
+      "description": "Quanti titoli ed etichette compaiono.",
+      "options": {
+        "none": "Nessuno",
+        "minimal": "Minimo",
+        "moderate": "Alcuni",
+        "rich": "Molti"
+      }
+    },
+    "dynamics": {
+      "label": "Dinamica",
+      "description": "Quanti zoom, flash e cambi di velocità cadono a tempo di musica.",
+      "options": {
+        "calm": "Effetti calmi",
+        "medium": "Effetti medi",
+        "fast": "Effetti veloci"
+      }
+    }
+  },
+  "format": {
+    "original": {
+      "label": "Come impostato",
+      "hint": "Mantieni il formato con cui è impostato il flusso di lavoro."
+    },
+    "vertical": {
+      "label": "9:16",
+      "hint": "Verticale — Reels, TikTok, Shorts"
+    },
+    "square": {
+      "label": "1:1",
+      "hint": "Quadrato — post nel feed"
+    },
+    "portrait": {
+      "label": "4:5",
+      "hint": "Ritratto — post nel feed che occupano più schermo"
+    },
+    "landscape": {
+      "label": "16:9",
+      "hint": "Orizzontale — YouTube e siti web"
+    }
+  },
+  "resolution": {
+    "auto": {
+      "label": "Auto",
+      "hint": "Come oggi: fino a 1080p, o al limite del tuo piano se inferiore"
+    },
+    "p720": {
+      "label": "720p",
+      "hint": "File più piccoli, render più veloci"
+    },
+    "p1080": {
+      "label": "1080p",
+      "hint": "Full HD"
+    },
+    "p2160": {
+      "label": "4K",
+      "hint": "Ultra HD, 2160p. Usa circa 4 volte i crediti di render di 1080p"
+    }
+  },
+  "cap": {
+    "under1080": "Il tuo piano esporta fino a {cap}p. Passa a un piano superiore per esportare in 1080p o 4K.",
+    "from1080": "Il tuo piano esporta fino a {cap}p. Passa a un piano superiore per esportare in 4K."
+  },
+  "describe": {
+    "notes": "note"
+  },
+  "form": {
+    "submit": "Salva stile",
+    "name": "Nome",
+    "description": "Descrizione",
+    "descriptionHint": "Facoltativo. Un promemoria su quando usare questo stile.",
+    "noPreference": "Nessuna preferenza",
+    "notes": "Note per l'AI",
+    "notesHint": "Facoltativo. Qualsiasi altra indicazione su aspetto e atmosfera, in una o due frasi. Viene trattata come una preferenza, mai come un'istruzione.",
+    "projectOnly": "Usa solo in questo progetto",
+    "pickOne": "Scegli almeno un'opzione o scrivi una nota.",
+    "cancel": "Annulla"
+  },
+  "picker": {
+    "noStyleGroup": "Nessuno stile",
+    "noStyle": "Nessuno stile in particolare",
+    "builtInGroup": "Stili integrati",
+    "yourGroup": "I tuoi stili",
+    "styleLabel": "Stile di montaggio",
+    "styleHint": "Come l'AI deve montare questo video. Gestisci i tuoi stili nella pagina Stili.",
+    "shape": "Formato del video",
+    "resolution": "Risoluzione",
+    "seePlans": "Vedi i piani"
+  },
+  "page": {
+    "title": "Stili",
+    "new": "Nuovo stile",
+    "intro": "Uno stile dice all'AI come montare il tuo video: quanto veloce, in che ordine, come si collegano le inquadrature e che atmosfera devono avere sottotitoli, colore, musica e testo a schermo. Scegline uno quando avvii un flusso di lavoro: gli stessi filmati possono diventare un reel social veloce o un documentario sereno.",
+    "yours": "I tuoi stili",
+    "oneProject": "Un progetto",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "emptyTitle": "Non hai ancora stili tuoi",
+    "emptyBody": "Creane uno da zero, oppure parti da uno stile integrato qui sotto e rendilo tuo.",
+    "builtIn": "Stili integrati",
+    "copy": "Crea una copia",
+    "copyName": "Copia di {name}",
+    "savedTitle": "Salvato",
+    "savedBody": "\"{name}\" è pronto da usare quando avvii un flusso di lavoro.",
+    "notSavedTitle": "Non salvato",
+    "saveFailed": "Impossibile salvare lo stile",
+    "notDeletedTitle": "Non eliminato",
+    "deleteFailed": "Impossibile eliminare",
+    "editTitle": "Modifica “{name}”",
+    "newTitle": "Nuovo stile",
+    "deleteTitle": "Elimina stile",
+    "deleteBody": "Eliminare lo stile “{name}”? Le esecuzioni che lo hanno già usato conservano la propria copia."
+  }
+}

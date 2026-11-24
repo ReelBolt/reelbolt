@@ -1,0 +1,463 @@
+{
+  "shots": [
+    {
+      "id": "sign-up-and-first-look-01",
+      "guide": "sign-up-and-first-look",
+      "route": "/app/signup",
+      "viewport": "desktop",
+      "auth": false,
+      "waitFor": [
+        "role=button[name=\"Create account\"]"
+      ],
+      "steps": [
+        {
+          "fill": "role=textbox[name=\"Name\"]",
+          "value": "Maya Lindqvist"
+        },
+        {
+          "fill": "role=textbox[name=\"Email\"]",
+          "value": "maya@example.com"
+        },
+        {
+          "fill": "input[type=\"password\"] >> nth=0",
+          "value": "northwind-2026"
+        },
+        {
+          "fill": "input[type=\"password\"] >> nth=1",
+          "value": "northwind-2026"
+        },
+        {
+          "click": "role=checkbox"
+        }
+      ],
+      "clip": null,
+      "highlight": "role=button[name=\"Create account\"]"
+    },
+    {
+      "id": "sign-up-and-first-look-02",
+      "guide": "sign-up-and-first-look",
+      "route": "/app/dashboard",
+      "viewport": "desktop",
+      "waitFor": [
+        "role=heading[level=1]",
+        "text=Ep12-Ridgeline-Sunrise.mp4"
+      ],
+      "steps": [],
+      "clip": null,
+      "highlight": [
+        "role=button[name=\"Open assistant\"]",
+        "role=link[name=\"Projects\"]"
+      ]
+    },
+    {
+      "id": "sign-up-and-first-look-03-phone",
+      "guide": "sign-up-and-first-look",
+      "route": "/app/dashboard",
+      "viewport": "phone",
+      "waitFor": [
+        "role=heading[level=1]"
+      ],
+      "steps": [
+        {
+          "click": "role=button[name=\"Toggle navigation\"]"
+        },
+        {
+          "waitFor": "role=link[name=\"Projects\"]"
+        },
+        {
+          "wait": 800
+        }
+      ],
+      "clip": null,
+      "highlight": "role=button[name=\"Toggle navigation\"]"
+    },
+    {
+      "id": "create-a-project-and-upload-01",
+      "guide": "create-a-project-and-upload",
+      "route": "/app/projects",
+      "viewport": "desktop",
+      "scenario": "two-projects",
+      "waitFor": [
+        "text=Aurora Trail Series"
+      ],
+      "steps": [],
+      "clip": null,
+      "highlight": "role=button[name=\"New project\"]"
+    },
+    {
+      "id": "create-a-project-and-upload-02",
+      "guide": "create-a-project-and-upload",
+      "route": "/app/projects",
+      "viewport": "desktop",
+      "scenario": "two-projects",
+      "waitFor": [
+        "text=Aurora Trail Series"
+      ],
+      "steps": [
+        {
+          "click": "role=button[name=\"New project\"]"
+        },
+        {
+          "waitFor": "role=dialog"
+        },
+        {
+          "fill": "role=dialog >> role=textbox[name=\"Name\"]",
+          "value": "Spring launch teaser"
+        }
+      ],
+      "clip": null,
+      "highlight": "role=dialog >> role=textbox[name=\"Name\"]"
+    },
+    {
+      "id": "create-a-project-and-upload-03",
+      "guide": "create-a-project-and-upload",
+      "route": "/app/projects/p-spring?tab=files",
+      "viewport": "desktop",
+      "waitFor": [
+        "text=product-demo.mp4"
+      ],
+      "steps": [],
+      "clip": null
+    },
+    {
+      "id": "pick-an-app-and-run-01",
+      "guide": "pick-an-app-and-run",
+      "route": "/app/projects/p-aurora?tab=workflows",
+      "viewport": "desktop",
+      "waitFor": [
+        "text=Your apps",
+        "text=Start from a recipe"
+      ],
+      "steps": [],
+      "clip": null,
+      "highlight": "role=heading[name=\"Start from a recipe\"]"
+    },
+    {
+      "id": "pick-an-app-and-run-02",
+      "guide": "pick-an-app-and-run",
+      "route": "/app/projects/p-aurora/workflows/w-promo",
+      "viewport": "desktop",
+      "waitFor": [
+        "role=button[name=/^Run/]"
+      ],
+      "steps": [
+        {
+          "fill": "role=textbox[name=/What should the video be about/]",
+          "value": "A 30 second promo for the spring launch of our trail app: calm, outdoors, ends on the logo."
+        }
+      ],
+      "clip": null,
+      "height": 900,
+      "highlight": [
+        "role=button[name=/^Run/]"
+      ]
+    },
+    {
+      "id": "follow-progress-and-share-01",
+      "guide": "follow-progress-and-share",
+      "route": "/app/projects/p-aurora/workflows/w-aurora/executions/e-live-1",
+      "waitFor": [
+        "[data-testid=\"run-summary\"]",
+        "role=button[name=\"Stop\"]"
+      ],
+      "highlight": [
+        "role=button[name=\"Stop\"]",
+        "[aria-label=\"Run progress\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null
+    },
+    {
+      "id": "follow-progress-and-share-02",
+      "guide": "follow-progress-and-share",
+      "route": "/app/projects/p-spring?tab=renders",
+      "waitFor": [
+        "role=link[name=\"Download\"]"
+      ],
+      "highlight": [
+        "role=link[name=\"Download\"]",
+        "role=button[name=\"Share\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null,
+      "height": 1040
+    },
+    {
+      "id": "ask-for-changes-01",
+      "guide": "ask-for-changes",
+      "route": "/app/projects/p-aurora/workflows/w-aurora/executions/e-done-1",
+      "waitFor": [
+        "[data-testid=\"request-changes\"]"
+      ],
+      "steps": [
+        {
+          "fill": "role=textbox[name=\"What should change?\"]",
+          "value": "Make the numbers in the stats section bigger"
+        },
+        {
+          "click": "[data-testid=\"request-changes\"] label:has-text(\"Stats\")"
+        },
+        {
+          "scrollTo": "[data-testid=\"request-changes\"]"
+        }
+      ],
+      "highlight": [
+        "role=heading[name=\"Request changes\"]",
+        "[data-testid=\"request-changes-estimate\"]"
+      ],
+      "viewport": "desktop",
+      "clip": null
+    },
+    {
+      "id": "editor-basics-01",
+      "guide": "editor-basics",
+      "route": "/app/editor?project=p-aurora&view=videos",
+      "waitFor": [
+        "text=From your workflow runs"
+      ],
+      "highlight": [
+        "[data-testid=\"render-edit-sr-out-1\"]",
+        "text=Early preview >> nth=0"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null
+    },
+    {
+      "id": "editor-basics-02",
+      "guide": "editor-basics",
+      "route": "/app/editor/p-aurora/timeline/7e1a2b3c-4d5e-4f60-8a1b-2c3d4e5f6a70",
+      "waitFor": [
+        "text=Early preview"
+      ],
+      "highlight": [
+        "text=Early preview >> nth=0",
+        "role=textbox[name=\"Name\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [
+        {
+          "click": "role=button[name=\"Not now\"]"
+        },
+        {
+          "wait": 400
+        },
+        {
+          "clickAt": [
+            1000,
+            662
+          ]
+        },
+        {
+          "wait": 600
+        }
+      ],
+      "clip": null,
+      "storage": {
+        "reelbolt:editor:preview-quality": "full"
+      }
+    },
+    {
+      "id": "assistant-basics-01",
+      "guide": "assistant-basics",
+      "route": "/app/projects/p-aurora",
+      "chat": "which-footage",
+      "waitFor": [
+        "role=tab[name=/Files/]"
+      ],
+      "steps": [
+        {
+          "click": "role=button[name=\"Open assistant\"]"
+        },
+        {
+          "waitFor": "role=textbox[name=\"Message the workflow assistant\"]"
+        },
+        {
+          "fill": "role=textbox[name=\"Message the workflow assistant\"]",
+          "value": "Which of my clips should I start with?"
+        },
+        {
+          "press": "Enter"
+        },
+        {
+          "waitFor": "text=creek crossing"
+        }
+      ],
+      "highlight": [
+        "role=button[name=\"Close assistant\"]",
+        "role=switch[name=\"Ask before changes\"]"
+      ],
+      "viewport": "desktop",
+      "clip": null
+    },
+    {
+      "id": "assistant-basics-02",
+      "guide": "assistant-basics",
+      "route": "/app/projects/p-aurora",
+      "chat": "create-project",
+      "waitFor": [
+        "role=tab[name=/Files/]"
+      ],
+      "steps": [
+        {
+          "click": "role=button[name=\"Open assistant\"]"
+        },
+        {
+          "waitFor": "role=textbox[name=\"Message the workflow assistant\"]"
+        },
+        {
+          "fill": "role=textbox[name=\"Message the workflow assistant\"]",
+          "value": "Create a project called Spring Teaser"
+        },
+        {
+          "press": "Enter"
+        },
+        {
+          "waitFor": "role=button[name=\"Allow\"]"
+        }
+      ],
+      "highlight": [
+        "role=button[name=\"Allow\"]"
+      ],
+      "viewport": "desktop",
+      "clip": null
+    },
+    {
+      "id": "assistant-basics-03-phone",
+      "guide": "assistant-basics",
+      "viewport": "phone",
+      "route": "/app/projects/p-aurora",
+      "chat": "which-footage-short",
+      "waitFor": [
+        "role=tab[name=/Files/]"
+      ],
+      "steps": [
+        {
+          "click": "role=button[name=\"Open assistant\"]"
+        },
+        {
+          "waitFor": "role=textbox[name=\"Message the workflow assistant\"]"
+        },
+        {
+          "fill": "role=textbox[name=\"Message the workflow assistant\"]",
+          "value": "Which of my clips should I start with?"
+        },
+        {
+          "press": "Enter"
+        },
+        {
+          "waitFor": "text=ridgeline run"
+        }
+      ],
+      "highlight": [
+        "role=textbox[name=\"Message the workflow assistant\"]"
+      ],
+      "clip": null
+    },
+    {
+      "id": "pictures-and-thumbnails-01",
+      "guide": "pictures-and-thumbnails",
+      "route": "/app/editor?project=p-aurora&view=pictures",
+      "waitFor": [
+        "text=Your pictures"
+      ],
+      "highlight": [
+        "role=button[name=\"New picture\"]",
+        "role=tab[name=/Pictures/]"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null
+    },
+    {
+      "id": "pictures-and-thumbnails-02",
+      "guide": "pictures-and-thumbnails",
+      "route": "/app/editor/thumbnails/pd-1?project=p-aurora",
+      "waitFor": [
+        "text=Early preview"
+      ],
+      "highlight": [
+        "text=Early preview >> nth=0",
+        "[data-testid=\"layer-row-pl-2\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [
+        {
+          "wait": 2000
+        }
+      ],
+      "clip": null
+    },
+    {
+      "id": "plan-credits-and-billing-01",
+      "guide": "plan-credits-and-billing",
+      "route": "/app/settings/billing",
+      "scenario": "trial",
+      "waitFor": [
+        "[data-testid=\"current-plan-card\"]",
+        "[data-testid=\"plans-card\"]"
+      ],
+      "highlight": [
+        "[data-testid=\"current-plan-card\"]",
+        "[data-testid=\"plans-card\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null,
+      "height": 1700
+    },
+    {
+      "id": "plan-credits-and-billing-02",
+      "guide": "plan-credits-and-billing",
+      "route": "/app/settings/usage",
+      "waitFor": [
+        "[data-testid=\"credits-card\"]"
+      ],
+      "steps": [
+        {
+          "click": "text=By step kind"
+        },
+        {
+          "waitFor": "text=Rendered seconds"
+        }
+      ],
+      "highlight": [
+        "[data-testid=\"credits-card\"]"
+      ],
+      "viewport": "desktop",
+      "clip": null
+    },
+    {
+      "id": "connect-a-runner-01",
+      "guide": "connect-a-runner",
+      "route": "/app/runners/pair?code=BRK7-QX4M",
+      "waitFor": [
+        "role=button[name=\"Approve this device\"]"
+      ],
+      "highlight": [
+        "text=BRK7-QX4M >> nth=0",
+        "role=button[name=\"Approve this device\"]"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null
+    },
+    {
+      "id": "connect-a-runner-02",
+      "guide": "connect-a-runner",
+      "route": "/app/runners",
+      "scenario": "one-runner",
+      "waitFor": [
+        "text=Render box (studio)"
+      ],
+      "highlight": [
+        "tr:has-text(\"Render box\")"
+      ],
+      "viewport": "desktop",
+      "steps": [],
+      "clip": null
+    }
+  ]
+}

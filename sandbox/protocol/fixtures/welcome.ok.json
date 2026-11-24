@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "type": "welcome",
+  "id": "01J9ZQ0000000000000000W001",
+  "payload": {
+    "runnerId": "c3a1f0de-2b4c-4d8e-9a10-6e5f7b8c9d01",
+    "kind": "Desktop",
+    "orgId": "5e2b1c90-7a3d-4f68-8b21-0c9d4e6f1a22",
+    "protocolVersion": "1.0",
+    "heartbeatSec": 15,
+    "deadAfterSec": 45,
+    "maxInlineBytes": 4194304,
+    "gatewayInstance": "10.0.3.17",
+    "serverTime": "2026-10-05T09:00:00Z",
+    "resumed": []
+  }
+}

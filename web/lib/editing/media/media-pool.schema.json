@@ -1,0 +1,720 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reelforge.internal/schemas/media-pool.schema.json",
+  "title": "ReelBolt media pool contract (T-101 MediaController + T-102 MediaBinsController)",
+  "$comment": "AUTHORSHIP — this is the FRONTEND's committed transcription of the media contract (T-101 MediaController/MediaDtos, T-102 MediaBinsController/MediaBinDtos). It is NOT generated and NOT backend-owned (unlike inference/src/ReelBolt.Shared/Editing/EditTimeline.schema.json). It was written from the T-101/T-102 ticket text and the shared models, and then RECONCILED against the landed C# once that code appeared on the branch. CONFIRMED against the code: the pool-item and derivative-row field names, order and nullability; the bin summary shape; every route; and the camelCase enum encoding (MediaController.WireName = JsonNamingPolicy.CamelCase). DELTAS the code forced, in the order they landed: (1) MediaDerivativeKind has SIX members, not three — MediaController.ListDerivatives filters by source but NOT by kind, so a response can legitimately carry filmstrip, keyframeIndex or waveformPeaks rows; (2) the move-a-bin-item body field is `binId`, not `targetBinId`; (3) MediaPoolItemResponse APPENDS `bins` (always present, [] when unbinned) and `filmstripUrl` (always present) — both required in the TS mirror, and neither was in the original transcription; (4) MediaProbeResponse APPENDS six nullable fields (videoCodec, audioCodec, container, audioChannels, audioSampleRateHz, bitrateBps) which are null — never 0, never an empty string — when unprobed or when the artifact predates the fix; (5) `container` is ffprobe's format_name VERBATIM, so it may be a comma-separated probe list rather than one container name, and nothing here normalizes it; (6) the filmstrip index IS now a wire shape — GET .../media/{mediaRef}/filmstrip returns { filmstrip: { densities: [...] } }, one density per media_derivatives ROW, with each sheet's bytes addressed through the owning derivativeId plus the sheet's own 0-based index. ONE DELIBERATE DIVERGENCE: MediaProbeResponse is non-nullable per field in C# while MediaProbe tolerates null per field here, so a service that degrades a probe cannot emit a NaN-valued field into the UI. That divergence is now productively narrow — the six appended fields really are nullable on the wire, so only the five original ones are still wider here than the C#. If the C# changes again, the code wins.",
+  "description": "The read/write wire shapes of the editor media pool: the project media pool list, one source's flat derivative row list, and media bins with their membership write requests. No shape here ever carries a storage key, a bucket name or a full object URL — derivative bytes are reachable only through the /content API path.",
+  "$defs": {
+    "MediaRef": {
+      "type": "string",
+      "pattern": "^(file|step_result):[0-9a-fA-F-]{36}$",
+      "description": "An OPAQUE media source token. 'file:<guid>' is a ProjectFile id; 'step_result:<guid>' is a WorkflowStepResult id (a render registered only in workflow_step_results.output_storage_key). The two prefixes exist because a bare GUID cannot tell the two tables apart. Treat it as opaque: never parse a GUID out of it, never assume a prefix."
+    },
+    "MediaKind": {
+      "enum": [
+        "video",
+        "audio",
+        "image"
+      ],
+      "$comment": "INFERRED casing and domain: the pool is built from project_files with mime video/*, audio/*, image/*, so these are the three media kinds. Lowercase follows the repo's JsonStringEnumConverter(JsonNamingPolicy.CamelCase) convention (see EditTimeline's enums), not read from the missing DTO.",
+      "description": "The media kind of a pool item, derived from its MIME type."
+    },
+    "MediaCategory": {
+      "enum": [
+        "userFiles",
+        "agentFiles",
+        "outputFiles"
+      ],
+      "$comment": "INFERRED: these are exactly the three values ProjectFilesController already validates for ProjectFile.Category, so `category` on a pool item is read as that same project-file category and not as a second media taxonomy. Step-result-only renders live under projects/{projectId}/outputFiles/, so they carry 'outputFiles'.",
+      "description": "The owning project-file category of a pool item."
+    },
+    "MediaProbe": {
+      "type": "object",
+      "description": "Probed media characteristics, projected from the newest VideoAnalyze artifact's Sources[] entry for this source. Null on the pool item when the source was never analysed — the API never probes, computes or invents a duration, fps, resolution, codec, container, channel count, sample rate or bitrate of its own. A null FIELD inside a present probe means the artifact mentioned the source but never probed that particular field, which is the normal reading of an artifact persisted before the six appended fields existed. Never 0 and never an empty string in either case.",
+      "required": [
+        "durationSec",
+        "fpsNum",
+        "fpsDen",
+        "width",
+        "height",
+        "videoCodec",
+        "audioCodec",
+        "container",
+        "audioChannels",
+        "audioSampleRateHz",
+        "bitrateBps"
+      ],
+      "properties": {
+        "durationSec": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Container duration in seconds, as ffprobe reported it."
+        },
+        "fpsNum": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Exact rational frame rate numerator — ffprobe's r_frame_rate (e.g. 30000 for 29.97). Never a pre-divided double, so frame arithmetic accumulates no drift."
+        },
+        "fpsDen": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Exact rational frame rate denominator (e.g. 1001 for 29.97)."
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Pixel width."
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Pixel height."
+        },
+        "videoCodec": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ffprobe's codec_name for the first video stream, or null when unprobed. Never an empty string and never a stand-in like 'unknown codec' — a stand-in presented as data is exactly the fabricated fact this field exists to avoid."
+        },
+        "audioCodec": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ffprobe's codec_name for the first audio stream, or null when unprobed — which is also the honest reading of a video with no audio stream: nothing was reported."
+        },
+        "container": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ffprobe's format_name VERBATIM. A sniffed MP4 reports the comma-separated probe list 'mov,mp4,m4a,3gp,3g2,mj2' rather than a single clean container name, and normalizing it here would invent a canonical name the source may not have. Render it readably (format.ts#formatContainer) without pretending it is one container."
+        },
+        "audioChannels": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Channel count of the first audio stream, or null when unprobed. 0 is never emitted as a stand-in for 'not probed'."
+        },
+        "audioSampleRateHz": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Sample rate of the first audio stream in Hz, or null when unprobed."
+        },
+        "bitrateBps": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Container bitrate in bits per second, or null when unprobed. 0 is never emitted as a stand-in for 'not probed'."
+        }
+      },
+      "$comment": "Field names come from VideoAnalysisMedia in VideoAnalysisArtifact.cs and the appended six from the landed MediaProbeResponse; the null-tolerance on the five original fields is a deliberate widening of that DTO, whose five are non-nullable. Being more permissive than the sender costs nothing and stops a degraded probe from rendering NaN. The six appended fields are genuinely nullable on the wire — they are null when the artifact predates them."
+    },
+    "MediaPoolItem": {
+      "type": "object",
+      "description": "One source in the project media pool: a project_files row with a video/*, audio/* or image/* MIME type, or an unregistered render found only in workflow_step_results.output_storage_key.",
+      "required": [
+        "mediaRef",
+        "kind",
+        "fileName",
+        "mimeType",
+        "sizeBytes",
+        "category",
+        "probe",
+        "bins",
+        "filmstripUrl"
+      ],
+      "properties": {
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        },
+        "kind": {
+          "$ref": "#/$defs/MediaKind"
+        },
+        "fileName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display file name. Always non-empty."
+        },
+        "mimeType": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Declared MIME type. Always non-empty."
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Object size in bytes."
+        },
+        "category": {
+          "$ref": "#/$defs/MediaCategory"
+        },
+        "probe": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MediaProbe"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Probe metadata, or null when the source was never analysed."
+        },
+        "bins": {
+          "type": "array",
+          "description": "Every non-deleted bin of THIS project that holds this source, ordered by binId then itemId. ALWAYS PRESENT and EMPTY rather than null when the source is unbinned — 'in no bin' is a normal state a panel renders, not a missing value. A source may appear more than once (several pins, several bins), which is why this is a list.",
+          "items": {
+            "$ref": "#/$defs/MediaBinMembership"
+          }
+        },
+        "filmstripUrl": {
+          "type": "string",
+          "minLength": 1,
+          "description": "This source's filmstrip-index route as an API path string — never a storage key, a bucket or an object URL. Always present, because a client holding a mediaRef is not supposed to have to rebuild this feature's path grammar from it."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaBinMembership": {
+      "type": "object",
+      "description": "One bin holding one source — a membership PIN, not the membership itself. Both ids are needed and neither is derivable from the other: binId says which folder, itemId is what DELETE .../media/bins/{binId}/items/{itemId} addresses. The same source can legitimately appear in several bins at once.",
+      "required": [
+        "binId",
+        "itemId"
+      ],
+      "properties": {
+        "binId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The bin holding the source."
+        },
+        "itemId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The pin's own id — the value the remove route needs."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaPoolList": {
+      "type": "array",
+      "description": "The project pool, newest first, capped at 500 entries by the server.",
+      "maxItems": 500,
+      "items": {
+        "$ref": "#/$defs/MediaPoolItem"
+      }
+    },
+    "MediaDerivativeKind": {
+      "enum": [
+        "proxy",
+        "waveform",
+        "waveformPeaks",
+        "thumbnail",
+        "filmstrip",
+        "keyframeIndex",
+        "stills",
+        "stabilizedProxy"
+      ],
+      "$comment": "Read from the landed ReelBolt.Shared/Data/Models/MediaDerivative.cs (eight members: Proxy, Waveform, WaveformPeaks, Thumbnail, Filmstrip, KeyframeIndex, Stills, StabilizedProxy — Stills are on-demand full-size frames the assistant asks for; StabilizedProxy is the stabilised copy of a whole source, picture only, listed once ready), encoded camelCase by MediaWireEnumJsonConverter. All eight are listed because MediaController.ListDerivatives filters by source and NOT by kind — a client that closed this set at three would reject a real response. `waveform` is retained by the model as a superseded signpost (nothing ever wrote it); `waveformPeaks` is what the editor draws.",
+      "description": "What a derivative row was generated for — the full landed set."
+    },
+    "MediaDerivativeRow": {
+      "type": "object",
+      "description": "One derivative of one source. Rows are a FLAT LIST — not a kind-keyed map — and the only thing a client can observe about a derivative is whether its row EXISTS. There is deliberately no `state` field: the API cannot distinguish 'not generated yet' from 'failed' from 'unsupported', so the UI must not claim any of them.",
+      "required": [
+        "id",
+        "kind",
+        "mimeType",
+        "sizeBytes",
+        "durationSec",
+        "width",
+        "height",
+        "contentUrl"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The derivative row id. Bytes stream from GET .../derivatives/{id}/content — by ROW ID, never by kind, because one source can legitimately hold several rows of the same kind."
+        },
+        "kind": {
+          "$ref": "#/$defs/MediaDerivativeKind"
+        },
+        "mimeType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "MIME type of the stored object, when known (nullable in the model)."
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Object size in bytes."
+        },
+        "durationSec": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Duration in seconds for time-based derivatives (proxy, waveform); null for still images."
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Pixel width, for image/video derivatives; null when not applicable."
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Pixel height, for image/video derivatives; null when not applicable."
+        },
+        "contentUrl": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The API content path for this row's bytes. An API path — never a storage key, a bucket or a presigned object URL."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaDerivativeList": {
+      "type": "array",
+      "description": "Every non-deleted derivative row for one source, in the project. A source with no generated derivatives is an empty list — a normal, expected state, not an error.",
+      "items": {
+        "$ref": "#/$defs/MediaDerivativeRow"
+      }
+    },
+    "MediaBin": {
+      "type": "object",
+      "description": "One media bin. `itemCount` is the server's own count of DIRECT members (not the subtree total). Membership is readable elsewhere now: GET .../media/bins/{binId}/items lists a bin's pins, and every pool item carries its own `bins` pin list. A bin's count and its listing can legitimately disagree, because the listing also returns DANGLING pins whose source is gone and which therefore appear in no pool item at all.",
+      "required": [
+        "id",
+        "name",
+        "parentBinId",
+        "sortOrder",
+        "itemCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The bin id."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "Required, trimmed, 1..120 characters. Empty or oversized is a 400 on write."
+        },
+        "parentBinId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The parent bin, or null for a top-level bin."
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Sibling ordering hint."
+        },
+        "itemCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many mediaRefs this bin directly holds. Direct membership only — not the subtree total."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaBinList": {
+      "type": "array",
+      "description": "Every non-deleted bin of the project, ordered deterministically by the server. The list is FLAT: nesting is expressed only through parentBinId, and the client builds the tree.",
+      "items": {
+        "$ref": "#/$defs/MediaBin"
+      }
+    },
+    "CreateBinRequest": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "parentBinId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "UpdateBinRequest": {
+      "type": "object",
+      "description": "Renames and/or reparents a bin (PatchMediaBinRequest). The two no-op-looking JSON shapes are NOT the same request: an ABSENT parentBinId means \"rename, keep the current parent\", while an explicit null means \"move this bin to the root\". A client must therefore send the key only when it means to move. Reparenting under the bin itself or any of its descendants is a 400 — refused here too, which never issues the call.",
+      "minProperties": 1,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "parentBinId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AddBinItemRequest": {
+      "type": "object",
+      "description": "Adds a pool mediaRef to a bin (AddMediaBinItemRequest.MediaRef). Adding the same mediaRef to the same bin twice returns the existing item instead of creating a duplicate row.",
+      "required": [
+        "mediaRef"
+      ],
+      "properties": {
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaBinItem": {
+      "type": "object",
+      "description": "One bin item, as returned by the add and move routes. The add route's response is also where a client first learns an itemId, which is what makes a removal reachable the moment a pin is created.",
+      "required": [
+        "id",
+        "binId",
+        "mediaRef",
+        "sourceKind",
+        "sortOrder",
+        "createdAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The item id."
+        },
+        "binId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The bin holding it."
+        },
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        },
+        "sourceKind": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"ProjectFile\" or \"StepResult\" — the string form of the shared MediaSourceKind discriminator. A plain string on the wire, not a camelCased enum, so it is NOT a closed union here."
+        },
+        "sortOrder": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "MoveBinItemRequest": {
+      "type": "object",
+      "description": "Body of PATCH .../media/bins/{binId}/items/{itemId} — moves the item INTO `binId`. The field is `binId`, read from the landed MoveMediaBinItemRequest.",
+      "required": [
+        "binId"
+      ],
+      "properties": {
+        "binId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaBinItemDetail": {
+      "type": "object",
+      "description": "One bin item as GET .../media/bins/{binId}/items returns it — MediaBinItem's six fields, in its order and with its meaning, plus the four fields of the source the pin names. The four resolution fields are ALL null for a DANGLING pin (its source row was deleted, belongs to another project, or no longer sits under this project's outputFiles/ prefix). The row is still returned, with its id and its normalized mediaRef, because a pin the client cannot see is a pin the client cannot remove. Nothing is defaulted, emptied or guessed in place of a value the server does not have. There is deliberately no `probe` field: probe metadata is produced by the pool and joined by mediaRef, and a second producer could disagree with it.",
+      "required": [
+        "id",
+        "binId",
+        "mediaRef",
+        "sourceKind",
+        "sortOrder",
+        "createdAt",
+        "kind",
+        "fileName",
+        "mimeType",
+        "sizeBytes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The item id — the value the move and remove routes need."
+        },
+        "binId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        },
+        "sourceKind": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"ProjectFile\" or \"StepResult\" — unchanged from MediaBinItem."
+        },
+        "sortOrder": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MediaKind"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The source's media kind, or null when it is not known (a file uploaded without a MIME type, or a dangling pin)."
+        },
+        "fileName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The source's display name, or null when it has none to report. A base name — never a storage key."
+        },
+        "mimeType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The source's MIME type, or null when it is not known."
+        },
+        "sizeBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "The source's size in bytes, or null when it is not recorded (a render records none)."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaBinItemDetailList": {
+      "type": "array",
+      "description": "Every non-deleted item of one bin, ordered by sortOrder ascending. An empty list is the normal answer for an empty bin, not an error.",
+      "items": {
+        "$ref": "#/$defs/MediaBinItemDetail"
+      }
+    },
+    "MediaFilmstripSheet": {
+      "type": "object",
+      "description": "One sprite sheet of one density: where its thumbnails start in the flat sequence, how many it carries, and the API path that streams its bytes. contentUrl addresses the sheet through the derivative ROW that owns the density plus this sheet's own 0-based index in the density's sheets[] array, because one density is ONE media_derivatives row while sheets 1..N-1 have no row of their own. Whether the bytes exist yet is the sheet route's answer (a per-sheet 404), never a hole in this index — so a missing sheet image is a per-sheet degradation, not 'no filmstrip'.",
+      "required": [
+        "firstThumbIndex",
+        "thumbCount",
+        "firstTimeSec",
+        "contentUrl"
+      ],
+      "properties": {
+        "firstThumbIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Index of this sheet's first thumbnail in the whole filmstrip, 0-based."
+        },
+        "thumbCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Thumbnails this sheet actually carries — a MEASURED decoded frame count, never duration/densitySec. The last sheet is usually partial."
+        },
+        "firstTimeSec": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Source time of thumbnail firstThumbIndex."
+        },
+        "contentUrl": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The API content path for this sheet's bytes. Always present; never a storage key, a bucket or an object URL."
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaFilmstripDensity": {
+      "type": "object",
+      "description": "One filmstrip density: the sprite-sheet geometry and the sheets it is tiled from, read VERBATIM from the sidecar document the media writer produced. Nothing here is recomputed — sheetCount comes from the document rather than from sheets.length, and the geometry comes from the document rather than from an assumed 10x10 tile, because duration/densitySec and the real decoded frame count disagree and the rounded-up difference is exactly the off-by-one that makes hover-scrub land on the wrong thumbnail. densitySec is the source-seconds step between consecutive thumbnails of the FLAT sequence, which is what a client multiplies by a thumbnail index to get a source time.",
+      "required": [
+        "densitySec",
+        "thumbWidth",
+        "thumbHeight",
+        "cols",
+        "rows",
+        "sheetCount",
+        "sheets"
+      ],
+      "properties": {
+        "densitySec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "thumbWidth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "thumbHeight": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sheetCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Sheets the sidecar says this density has. Read, never recomputed from sheets.length."
+        },
+        "sheets": {
+          "type": "array",
+          "description": "The sheets in the order the sidecar lists them — which IS the flat thumbnail order, since each sheet's firstThumbIndex is the running sum of the preceding sheets' counts.",
+          "items": {
+            "$ref": "#/$defs/MediaFilmstripSheet"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaFilmstripDocument": {
+      "type": "object",
+      "description": "Every density of one source's filmstrip index, densitySec ascending. An EMPTY list is a normal answer, not an error: 'this source has no filmstrip index yet' is a state the editor shows as 'nothing to scrub with', reported honestly as zero densities rather than as a fabricated one.",
+      "required": [
+        "densities"
+      ],
+      "properties": {
+        "densities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MediaFilmstripDensity"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "MediaFilmstripResponse": {
+      "type": "object",
+      "description": "The envelope of GET .../media/{mediaRef}/filmstrip. An envelope rather than a bare array, so the frontend's resolveFilmstripThumb(index, timeSec) — already written against filmstrip.densities[].sheets[] — receives a body that drops straight into it.",
+      "required": [
+        "filmstrip"
+      ],
+      "properties": {
+        "filmstrip": {
+          "$ref": "#/$defs/MediaFilmstripDocument"
+        }
+      },
+      "additionalProperties": true
+    },
+    "RequestMediaDerivativesRequest": {
+      "type": "object",
+      "description": "Body of POST .../media/derivatives/request — the editor's explicit 'I just opened this clip, build what it needs' call. Kinds is a list of NAMES, not of enum values: the HTTP body cannot carry the type-level converter, so the boundary takes names and MediaController closes them onto the enum once, before anything is published, rejecting any name the enum does not have.",
+      "required": [
+        "mediaRef"
+      ],
+      "properties": {
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        },
+        "kinds": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Omitted means the server's default, which is EVERY member of the closed enum — deciding what is worth producing is the consumer's job, since this API has no ffmpeg and cannot know which kinds are cheap for a given source."
+        },
+        "requestedBy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Omitted means 'editor-open'. The server also defines 'upload' and 'render-output'."
+        }
+      },
+      "additionalProperties": true
+    },
+    "RequestMediaDerivativesResponse": {
+      "type": "object",
+      "description": "The 202 Accepted body of a derivative request: what was asked for, and under which reason. A request is a REQUEST — it does not generate anything synchronously, so a client must never read this as 'the derivative now exists'.",
+      "required": [
+        "mediaRef",
+        "kinds",
+        "requestedBy"
+      ],
+      "properties": {
+        "mediaRef": {
+          "$ref": "#/$defs/MediaRef"
+        },
+        "kinds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requestedBy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

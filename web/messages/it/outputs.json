@@ -1,0 +1,99 @@
+{
+  "share": {
+    "scopeNote": "Condividi copia un link che si apre solo per chi ha effettuato l'accesso a questo progetto. I link pubblici non sono ancora disponibili.",
+    "copiedTitle": "Link copiato",
+    "failedTitle": "Impossibile condividere questo video",
+    "copyYourself": "Copia il link a mano: {url}"
+  },
+  "check": {
+    "pending": "Stiamo controllando il tuo video. Comparirà qui da solo.",
+    "pendingFile": "Stiamo controllando questo file. Comparirà qui da solo.",
+    "cue": "Controllo in corso",
+    "blocked": "Questo video non può essere mostrato."
+  },
+  "loadError": {
+    "generic": "Non è stato possibile caricare questo video.",
+    "missing": "Non è stato possibile caricare questo video. Potrebbe essere stato rimosso dallo spazio di archiviazione.",
+    "moderationFile": "Questo file non è disponibile per ora, perché sta passando il controllo di pubblicazione. Riprova tra un momento.",
+    "moderation": "Questo video non è disponibile per ora, perché sta passando il controllo di pubblicazione. Riprova tra un momento."
+  },
+  "player": {
+    "checking": "Controllo del motivo per cui questo video non si è caricato…",
+    "ariaLabel": "Video {title}",
+    "download": "Scarica",
+    "share": "Condividi",
+    "openRun": "Apri esecuzione"
+  },
+  "stage": {
+    "final": "Finale",
+    "draft": "Bozza",
+    "inProgress": "In corso"
+  },
+  "takes": {
+    "run": "Esecuzione {number}",
+    "earlierRun": "Esecuzione precedente",
+    "replaced": "{run} · sostituito durante l'esecuzione",
+    "failed": "Non ha funzionato",
+    "count": "{count, plural, one {# versione precedente} other {# versioni precedenti}}",
+    "deleteEarlier": "Elimina le versioni precedenti",
+    "listLabel": "Versioni precedenti",
+    "stillGoing": "Esecuzione ancora in corso",
+    "inProgressTake": "Versione in corso",
+    "pinned": "Fissato",
+    "play": "Riproduci",
+    "playLabel": "Riproduci {label}",
+    "download": "Scarica",
+    "downloadLabel": "Scarica {label}",
+    "unpin": "Sblocca",
+    "pinTip": "Fissa: conserva questa versione",
+    "unpinLabel": "Sblocca {label}",
+    "pinLabel": "Fissa {label}",
+    "unpinned": "Versione sbloccata",
+    "pinnedDone": "Versione fissata",
+    "deleteTip": "Elimina questa versione",
+    "deleteLabel": "Elimina {label}",
+    "deleteAllTitle": "Eliminare le versioni precedenti?",
+    "deleteOneTitle": "Eliminare questa versione?",
+    "deleteAllBody": "Questa azione elimina in modo definitivo {count, plural, one {# versione precedente} other {# versioni precedenti}} di questo video. L'ultima versione e quelle fissate restano.",
+    "deleteOneBody": "Questa azione elimina in modo definitivo questa versione del video e la rimuove da File. L'ultima versione resta.",
+    "deletedAll": "Versioni precedenti eliminate",
+    "deletedOne": "Versione eliminata"
+  },
+  "modal": {
+    "render": "Video",
+    "close": "Chiudi il lettore",
+    "prev": "Video precedente",
+    "next": "Video successivo"
+  },
+  "rail": {
+    "label": "Video",
+    "play": "Riproduci {title}",
+    "playStage": "Riproduci {title} ({stage})"
+  },
+  "warnings": {
+    "many": "{count} cose da controllare in questo video"
+  },
+  "quota": {
+    "title": "Il tuo spazio di lavoro ha esaurito lo spazio di archiviazione",
+    "plans": "Vedi piani e spazio di archiviazione"
+  },
+  "usage": {
+    "ariaUnlimited": "{used} usati: questo piano non ha un limite di spazio",
+    "ariaPercent": "Spazio usato: {percent}%",
+    "unlimited": "Questo piano non ha un limite di spazio.",
+    "free": "{free} liberi su {total}.",
+    "largest": "Progetti più grandi"
+  },
+  "gallery": {
+    "title": "{count, plural, one {# immagine} other {# immagini}}",
+    "listLabel": "Immagini di questa esecuzione",
+    "pictureN": "Immagine {n}",
+    "open": "Apri {name} a schermo intero",
+    "download": "Scarica {name}",
+    "downloadAll": "Scarica tutte",
+    "downloadThis": "Scarica",
+    "previous": "Immagine precedente",
+    "next": "Immagine successiva",
+    "close": "Chiudi"
+  }
+}

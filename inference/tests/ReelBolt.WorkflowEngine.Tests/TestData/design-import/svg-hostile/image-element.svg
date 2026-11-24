@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <image href="https://example.test/a.png" width="10" height="10"/>
+  <circle cx="5" cy="5" r="4" fill="#333"/>
+</svg>

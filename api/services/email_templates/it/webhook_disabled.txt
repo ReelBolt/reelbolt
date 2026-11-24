@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+L'endpoint webhook {{.FileName}} nello spazio di lavoro {{.OrgName}} è stato disattivato.
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+Correggi l'endpoint, poi riattivalo dalla scheda webhook:
+
+{{.Link}}
+
+-- {{.FooterNote}}

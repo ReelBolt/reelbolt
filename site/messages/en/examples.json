@@ -1,0 +1,33 @@
+{
+  "page": {
+    "eyebrow": "Example",
+    "title": "See ReelBolt at work before you sign up",
+    "lead": "No footage and no editor yet? This is the ReelBolt launch film. It shows the product doing the work.",
+    "secondary": "See what else it does"
+  },
+  "film": {
+    "caption": "The film is in English and plays without sound until you turn it on. It runs about a minute.",
+    "unavailable": "The example film is not available right now. Come back soon, or read what ReelBolt does on the features page."
+  },
+  "inside": {
+    "eyebrow": "What you are watching",
+    "title": "What the film shows",
+    "intro": "The film opens on a founder at a desk at night, asking an AI assistant for a launch video. It then shows what happened next, in the product itself:",
+    "items": [
+      "The assistant's requests running, each one allowed before it starts.",
+      "The editing room working through the steps of the film.",
+      "The takes and a real timeline you can open and change.",
+      "The picture editor and the logo."
+    ],
+    "note": "This is one film made by the team behind ReelBolt, not a customer's result."
+  },
+  "next": {
+    "title": "Make your own",
+    "body": "You can bring your product, your footage and your brand. If you have no footage yet, you can start from your product alone.",
+    "recipes": "Browse video recipes you can copy"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "examples": "Example"
+  }
+}

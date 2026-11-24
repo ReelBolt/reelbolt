@@ -1,0 +1,217 @@
+# Media-plane (ARM64 render host) override — /opt/reelbolt/docker-compose.media.yml
+#
+#   docker compose -f docker-compose.yml -f docker-compose.media.yml build
+#   docker compose -f docker-compose.yml -f docker-compose.media.yml up -d
+#
+# This host runs ONLY the four render services: workflow-engine, sandbox-runtime,
+# sandbox-executor, runner-gateway. docker-compose.yml is never edited; everything
+# below is an override.
+#
+# Two deliberate differences from an operator file (not in the public repository):
+#   1. The images are built HERE, on this ARM64 box, instead of pulled from GHCR.
+#      A plain `docker build` on aarch64 produces an arm64 image, which is what the
+#      control plane (x86_64) must never receive. Nothing amd64 is pulled.
+#   2. runner-gateway is part of this stack, so its "fabric" opt-in profile is reset.
+#
+# Inbound: nothing binds 0.0.0.0 except sshd. The engine publishes 8080 on the
+# Hetzner private address only (the control plane's nginx proxies to it there).
+
+# Render-host marker. The session-key guard lives in docker-compose.override.yml, which compose
+# loads only without -f, so this host (always -f docker-compose.yml -f docker-compose.media.yml)
+# never sees it. This overlay refuses to render without the marker: set REELBOLT_RENDER_HOST=true
+# in this host's .env (and no session key). Reaches no container.
+x-render-host-guard: ${REELBOLT_RENDER_HOST:?set REELBOLT_RENDER_HOST=true in this render host's .env (it holds the engine key only, never the session key)}
+
+services:
+  workflow-engine:
+    environment:
+      # ── Data services: the control plane's private address. Nothing database-facing
+      #    here is publicly exposed; these are private-network (10.0.0.0/16) addresses.
+      # DATABASE_CONNECTION_STRING is the engine's RUNTIME login (role reelbolt_engine, password
+      # ENGINE_DB_PASSWORD as set on the control host): data access only. Never the postgres
+      # superuser and never the migration login; an operator file (not in the public repository) refuses those
+      # before a release starts anything. This host needs no POSTGRES_USER / POSTGRES_PASSWORD.
+      ConnectionStrings__DefaultConnection: ${DATABASE_CONNECTION_STRING:?set DATABASE_CONNECTION_STRING in .env}
+      # The engine does not migrate here: the control host runs the engine-migrator one-shot on
+      # every release, and the engine refuses to start while migrations are pending.
+      Database__MigrateAtStartup: "false"
+      Database__MaxPoolSize: ${ENGINE_DB_MAX_POOL_SIZE:-12}
+      # ── Token signing: this host holds the ENGINE key only, never the session key. The engine signs
+      #    its calls to the Inference API with it and accepts only tokens the Inference API mints with
+      #    it, so a compromise of this box cannot forge a user session. Same value as the control
+      #    plane's ENGINE_JWT_SIGNING_KEY; the session key must NOT be in this host's .env.
+      Jwt__SigningKey: !reset null
+      EngineJwt__SigningKey: ${ENGINE_JWT_SIGNING_KEY:?set ENGINE_JWT_SIGNING_KEY in .env (openssl rand -hex 32, same value as the control plane, never the session key value)}
+      RabbitMQ__Host: ${CONTROL_PRIVATE_IP:?set CONTROL_PRIVATE_IP in .env}
+      RabbitMQ__Username: ${RABBITMQ_USER:?set RABBITMQ_USER in .env}
+      RabbitMQ__Password: ${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env}
+      InferenceApi__BaseUrl: http://${CONTROL_PRIVATE_IP:?}:8080
+      # ── Object storage: also on the control plane, also private-network only.
+      MinIO__Endpoint: ${MINIO_ENDPOINT:?set MINIO_ENDPOINT in .env}
+      MinIO__PublicEndpoint: ${MINIO_PUBLIC_ENDPOINT:-}
+      MinIO__Region: ${MINIO_REGION:-garage}
+      MinIO__ForcePathStyle: ${MINIO_FORCE_PATH_STYLE:-true}
+      MinIO__AccessKey: ${MINIO_ACCESS_KEY:?set MINIO_ACCESS_KEY in .env}
+      MinIO__SecretKey: ${MINIO_SECRET_KEY:?set MINIO_SECRET_KEY in .env}
+      MinIO__BucketName: ${MINIO_BUCKET:?set MINIO_BUCKET in .env}
+      # ── Data Protection — ONE ring shared with the control plane (docs/secrets.md, WP F3).
+      #    The Inference API (control plane) writes provider API keys through
+      #    DataProtectionSecretProtector; this engine decrypts them. That needs ONE ring and
+      #    ONE wrapping key on both hosts: the ring lives in the shared Postgres table
+      #    data_protection_keys (this service maps it read-only) and both .env files hold the
+      #    SAME DATA_PROTECTION_KMS_LOCAL_KEY. A per-host /keys ring cannot work across hosts.
+      DataProtection__Store: ${DATA_PROTECTION_STORE:-FileSystem}
+      DataProtection__Kms__LocalKey: ${DATA_PROTECTION_KMS_LOCAL_KEY:-}
+      #    Rows whose key is the literal "env:" never touch the ring and are unaffected.
+      # ── Compute fabric: the gateway runs on THIS host, so the engine may use it.
+      Compute__Mode: ${COMPUTE_MODE:-Local}
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      Billing__Enabled: ${BILLING_ENABLED:-false}
+      # ── Observability (blank endpoint = nothing exported).
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      OTEL_EXPORTER_OTLP_PROTOCOL: ${OTEL_EXPORTER_OTLP_PROTOCOL:-http/protobuf}
+      OTEL_EXPORTER_OTLP_HEADERS: ${OTEL_EXPORTER_OTLP_HEADERS:-}
+      OTEL_DEPLOYMENT_ENVIRONMENT: ${OTEL_DEPLOYMENT_ENVIRONMENT:-production}
+    ports: !override
+      # Private address only — never 0.0.0.0. The control plane's nginx is the only
+      # caller (UPSTREAM_WORKFLOW_ENGINE=http://10.0.0.3:8080).
+      - "${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:8080:8080"
+    # postgres / inference / rabbitmq / qdrant are on the OTHER host: a compose
+    # depends_on cannot span hosts, and naming them here would make compose try to
+    # start them locally.
+    depends_on: !reset {}
+
+  # Build-and-exit: produces the image untrusted, model-authored render code runs in.
+  # It is not published anywhere and never leaves this box.
+  sandbox-runtime:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: sandbox-runtime
+    image: reelbolt-sandbox-runtime:local
+
+  # Held on purpose: this service mounts the Docker socket, because it starts the
+  # sandbox containers that run untrusted render workloads. That is exactly why the
+  # render host is a separate machine from the database host (docs/sandbox-service.md).
+  sandbox-executor:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: control-plane
+
+  # Inert while Compute__Mode=Local; part of this stack because the media plane owns
+  # the compute fabric's control plane. Reset out of its opt-in "fabric" profile.
+  runner-gateway:
+    profiles: !reset []
+    # Reached by the control plane's nginx over the private network only; the
+    # public entry point is https://<host>/runner/v1/connect on the control box.
+    ports:
+      - "${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:8090:8090"
+      # The internal API for the control host (local-model relay, docs/local-llm-gateway.md):
+      # TLS with a required client certificate, on the private address only. Firewall it to
+      # CONTROL_PRIVATE_IP (an operator document that is not in the public repository).
+      - "${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:8443:8443"
+    volumes:
+      # server.pem, server-key.pem, ca-client.pem from an operator file (not in the public repository)
+      - ${GATEWAY_INTERNAL_TLS_DIR:-./certs/gateway-internal/server}:/run/gateway-tls:ro
+    environment:
+      # Opt in per host once the certificates are in place (an operator document "Gateway internal
+      # TLS link"): RUNNER_GATEWAY_INTERNAL_TLS_ADDR=:8443 in .env. Empty keeps today's behaviour and the
+      # file variables below stay empty too (the gateway refuses TLS files without an address).
+      RUNNER_GATEWAY_INTERNAL_TLS_ADDR: ${RUNNER_GATEWAY_INTERNAL_TLS_ADDR:-}
+      RUNNER_GATEWAY_INTERNAL_TLS_CERT_FILE: ${RUNNER_GATEWAY_INTERNAL_TLS_ADDR:+/run/gateway-tls/server.pem}
+      RUNNER_GATEWAY_INTERNAL_TLS_KEY_FILE: ${RUNNER_GATEWAY_INTERNAL_TLS_ADDR:+/run/gateway-tls/server-key.pem}
+      RUNNER_GATEWAY_INTERNAL_TLS_CLIENT_CA_FILE: ${RUNNER_GATEWAY_INTERNAL_TLS_ADDR:+/run/gateway-tls/ca-client.pem}
+      # true = the plain port serves /internal only to peers on this host's compose network (the engine);
+      # the control host must then use the TLS port. Turn on after the TLS link is verified.
+      RUNNER_GATEWAY_INTERNAL_PLAIN_LOCAL_ONLY: ${RUNNER_GATEWAY_INTERNAL_PLAIN_LOCAL_ONLY:-false}
+      # The gateway's own login (role reelbolt_gateway, password GATEWAY_DB_PASSWORD as set on the
+      # control host). A different user and a different password from the engine's.
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL in .env}
+      DATABASE_MAX_CONNS: ${RUNNER_GATEWAY_DB_MAX_CONNS:-4}
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:?}:${RABBITMQ_PASSWORD:?}@${CONTROL_PRIVATE_IP:?}:5672/
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      RUNNER_JOB_TOKEN_KEY: ${RUNNER_JOB_TOKEN_KEY:-}
+      RUNNER_POOL_CREDENTIALS: ${RUNNER_POOL_CREDENTIALS:-}
+      RUNNER_POOL_TOKEN_KEY: ${RUNNER_POOL_TOKEN_KEY:-}
+      RUNNER_PUBLIC_HOST: ${RUNNER_PUBLIC_HOST:-}
+    depends_on: !override
+      workflow-engine:
+        condition: service_started
+
+  # The only listener pool nodes may reach: the private address, one path (/v1/connect), everything
+  # else 404. Behind the "poolwaker" profile, so a normal deploy neither starts nor stops it and it
+  # is inert while no node exists. Start it here:  docker compose ... --profile poolwaker up -d pool-edge
+  # (the waker itself is started on the control host with the same profile name).
+  pool-edge:
+    profiles: ["poolwaker"]
+    image: nginx:1.31.9-alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETGID, SETUID]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+    ports:
+      - "${ENGINE_PRIVATE_IP:?set ENGINE_PRIVATE_IP in .env}:${POOL_EDGE_PORT:-8091}:8080"
+    volumes:
+      - ./infra/compose/pool-edge:/etc/nginx/conf.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1:8080/edge-health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - reelbolt
+
+  # The pool waker is NOT on this host any more. It holds a read/write cloud provider token, and
+  # this host runs untrusted render workloads, so the waker (with its token file and its
+  # pool-waker-state volume) moved to the control host: docker-compose.control.yml, profile
+  # "poolwaker". It reaches this host's gateway over the internal TLS port (8443) with its own
+  # client certificate. Do not add a provider token mount to this file; the scaler also refuses
+  # to start with one when REELBOLT_ROLE=media.
+
+  # ── Everything below belongs to the CONTROL plane (its data services live there,
+  #    not here). Moved behind a never-activated profile rather than deleted, so a
+  #    bare `docker compose up` on this host can never start a second, split-brain
+  #    Postgres/RabbitMQ/Garage or a second API.
+  postgres:
+    profiles: ["media-disabled"]
+  garage:
+    profiles: ["media-disabled"]
+  rabbitmq:
+    profiles: ["media-disabled"]
+  whisper:
+    profiles: ["media-disabled"]
+  embeddings:
+    profiles: ["media-disabled"]
+  qdrant:
+    profiles: ["media-disabled"]
+  inference:
+    profiles: ["media-disabled"]
+  mcp:
+    profiles: ["media-disabled"]
+  go-api:
+    profiles: ["media-disabled"]
+  web:
+    profiles: ["media-disabled"]
+  site:
+    profiles: ["media-disabled"]
+  docs:
+    profiles: ["media-disabled"]
+  nginx:
+    profiles: ["media-disabled"]
+  autoheal:
+    profiles: ["media-disabled"]
+  import-worker:
+    profiles: ["media-disabled"]
+  # Grafana is a control-box operator UI, and this stack pins Postgres off — nothing for it to read.
+  # `!override` replaces the base profile list; a plain `profiles:` would be APPENDED to
+  # ["observability"], leaving `--profile observability` able to select it on this stack.
+  grafana:
+    profiles: !override ["media-disabled"]

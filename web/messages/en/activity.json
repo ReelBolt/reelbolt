@@ -1,0 +1,133 @@
+{
+  "types": {
+    "workflowRun": "Running your workflow",
+    "designSystemBuild": "Building your design system",
+    "revision": "Revising your film",
+    "changeRequest": "Applying your change",
+    "graphic": "Designing a graphic",
+    "render": "Making your film",
+    "preview": "Preparing a preview",
+    "loudness": "Checking loudness",
+    "audition": "Preparing a sound preview",
+    "objectAnalysis": "Finding the object",
+    "audioCleanup": "Cleaning the sound",
+    "mediaAnalysis": "Studying your media",
+    "mediaPrep": "Getting your media ready",
+    "cloudSync": "Syncing from Google Drive",
+    "hiddenRun": "Working in the background",
+    "upload": "Uploading a file",
+    "pictureOperation": "Editing a picture",
+    "proposal": "Thinking up edit ideas",
+    "assistantWatch": "Waiting for the assistant",
+    "avatarBuild": "Making an avatar",
+    "generic": "Working in the background",
+    "subjectClip": "Making a clip with your avatars"
+  },
+  "states": {
+    "waiting": "Waiting for a free slot",
+    "running": "Running",
+    "done": "Done",
+    "failed": "Failed",
+    "cancelled": "Cancelled",
+    "estimating": "Getting a cost estimate",
+    "needsReview": "Finished, needs your OK"
+  },
+  "toast": {
+    "done": "{label} is done.",
+    "failed": "{label} did not finish.",
+    "cancelled": "{label} was cancelled.",
+    "refunded": "Your credits were returned.",
+    "open": "Open",
+    "browserTitle": "ReelBolt",
+    "needsReview": "{label} finished and needs your OK.",
+    "switchLabel": "Tell me when a background job finishes"
+  },
+  "failure": {
+    "INSUFFICIENT_CREDITS": "You do not have enough credits for this.",
+    "NO_RUNNER_ONLINE": "No worker is available right now. Try again in a few minutes.",
+    "BUDGET_EXCEEDED": "This went over your spending limit.",
+    "CONTENT_MODERATION_PENDING": "The content is still being checked.",
+    "SOURCE_TOO_LARGE": "The file is too large.",
+    "SOURCE_TOO_LONG": "The video is too long.",
+    "SCRATCH_BUSY": "The workspace is busy. Try again in a moment.",
+    "EGRESS_REFUSED": "The file could not be fetched from that address.",
+    "RUN_RATE_LIMITED": "Too many runs at once. Wait a moment and try again.",
+    "generic": "Something went wrong.",
+    "refunded": "Your credits were given back.",
+    "kept": "Credits used up to the failure were kept."
+  },
+  "cost": {
+    "held": "{count, plural, =1 {About {amount} credit held} other {About {amount} credits held}}",
+    "used": "{count, plural, =1 {{amount} credit used} other {{amount} credits used}}"
+  },
+  "progress": {
+    "step": "Step {order} of {count}",
+    "label": "Progress"
+  },
+  "cancel": {
+    "button": "Cancel",
+    "question": "Stop this job?",
+    "confirm": "Yes, stop it",
+    "keep": "Keep going",
+    "failed": "Could not stop it. It may have already finished."
+  },
+  "row": {
+    "open": "Open",
+    "dismiss": "Dismiss"
+  },
+  "indicator": {
+    "label": "Background activity, {count} running"
+  },
+  "tray": {
+    "title": "Background activity",
+    "needsReview": "Needs your OK",
+    "running": "Running now",
+    "finished": "Recently finished",
+    "clear": "Clear finished",
+    "empty": "Nothing is running. Renders, analyses and AI edits you start show up here.",
+    "apply": "Apply",
+    "discard": "Discard"
+  },
+  "editor": {
+    "needsReview": "{tool} finished, but the clip changed while it ran. Apply it to what is left, or discard it.",
+    "audioCleanupReady": "{tool} is ready. Apply it, or discard it.",
+    "proposalReady": "{tool} are ready. Open them to review, or discard them.",
+    "pictureNeedsReview": "{tool} finished, but the layer it was made for was deleted. The result is kept, hidden. Show it, or discard it.",
+    "openToDecide": "{tool} is waiting for your OK. Open the editor to apply or discard it."
+  },
+  "stages": {
+    "cuttingCaptionCues": "Cutting the captions",
+    "cuttingToTheBeat": "Cutting to the beat",
+    "done": "Done",
+    "encoding": "Encoding the video",
+    "extractingTheFrame": "Picking the frame",
+    "generatingTimelineManifest": "Preparing the timeline",
+    "loadingTimeline": "Loading the timeline",
+    "mixingTheSoundOfInsertedAssets": "Mixing the sound",
+    "placingGeneratedClips": "Placing the new clips",
+    "publishingTheFrame": "Saving the frame",
+    "publishingTheThumbnail": "Saving the thumbnail",
+    "readingTheTrackedScreens": "Reading the screens",
+    "reservingTheGenerationBudget": "Setting aside credits",
+    "resolvingAnalysisArtifact": "Reading the analysis",
+    "resolvingBackgroundMusic": "Choosing the music",
+    "resolvingCensoredRegions": "Finding the areas to hide",
+    "resolvingColorGradePlan": "Planning the colours",
+    "resolvingEditorialDecision": "Planning the edit",
+    "resolvingMotionGraphicsPlan": "Planning the graphics",
+    "resolvingPickupLines": "Preparing the extra lines",
+    "resolvingPicturesAndVideosOverTheFilm": "Preparing the overlays",
+    "resolvingRegionEffects": "Preparing the effects",
+    "resolvingScreenInserts": "Preparing the screen inserts",
+    "resolvingSoundEffectsPlan": "Planning the sound effects",
+    "resolvingTheContent": "Reading the content",
+    "resolvingTheSourceVideo": "Reading the source video",
+    "resolvingVoiceoverLines": "Preparing the voiceover",
+    "reusingCachedResult": "Reusing an earlier result",
+    "selectingTheThumbnailMoment": "Choosing the thumbnail moment",
+    "settingTheLoudness": "Setting the loudness",
+    "uploadingCompiledVideo": "Uploading the video",
+    "uploadingRender": "Uploading the video",
+    "writingEditDecisionList": "Writing the edit list"
+  }
+}

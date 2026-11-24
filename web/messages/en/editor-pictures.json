@@ -1,0 +1,79 @@
+{
+  "defaultName": {
+    "youtube": "Untitled thumbnail",
+    "square": "Untitled square",
+    "post": "Untitled post",
+    "story": "Untitled story",
+    "landscape": "Untitled landscape",
+    "custom": "Untitled picture"
+  },
+  "shapes": {
+    "youtube": {
+      "label": "YouTube thumbnail",
+      "hint": "16:9, {width} × {height}"
+    },
+    "square": {
+      "label": "Square",
+      "hint": "{width} × {height}"
+    },
+    "post": {
+      "label": "Post",
+      "hint": "4:5, {width} × {height}"
+    },
+    "story": {
+      "label": "Story",
+      "hint": "9:16, {width} × {height}"
+    },
+    "landscape": {
+      "label": "Landscape",
+      "hint": "16:9, {width} × {height}"
+    },
+    "custom": {
+      "label": "Custom",
+      "hint": "Your own size"
+    }
+  },
+  "createFailed": "The picture could not be created.",
+  "uploadFailedWith": "The photo could not be uploaded: {message}",
+  "uploadFailed": "The photo could not be uploaded. Check your connection and try again.",
+  "openFailed": "The picture could not be opened.",
+  "renameFailed": "The picture could not be renamed.",
+  "duplicateFailed": "The picture could not be duplicated.",
+  "deleteFailed": "The picture could not be deleted.",
+  "startTitle": "Start a picture",
+  "newPicture": "New picture",
+  "shapeLabel": "Picture shape",
+  "width": "Width",
+  "widthPx": "Width in pixels",
+  "height": "Height",
+  "heightPx": "Height in pixels",
+  "pxSuffix": " px",
+  "nameLabel": "Name of the new picture",
+  "fromPhoto": "Start from a photo",
+  "fromImageLabel": "Start from one of your images",
+  "pickImage": "Pick an image",
+  "noImages": "No images in this project yet",
+  "openInEditor": "Open in the picture editor",
+  "uploadPhoto": "Upload a photo",
+  "uploadProgress": "Upload progress",
+  "yourPictures": "Your pictures",
+  "search": "Search your pictures",
+  "loadFailed": "This project's pictures could not be loaded: {reason}",
+  "tryAgain": "Try again in a moment.",
+  "emptyTitle": "No pictures yet",
+  "emptyBody": "Pick an image above to make a thumbnail: cut people out, add text, use AI tools, and export for YouTube or Photoshop.",
+  "open": "Open {name}",
+  "meta": "{count, plural, one {# layer} other {# layers}} · Edited {when}",
+  "more": "More for {name}",
+  "rename": "Rename",
+  "duplicate": "Duplicate",
+  "startAnother": "Start a new one from this photo",
+  "deletePicture": "Delete picture",
+  "renameTitle": "Rename picture",
+  "pictureName": "Picture name",
+  "pictureNameHint": "Leave it empty to use the photo's file name.",
+  "cancel": "Cancel",
+  "saveName": "Save name",
+  "deleteTitle": "Delete this picture?",
+  "deleteMessage": "\"{name}\" and its layers are deleted for good. The photo it was made from, and any picture you saved from it, stay in your project's files."
+}

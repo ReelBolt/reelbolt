@@ -1,0 +1,12 @@
+{
+  "id": "gsap-kinetic-title",
+  "version": "1.0.0",
+  "title": "GSAP kinetic title",
+  "category": "titles",
+  "description": "Title whose characters rise in with a GSAP SplitText timeline. The timeline is built paused and sought from the frame, so every frame is deterministic.",
+  "tags": ["title", "kinetic type", "gsap", "splittext", "text", "headline"],
+  "requires": ["remotion", "react", "gsap"],
+  "previewComposition": {"compositionId": "Block-gsap-kinetic-title", "durationInFrames": 60, "width": 1280, "height": 720, "fps": 30, "frames": [24, 50]},
+  "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*120*/; fontFamily?: string /*'Inter, sans-serif'*/; staggerSeconds?: number /*0.03*/; durationSeconds?: number /*0.6*/}",
+  "example": "import {GsapKineticTitle} from './blocks/gsap-kinetic-title/GsapKineticTitle.tsx';\n<GsapKineticTitle text=\"Ship the cut today\" color=\"#fff\" fontSize={110} />"
+}

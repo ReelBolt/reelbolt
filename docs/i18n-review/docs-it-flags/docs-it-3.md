@@ -1,0 +1,10 @@
+- recipes/*: "Shape" -> "Formato" : the video frame setting; "Forma" would read as a geometric term. Check against dashboard label.
+- recipes/*: "Run" -> "Avvia", "Retry" -> "Riprova", "Output Video" -> "Video finale", "Your brief" -> "Il tuo brief" : guessed dashboard button/label wording, align with the dashboard catalogue.
+- recipes/*: "Start from a recipe" -> "Parti da una ricetta" ; "New workflow" -> "Nuovo flusso di lavoro" : check against the dashboard strings.
+- recipes/*: "lower-third" -> "sottopancia", "cold open" -> "apertura a freddo", "end card" -> "schermata finale", "cutaway" -> "cutaway" (kept), "b-roll" (kept), "derush" -> "montaggio derush" : editor jargon without a glossary entry.
+- recipes/*: template display names (e.g. "Highlight edit from footage" -> "Montaggio dei momenti migliori dal girato", "Quick vertical reel" -> "Reel verticale veloce") : must match the translated template catalogue.
+- recipes/*: "Admin, Inference Providers" -> "Amministrazione, Provider di inferenza" ; "Files/Renders/Voices/Pronunciation tab" -> "scheda File/Render/Voci/Pronuncia" : navigation labels not in the glossary.
+- recipes/prompted-region-effects.md: server error messages in the "word for word" tables left in English : they are the literal text the step writes; translating would not match what the reader sees.
+- recipes/voiceover.md: "Licence note: Fish Audio ... licence" -> "Nota sulla licenza ..." : legal-adjacent wording, needs review.
+- recipes/voiceover.md: "pickup" kept as English term ; "ducking" kept in prose : audio jargon used by Italian editors.
+- recipes/prompted-region-effects.md: effect names "Colour pop" -> "Colore selettivo", "Spotlight" -> "Faro" : must match the dashboard effect labels.

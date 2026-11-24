@@ -1,0 +1,56 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "speech_start-ev1",
+   "frame": 40,
+   "label": "speech start"
+  },
+  {
+   "name": "speech_end-ev2",
+   "frame": 120,
+   "label": "speech end"
+  },
+  {
+   "name": "speech_start-ev3",
+   "frame": 150,
+   "label": "speech start"
+  },
+  {
+   "name": "speech_end-ev4",
+   "frame": 290,
+   "label": "speech end"
+  },
+  {
+   "name": "speech_start-ev5",
+   "frame": 340,
+   "label": "speech start"
+  },
+  {
+   "name": "speech_end-ev6",
+   "frame": 420,
+   "label": "speech end"
+  },
+  {
+   "name": "speech_start-ev7",
+   "frame": 470,
+   "label": "speech start"
+  },
+  {
+   "name": "speech_end-ev8",
+   "frame": 600,
+   "label": "speech end"
+  },
+  {
+   "name": "speech_start-ev9",
+   "frame": 640,
+   "label": "speech start"
+  },
+  {
+   "name": "speech_end-ev10",
+   "frame": 710,
+   "label": "speech end"
+  }
+ ]
+}

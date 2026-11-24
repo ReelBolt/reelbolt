@@ -1,0 +1,171 @@
+{
+  "section": {
+    "title": "Enhance",
+    "hint": "Make this clip's video look better. Your original stays in your project.",
+    "pick": "What do you want to do?",
+    "noChoice": "Pick one to see what it would cost.",
+    "how": "How",
+    "keepGrain": "Keep film grain",
+    "planHeight": "Your plan goes up to {height}p. Upgrade to pick this.",
+    "aiLimit": "AI slow motion goes up to 4x.",
+    "needsPicture": "Enhance works on a video clip on a picture track."
+  },
+  "choice": {
+    "upscale": "Sharper picture",
+    "interpolate": "Smooth slow motion",
+    "denoise": "Clean up noise",
+    "motionBlur": "Motion blur",
+    "extend": "Extend the picture"
+  },
+  "choiceHint": {
+    "upscale": "Makes the picture bigger and crisper.",
+    "interpolate": "Adds in-between frames so slow motion looks smooth.",
+    "denoise": "Takes out grain and speckle from dark or low-light shots.",
+    "motionBlur": "Adds a natural blur to fast movement.",
+    "extend": "Adds picture around the clip so it fills a different shape."
+  },
+  "engine": {
+    "Local": "Fast (free)",
+    "Hosted": "AI (uses credits)"
+  },
+  "upscale": {
+    "x2": "2x bigger",
+    "x4": "4x bigger",
+    "h1080": "To 1080p",
+    "h2160": "To 4K"
+  },
+  "multiplier": {
+    "2": "2x",
+    "4": "4x",
+    "8": "8x"
+  },
+  "strength": {
+    "Light": "Light",
+    "Strong": "Strong"
+  },
+  "shutter": {
+    "light": "Light",
+    "natural": "Natural",
+    "strong": "Strong"
+  },
+  "extend": {
+    "aiOnly": "Extend uses AI and credits.",
+    "mode": {
+      "aspect": "Shape",
+      "sides": "Custom sides"
+    },
+    "aspect": {
+      "16:9": "Landscape 16:9",
+      "9:16": "Vertical 9:16",
+      "1:1": "Square 1:1",
+      "4:5": "4:5"
+    },
+    "sides": {
+      "hint": "Pick the sides that get new picture. They all grow by the same amount.",
+      "amount": "How much to add (percent)",
+      "left": "Left",
+      "right": "Right",
+      "top": "Top",
+      "bottom": "Bottom",
+      "required": "Add some picture on at least one side."
+    },
+    "prompt": {
+      "label": "What should the new edges show? (optional)",
+      "description": "Plain words, up to {max} characters. Leave blank to continue the scene naturally."
+    }
+  },
+  "estimate": {
+    "checking": "Checking the price...",
+    "free": "Free",
+    "credits": "About {credits, number} {credits, plural, one {credit} other {credits}}",
+    "line": "{cost}. The new video is {width} by {height} at {fps} frames a second, about {size} MB, and takes about {time}.",
+    "lineShort": "{cost}.",
+    "seconds": "{seconds} seconds",
+    "minutes": "{minutes} minutes"
+  },
+  "start": "Start",
+  "cancel": "Cancel",
+  "running": "Working on it...",
+  "progress": "Working on it... {percent}%",
+  "cancelled": "Stopped. Nothing changed in your timeline.",
+  "statusChip": "Enhancing",
+  "readyChip": "Needs your OK",
+  "done": "Ready. Compare, then apply it to your clip.",
+  "compareTitle": "Before and after",
+  "before": "Before",
+  "after": "After",
+  "play": "Play both",
+  "pause": "Pause",
+  "apply": "Apply",
+  "applyAgain": "Apply again",
+  "applied": "Applied to your clip. One undo puts it back.",
+  "useOriginal": "Use original",
+  "reverted": "Your original video is back.",
+  "needsOk": {
+    "title": "Ready - needs your OK",
+    "body": "The clip you enhanced is no longer in your timeline. The new video is saved in your media.",
+    "applyToClip": "Apply to this clip",
+    "keep": "Keep in media only"
+  },
+  "consent": {
+    "title": "Send this video to an outside service?",
+    "body": "AI enhancement sends this video's picture to an outside video service to process it. It is used for this project only. Fast never sends anything.",
+    "check": "I agree to send this project's videos to an outside service for AI enhancement",
+    "cancel": "Not now",
+    "confirm": "Agree and start",
+    "failed": "We could not save your choice. Try again."
+  },
+  "refusal": {
+    "credits": "You need {missing} more credits for this.",
+    "creditsPlain": "You do not have enough credits for this.",
+    "plan": "Your plan does not include this. See the plans to unlock it.",
+    "planVideo": "Your plan does not include video enhancement. See the plans to unlock it.",
+    "planResolution": "Your plan does not go up to this size. Pick a smaller size or see the plans.",
+    "consent": "Agree to send the video to an outside service first.",
+    "tooLong": "This video is too long to enhance.",
+    "tooLongMax": "This video is too long. The longest we can enhance is {seconds} seconds.",
+    "tooShort": "This video is too short to extend. Use a longer clip.",
+    "tooShortMin": "This video is too short to extend. Use a clip of at least {seconds} seconds.",
+    "busy": "You have a lot running right now. Wait a moment and try again.",
+    "unavailable": "This is not available right now. Try Fast, or try again later.",
+    "notVideo": "This only works on videos.",
+    "notFound": "We could not find this video in your project.",
+    "other": "That did not work. Try again.",
+    "addCredits": "Add credits",
+    "seePlans": "See plans",
+    "notMeasured": "We could not measure this video yet. Try again in a moment.",
+    "email": "Verify your email address first, then try again.",
+    "invalid": "That choice is not allowed for this video. Pick another option."
+  },
+  "failure": {
+    "ENHANCE_DURATION_MISMATCH": "The new video came out a different length, so we did not use it. Your credits were refunded. Try again.",
+    "timeout": "This took too long and was stopped. Try again.",
+    "failed": "That did not work. Nothing changed in your timeline. Try again.",
+    "ENHANCE_SOURCE_CHANGED": "The picture changed while it was being enhanced, so we did not use the result. Your credits were refunded. Try again.",
+    "tooLong": "This video is too long to enhance.",
+    "tooShort": "This video is too short to extend. Use a longer clip.",
+    "submitUnknown": "We could not confirm that this started. It may still have been created, and any credits stay held until it is settled. Check your files before you try again.",
+    "contentBlocked": "The text for the new edges could not be used. Change it and try again.",
+    "configInvalid": "That extension is not possible for this video: it already has that shape, or a side would need to grow by more than half. Pick another one.",
+    "noVideo": "There is no picture in this file to enhance.",
+    "outputTooLarge": "The new video would be too large. Pick a smaller size.",
+    "fpsTooHigh": "The new video would have too many frames a second. Pick a smaller multiplier.",
+    "notLarger": "This video is already that size or bigger. Pick a larger size.",
+    "invalid": "That choice is not allowed for this video. Pick another option.",
+    "processing": "We could not process this video. Try another clip.",
+    "service": "The AI service is not available right now. Try Fast, or try again later.",
+    "stillRunning": "This is still running. Wait for it to finish.",
+    "outputUnavailable": "The new video could not be saved. Try again."
+  },
+  "pool": {
+    "action": "Enhance...",
+    "title": "Enhance {name}",
+    "added": "Done. The new video is in your media.",
+    "close": "Close"
+  },
+  "applyLabel": "Enhance clip",
+  "useOriginalLabel": "Use original video",
+  "forClip": "This is the job for {name}.",
+  "otherJob": "Enhancing {name}",
+  "otherJobReady": "{name} is ready - needs your OK"
+}

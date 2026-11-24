@@ -1,0 +1,13 @@
+{
+  "id": "kinetic-title",
+  "version": "1.0.0",
+  "title": "Kinetic title",
+  "category": "titles",
+  "description": "Centered title that lands word by word: each word rises and fades in on a spring, staggered by a few frames.",
+  "tags": ["title", "kinetic type", "text", "spring", "headline"],
+  "requires": ["remotion", "react"],
+  "sharedFiles": ["_shared/motion.ts"],
+  "previewComposition": {"compositionId": "Block-kinetic-title", "durationInFrames": 45, "width": 1280, "height": 720, "fps": 30, "frames": [40]},
+  "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*120*/; fontFamily?: string /*'Inter, sans-serif'*/; staggerFrames?: number /*5*/}",
+  "example": "import {KineticTitle} from './blocks/kinetic-title/KineticTitle.tsx';\n<KineticTitle text=\"Ship the cut today\" color=\"#fff\" fontSize={110} />"
+}

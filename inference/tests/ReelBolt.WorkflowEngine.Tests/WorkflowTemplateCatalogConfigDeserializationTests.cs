@@ -1,0 +1,738 @@
+using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using AwesomeAssertions;
+using ReelBolt.Shared.Data.Models;
+using ReelBolt.Shared.Workflows;
+using Xunit;
+
+namespace ReelBolt.WorkflowEngine.Tests;
+
+/// <summary>
+/// The literal JSON strings seeded in <see cref="WorkflowTemplateCatalog"/> for
+/// <c>lean-context-promo</c> and <c>video-derush-edit</c> were authored by hand alongside (but not
+/// generated from) the config record types they are meant to deserialize into. This is exactly
+/// the class of bug that slipped through once already in this initiative's precedent (enum JSON
+/// casing, commit 8e4b6a5a) — a field name or enum value drifting between the type's author and
+/// the template's author looks correct by eye but throws or silently no-ops at execution time.
+/// These tests deserialize the actual seeded literals with the exact <see cref="JsonSerializerOptions"/>
+/// the real step executors use, and assert the resulting values, so a future edit to either side
+/// that breaks the pairing fails CI instead of a live workflow run.
+/// </summary>
+public class WorkflowTemplateCatalogConfigDeserializationTests
+{
+    // Mirrors VideoAnalyzeStepExecutor.ConfigJsonOptions / VideoCompileStepExecutor.ConfigJsonOptions
+    // / ExtractStepExecutor.ConfigJsonOptions exactly: JsonSerializerDefaults.Web (camelCase
+    // properties) + JsonStringEnumConverter (PascalCase enum member names, per R7).
+    private static readonly JsonSerializerOptions ConfigJsonOptions = new(JsonSerializerDefaults.Web)
+    {
+        Converters = { new JsonStringEnumConverter() }
+    };
+
+    private static WorkflowTemplateStepDefinition GetStep(string templateKey, int index)
+    {
+        WorkflowTemplateDefinition? template = WorkflowTemplateCatalog.GetByKey(templateKey);
+        template.Should().NotBeNull($"template '{templateKey}' must be registered in WorkflowTemplateCatalog");
+        template!.Steps.Should().HaveCountGreaterThan(index);
+        return template.Steps[index];
+    }
+
+    [Fact]
+    public void VideoAnalyze_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Should().NotBeNull();
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+        config.Source.ProjectFileId.Should().BeNull();
+        config.Source.StepOrder.Should().BeNull();
+
+        // Everything else in the literal was left to the record's own defaults — confirm those
+        // defaults are the sane, safe values the config type documents, not silently nulled out
+        // by a property-name mismatch (which System.Text.Json would do without throwing).
+        config.DetectSilence.Should().BeTrue();
+        config.DetectShots.Should().BeTrue();
+        config.Transcription.Should().Be(VideoTranscriptionMode.Optional);
+        config.MaxDurationSeconds.Should().Be(0, "unset: the platform limit applies (VideoSourceLimits)");
+        config.MaxOutputChars.Should().Be(24_000);
+
+        // Phase 1 (scene/visual analysis) defaults — the seeded literal predates these fields, so
+        // this confirms they fall back to sane, on-by-default values rather than being silently
+        // nulled/zeroed by a future property-name mismatch.
+        config.AnalyzeVisuals.Should().BeTrue();
+        config.VisualDetail.Should().Be(VideoVisualDetail.Compact);
+        config.AnalyzeAudioLevels.Should().BeTrue();
+        config.DetectNearDuplicates.Should().BeTrue();
+        config.DuplicateSimilarityThreshold.Should().Be(0.90);
+
+        // Phase 2 (vision shot captioning) defaults — the seeded literal predates these fields
+        // too. Vision must default OFF (unlike Transcription's Optional default — see
+        // VideoVisionMode's doc comment) so this opt-in template's cost/behavior doesn't change
+        // until a workflow author explicitly turns captioning on.
+        config.Vision.Should().Be(VideoVisionMode.Off);
+        config.VisionProviderId.Should().BeNull();
+        config.CaptionSelection.Should().Be(VideoCaptionSelection.PerDuplicateGroup);
+        config.MaxCaptionedShots.Should().Be(50);
+        config.MinCaptionShotSeconds.Should().Be(1.0);
+        config.KeyframeMaxWidth.Should().Be(512);
+        config.VisionTimeoutSeconds.Should().Be(120);
+        config.MaxCaptionChars.Should().Be(320);
+        config.PersistKeyframes.Should().BeFalse();
+
+        // The base edit offers pictures and videos for its OverlayPlanner step (docs/design/picture-overlay.md 8.5).
+        config.EmitOverlayOffers.Should().BeTrue();
+    }
+
+    [Fact]
+    public void VideoCompile_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.Should().NotBeNull();
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2, "the Plan compile reads the story editor, not the inserted planner");
+        config.AnalysisStepOrder.Should().Be(1);
+        config.AnalysisStepResultId.Should().BeNull();
+        config.MediaOverlayPlan.Should().NotBeNull();
+        config.MediaOverlayPlan!.From.Should().Be(ExtractInputSource.Step);
+        config.MediaOverlayPlan.StepOrder.Should().Be(3, "the OverlayPlanner is step 3");
+
+        // Defaults again: confirm the frame-accuracy-protecting default (Reencode) and the
+        // allowlisted codec/preset defaults actually round-trip.
+        config.Mode.Should().Be(VideoCompileMode.Reencode);
+        config.VideoCodec.Should().Be("libx264");
+        config.AudioCodec.Should().Be("aac");
+        config.Preset.Should().Be("veryfast");
+        config.AllowKeyframeSnapping.Should().BeFalse();
+        config.RegisterProjectFile.Should().BeTrue();
+
+        // Seam-transition / program-envelope config (see docs/video-editing.md "Seam transitions
+        // and the program envelope"). Only MinSegmentMs exists on VideoCompileStepConfig as of
+        // this template edit — TransitionPolicy/ProgramFadeInMs/ProgramFadeOutMs/
+        // ProgramAudioFadeInMs/ProgramAudioFadeOutMs are seeded in the literal for the sibling
+        // transition-system effort to pick up once its VideoCompileStepConfig fields land; System.Text.Json
+        // ignores unmapped JSON properties by default, so the extra keys are harmless today.
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_middle_video_derush_edit_step_is_the_story_editor_agent_with_no_deterministic_config()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit", 1);
+        step.AgentType.Should().Be(AgentType.VideoStoryEditor);
+        step.StepType.Should().Be(StepType.Agent);
+        step.VideoAnalyzeConfigJson.Should().BeNull();
+        step.VideoCompileConfigJson.Should().BeNull();
+        step.ExtractConfigJson.Should().BeNull();
+    }
+
+    [Fact]
+    public void VideoAnalyze_graphics_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+        config.EmitOverlayPlacements.Should().BeTrue();
+
+        // Phase 3 defaults not set by the literal — confirm they fall back to sane values rather
+        // than being silently nulled/zeroed by a future property-name mismatch.
+        config.MaxPlacementsPerShot.Should().Be(2);
+        config.MaxPlacements.Should().Be(40);
+    }
+
+    [Fact]
+    public void The_second_video_derush_edit_graphics_step_is_the_story_editor_agent()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics", 1);
+        step.AgentType.Should().Be(AgentType.VideoStoryEditor);
+        step.StepType.Should().Be(StepType.Agent);
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_graphics_step_is_the_motion_graphics_planner_agent_with_no_deterministic_config()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics", 2);
+        step.AgentType.Should().Be(AgentType.MotionGraphicsPlanner);
+        step.StepType.Should().Be(StepType.Agent);
+        step.VideoAnalyzeConfigJson.Should().BeNull();
+        step.VideoCompileConfigJson.Should().BeNull();
+        step.ExtractConfigJson.Should().BeNull();
+    }
+
+    [Fact]
+    public void VideoCompile_graphics_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2);
+        config.AnalysisStepOrder.Should().Be(1);
+        config.EnableGraphics.Should().BeTrue();
+        config.GraphicsPlan.Should().NotBeNull();
+        config.GraphicsPlan!.From.Should().Be(ExtractInputSource.Step);
+        config.GraphicsPlan.StepOrder.Should().Be(3);
+
+        // Phase 3 graphics defaults not set by the literal.
+        config.MaxOverlays.Should().Be(20);
+        config.OverlayShortMs.Should().Be(1500);
+        config.OverlayMediumMs.Should().Be(3000);
+        config.OverlayHoldMs.Should().Be(6000);
+        config.OverlayFontColor.Should().Be("white");
+        config.OverlayBoxColor.Should().Be("black@0.45");
+
+        // See the seam-transition/program-envelope comment on
+        // VideoCompile_step_literal_deserializes_against_the_real_config_type above — only
+        // MinSegmentMs round-trips today.
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_step_is_the_overlay_planner_agent_with_no_deterministic_config()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit", 2);
+        step.AgentType.Should().Be(AgentType.OverlayPlanner);
+        step.StepType.Should().Be(StepType.Agent);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+        step.CacheMode.Should().Be(StepCacheMode.Never);
+        step.VideoAnalyzeConfigJson.Should().BeNull();
+        step.VideoCompileConfigJson.Should().BeNull();
+    }
+
+    [Fact]
+    public void The_fourth_video_derush_edit_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story-editor step, not the deterministic VideoAnalyze step");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void The_final_video_derush_edit_step_is_the_one_encode_pointing_at_the_story_editor_and_the_planner()
+    {
+        WorkflowTemplateDefinition template = WorkflowTemplateCatalog.GetByKey("video-derush-edit")!;
+        template.Steps.Should().HaveCount(7);
+
+        WorkflowTemplateStepDefinition step = template.Steps[6];
+        step.StepType.Should().Be(StepType.VideoCompile);
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config!.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2);
+        config.MediaOverlayPlan!.StepOrder.Should().Be(3);
+        config.EncodeStage.Should().Be(CompileEncodeStage.Final);
+    }
+
+    [Fact]
+    public void The_fifth_video_derush_edit_graphics_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story-editor step so the story editor, motion-graphics planner, and compile all re-run");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void VideoAnalyze_music_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-music", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+        config.OfferMusicTracks.Should().BeTrue();
+
+        // Defaults not set by the literal — confirm they fall back to sane values rather than
+        // being silently nulled/zeroed by a future property-name mismatch.
+        config.MaxMusicTracks.Should().Be(20);
+    }
+
+    [Fact]
+    public void The_second_video_derush_edit_music_step_is_the_story_editor_agent()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-music", 1);
+        step.AgentType.Should().Be(AgentType.VideoStoryEditor);
+        step.StepType.Should().Be(StepType.Agent);
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_music_step_is_the_music_supervisor_agent_with_no_deterministic_config()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-music", 2);
+        step.AgentType.Should().Be(AgentType.MusicSupervisor);
+        step.StepType.Should().Be(StepType.Agent);
+        step.VideoAnalyzeConfigJson.Should().BeNull();
+        step.VideoCompileConfigJson.Should().BeNull();
+        step.ExtractConfigJson.Should().BeNull();
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void VideoCompile_music_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-music", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2);
+        config.AnalysisStepOrder.Should().Be(1);
+        config.EnableMusic.Should().BeTrue();
+        config.MusicPlan.Should().NotBeNull();
+        config.MusicPlan!.From.Should().Be(ExtractInputSource.Step);
+        config.MusicPlan.StepOrder.Should().Be(3);
+
+        // Untouched defaults — confirm they really landed rather than being silently
+        // nulled/zeroed by a future property-name mismatch.
+        config.MusicDucking.Should().Be(MusicDuckingMode.SpeechEnvelope);
+        config.MusicFitPolicy.Should().Be(MusicFit.LoopToFit);
+        config.MusicFadeInMs.Should().Be(1500);
+        config.MusicFadeOutMs.Should().Be(2500);
+        config.MusicBedQuietDb.Should().Be(-26);
+        config.MusicBedBalancedDb.Should().Be(-20);
+        config.MusicBedFeatureDb.Should().Be(-14);
+        config.MusicDuckLightDb.Should().Be(-6);
+        config.MusicDuckNormalDb.Should().Be(-11);
+        config.MusicDuckHeavyDb.Should().Be(-18);
+
+        // See the seam-transition/program-envelope comment on
+        // VideoCompile_step_literal_deserializes_against_the_real_config_type above — only
+        // MinSegmentMs round-trips today.
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_fifth_video_derush_edit_music_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-music", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story-editor step so the story editor, music supervisor, and compile all re-run");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void VideoAnalyze_edit_room_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-room", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+    }
+
+    [Fact]
+    public void The_second_video_derush_edit_room_step_is_an_EditRoom_step_referencing_the_previous_view()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-room", 1);
+        step.StepType.Should().Be(StepType.EditRoom);
+        step.AgentType.Should().Be(AgentType.VideoTransform, "the step's own AgentDefinitionId FK is a placeholder — the room's real seats/director are resolved from EditRoomConfigJson");
+        step.EditRoomConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        EditRoomStepConfig? config = JsonSerializer.Deserialize<EditRoomStepConfig>(
+            step.EditRoomConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.View.Should().NotBeNull();
+        config.View!.From.Should().Be(ExtractInputSource.Previous);
+
+        // Defaults not set by the literal — confirm they fall back to the validated-live values
+        // rather than being silently nulled/zeroed by a future property-name mismatch.
+        config.EffectiveSeats.Should().HaveCount(3);
+        config.Rounds.Should().Be(2);
+        config.MaxTurns.Should().Be(8);
+        config.ClampedMaxTurns.Should().Be(8);
+        config.Termination.Should().Be(EditRoomTerminationMode.SentinelOrConverged);
+        config.Temperature.Should().Be(0.7f);
+        config.DirectorTemperature.Should().Be(0.3f);
+        config.ReasoningEffort.Should().Be("none");
+        config.RoomTimeoutSeconds.Should().Be(1200);
+        config.FallbackToSoloEditor.Should().BeTrue();
+    }
+
+    [Fact]
+    public void VideoCompile_edit_room_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-room", 3);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2, "must reference the EditRoom step, which emits the same VideoEditDecisionOutput shape a solo VideoStoryEditor step would");
+        config.AnalysisStepOrder.Should().Be(1);
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_fourth_video_derush_edit_room_step_is_a_ReviewLoop_looping_back_to_the_edit_room()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-room", 4);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the EditRoom step, not the deterministic VideoAnalyze step");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void VideoAnalyze_graphics_room_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics-room", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+        config.EmitOverlayPlacements.Should().BeTrue("the graphics room deliberates over view.placements, which only exist when the analyze step emits them");
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_graphics_room_step_is_a_GraphicsRoom_step_referencing_the_analyze_view()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics-room", 2);
+        step.StepType.Should().Be(StepType.GraphicsRoom);
+        step.AgentType.Should().Be(AgentType.VideoTransform, "the step's own AgentDefinitionId FK is a placeholder — the room's real seats/director are resolved from GraphicsRoomConfigJson");
+        step.GraphicsRoomConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        GraphicsRoomStepConfig? config = JsonSerializer.Deserialize<GraphicsRoomStepConfig>(
+            step.GraphicsRoomConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.View.Should().NotBeNull();
+        config.View!.From.Should().Be(ExtractInputSource.Step);
+        config.View.StepOrder.Should().Be(1,
+            "the view must reference the analyze step explicitly — Previous relative to the graphics-room step resolves to the story editor's decision, not the placements envelope");
+
+        // Defaults not set by the literal — confirm they fall back to the documented values
+        // rather than being silently nulled/zeroed by a future property-name mismatch.
+        // Four seats, not three: the fourth owns the tracked-insert half of
+        // MotionGraphicsPlanOutput, which a placements-only room never deliberates at all.
+        config.EffectiveSeats.Should().HaveCount(4);
+        config.EffectiveSeats.Select(s => s.Name).Should().Contain("InsertArtist");
+        config.Rounds.Should().Be(2);
+        // Ten, not the edit room's eight: four seats x two rounds already consumes eight turns,
+        // and the director speaks only after the round-robin phase ends.
+        config.MaxTurns.Should().Be(10);
+        config.ClampedMaxTurns.Should().Be(10);
+        config.Termination.Should().Be(EditRoomTerminationMode.SentinelOrConverged);
+        config.Temperature.Should().Be(0.7f);
+        config.DirectorTemperature.Should().Be(0.3f);
+        config.ReasoningEffort.Should().Be("none");
+        config.RoomTimeoutSeconds.Should().Be(1200);
+        config.FallbackToSoloPlanner.Should().BeTrue();
+    }
+
+    [Fact]
+    public void VideoCompile_graphics_room_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics-room", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2, "must reference the story editor's decision, not the graphics room's plan");
+        config.AnalysisStepOrder.Should().Be(1);
+        config.EnableGraphics.Should().BeTrue();
+        config.GraphicsPlan.Should().NotBeNull();
+        config.GraphicsPlan!.From.Should().Be(ExtractInputSource.Step);
+        config.GraphicsPlan.StepOrder.Should().Be(3,
+            "must reference the GraphicsRoom step, which emits the same MotionGraphicsPlanOutput shape a solo MotionGraphicsPlanner step would");
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_fifth_video_derush_edit_graphics_room_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-graphics-room", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story editor so the story editor, graphics room, and compile all re-run");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_grade_room_step_is_a_ColorGradeRoom_step_referencing_the_analyze_view()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-grade-room", 2);
+        step.StepType.Should().Be(StepType.ColorGradeRoom);
+        step.AgentType.Should().Be(AgentType.VideoTransform, "the step's own AgentDefinitionId FK is a placeholder — the room's real seats/director are resolved from ColorGradeRoomConfigJson");
+        step.ColorGradeRoomConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        ColorGradeRoomStepConfig? config = JsonSerializer.Deserialize<ColorGradeRoomStepConfig>(
+            step.ColorGradeRoomConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.View.Should().NotBeNull();
+        config.View!.From.Should().Be(ExtractInputSource.Step);
+        config.View.StepOrder.Should().Be(1,
+            "the view must reference the analyze step explicitly — Previous relative to the grade-room step resolves to the story editor's decision, not the measured-shot-descriptor envelope");
+
+        // Defaults not set by the literal — confirm they fall back to the documented values
+        // rather than being silently nulled/zeroed by a future property-name mismatch.
+        config.EffectiveSeats.Should().HaveCount(3);
+        config.Rounds.Should().Be(2);
+        config.MaxTurns.Should().Be(8);
+        config.ClampedMaxTurns.Should().Be(8);
+        config.Termination.Should().Be(EditRoomTerminationMode.SentinelOrConverged);
+        config.Temperature.Should().Be(0.7f);
+        config.DirectorTemperature.Should().Be(0.3f);
+        config.ReasoningEffort.Should().Be("none");
+        config.RoomTimeoutSeconds.Should().Be(1200);
+        config.FallbackToSoloColorist.Should().BeTrue();
+    }
+
+    [Fact]
+    public void VideoCompile_grade_room_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-grade-room", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2, "must reference the story editor's decision, not the grade room's plan");
+        config.AnalysisStepOrder.Should().Be(1);
+        config.EnableColorGrade.Should().BeTrue();
+        config.ColorGradePlan.Should().NotBeNull();
+        config.ColorGradePlan!.From.Should().Be(ExtractInputSource.Step);
+        config.ColorGradePlan.StepOrder.Should().Be(3,
+            "must reference the ColorGradeRoom step, which emits the same ColorGradePlanOutput shape a solo Colorist step would");
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_fifth_video_derush_edit_grade_room_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-grade-room", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story editor so the story editor, grade room, and compile all re-run");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void Lean_context_promo_Extract_step_literal_still_deserializes_against_the_real_config_type()
+    {
+        // Precedent check (R7): this template predates video editing but is the same
+        // hand-authored-literal-vs-type-author pairing risk, and had no dedicated
+        // deserialization test until now either.
+        WorkflowTemplateStepDefinition step = GetStep("lean-context-promo", 5);
+        step.AgentType.Should().Be(AgentType.ExtractTransform);
+        step.StepType.Should().Be(StepType.Extract);
+        step.ExtractConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        ExtractStepConfig? config = JsonSerializer.Deserialize<ExtractStepConfig>(
+            step.ExtractConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Operation.Should().Be(ExtractOperation.Project);
+        config.Inputs.Should().ContainKey("source");
+        config.Inputs["source"].From.Should().Be(ExtractInputSource.Step);
+        config.Inputs["source"].StepOrder.Should().Be(3);
+        config.Path.Should().Be("$.components");
+        config.Fields.Should().BeEquivalentTo(new[] { "name", "filePath", "responsibility" });
+        config.Take.Should().Be(40);
+        config.MaxOutputChars.Should().Be(8000);
+        config.Expect.Should().NotBeNull();
+        config.Expect!.MinItems.Should().Be(1);
+    }
+
+    // =======================================================================
+    // video-derush-edit-sfx (see docs/video-editing.md "Sound effects")
+    // =======================================================================
+
+    [Fact]
+    public void VideoAnalyze_sfx_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-sfx", 0);
+        step.StepType.Should().Be(StepType.VideoAnalyze);
+        step.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            step.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Source.Kind.Should().Be(VideoSourceKind.ProjectFile);
+        config.OfferSfxClips.Should().BeTrue();
+
+        // Defaults not set by the literal — confirm they fall back to sane values rather than
+        // being silently nulled/zeroed by a future property-name mismatch. OfferMusicTracks must
+        // stay off: this template offers SFX clips only, and the two candidate lists are
+        // independent features.
+        config.MaxSfxClips.Should().Be(40);
+        config.OfferMusicTracks.Should().BeFalse();
+    }
+
+    [Fact]
+    public void The_third_video_derush_edit_sfx_step_is_the_sound_designer_agent_with_no_deterministic_config()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-sfx", 2);
+        step.AgentType.Should().Be(AgentType.SoundDesigner);
+        step.StepType.Should().Be(StepType.Agent);
+        step.VideoAnalyzeConfigJson.Should().BeNull();
+        step.VideoCompileConfigJson.Should().BeNull();
+        step.ExtractConfigJson.Should().BeNull();
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    [Fact]
+    public void VideoCompile_sfx_step_literal_deserializes_against_the_real_config_type()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-sfx", 4);
+        step.StepType.Should().Be(StepType.VideoCompile);
+        step.VideoCompileConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoCompileStepConfig? config = JsonSerializer.Deserialize<VideoCompileStepConfig>(
+            step.VideoCompileConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.Version.Should().Be(1);
+        config.Decision.From.Should().Be(ExtractInputSource.Step);
+        config.Decision.StepOrder.Should().Be(2);
+        config.AnalysisStepOrder.Should().Be(1);
+        config.EnableSfx.Should().BeTrue();
+        config.SfxPlan.Should().NotBeNull();
+        config.SfxPlan!.From.Should().Be(ExtractInputSource.Step);
+        config.SfxPlan.StepOrder.Should().Be(3);
+
+        // Untouched defaults — confirm they really landed rather than being silently
+        // nulled/zeroed by a future property-name mismatch.
+        config.MaxSfxCues.Should().Be(8);
+        config.MaxSfxCueSeconds.Should().Be(4.0);
+        config.SfxSubtleDb.Should().Be(-12);
+        config.SfxNormalDb.Should().Be(-8);
+        config.SfxStrongDb.Should().Be(-4);
+        config.SfxLeadMs.Should().Be(150);
+        config.SfxLagMs.Should().Be(150);
+        config.SfxFadeOutMs.Should().Be(120);
+        config.EnableMusic.Should().BeFalse();
+        config.MinSegmentMs.Should().Be(800);
+    }
+
+    [Fact]
+    public void The_fifth_video_derush_edit_sfx_step_is_a_ReviewLoop_looping_back_to_the_story_editor()
+    {
+        WorkflowTemplateStepDefinition step = GetStep("video-derush-edit-sfx", 5);
+        step.AgentType.Should().Be(AgentType.VideoReviewAgent);
+        step.StepType.Should().Be(StepType.ReviewLoop);
+        step.LoopTargetStepOrder.Should().Be(2, "must loop back to the story-editor step so the story editor, sound designer, and compile all re-run");
+        step.MaxIterations.Should().Be(3);
+        step.MinScore.Should().Be(8);
+        step.AgentInputContextMode.Should().Be(AgentInputContextMode.FullWorkflow);
+    }
+
+    // Footage derush templates split long shots into sub-shots whose cut points come from the
+    // content (1.2..4 s, at most 8 per shot), so a silent single-shot clip gives the story editor
+    // parts to choose from (see docs/video-editing.md). dailies is deliberately absent: its
+    // analyze step reads generated takes.
+    [Theory]
+    [InlineData("video-derush-edit")]
+    [InlineData("video-derush-edit-graphics")]
+    [InlineData("video-derush-edit-music")]
+    [InlineData("video-derush-edit-room")]
+    [InlineData("video-derush-edit-graphics-room")]
+    [InlineData("video-derush-edit-grade-room")]
+    [InlineData("video-derush-edit-sfx")]
+    [InlineData("video-derush-edit-broll")]
+    [InlineData("video-derush-edit-voiceover")]
+    [InlineData("video-derush-edit-pickups")]
+    [InlineData("video-derush-edit-dub")]
+    public void Derush_template_analyze_step_splits_long_shots_by_content(string templateKey)
+    {
+        WorkflowTemplateDefinition? template = WorkflowTemplateCatalog.GetByKey(templateKey);
+        template.Should().NotBeNull($"template '{templateKey}' must be registered in WorkflowTemplateCatalog");
+
+        WorkflowTemplateStepDefinition analyze = template!.Steps.First(s => s.StepType == StepType.VideoAnalyze);
+        analyze.VideoAnalyzeConfigJson.Should().NotBeNullOrWhiteSpace();
+
+        VideoAnalyzeStepConfig? config = JsonSerializer.Deserialize<VideoAnalyzeStepConfig>(
+            analyze.VideoAnalyzeConfigJson!, ConfigJsonOptions);
+
+        config.Should().NotBeNull();
+        config!.SubShotMode.Should().Be(VideoSubShotMode.Content);
+        config.MinSubShotSec.Should().Be(1.2);
+        config.MaxSubShotSec.Should().Be(4);
+        config.MaxSubShotsPerShot.Should().Be(8);
+        config.MaxShotSec.Should().Be(0, "the fixed grid is replaced, not layered under the content split");
+    }
+}

@@ -1,0 +1,9 @@
+Ciao,
+
+Qualcuno ha chiesto di ricevere novità, consigli e offerte su ReelBolt a questo indirizzo email. Conferma l'iscrizione qui:
+
+{{.Link}}
+
+Se non sei stato tu, ignora questa email: non ti invieremo nulla.
+
+-- {{.FooterNote}}

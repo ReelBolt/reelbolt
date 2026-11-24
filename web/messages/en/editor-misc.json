@@ -1,0 +1,312 @@
+{
+  "relative": {
+    "justNow": "Just now",
+    "minutesAgo": "{count} min ago",
+    "hoursAgo": "{count} h ago",
+    "yesterday": "Yesterday",
+    "daysAgo": "{count} days ago"
+  },
+  "landed": {
+    "line": "{verb} on {track} at {time}",
+    "selected": "It is selected on the timeline.",
+    "undo": "Undo"
+  },
+  "pip": {
+    "covers": "This picture covers the one below.",
+    "make": "Make it picture-in-picture"
+  },
+  "place": {
+    "place": "Place",
+    "menuLabel": "Put it on the timeline",
+    "choices": {
+      "insert": {
+        "label": "Insert at playhead",
+        "hint": "Put it at the playhead (snapping to the nearest cut) and push everything after it later."
+      },
+      "overwrite": {
+        "label": "Overwrite",
+        "hint": "Lay it over the timeline at the playhead, replacing whatever is under it. Nothing moves."
+      },
+      "append": {
+        "label": "Add to end",
+        "hint": "Put it after the last clip on the track."
+      },
+      "placeOnTop": {
+        "label": "Place on top",
+        "hint": "Put it at the playhead on the topmost free track, or on a new track, without touching other clips."
+      },
+      "placeOver": {
+        "label": "Place over",
+        "hint": "Put it at the playhead above the pictures already there, small in the bottom-right corner."
+      }
+    },
+    "position": "Position",
+    "templateDefault": "Template default",
+    "positions": {
+      "topLeft": "Top left",
+      "topCenter": "Top centre",
+      "topRight": "Top right",
+      "middleLeft": "Middle left",
+      "center": "Centre",
+      "middleRight": "Middle right",
+      "bottomLeft": "Bottom left",
+      "bottomCenter": "Bottom centre",
+      "bottomRight": "Bottom right"
+    },
+    "colourPresets": "Colour presets",
+    "customColour": "Custom colour (#RRGGBB)",
+    "hexError": "Use six digits, like {example}",
+    "selected": "Selected: {name}",
+    "colors": {
+      "black": "Black",
+      "white": "White",
+      "grey": "Grey",
+      "red": "Red",
+      "orange": "Orange",
+      "yellow": "Yellow",
+      "green": "Green",
+      "teal": "Teal",
+      "blue": "Blue",
+      "purple": "Purple",
+      "pink": "Pink",
+      "navy": "Navy"
+    }
+  },
+  "graphics": {
+    "autoTrack": "Choose a free track for me",
+    "yourTitle": "Your title",
+    "titlePreview": "Title preview",
+    "defaultTitle": "Title",
+    "addTitleTitle": "Add a title",
+    "style": "Style",
+    "templates": {
+      "plain": {
+        "label": "Plain (centred)",
+        "hint": "Large text in the middle of the picture."
+      },
+      "lowerThird": {
+        "label": "Lower third",
+        "hint": "Smaller text near the bottom, like a name caption."
+      },
+      "boxed": {
+        "label": "Boxed",
+        "hint": "Text on a solid box so it stays readable on any picture."
+      },
+      "outline": {
+        "label": "Outline",
+        "hint": "Text with a dark outline."
+      },
+      "card": {
+        "label": "Card",
+        "hint": "Text on a full-screen card."
+      }
+    },
+    "positionNote": "This style keeps its own place on the picture. Pick Plain, Boxed or Outline to choose a position.",
+    "text": "Text",
+    "length": "Length (seconds)",
+    "track": "Track",
+    "titleHint": "It goes in at the playhead. The style decides where the text sits on the picture.",
+    "cancel": "Cancel",
+    "addTitle": "Add title",
+    "addCardTitle": "Add a colour card",
+    "cardPreview": "Colour card preview, {color}",
+    "addCard": "Add colour card"
+  },
+  "cut": {
+    "insertLabel": "{label} at {time}",
+    "inserted": "{file} inserted at {time}{sound, select, yes { with its sound} other {}}{known, select, yes {} other { ({seconds, number} s - the source was not probed, trim to taste)}}.",
+    "removeLabel": "Remove shot {id} ({frames} f)",
+    "removed": "Shot {id} removed; {frames, plural, one {# frame} other {# frames}} rippled out{linked, select, yes {, with the linked sound} other {}}.",
+    "title": "Cut",
+    "editOn": "Edit on",
+    "overviewNote": "The whole timeline at a glance. Click to move the playhead; the detail timeline below follows.",
+    "sourceTape": "Source tape",
+    "poolFailed": "The media pool could not be loaded.",
+    "noSourcesHint": "Upload some in the Media workspace.",
+    "kinds": {
+      "video": "video",
+      "image": "image"
+    },
+    "sourceMeta": "{kind}, {duration}",
+    "seconds": "{value} s",
+    "notProbed": "not probed",
+    "fastReview": "Fast review",
+    "review": "Review",
+    "speedByLength": "Speed by clip length",
+    "planNote": "{count, plural, one {# clip} other {# clips}}; long clips play faster ({min, number}× to {max, number}×).",
+    "boringShots": "Boring shots ({count, number})",
+    "noAnalysis": "This timeline was not made from an analysed run, so there is no measurement of which shots are long and still. Open the Analyse tab and analyse the footage, or run Watch footage on it and make a timeline from that run.",
+    "noBoring": "No long, still shot on this track.",
+    "speechUnchecked": "Speech was not checked: transcribe the footage in the Analyse tab so a cut never lands in the middle of a sentence.",
+    "shotMeta": "{seconds} s · motion {motion}",
+    "cutsQuiet": "Cuts only the quiet {seconds} s; speech kept",
+    "talking": "Someone is talking; not suggested",
+    "show": "Show",
+    "remove": "Remove",
+    "watch": "Watch"
+  },
+  "stages": {
+    "below": "Layers below",
+    "grade": "Grade ({count, plural, one {# correction} other {# corrections}})",
+    "effects": "Effects ({count, number})",
+    "program": "Program",
+    "source": "Source",
+    "stabilise": "Stabilise",
+    "reframe": "Reframe",
+    "keyer": "Keyer",
+    "crop": "Crop",
+    "transform": "Transform",
+    "groupGradeNamed": "Group grade: {name}",
+    "groupGrade": "Group grade",
+    "mask": "Mask",
+    "pin": "Corner pin",
+    "overlay": "Overlay"
+  },
+  "compose": {
+    "addAdjustmentLabel": "Add adjustment clip",
+    "title": "Compose",
+    "selectHint": "Select a media clip (mask, keyer, corner pin, effects, stabilise, reframe), an insert (matte, corner keyframes) or an adjustment clip.",
+    "addAdjustmentRange": "Add adjustment clip over the marked range",
+    "addAdjustmentAt": "Add adjustment clip at {time}",
+    "adjustmentNote": "An adjustment clip grades and applies effects to everything below it for its span; it goes on a new top track.",
+    "enableEffect": "Enable {effect}",
+    "effectAmount": "{effect} amount",
+    "removeEffect": "Remove {effect}",
+    "effectToAdd": "Effect to add",
+    "addEffect": "Add effect",
+    "effectTypes": {
+      "blur": "blur",
+      "sharpen": "sharpen",
+      "vignette": "vignette",
+      "grain": "grain",
+      "pixelate": "pixelate",
+      "mono": "mono"
+    },
+    "enabled": "Enabled",
+    "toggleAdjustment": "Toggle adjustment",
+    "gradeBelow": "Grade (applied to the layers below)",
+    "effects": "Effects",
+    "adjustmentEffects": "Adjustment effects",
+    "nodeView": "Node view",
+    "insertQuad": "Insert quad",
+    "matte": "Matte",
+    "insertMatte": "Insert matte",
+    "quadKeys": "Corner keyframes ({count, number})",
+    "editingKey": "Editing the key at {time}.",
+    "noKeyHere": "No key at the playhead: editing moves the static value; add a key to animate from here.",
+    "editingStatic": "Editing the static corner pin.",
+    "corners": {
+      "topLeft": "top left",
+      "topRight": "top right",
+      "bottomRight": "bottom right",
+      "bottomLeft": "bottom left"
+    },
+    "addKey": "Add key at playhead",
+    "removeKey": "Remove key",
+    "resetCorners": "Reset corners",
+    "goToKey": "Go to key at {time}",
+    "noControls": "A {type} has no compose controls.",
+    "keyer": "Keyer",
+    "keyerLabel": "Keyer",
+    "cornerPin": "Corner pin",
+    "cornerPinLabel": "Corner pin",
+    "effectsLabel": "Effects",
+    "motionFraming": "Motion and framing",
+    "stabiliseTip": "Two-pass vidstab at render time; the preview shows the unstabilised picture",
+    "stabilise": "Stabilise",
+    "slowMotion": "Slow motion",
+    "opticalFlow": "Optical flow (interpolated)",
+    "frameDuplication": "Frame duplication",
+    "retimeQuality": "Retime quality",
+    "listLabel": "On this clip",
+    "propertiesTitle": "Properties",
+    "propertiesLabel": "Properties of {entry}",
+    "headerLine": "{name}, {kind}",
+    "kind": {
+      "media": "Video clip",
+      "adjustment": "Adjustment clip",
+      "insert": "Insert",
+      "other": "Other item"
+    },
+    "entry": {
+      "mask": "Mask",
+      "reframe": "Reframe",
+      "keyer": "Keyer",
+      "pin": "Corner pin",
+      "effects": "Effects",
+      "motion": "Motion",
+      "chain": "Node view",
+      "grade": "Grade",
+      "matte": "Matte",
+      "quad": "Corners"
+    },
+    "entryOff": "{name}, off",
+    "entryOn": "{name}, on",
+    "entryShape": "{name}, {shape}",
+    "entryCount": "{name} ({count})",
+    "shapeRect": "rectangle",
+    "shapeEllipse": "ellipse",
+    "shapeObject": "object",
+    "multiSelect": "Several items are selected. Select one clip to see its properties.",
+    "noSelectionProps": "Nothing is selected. Pick a clip on the timeline.",
+    "previewNote": "Shown in the viewer as you edit. The finished video is exact.",
+    "motionNote": "Stabilising shows in the viewer once its steadied copy is ready. Smooth slow motion blends frames only in the finished video.",
+    "addKeyer": "Add keyer",
+    "removeKeyer": "Remove keyer",
+    "addPin": "Add corner pin",
+    "removePin": "Remove corner pin",
+    "addMatte": "Add matte",
+    "removeMatte": "Remove matte",
+    "drawMask": "Draw on the picture",
+    "redrawMask": "Redraw"
+  },
+  "presets": {
+    "manageTitle": "Manage presets",
+    "none": "No saved presets yet. Save the current settings as a preset to see it here.",
+    "newName": "New name",
+    "renameFailed": "The preset could not be renamed.",
+    "rename": "Rename",
+    "cancel": "Cancel",
+    "deletePrompt": "Delete “{name}”? Clips that used it keep their settings.",
+    "deleteFailed": "The preset could not be deleted.",
+    "delete": "Delete",
+    "keep": "Keep",
+    "apply": "Apply",
+    "duplicateFailed": "The preset could not be duplicated.",
+    "duplicate": "Duplicate",
+    "close": "Close",
+    "label": "Preset",
+    "noneYet": "No presets yet",
+    "applyOne": "Apply a preset",
+    "manage": "Manage",
+    "saveAs": "Save as",
+    "namePlaceholder": "Name",
+    "saveTip": "Save the current settings as a project preset",
+    "notSaved": "Not saved",
+    "save": "Save",
+    "deleteOne": "Delete a preset"
+  },
+  "importResult": {
+    "title": "Import finished",
+    "matched": "Matched ({count, number})",
+    "matchedItem": "{name}: {how}",
+    "offline": "Offline ({count, number})",
+    "offlineNote": "Each offline clip is a gap of its own length with a red marker. Relink puts a file there, and you can undo it in one step.",
+    "pickFile": "Pick a file",
+    "relink": "Relink",
+    "done": "Done"
+  },
+  "relink": {
+    "bannerTitle": "Some media is offline",
+    "offlineItem": "Offline: {name}",
+    "show": "Show",
+    "relink": "Relink",
+    "relinkNamed": "Relink {name}",
+    "intro": "Pick a file from this project. It goes where the red marker is, for as long as the gap, and you can undo it in one step.",
+    "whichFile": "Which file is it?",
+    "orAnother": "Or another file from the media pool",
+    "fileFromPool": "File from the media pool",
+    "noFiles": "No files in the project",
+    "cancel": "Cancel"
+  }
+}

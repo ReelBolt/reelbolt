@@ -1,0 +1,50 @@
+{
+  "title": {
+    "image": "Scegli un'immagine",
+    "video": "Scegli un video",
+    "both": "Scegli un'immagine o un video",
+    "audio": "Scegli un file audio",
+    "videoAudio": "Scegli un video o un file audio"
+  },
+  "titleMulti": {
+    "image": "Scegli le immagini",
+    "video": "Scegli i video",
+    "both": "Scegli immagini o video",
+    "audio": "Scegli i file audio",
+    "videoAudio": "Scegli video o file audio"
+  },
+  "search": {
+    "label": "Cerca nei file",
+    "placeholder": "Cerca per nome"
+  },
+  "gridLabel": "File del progetto",
+  "selectAll": "Seleziona tutto",
+  "clear": "Deseleziona tutto",
+  "selected": "{count, plural, one {# selezionato} other {# selezionati}}",
+  "selectedMax": "{count} di {max} selezionati",
+  "limit": "Puoi sceglierne al massimo {max}.",
+  "needMin": "{min, plural, one {Scegli almeno # file.} other {Scegli almeno # file.}}",
+  "confirm": "Conferma",
+  "cancel": "Annulla",
+  "empty": {
+    "none": "Questo progetto non ha ancora file adatti.",
+    "search": "Nessun file corrisponde a \"{query}\"."
+  },
+  "loading": "Caricamento dei file",
+  "loadError": "Non è stato possibile caricare i file.",
+  "preview": {
+    "open": "Anteprima di {name}",
+    "title": "Anteprima: {name}",
+    "close": "Chiudi anteprima"
+  },
+  "field": {
+    "choose": "Scegli",
+    "change": "Cambia",
+    "chooseMany": "Scegli i file",
+    "none": "Nessun file scelto",
+    "missing": "File non più disponibile",
+    "empty": "Questo progetto non ha file adatti"
+  },
+  "tileMetaDuration": "{size} · {duration}",
+  "close": "Chiudi"
+}

@@ -1,0 +1,62 @@
+{
+ "clip": "syn-speech-01",
+ "videoType": "speech",
+ "source": "synthetic",
+ "expect": {
+  "noBeats": true
+ },
+ "fps": 30,
+ "frames": 720,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "speech_start",
+   "frame": 20,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev2",
+   "type": "speech_end",
+   "frame": 150,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev3",
+   "type": "speech_start",
+   "frame": 200,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev4",
+   "type": "speech_end",
+   "frame": 330,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev5",
+   "type": "speech_start",
+   "frame": 380,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev6",
+   "type": "speech_end",
+   "frame": 520,
+   "note": "voice-over phrase offset"
+  },
+  {
+   "id": "ev7",
+   "type": "speech_start",
+   "frame": 570,
+   "note": "voice-over phrase onset"
+  },
+  {
+   "id": "ev8",
+   "type": "speech_end",
+   "frame": 700,
+   "note": "voice-over phrase offset"
+  }
+ ]
+}

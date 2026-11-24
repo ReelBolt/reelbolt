@@ -1,0 +1,574 @@
+name: Runner release
+
+# Builds, signs and publishes the desktop runner's installers and the signed
+# update manifest (WP E10b). See runner/build/README.md for the operator runbook
+# and docs/ci.md for where this sits next to the other workflows.
+#
+# WHAT TRIGGERS WHAT
+#
+#   push a tag runner-v1.4.2           build, sign, publish to the BETA channel
+#   workflow_dispatch with publish     build, sign, publish to the chosen channel
+#   workflow_dispatch without publish  build and verify only; nothing is uploaded
+#
+# Promoting a beta to stable is NOT a rebuild: dispatch with promote=true (and
+# publish=true, channel=stable, the version already published to beta). The build
+# jobs are skipped; publish downloads runner/<version>/* from the bucket over S3,
+# checks those bytes against the existing beta manifest, then signs a stable
+# manifest over exactly those bytes. Released bytes are never overwritten:
+# publish.sh refuses to replace an existing runner/<version>/ object unless the
+# bytes are identical.
+#
+# WHY THIS FAILS INSTEAD OF SKIPPING
+#
+# The repository's other workflows skip their deploy jobs with a notice when the
+# maintainer has not created the environments and secrets yet, so that CI stays green
+# before the accounts exist (docs/ci.md). That reasoning does not apply here: this
+# workflow does not run on every push, it runs when somebody asks for a release. A
+# release that silently does nothing is worse than one that fails, so the publish
+# job fails with the exact list of what is missing. The build jobs still run, so
+# the toolchain and the packaging are exercisable before E10a is provisioned -
+# they just cannot publish anything.
+#
+# WHAT MUST EXIST (E10a - a human, once)
+#
+#   repository variables (public, so no approval gate on every build):
+#     RUNNER_RELEASE_PUBLIC_KEY_CURRENT  <id>:<hex>  the key a release is signed with
+#     RUNNER_RELEASE_PUBLIC_KEY_NEXT     <id>:<hex>  optional; a staged rotation
+#
+#   environment "release" (approval-gated; read ONLY by the jobs that sign or
+#   publish, never by a build job):
+#     RUNNER_MANIFEST_SIGNING_KEY     the Ed25519 private key, from "gen-key"
+#     R2_ACCOUNT_ID, R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
+#     RUNNER_WINDOWS_SIGNING (variable)  trusted-signing | pfx
+#       trusted-signing: no static Azure secret. The package-windows job exchanges
+#         its GitHub OIDC token for an Entra token with
+#         runner/build/windows/azure-oidc-token.sh (curl only); variables
+#         AZURE_CLIENT_ID, AZURE_TENANT_ID, TS_ENDPOINT, TS_ACCOUNT, TS_PROFILE
+#         name the federated identity and the signing profile.
+#       pfx: secrets WINDOWS_SIGNING_PFX_BASE64, WINDOWS_SIGNING_PFX_PASSWORD
+#     RUNNER_WINDOWS_SIGNER_SUBJECT / RUNNER_WINDOWS_SIGNER_THUMBPRINT (variables):
+#       the signer's EXACT subject DN (Trusted Signing: certificates rotate) and/or
+#       its leaf SHA-256 (pfx). At least one is REQUIRED to publish; packaging fails
+#       if the signature names anyone else. Formats: runner/build/windows/signer-check.sh
+#   environment "release-dry-run" (no reviewers, no secrets): what the Windows
+#   packaging job runs under when publish is off, so a dry run never waits for an
+#   approval and never touches a credential.
+#
+# WHERE IT RUNS. Every job runs on Linux, on the label in the repository variable
+# RUNNER_RELEASE_LABEL, falling back to CI_RUNNER_LINUX, then ubuntu-24.04. A label
+# is NOT a security boundary: any workflow file in a pull request can name any
+# label. The isolation is the ephemeral per-job VM (nothing survives a job, and
+# there is no shared cache). A dedicated label that ci.yml never references is
+# hygiene that keeps ordinary CI off the release runners, nothing more.
+# (`prepare` resolves the label once and
+# every later job reads it from there.) The toolchains live in pinned containers
+# (runner/build/ci for Linux, runner/build/windows for Windows) with no shared
+# cache: a runner needs docker and curl, nothing else (no sudo, no apt, no az).
+# An arm64 leg exists only when RUNNER_ARM64_RUNNER (a runner label) is set;
+# otherwise the release is linux-amd64 + windows-amd64 and publish.sh skips the
+# missing formats loudly. The AppImage is not GPG-signed any more: the trust chain
+# is the Ed25519 manifest, Authenticode on Windows, SHA256SUMS and optional keyless
+# cosign bundles.
+#
+# THE MACHINE MAY BE OFF. Nothing schedules this workflow and nothing retries it:
+# a job simply waits (queued) until a runner with the label comes online.
+#
+# A DRY RUN (publish off) needs no secret and no approval: build jobs use no
+# environment, package-windows runs under the empty release-dry-run environment
+# and signs nothing, and publish does not run.
+#
+# runner/build/README.md is the checklist for all of it.
+#
+# D26: Windows x64 and Linux x64 (+ arm64 when a runner is configured). There is no macOS leg, no .dmg, no
+# notarisation and no Apple account. runner/internal/update refuses a darwin
+# artifact at parse time and reelbolt-manifest refuses to assemble one, so the
+# platform list cannot drift into this file by accident.
+
+on:
+  push:
+    tags: ["runner-v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version, without the tag prefix (1.4.2, or 1.4.2-beta.1)"
+        required: true
+        type: string
+      channel:
+        description: "beta is what a tag publishes; stable is the promotion"
+        required: true
+        default: beta
+        type: choice
+        options: [beta, stable]
+      rollout_percent:
+        description: "How much of the fleet is offered this release, 0-100"
+        required: true
+        default: "10"
+        type: string
+      min_supported:
+        description: "Oldest version the platform still supports; empty means unchanged"
+        required: false
+        default: ""
+        type: string
+      notes:
+        description: "What changed, shown to a user who asks"
+        required: false
+        default: ""
+        type: string
+      publish:
+        description: "Upload to R2 and publish the signed manifest (unchecked: build and verify only)"
+        required: true
+        default: false
+        type: boolean
+      promote:
+        description: "Promote the already-published beta of this version to stable without rebuilding (needs publish and channel=stable)"
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  # A dry run must not cancel or queue behind a publish, so they are separate groups.
+  group: runner-release-${{ inputs.channel || 'beta' }}-${{ (github.event_name == 'push' || inputs.publish) && 'publish' || 'dry-run' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  # Everything the build produces lands here, and every tool is pointed at it, so
+  # the bytes that are hashed are the bytes that were built.
+  DIST: dist
+  # The public download root. The signed manifest is the only thing a runner
+  # reads; the latest/ copies exist for the download page.
+  DOWNLOAD_BASE: https://downloads.reelbolt.ai/runner
+  # Build tooling pins (nfpm, appimagetool, Go, Node, the Ubuntu image) live in
+  # runner/build/ci/pins.env; the Windows toolchain is pinned in
+  # runner/build/windows/Dockerfile.toolchain.
+
+jobs:
+  # ---- resolve the release ----------------------------------------------------
+  prepare:
+    name: Resolve the release
+    # Upstream only: a fork has no signing keys or release environment, and a release
+    # published from a fork must not look like ours. Every other job needs `prepare`.
+    if: github.repository == 'ReelBolt/reelbolt'
+    runs-on: ${{ vars.RUNNER_RELEASE_LABEL || vars.CI_RUNNER_LINUX || 'ubuntu-24.04' }}
+    outputs:
+      runs_on: ${{ steps.legs.outputs.runs_on }}
+      legs: ${{ steps.legs.outputs.legs }}
+      version: ${{ steps.meta.outputs.version }}
+      channel: ${{ steps.meta.outputs.channel }}
+      rollout: ${{ steps.meta.outputs.rollout }}
+      min_supported: ${{ steps.meta.outputs.min_supported }}
+      notes: ${{ steps.meta.outputs.notes }}
+      publish: ${{ steps.meta.outputs.publish }}
+      promote: ${{ steps.meta.outputs.promote }}
+      has_key: ${{ steps.stamp.outputs.has_key }}
+      ldflags: ${{ steps.stamp.outputs.ldflags }}
+      tags: ${{ steps.stamp.outputs.tags }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: runner/go.mod
+          # No implicit cache anywhere in this workflow: a restored cache is state
+          # another job could have written, and this job's output is trusted.
+          cache: false
+
+      - name: Derive the version, channel and rollout
+        id: meta
+        env:
+          EVENT: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          IN_VERSION: ${{ inputs.version }}
+          IN_CHANNEL: ${{ inputs.channel }}
+          IN_ROLLOUT: ${{ inputs.rollout_percent }}
+          IN_MIN: ${{ inputs.min_supported }}
+          IN_NOTES: ${{ inputs.notes }}
+          IN_PUBLISH: ${{ inputs.publish }}
+          IN_PROMOTE: ${{ inputs.promote }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "push" ]; then
+            # A tag is a beta, and the whole beta channel gets it: a beta release
+            # is opt-in, so holding part of that fleet back would only delay the
+            # feedback it exists to collect.
+            if [ "$REF_NAME" = "${REF_NAME#runner-v}" ]; then
+              echo "::error::tag $REF_NAME does not start with runner-v"
+              exit 1
+            fi
+            version="${REF_NAME#runner-v}"
+            channel=beta
+            rollout=100
+            min_supported=""
+            notes=""
+            publish=true
+            promote=false
+          else
+            version="$IN_VERSION"
+            channel="$IN_CHANNEL"
+            rollout="$IN_ROLLOUT"
+            min_supported="$IN_MIN"
+            notes="$IN_NOTES"
+            publish="$IN_PUBLISH"
+            promote="${IN_PROMOTE:-false}"
+          fi
+          # Every value below goes into GITHUB_OUTPUT as name=value, so a newline
+          # or carriage return in any of them would inject another output.
+          for pair in "version:$version" "channel:$channel" "rollout:$rollout" "min_supported:$min_supported" "notes:$notes"; do
+            case "${pair#*:}" in
+              *"$(printf '\n')"* | *"$(printf '\r')"*)
+                echo "::error::${pair%%:*} contains a line break, which is refused"
+                exit 1
+                ;;
+            esac
+          done
+          # grep -E is line-oriented; the line-break check above plus -x make this a
+          # whole-string match.
+          if ! printf '%s' "$version" | grep -Exq '[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.]+)?'; then
+            echo "::error::'$version' is not a dotted version (1.4.2, or 1.4.2-beta.1)."
+            echo "::error::The runner compares versions with runner/internal/update.ParseVersion, which refuses anything else, so publishing this would be publishing a manifest no runner accepts."
+            exit 1
+          fi
+          case "$channel" in beta|stable) ;; *) echo "::error::channel must be beta or stable, got '$channel'"; exit 1 ;; esac
+          case "$rollout" in ''|*[!0-9]*) echo "::error::rollout-percent must be a number 0-100, got '$rollout'"; exit 1 ;; esac
+          if [ "$rollout" -gt 100 ]; then echo "::error::rollout-percent $rollout is over 100"; exit 1; fi
+          if [ "$promote" = "true" ]; then
+            if [ "$publish" != "true" ] || [ "$channel" != "stable" ]; then
+              echo "::error::promote needs publish=true and channel=stable (it promotes the published beta of this version)"
+              exit 1
+            fi
+          fi
+          {
+            echo "version=$version"
+            echo "channel=$channel"
+            echo "rollout=$rollout"
+            echo "min_supported=$min_supported"
+            echo "notes=$notes"
+            echo "publish=$publish"
+            echo "promote=$promote"
+          } >> "$GITHUB_OUTPUT"
+          echo "reelbolt-runner $version -> $channel, rollout ${rollout}%, publish=$publish, promote=$promote"
+
+      - name: Stamp line for the release build
+        id: stamp
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          CURRENT_KEY: ${{ vars.RUNNER_RELEASE_PUBLIC_KEY_CURRENT }}
+          NEXT_KEY: ${{ vars.RUNNER_RELEASE_PUBLIC_KEY_NEXT }}
+          # The opt-in crash collector stamped into telemetry.CollectorEndpoint.
+          # Unset (the normal case) means the production gateway's
+          # https://reelbolt.ai/runner/telemetry/v1/reports; "none" stamps nothing.
+          REELBOLT_TELEMETRY_ENDPOINT_STAMP: ${{ vars.RUNNER_TELEMETRY_ENDPOINT }}
+        working-directory: runner
+        run: |
+          set -euo pipefail
+          # The build line comes from the tool that also signs the manifest, so
+          # the two sides cannot drift. ldflags refuses a release build with an
+          # empty trust root; -no-release-key is the explicit opt-out a dry run
+          # uses, and it cannot be combined with -release.
+          if [ -n "${CURRENT_KEY:-}" ]; then
+            # Unquoted on purpose: a public key stamp contains no whitespace, and
+            # this keeps -next-key out of the command line when it is unset.
+            # shellcheck disable=SC2086
+            go run ./cmd/reelbolt-manifest ldflags -version "$VERSION" -release \
+              -current-key "$CURRENT_KEY" ${NEXT_KEY:+-next-key} ${NEXT_KEY:+"$NEXT_KEY"} >> "$GITHUB_OUTPUT"
+            echo "has_key=true" >> "$GITHUB_OUTPUT"
+          else
+            go run ./cmd/reelbolt-manifest ldflags -version "$VERSION" -no-release-key >> "$GITHUB_OUTPUT"
+            echo "has_key=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::RUNNER_RELEASE_PUBLIC_KEY_CURRENT is not set, so this build carries no trust root and refuses every update. It is good for exercising the pipeline and must not be published; publish refuses it."
+          fi
+
+      - name: Choose the Linux legs
+        id: legs
+        env:
+          LINUX_RUNNER: ${{ vars.RUNNER_RELEASE_LABEL || vars.CI_RUNNER_LINUX || 'ubuntu-24.04' }}
+          ARM64_RUNNER: ${{ vars.RUNNER_ARM64_RUNNER }}
+        run: |
+          set -euo pipefail
+          legs=$(jq -cn --arg r "$LINUX_RUNNER" '[{runner:$r,target:"linux/amd64",arch:"amd64"}]')
+          if [ -n "${ARM64_RUNNER:-}" ]; then
+            legs=$(jq -c --arg r "$ARM64_RUNNER" '. + [{runner:$r,target:"linux/arm64",arch:"arm64"}]' <<<"$legs")
+          else
+            echo "::notice::RUNNER_ARM64_RUNNER is not set, so this release has no linux-arm64 leg."
+          fi
+          echo "legs=$legs" >> "$GITHUB_OUTPUT"
+          echo "runs_on=$LINUX_RUNNER" >> "$GITHUB_OUTPUT"
+
+      - name: Refuse to publish an unprovisioned release
+        if: steps.meta.outputs.publish == 'true' && steps.stamp.outputs.has_key != 'true'
+        run: |
+          echo "::error::E10a is not provisioned: RUNNER_RELEASE_PUBLIC_KEY_CURRENT is unset or empty, so no build from this run could ever be updated."
+          echo "::error::"
+          echo "::error::What a real release needs from the operator, once:"
+          echo "::error::  1. run (the key file goes OUTSIDE the checkout): mkdir -p -m 700 \"\$HOME/reelbolt-release-key\" && cd runner && go run ./cmd/reelbolt-manifest gen-key -out \"\$HOME/reelbolt-release-key/release.key\""
+          echo "::error::  2. put that file's contents in the environment 'release' secret RUNNER_MANIFEST_SIGNING_KEY"
+          echo "::error::  3. put the public stamp it printed in the repository variable RUNNER_RELEASE_PUBLIC_KEY_CURRENT"
+          echo "::error::  4. add R2_ACCOUNT_ID, R2_BUCKET, R2_ACCESS_KEY_ID and R2_SECRET_ACCESS_KEY to the environment"
+          echo "::error::  5. add the Windows signing credentials (RUNNER_WINDOWS_SIGNING and its backend's secrets)"
+          echo "::error::See runner/build/README.md. Nothing was published and nothing was uploaded."
+          exit 1
+
+  # ---- linux ------------------------------------------------------------------
+  # No environment and no secret: a build job can be run by anyone who can start
+  # the workflow, and everything it produces is signed or verified downstream.
+  build-linux:
+    if: needs.prepare.outputs.promote != 'true'
+    name: Build (${{ matrix.target }})
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.prepare.outputs.legs) }}
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # ffmpeg, the daemon, the GTK/webkit tray, nfpm, appimagetool and package.sh
+      # all run inside the pinned Ubuntu container. The host needs docker only.
+      - name: Build and package in the container
+        env:
+          LDFLAGS: ${{ needs.prepare.outputs.ldflags }}
+          TAGS: ${{ needs.prepare.outputs.tags }}
+          HAS_KEY: ${{ needs.prepare.outputs.has_key }}
+          TARGET: ${{ matrix.target }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: runner/build/ci/linux-container.sh --target "$TARGET" --version "$VERSION" --dist "$DIST"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: runner-linux-${{ matrix.arch }}
+          if-no-files-found: error
+          retention-days: 14
+          path: ${{ env.DIST }}/artifacts/*
+
+      # One copy of the verified sources is enough: they are the same three
+      # tarballs on every leg, and THIRD_PARTY_NOTICES.md promises them at a
+      # stable URL for as long as these binaries are distributed.
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: matrix.arch == 'amd64'
+        with:
+          name: runner-ffmpeg-sources
+          if-no-files-found: error
+          retention-days: 14
+          path: ${{ env.DIST }}/sources/*
+
+  # ---- windows -----------------------------------------------------------------
+  # Cross-built on Linux in the pinned toolchain container (runner/build/windows).
+  # No environment, no secret: it produces UNSIGNED binaries.
+  build-windows:
+    if: needs.prepare.outputs.promote != 'true'
+    name: Build (windows/amd64)
+    needs: prepare
+    runs-on: ${{ needs.prepare.outputs.runs_on }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Build ffmpeg, the daemon and the tray
+        env:
+          LDFLAGS: ${{ needs.prepare.outputs.ldflags }}
+          TAGS: ${{ needs.prepare.outputs.tags }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          set -euo pipefail
+          runner/build/windows/run-in-container.sh -- \
+            runner/build/windows/build-binaries.sh --version "$VERSION" --out "$DIST-windows"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows-unsigned-binaries
+          if-no-files-found: error
+          retention-days: 3
+          path: ${{ env.DIST }}-windows/*
+
+  # Signs and packages. This is the only Windows job that can see a credential,
+  # and only when publish is on: a dry run uses the credential-free
+  # release-dry-run environment and signs nothing.
+  package-windows:
+    name: Package and sign (windows/amd64)
+    if: needs.prepare.outputs.promote != 'true'
+    needs: [prepare, build-windows]
+    runs-on: ${{ needs.prepare.outputs.runs_on }}
+    environment: ${{ needs.prepare.outputs.publish == 'true' && 'release' || 'release-dry-run' }}
+    permissions:
+      contents: read
+      # Only for azure-oidc-token.sh (GitHub OIDC -> Azure Trusted Signing).
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: windows-unsigned-binaries
+          path: ${{ env.DIST }}-windows
+
+      - name: Decide how to sign
+        id: mode
+        env:
+          PUBLISH: ${{ needs.prepare.outputs.publish }}
+          BACKEND: ${{ vars.RUNNER_WINDOWS_SIGNING }}
+          EXPECTED_SIGNER_SUBJECT: ${{ vars.RUNNER_WINDOWS_SIGNER_SUBJECT }}
+          EXPECTED_SIGNER_THUMBPRINT: ${{ vars.RUNNER_WINDOWS_SIGNER_THUMBPRINT }}
+        run: |
+          set -euo pipefail
+          signing=none
+          if [ "$PUBLISH" = "true" ]; then
+            case "$BACKEND" in
+              trusted-signing|pfx) signing=$BACKEND ;;
+              *)
+                echo "::error::RUNNER_WINDOWS_SIGNING is '${BACKEND:-unset}' in the release environment. A published Windows installer must be signed: set it to trusted-signing or pfx. Nothing was published."
+                exit 1
+                ;;
+            esac
+          else
+            echo "::notice::publish is off: the Windows artifacts of this dry run are UNSIGNED."
+          fi
+          # A publishing release must pin who signed (exact subject DN and/or leaf
+          # SHA-256); a dry run only warns. See runner/build/windows/signer-check.sh.
+          SIGNING=$signing PUBLISH=$PUBLISH runner/build/windows/require-signer-pin.sh
+          echo "signing=$signing" >> "$GITHUB_OUTPUT"
+
+      # GitHub OIDC -> Entra token with curl only (no az CLI, no azure/login, no
+      # sudo on the pool). The token is masked, then appended to the job env.
+      - name: Get the Trusted Signing token (OIDC, no stored secret)
+        if: steps.mode.outputs.signing == 'trusted-signing'
+        env:
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+        run: runner/build/windows/azure-oidc-token.sh --env-file "$GITHUB_ENV"
+
+      - name: Package and sign
+        env:
+          SIGNING: ${{ steps.mode.outputs.signing }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          TS_ENDPOINT: ${{ vars.TS_ENDPOINT }}
+          TS_ACCOUNT: ${{ vars.TS_ACCOUNT }}
+          TS_PROFILE: ${{ vars.TS_PROFILE }}
+          # The signature must name exactly this signer (full subject DN and/or leaf SHA-256).
+          EXPECTED_SIGNER_SUBJECT: ${{ vars.RUNNER_WINDOWS_SIGNER_SUBJECT }}
+          EXPECTED_SIGNER_THUMBPRINT: ${{ vars.RUNNER_WINDOWS_SIGNER_THUMBPRINT }}
+          WINDOWS_SIGNING_PFX_BASE64: ${{ steps.mode.outputs.signing == 'pfx' && secrets.WINDOWS_SIGNING_PFX_BASE64 || '' }}
+          WINDOWS_SIGNING_PFX_PASSWORD: ${{ steps.mode.outputs.signing == 'pfx' && secrets.WINDOWS_SIGNING_PFX_PASSWORD || '' }}
+        run: |
+          set -euo pipefail
+          runner/build/windows/run-in-container.sh -- \
+            runner/build/windows/package.sh --version "$VERSION" \
+              --dist "$DIST-windows" --out "$DIST-windows/artifacts" --signing "$SIGNING"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: runner-windows-amd64
+          if-no-files-found: error
+          retention-days: 14
+          path: ${{ env.DIST }}-windows/artifacts/*
+
+  # ---- sign, verify, publish ----------------------------------------------------
+  publish:
+    name: Sign the manifest and publish
+    needs: [prepare, build-linux, package-windows]
+    # A promotion skips the build jobs; !failure() lets publish run after skipped needs.
+    if: ${{ !cancelled() && !failure() && needs.prepare.outputs.publish == 'true' }}
+    runs-on: ${{ needs.prepare.outputs.runs_on }}
+    environment: release
+    permissions:
+      contents: read
+      # Keyless cosign signing of the installers (optional; see publish.sh).
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: runner/go.mod
+          # No implicit cache anywhere in this workflow: a restored cache is state
+          # another job could have written, and this job's output is trusted.
+          cache: false
+
+      - name: Preflight
+        env:
+          CURRENT_KEY: ${{ vars.RUNNER_RELEASE_PUBLIC_KEY_CURRENT }}
+          SIGNING_KEY: ${{ secrets.RUNNER_MANIFEST_SIGNING_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          missing=""
+          for pair in \
+            "RUNNER_RELEASE_PUBLIC_KEY_CURRENT=${CURRENT_KEY:-}" \
+            "RUNNER_MANIFEST_SIGNING_KEY=${SIGNING_KEY:-}" \
+            "R2_ACCOUNT_ID=${R2_ACCOUNT_ID:-}" \
+            "R2_BUCKET=${R2_BUCKET:-}" \
+            "R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID:-}" \
+            "R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY:-}"
+          do
+            name="${pair%%=*}"
+            value="${pair#*=}"
+            [ -n "$value" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::E10a is not provisioned; missing:$missing"
+            echo "::error::Nothing was uploaded and no manifest was signed. runner/build/README.md says what each one is and how to create it."
+            exit 1
+          fi
+
+      - name: Download the built artifacts
+        if: needs.prepare.outputs.promote != 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: runner-linux-*
+          merge-multiple: true
+          path: ${{ env.DIST }}
+
+      - name: Download the verified ffmpeg sources
+        if: needs.prepare.outputs.promote != 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: runner-ffmpeg-sources
+          path: sources
+
+      - name: Download the Windows artifacts
+        if: needs.prepare.outputs.promote != 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: runner-windows-amd64
+          # The manifest builds each URL from the file name, so the MSI must sit
+          # beside the Linux artifacts: the layout here is load-bearing.
+          path: ${{ env.DIST }}
+
+      - name: Show what was built
+        if: needs.prepare.outputs.promote != 'true'
+        run: ls -la "$DIST"
+
+      # Assemble, sign, verify, SHA256SUMS, optional cosign, latest.json, upload,
+      # source offer and the final download check all live in publish.sh, which is
+      # also what the local rehearsal runs (runner/build/README.md). Secrets reach
+      # it through the environment only.
+      - name: Assemble, sign, verify and publish
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+          CHANNEL: ${{ needs.prepare.outputs.channel }}
+          ROLLOUT: ${{ needs.prepare.outputs.rollout }}
+          MIN_SUPPORTED: ${{ needs.prepare.outputs.min_supported }}
+          NOTES: ${{ needs.prepare.outputs.notes }}
+          RUNNER_RELEASE_PUBLIC_KEY_CURRENT: ${{ vars.RUNNER_RELEASE_PUBLIC_KEY_CURRENT }}
+          RUNNER_MANIFEST_SIGNING_KEY: ${{ secrets.RUNNER_MANIFEST_SIGNING_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          COSIGN_REQUIRED: ${{ vars.RUNNER_COSIGN_REQUIRED }}
+          SOURCES_DIR: sources
+          PROMOTE: ${{ needs.prepare.outputs.promote }}
+          WORK: ${{ runner.temp }}/publish
+        run: runner/build/publish.sh
+
+      - name: Summary
+        run: |
+          {
+            cat "$RUNNER_TEMP/publish/summary.md"
+            echo
+            echo "The download page (site/lib/runner-downloads.ts) reads $DOWNLOAD_BASE/<channel>/latest.json."
+          } >> "$GITHUB_STEP_SUMMARY"

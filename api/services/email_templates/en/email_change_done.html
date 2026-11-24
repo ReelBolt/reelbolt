@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{.Subject}}</title></head>
+<body style="margin:0;padding:0;background:#f4f3f8;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1c1b22;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f8;padding:24px 0;"><tr><td align="center">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:8px;padding:32px;">
+<tr><td style="font-size:20px;font-weight:700;color:#6d28d9;padding-bottom:16px;">ReelBolt</td></tr>
+<tr><td style="font-size:15px;line-height:1.55;">
+<p>Hello {{.Name}},</p>
+<p>The email address you use to sign in to ReelBolt was changed to <strong>{{.NewEmail}}</strong>. This address no longer signs in to the account, and you were signed out everywhere.</p>
+<p>If you did not make this change, contact <a href="mailto:support@reelbolt.ai" style="color:#6d28d9;">support@reelbolt.ai</a> right away.</p>
+</td></tr>
+<tr><td style="font-size:12px;color:#6b6a75;padding-top:24px;">You are receiving this email because of activity on your ReelBolt account.{{if .Unsubscribe}} <a href="{{.Unsubscribe}}" style="color:#6b6a75;">Unsubscribe</a>.{{end}}</td></tr>{{if .FooterNote}}<tr><td style="font-size:12px;color:#6b6a75;">{{.FooterNote}}</td></tr>{{end}}
+</table></td></tr></table></body></html>

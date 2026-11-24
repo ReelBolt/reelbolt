@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+{{if .ActorName}}{{.ActorName}} ha modificato una grafica della miniatura{{else}}È stata modificata una grafica della miniatura{{end}} in {{.ProjectName}} (spazio di lavoro {{.OrgName}}).
+{{if .FileName}}
+Grafica: {{.FileName}}
+{{end}}
+Apri i file del progetto:
+
+{{.Link}}
+
+-- {{.FooterNote}}

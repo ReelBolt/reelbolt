@@ -1,0 +1,21 @@
+metadata_dir = "/meta"
+data_dir = "/data"
+db_engine = "sqlite"
+
+replication_factor = 1
+
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "127.0.0.1:3901"
+# Generate with: openssl rand -hex 32
+rpc_secret = "CHANGE_ME_32_BYTE_HEX"
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.garage.localhost"
+
+[admin]
+api_bind_addr = "[::]:3903"
+# Generate with: openssl rand -base64 32
+admin_token = "CHANGE_ME"
+metrics_token = "CHANGE_ME"

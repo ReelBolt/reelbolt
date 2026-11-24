@@ -1,0 +1,72 @@
+{
+  "skipToContent": "Vai al contenuto",
+  "brand": {
+    "tagline": "Team video AI"
+  },
+  "cta": {
+    "startFree": "Inizia gratis",
+    "talkToUs": "Parliamone"
+  },
+  "nav": {
+    "howItWorks": "Come funziona",
+    "features": "Funzionalità",
+    "teams": "Team",
+    "pricing": "Prezzi",
+    "recipes": "Ricette",
+    "blog": "Blog (EN)",
+    "docs": "Guida",
+    "about": "Chi siamo",
+    "contact": "Contatti"
+  },
+  "header": {
+    "signIn": "Accedi",
+    "appComingSoon": "App · In arrivo",
+    "openMenu": "Apri il menu",
+    "closeMenu": "Chiudi il menu"
+  },
+  "footer": {
+    "product": "Prodotto",
+    "company": "Azienda",
+    "legal": "Note legali",
+    "contact": "Contatti",
+    "madeFor": "Pensato per",
+    "howItWorks": "Come funziona",
+    "features": "Funzionalità",
+    "examples": "Esempio",
+    "pricing": "Prezzi",
+    "recipes": "Ricette",
+    "blog": "Blog (in inglese)",
+    "docs": "Documentazione",
+    "desktopRunner": "Runner desktop",
+    "whatYouGet": "Cosa ottieni",
+    "faq": "Domande frequenti",
+    "about": "Chi siamo",
+    "signIn": "Accedi",
+    "appComingSoon": "App · In arrivo",
+    "privacy": "Informativa sulla privacy (in inglese)",
+    "terms": "Termini di servizio (in inglese)",
+    "acceptableUse": "Uso accettabile (in inglese)",
+    "refunds": "Rimborsi e disdetta (in inglese)",
+    "runnerEula": "EULA del runner (in inglese)",
+    "cookiePreferences": "Preferenze sui cookie",
+    "disclosure": "{name} crea video finiti a partire dai materiali che porti tu: le tue riprese, le tue parole e il tuo brand. Usarlo significa inviare parte del tuo materiale ad API di terze parti: provider AI per la generazione, un provider di archiviazione e hosting per i tuoi file e un provider di pagamenti per la fatturazione. Google è uno di questi, usato solo per l'accesso facoltativo e la sincronizzazione con Drive. La nostra <privacy>informativa sulla privacy</privacy> (in inglese) descrive cosa viene inviato a ciascun provider e perché. Non usiamo le API di Google né alcun altro servizio AI di terze parti per generare immagini intime non consensuali (NCII) o qualsiasi contenuto sessualmente esplicito.",
+    "copyright": "© {year} {name}. Tutti i diritti riservati.",
+    "version": "ReelBolt {version}",
+    "alpha": "ReelBolt {version} — alpha pubblica. Aspettati qualche spigolo: le cose possono cambiare.",
+    "privacyTelemetry": "Privacy e telemetria (in inglese)"
+  },
+  "contactAddress": {
+    "responseTime": "Tempo di risposta: {value}"
+  },
+  "language": {
+    "label": "Lingua",
+    "switchTo": "Passa alla lingua: {language}"
+  },
+  "errorpage": {
+    "heading": "Qualcosa è andato storto nel caricare questa pagina",
+    "body": "Il problema è da parte nostra, non tua. Riprova e, se continua a succedere, scrivici e ce ne occuperemo.",
+    "retry": "Riprova",
+    "home": "Torna alla home",
+    "contact": "Contattaci"
+  }
+}

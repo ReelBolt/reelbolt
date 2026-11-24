@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Un ospite ha lasciato una nota o una decisione su una revisione condivisa di {{.FileName}} in {{.ProjectName}} (spazio di lavoro {{.OrgName}}).
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+Apri il progetto:
+
+{{.Link}}
+
+-- {{.FooterNote}}

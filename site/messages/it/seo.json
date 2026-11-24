@@ -1,0 +1,65 @@
+{
+  "description": "ReelBolt è un team video AI per chi ha una storia da raccontare e non ha il tempo di raccontarla. Carica le clip che hai già girato, di' a cosa serve il video e ricevi un montaggio già rivisto, che puoi cambiare.",
+  "plansName": "Piani {name}",
+  "featureList": [
+    "Produzione di video con sceneggiatura AI",
+    "Montaggio automatico delle riprese grezze",
+    "Editor timeline con cronologia delle versioni",
+    "Editor di immagini e miniature a livelli",
+    "Grafiche progettate dall'AI con i colori e i font del tuo brand",
+    "Brand kit e libreria del brand condivisa",
+    "Titoli, sottotitoli, color grading, musica ed effetti sonori",
+    "Voce narrante AI con clonazione vocale consensuale",
+    "Doppiaggi e correzione delle battute",
+    "B-roll generato dall'AI entro un limite di spesa",
+    "Stanze di montaggio con più agenti",
+    "Inserti sullo schermo con tracciamento",
+    "Tracciamento degli oggetti e sfocatura",
+    "Revisione automatica della qualità di ogni bozza",
+    "Assistente in chat con schede di approvazione, anche in Claude Code",
+    "Sincronizzazione da GitHub, cartelle del computer e cloud drive",
+    "Porta il tuo provider AI e scegli i modelli per ogni agente",
+    "Render su un computer collegato di tua proprietà",
+    "Risoluzione e formato di output scelti a ogni esecuzione",
+    "Spazi di lavoro di team con ruoli e un pool di crediti condiviso"
+  ],
+  "ogAlt": "ReelBolt: tu hai una storia, ReelBolt ne fa un video",
+  "ogTitle": "Tu hai una storia. ReelBolt ne fa un video.",
+  "ogSubtitle": "Montato e rivisto da un team video AI. Pronto da pubblicare.",
+  "pages": {
+    "home": {
+      "title": "Team video AI per chi ha una storia da raccontare",
+      "descriptionSignup": "Carica le clip che hai già girato e di' a cosa serve il video. Un team video AI lo monta e lo rivede. Inizia gratis, senza carta.",
+      "descriptionContact": "Carica le clip che hai già girato e di' a cosa serve il video. Un team video AI lo monta e lo rivede prima che tu lo veda, e puoi cambiare tutto."
+    },
+    "pricing": {
+      "title": "Prezzi: piani, crediti e cosa è gratis",
+      "description": "Piani mensili con crediti inclusi, una stima prima di ogni esecuzione, rimborsi quando sbagliamo noi e pacchetti di crediti sui piani a pagamento. Disdici quando vuoi. I prezzi non includono le imposte."
+    },
+    "examples": {
+      "title": "Esempio: guarda il film di lancio di ReelBolt",
+      "description": "Guarda il film di lancio di ReelBolt prima di registrarti. Mostra il prodotto al lavoro, dalla richiesta a un assistente AI fino alla timeline e all'editor di immagini."
+    },
+    "about": {
+      "title": "Chi siamo: perché abbiamo creato un team video AI",
+      "description": "Perché esiste ReelBolt: perché chiunque abbia una storia da raccontare ottenga un video finito dalle proprie riprese e dalle proprie parole, con il controllo su modelli e dati."
+    },
+    "contact": {
+      "title": "Contatta il team ReelBolt",
+      "description": "Domande su ReelBolt, su un piano per il tuo team o sul self-hosting? Scrivici cosa stai realizzando e il team ti risponde."
+    },
+    "thanks": {
+      "title": "Grazie",
+      "description": "Abbiamo ricevuto il tuo messaggio. Ti risponderemo a breve sul video che vuoi realizzare."
+    },
+    "runner": {
+      "title": "Runner desktop",
+      "descriptionAvailable": "Scarica il runner di ReelBolt per fare il render su un computer tuo. Il rendering sul tuo computer non usa crediti.",
+      "descriptionSoon": "Il runner di ReelBolt, che fa il render su un computer tuo, è ancora in costruzione. Per ora non c'è nulla da scaricare."
+    },
+    "features": {
+      "title": "Funzionalità: montaggio, grafiche, voce e b-roll",
+      "description": "Montaggio automatico, editor di timeline e immagini, grafiche progettate, brand kit, narrazione e doppiaggi, b-roll generato, stanze di montaggio, Claude Code e sincronizzazione dei file."
+    }
+  }
+}

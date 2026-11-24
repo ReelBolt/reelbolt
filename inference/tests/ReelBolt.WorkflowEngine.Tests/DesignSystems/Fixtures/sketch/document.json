@@ -1,0 +1,69 @@
+{
+  "_class": "document",
+  "do_objectID": "3A1B2C3D-0000-4000-8000-000000000001",
+  "sharedSwatches": {
+    "_class": "sharedStyleContainer",
+    "objects": [
+      {
+        "_class": "sharedStyle",
+        "name": "Brand/Primary",
+        "color": { "red": 0.427, "green": 0.157, "blue": 0.851, "alpha": 1 }
+      },
+      {
+        "_class": "sharedStyle",
+        "name": "Surface",
+        "color": { "red": 1, "green": 1, "blue": 1, "alpha": 1 }
+      }
+    ]
+  },
+  "layerTextStyles": {
+    "_class": "sharedTextStyleContainer",
+    "objects": [
+      {
+        "_class": "sharedStyle",
+        "name": "Heading/H1",
+        "value": {
+          "textStyle": {
+            "encodedAttributes": {
+              "MSAttributedStringFontAttribute": {
+                "attributes": { "name": "Inter-Bold", "size": 32 }
+              }
+            }
+          }
+        }
+      },
+      {
+        "_class": "sharedStyle",
+        "name": "Body",
+        "value": {
+          "textStyle": {
+            "encodedAttributes": {
+              "MSAttributedStringFontAttribute": {
+                "attributes": { "name": "Inter-Regular", "size": 16 }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "assets": {
+    "colorAssets": [
+      {
+        "name": "Legacy/Accent",
+        "color": { "red": 0, "green": 1, "blue": 0.533, "alpha": 1 }
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Page 1",
+      "layers": [
+        {
+          "name": "Decoy/Layer",
+          "color": { "red": 0.9, "green": 0.1, "blue": 0.1, "alpha": 1 }
+        }
+      ]
+    }
+  ]
+}

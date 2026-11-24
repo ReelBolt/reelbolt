@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+{{.FileName}}
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}{{if .ProjectName}}
+Progetto {{.ProjectName}} (spazio di lavoro {{.OrgName}}).
+{{end}}
+{{.Link}}
+
+-- {{.FooterNote}}

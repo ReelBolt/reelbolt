@@ -1,0 +1,111 @@
+/* App chrome: the ink header bar, the navbar, nav section labels and the alpha strip.
+   Tokens come from app/global.css (--rb-*). */
+
+/* Header: a solid ink bar in BOTH schemes with an accent underline. It is a dark island, so the Mantine tokens its
+   controls read are re-pointed here (Mantine resolves a variant's colours through these variables, so no !important). */
+.header {
+  color-scheme: dark;
+  background: var(--rb-ink);
+  color: var(--rb-ink-text);
+  border-bottom: 3px solid var(--rb-accent);
+  --mantine-color-text: var(--rb-ink-text);
+  --mantine-color-dimmed: var(--rb-ink-dimmed);
+  --mantine-color-default: var(--rb-ink-surface);
+  --mantine-color-default-color: var(--rb-ink-text);
+  --mantine-color-default-hover: var(--rb-ink-raised);
+  --mantine-color-default-border: var(--rb-ink-line);
+  --mantine-color-violet-text: var(--rb-accent-ink);
+  --mantine-color-violet-light-color: var(--rb-ink-text);
+  --mantine-color-violet-light: rgba(168, 85, 247, 0.16);
+  --mantine-color-violet-light-hover: rgba(168, 85, 247, 0.28);
+  --mantine-color-gray-light-color: var(--rb-ink-text);
+  --mantine-color-gray-light: rgba(199, 194, 211, 0.12);
+  --mantine-color-gray-light-hover: rgba(199, 194, 211, 0.22);
+  --mantine-color-gray-text: var(--rb-ink-dimmed);
+}
+
+.header :is(:global(.mantine-Button-label), :global(.mantine-Text-root)) {
+  font-family: var(--rb-font-mono);
+  letter-spacing: 0.04em;
+}
+
+.header :global(.mantine-Burger-burger),
+.header :global(.mantine-Burger-burger)::before,
+.header :global(.mantine-Burger-burger)::after {
+  background-color: var(--rb-ink-text);
+}
+
+.navbar {
+  background: var(--rb-surface);
+}
+
+/* The burger shows on the tablet class and below (<= 1100 px, lib/breakpoints.ts TABLET_DOWN_QUERY). */
+@media (min-width: 1100.99px) {
+  .burger {
+    display: none !important;
+  }
+}
+
+/* Tablet class and below: visibility follows the navbar's own data-opened attribute, not Mantine's root
+   --app-shell-navbar-transform variable (which can go stale and strand a half-painted menu). Open
+   is forced on screen and above the toasts (150) but BELOW Mantine modals and drawers (200), so a
+   dialog opened from the header (feedback, help, the assistant sheet) is never hidden under the
+   menu; opening the menu closes the assistant (AppShell.tsx). It starts under the header (100),
+   so the burger stays tappable. Closed drops the layer once the slide-out ends. */
+@media (max-width: 1100.98px) {
+  .navbar[data-opened] {
+    transform: none !important;
+    visibility: visible;
+    z-index: 190;
+  }
+
+  .navbar:not([data-opened]) {
+    visibility: hidden;
+    transition:
+      transform var(--app-shell-transition-duration) var(--app-shell-transition-timing-function),
+      visibility 0s linear var(--app-shell-transition-duration);
+  }
+}
+
+@media (max-width: 1100.98px) and (prefers-reduced-motion: reduce) {
+  .navbar:not([data-opened]) {
+    transition: none;
+  }
+}
+
+/* Disclosure labels in the nav: mono eyebrow. Colour pairs measured in app/theme.contrast.test.ts. */
+.sectionLabel {
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
+}
+
+.sectionLabelCurrent {
+  color: var(--mantine-color-violet-text);
+}
+
+/* Alpha notice: hairline paper strip, accent edge, mono label. */
+.alpha {
+  background: var(--rb-surface);
+  border: 1px solid var(--rb-border);
+  color: var(--mantine-color-text);
+  font-family: var(--rb-font-mono);
+  font-size: 12px;
+}
+
+.alpha :is(:global(.mantine-Alert-message), :global(.mantine-Alert-icon), :global(.mantine-Alert-closeButton), :global(.mantine-Text-root)) {
+  color: var(--mantine-color-text);
+}
+
+/* Touch: the dismiss control is a 44px target. */
+@media (pointer: coarse) {
+  .alpha :global(.mantine-Alert-closeButton) {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

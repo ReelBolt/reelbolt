@@ -1,0 +1,157 @@
+{
+  "name": "title-position-in-compound-cut",
+  "description": "A compound clip whose sequence holds a title with a pad position, a template and a transform; the flattener cuts the title at the compound head and must keep all three.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "0e4d2c1b-7a6f-4e3d-8c2b-1a0f9e8d7c60",
+    "projectId": "5b0f6c1e-2a3d-4c8e-9f10-1a2b3c4d5e60",
+    "name": "Seeded timeline",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "11111111-2222-4333-8444-555555555501",
+        "kind": "video",
+        "name": "V1",
+        "color": null,
+        "height": 64,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "id": "9e8d7c6b-5a4f-4e3d-8c2b-1a0f9e8d7c02",
+            "type": "compoundClip",
+            "name": "Compound 1",
+            "recordIn": 0,
+            "recordOut": 100,
+            "sequenceId": "9e8d7c6b-5a4f-4e3d-8c2b-1a0f9e8d7c01",
+            "sourceIn": 20,
+            "enabled": true,
+            "provenance": null
+          },
+          {
+            "id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeee02",
+            "type": "mediaClip",
+            "name": "Clip 02",
+            "recordIn": 100,
+            "recordOut": 250,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "7d3c2b1a-0f9e-4d8c-b7a6-5f4e3d2c1b02"
+            },
+            "sourceIn": 30,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null
+          }
+        ]
+      },
+      {
+        "id": "11111111-2222-4333-8444-555555555502",
+        "kind": "audio",
+        "name": "A1",
+        "color": null,
+        "height": 64,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeee03",
+            "type": "mediaClip",
+            "name": "Clip 03",
+            "recordIn": 0,
+            "recordOut": 250,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "7d3c2b1a-0f9e-4d8c-b7a6-5f4e3d2c1b03"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null
+          }
+        ]
+      }
+    ],
+    "markers": [
+      {
+        "id": "cccccccc-dddd-4eee-8fff-000000000001",
+        "frame": 50,
+        "name": "Marker 1",
+        "color": null,
+        "note": null,
+        "durationFrames": null
+      }
+    ],
+    "inOut": null,
+    "seed": null,
+    "sequences": [
+      {
+        "id": "9e8d7c6b-5a4f-4e3d-8c2b-1a0f9e8d7c01",
+        "name": "Compound 1",
+        "tracks": [
+          {
+            "id": "11111111-2222-4333-8444-555555555501",
+            "kind": "video",
+            "name": "V1",
+            "color": null,
+            "height": 64,
+            "locked": false,
+            "enabled": true,
+            "mute": false,
+            "solo": false,
+            "busId": null,
+            "items": [
+              {
+                "type": "titleClip",
+                "id": "9e8d7c6b-5a4f-4e3d-8c2b-1a0f9e8d7c04",
+                "name": "Title",
+                "recordIn": 0,
+                "recordOut": 200,
+                "text": "Hello",
+                "fontSize": 48,
+                "fontFamily": "Arial",
+                "color": "#FFFFFF",
+                "enabled": true,
+                "template": "lowerThird",
+                "position": "topLeft",
+                "transform": {
+                  "positionX": {
+                    "value": 0.05,
+                    "keys": null
+                  },
+                  "scale": {
+                    "value": 1.2,
+                    "keys": null
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "valid": true
+  }
+}

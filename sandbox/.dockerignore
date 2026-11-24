@@ -1,0 +1,16 @@
+# A local template/node_modules (from running the template by hand) must never
+# reach the build context: the `COPY template/ ./` in the runtime stage would
+# overwrite the node_modules the image's own controlled `npm install` just
+# produced, shipping whatever is on disk instead — including prebuilt binaries
+# for other platforms. Dependencies must come from npm install against
+# package.json, not from the working tree.
+template/node_modules/
+**/node_modules/
+
+# Local scratch and build output — never belongs in an image.
+temp/
+sandbox
+sandbox-executor
+*.log
+.env
+.git/

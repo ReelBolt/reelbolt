@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "Welcome"
+  },
+  "progress": "Question {n} of {total}",
+  "skip": "Skip for now",
+  "back": "Back",
+  "continue": "Continue",
+  "projectName": "My first video",
+  "persona": {
+    "title": "What are you here to make a video for?",
+    "body": "Pick the closest one. We use it for the examples and tips you see. You can make anything later.",
+    "groupLabel": "What the video is for"
+  },
+  "personas": {
+    "creator": {
+      "title": "My channel or my followers",
+      "words": "I film all week and edit all weekend."
+    },
+    "business": {
+      "title": "My business",
+      "words": "I know we need video. I run a business, I am not an editor."
+    },
+    "educator": {
+      "title": "My lessons or my course",
+      "words": "My best lessons are stuck in hour-long recordings."
+    },
+    "nonprofit": {
+      "title": "My cause or my community",
+      "words": "We have the stories and the clips. Nobody on the team edits."
+    },
+    "software": {
+      "title": "My app or software product",
+      "words": "We ship every week and announce it with a screenshot."
+    },
+    "agency": {
+      "title": "My clients",
+      "words": "First cuts eat the margin."
+    },
+    "other": {
+      "title": "Something else",
+      "words": "I have a story to tell and no time to tell it."
+    }
+  },
+  "material": {
+    "title": "What do you have to start from?",
+    "body": "This decides what we set up for you first. One click and your first project is ready for it.",
+    "groupLabel": "What you start from",
+    "footage": {
+      "title": "Clips I already shot",
+      "body": "From a phone, a camera or a screen recording. The dead air and the retakes get cut."
+    },
+    "code": {
+      "title": "An app or website I built",
+      "body": "Add its source code and get a promo video of its screens."
+    },
+    "idea": {
+      "title": "Just an idea so far",
+      "body": "You get five short clips to film on your phone. Then you add them here."
+    }
+  },
+  "creating": "Setting up your first project...",
+  "error": {
+    "title": "Your project could not be set up",
+    "retry": "Try again"
+  },
+  "samples": {
+    "offer": "No clips handy? Try it with our sample clips",
+    "importing": "Adding the sample clips...",
+    "unverifiedTitle": "Confirm your email to use the sample clips",
+    "unverifiedBody": "Open the link we sent to your inbox, then try again. Your project is ready, and your own clips can go in right now.",
+    "failedTitle": "The sample clips could not be added",
+    "failedBody": "Your project is ready. You can add your own clips right now.",
+    "someFailedTitle": "Some sample clips could not be added",
+    "someFailedBody": "{added, plural, one {# sample clip is} other {# sample clips are}} in your project. You can add more of your own.",
+    "retry": "Try the sample clips again",
+    "open": "Open my project"
+  },
+  "shots": {
+    "title": "Film these five clips on your phone",
+    "body": "About ten seconds each is plenty. Five different shots give the edit something to work with. One long take can only be trimmed.",
+    "listLabel": "Your five clips",
+    "tip": "Hold the phone still, find good light, and let each clip run a second longer than feels natural.",
+    "ready": "I have my clips. Add them",
+    "later": "I will film them first",
+    "laterHint": "Your project is saved. This list is on your dashboard when you come back.",
+    "lists": {
+      "creator": {
+        "one": "You, to the camera: one sentence on what this video is about.",
+        "two": "A slow look around the place where it happens.",
+        "three": "Your hands doing the main thing, up close.",
+        "four": "The moment you most want people to see.",
+        "five": "You again: what you would tell a friend to try next."
+      },
+      "business": {
+        "one": "The front of your place, or your product on a table, in daylight.",
+        "two": "You or a colleague at work, hands busy.",
+        "three": "The product or the finished result, up close.",
+        "four": "What a customer sees first: the door, the counter or the box being opened.",
+        "five": "You, to the camera: what you offer and how to get it."
+      },
+      "educator": {
+        "one": "You, to the camera: the one thing this lesson teaches.",
+        "two": "The board, the screen or the page you teach from.",
+        "three": "Your hands showing the key step.",
+        "four": "A common mistake, shown once.",
+        "five": "You again: what to practice next."
+      },
+      "nonprofit": {
+        "one": "The place where your work happens.",
+        "two": "People doing the work, filmed with their permission.",
+        "three": "One detail that shows why it matters: a sign, a tool or a finished job.",
+        "four": "You or a volunteer, to the camera: what you do, in one sentence.",
+        "five": "How people can help: the event, the page or the collection box."
+      },
+      "software": {
+        "one": "Your product on its screen, doing its main job from start to finish.",
+        "two": "The old way people do this today, shown once.",
+        "three": "One feature up close, used slowly.",
+        "four": "You, to the camera: who it is for, in one sentence.",
+        "five": "The last screen people should remember: the result or the sign-up page."
+      },
+      "agency": {
+        "one": "The client's place or product, from a few steps back.",
+        "two": "The product or the service in use, up close.",
+        "three": "Someone from the client's team, to the camera: what they offer.",
+        "four": "One detail of the brand: the sign, the packaging or the logo.",
+        "five": "The closing shot: where people should go next."
+      },
+      "other": {
+        "one": "You, to the camera: what this video is about, in one sentence.",
+        "two": "The place where the story happens.",
+        "three": "The main thing, up close.",
+        "four": "The moment that matters most.",
+        "five": "The ending: what you want people to do or remember."
+      }
+    }
+  }
+}

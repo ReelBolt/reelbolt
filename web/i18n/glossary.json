@@ -1,0 +1,33 @@
+{
+  "_comment": "Banned Italian variants, derived from docs/i18n-glossary.md. Conservative: only clear errors. Each entry: [regex (case-insensitive), why]. Matched against every Italian message string. Third element = RegExp flags (default \"i\").",
+  "it": {
+    "banned": [
+      [
+        "\\bpunti\\b",
+        "credits are \"crediti\", never \"punti\""
+      ],
+      [
+        "\\bbeta\\b",
+        "the early preview is \"anteprima anticipata\", never \"beta\""
+      ],
+      [
+        "\\bworkflow\\b",
+        "workflow is \"flusso di lavoro\" (or \"app\" in the gallery); do not leave it untranslated in prose"
+      ],
+      [
+        "\\buploadare\\b|\\bcaricare un upload\\b",
+        "upload is \"carica\""
+      ],
+      [
+        "\\bLei\\b",
+        "informal tu, never formal Lei",
+        ""
+      ],
+      [
+        "\\b(la Sua|il Suo|le Sue|i Suoi|Sua|Suo)\\b",
+        "informal tu, never formal Sua/Suo",
+        ""
+      ]
+    ]
+  }
+}

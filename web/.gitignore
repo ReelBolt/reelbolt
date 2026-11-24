@@ -1,0 +1,4 @@
+# The repo-root .gitignore ignores every `data/` directory (Qdrant storage). That also swallowed the
+# /settings/data route, so the page the legal gate exempts (web/proxy.ts, S-22) was never committed
+# and 404'd on every checkout. Re-include it; web/app/legal-gate-routes.test.ts guards this.
+!/app/(app)/settings/data/

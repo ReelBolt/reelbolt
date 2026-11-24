@@ -1,0 +1,56 @@
+[
+  {
+    "name": "dashboard",
+    "width": 1280,
+    "height": 800,
+    "alt": "The ReelBolt dashboard home with a running-now panel, a latest renders panel and a finish-setup checklist."
+  },
+  {
+    "name": "project-files",
+    "width": 1280,
+    "height": 800,
+    "alt": "The Files tab of the Acme Notes demo project, listing five uploaded source files with sizes and upload times."
+  },
+  {
+    "name": "picture-editor",
+    "width": 1280,
+    "height": 800,
+    "alt": "The thumbnail editor with a logo picture on the canvas and a text layer named Headline in the layers panel."
+  },
+  {
+    "name": "assistant",
+    "width": 1280,
+    "height": 800,
+    "alt": "The assistant side panel open over the dashboard, showing the welcome state with suggested prompts."
+  },
+  {
+    "name": "workflow-builder",
+    "width": 1280,
+    "height": 624,
+    "alt": "The workflow builder for a promo video workflow, with its run button, credit estimate line and the first steps on the canvas."
+  },
+  {
+    "name": "timeline-editor",
+    "width": 1280,
+    "height": 214,
+    "alt": "The timeline tracks of a demo timeline in the timeline editor, with three video clips on track V1 and one audio clip on track A1."
+  },
+  {
+    "name": "run-estimate",
+    "width": 1280,
+    "height": 218,
+    "alt": "The run dialog estimate for a workflow, showing the estimated credits, a rough-estimate note and the credits the workspace has available."
+  },
+  {
+    "name": "brand-kit",
+    "width": 1280,
+    "height": 800,
+    "alt": "The Brand and product tab of a demo project, showing the approved brand colours and typography."
+  },
+  {
+    "name": "billing-plans",
+    "width": 1280,
+    "height": 486,
+    "alt": "The Choose a plan section of the Plan and billing page, with Creator, Pro and Team plan cards."
+  }
+]

@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "Benvenuto"
+  },
+  "progress": "Domanda {n} di {total}",
+  "skip": "Salta per ora",
+  "back": "Indietro",
+  "continue": "Continua",
+  "projectName": "Il mio primo video",
+  "persona": {
+    "title": "Per cosa vuoi fare un video?",
+    "body": "Scegli quello che ti somiglia di più. Lo usiamo per gli esempi e i suggerimenti che vedi. Poi puoi fare qualsiasi cosa.",
+    "groupLabel": "A cosa serve il video"
+  },
+  "personas": {
+    "creator": {
+      "title": "Il mio canale o i miei follower",
+      "words": "Giro tutta la settimana e monto tutto il weekend."
+    },
+    "business": {
+      "title": "La mia attività",
+      "words": "So che ci serve un video. Gestisco un'attività, non faccio il montatore."
+    },
+    "educator": {
+      "title": "Le mie lezioni o il mio corso",
+      "words": "Le mie lezioni migliori sono chiuse in registrazioni di un'ora."
+    },
+    "nonprofit": {
+      "title": "La mia causa o la mia comunità",
+      "words": "Abbiamo le storie e le clip. Nel team nessuno fa montaggio."
+    },
+    "software": {
+      "title": "La mia app o il mio software",
+      "words": "Rilasciamo ogni settimana e lo annunciamo con uno screenshot."
+    },
+    "agency": {
+      "title": "I miei clienti",
+      "words": "I primi montaggi si mangiano il margine."
+    },
+    "other": {
+      "title": "Qualcos'altro",
+      "words": "Ho una storia da raccontare e non ho il tempo di raccontarla."
+    }
+  },
+  "material": {
+    "title": "Da cosa parti?",
+    "body": "Da qui dipende cosa prepariamo per te all'inizio. Un clic e il tuo primo progetto è pronto.",
+    "groupLabel": "Da cosa parti",
+    "footage": {
+      "title": "Clip che ho già girato",
+      "body": "Da smartphone, videocamera o registrazione dello schermo. I tempi morti e le ripetizioni vengono tagliati."
+    },
+    "code": {
+      "title": "Un'app o un sito che ho creato",
+      "body": "Aggiungi il codice sorgente e ottieni un video promozionale con le sue schermate."
+    },
+    "idea": {
+      "title": "Per ora solo un'idea",
+      "body": "Ti diamo cinque clip brevi da girare con lo smartphone. Poi le aggiungi qui."
+    }
+  },
+  "creating": "Prepariamo il tuo primo progetto…",
+  "error": {
+    "title": "Non è stato possibile preparare il progetto",
+    "retry": "Riprova"
+  },
+  "samples": {
+    "offer": "Non hai clip a portata di mano? Prova con le nostre clip di esempio",
+    "importing": "Aggiungiamo le clip di esempio…",
+    "unverifiedTitle": "Conferma la tua email per usare le clip di esempio",
+    "unverifiedBody": "Apri il link che ti abbiamo mandato per email, poi riprova. Il tuo progetto è pronto e puoi aggiungere subito le tue clip.",
+    "failedTitle": "Non è stato possibile aggiungere le clip di esempio",
+    "failedBody": "Il tuo progetto è pronto. Puoi aggiungere subito le tue clip.",
+    "someFailedTitle": "Alcune clip di esempio non sono state aggiunte",
+    "someFailedBody": "{added, plural, one {Nel tuo progetto c'è # clip di esempio} other {Nel tuo progetto ci sono # clip di esempio}}. Puoi aggiungerne altre tue.",
+    "retry": "Riprova con le clip di esempio",
+    "open": "Apri il mio progetto"
+  },
+  "shots": {
+    "title": "Gira queste cinque clip con lo smartphone",
+    "body": "Bastano circa dieci secondi l'una. Cinque riprese diverse danno al montaggio qualcosa su cui lavorare. Una sola ripresa lunga si può soltanto accorciare.",
+    "listLabel": "Le tue cinque clip",
+    "tip": "Tieni fermo lo smartphone, cerca una buona luce e lascia girare ogni clip un secondo in più di quanto ti sembra naturale.",
+    "ready": "Ho le mie clip. Aggiungile",
+    "later": "Prima le giro",
+    "laterHint": "Il tuo progetto è salvato. Al tuo ritorno trovi questo elenco nella dashboard.",
+    "lists": {
+      "creator": {
+        "one": "Tu, davanti alla camera: una frase su cosa racconta questo video.",
+        "two": "Una panoramica lenta del posto in cui succede.",
+        "three": "Le tue mani mentre fanno la cosa principale, da vicino.",
+        "four": "Il momento che vuoi far vedere più di tutti.",
+        "five": "Di nuovo tu: cosa diresti a un amico di provare dopo."
+      },
+      "business": {
+        "one": "L'ingresso del tuo locale, oppure il tuo prodotto su un tavolo, alla luce del giorno.",
+        "two": "Tu o un collega al lavoro, con le mani impegnate.",
+        "three": "Il prodotto o il risultato finito, da vicino.",
+        "four": "Quello che un cliente vede per primo: la porta, il bancone o la scatola che si apre.",
+        "five": "Tu, davanti alla camera: cosa offri e come averlo."
+      },
+      "educator": {
+        "one": "Tu, davanti alla camera: l'unica cosa che questa lezione insegna.",
+        "two": "La lavagna, lo schermo o la pagina da cui insegni.",
+        "three": "Le tue mani che mostrano il passaggio chiave.",
+        "four": "Un errore comune, mostrato una volta.",
+        "five": "Di nuovo tu: su cosa esercitarsi dopo."
+      },
+      "nonprofit": {
+        "one": "Il posto in cui si svolge il vostro lavoro.",
+        "two": "Le persone al lavoro, riprese con il loro permesso.",
+        "three": "Un dettaglio che fa capire perché conta: un cartello, un attrezzo o un lavoro finito.",
+        "four": "Tu o un volontario, davanti alla camera: cosa fate, in una frase.",
+        "five": "Come si può aiutare: l'evento, la pagina o la cassetta delle offerte."
+      },
+      "software": {
+        "one": "Il tuo prodotto sul suo schermo, mentre fa il suo lavoro principale dall'inizio alla fine.",
+        "two": "Il vecchio modo in cui si fa oggi, mostrato una volta.",
+        "three": "Una funzionalità da vicino, usata lentamente.",
+        "four": "Tu, davanti alla camera: a chi serve, in una frase.",
+        "five": "L'ultima schermata da ricordare: il risultato o la pagina di registrazione."
+      },
+      "agency": {
+        "one": "Il locale o il prodotto del cliente, da qualche passo di distanza.",
+        "two": "Il prodotto o il servizio in uso, da vicino.",
+        "three": "Una persona del team del cliente, davanti alla camera: cosa offrono.",
+        "four": "Un dettaglio del brand: l'insegna, la confezione o il logo.",
+        "five": "La ripresa di chiusura: dove devono andare le persone dopo."
+      },
+      "other": {
+        "one": "Tu, davanti alla camera: di cosa parla questo video, in una frase.",
+        "two": "Il posto in cui si svolge la storia.",
+        "three": "La cosa principale, da vicino.",
+        "four": "Il momento che conta di più.",
+        "five": "Il finale: cosa vuoi che le persone facciano o ricordino."
+      }
+    }
+  }
+}

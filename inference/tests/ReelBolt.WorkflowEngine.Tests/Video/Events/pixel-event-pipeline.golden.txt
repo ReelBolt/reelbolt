@@ -1,0 +1,178 @@
+## still picture (0 events)
+
+## picture slides right 0.6 px per frame (camera pans left), frames 30 to 70 (1 events)
+Transition frame=31 end=70 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## picture slides left 0.8 px per frame (camera pans right), frames 20 to 80 (1 events)
+Transition frame=21 end=80 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## picture slides down 0.5 px per frame (camera tilts up), frames 30 to 90 (1 events)
+Transition frame=31 end=90 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## picture slides up 0.5 px per frame (camera tilts down), frames 30 to 90 (1 events)
+Transition frame=31 end=90 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## push in, one percent per frame, frames 30 to 70 (1 events)
+CameraMoveStart frame=31 end=70 region=- strength=1 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+
+## pull out, one percent per frame, frames 30 to 70 (1 events)
+CameraMoveStart frame=31 end=70 region=- strength=1 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+
+## picture slides right 0.25 px per frame for 200 frames (long slow pan left) (1 events)
+Transition frame=31 end=131 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## picture slides right at 30 fps (camera pans left) (1 events)
+Transition frame=31 end=70 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## ball bounces off the floor at frame 50 (2 events)
+MoveStart frame=21 end=58 region=0.5,0.0556,0.0938,0.9444 strength=0.8073908223797188 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=53 end=88 region=0.5,0,0.0938,0.8333 strength=0.7705443307345481 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+
+## ball bounces every 30 frames (10 events)
+MoveStart frame=1 end=38 region=0.5,0.0556,0.0938,0.9444 strength=0.8073908223797188 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=33 end=68 region=0.5,0.0556,0.0938,0.7778 strength=0.751198189805123 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+MoveStart frame=63 end=98 region=0.5,0.2778,0.0938,0.7222 strength=0.7311478659992483 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=93 end=128 region=0.5,0.0556,0.0938,0.7778 strength=0.751198189805123 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+MoveStart frame=123 end=158 region=0.5,0.2778,0.0938,0.7222 strength=0.7311478659992483 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=153 end=188 region=0.5,0.0556,0.0938,0.7778 strength=0.751198189805123 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+MoveStart frame=183 end=218 region=0.5,0.2778,0.0938,0.7222 strength=0.7311478659992483 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=213 end=248 region=0.5,0.0556,0.0938,0.7778 strength=0.751198189805123 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+MoveStart frame=243 end=278 region=0.5,0.2778,0.0938,0.7222 strength=0.7311478659992483 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+Appear frame=273 end=299 region=0.5,0.0556,0.0938,0.7778 strength=0.751198189805123 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+
+## box travels 1.2 px per frame, frames 30 to 70 (1 events)
+Change frame=31 end=70 region=0.125,0.3333,0.5,0.2778 strength=0.9607257743127307 origin=Pixels confidence=0.7 direction=right speed=medium kind=-
+
+## box fades in, frames 30 to 42 (1 events)
+Appear frame=31 end=42 region=0.375,0.3333,0.2812,0.3889 strength=0.8696979695133997 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## box fades out, frames 40 to 52 (1 events)
+Disappear frame=41 end=52 region=0.375,0.3333,0.2812,0.3889 strength=0.8696979695133997 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## stripes fade in, frames 30 to 42 (1 events)
+Appear frame=31 end=42 region=0.25,0.3333,0.5,0.2778 strength=0.9607257743127307 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## patch pulses bright, frames 40 to 48 (1 events)
+Flash frame=41 end=48 region=0.3125,0.3333,0.2188,0.2778 strength=0.7031728036871332 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+
+## hard cut at frame 50 (1 events)
+Transition frame=50 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+
+## dissolve, frames 40 to 60 (1 events)
+Transition frame=41 end=60 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## montage, a new still every 10 frames (23 events)
+Transition frame=10 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=20 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=30 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=40 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=50 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=60 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=70 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=80 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=90 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=100 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=110 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=120 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=130 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=140 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=150 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=160 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=170 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=180 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=190 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=200 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=210 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=220 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Transition frame=230 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+
+## whole layout eases into a pan from frame 120 (1 events)
+CameraMoveStart frame=122 end=210 region=- strength=1 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+
+## pops on a still page, then footage in a panel (6 events)
+Appear frame=40 end=- region=0.0312,0.0556,0.0938,0.1667 strength=0.4551551815399144 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+Appear frame=90 end=- region=0.125,0.2778,0.125,0.1667 strength=0.4946278254943948 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+Appear frame=95 end=- region=0.25,0.0556,0.0938,0.1667 strength=0.4551551815399144 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+Appear frame=150 end=- region=0.375,0.2778,0.0938,0.1667 strength=0.4551551815399144 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+Appear frame=180 end=- region=0.375,0.3333,0.5625,0.5556 strength=1 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+Change frame=182 end=298 region=0.375,0.3333,0.5625,0.5556 strength=1 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## grain over a picture that pans, with a cut at frame 150 (2 events)
+Transition frame=1 end=149 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+Transition frame=150 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=footage
+
+## heavy grain everywhere (1 events)
+Transition frame=1 end=180 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+
+## pan, then a bounce, then a cut, then a fade in (6 events)
+Transition frame=31 end=70 region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=-
+Transition frame=120 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=footage
+MoveStart frame=151 end=188 region=0.5,0.0556,0.0938,0.9444 strength=0.8073908223797188 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+MoveStart frame=183 end=218 region=0.5,0,0.0938,0.8333 strength=0.7705443307345481 origin=Pixels confidence=0.7 direction=up speed=medium kind=-
+Transition frame=260 end=- region=- strength=1 origin=Pixels confidence=0.9 direction=- speed=- kind=-
+Appear frame=321 end=332 region=0.4375,0.4444,0.2188,0.3889 strength=0.7892556509887896 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## filmed, picture slides right 0.3 px per frame (camera pans left), frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=left speed=- kind=footage
+CameraMoveStop frame=121 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides left 0.3 px per frame (camera pans right), frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=right speed=- kind=footage
+CameraMoveStop frame=124 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides down 0.3 px per frame (camera tilts up), frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=up speed=- kind=footage
+CameraMoveStop frame=120 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides up 0.3 px per frame (camera tilts down), frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=down speed=- kind=footage
+CameraMoveStop frame=120 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides down and to the right (camera moves up and to the left), frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=up-left speed=- kind=footage
+CameraMoveStop frame=120 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, push in, frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=in speed=- kind=footage
+CameraMoveStop frame=122 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, pull out, frames 60 to 120 (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=out speed=- kind=footage
+CameraMoveStop frame=129 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8704861044883728 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides right 0.2 px per frame for 220 frames (long slow pan left) (3 events)
+CameraMoveStart frame=61 end=280 region=- strength=0.3 origin=Pixels confidence=0.8 direction=left speed=- kind=footage
+CameraMoveStop frame=280 end=- region=- strength=0.3 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=319 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, picture slides right at 30 fps (camera pans left) (3 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=left speed=- kind=footage
+CameraMoveStop frame=121 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=199 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+
+## filmed, the camera shakes from side to side, frames 60 to 140 (4 events)
+CameraMoveStart frame=61 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStop frame=140 end=- region=- strength=1 origin=Pixels confidence=0.8 direction=- speed=- kind=footage
+CameraMoveStart frame=2 end=219 region=- strength=0.8739583432674408 origin=Pixels confidence=0.6 direction=- speed=- kind=footage
+Change frame=31 end=62 region=0.7812,0.2778,0.0625,0.2222 strength=0.3901814435781827 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+
+## large box slows hard at frame 55 (4 events)
+Hit frame=55 end=- region=0.4098,0.3641,0.0625,0.1111 strength=0.6388410329818726 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+Change frame=31 end=95 region=0.0625,0.3333,0.5312,0.2778 strength=0.9795119555779046 origin=Pixels confidence=0.7 direction=right speed=medium kind=-
+Change frame=69 end=95 region=0.5625,0.3333,0.0625,0.2778 strength=0.4083333333333333 origin=Pixels confidence=0.7 direction=right speed=slow kind=-
+Appear frame=84 end=95 region=0.625,0.3333,0.0312,0.2778 strength=0.3901814435781827 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## large box falls and turns back at frame 55 (2 events)
+Hit frame=55 end=- region=0.4504,0.6457,0.0625,0.1111 strength=0.7764387130737305 origin=Pixels confidence=0.6 direction=- speed=- kind=-
+Change frame=31 end=80 region=0.375,0.0556,0.2812,0.8333 strength=1 origin=Pixels confidence=0.7 direction=- speed=- kind=-
+
+## vertical source, box travels down (1 events)
+MoveStart frame=31 end=80 region=0.375,0.1111,0.2188,0.7778 strength=1 origin=Pixels confidence=0.7 direction=down speed=medium kind=-
+

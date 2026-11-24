@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{.Subject}}</title></head>
+<body style="margin:0;padding:0;background:#f4f3f8;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1c1b22;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f8;padding:24px 0;"><tr><td align="center">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:8px;padding:32px;">
+<tr><td style="font-size:20px;font-weight:700;color:#6d28d9;padding-bottom:16px;">ReelBolt</td></tr>
+<tr><td style="font-size:15px;line-height:1.55;">
+<p>Ciao{{if .Name}} {{.Name}}{{end}},</p>
+<p>Il tuo account ReelBolt è stato creato.</p>
+{{if .TempPassword}}<p>La tua password temporanea è: <strong style="font-family:monospace;">{{.TempPassword}}</strong></p>
+<p>Cambiala al primo accesso.</p>{{end}}
+{{if .Link}}<p style="margin:24px 0;"><a href="{{.Link}}" style="background:#6d28d9;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:6px;display:inline-block;">Accedi</a></p>{{end}}
+</td></tr>
+<tr><td style="font-size:12px;color:#6b6a75;padding-top:24px;">Ricevi questa email per un'attività sul tuo account ReelBolt.{{if .Unsubscribe}} <a href="{{.Unsubscribe}}" style="color:#6b6a75;">Annulla l'iscrizione</a>.{{end}}</td></tr>{{if .FooterNote}}<tr><td style="font-size:12px;color:#6b6a75;">{{.FooterNote}}</td></tr>{{end}}
+</table></td></tr></table></body></html>

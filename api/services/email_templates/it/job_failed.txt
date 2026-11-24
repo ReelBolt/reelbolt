@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+L'esecuzione del video in {{.ProjectName}} (spazio di lavoro {{.OrgName}}) non è riuscita.
+{{if .ErrorDetail}}
+Motivo: {{.ErrorDetail}}
+{{end}}
+Apri l'esecuzione:
+
+{{.Link}}
+
+-- {{.FooterNote}}

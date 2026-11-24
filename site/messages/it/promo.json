@@ -1,0 +1,26 @@
+{
+  "banner": {
+    "regionLabel": "Offerta in corso",
+    "link": "Vedi i prezzi",
+    "dismiss": "Chiudi questa offerta"
+  },
+  "price": {
+    "was": "Prima",
+    "now": "Ora"
+  },
+  "newsletter": {
+    "heading": "Le novità su ReelBolt via email",
+    "helper": "Ti mandiamo prima un link per confermare il tuo indirizzo. Ti iscriviamo solo dopo che l'hai aperto.",
+    "emailLabel": "Indirizzo email",
+    "firstNameLabel": "Nome (facoltativo)",
+    "submit": "Invia il link di conferma",
+    "submitting": "Invio in corso…",
+    "checkInbox": "Controlla la posta per confermare. Il link nell'email che ti abbiamo appena mandato completa l'iscrizione.",
+    "invalidEmail": "Inserisci un indirizzo email valido, come tu@azienda.com.",
+    "consentRequired": "Spunta la casella per confermare che vuoi ricevere le novità sul prodotto via email.",
+    "error": "Non siamo riusciti a inviarla ora. Controlla la connessione e riprova.",
+    "rateLimited": "Troppe richieste. Riprova più tardi.",
+    "staleWording": "Ricarica la pagina e riprova.",
+    "honeypotLabel": "Sito web"
+  }
+}

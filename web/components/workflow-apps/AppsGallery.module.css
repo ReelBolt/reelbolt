@@ -1,0 +1,311 @@
+/* The app gallery. Colours read the editor's tokens (read-only) where one exists; every text and
+   chip pairing below is a fixed, checked pairing (4.5:1 or better), because Mantine's "dimmed" grey
+   on white is only about 3.5:1. */
+.root {
+  display: grid;
+  gap: var(--mantine-spacing-lg);
+  --wa-text: var(--mantine-color-text);
+  --wa-muted: var(--mantine-color-dimmed);
+  --wa-card-bg: var(--rb-surface);
+  --wa-card-line: var(--rb-border);
+  --wa-chip-bg: var(--rb-surface-raised);
+  --wa-chip-fg: var(--mantine-color-text);
+  --wa-amber-bg: var(--rb-status-warn-bg);
+  --wa-amber-fg: var(--rb-status-warn);
+  --wa-ok: var(--rb-status-done);
+  --wa-bad: var(--rb-status-failed);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--mantine-spacing-sm);
+  justify-content: space-between;
+}
+
+.search {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--mantine-radius-xs);
+  border: 1px solid var(--wa-card-line);
+  background: var(--wa-card-bg);
+  color: var(--wa-text);
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+  cursor: var(--rb-cursor-pointer);
+}
+
+.chip[aria-checked='true'] {
+  background: var(--wa-chip-bg);
+  border-color: var(--wa-text);
+  font-weight: 650;
+}
+
+.chip:focus-visible,
+.openLink:focus-visible,
+.communityLink:focus-visible,
+.needsLink:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-6);
+  outline-offset: 2px;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--wa-text);
+}
+
+.hint {
+  margin: 0 0 var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+  grid-template-columns: minmax(0, 1fr);
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: var(--mantine-spacing-md);
+  border: 1px solid var(--wa-card-line);
+  border-radius: var(--mantine-radius-xs);
+  background: var(--wa-card-bg);
+  color: var(--wa-text);
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--mantine-font-size-md);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.tagline {
+  margin: 0;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+  flex: 1 1 auto;
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge {
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wa-chip-fg);
+}
+
+.badgeAmber {
+  background: var(--wa-amber-bg);
+  color: var(--wa-amber-fg);
+}
+
+.costHint {
+  font-size: var(--mantine-font-size-xs);
+  color: var(--wa-muted);
+  flex-basis: 100%;
+}
+
+.statusLine,
+.needsRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+}
+
+.statusOk {
+  color: var(--wa-ok);
+}
+
+.statusBad {
+  color: var(--wa-bad);
+}
+
+.needsLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--wa-bad);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.cardActions {
+  display: flex;
+  margin-top: 4px;
+}
+
+.openLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--mantine-radius-xs);
+  border: 1px solid var(--wa-card-line);
+  color: var(--wa-text);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 600;
+  background: transparent;
+  cursor: var(--rb-cursor-pointer);
+}
+
+/* "Model choices" on a recipe card: a quiet text button (44px tall for touch) and the list it opens. */
+.modelChoices {
+  margin-top: 4px;
+}
+
+.modelChoicesToggle {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--wa-text);
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+  text-decoration: underline;
+  cursor: var(--rb-cursor-pointer);
+}
+
+.modelChoiceList {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: var(--mantine-font-size-sm);
+}
+
+/* Another recipe is being set up: this one looks unavailable too (text stays above 4.5:1). */
+.openLink[aria-disabled='true'] {
+  cursor: var(--rb-cursor-progress);
+  opacity: 0.8;
+  border-style: dashed;
+}
+
+.empty {
+  padding: var(--mantine-spacing-md);
+  border: 1px dashed var(--wa-card-line);
+  border-radius: var(--mantine-radius-xs);
+  color: var(--wa-text);
+}
+
+/* The "Browse community recipes" link under the recipes: plain text colour, underlined, a 44 px target. */
+.communityLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--wa-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Goal chooser: one column on a phone, two on a tablet, four on desktop. */
+.goalGrid {
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+  grid-template-columns: minmax(0, 1fr);
+
+  @media (min-width: 36em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 75em) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.goalTile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 44px;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  border: 1px solid var(--wa-card-line);
+  border-radius: var(--mantine-radius-xs);
+  background: var(--wa-card-bg);
+  color: var(--wa-text);
+  font: inherit;
+  text-align: start;
+  cursor: var(--rb-cursor-pointer);
+}
+
+.goalTile:hover {
+  border-color: var(--wa-text);
+}
+
+.goalTile[aria-disabled='true'] {
+  opacity: 0.7;
+  cursor: var(--rb-cursor-not-allowed);
+}
+
+.goalTile:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-6);
+  outline-offset: 2px;
+}
+
+.goalLabel {
+  font-size: var(--mantine-font-size-md);
+  font-weight: 650;
+}
+
+.goalHint {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+}
+
+.goalsToggle {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: var(--rb-cursor-pointer);
+}
+
+.goalsToggle:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-6);
+  outline-offset: 2px;
+}

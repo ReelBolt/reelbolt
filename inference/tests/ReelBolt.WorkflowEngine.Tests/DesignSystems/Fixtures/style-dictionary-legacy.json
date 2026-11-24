@@ -1,0 +1,8 @@
+{
+  "color": {
+    "accent": { "value": "#ff5722", "type": "color" }
+  },
+  "radius": {
+    "card": { "value": "12px", "type": "dimension" }
+  }
+}

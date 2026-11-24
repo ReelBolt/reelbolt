@@ -1,0 +1,312 @@
+{
+  "relative": {
+    "justNow": "Adesso",
+    "minutesAgo": "{count} min fa",
+    "hoursAgo": "{count} h fa",
+    "yesterday": "Ieri",
+    "daysAgo": "{count} giorni fa"
+  },
+  "landed": {
+    "line": "{verb} su {track} a {time}",
+    "selected": "È selezionato sulla timeline.",
+    "undo": "Annulla"
+  },
+  "pip": {
+    "covers": "Questa immagine copre quella sotto.",
+    "make": "Mettila nell'angolo (immagine nell'immagine)"
+  },
+  "place": {
+    "place": "Posiziona",
+    "menuLabel": "Mettilo sulla timeline",
+    "choices": {
+      "insert": {
+        "label": "Inserisci alla testina",
+        "hint": "Mettilo al cursore (agganciandolo al taglio più vicino) e sposta più avanti tutto ciò che segue."
+      },
+      "overwrite": {
+        "label": "Sovrascrivi",
+        "hint": "Mettilo sulla timeline al cursore, sostituendo ciò che c'è sotto. Niente si sposta."
+      },
+      "append": {
+        "label": "In fondo",
+        "hint": "Mettilo dopo l'ultima clip della traccia."
+      },
+      "placeOnTop": {
+        "label": "Metti sopra",
+        "hint": "Mettilo al cursore sulla traccia libera più in alto, o su una nuova traccia, senza toccare le altre clip."
+      },
+      "placeOver": {
+        "label": "Metti sopra",
+        "hint": "Mettilo al cursore sopra le immagini già presenti, piccolo nell'angolo in basso a destra."
+      }
+    },
+    "position": "Posizione",
+    "templateDefault": "Predefinito del template",
+    "positions": {
+      "topLeft": "In alto a sinistra",
+      "topCenter": "In alto al centro",
+      "topRight": "In alto a destra",
+      "middleLeft": "Al centro a sinistra",
+      "center": "Al centro",
+      "middleRight": "Al centro a destra",
+      "bottomLeft": "In basso a sinistra",
+      "bottomCenter": "In basso al centro",
+      "bottomRight": "In basso a destra"
+    },
+    "colourPresets": "Colori predefiniti",
+    "customColour": "Colore personalizzato (#RRGGBB)",
+    "hexError": "Usa sei cifre, come {example}",
+    "selected": "Selezionato: {name}",
+    "colors": {
+      "black": "Nero",
+      "white": "Bianco",
+      "grey": "Grigio",
+      "red": "Rosso",
+      "orange": "Arancione",
+      "yellow": "Giallo",
+      "green": "Verde",
+      "teal": "Verde acqua",
+      "blue": "Blu",
+      "purple": "Viola",
+      "pink": "Rosa",
+      "navy": "Blu scuro"
+    }
+  },
+  "graphics": {
+    "autoTrack": "Scegli tu una traccia libera",
+    "yourTitle": "Il tuo titolo",
+    "titlePreview": "Anteprima del titolo",
+    "defaultTitle": "Titolo",
+    "addTitleTitle": "Aggiungi un titolo",
+    "style": "Stile",
+    "templates": {
+      "plain": {
+        "label": "Semplice (centrato)",
+        "hint": "Testo grande al centro dell'immagine."
+      },
+      "lowerThird": {
+        "label": "Sottopancia",
+        "hint": "Testo più piccolo in basso, come una didascalia con il nome."
+      },
+      "boxed": {
+        "label": "Con riquadro",
+        "hint": "Testo su un riquadro pieno, così resta leggibile su qualsiasi immagine."
+      },
+      "outline": {
+        "label": "Con contorno",
+        "hint": "Testo con un contorno scuro."
+      },
+      "card": {
+        "label": "Schermata",
+        "hint": "Testo su una schermata a tutto schermo."
+      }
+    },
+    "positionNote": "Questo stile mantiene la sua posizione sull'immagine. Scegli Semplice, Con riquadro o Con contorno per decidere dove mettere il testo.",
+    "text": "Testo",
+    "length": "Durata (secondi)",
+    "track": "Traccia",
+    "titleHint": "Viene inserito al cursore. Lo stile decide dove sta il testo sull'immagine.",
+    "cancel": "Annulla",
+    "addTitle": "Aggiungi titolo",
+    "addCardTitle": "Aggiungi una schermata colore",
+    "cardPreview": "Anteprima della schermata colore, {color}",
+    "addCard": "Aggiungi schermata colore"
+  },
+  "cut": {
+    "insertLabel": "{label} a {time}",
+    "inserted": "{file} inserito a {time}{sound, select, yes { con il suo audio} other {}}{known, select, yes {} other { ({seconds, number} s: la sorgente non è stata analizzata, regola la durata come preferisci)}}.",
+    "removeLabel": "Rimuovi inquadratura {id} ({frames} f)",
+    "removed": "Inquadratura {id} rimossa; {frames, plural, one {# frame eliminato} other {# frame eliminati}} dalla timeline{linked, select, yes {, insieme all'audio collegato} other {}}.",
+    "title": "Taglio",
+    "editOn": "Modifica su",
+    "overviewNote": "Tutta la timeline in un colpo d'occhio. Fai clic per spostare il cursore; la timeline di dettaglio qui sotto lo segue.",
+    "sourceTape": "Nastro sorgenti",
+    "poolFailed": "Non è stato possibile caricare il pool dei media.",
+    "noSourcesHint": "Caricane alcune nello spazio Media.",
+    "kinds": {
+      "video": "video",
+      "image": "immagine"
+    },
+    "sourceMeta": "{kind}, {duration}",
+    "seconds": "{value} s",
+    "notProbed": "non analizzata",
+    "fastReview": "Revisione veloce",
+    "review": "Rivedi",
+    "speedByLength": "Velocità in base alla durata della clip",
+    "planNote": "{count, plural, one {# clip} other {# clip}}; le clip lunghe vanno più veloci (da {min, number}× a {max, number}×).",
+    "boringShots": "Inquadrature noiose ({count, number})",
+    "noAnalysis": "Questa timeline non nasce da un'esecuzione analizzata, quindi non c'è alcuna misura di quali inquadrature siano lunghe e ferme. Apri la scheda Analizza e analizza il girato, oppure avvia Guarda il girato e crea una timeline da quell'esecuzione.",
+    "noBoring": "Nessuna inquadratura lunga e ferma su questa traccia.",
+    "speechUnchecked": "Il parlato non è stato controllato: trascrivi il girato nella scheda Analizza, così un taglio non cade mai a metà frase.",
+    "shotMeta": "{seconds} s · movimento {motion}",
+    "cutsQuiet": "Taglia solo i {seconds} s di silenzio; il parlato resta",
+    "talking": "Qualcuno sta parlando; non suggerita",
+    "show": "Mostra",
+    "remove": "Rimuovi",
+    "watch": "Guarda"
+  },
+  "stages": {
+    "below": "Livelli sotto",
+    "grade": "Correzione colore ({count, plural, one {# correzione} other {# correzioni}})",
+    "effects": "Effetti ({count, number})",
+    "program": "Programma",
+    "source": "Sorgente",
+    "stabilise": "Stabilizza",
+    "reframe": "Reinquadratura",
+    "keyer": "Keyer",
+    "crop": "Ritaglia",
+    "transform": "Trasforma",
+    "groupGradeNamed": "Correzione di gruppo: {name}",
+    "groupGrade": "Correzione di gruppo",
+    "mask": "Maschera",
+    "pin": "Corner pin",
+    "overlay": "Sovrapposizione"
+  },
+  "compose": {
+    "addAdjustmentLabel": "Aggiungi clip di regolazione",
+    "title": "Composizione",
+    "selectHint": "Seleziona una clip multimediale (maschera, keyer, corner pin, effetti, stabilizzazione, reinquadratura), un inserto (matte, keyframe degli angoli) o una clip di regolazione.",
+    "addAdjustmentRange": "Aggiungi una clip di regolazione sull'intervallo segnato",
+    "addAdjustmentAt": "Aggiungi una clip di regolazione a {time}",
+    "adjustmentNote": "Una clip di regolazione corregge il colore e applica effetti a tutto ciò che sta sotto per la sua durata; va su una nuova traccia in alto.",
+    "enableEffect": "Attiva {effect}",
+    "effectAmount": "Quantità di {effect}",
+    "removeEffect": "Rimuovi {effect}",
+    "effectToAdd": "Effetto da aggiungere",
+    "addEffect": "Aggiungi effetto",
+    "effectTypes": {
+      "blur": "sfocatura",
+      "sharpen": "nitidezza",
+      "vignette": "vignettatura",
+      "grain": "grana",
+      "pixelate": "pixel",
+      "mono": "mono"
+    },
+    "enabled": "Attivo",
+    "toggleAdjustment": "Attiva/disattiva regolazione",
+    "gradeBelow": "Correzione colore (applicata ai livelli sotto)",
+    "effects": "Effetti",
+    "adjustmentEffects": "Effetti della regolazione",
+    "nodeView": "Vista a nodi",
+    "insertQuad": "Quadrilatero dell'inserto",
+    "matte": "Matte",
+    "insertMatte": "Matte dell'inserto",
+    "quadKeys": "Keyframe degli angoli ({count, number})",
+    "editingKey": "Stai modificando il keyframe a {time}.",
+    "noKeyHere": "Nessun keyframe al cursore: la modifica sposta il valore statico; aggiungi un keyframe per animare da qui.",
+    "editingStatic": "Stai modificando il corner pin statico.",
+    "corners": {
+      "topLeft": "in alto a sinistra",
+      "topRight": "in alto a destra",
+      "bottomRight": "in basso a destra",
+      "bottomLeft": "in basso a sinistra"
+    },
+    "addKey": "Aggiungi keyframe al cursore",
+    "removeKey": "Rimuovi keyframe",
+    "resetCorners": "Reimposta gli angoli",
+    "goToKey": "Vai al keyframe a {time}",
+    "noControls": "Un elemento di tipo {type} non ha controlli di composizione.",
+    "keyer": "Keyer",
+    "keyerLabel": "Keyer",
+    "cornerPin": "Corner pin",
+    "cornerPinLabel": "Corner pin",
+    "effectsLabel": "Effetti",
+    "motionFraming": "Movimento e inquadratura",
+    "stabiliseTip": "Vidstab a due passate durante il render; l'anteprima mostra l'immagine non stabilizzata",
+    "stabilise": "Stabilizza",
+    "slowMotion": "Rallenty",
+    "opticalFlow": "Flusso ottico (interpolato)",
+    "frameDuplication": "Duplicazione dei frame",
+    "retimeQuality": "Qualità del retime",
+    "listLabel": "Su questa clip",
+    "propertiesTitle": "Proprietà",
+    "propertiesLabel": "Proprietà di {entry}",
+    "headerLine": "{name}, {kind}",
+    "kind": {
+      "media": "Clip video",
+      "adjustment": "Clip di regolazione",
+      "insert": "Inserto",
+      "other": "Altro elemento"
+    },
+    "entry": {
+      "mask": "Maschera",
+      "reframe": "Reinquadratura",
+      "keyer": "Keyer",
+      "pin": "Corner pin",
+      "effects": "Effetti",
+      "motion": "Movimento",
+      "chain": "Vista a nodi",
+      "grade": "Correzione",
+      "matte": "Matte",
+      "quad": "Angoli"
+    },
+    "entryOff": "{name}, spento",
+    "entryOn": "{name}, attivo",
+    "entryShape": "{name}, {shape}",
+    "entryCount": "{name} ({count})",
+    "shapeRect": "rettangolo",
+    "shapeEllipse": "ellisse",
+    "shapeObject": "oggetto",
+    "multiSelect": "Hai selezionato più elementi. Seleziona una sola clip per vederne le proprietà.",
+    "noSelectionProps": "Nessuna selezione. Scegli una clip sulla timeline.",
+    "previewNote": "Si vede nel visore mentre modifichi. Il video finale è esatto.",
+    "motionNote": "La stabilizzazione si vede nel visore quando la copia stabilizzata è pronta. Il rallentatore fluido fonde i fotogrammi solo nel video finale.",
+    "addKeyer": "Aggiungi keyer",
+    "removeKeyer": "Rimuovi keyer",
+    "addPin": "Aggiungi corner pin",
+    "removePin": "Rimuovi corner pin",
+    "addMatte": "Aggiungi matte",
+    "removeMatte": "Rimuovi matte",
+    "drawMask": "Disegna sull'immagine",
+    "redrawMask": "Ridisegna"
+  },
+  "presets": {
+    "manageTitle": "Gestisci i preset",
+    "none": "Ancora nessun preset salvato. Salva le impostazioni attuali come preset per vederlo qui.",
+    "newName": "Nuovo nome",
+    "renameFailed": "Non è stato possibile rinominare il preset.",
+    "rename": "Rinomina",
+    "cancel": "Annulla",
+    "deletePrompt": "Eliminare “{name}”? Le clip che lo usavano mantengono le loro impostazioni.",
+    "deleteFailed": "Non è stato possibile eliminare il preset.",
+    "delete": "Elimina",
+    "keep": "Tieni",
+    "apply": "Applica",
+    "duplicateFailed": "Non è stato possibile duplicare il preset.",
+    "duplicate": "Duplica",
+    "close": "Chiudi",
+    "label": "Preset",
+    "noneYet": "Ancora nessun preset",
+    "applyOne": "Applica un preset",
+    "manage": "Gestisci",
+    "saveAs": "Salva come",
+    "namePlaceholder": "Nome",
+    "saveTip": "Salva le impostazioni attuali come preset del progetto",
+    "notSaved": "Non salvato",
+    "save": "Salva",
+    "deleteOne": "Elimina un preset"
+  },
+  "importResult": {
+    "title": "Importazione completata",
+    "matched": "Abbinati ({count, number})",
+    "matchedItem": "{name}: {how}",
+    "offline": "Non disponibili ({count, number})",
+    "offlineNote": "Ogni clip non disponibile è un vuoto della sua stessa durata con un indicatore rosso. Ricollega mette un file lì, e puoi annullare con un solo passaggio.",
+    "pickFile": "Scegli un file",
+    "relink": "Ricollega",
+    "done": "Fatto"
+  },
+  "relink": {
+    "bannerTitle": "Alcuni media non sono disponibili",
+    "offlineItem": "Non disponibile: {name}",
+    "show": "Mostra",
+    "relink": "Ricollega",
+    "relinkNamed": "Ricollega {name}",
+    "intro": "Scegli un file di questo progetto. Va dove c'è l'indicatore rosso, per tutta la durata del vuoto, e puoi annullare con un solo passaggio.",
+    "whichFile": "Qual è il file?",
+    "orAnother": "Oppure un altro file dal pool dei media",
+    "fileFromPool": "File dal pool dei media",
+    "noFiles": "Nessun file nel progetto",
+    "cancel": "Annulla"
+  }
+}

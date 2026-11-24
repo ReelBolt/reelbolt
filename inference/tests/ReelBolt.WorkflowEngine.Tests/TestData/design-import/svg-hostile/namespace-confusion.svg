@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <html:script>alert(1)</html:script>
+  <html:div><html:script>alert(2)</html:script></html:div>
+  <path d="M0 0 L6 6"/>
+</svg>

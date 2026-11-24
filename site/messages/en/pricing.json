@@ -1,0 +1,36 @@
+{
+  "page": {
+    "hero": {
+      "title": "Pricing",
+      "intro": "Start free and see what ReelBolt makes of your footage.",
+      "from": "Plans from {price} a month.",
+      "firstVideo": "Your first video is on us: {credits} credits when you verify your email. Trial exports are 720p with a watermark."
+    },
+    "offer": {
+      "eyebrow": "Founder price",
+      "heading": "{percent}% off for new subscribers",
+      "body": "Open to new subscribers until {date}. The discount is applied automatically at checkout. There is no code to enter.",
+      "until": "Open to new subscribers until {date}"
+    },
+    "plansHeading": "Plans",
+    "moneyBack": "{days}-day money-back guarantee",
+    "notSure": "Not sure which one fits? Tell us what you are making and we will say which plan you actually need. <link>Get in touch.</link>",
+    "compare": {
+      "title": "Compare the plans",
+      "intro": "The same limits the platform enforces, side by side. Every plan can produce the same kinds of video; what changes is resolution, the extras, priority and how many credits come with it."
+    },
+    "faq": {
+      "title": "Billing, credits and your data"
+    },
+    "cta": {
+      "title": "Start with the free plan",
+      "body": "No card required. Make your first video and decide afterwards which plan it needs.",
+      "seeFeatures": "See what it does"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "pricing": "Pricing"
+    },
+    "taxNote": "Prices exclude VAT and sales tax, which are added at checkout."
+  }
+}

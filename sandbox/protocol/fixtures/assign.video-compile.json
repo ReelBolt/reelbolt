@@ -1,0 +1,28 @@
+{
+  "v": 1,
+  "type": "assign",
+  "id": "01J9ZQ0000000000000000A002",
+  "jobId": "7d1c2e0a-5b7e-4a43-9d57-3f0c1a9b2e11",
+  "sessionId": "0b6f3c58-91d2-4c7a-8e34-5a2d7f1e9c40",
+  "payload": {
+    "jobType": "video.compile",
+    "leaseEpoch": 1,
+    "jobToken": "FIXTURE.job.token",
+    "attempt": 1,
+    "timeoutSec": 1800,
+    "orgId": "5e2b1c90-7a3d-4f68-8b21-0c9d4e6f1a22",
+    "limits": {
+      "maxOutputBytes": 4294967296,
+      "idleTimeoutSec": 900
+    },
+    "requires": {
+      "fontsetVersion": "1",
+      "ffmpegMajor": 7
+    },
+    "spec": {
+      "executionId": "9f8e7d6c-5b4a-4392-8170-a1b2c3d4e5f6",
+      "stepId": "2c4e6a80-1b3d-4f57-9a79-8b6c4d2e0f13",
+      "mode": "Reencode"
+    }
+  }
+}

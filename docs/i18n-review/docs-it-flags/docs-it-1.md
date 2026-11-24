@@ -1,0 +1,10 @@
+- workflows/*: "Inference providers" -> "Provider di inferenza" : UI label, glossary gap
+- workflows/web-search.md: "Shot Director / Narration Writer / Scriptwriter" -> "Regista delle inquadrature / Autore della narrazione / Sceneggiatore" : agent names, glossary gap
+- workflows/choosing-models.md: "Bring your own provider" -> "Usa il tuo provider" : link text, glossary gap
+- workflows/editing-styles.md: "Trial" -> "prova gratuita" : not a plan name in glossary
+- workflows/editing-styles.md: built-in style names ("Fast social reel" etc.) -> translated : confirm they match dashboard
+- workflows/rooms.md: "dailies" -> "giornalieri", "lower-thirds" -> "sottopancia" : industry terms
+- workflows/templates.md: step labels in tables left in English : they are template data shown as-is in the app; translate if the app localises them
+- workflows/templates.md: template display names translated in headings/tables : confirm the app shows Italian names; rooms.md links use same names
+- workflows/templates.md: "Vision provider" -> "provider di visione" : glossary gap
+- workflows/templates.md: "pickups", "cold open", "stinger", "whoosh", "callout" kept as industry terms

@@ -1,0 +1,45 @@
+<!doctype html>
+<!--
+  T-201 — compositor performance-budget harness page.  REMOVABLE (see README.md).
+
+  Same serving rules as the T-200 page: opened only by the spike's own static server
+  (`serve.mjs`) and driven by `run-playback.mjs`.  Never reachable from the product
+  surface — that is what `web/app/spike/spike-isolation.test.ts` asserts.
+
+  The import map is REQUIRED and is NOT optional — mediabunny's browser entry statically
+  reaches `node:fs/promises` through index.js → source.js → node.js, and the `node:`
+  scheme is rejected by the browser before any request is made.  This map reproduces
+  mediabunny's own package.json `browser` field.  See T-200's README for the full trace.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Inline empty icon: stops the automatic /favicon.ico 404 from being the only
+         console error in an otherwise clean run, where it could mask a real one. -->
+    <link rel="icon" href="data:," />
+    <title>T-201 — compositor budget harness (4 video layers + 6 audio tracks)</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "node:fs/promises": "./browser-node-fs-shim.mjs"
+        }
+      }
+    </script>
+    <style>
+      body { font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; margin: 24px; }
+      #log { white-space: pre-wrap; }
+      #stage { margin: 12px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>T-201 — compositor budget harness</h1>
+    <p>
+      Scenario: <strong>4 video layers + 6 audio tracks, 1080p proxy, 30 fps</strong>.
+      The Playwright driver calls <code>window.runScenario()</code>. The canvas below is the
+      real composite target — the numbers are taken from this page, not from a model.
+    </p>
+    <div id="stage"></div>
+    <div id="log"></div>
+    <script type="module" src="./playback-harness.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "@phosphor-icons/react",
+    "version": "2.1.10",
+    "purpose": "Icon set"
+  },
+  {
+    "name": "@react-spring/web",
+    "version": "10.1.2",
+    "purpose": "Physics-based animation"
+  },
+  {
+    "name": "@react-three/drei",
+    "version": "10.7.9",
+    "purpose": "Helpers for react-three-fiber"
+  },
+  {
+    "name": "@react-three/fiber",
+    "version": "9.8.1",
+    "purpose": "React renderer for three.js"
+  },
+  {
+    "name": "@remotion/captions",
+    "version": "4.0.542",
+    "purpose": "Caption data types and helpers"
+  },
+  {
+    "name": "@remotion/cli",
+    "version": "4.0.542",
+    "purpose": "CLI: compositions, render, bundle"
+  },
+  {
+    "name": "@remotion/fonts",
+    "version": "4.0.542",
+    "purpose": "Load local font files (no network)"
+  },
+  {
+    "name": "@remotion/gif",
+    "version": "4.0.542",
+    "purpose": "GIF playback"
+  },
+  {
+    "name": "@remotion/layout-utils",
+    "version": "4.0.542",
+    "purpose": "Text measurement and fit"
+  },
+  {
+    "name": "@remotion/lottie",
+    "version": "4.0.542",
+    "purpose": "Lottie animation playback"
+  },
+  {
+    "name": "@remotion/media-utils",
+    "version": "4.0.542",
+    "purpose": "Audio/video metadata and waveform helpers"
+  },
+  {
+    "name": "@remotion/motion-blur",
+    "version": "4.0.542",
+    "purpose": "Trail and camera motion blur"
+  },
+  {
+    "name": "@remotion/noise",
+    "version": "4.0.542",
+    "purpose": "Perlin-style noise"
+  },
+  {
+    "name": "@remotion/paths",
+    "version": "4.0.542",
+    "purpose": "SVG path utilities"
+  },
+  {
+    "name": "@remotion/renderer",
+    "version": "4.0.542",
+    "purpose": "Server-side rendering"
+  },
+  {
+    "name": "@remotion/shapes",
+    "version": "4.0.542",
+    "purpose": "SVG shape generators"
+  },
+  {
+    "name": "@remotion/three",
+    "version": "4.0.542",
+    "purpose": "Remotion integration for three.js"
+  },
+  {
+    "name": "@remotion/transitions",
+    "version": "4.0.542",
+    "purpose": "Scene transitions"
+  },
+  {
+    "name": "@remotion/zod-types",
+    "version": "4.0.542",
+    "purpose": "Zod types for composition props"
+  },
+  {
+    "name": "d3",
+    "version": "7.9.0",
+    "purpose": "Data-driven visualisation"
+  },
+  {
+    "name": "framer-motion",
+    "version": "13.4.6",
+    "purpose": "Declarative animation"
+  },
+  {
+    "name": "gsap",
+    "version": "3.15.0",
+    "purpose": "Timeline animation, driven by the frame (see the ReelBolt gsap guide)"
+  },
+  {
+    "name": "lottie-web",
+    "version": "5.13.0",
+    "purpose": "Lottie runtime (peer of @remotion/lottie)"
+  },
+  {
+    "name": "lucide-react",
+    "version": "1.59.0",
+    "purpose": "Icon set"
+  },
+  {
+    "name": "react",
+    "version": "19.3.0",
+    "purpose": "UI runtime"
+  },
+  {
+    "name": "react-dom",
+    "version": "19.3.0",
+    "purpose": "UI runtime"
+  },
+  {
+    "name": "remotion",
+    "version": "4.0.542",
+    "purpose": "Core framework"
+  },
+  {
+    "name": "simplex-noise",
+    "version": "4.0.3",
+    "purpose": "Simplex noise"
+  },
+  {
+    "name": "three",
+    "version": "0.172.0",
+    "purpose": "3D graphics"
+  },
+  {
+    "name": "zod",
+    "version": "4.6.7",
+    "purpose": "Schema validation for composition props"
+  }
+]

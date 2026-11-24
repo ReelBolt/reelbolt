@@ -1,0 +1,65 @@
+{
+  "description": "ReelBolt is an AI video team for anyone with a story to tell and no time to tell it. Drop in the clips you already shot, say what the video is for, and get a reviewed cut you can change.",
+  "plansName": "{name} plans",
+  "featureList": [
+    "AI-scripted video production",
+    "Automatic editing of raw footage",
+    "Timeline editor with version history",
+    "Layered picture and thumbnail editor",
+    "AI-designed graphics in your brand colors and fonts",
+    "Brand kit and shared brand library",
+    "Titles, captions, color grading, music and sound effects",
+    "AI narration with consented voice cloning",
+    "Dubs and pickups",
+    "AI-generated b-roll under a spending cap",
+    "Multi-agent editing rooms",
+    "Tracked screen inserts",
+    "Object tracking and blurring",
+    "Automated quality review of every draft",
+    "Chat assistant with approval cards, also in Claude Code",
+    "Sync from GitHub, computer folders and cloud drives",
+    "Bring your own AI provider and choose models per agent",
+    "Rendering on a paired machine you own",
+    "Output resolution and format chosen per run",
+    "Team workspaces with roles and a shared credit pool"
+  ],
+  "ogAlt": "ReelBolt: you have a story, ReelBolt makes the video",
+  "ogTitle": "You have a story. ReelBolt makes the video.",
+  "ogSubtitle": "Cut and reviewed by an AI video team. Ready to publish.",
+  "pages": {
+    "home": {
+      "title": "AI video team for anyone with a story to tell",
+      "descriptionSignup": "Drop in the clips you already shot and say what the video is for. An AI video team cuts and reviews it. Start free, no card required.",
+      "descriptionContact": "Drop in the clips you already shot and say what the video is for. An AI video team cuts and reviews it before you see it, and you can change anything."
+    },
+    "pricing": {
+      "title": "Pricing: plans, credits and what is free",
+      "description": "Monthly plans with included credits, an estimate before every run, refunds when we fail, and credit packs on paid plans. Cancel anytime. Prices exclude tax."
+    },
+    "examples": {
+      "title": "Example: watch the ReelBolt launch film",
+      "description": "Watch the ReelBolt launch film before you sign up. It shows the product at work, from a request to an AI assistant through to the timeline and picture editor."
+    },
+    "about": {
+      "title": "About: why we built an AI video team",
+      "description": "Why ReelBolt exists: so anyone with a story to tell gets a finished video from their own footage and words, with control over models and data."
+    },
+    "contact": {
+      "title": "Contact the ReelBolt team",
+      "description": "Questions about ReelBolt, a plan for your team or self-hosting? Send us a note about what you want to make and the team will get back to you with an answer."
+    },
+    "thanks": {
+      "title": "Thanks",
+      "description": "Your message has been received. We will follow up shortly about the video you want to make."
+    },
+    "runner": {
+      "title": "Desktop runner",
+      "descriptionAvailable": "Download the ReelBolt runner to render on a computer you own. Rendering on your own computer uses no credits.",
+      "descriptionSoon": "The ReelBolt runner, which renders on a computer you own, is still being built. There is nothing to download yet."
+    },
+    "features": {
+      "title": "Features: editing, graphics, voice and b-roll",
+      "description": "Auto editing, a timeline and picture editor, designed graphics, brand kit, narration and dubs, generated b-roll, editing rooms, Claude Code and file sync."
+    }
+  }
+}

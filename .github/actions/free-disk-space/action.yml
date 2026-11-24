@@ -1,0 +1,20 @@
+name: Free disk space
+description: >-
+  Remove preinstalled toolchains the repository's jobs never use from a GitHub-hosted
+  Ubuntu runner (about 14 GB free before, 30 GB or more after), so Docker builds and
+  the compose end-to-end stack fit. Best effort and a no-op on non-Linux runners.
+
+runs:
+  using: composite
+  steps:
+    - name: Remove unused preinstalled toolchains
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        set -u
+        echo "Before:"; df -h / | tail -n 1
+        sudo rm -rf /usr/local/lib/android \
+          /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /usr/local/share/boost \
+          /usr/share/swift /usr/local/share/powershell /usr/local/julia* || true
+        sudo docker image prune --all --force >/dev/null 2>&1 || true
+        echo "After:"; df -h / | tail -n 1

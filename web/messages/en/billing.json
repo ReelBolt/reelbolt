@@ -1,0 +1,365 @@
+{
+  "allowance": {
+    "title": "Assistant allowance",
+    "periodEnds": "Period ends {date}",
+    "unlimitedUsed": "Unlimited, {count, plural, one {{amount} credit} other {{amount} credits}} used this period",
+    "usedOfIncluded": "{used} of {included} included credits used this period",
+    "progressLabel": "Share of the assistant allowance used",
+    "afterAllowance": "After the allowance, assistant and Claude Code use is charged from your credits."
+  },
+  "grants": {
+    "source": {
+      "trial": "Free trial credits",
+      "plan": "Plan credits",
+      "topup": "Purchased credits",
+      "promo": "Promo credits",
+      "other": "Credits"
+    },
+    "title": "Where your credits come from",
+    "empty": "No credits are waiting to be spent.",
+    "amount": "{amount} credits",
+    "expires": "expires {date}",
+    "noExpiry": "does not expire"
+  },
+  "firstVideo": {
+    "unavailable": "The free first video is not available from this connection or address. You can still use ReelBolt on the Trial plan, or buy a plan.",
+    "seePlans": "See plans",
+    "title": "Your first video is on us",
+    "left": "{remaining} of your {total} free credits are left.",
+    "useBy": "Use them by {date}.",
+    "watermark": "Free trial exports are 720p with a watermark.",
+    "calloutTitle": "Make your first video, on us",
+    "calloutBody": "You have {amount} free credits to start your first video.",
+    "expiresOn": "They expire on {date}."
+  },
+  "merchant": {
+    "fallback": "your payment provider",
+    "fallbackStart": "Your payment provider"
+  },
+  "currentPlan": {
+    "title": "Current plan",
+    "noPlan": "No plan",
+    "manageIn": "Manage in {provider}",
+    "manageUnavailable": "Available after your first purchase: there is nothing to manage at {provider} until then.",
+    "portalCancelNote": "\"Cancel plan\" cancels from here. \"Cancel in {provider}\" opens {provider}'s own page for the same subscription.",
+    "creditsAvailable": "Credits available",
+    "creditsHint": "{balance} in the account, {reserved} held for running work",
+    "accessEnds": "Access ends",
+    "renews": "Renews",
+    "periodStarted": "Billing period started {date}",
+    "noPeriod": "No billing period is running.",
+    "seats": "Seats",
+    "seatsScale": "Credits scale with seats.",
+    "notPerSeat": "This plan is not billed per seat.",
+    "cancelsOn": "Cancels on {date}",
+    "cancelsAtEnd": "Cancels at the end of this billing period",
+    "cancelBannerBody": "You keep the plan and its credits until then. After that the workspace moves to the free trial. Credits you already have stay until they expire.",
+    "keepMyPlan": "Keep my plan",
+    "movesTo": "Moves to {plan} on {date}",
+    "scheduledSeats": "The workspace keeps {current} seats until then, and has {next} after that.",
+    "scheduledKeepPlan": "You keep {plan} and its credits until then.",
+    "scheduledKeepYourPlan": "You keep your plan and its credits until then.",
+    "keepPlan": "Keep {plan}",
+    "notPurchased": "This workspace has not been purchased yet, so there are no invoices and nothing to manage at the payment provider. Choose a plan below, or use the free credits it starts with.",
+    "seatsMin": "This plan starts at {min} seats.",
+    "updateSeats": "Update seats",
+    "seatsNote": "More seats start now: {provider} charges the difference for the rest of this period. Fewer seats start with your next billing period.",
+    "cancelPlan": "Cancel plan",
+    "updatePayment": "Update payment method",
+    "cancelIn": "Cancel in {provider}",
+    "cancelModal": {
+      "title": "Cancel your plan?",
+      "untilDate": "Your plan stays active until {date}.",
+      "untilEnd": "Your plan stays active until the end of this billing period.",
+      "after": "After that the workspace moves to the free trial. Credits you already have stay until they expire.",
+      "confirm": "Yes, cancel at period end"
+    },
+    "fewerSeats": {
+      "titleDate": "Fewer seats from {date}",
+      "titleNext": "Fewer seats from your next billing period",
+      "confirm": "Confirm",
+      "back": "Go back",
+      "body": "You keep {current} seats until then. After that the workspace has {next} seats, and the monthly credits that come with them."
+    },
+    "creditsRenew": "Next monthly credits arrive {date}."
+  },
+  "status": {
+    "active": "Active",
+    "trialing": "Trialing",
+    "pastDue": "PastDue",
+    "paused": "Paused",
+    "canceled": "Canceled"
+  },
+  "promo": {
+    "endsWithValue": "Your {value} promo ends with this change.",
+    "ends": "Your promo ends with this change.",
+    "endsDowngrade": "{head} Keeping {plan} later does not bring it back."
+  },
+  "estimate": {
+    "rangeSingle": "≈ {amount, number} credits",
+    "range": "≈ {low, number}–{high, number} credits",
+    "needed": "Needs {count, plural, one {# credit} other {# credits}} available to start; it can cost more.",
+    "charge": {
+      "none": "No charge",
+      "tiny": "Less than {amount, number} credits",
+      "amount": "{count, plural, one {# credit} other {# credits}}"
+    },
+    "basis": {
+      "history": "from your own past runs of this step",
+      "stepTypeHistory": "from your own past runs of this kind of step",
+      "default": "a typical figure, not your own history",
+      "notCharged": "not charged",
+      "agentTypeHistory": "from your own past runs of this kind of agent",
+      "ownProvider": "on your own provider key, not charged",
+      "audioGeneration": "priced from the takes and length this step asks for"
+    },
+    "headlineSingle": "≈ {typical, number} credits",
+    "headline": "≈ {typical, number} credits (usually {low, number}–{high, number})",
+    "fixed": "Plus up to {amount, number} credits for generated video, priced at the most clips it can order.",
+    "fixedReview": "Plus up to {amount, number} credits for generated video, priced at the most clips it can order. It can be ordered again if the review asks for another pass.",
+    "fixedReviewReruns": "Plus up to {amount, number} credits if the review re-makes earlier steps (a narration line, a generated shot, the script) and for any generated video, priced at the most it can order.",
+    "reason": {
+      "reviewLoop": "The review step can send the edit back for another pass.",
+      "footageLength": "Analysing and cutting footage cost more for longer clips.",
+      "foreachUnknown": "A repeating step runs once per item, and the number of items is only known during the run.",
+      "ownProvider": "Steps on your own provider key are not charged."
+    },
+    "sentence": {
+      "pastRuns": "Based on {count, plural, one {# past run} other {# past runs}} of this workflow.",
+      "stepHistory": "Based on what these steps have cost in this workspace.",
+      "firstRun": "First run, so this is a rough estimate from typical figures for these steps.",
+      "history": "Based on what runs in this workspace have actually cost. The real total should land in this range.",
+      "noHistory": "This workspace has no finished runs of its own to measure yet, so these are typical figures for these steps rather than your own history. The first run will show what it really costs."
+    },
+    "step": {
+      "notCharged": "{name}: not charged",
+      "upTo": "{name}: up to {amount, number} credits",
+      "rangeAgain": "{name}: {range}, may run again after review ({basis})",
+      "range": "{name}: {range} ({basis})"
+    },
+    "loading": "Working out what this run will cost…",
+    "shouldCost": "This run should cost {figure}",
+    "shouldCostAbout": "This run should cost about {figure}",
+    "whyWide": "Why the range is this wide:",
+    "notEnough": {
+      "title": "Not enough credits for this run",
+      "body": "Starting it needs {required, plural, one {# credit} other {# credits}} up front and this workspace has {balance, number} available. Top up to run it, or trim the workflow.",
+      "bodyShort": "Starting it needs {required, plural, one {# credit} other {# credits}} up front and this workspace has {balance, number} available, {shortfall, number} short. Top up to run it, or trim the workflow."
+    },
+    "topUp": "Top up credits",
+    "covers": "Your workspace has {balance, number} credits available, which covers the {required, number} this run holds before it starts.",
+    "mayRunOut": {
+      "title": "You may run out of credits partway through this run.",
+      "body": "Runs often cost more than the amount needed to start, so top up first to avoid the run stopping halfway."
+    },
+    "stepsTitle": "What each step costs",
+    "videoLimit": "Your daily video limit: {used} of {limit} credits used today, {left} left. Change it in Settings > Usage.",
+    "videoLimitNone": "No daily video limit set. Used today: {used} credits. You can set one in Settings > Usage.",
+    "videoLimitAlert": "You have reached your alert level for today's video spend."
+  },
+  "lowBalance": {
+    "title": "Your credits are running low",
+    "body": "This workspace has {available} of the {allowance} credits its plan grants left (about {percent}%). Runs are refused once the balance cannot cover them, so top up before that happens.",
+    "topUp": "Top up credits"
+  },
+  "insufficient": {
+    "title": "Not enough credits to start this run",
+    "needs": "This run needs {required} credits up front and the workspace has {balance} available.",
+    "needsShort": "This run needs {required} credits up front and the workspace has {balance} available, which is {shortfall} credits short.",
+    "nothingCharged": "Nothing was started and nothing was charged.",
+    "estimated": "The run itself is estimated at {range}; the figure above is what has to be available before it starts.",
+    "noHistory": "That figure is a typical one for these steps: this workspace has no finished runs of its own to measure yet, so a first run may well cost less once there is history to go on.",
+    "choosePlan": "Choose a plan",
+    "topUp": "Top up credits",
+    "dismiss": "Dismiss"
+  },
+  "insufficientToast": {
+    "title": "Not enough credits",
+    "body": "Not enough credits for this. It needs about {required} credits and you have {balance}.",
+    "add": "Add credits"
+  },
+  "promoField": {
+    "title": "Have a code?",
+    "description": "Enter a promo code for a discount, or a code for free credits. Discounts show on the plans and packs they cover and apply at checkout; free credits are added to this workspace straight away.",
+    "applied": "Code <strong>{code}</strong> applied to {targets}.",
+    "remove": "Remove code",
+    "label": "Code",
+    "apply": "Apply code",
+    "needsOwner": "The workspace Owner or a member with the Billing role can use a code for this workspace.",
+    "redeemed": "Code redeemed",
+    "added": "{credits} credits were added to this workspace. They expire on {date}, and unused credits are not carried past that date.",
+    "noCashValue": "Promo credits have no cash value and can't be transferred."
+  },
+  "usage": {
+    "source": {
+      "workflow": "Workflow runs",
+      "assistant": "Assistant",
+      "mcp": "Claude Code and MCP",
+      "editor": "Picture editor",
+      "timelineAssist": "Timeline suggestions",
+      "fileSummary": "File summaries",
+      "indexing": "Search indexing",
+      "docsIndex": "Help search",
+      "storage": "Storage",
+      "unattributed": "Other"
+    },
+    "raw": "{value}",
+    "axis": {
+      "day": "Day (UTC)",
+      "project": "Project",
+      "model": "Model",
+      "kind": "Step kind",
+      "mode": "Who pays",
+      "source": "Source"
+    },
+    "credits": "Credits",
+    "calls": "Metered calls",
+    "consumed": "What was consumed",
+    "providerCost": "Provider cost",
+    "shareAria": "{name} share of the largest group",
+    "more": "+{count} more"
+  },
+  "page": {
+    "metaTitle": "Plan and billing",
+    "title": "Plan and billing",
+    "breadcrumbDashboard": "Dashboard",
+    "openingCheckout": "Opening the checkout…",
+    "unsafeLink": "The payment provider returned a link this page will not follow. Nothing was charged.",
+    "waiting": "Waiting for {provider} to confirm…",
+    "timeout": "{provider} has not confirmed yet. Refresh in a minute.",
+    "portalMissing": "{providerStart} did not return that page this time. Open Manage in {provider} and find it there.",
+    "openingProvider": "Opening {provider}…",
+    "describe": {
+      "yourPlan": "your plan",
+      "keep": "You keep {plan}. The scheduled change is removed.",
+      "downgradeSeatsDate": "The workspace moves to {seats} seats on {date}. You keep {current} seats until then.",
+      "downgradeSeatsNext": "The workspace moves to {seats} seats on your next billing period. You keep {current} seats until then.",
+      "newPlanStart": "The new plan",
+      "downgradePlanDate": "{plan} starts on {date}. You keep {current} until then.",
+      "downgradePlanNext": "{plan} starts on your next billing period. You keep {current} until then.",
+      "extraCredits": "Extra credits for the rest of this billing period are added as soon as {provider} confirms the payment.",
+      "seatsNow": "You have {seats} seats now.",
+      "onPlan": "You're on {plan} now.",
+      "onNewPlan": "You're on the new plan now."
+    },
+    "disabled": {
+      "title": "Billing is not enabled on this deployment",
+      "body": "This deployment runs without billing: there is no plan to buy, no credit balance to top up and no invoice to open. Nothing is wrong with your account: the billing page is simply switched off here, and nothing you run has been metered or charged."
+    },
+    "loadError": {
+      "title": "Could not load your plan",
+      "fallback": "Please try again in a moment.",
+      "retry": "Retry"
+    },
+    "loading": "Loading your plan",
+    "packCredits": "{credits} credits",
+    "promoInvalid": "That code isn't valid.",
+    "intro": "Plans are billed monthly through {provider}, which is the merchant of record: it adds any VAT or sales tax your country charges and emails the invoice.",
+    "introGeneric": "Plans are billed monthly by our payment provider, which is the merchant of record: it adds any VAT or sales tax your country charges and emails the invoice.",
+    "introCredits": "Credits are consumed by the work you run, and are granted again at the start of each billing period.",
+    "readOnly": {
+      "title": "You can see this page, but not change it",
+      "body": "Choosing, changing or canceling the plan, changing seats, buying credits and opening {provider} are limited to the workspace Owner and to members with the Billing role. Ask one of them to make the change."
+    },
+    "verifyEmail": {
+      "title": "Confirm your email first",
+      "body": "Checkout opens once your email address is confirmed. Open the link we sent you, then choose your plan again. Your pick is kept."
+    },
+    "actionError": "That did not go through",
+    "waitingBody": "{provider} applies the change and tells us. This usually takes a few seconds.",
+    "notConfirmed": "Not confirmed yet",
+    "done": "Done",
+    "cancelDoneDate": "Your plan cancels on {date}. You keep it and its credits until then.",
+    "cancelDoneEnd": "Your plan cancels at the end of this billing period. You keep it and its credits until then.",
+    "resumeDone": "You keep {plan}. It renews as usual.",
+    "storage": {
+      "title": "Storage",
+      "description": "Every file in this workspace counts: uploads, folders synced from your computer or from cloud storage, and agent and workflow outputs. Image-editor working layers and render scratch space are not stored as files and do not count.",
+      "error": "Storage usage could not be read right now. Reload the page in a moment.",
+      "loading": "Reading your storage usage…"
+    },
+    "plans": {
+      "title": "Choose a plan",
+      "descriptionLive": "This workspace already has a plan. An upgrade starts now; a switch to a smaller plan starts with your next billing period.",
+      "description": "Every paid plan includes its monthly credits. Move to a bigger plan whenever a run needs more than you have.",
+      "none": "No plans are on sale on this deployment right now."
+    },
+    "topUp": {
+      "title": "Buy credits",
+      "description": "Top-up credits are added to the same balance as your plan's monthly credits. They are for a busy month, not a replacement for a plan.",
+      "needsOwner": "An Owner or a member with the Billing role buys credits for this workspace. Ask one of them if you are running low before the next billing period.",
+      "paidOnly": "Top-up credits are available on paid plans only. Choose one of the plans above first: its monthly credits are included in the price.",
+      "noPacks": "No credit packs are configured on this deployment, so there is nothing to buy here yet.",
+      "exactCharge": "The payment provider shows the exact charge, in your currency, before you pay."
+    },
+    "beforeTax": "before tax",
+    "bonus": "+{credits} bonus credits",
+    "priceLoading": "Price…",
+    "priceAtCheckout": "Price shown at checkout"
+  },
+  "assistantNotice": {
+    "limitTitle": "Reply stopped",
+    "limitBody": "This reply hit the spending limit for one message. Ask again to continue.",
+    "creditsTitle": "Not enough credits",
+    "creditsBody": "The assistant allowance for this period is used up, so the assistant can't do more until credits are added.",
+    "creditsBodyBalance": "The assistant allowance for this period is used up and you have {balance} credits, so the assistant can't do more until credits are added.",
+    "add": "Add credits"
+  },
+  "seatStepper": {
+    "current": "Seats on the current plan",
+    "onPlan": "Seats on the {plan} plan",
+    "fewer": "Fewer seats",
+    "more": "More seats",
+    "fewerOn": "Fewer seats on the {plan} plan",
+    "moreOn": "More seats on the {plan} plan"
+  },
+  "pickedPlan": {
+    "title": "You picked the {plan} plan",
+    "body": "You can start without paying: make your first video, then decide. The plan is one click away when you want it.",
+    "open": "See the {plan} plan",
+    "dismiss": "Not now"
+  },
+  "planFeature": {
+    "socialPublishing": "Your plan does not include publishing to social platforms. Upgrade to publish or schedule posts."
+  },
+  "upgrade": {
+    "title": "Not included in your plan",
+    "availableOn": "Available on {plan}.",
+    "upgradeToUnlock": "Upgrade your plan to unlock it.",
+    "seePlans": "See plans",
+    "upgradeTo": "Upgrade to {plan}",
+    "askOwner": "Ask the workspace owner to upgrade.",
+    "feature": {
+      "video_generation": "Generating video, animating images and lip sync",
+      "avatars": "Creating talking avatars",
+      "audio_generation": "Generating music and sound effects",
+      "rooms": "Using multi-agent editing rooms",
+      "segmentation": "Following an object through a video",
+      "audio_cleanup": "Cleaning audio with AI",
+      "video_enhance": "Enhancing video with AI",
+      "social_publishing": "Publishing to social accounts",
+      "api": "Creating API keys",
+      "resolution": "Exporting at this resolution",
+      "other": "This feature"
+    }
+  },
+  "videoLimit": {
+    "title": "Daily video limit",
+    "intro": "The most credits your runs may spend on generated video per day (UTC). Leave it empty for no limit: only your credit balance and each step's own limit apply.",
+    "statusNone": "No daily limit. Used today: {used} credits.",
+    "statusLimit": "Used today: {used} of {limit} credits ({left} left). It starts over at 00:00 UTC.",
+    "progressLabel": "Share of your daily video limit used",
+    "alertReached": "You have reached your alert level for today's video spend.",
+    "limitLabel": "Daily limit (credits)",
+    "limitHelp": "A run that would pass it stops before spending.",
+    "noLimit": "No limit",
+    "alertLabel": "Alert at (credits)",
+    "alertHelp": "Shown here and on the run page. Nothing is sent.",
+    "noAlert": "No alert",
+    "alertAboveLimit": "The alert level cannot be above the daily limit.",
+    "save": "Save",
+    "clear": "Remove limit",
+    "saveFailed": "Could not save your limit. Try again.",
+    "footnote": "Only video generation counts. Audio and other steps are not part of this limit."
+  }
+}

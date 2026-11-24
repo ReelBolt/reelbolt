@@ -1,0 +1,8 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReelBolt">
+  <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff" />
+    <path d="M68 12 L28 68 H54 L46 108 L92 48 H64 Z" fill="#000" stroke="#000" stroke-width="5" stroke-linejoin="round" transform="translate(66 80) scale(-.68 .68) translate(-60 -60)" />
+  </mask>
+  <path d="M36 96V24H62a21 21 0 0 1 0 42H36" fill="none" stroke="#C4B5FD" stroke-width="14" stroke-linejoin="round" mask="url(#cut)" />
+  <path d="M68 12 L28 68 H54 L46 108 L92 48 H64 Z" fill="#A855F7" transform="translate(66 80) scale(-.68 .68) translate(-60 -60)" />
+</svg>

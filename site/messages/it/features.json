@@ -1,0 +1,274 @@
+{
+  "page": {
+    "title": "Funzionalità",
+    "intro": "Ogni mestiere di un team video, svolto da agenti AI e rivisto prima che ti arrivi. Poi aprilo nell'editor e fallo tuo.",
+    "navLabel": "Funzionalità"
+  },
+  "bands": {
+    "make": {
+      "heading": "Realizza il video",
+      "alt": "Il costruttore di flussi di lavoro per un video promozionale, con il pulsante di avvio, la riga della stima dei crediti e i primi passaggi sulla tela."
+    },
+    "edit": {
+      "heading": "Montaggio e design",
+      "alt": "L'editor della timeline con una timeline dimostrativa che contiene tre clip video sulla traccia V1 e una clip audio sulla traccia A1."
+    },
+    "voice": {
+      "heading": "Voce e b-roll",
+      "alt": "La scheda File del progetto dimostrativo Acme Notes, con l'elenco di cinque file sorgente caricati, con dimensioni e orari di caricamento."
+    },
+    "assistant": {
+      "heading": "Assistente e automazione",
+      "alt": "Il pannello laterale dell'assistente aperto sulla dashboard, con lo stato di benvenuto e alcuni suggerimenti di richiesta."
+    },
+    "team": {
+      "heading": "Team, file e controllo",
+      "alt": "La scheda Brand e prodotto di un progetto dimostrativo, con i colori e la tipografia del brand approvati."
+    }
+  },
+  "blocks": {
+    "team": {
+      "heading": "Una squadra di produzione sempre disponibile",
+      "intro": "Un buon video richiede una dozzina di mestieri: capire il materiale, trovare la storia, scrivere, scegliere le inquadrature, disegnare i titoli, fare il color grading e scegliere la musica. ReelBolt ti dà un agente specializzato per ognuno, e lavorano sul tuo video allo stesso tempo.",
+      "bullets": {
+        "0": "Un ricercatore che capisce di cosa parla il tuo materiale e a chi è rivolto",
+        "1": "Uno sceneggiatore e un regista che ne fanno una storia che vale la pena guardare",
+        "2": "Un montatore, un motion designer, un colorist e un sound designer che la rifiniscono",
+        "3": "Un revisore che valuta il risultato e rimanda indietro le bozze deboli"
+      }
+    },
+    "rooms": {
+      "heading": "Più di un parere sulle scelte importanti",
+      "intro": "In una stanza, più specialisti AI lavorano su una decisione e un regista sceglie cosa tenere. Ottieni opzioni messe a confronto, invece della prima idea venuta in mente.",
+      "bullets": {
+        "0": "Stanza di montaggio: più montatori AI propongono tagli e un regista decide cosa resta",
+        "1": "Stanza delle grafiche: impaginazione, tempi, testi e inserti vengono curati insieme per le grafiche a schermo",
+        "2": "Stanza del color grading: un unico look per tutto il video, tra Nessuno, Caldo, Freddo, Filmico, Vivace, Spento o Mono, a intensità Leggera, Normale o Forte",
+        "3": "Stanza dei giornalieri: per ogni inquadratura generata viene scelto il take migliore",
+        "4": "Se una stanza non riesce a finire, il passaggio ripiega su un singolo montatore, così l'esecuzione si completa comunque"
+      },
+      "notes": {
+        "0": "Le stanze sono incluse nei piani {roomsPlans}. Una stanza usa più crediti di un singolo passaggio, e la stima lo mostra prima che tu inizi."
+      }
+    },
+    "editing": {
+      "heading": "Carica il take grezzo, ricevi il montaggio finito",
+      "intro": "Registra tutto in un colpo solo, errori compresi. ReelBolt trova dove ti sei fermato, hai ricominciato o hai perso il filo, tiene i momenti che reggono la storia e taglia a fine frase, non a metà parola.",
+      "bullets": {
+        "0": "Pause morte, inciampi e false partenze rimossi automaticamente",
+        "1": "Il take migliore tenuto quando hai registrato la stessa cosa due volte",
+        "2": "Parlato trascritto, così il montaggio segue ciò che è stato detto davvero",
+        "3": "Transizioni pulite e dissolvenze in entrata e in uscita, fatte per te"
+      }
+    },
+    "timeline": {
+      "heading": "Apri il montaggio e cambia ciò che vuoi",
+      "intro": "Ogni video finito si apre come una timeline modificabile, oppure puoi partire da una vuota. Cambia ciò che hanno fatto gli agenti, tieni ciò che hanno azzeccato e rifai il render.",
+      "bullets": {
+        "0": "Taglia, accorcia e sposta le clip, aggiungi marker e annulla qualsiasi cosa, con salvataggio automatico e cronologia delle versioni che puoi ripristinare",
+        "1": "Monta dalla trascrizione, rimuovi i silenzi e cambia velocità, inverti o fermi un fotogramma",
+        "2": "Keyframe, transizioni, color grading con scopes, maschere, key, corner pin, effetti e template di titoli",
+        "3": "Un mixer audio che abbassa la musica sotto la voce, sottotitoli e voce fuori campo che registri tu",
+        "4": "Commenti dei revisori, una pagina di revisione che funziona sul telefono e una modalità offline che si aggiorna quando ti riconnetti"
+      },
+      "notes": {
+        "0": "Lavori con un altro editor? Esporta il montaggio in OTIO, EDL o Final Cut XML, e i sottotitoli in SRT o VTT. L'esportazione per Final Cut porta il montaggio e le clip; titoli, correzioni colore ed effetti restano in ReelBolt.",
+        "1": "Vuoi un secondo parere? L'assistente suggerisce un nuovo taglio, grafiche, una correzione colore, effetti sonori o una nota di revisione, e tu accetti o rifiuti ogni proposta. I suggerimenti usano crediti."
+      }
+    },
+    "pictures": {
+      "heading": "Miniature e immagini, modificate a livelli",
+      "intro": "Realizza la miniatura, l'immagine di copertina o la still per i social nello stesso posto in cui hai fatto il video. Ogni modifica sta su un livello a parte, quindi l'immagine originale non viene mai toccata.",
+      "bullets": {
+        "0": "Ritaglia un soggetto, rimuovi o sostituisci lo sfondo, cancella e riempi",
+        "1": "Descrivi la modifica a parole, espandi l'inquadratura, aumenta la risoluzione e rimodella la luce",
+        "2": "Crea una nuova immagine da una descrizione, poi aggiungi il testo",
+        "3": "Esporta in PNG, JPEG o in PSD a livelli"
+      },
+      "notes": {
+        "0": "Gli strumenti AI dell'editor di immagini usano crediti. Livelli, testo ed esportazione no."
+      }
+    },
+    "design": {
+      "heading": "Titoli, sottotitoli, colore e suono che sembrano disegnati",
+      "intro": "Sottopancia, schede titolo e callout che indicano ciò che hai appena nominato sono ciò che distingue un video curato da una registrazione dello schermo. Sono sincronizzati con quello che viene detto e piazzati dove non coprono nulla di importante.",
+      "bullets": {
+        "0": "Sottopancia, titoli e callout sincronizzati con la narrazione",
+        "1": "Color grading su tutto il video per un look coerente",
+        "2": "Musica di sottofondo ed effetti sonori mixati sotto la voce",
+        "3": "Sottotitoli karaoke, standard e a effetto"
+      }
+    },
+    "graphics": {
+      "heading": "Descrivi la grafica e ricevila disegnata",
+      "intro": "Chiedi un titolo, un badge, un cartellino prezzo, una freccia o un numero grande, e un designer AI lo disegna su un livello trasparente con il tuo testo esatto, nei colori e nei font del tuo brand. Chiedi \"più deciso\" e lo rivede.",
+      "bullets": {
+        "0": "Testo esatto, scritto come lo hai digitato",
+        "1": "I colori e i font del tuo brand; un font del brand non disponibile viene sostituito con il più simile tra quelli installati",
+        "2": "Ogni revisione è un nuovo livello, e la versione precedente resta nascosta nel caso la rivolessi",
+        "3": "Richiede pochi minuti, con avanzamento e una stima prima di iniziare",
+        "4": "Se il designer fallisce, i crediti tornano indietro"
+      }
+    },
+    "inserts": {
+      "heading": "Il tuo video su ogni schermo dell'inquadratura",
+      "intro": "Riprendi un telefono, un portatile o un monitor che mostra uno schermo verde, blu o magenta, e ReelBolt lo riempie con il tuo video o la tua animazione. L'inserto segue lo schermo mentre la camera o il dispositivo si muovono.",
+      "bullets": {
+        "0": "Traccia schermi in movimento, superfici curve e più schermi nella stessa inquadratura",
+        "1": "Mantiene i bordi e i riflessi del dispositivo reale",
+        "2": "La tua registrazione o animazione, posizionata sullo schermo",
+        "3": "Le inquadrature che non riesce a tracciare con sicurezza vengono lasciate stare invece di essere coperte male"
+      }
+    },
+    "privacy": {
+      "heading": "Sfoca ciò che non deve stare nell'inquadratura",
+      "intro": "Le riprese reali contengono cose che non puoi pubblicare: una targa dietro chi presenta, un badge visitatore, uno schermo con i dati di un cliente. Indica cosa cercare e ReelBolt lo trova, lo segue mentre la camera si muove e lo sfoca, lo pixelizza o lo copre.",
+      "bullets": {
+        "0": "Descrivi l'oggetto con parole semplici; non disegni le maschere a mano",
+        "1": "Seguito attraverso movimenti di camera, zoom e inclinazioni",
+        "2": "Sfocato, pixelizzato o coperto, a tua scelta",
+        "3": "Controlla il risultato prima di pubblicare; il tracciamento automatico può perdere un fotogramma"
+      }
+    },
+    "brand": {
+      "heading": "Costruito sul tuo brand, non su un template",
+      "intro": "ReelBolt tiene un brand kit per ogni progetto, con i tuoi colori, la tua tipografia e la tua voce, e costruisce ogni video partendo da lì. Una libreria del brand condivisa mantiene ogni progetto dello spazio di lavoro sullo stesso brand.",
+      "bullets": {
+        "0": "Importa design token, CSS e Tailwind, DESIGN.md, temi shadcn o Storybook, esportazioni di strumenti di design, un PDF del brand o variabili Figma dove abilitate",
+        "1": "Esporta il tuo brand come design token, CSS, Tailwind, DESIGN.md o JSON",
+        "2": "I progetti ereditano la libreria dello spazio di lavoro, e i valori che blocchi vincono sempre",
+        "3": "ReelBolt controlla le tue fonti e propone modifiche quando cambiano, e tu approvi o rifiuti ciascuna",
+        "4": "Cronologia delle versioni, e ogni esecuzione registra quale versione del brand ha usato"
+      },
+      "notes": {
+        "0": "Importazione, esportazione e controlli di variazione sono gratuiti. Se i file lasciano dei vuoti, l'AI può colmarli dopo che hai confermato la stima."
+      }
+    },
+    "narration": {
+      "heading": "Una voce che porta la storia",
+      "intro": "Non in ogni video di prodotto c'è qualcuno che parla in camera. ReelBolt scrive una narrazione adatta al montaggio, la fa leggere con la voce che scegli e la mixa sotto l'immagine insieme a musica e dialoghi.",
+      "bullets": {
+        "0": "Narrazione scritta per adattarsi al montaggio, oppure le tue battute lette parola per parola",
+        "1": "Una voce stock, oppure la voce clonata di una persona indicata che ha registrato una dichiarazione di consenso",
+        "2": "Il consenso può essere revocato e la voce cancellata in qualsiasi momento; le voci clonate vengono conservate fino a due anni",
+        "3": "Mixata sotto l'immagine insieme a musica e dialoghi"
+      }
+    },
+    "dubs": {
+      "heading": "Correggi una battuta o cambia lingua senza rifare le riprese",
+      "intro": "Una battuta sbagliata non significa più richiamare chi presenta, e un nuovo mercato non significa più un nuovo video. Correzioni di battute e doppiaggi usano la voce clonata con consenso.",
+      "bullets": {
+        "0": "Correggi una battuta sbagliata registrandola di nuovo con la voce clonata, con consenso, di chi parla",
+        "1": "I doppiaggi traducono la narrazione e sostituiscono i dialoghi",
+        "2": "Il movimento delle labbra in camera non cambia, quindi i doppiaggi funzionano meglio con narrazione e voce fuori campo"
+      }
+    },
+    "b-roll": {
+      "heading": "B-roll che non hai dovuto girare, con un budget che decidi tu",
+      "intro": "Una demo con una persona che parla in camera ha bisogno di qualcosa su cui stacchi. Un regista delle inquadrature legge il tuo montaggio e pianifica clip brevi, come uno stacco, un cold open, una scheda finale o un ponte tra due scene, che vengono generate e inserite nel montaggio.",
+      "bullets": {
+        "0": "Stacchi, cold open, schede finali, ponti tra scene e contenuti per lo schermo pianificati a partire dal tuo montaggio reale",
+        "1": "Un tetto di spesa per esecuzione e un budget giornaliero, controllati prima di generare qualsiasi cosa",
+        "2": "Più take per ogni inquadratura, e la stanza dei giornalieri tiene il migliore",
+        "3": "A una nuova esecuzione, riutilizzi le clip che hai già o ne generi di nuove"
+      },
+      "notes": {
+        "0": "Il video generato è incluso nei piani {videoGenPlans} e usa crediti. La stima mostra il massimo che può costare prima di iniziare."
+      }
+    },
+    "quality": {
+      "heading": "Niente di mediocre arriva nella tua casella",
+      "intro": "Un agente revisore controlla ogni bozza rispetto al brief: regge? dice quello che voleva dire? il ritmo funziona? Ciò che non basta torna indietro per un altro passaggio, così la prima versione che vedi è già stata rivista.",
+      "bullets": {
+        "0": "Ogni bozza valutata rispetto al tuo brief",
+        "1": "Bozze deboli rimandate indietro automaticamente",
+        "2": "Rivedi una versione che ha già superato il controllo, poi cambia ciò che vuoi nell'editor"
+      }
+    },
+    "repeat": {
+      "heading": "Un video, poi il prossimo con un clic",
+      "intro": "Il modo in cui il tuo video viene prodotto si salva come ricetta riutilizzabile. Gira le prossime clip, o rilascia la prossima versione, rilancia la ricetta, e il nuovo video segue la stessa struttura e lo stesso tono con i contenuti nuovi.",
+      "bullets": {
+        "0": "Salva i passaggi che hanno prodotto un video che ti è piaciuto e riutilizzali",
+        "1": "Regola una fase senza ricostruire tutto",
+        "2": "Crea più montaggi insieme: uno lungo per il sito, uno verticale per i social"
+      }
+    },
+    "assistant": {
+      "heading": "Chiedilo in linguaggio naturale, qui o in Claude Code",
+      "intro": "Un assistente in chat è presente in ogni pagina della dashboard e sa cosa stai guardando. Risponde a domande su progetti, flussi di lavoro ed esecuzioni, modifica immagini e avvia esecuzioni con lo stile, il formato e la risoluzione che chiedi.",
+      "bullets": {
+        "0": "\"Perché è fallita la mia ultima esecuzione?\" con la risposta tratta dall'esecuzione vera",
+        "1": "Ogni modifica compare come scheda di approvazione con l'intervento esatto e il suo costo, e aspetta il tuo sì; c'è la modalità automatica se la vuoi",
+        "2": "Conversazioni salvate, così puoi riprendere un discorso più tardi",
+        "3": "Collega Claude Code o un altro client MCP al tuo spazio di lavoro e può fare quello che fa l'assistente qui; lì è il tuo client a chiederti conferma prima di un passaggio che modifica qualcosa o spende crediti",
+        "4": "Non può gestire gli utenti, vedere i progetti di altre persone o cambiare le impostazioni di amministrazione"
+      },
+      "notes": {
+        "0": "Le consultazioni sono gratuite. La chat è gratuita fino alla quota mensile di assistente del tuo piano, condivisa con Claude Code; oltre quella usa crediti. Esecuzioni, strumenti per immagini a pagamento, grafiche progettate e video generato usano crediti come sempre."
+      }
+    },
+    "sync": {
+      "heading": "Porta i tuoi file da dove stanno già",
+      "intro": "Collega i posti in cui il tuo team tiene già i file e ReelBolt tiene aggiornato il progetto. I tuoi file non vengono mai cancellati automaticamente.",
+      "bullets": {
+        "0": "Google Drive, OneDrive e SharePoint, e Dropbox: sola visualizzazione, sincronizzati in background o quando premi Sincronizza ora",
+        "1": "Una cartella sul tuo computer, comprese quelle di iCloud Drive, OneDrive o Dropbox, sincronizzata in una sola direzione e in sola lettura da un computer collegato. Il download dell'app desktop non è ancora disponibile.",
+        "2": "GitHub: scegli un repository, un branch e i file che ti servono, e i nuovi push aggiornano il progetto",
+        "3": "Nulla viene mai riscritto sui tuoi drive o nelle tue cartelle"
+      },
+      "notes": {
+        "0": "Lo spazio dipende dal piano, da {storageFrom} su {storageFromPlan} fino a {storageTo} su {storageToPlan}. Vedi i prezzi."
+      }
+    },
+    "teams": {
+      "heading": "Uno spazio di lavoro condiviso da tutto il team",
+      "intro": "Progetti, riprese, flussi di lavoro e cronologia delle esecuzioni appartengono allo spazio di lavoro, non all'account di una sola persona, così il video non se ne va con chi cambia lavoro. Invita chi serve, con un ruolo adatto a ciò che deve fare.",
+      "bullets": {
+        "0": "Progetti, riprese e cronologia delle esecuzioni condivisi",
+        "1": "Ruoli per proprietari, amministratori, membri e per chi gestisce la fatturazione",
+        "2": "Inviti per far entrare le persone, senza condividere una password",
+        "3": "Un pool di crediti a cui attinge l'intero spazio di lavoro, con una stima prima di ogni esecuzione"
+      }
+    },
+    "own-machine": {
+      "heading": "Fai il render su una macchina tua",
+      "intro": "Collega una macchina Windows o Linux al tuo spazio di lavoro e si occupa del rendering e del lavoro sui media. Il lavoro svolto lì non costa crediti, mentre le chiamate ai modelli e la fatturazione restano su ReelBolt.",
+      "bullets": {
+        "0": "Rendering e lavoro sui media sul tuo hardware, senza costo in crediti",
+        "1": "Proprietari e amministratori approvano una macchina collegata e possono revocarla in qualsiasi momento",
+        "2": "Ogni esecuzione mostra dove è stata eseguita",
+        "3": "Il download self-service non è ancora disponibile; finché una macchina non è collegata, le esecuzioni usano la capacità di ReelBolt"
+      }
+    },
+    "resolution": {
+      "heading": "Dimensione e formato che serve a ogni canale",
+      "intro": "Scegli risoluzione e formato quando avvii un'esecuzione. La risoluzione si misura sul lato corto dell'inquadratura, quindi un video verticale e uno orizzontale sono trattati allo stesso modo.",
+      "bullets": {
+        "0": "Fino a {topRes} sui piani {topPlans}; il limite di ogni piano è nella pagina dei prezzi",
+        "1": "Orizzontale, verticale, quadrato, ritratto o solo audio",
+        "2": "Livelli di loudness per le piattaforme su cui pubblichi",
+        "3": "Una risoluzione più alta usa più crediti di render e una più bassa ne usa meno, e la stima lo mostra prima di iniziare"
+      }
+    },
+    "control": {
+      "heading": "Il tuo provider AI, i tuoi modelli, i tuoi dati",
+      "intro": "ReelBolt non ti lega a un solo fornitore di AI. Collega il tuo account di un provider e scegli quale modello usa ogni agente, oppure tieni i principali modelli AI che lo spazio di lavoro include.",
+      "bullets": {
+        "0": "Usa il tuo account di un provider AI sui piani {byoPlans}",
+        "1": "Scegli un modello diverso per ogni agente, o uno per tutto",
+        "2": "L'uso sul tuo provider non costa crediti ReelBolt; paghi direttamente il provider",
+        "3": "Cerca nei file del progetto per significato, non solo per nome",
+        "4": "Licenza di self-hosting su Enterprise, per far girare l'intera piattaforma dentro la tua infrastruttura"
+      },
+      "after": "Tutto ciò che fa la piattaforma è descritto nella <docs>documentazione</docs>, una guida per l'utente in linguaggio semplice. Trovi di più sul pensiero che c'è dietro nella <about>pagina chi siamo</about>."
+    }
+  },
+  "cta": {
+    "title": "Vuoi vederlo sulle tue riprese?"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "features": "Funzionalità"
+  }
+}

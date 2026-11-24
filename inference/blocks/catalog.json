@@ -1,0 +1,2459 @@
+{
+  "schemaVersion": 1,
+  "blocks": [
+    {
+      "id": "aurora",
+      "version": "1.0.0",
+      "title": "Aurora",
+      "category": "backgrounds",
+      "description": "Soft waving aurora bands over a night sky; calm, premium background.",
+      "tags": [
+        "aurora",
+        "background",
+        "calm",
+        "gradient"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "aurora/Aurora.tsx",
+          "sha256": "0e006f08c0e611b2f5b1feecab0beff40d6a1b2aaa28ce6142897429552111f7"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-aurora",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/aurora.tsx"
+      },
+      "props": "{children?: ReactNode; colors?: string[]; sky?: [string,string]; speed?: number /*1*/; intensity?: number /*0.7*/}",
+      "example": "import {Aurora} from './blocks/aurora/Aurora.tsx';\n<Aurora><Title /></Aurora>"
+    },
+    {
+      "id": "gradient-mesh",
+      "version": "1.0.0",
+      "title": "Gradient mesh",
+      "category": "backgrounds",
+      "description": "Modern slowly drifting multi-colour gradient background; use behind titles and UI.",
+      "tags": [
+        "background",
+        "gradient",
+        "mesh",
+        "modern"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "gradient-mesh/GradientMesh.tsx",
+          "sha256": "c52ef030fca48380b092eb60845cc4a85eb9d09c153ccb4ea84acb495e333906"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-gradient-mesh",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/gradient-mesh.tsx"
+      },
+      "props": "{children?: ReactNode; colors?: string[]; background?: string; speed?: number /*1*/; seed?: string}",
+      "example": "import {GradientMesh} from './blocks/gradient-mesh/GradientMesh.tsx';\n<GradientMesh><Title /></GradientMesh>"
+    },
+    {
+      "id": "particle-field",
+      "version": "1.0.0",
+      "title": "Particle field",
+      "category": "backgrounds",
+      "description": "Seeded drifting dots with optional connecting lines; use for tech, network and data themes.",
+      "tags": [
+        "particles",
+        "network",
+        "constellation",
+        "background"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "particle-field/ParticleField.tsx",
+          "sha256": "affd7600d838553d9766cfa3dafa82475e3c0608b5e7a98b47c61997f20c3df2"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-particle-field",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/particle-field.tsx"
+      },
+      "props": "{children?: ReactNode; count?: number /*60*/; connect?: boolean /*true*/; linkDistance?: number /*180*/; color?: string; background?: string; speed?: number /*25*/; seed?: string}",
+      "example": "import {ParticleField} from './blocks/particle-field/ParticleField.tsx';\n<ParticleField><Title /></ParticleField>"
+    },
+    {
+      "id": "perspective-grid",
+      "version": "1.0.0",
+      "title": "Perspective grid",
+      "category": "backgrounds",
+      "description": "Retro synthwave 3D grid floor scrolling toward the viewer; use for tech, gaming and 80s themes.",
+      "tags": [
+        "retro",
+        "synthwave",
+        "grid",
+        "3d",
+        "background"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "perspective-grid/PerspectiveGrid.tsx",
+          "sha256": "2393bdc5da100c2c703d7c4056acdc201d06bb740966d1274f303a154b372438"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-perspective-grid",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/perspective-grid.tsx"
+      },
+      "props": "{children?: ReactNode; lineColor?: string; sky?: [string,string]; cell?: number /*90*/; speed?: number /*120*/; horizon?: number /*0.5*/}",
+      "example": "import {PerspectiveGrid} from './blocks/perspective-grid/PerspectiveGrid.tsx';\n<PerspectiveGrid><Title /></PerspectiveGrid>"
+    },
+    {
+      "id": "caption-boxed",
+      "version": "1.0.0",
+      "title": "Caption boxed",
+      "category": "captions",
+      "description": "Use for clean, professional captions on a rounded dark panel with the spoken word on an accent chip (explainers, interviews). The `captions` prop is a @remotion/captions Caption[].",
+      "tags": [
+        "caption",
+        "subtitle",
+        "box",
+        "panel",
+        "clean"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "@remotion/captions",
+          "version": "4.0.542"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/captions.ts",
+          "sha256": "c303738c56f50f176a459fcc277b979639685a4b6992dab6f19ba54520e20f06"
+        },
+        {
+          "path": "caption-boxed/CaptionBoxed.tsx",
+          "sha256": "84d865086b7bc9b580170ef30751d625201fd4c894573bbc0270258d937640cb"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-caption-boxed",
+        "durationInFrames": 120,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          20,
+          50,
+          80
+        ],
+        "file": "previews/caption-boxed.tsx"
+      },
+      "props": "{captions: Caption[]; maxWordsPerPage?: number /*5*/; boxColor?: string; color?: string; chipColor?: string /*'#3b82f6'*/; fontSize?: number; fontFamily?: string /*'Inter, sans-serif'*/}",
+      "example": "import {CaptionBoxed} from './blocks/caption-boxed/CaptionBoxed.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionBoxed captions={captions} />"
+    },
+    {
+      "id": "caption-karaoke",
+      "version": "1.0.0",
+      "title": "Caption karaoke",
+      "category": "captions",
+      "description": "Use for word-by-word spoken captions where each word fills with colour as it is said (talking heads, voice-overs). The `captions` prop is a @remotion/captions Caption[].",
+      "tags": [
+        "caption",
+        "karaoke",
+        "subtitle",
+        "word highlight"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "@remotion/captions",
+          "version": "4.0.542"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/captions.ts",
+          "sha256": "c303738c56f50f176a459fcc277b979639685a4b6992dab6f19ba54520e20f06"
+        },
+        {
+          "path": "caption-karaoke/CaptionKaraoke.tsx",
+          "sha256": "5a7445361aac6e793c97e87cf9aaab529b2b70952cadc68a99bdf61aa53d5ba8"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-caption-karaoke",
+        "durationInFrames": 120,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          20,
+          50,
+          80
+        ],
+        "file": "previews/caption-karaoke.tsx"
+      },
+      "props": "{captions: Caption[]; maxWordsPerPage?: number /*4*/; color?: string; highlightColor?: string /*'#ffd54a'*/; fontSize?: number; fontFamily?: string /*'Montserrat, sans-serif'*/}",
+      "example": "import {CaptionKaraoke} from './blocks/caption-karaoke/CaptionKaraoke.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionKaraoke captions={captions} maxWordsPerPage={4} />"
+    },
+    {
+      "id": "caption-outline-bold",
+      "version": "1.0.0",
+      "title": "Caption outline bold",
+      "category": "captions",
+      "description": "Use for bold upper-case captions with a thick outline that stay readable over busy footage; the spoken word changes colour. The `captions` prop is a @remotion/captions Caption[].",
+      "tags": [
+        "caption",
+        "subtitle",
+        "outline",
+        "bold",
+        "readable"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "@remotion/captions",
+          "version": "4.0.542"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/captions.ts",
+          "sha256": "c303738c56f50f176a459fcc277b979639685a4b6992dab6f19ba54520e20f06"
+        },
+        {
+          "path": "caption-outline-bold/CaptionOutlineBold.tsx",
+          "sha256": "e581996c5eff1b6d20546468662ac8e4c3be45942435d300668cbe3973d4ffde"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-caption-outline-bold",
+        "durationInFrames": 120,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          20,
+          50,
+          80
+        ],
+        "file": "previews/caption-outline-bold.tsx"
+      },
+      "props": "{captions: Caption[]; maxWordsPerPage?: number /*3*/; color?: string; activeColor?: string /*'#ffe14d'*/; outlineColor?: string /*'#000'*/; fontSize?: number; fontFamily?: string /*'Anton, sans-serif'*/}",
+      "example": "import {CaptionOutlineBold} from './blocks/caption-outline-bold/CaptionOutlineBold.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionOutlineBold captions={captions} />"
+    },
+    {
+      "id": "caption-pop-word",
+      "version": "1.0.0",
+      "title": "Caption pop word",
+      "category": "captions",
+      "description": "Use for punchy short-form captions that show one big word at a time, popping in as it is spoken. The `captions` prop is a @remotion/captions Caption[].",
+      "tags": [
+        "caption",
+        "subtitle",
+        "pop",
+        "tiktok",
+        "one word"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "@remotion/captions",
+          "version": "4.0.542"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/captions.ts",
+          "sha256": "c303738c56f50f176a459fcc277b979639685a4b6992dab6f19ba54520e20f06"
+        },
+        {
+          "path": "caption-pop-word/CaptionPopWord.tsx",
+          "sha256": "c02e4f3c4daceae532741b5456cdef482d08cb13b1973ef0b06ed8900c5678f2"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-caption-pop-word",
+        "durationInFrames": 120,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          20,
+          50,
+          80
+        ],
+        "file": "previews/caption-pop-word.tsx"
+      },
+      "props": "{captions: Caption[]; color?: string; accentColor?: string /*'#ff4d6d'*/; fontSize?: number; uppercase?: boolean /*true*/; fontFamily?: string /*'Anton, sans-serif'*/}",
+      "example": "import {CaptionPopWord} from './blocks/caption-pop-word/CaptionPopWord.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionPopWord captions={captions} accentColor=\"#ff4d6d\" />"
+    },
+    {
+      "id": "chart-bars",
+      "version": "1.0.0",
+      "title": "Bar chart",
+      "category": "charts",
+      "description": "Use to compare a handful of categories: horizontal bars grow in one after another with value labels. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+      "tags": [
+        "chart",
+        "bar",
+        "compare",
+        "ranking",
+        "data"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "chart-bars/ChartBars.tsx",
+          "sha256": "7df737f82c3ec0d0338e0ec3b04895deceb45a7a4e228973bed7857fe8f4437f"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-chart-bars",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          30,
+          70
+        ],
+        "file": "previews/chart-bars.tsx"
+      },
+      "props": "{data: {label: string; value: number}[]; title?: string; color?: string /*'#38bdf8'*/; valueFormat?: string /*',.0f'*/; startFrame?: number /*5*/; staggerFrames?: number /*6*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+      "example": "import {ChartBars} from './blocks/chart-bars/ChartBars.tsx';\n<ChartBars title=\"Users by region\" data={[{label: \"Europe\", value: 420}, {label: \"Asia\", value: 610}]} />"
+    },
+    {
+      "id": "chart-donut",
+      "version": "1.0.0",
+      "title": "Donut chart",
+      "category": "charts",
+      "description": "Use to show parts of a whole (shares, budget split): a donut that sweeps open with a total and a legend. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+      "tags": [
+        "chart",
+        "donut",
+        "pie",
+        "share",
+        "data"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "chart-donut/ChartDonut.tsx",
+          "sha256": "4c93faf8166fedc389816a7977aa159fed42184cffa54fca8c959560f499970f"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-chart-donut",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          30,
+          80
+        ],
+        "file": "previews/chart-donut.tsx"
+      },
+      "props": "{data: {label: string; value: number; color?: string}[]; centerLabel?: string /*'Total'*/; palette?: string[]; startFrame?: number /*5*/; durationInFrames?: number /*45*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+      "example": "import {ChartDonut} from './blocks/chart-donut/ChartDonut.tsx';\n<ChartDonut data={[{label: \"Ads\", value: 40}, {label: \"Organic\", value: 60}]} />"
+    },
+    {
+      "id": "chart-line-draw",
+      "version": "1.0.0",
+      "title": "Line chart draw-on",
+      "category": "charts",
+      "description": "Use to show a trend over time: a smooth line with area fill that draws itself left to right. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+      "tags": [
+        "chart",
+        "line",
+        "trend",
+        "growth",
+        "data"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "chart-line-draw/ChartLineDraw.tsx",
+          "sha256": "91854e9dd7c7e090a078bb577d597d44ebed36e5a71508ec7e8486326df70ab4"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-chart-line-draw",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          35,
+          80
+        ],
+        "file": "previews/chart-line-draw.tsx"
+      },
+      "props": "{values: number[]; labels?: string[]; title?: string; color?: string /*'#34d399'*/; startFrame?: number /*5*/; durationInFrames?: number /*50*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+      "example": "import {ChartLineDraw} from './blocks/chart-line-draw/ChartLineDraw.tsx';\n<ChartLineDraw title=\"Revenue\" values={[3, 5, 4, 8, 12]} labels={[\"Jan\", \"\", \"\", \"\", \"May\"]} />"
+    },
+    {
+      "id": "kpi-ticker",
+      "version": "1.0.0",
+      "title": "KPI ticker",
+      "category": "charts",
+      "description": "Use to land one headline number: a big figure that counts up with a label and an optional change chip. The figure size fits the frame width (9:16 safe); override with fontSize.",
+      "tags": [
+        "kpi",
+        "number",
+        "counter",
+        "stat",
+        "metric"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "kpi-ticker/KpiTicker.tsx",
+          "sha256": "7109945ad53a36bc048437703f4e07edbd45426fc0ccb4e831c8f279779007fe"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-kpi-ticker",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          30,
+          70
+        ],
+        "file": "previews/kpi-ticker.tsx"
+      },
+      "props": "{value: number; label: string; from?: number /*0*/; prefix?: string; suffix?: string; valueFormat?: string /*',.0f'*/; delta?: string; deltaColor?: string /*'#34d399'*/; color?: string; startFrame?: number /*5*/; durationInFrames?: number /*40*/; fontSize?: number /*fits width*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/}",
+      "example": "import {KpiTicker} from './blocks/kpi-ticker/KpiTicker.tsx';\n<KpiTicker value={128400} prefix=\"$\" label=\"Monthly revenue\" delta=\"+12.4%\" />"
+    },
+    {
+      "id": "progress-ring",
+      "version": "1.0.0",
+      "title": "Progress ring",
+      "category": "charts",
+      "description": "Use to show completion or a score out of 100: a ring that fills while the percentage counts up.",
+      "tags": [
+        "chart",
+        "progress",
+        "ring",
+        "percent",
+        "gauge"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "progress-ring/ProgressRing.tsx",
+          "sha256": "1023aa4218a2a483a65afb5528cec26ad67b1098a16b5f2af868a06e66fdc11d"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-progress-ring",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          30,
+          70
+        ],
+        "file": "previews/progress-ring.tsx"
+      },
+      "props": "{percent: number; label?: string; color?: string /*'#22d3ee'*/; trackColor?: string; textColor?: string; startFrame?: number /*5*/; durationInFrames?: number /*45*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/}",
+      "example": "import {ProgressRing} from './blocks/progress-ring/ProgressRing.tsx';\n<ProgressRing percent={78} label=\"Goal reached\" />"
+    },
+    {
+      "id": "sparkline",
+      "version": "1.0.0",
+      "title": "Sparkline card",
+      "category": "charts",
+      "description": "Use for a small trend callout next to a metric: a compact card with the latest value and a self-drawing line.",
+      "tags": [
+        "chart",
+        "sparkline",
+        "trend",
+        "card",
+        "metric"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "sparkline/Sparkline.tsx",
+          "sha256": "aa3e625df73ae2767e9764953d5b12c0bcf710a30f8dedda6c0633078062dc36"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-sparkline",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          30,
+          70
+        ],
+        "file": "previews/sparkline.tsx"
+      },
+      "props": "{values: number[]; label?: string; valueFormat?: string /*',.0f'*/; color?: string /*'#f472b6'*/; textColor?: string; cardColor?: string; startFrame?: number /*5*/; durationInFrames?: number /*40*/; fontFamily?: string}",
+      "example": "import {Sparkline} from './blocks/sparkline/Sparkline.tsx';\n<Sparkline label=\"Signups\" values={[4, 6, 5, 9, 12, 11, 16]} />"
+    },
+    {
+      "id": "browser-frame",
+      "version": "1.0.0",
+      "title": "Browser frame",
+      "category": "devices",
+      "description": "Put screenshots or UI inside a browser window with chrome; use for web product demos.",
+      "tags": [
+        "browser",
+        "window",
+        "device",
+        "mockup"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "browser-frame/BrowserFrame.tsx",
+          "sha256": "d5d1e67c403f3138542bc27692a8e0688be1fabb29afa14e98fbdc374f9c02c5"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-browser-frame",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/browser-frame.tsx"
+      },
+      "props": "{children?: ReactNode; url?: string; title?: string; width?: number /*1400*/; height?: number /*800*/; dark?: boolean; font?: string /*\"Inter\"*/}",
+      "example": "import {BrowserFrame} from './blocks/browser-frame/BrowserFrame.tsx';\n<BrowserFrame url=\"example.com/pricing\" title=\"Pricing\"><Page /></BrowserFrame>"
+    },
+    {
+      "id": "cursor-click",
+      "version": "1.0.0",
+      "title": "Cursor click",
+      "category": "devices",
+      "description": "Animated mouse cursor that glides to a point and clicks with a ripple; use to guide attention in UI demos.",
+      "tags": [
+        "cursor",
+        "click",
+        "ui",
+        "demo"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "cursor-click/CursorClick.tsx",
+          "sha256": "6ab1cc77160dcbde4ec0722b202ceef3b5f8bcd76cb72dc7e0876ed3f3f28eef"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-cursor-click",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          32,
+          50
+        ],
+        "file": "previews/cursor-click.tsx"
+      },
+      "props": "{children?: ReactNode; from?: [number,number]; to?: [number,number]; startFrame?: number /*5*/; moveFrames?: number /*30*/; rippleColor?: string; scale?: number /*1.6*/}",
+      "example": "import {CursorClick} from './blocks/cursor-click/CursorClick.tsx';\n<CursorClick from={[200,700]} to={[960,540]}><Screen /></CursorClick>"
+    },
+    {
+      "id": "laptop-frame",
+      "version": "1.0.0",
+      "title": "Laptop frame",
+      "category": "devices",
+      "description": "Put a desktop UI inside a laptop with base; use for SaaS and software showcases.",
+      "tags": [
+        "laptop",
+        "desktop",
+        "device",
+        "mockup"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "laptop-frame/LaptopFrame.tsx",
+          "sha256": "6f20566fbf8d7fed6782d03f904e8c4560049f206f266087e62f38ecdfe08d88"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-laptop-frame",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/laptop-frame.tsx"
+      },
+      "props": "{children?: ReactNode; width?: number /*1200*/; body?: string}",
+      "example": "import {LaptopFrame} from './blocks/laptop-frame/LaptopFrame.tsx';\n<LaptopFrame><Page /></LaptopFrame>"
+    },
+    {
+      "id": "phone-frame",
+      "version": "1.0.0",
+      "title": "Phone frame",
+      "category": "devices",
+      "description": "Put app screens or vertical video inside a smartphone bezel; use for mobile demos.",
+      "tags": [
+        "phone",
+        "mobile",
+        "device",
+        "mockup"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "phone-frame/PhoneFrame.tsx",
+          "sha256": "693ca3c8775489e97d720129866a60d0727220ca18c3cfe2fb3e62bc86715156"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-phone-frame",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          30,
+          59
+        ],
+        "file": "previews/phone-frame.tsx"
+      },
+      "props": "{children?: ReactNode; width?: number /*400*/; bezel?: string; rotate?: number /*0*/}",
+      "example": "import {PhoneFrame} from './blocks/phone-frame/PhoneFrame.tsx';\n<PhoneFrame><AppScreen /></PhoneFrame>"
+    },
+    {
+      "id": "toast-notification",
+      "version": "1.0.0",
+      "title": "Toast notification",
+      "category": "devices",
+      "description": "Notification card that slides in, holds and slides out; use for success messages and alerts in UI scenes.",
+      "tags": [
+        "toast",
+        "notification",
+        "ui",
+        "alert"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "toast-notification/ToastNotification.tsx",
+          "sha256": "0512848d8804b015a2fb0c529863b3e99260da1d399c8d773197fb7b989d8dc8"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-toast-notification",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          5,
+          25,
+          58
+        ],
+        "file": "previews/toast-notification.tsx"
+      },
+      "props": "{children?: ReactNode; title?: string; message?: string; startFrame?: number /*10*/; holdFrames?: number /*60*/; position?: \"top-right\"|\"top-left\"|\"bottom-right\"|\"bottom-left\"; accent?: string; font?: string}",
+      "example": "import {ToastNotification} from './blocks/toast-notification/ToastNotification.tsx';\n<ToastNotification title=\"Saved\" message=\"All changes synced\" />"
+    },
+    {
+      "id": "bokeh",
+      "version": "1.0.0",
+      "title": "Bokeh",
+      "category": "effects",
+      "description": "Floating soft light circles for a dreamy depth-of-field feel over a scene.",
+      "tags": [
+        "bokeh",
+        "lights",
+        "dreamy",
+        "overlay"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "bokeh/Bokeh.tsx",
+          "sha256": "c9949350e557241bf67f6500b63f5a27d78b8f10d9d43d21a386efcac77e7918"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-bokeh",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          25,
+          50
+        ],
+        "file": "previews/bokeh.tsx"
+      },
+      "props": "{children?: ReactNode; count?: number /*18*/; intensity?: number /*0.6*/; colors?: string[]; maxSize?: number /*220*/; speed?: number /*30*/; seed?: string}",
+      "example": "import {Bokeh} from './blocks/bokeh/Bokeh.tsx';\n<Bokeh count={20}><Scene /></Bokeh>"
+    },
+    {
+      "id": "confetti",
+      "version": "1.0.0",
+      "title": "Confetti",
+      "category": "effects",
+      "description": "Seeded confetti burst for celebrations and milestones.",
+      "tags": [
+        "confetti",
+        "celebration",
+        "burst",
+        "party"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "confetti/Confetti.tsx",
+          "sha256": "d7224b75377761c72d0542106df7bc4002caeb8a391dc48b43efb87f885310e6"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-confetti",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          22,
+          40
+        ],
+        "file": "previews/confetti.tsx"
+      },
+      "props": "{children?: ReactNode; startFrame?: number /*0*/; count?: number /*90*/; origin?: [number,number] /*[0.5,0.6]*/; colors?: string[]; power?: number /*1400*/; durationInFrames?: number /*90*/; seed?: string}",
+      "example": "import {Confetti} from './blocks/confetti/Confetti.tsx';\n<Confetti startFrame={10}><Scene /></Confetti>"
+    },
+    {
+      "id": "crt-scanlines",
+      "version": "1.0.0",
+      "title": "CRT scanlines",
+      "category": "effects",
+      "description": "Wrap a scene in an old CRT monitor look: scanlines, rounded screen, vignette and flicker. Use for retro or gaming moments.",
+      "tags": [
+        "crt",
+        "retro",
+        "scanlines",
+        "overlay"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "crt-scanlines/CrtScanlines.tsx",
+          "sha256": "1e9cb85ab3919d8fc6deafc22dceb99141c591a1195a0a66019d0a10b40dcc7b"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-crt-scanlines",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          20,
+          40
+        ],
+        "file": "previews/crt-scanlines.tsx"
+      },
+      "props": "{children?: ReactNode; intensity?: number /*0.5*/; lineHeight?: number /*4*/; curvature?: number /*40*/; flicker?: number /*0.4*/; seed?: string}",
+      "example": "import {CrtScanlines} from './blocks/crt-scanlines/CrtScanlines.tsx';\n<CrtScanlines intensity={0.6}><Scene /></CrtScanlines>"
+    },
+    {
+      "id": "film-grain",
+      "version": "1.0.0",
+      "title": "Film grain",
+      "category": "effects",
+      "description": "Overlay animated film grain on any scene for a filmic, analogue texture.",
+      "tags": [
+        "grain",
+        "film",
+        "overlay",
+        "texture"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "film-grain/FilmGrain.tsx",
+          "sha256": "feb8214b3a5ae230761a53b3e149ee9749223cd62694d4a26439cfed24c6a3a1"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-film-grain",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          20,
+          40
+        ],
+        "file": "previews/film-grain.tsx"
+      },
+      "props": "{children?: ReactNode; intensity?: number /*0.35*/; frequency?: number /*0.8*/; holdFrames?: number /*2*/}",
+      "example": "import {FilmGrain} from './blocks/film-grain/FilmGrain.tsx';\n<FilmGrain intensity={0.4}><Scene /></FilmGrain>"
+    },
+    {
+      "id": "halftone",
+      "version": "1.0.0",
+      "title": "Halftone",
+      "category": "effects",
+      "description": "Use for a comic or print halftone dot look over a scene, strongest at the edges (stylised intros, comic-book beats). Render cost: masks and rotates a full-frame layer, about +0.36 s/frame at 1080p (roughly 5 minutes extra for a 30 s film), so apply it to short beats, not whole films.",
+      "tags": [
+        "halftone",
+        "dots",
+        "comic",
+        "overlay"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "halftone/Halftone.tsx",
+          "sha256": "3a10926e9a963cc5fa188ffc2cdecaaca6804f17cbf1c38af46070fde2ddc258"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-halftone",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          25,
+          50
+        ],
+        "file": "previews/halftone.tsx"
+      },
+      "props": "{children?: ReactNode; dotSize?: number /*18*/; color?: string; intensity?: number /*0.5*/; angle?: number /*45*/; drift?: number /*12*/; clearCenter?: number /*25*/}",
+      "example": "import {Halftone} from './blocks/halftone/Halftone.tsx';\n<Halftone dotSize={20}><Scene /></Halftone>"
+    },
+    {
+      "id": "light-leak",
+      "version": "1.0.0",
+      "title": "Light leak",
+      "category": "effects",
+      "description": "Warm drifting light leaks blended over a scene for a nostalgic film feel, good for transitions and intros.",
+      "tags": [
+        "light leak",
+        "film",
+        "warm",
+        "overlay"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "light-leak/LightLeak.tsx",
+          "sha256": "a80de1d929a32de27438a3a796faf1ed1d9be853d3ae1a336e38c85ea88fa1b9"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-light-leak",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          25,
+          50
+        ],
+        "file": "previews/light-leak.tsx"
+      },
+      "props": "{children?: ReactNode; intensity?: number /*0.7*/; colors?: string[]; speed?: number /*1*/}",
+      "example": "import {LightLeak} from './blocks/light-leak/LightLeak.tsx';\n<LightLeak intensity={0.8}><Scene /></LightLeak>"
+    },
+    {
+      "id": "vhs-glitch",
+      "version": "1.0.0",
+      "title": "VHS glitch",
+      "category": "effects",
+      "description": "Glitch a scene with RGB channel split and horizontal tear bands in seeded bursts. Use for tension cuts or retro intros.",
+      "tags": [
+        "glitch",
+        "vhs",
+        "rgb split",
+        "distortion"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "vhs-glitch/VhsGlitch.tsx",
+          "sha256": "6d2d219018739a4d52ab32132f08919cc63c112411fe49bf1cdabb5f7b062457"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-vhs-glitch",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          3,
+          12,
+          30
+        ],
+        "file": "previews/vhs-glitch.tsx"
+      },
+      "props": "{children: ReactNode; intensity?: number /*0.5*/; split?: number /*14*/; bands?: number /*3*/; stepFrames?: number /*3*/; seed?: string}",
+      "example": "import {VhsGlitch} from './blocks/vhs-glitch/VhsGlitch.tsx';\n<VhsGlitch intensity={0.6}><Scene /></VhsGlitch>"
+    },
+    {
+      "id": "vignette",
+      "version": "1.0.0",
+      "title": "Vignette",
+      "category": "effects",
+      "description": "Darken or tint the edges to focus attention on the centre of a scene.",
+      "tags": [
+        "vignette",
+        "focus",
+        "overlay",
+        "cinematic"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "vignette/Vignette.tsx",
+          "sha256": "3aea5ad7aafb94c31e8357f8e4b20da6644f1321450746869dc9844e5296e051"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-vignette",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          25,
+          50
+        ],
+        "file": "previews/vignette.tsx"
+      },
+      "props": "{children?: ReactNode; intensity?: number /*0.6*/; innerStop?: number /*45*/; color?: string /*\"#000\"*/; pulse?: number /*0*/; pulseFrames?: number /*90*/}",
+      "example": "import {Vignette} from './blocks/vignette/Vignette.tsx';\n<Vignette intensity={0.7}><Scene /></Vignette>"
+    },
+    {
+      "id": "map-pin-pulse",
+      "version": "1.0.0",
+      "title": "Map pin pulse",
+      "category": "maps",
+      "description": "Use to mark places on a world map: pins drop in and send out pulsing rings with city labels (offline).",
+      "tags": [
+        "map",
+        "pin",
+        "location",
+        "pulse",
+        "world"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/geo.ts",
+          "sha256": "7adcf12dc68e7262776e0effaed7092635bacc4c349ca9f6fc42db3ebf0ed01a"
+        },
+        {
+          "path": "_shared/worldData.ts",
+          "sha256": "b47c02e7ea064a73a950066016dd8dd3f922f304967b2d0a76f2bc09d808d832"
+        },
+        {
+          "path": "map-pin-pulse/MapPinPulse.tsx",
+          "sha256": "5b21c7ae7da59b6bff35aa479de304d93a9b8a522384941c985b950a8786d2be"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-map-pin-pulse",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          30,
+          70
+        ],
+        "file": "previews/map-pin-pulse.tsx"
+      },
+      "props": "{pins?: {name: string; lon: number; lat: number}[] /*London, New York, Tokyo*/; landColor?: string; strokeColor?: string; pinColor?: string /*'#f43f5e'*/; textColor?: string; staggerFrames?: number /*10*/; fontFamily?: string}",
+      "example": "import {MapPinPulse} from './blocks/map-pin-pulse/MapPinPulse.tsx';\n<MapPinPulse pins={[{name: \"Berlin\", lon: 13.4, lat: 52.5}]} />"
+    },
+    {
+      "id": "map-region-highlight",
+      "version": "1.0.0",
+      "title": "Map region highlight",
+      "category": "maps",
+      "description": "Use to call out a country by ISO code on a world map: it lights up and the camera eases toward it (offline). The label sits on the country.",
+      "tags": [
+        "map",
+        "country",
+        "region",
+        "highlight",
+        "world"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/geo.ts",
+          "sha256": "7adcf12dc68e7262776e0effaed7092635bacc4c349ca9f6fc42db3ebf0ed01a"
+        },
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "_shared/worldData.ts",
+          "sha256": "b47c02e7ea064a73a950066016dd8dd3f922f304967b2d0a76f2bc09d808d832"
+        },
+        {
+          "path": "map-region-highlight/MapRegionHighlight.tsx",
+          "sha256": "b152eb714469d090258d8ecc3807cc2d68333dfbf108c40a9bbf930b3f799b75"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-map-region-highlight",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          30,
+          70
+        ],
+        "file": "previews/map-region-highlight.tsx"
+      },
+      "props": "{code?: string /*'ITA' (ISO alpha-3 or alpha-2)*/; label?: string /*country name*/; zoom?: number /*0.5*/; landColor?: string; strokeColor?: string; highlightColor?: string /*'#38bdf8'*/; textColor?: string; startFrame?: number /*10*/; durationInFrames?: number /*40*/; fontFamily?: string}",
+      "example": "import {MapRegionHighlight} from './blocks/map-region-highlight/MapRegionHighlight.tsx';\n<MapRegionHighlight code=\"BRA\" label=\"Brazil\" zoom={0.6} />"
+    },
+    {
+      "id": "map-route-arc",
+      "version": "1.0.0",
+      "title": "Map route arc",
+      "category": "maps",
+      "description": "Use to show a journey or shipment between two cities: a great-circle route draws on with a travelling dot (offline).",
+      "tags": [
+        "map",
+        "route",
+        "arc",
+        "flight",
+        "shipping",
+        "world"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/geo.ts",
+          "sha256": "7adcf12dc68e7262776e0effaed7092635bacc4c349ca9f6fc42db3ebf0ed01a"
+        },
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "_shared/worldData.ts",
+          "sha256": "b47c02e7ea064a73a950066016dd8dd3f922f304967b2d0a76f2bc09d808d832"
+        },
+        {
+          "path": "map-route-arc/MapRouteArc.tsx",
+          "sha256": "811c8a33d723f95f4515ea99f7b45e2c9ca1c6013844353131cbd91ed36736ea"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-map-route-arc",
+        "durationInFrames": 90,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          35,
+          80
+        ],
+        "file": "previews/map-route-arc.tsx"
+      },
+      "props": "{from?: City /*Lisbon*/; to?: City /*Sao Paulo*/; landColor?: string; strokeColor?: string; routeColor?: string /*'#fbbf24'*/; textColor?: string; startFrame?: number /*12*/; durationInFrames?: number /*45*/; fontFamily?: string} // City = {name: string; lon: number; lat: number}",
+      "example": "import {MapRouteArc} from './blocks/map-route-arc/MapRouteArc.tsx';\n<MapRouteArc from={{name: \"Paris\", lon: 2.35, lat: 48.86}} to={{name: \"Tokyo\", lon: 139.7, lat: 35.7}} />"
+    },
+    {
+      "id": "arrow-draw",
+      "version": "1.0.0",
+      "title": "Arrow draw",
+      "category": "shapes",
+      "description": "Hand-drawn style arrow that draws itself along given points; use to point at something on screen.",
+      "tags": [
+        "arrow",
+        "draw",
+        "annotation",
+        "callout"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "arrow-draw/ArrowDraw.tsx",
+          "sha256": "adedc05f2b3cf4ff7466eee2e392f1d201dcb3242f6d9ae3ade6f11f48149afa"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-arrow-draw",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          25,
+          50
+        ],
+        "file": "previews/arrow-draw.tsx"
+      },
+      "props": "{children?: ReactNode; points?: [number,number][]; startFrame?: number /*5*/; durationInFrames?: number /*30*/; color?: string; strokeWidth?: number /*10*/; wobble?: number /*4*/; seed?: string}",
+      "example": "import {ArrowDraw} from './blocks/arrow-draw/ArrowDraw.tsx';\n<ArrowDraw points={[[300,800],[700,600],[1200,400]]} />"
+    },
+    {
+      "id": "callout-bubble",
+      "version": "1.0.0",
+      "title": "Callout bubble",
+      "category": "shapes",
+      "description": "Speech or annotation bubble with a pointer that pops in; use to label or comment on part of the frame.",
+      "tags": [
+        "callout",
+        "speech bubble",
+        "annotation",
+        "label"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "callout-bubble/CalloutBubble.tsx",
+          "sha256": "9a4956c1ac52d8e4e1c9f30e4e82794b22d55c43fe03e5a6e134f0e2fb35b841"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-callout-bubble",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          3,
+          12,
+          40
+        ],
+        "file": "previews/callout-bubble.tsx"
+      },
+      "props": "{children?: ReactNode; text?: string; position?: [number,number]; pointer?: \"bottom-left\"|\"bottom-right\"|\"top-left\"|\"top-right\"; startFrame?: number /*5*/; background?: string; color?: string; fontSize?: number /*44*/; font?: string}",
+      "example": "import {CalloutBubble} from './blocks/callout-bubble/CalloutBubble.tsx';\n<CalloutBubble text=\"Look here\" position={[0.5,0.4]} />"
+    },
+    {
+      "id": "check-draw",
+      "version": "1.0.0",
+      "title": "Check draw",
+      "category": "shapes",
+      "description": "Animated checkmark inside a circle that draws itself; use for success, done and completed states.",
+      "tags": [
+        "check",
+        "success",
+        "done",
+        "icon"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "check-draw/CheckDraw.tsx",
+          "sha256": "f89cc779041703deb8b9d2807f19fcda936a7466496e01696cc1788ed09dae3f"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-check-draw",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          10,
+          25,
+          50
+        ],
+        "file": "previews/check-draw.tsx"
+      },
+      "props": "{children?: ReactNode; size?: number /*360*/; startFrame?: number /*5*/; durationInFrames?: number /*36*/; color?: string; strokeWidth?: number /*18*/; fill?: boolean}",
+      "example": "import {CheckDraw} from './blocks/check-draw/CheckDraw.tsx';\n<CheckDraw size={300} />"
+    },
+    {
+      "id": "char-stagger",
+      "version": "1.0.0",
+      "title": "Character stagger",
+      "category": "titles",
+      "description": "Letters pop in one by one with a springy overshoot; use for playful or punchy short titles.",
+      "tags": [
+        "title",
+        "letters",
+        "spring",
+        "kinetic type"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "char-stagger/CharStagger.tsx",
+          "sha256": "d63bef47e698bb5523656251d498c6e375dfb3934264196f8f94eb20eb9173b2"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-char-stagger",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          16,
+          40
+        ],
+        "file": "previews/char-stagger.tsx"
+      },
+      "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*110*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/; fontWeight?: number /*700*/; startFrame?: number /*0*/; staggerFrames?: number /*2*/}",
+      "example": "import {CharStagger} from './blocks/char-stagger/CharStagger.tsx';\n<CharStagger text=\"Hello world\" />"
+    },
+    {
+      "id": "counter-number",
+      "version": "1.0.0",
+      "title": "Counter number",
+      "category": "titles",
+      "description": "Big number that counts to a target with a label; use for stats, milestones and KPIs.",
+      "tags": [
+        "counter",
+        "number",
+        "stat",
+        "kpi",
+        "count up"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "counter-number/CounterNumber.tsx",
+          "sha256": "6238e950c1e4b5abf014459f00620cf9db0bdfef7617294a66e00f533887cf9c"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-counter-number",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          24,
+          50
+        ],
+        "file": "previews/counter-number.tsx"
+      },
+      "props": "{from?: number /*0*/; to?: number /*12840*/; prefix?: string; suffix?: string; label?: string; decimals?: number /*0*/; color?: string; labelColor?: string; fontSize?: number /*180*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/; startFrame?: number /*0*/; durationInFrames?: number /*45*/}",
+      "example": "import {CounterNumber} from './blocks/counter-number/CounterNumber.tsx';\n<CounterNumber to={12840} label=\"Videos rendered\" />"
+    },
+    {
+      "id": "gsap-kinetic-title",
+      "version": "1.0.0",
+      "title": "GSAP kinetic title",
+      "category": "titles",
+      "description": "Title whose characters rise in with a GSAP SplitText timeline. The timeline is built paused and sought from the frame, so every frame is deterministic.",
+      "tags": [
+        "title",
+        "kinetic type",
+        "gsap",
+        "splittext",
+        "text",
+        "headline"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        },
+        {
+          "name": "gsap",
+          "version": "3.15.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "gsap-kinetic-title/GsapKineticTitle.tsx",
+          "sha256": "9fbd799f3ba289fa36b1859cce53be0d8f69c8d8b344a8ec20503def53df18c1"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-gsap-kinetic-title",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          24,
+          50
+        ],
+        "file": "previews/gsap-kinetic-title.tsx"
+      },
+      "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*120*/; fontFamily?: string /*'Inter, sans-serif'*/; staggerSeconds?: number /*0.03*/; durationSeconds?: number /*0.6*/}",
+      "example": "import {GsapKineticTitle} from './blocks/gsap-kinetic-title/GsapKineticTitle.tsx';\n<GsapKineticTitle text=\"Ship the cut today\" color=\"#fff\" fontSize={110} />"
+    },
+    {
+      "id": "kinetic-title",
+      "version": "1.0.0",
+      "title": "Kinetic title",
+      "category": "titles",
+      "description": "Centered title that lands word by word: each word rises and fades in on a spring, staggered by a few frames.",
+      "tags": [
+        "title",
+        "kinetic type",
+        "text",
+        "spring",
+        "headline"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "kinetic-title/KineticTitle.tsx",
+          "sha256": "c26deed65a76512ec996ac82a1f612d2818aebbc8dd486c73a820fca5ff07b2f"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-kinetic-title",
+        "durationInFrames": 45,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          40
+        ],
+        "file": "previews/kinetic-title.tsx"
+      },
+      "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*120*/; fontFamily?: string /*'Inter, sans-serif'*/; staggerFrames?: number /*5*/}",
+      "example": "import {KineticTitle} from './blocks/kinetic-title/KineticTitle.tsx';\n<KineticTitle text=\"Ship the cut today\" color=\"#fff\" fontSize={110} />"
+    },
+    {
+      "id": "lower-third-bar",
+      "version": "1.0.0",
+      "title": "Lower third: bar",
+      "category": "titles",
+      "description": "Solid name bar with an accent stripe in the lower left; use to introduce a speaker or place.",
+      "tags": [
+        "lower third",
+        "name",
+        "bar",
+        "speaker"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "lower-third-bar/LowerThirdBar.tsx",
+          "sha256": "296ecd76762e5e73185eee3f5367d36b6ad6c9081e4c5e641b91771949629804"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-lower-third-bar",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          6,
+          14,
+          40
+        ],
+        "file": "previews/lower-third-bar.tsx"
+      },
+      "props": "{name: string; subtitle?: string; accentColor?: string /*'#f43f5e'*/; barColor?: string /*'#0f172a'*/; textColor?: string; fontFamily?: string /*'Montserrat, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+      "example": "import {LowerThirdBar} from './blocks/lower-third-bar/LowerThirdBar.tsx';\n<LowerThirdBar name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+    },
+    {
+      "id": "lower-third-glass",
+      "version": "1.0.0",
+      "title": "Lower third: glass",
+      "category": "titles",
+      "description": "Frosted translucent name card that floats up in the lower left; use over busy footage or imagery.",
+      "tags": [
+        "lower third",
+        "name",
+        "glass",
+        "frosted"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "lower-third-glass/LowerThirdGlass.tsx",
+          "sha256": "a63d79053e8101893e527a96cbce419af890088ff872567628f154518f3c35a6"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-lower-third-glass",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          6,
+          14,
+          40
+        ],
+        "file": "previews/lower-third-glass.tsx"
+      },
+      "props": "{name: string; subtitle?: string; accentColor?: string /*'#38bdf8'*/; textColor?: string; fontFamily?: string /*'DM Sans, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+      "example": "import {LowerThirdGlass} from './blocks/lower-third-glass/LowerThirdGlass.tsx';\n<LowerThirdGlass name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+    },
+    {
+      "id": "lower-third-minimal",
+      "version": "1.0.0",
+      "title": "Lower third: minimal",
+      "category": "titles",
+      "description": "Text only over a thin drawn line; use for clean, documentary-style credits.",
+      "tags": [
+        "lower third",
+        "name",
+        "minimal",
+        "clean"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "lower-third-minimal/LowerThirdMinimal.tsx",
+          "sha256": "8df64265b34c0688fbc30008aedca94a8dc23b80cdbc0993e2a90ddcbe0bd161"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-lower-third-minimal",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          6,
+          14,
+          40
+        ],
+        "file": "previews/lower-third-minimal.tsx"
+      },
+      "props": "{name: string; subtitle?: string; lineColor?: string /*'#ffffff'*/; textColor?: string; fontFamily?: string /*'Inter, sans-serif'*/; startFrame?: number /*0*/; endFrame?: number}",
+      "example": "import {LowerThirdMinimal} from './blocks/lower-third-minimal/LowerThirdMinimal.tsx';\n<LowerThirdMinimal name=\"Ada Lovelace\" subtitle=\"Founder, Analytical Co.\" />"
+    },
+    {
+      "id": "marquee-ticker",
+      "version": "1.0.0",
+      "title": "Marquee ticker",
+      "category": "titles",
+      "description": "Endless scrolling news-style band of text; use for headlines, announcements or promo strips.",
+      "tags": [
+        "ticker",
+        "marquee",
+        "news",
+        "scroll",
+        "band"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "marquee-ticker/MarqueeTicker.tsx",
+          "sha256": "befc6f1842db956f5dbb998583ff06e988262a41ed520c7488cfd5a6604c6648"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-marquee-ticker",
+        "durationInFrames": 150,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          0,
+          72,
+          144
+        ],
+        "file": "previews/marquee-ticker.tsx"
+      },
+      "props": "{items?: string[]; backgroundColor?: string /*'#facc15'*/; color?: string; fontSize?: number /*56*/; fontFamily?: string /*'Bebas Neue, sans-serif'*/; speed?: number /*8, px per frame*/; itemsPerView?: number /*2*/; position?: 'bottom'|'middle' /*'bottom'*/}",
+      "example": "import {MarqueeTicker} from './blocks/marquee-ticker/MarqueeTicker.tsx';\n<MarqueeTicker items={[\"\\u2022 BREAKING NEWS\", \"\\u2022 FRESH TEMPLATES\"]} speed={8} />"
+    },
+    {
+      "id": "text-mask-reveal",
+      "version": "1.0.0",
+      "title": "Text mask reveal",
+      "category": "titles",
+      "description": "Huge letters filled with a drifting gradient, wiped in from the left; use for bold opening titles.",
+      "tags": [
+        "title",
+        "mask",
+        "gradient",
+        "reveal",
+        "text"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "text-mask-reveal/TextMaskReveal.tsx",
+          "sha256": "bd26476a164f4a5d46d99caffce54486f8e655e7fe6097bba9ebd737bd208bb8"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-text-mask-reveal",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          16,
+          40
+        ],
+        "file": "previews/text-mask-reveal.tsx"
+      },
+      "props": "{text: string; colors?: string[]; fontSize?: number /*140*/; fontFamily?: string /*'Anton, sans-serif'*/; startFrame?: number /*0*/; durationInFrames?: number /*24*/}",
+      "example": "import {TextMaskReveal} from './blocks/text-mask-reveal/TextMaskReveal.tsx';\n<TextMaskReveal text=\"Summer sale\" />"
+    },
+    {
+      "id": "typewriter-cursor",
+      "version": "1.0.0",
+      "title": "Typewriter with cursor",
+      "category": "titles",
+      "description": "Text types out behind a blinking cursor; use for code, terminals, quotes and reveals of a sentence.",
+      "tags": [
+        "title",
+        "typewriter",
+        "cursor",
+        "terminal",
+        "text"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "typewriter-cursor/TypewriterCursor.tsx",
+          "sha256": "7e8c0eebd6dcfbd58e4ad90cea92f5e29d7a772b93857ded8900cfd322f81f5d"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-typewriter-cursor",
+        "durationInFrames": 75,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          12,
+          30,
+          60
+        ],
+        "file": "previews/typewriter-cursor.tsx"
+      },
+      "props": "{text: string; color?: string /*'#ffffff'*/; cursorColor?: string /*'#38bdf8'*/; fontSize?: number /*64*/; fontFamily?: string /*'JetBrains Mono, monospace'*/; startFrame?: number /*0*/; charsPerSecond?: number /*18*/; blinkFrames?: number /*16*/}",
+      "example": "import {TypewriterCursor} from './blocks/typewriter-cursor/TypewriterCursor.tsx';\n<TypewriterCursor text=\"npx create-video@latest\" />"
+    },
+    {
+      "id": "word-reveal",
+      "version": "1.0.0",
+      "title": "Word reveal",
+      "category": "titles",
+      "description": "Words rise out of a mask one after another; use for headlines and key statements.",
+      "tags": [
+        "title",
+        "words",
+        "mask",
+        "headline"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "word-reveal/WordReveal.tsx",
+          "sha256": "32c402a8aa82a8de3a672a444ca924d85d86512099dd0d3d2827f2a00746de0c"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-word-reveal",
+        "durationInFrames": 60,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          16,
+          40
+        ],
+        "file": "previews/word-reveal.tsx"
+      },
+      "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*80*/; fontFamily?: string /*'Montserrat, sans-serif'*/; fontWeight?: number /*800*/; startFrame?: number /*0*/; staggerFrames?: number /*4*/}",
+      "example": "import {WordReveal} from './blocks/word-reveal/WordReveal.tsx';\n<WordReveal text=\"Make every frame count\" />"
+    },
+    {
+      "id": "flash-cut",
+      "version": "1.0.0",
+      "title": "Flash cut",
+      "category": "transitions",
+      "description": "Hard cut hidden behind a quick colour flash; use for beats, impacts and camera-flash moments.",
+      "tags": [
+        "transition",
+        "flash",
+        "cut",
+        "impact"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "flash-cut/FlashCut.tsx",
+          "sha256": "59b9c03b8c58b251f751d1c3404a0416d6b417758d7362f8f5f0b315eb8674a8"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-flash-cut",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/flash-cut.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*10*/; color?: string /*'#ffffff'*/}",
+      "example": "import {FlashCut} from './blocks/flash-cut/FlashCut.tsx';\n<FlashCut from={<SceneA />} to={<SceneB />} startFrame={40} color=\"#ffffff\" />"
+    },
+    {
+      "id": "glitch-cut",
+      "version": "1.0.0",
+      "title": "Glitch cut",
+      "category": "transitions",
+      "description": "Scene change through jittering horizontal slices (slices is clamped to 2-24); use for tech, gaming or error-themed cuts.",
+      "tags": [
+        "transition",
+        "glitch",
+        "cut",
+        "digital"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "glitch-cut/GlitchCut.tsx",
+          "sha256": "9aecb3936942f683fbb4f762d97b47f31a4be02321c1c14ab257e421b5b68569"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-glitch-cut",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/glitch-cut.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*14*/; slices?: number /*8*/; intensity?: number /*90*/; seed?: string /*'glitch'*/}",
+      "example": "import {GlitchCut} from './blocks/glitch-cut/GlitchCut.tsx';\n<GlitchCut from={<SceneA />} to={<SceneB />} startFrame={40} slices={8} intensity={90} />"
+    },
+    {
+      "id": "ink-reveal",
+      "version": "1.0.0",
+      "title": "Ink reveal",
+      "category": "transitions",
+      "description": "New scene spreads from a point through an organic wobbling clip-path; use for soft, artistic reveals.",
+      "tags": [
+        "transition",
+        "reveal",
+        "clip-path",
+        "ink",
+        "organic"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "ink-reveal/InkReveal.tsx",
+          "sha256": "7c8e9d94f5b49c8d9e797acf7b32ae9e548c9d6ffd28a53a6d3cab11710dffcf"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-ink-reveal",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/ink-reveal.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*28*/; originX?: number /*50*/; originY?: number /*50*/; roughness?: number /*0.5*/; seed?: string /*'ink'*/}",
+      "example": "import {InkReveal} from './blocks/ink-reveal/InkReveal.tsx';\n<InkReveal from={<SceneA />} to={<SceneB />} startFrame={40} originX={50} originY={50} roughness={0.5} />"
+    },
+    {
+      "id": "whip-blur",
+      "version": "1.0.0",
+      "title": "Whip blur",
+      "category": "transitions",
+      "description": "Fast whip pan between scenes with motion blur; use for quick travel or high-energy cuts.",
+      "tags": [
+        "transition",
+        "whip",
+        "pan",
+        "blur",
+        "motion"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "whip-blur/WhipBlur.tsx",
+          "sha256": "e227ceb06eba7d9dfdbb4fe67279324ac242dcef1220806a23facd36b1a98d93"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-whip-blur",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/whip-blur.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*14*/; direction?: 'left'|'right' /*'left'*/; maxBlur?: number /*28*/}",
+      "example": "import {WhipBlur} from './blocks/whip-blur/WhipBlur.tsx';\n<WhipBlur from={<SceneA />} to={<SceneB />} startFrame={40} direction=\"left\" maxBlur={28} />"
+    },
+    {
+      "id": "wipe-edges",
+      "version": "1.0.0",
+      "title": "Wipe edges",
+      "category": "transitions",
+      "description": "Wipe between two scenes with a coloured bar riding the moving edge; use for energetic section changes.",
+      "tags": [
+        "transition",
+        "wipe",
+        "edge",
+        "bar"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "wipe-edges/WipeEdges.tsx",
+          "sha256": "d25606df20967fd3d95740f0da8d861235d236965220260c27399a8ca3a6e640"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-wipe-edges",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/wipe-edges.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; direction?: 'left'|'right' /*'left'*/; edgeColor?: string /*'#facc15'*/; edgeWidth?: number /*24*/}",
+      "example": "import {WipeEdges} from './blocks/wipe-edges/WipeEdges.tsx';\n<WipeEdges from={<SceneA />} to={<SceneB />} startFrame={40} direction=\"left\" edgeColor=\"#facc15\" />"
+    },
+    {
+      "id": "wipe-slide",
+      "version": "1.0.0",
+      "title": "Wipe slide",
+      "category": "transitions",
+      "description": "Directional wipe from one scene to the next: the arriving scene is revealed by a moving clip-path edge with an ease-in-out curve.",
+      "tags": [
+        "transition",
+        "wipe",
+        "reveal",
+        "scene change"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "wipe-slide/WipeSlide.tsx",
+          "sha256": "90f4b2db66ee035837ec7f794f05d6046c956712b6d8603ae65f5671ddbff739"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-wipe-slide",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          18
+        ],
+        "file": "previews/wipe-slide.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; direction?: 'left'|'right'|'up'|'down' /*'left'*/}",
+      "example": "import {WipeSlide} from './blocks/wipe-slide/WipeSlide.tsx';\n<WipeSlide from={<SceneA />} to={<SceneB />} startFrame={40} durationInFrames={20} direction=\"left\" />"
+    },
+    {
+      "id": "zoom-through",
+      "version": "1.0.0",
+      "title": "Zoom through",
+      "category": "transitions",
+      "description": "Old scene zooms past the camera while the new one settles in; use to dive into a new topic or detail.",
+      "tags": [
+        "transition",
+        "zoom",
+        "scale",
+        "dive"
+      ],
+      "requires": [
+        {
+          "name": "remotion",
+          "version": "4.0.542"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0"
+        }
+      ],
+      "files": [
+        {
+          "path": "_shared/motion.ts",
+          "sha256": "a8358246e841296651bcccd3f94bc8029d6ea227ca8b0deb02a6832c3d00d851"
+        },
+        {
+          "path": "zoom-through/ZoomThrough.tsx",
+          "sha256": "aee33136dc020192f7c6d62cfaf276a34ca43448bffeb49915bdfda955522ced"
+        }
+      ],
+      "previewComposition": {
+        "compositionId": "Block-zoom-through",
+        "durationInFrames": 30,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": [
+          8,
+          14,
+          20
+        ],
+        "file": "previews/zoom-through.tsx"
+      },
+      "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; zoom?: number /*3*/; maxBlur?: number /*12*/}",
+      "example": "import {ZoomThrough} from './blocks/zoom-through/ZoomThrough.tsx';\n<ZoomThrough from={<SceneA />} to={<SceneB />} startFrame={40} zoom={3} />"
+    }
+  ]
+}

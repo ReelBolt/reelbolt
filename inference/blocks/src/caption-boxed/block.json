@@ -1,0 +1,36 @@
+{
+  "id": "caption-boxed",
+  "version": "1.0.0",
+  "title": "Caption boxed",
+  "category": "captions",
+  "description": "Use for clean, professional captions on a rounded dark panel with the spoken word on an accent chip (explainers, interviews). The `captions` prop is a @remotion/captions Caption[].",
+  "tags": [
+    "caption",
+    "subtitle",
+    "box",
+    "panel",
+    "clean"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "@remotion/captions"
+  ],
+  "sharedFiles": [
+    "_shared/captions.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-caption-boxed",
+    "durationInFrames": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      20,
+      50,
+      80
+    ]
+  },
+  "props": "{captions: Caption[]; maxWordsPerPage?: number /*5*/; boxColor?: string; color?: string; chipColor?: string /*'#3b82f6'*/; fontSize?: number; fontFamily?: string /*'Inter, sans-serif'*/}",
+  "example": "import {CaptionBoxed} from './blocks/caption-boxed/CaptionBoxed.tsx';\n// captions: a @remotion/captions Caption[] (word-level, each {text, startMs, endMs, timestampMs, confidence}).\n<CaptionBoxed captions={captions} />"
+}

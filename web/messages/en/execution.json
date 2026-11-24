@@ -1,0 +1,73 @@
+{
+  "stepState": {
+    "Completed": "Done",
+    "Running": "Working",
+    "Failed": "Failed",
+    "Skipped": "Skipped",
+    "NotRun": "Not run",
+    "Pending": "Waiting"
+  },
+  "stepRow": {
+    "ariaLabel": "Step {order}, {name}, {state}{live, select, none {} other {, {live}}}{duration, select, none {} other {, {duration}}}"
+  },
+  "history": {
+    "emptyTitle": "No runs yet",
+    "emptyDescription": "Press Run to make a video. Each run shows up here.",
+    "heading": "Run history",
+    "starting": "Starting…",
+    "retries": "{count, plural, one {# review round} other {# review rounds}}",
+    "runNumber": "Run {number}"
+  },
+  "event": {
+    "type": {
+      "running": "Started",
+      "completed": "Finished",
+      "failed": "Failed",
+      "stepStarted": "Step started",
+      "progress": "Progress",
+      "toolCalled": "Tool",
+      "reasoning": "Thinking",
+      "chatTurn": "Discussion",
+      "stepCompleted": "Step done",
+      "other": "Update"
+    },
+    "title": {
+      "running": "Your video is being made",
+      "completed": "Your video is ready",
+      "failed": "The run stopped with a problem",
+      "stepStarted": "Step started",
+      "progress": "Step progress",
+      "toolCalled": "Tool call",
+      "reasoning": "Model reasoning",
+      "speakerSpoke": "{speaker} spoke",
+      "discussionTurn": "Discussion turn",
+      "stepFailed": "Step failed",
+      "stepSkipped": "Step skipped",
+      "stepCompleted": "Step completed"
+    },
+    "meta": {
+      "stepNumber": "Step #{number}",
+      "took": "Took {duration}",
+      "tokens": "{count} tokens",
+      "tool": "Tool: {name}",
+      "call": "Call #{number}",
+      "reasoning": "Reasoning #{number}",
+      "percent": "{percent}%",
+      "turnOf": "Turn {turn} of {total}",
+      "turn": "Turn {turn}"
+    },
+    "hideRaw": "Hide raw payload",
+    "showRaw": "Show raw payload",
+    "payloadLabel": "Event payload"
+  },
+  "page": {
+    "runStatus": {
+      "Queued": "Waiting to start",
+      "Running": "Working",
+      "Passed": "Finished",
+      "Failed": "Failed",
+      "Cancelled": "Stopped",
+      "Stopped": "Stopped"
+    }
+  }
+}

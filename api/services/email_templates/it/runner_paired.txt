@@ -1,0 +1,10 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Un computer è stato appena collegato come runner a {{.OrgName}}: {{.DeviceName}}.
+
+Controllalo o revocalo: {{.Link}}
+
+Se non te lo aspettavi, revoca il runner e cambia subito la password. Un runner collegato
+può scaricare ed elaborare i contenuti di questo spazio di lavoro.
+
+-- {{.FooterNote}}

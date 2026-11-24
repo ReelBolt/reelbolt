@@ -1,0 +1,4 @@
+services:
+  inference:
+    environment:
+      Marketing__Campaigns__SyncStaleMinutes: "1"

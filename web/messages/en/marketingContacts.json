@@ -1,0 +1,73 @@
+{
+  "title": "Marketing contacts",
+  "sync": {
+    "title": "Brevo contact sync",
+    "disabled": "Contact sync is turned off.",
+    "notConfigured": "Brevo is not configured, so nothing is sent.",
+    "campaignActive": "A campaign is running. Syncing resumes when it finishes.",
+    "lastRun": "Last run: {time}",
+    "neverRun": "The sync has not run yet.",
+    "runOk": "Succeeded",
+    "runFailed": "Failed ({code})",
+    "runFailedNoCode": "Failed",
+    "lastReconcile": "Last nightly check: {time}",
+    "neverReconciled": "The nightly check has not run yet.",
+    "synced": "Synced",
+    "waiting": "Waiting",
+    "failed": "Failed",
+    "syncNow": "Sync now",
+    "requested": "Sync requested. The counts update shortly.",
+    "errDisabled": "Sync is turned off, so it cannot be started.",
+    "errRateLimited": "A sync was requested very recently. Try again in a minute.",
+    "errGeneric": "Could not start the sync. Please try again.",
+    "loadError": "Could not load the sync status"
+  },
+  "table": {
+    "caption": "Marketing contacts",
+    "email": "Email",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "source": "Name source",
+    "brevo": "Brevo",
+    "actions": "Actions",
+    "noName": "No name",
+    "edit": "Edit name",
+    "editFor": "Edit name for {email}",
+    "empty": "No contacts match.",
+    "loadError": "Could not load the contacts",
+    "total": "{count, plural, one {# contact} other {# contacts}}",
+    "page": "Contacts pages",
+    "brevoError": "Error: {code}",
+    "status": "Status"
+  },
+  "filters": {
+    "search": "Search by email or name",
+    "status": "Status",
+    "all": "All",
+    "optedIn": "Opted in",
+    "pending": "Awaiting confirmation",
+    "withdrawn": "Unsubscribed"
+  },
+  "source": {
+    "Account": "Account",
+    "Form": "Form",
+    "Admin": "Admin"
+  },
+  "brevoState": {
+    "synced": "Synced",
+    "pending": "Waiting",
+    "failed": "Failed",
+    "notAtBrevo": "Not at Brevo"
+  },
+  "edit": {
+    "title": "Edit contact name",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "hint": "Leave both fields empty to remove the name.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "invalid": "These names are not valid. Check the length and the characters.",
+    "error": "Could not save the name. Please try again.",
+    "saved": "Name saved"
+  }
+}

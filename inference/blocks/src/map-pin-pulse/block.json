@@ -1,0 +1,37 @@
+{
+  "id": "map-pin-pulse",
+  "version": "1.0.0",
+  "title": "Map pin pulse",
+  "category": "maps",
+  "description": "Use to mark places on a world map: pins drop in and send out pulsing rings with city labels (offline).",
+  "tags": [
+    "map",
+    "pin",
+    "location",
+    "pulse",
+    "world"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/geo.ts",
+    "_shared/worldData.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-map-pin-pulse",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      30,
+      70
+    ]
+  },
+  "props": "{pins?: {name: string; lon: number; lat: number}[] /*London, New York, Tokyo*/; landColor?: string; strokeColor?: string; pinColor?: string /*'#f43f5e'*/; textColor?: string; staggerFrames?: number /*10*/; fontFamily?: string}",
+  "example": "import {MapPinPulse} from './blocks/map-pin-pulse/MapPinPulse.tsx';\n<MapPinPulse pins={[{name: \"Berlin\", lon: 13.4, lat: 52.5}]} />"
+}

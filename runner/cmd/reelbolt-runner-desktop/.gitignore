@@ -1,0 +1,9 @@
+# The window is a build artifact: node build.mjs regenerates it from
+# runner/frontend. Only .gitkeep is tracked, so "go:embed all:dist" always
+# compiles in a fresh checkout.
+dist/*
+!dist/.gitkeep
+
+# "go build ./..." in this directory writes the binary here.
+/reelbolt-runner-desktop
+/reelbolt-runner-desktop.exe

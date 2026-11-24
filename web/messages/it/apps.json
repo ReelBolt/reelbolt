@@ -1,0 +1,1508 @@
+{
+  "gallery": {
+    "categories": {
+      "all": "Tutte",
+      "promo": "Promo",
+      "footage": "Riprese",
+      "brand": "Brand",
+      "utility": "Utilità"
+    },
+    "status": {
+      "never": "Mai eseguita",
+      "finished": "Completata",
+      "failed": "Non riuscita",
+      "running": "In corso",
+      "stopped": "Interrotta"
+    },
+    "statusWhen": "{word} {when}",
+    "openApp": "Apri {title}",
+    "open": "Apri",
+    "settingUp": "Preparazione di {title}…",
+    "suggested": "Consigliata per il tuo progetto",
+    "ready": "Pronta: il tuo progetto ha tutto quello che serve",
+    "needs": "Richiede:",
+    "useRecipe": "Usa questa ricetta",
+    "useRecipeFor": "per {title}",
+    "recipeFailedTitle": "Impossibile preparare l'app",
+    "tryAgainLater": "Riprova.",
+    "loading": "Caricamento delle tue app",
+    "search": "Cerca app",
+    "category": "Categoria",
+    "settingUpRecipe": "Preparazione di un'app. Le altre non sono disponibili finché non è pronta.",
+    "results": "{count, plural, one {# risultato} other {# risultati}}",
+    "refreshFailed": "Non siamo riusciti ad aggiornare in questo momento. Mostriamo quanto era già caricato.",
+    "yourApps": "Le tue app",
+    "noApps": "Ancora nessuna app",
+    "noAppsHint": "Un'app trasforma i tuoi file in un video. Scegline una qui sotto per ottenere il tuo primo risultato.",
+    "noAppsMatch": "Nessuna app corrisponde alla ricerca.",
+    "startFromRecipe": "Tutte le app",
+    "recipeHint": "Scegline una per preparare un'app già pronta in questo progetto e aprirla.",
+    "customTitle": "Crea il tuo (avanzato)",
+    "customTagline": "Costruisci la tua app da zero.",
+    "customCta": "Crea la tua app",
+    "noRecipesMatch": "Questo non lo facciamo ancora. Prova l'assistente o guarda tutte le app.",
+    "settingUpLabel": "Preparazione di {title}",
+    "modelChoices": "Modelli disponibili",
+    "hideModelChoices": "Nascondi i modelli",
+    "modelChoicesFailed": "Non è stato possibile caricare i modelli disponibili.",
+    "noModelChoices": "Questa ricetta non ha modelli da scegliere."
+  },
+  "cost": {
+    "noCredits": {
+      "label": "Nessun credito",
+      "hint": "Gratis da avviare. I file molto grandi possono usare tempo di elaborazione del tuo piano."
+    },
+    "credits": {
+      "label": "Usa crediti",
+      "hint": "Questa app usa crediti quando viene eseguita."
+    },
+    "creditsVoice": {
+      "label": "Usa crediti e una voce",
+      "hint": "Questa app usa crediti e genera una voce narrante."
+    },
+    "creditsShots": {
+      "label": "Usa crediti e clip creati dall'AI",
+      "hint": "Questa app usa crediti e genera video o audio. Questa spesa ha un limite per ogni esecuzione."
+    },
+    "other": "{label}"
+  },
+  "run": {
+    "languages": {
+      "sameAsSource": "Come l'originale",
+      "detect": "Rileva automaticamente"
+    },
+    "roles": {
+      "video": {
+        "one": "clip video",
+        "other": "clip video"
+      },
+      "code": {
+        "one": "file di codice",
+        "other": "file di codice"
+      },
+      "music": {
+        "one": "brano musicale",
+        "other": "brani musicali"
+      },
+      "sfx": {
+        "one": "effetto sonoro",
+        "other": "effetti sonori"
+      },
+      "image": {
+        "one": "immagine",
+        "other": "immagini"
+      },
+      "document": {
+        "one": "documento",
+        "other": "documenti"
+      },
+      "insertContent": {
+        "one": "immagine o video",
+        "other": "immagini o video"
+      },
+      "overlay": {
+        "one": "immagine o video",
+        "other": "immagini o video"
+      }
+    },
+    "readiness": {
+      "fix": "Da correggere",
+      "check": "Controlla",
+      "ready": "Pronto",
+      "note": "Nota"
+    },
+    "price": {
+      "run": "Avvia",
+      "noCreditsUsed": "Nessun credito usato",
+      "about": "Avvia, circa {amount} {unit, select, one {credito} other {crediti}}",
+      "rangeUsually": "di solito da {low} a {high}"
+    },
+    "strip": {
+      "label": "Controllo di prontezza",
+      "checking": "Controllo in corso",
+      "lookingOver": "sto esaminando questa app…",
+      "unavailable": "Non siamo riusciti a controllare questa app in questo momento. Puoi comunque avviarla.",
+      "allGood": "Tutto ciò che serve a questa app è a posto.",
+      "more": "{count, plural, one {Un'altra cosa da sapere} other {# altre cose da sapere}}"
+    },
+    "slot": {
+      "yourFiles": "{role, select, video {Le tue clip video} code {I tuoi file di codice} music {I tuoi brani musicali} sfx {I tuoi effetti sonori} image {Le tue immagini} insertContent {Cosa va sullo schermo} overlay {Immagini o video da mostrare} other {I tuoi documenti}}",
+      "none": "{role, select, video {Ancora nessuna clip video in questo progetto.} code {Ancora nessun file di codice in questo progetto.} music {Ancora nessun brano musicale in questo progetto.} sfx {Ancora nessun effetto sonoro in questo progetto.} image {Ancora nessuna immagine in questo progetto.} insertContent {Ancora nessuna immagine o video in questo progetto.} overlay {Ancora nessuna immagine o video in questo progetto.} other {Ancora nessun documento in questo progetto.}}",
+      "upload": "{role, select, video {Carica clip video} code {Carica file di codice} music {Carica brano musicale} sfx {Carica effetto sonoro} image {Carica immagine} insertContent {Carica immagine o video} overlay {Carica immagine o video} other {Carica documento}}",
+      "choose": "{role, select, video {Scegli le clip video} code {Scegli i file di codice} music {Scegli i brani musicali} sfx {Scegli gli effetti sonori} image {Scegli le immagini} insertContent {Scegli un'immagine o un video} overlay {Scegli un'immagine o un video} other {Scegli i documenti}}",
+      "summaryNone": "Nessuno scelto (fino a {max})",
+      "summaryChosen": "{count, plural, one {# scelto} other {# scelti}} (fino a {max})",
+      "done": "Fatto"
+    },
+    "overlays": {
+      "title": "Immagini sul filmato",
+      "applied": "Cosa è stato mostrato",
+      "fullScreen": "Schermo intero",
+      "corner": "Angolo (in basso a destra)",
+      "timeRange": "{start}–{end}",
+      "opacity": "{percent}% di opacità",
+      "borderLight": "Bordo chiaro",
+      "borderDark": "Bordo scuro",
+      "soundKept": "audio mantenuto",
+      "soundMuted": "audio disattivato",
+      "soundAt": "audio a {level, select, Quiet {Tranquillo} Balanced {Equilibrato} Prominent {In primo piano} other {un livello equilibrato}}",
+      "notShown": "Non mostrate",
+      "notShownRow": "{name}: {reason}",
+      "reasonCut": "il momento è stato tagliato",
+      "reasonUnreadable": "quell'immagine non è stata leggibile",
+      "reasonDuplicate": "è stata scelta due volte",
+      "reasonTooLarge": "quell'immagine è troppo grande",
+      "reasonNotChosen": "non scelta per questo montaggio",
+      "reasonTooMany": "c'era spazio solo per poche immagini",
+      "reasonInvisible": "era impostata come invisibile",
+      "unnamedPicture": "Un'immagine"
+    },
+    "bar": {
+      "stop": "Ferma",
+      "whyPrice": "Perché questo prezzo?",
+      "priceUnavailable": "Non siamo riusciti a calcolare il prezzo in questo momento.",
+      "tryAgain": "Riprova"
+    },
+    "result": {
+      "announceEmpty": "Il tuo video comparirà qui",
+      "announceActive": "Sto creando il tuo video",
+      "announceReady": "Il tuo video è pronto",
+      "announceFailed": "L'ultima esecuzione non è finita",
+      "announceStopped": "L'ultima esecuzione è stata interrotta",
+      "label": "Risultato",
+      "fillIn": "Compila le scelte {where, select, above {qui sopra} other {a sinistra}} e premi Avvia. Il video finito compare qui.",
+      "needs": "Questa app richiede: {list}.",
+      "progress": "Avanzamento",
+      "stateDone": "Fatto",
+      "stateWorking": "In corso",
+      "stateWaiting": "In attesa",
+      "seeEveryStep": "Vedi ogni passaggio",
+      "failed": "Non riuscita",
+      "resume": "Riprendi",
+      "retry": "Riprova",
+      "askAssistant": "Chiedi all'assistente",
+      "seeWhatHappened": "Vedi cosa è successo",
+      "stopped": "Questa esecuzione è stata interrotta prima della fine. Premi Avvia per ripartire.",
+      "finishedVideo": "Il video finito",
+      "videoNotFound": "Non abbiamo ancora trovato il video finito. Apri l'esecuzione per controllare.",
+      "download": "Scarica",
+      "editInEditor": "Modifica nell'editor",
+      "preparing": "Il video è in preparazione.",
+      "runFinished": "Questa esecuzione è finita.",
+      "openRun": "Apri l'esecuzione",
+      "changeOne": "Cambia una cosa e riavvia",
+      "askToChange": "Chiedi all'assistente di cambiare qualcosa",
+      "insertNext": {
+        "heading": "Cosa fare adesso",
+        "chooseClip": "Scegli un'altra clip",
+        "retry": "Riprova",
+        "notCharged": "Non ti è stato addebitato nulla.",
+        "whatWorks": "Quali clip funzionano",
+        "askCorner": "Chiedi all'assistente di metterlo in un angolo",
+        "runAgain": "Riavvia",
+        "cornerPrompt": "Lo schermo nella mia clip non è stato tracciato, quindi l'inserimento non è riuscito. Per favore metti l'immagine o il video in un angolo della clip."
+      }
+    },
+    "change": {
+      "title": "Cambia una cosa e rifallo",
+      "intro": "Cambia un campo e vengono rifatte solo le parti del video che lo usano. Tutto il resto viene ripreso da questa esecuzione senza costi.",
+      "redoes": "Cambiarlo fa rifare: {steps}",
+      "picksBranch": "Questa scelta porta l'app su un altro percorso, quindi crea un video diverso.",
+      "fixedTitle": "Non modificabili qui",
+      "fixedLine": "{label}: {reason}",
+      "fixedReason": "avvia di nuovo l'app per cambiarlo",
+      "estimating": "Calcolo di cosa cambia…",
+      "changeLine": "{label}: {before} → {after}",
+      "redone": "Rifatto: {steps}",
+      "reused": "{count, plural, one {# passaggio viene ripreso da questa esecuzione} other {# passaggi vengono ripresi da questa esecuzione}}",
+      "branchNote": "“{label}” con questo valore porta l'app su un altro percorso. Avvia di nuovo l'app.",
+      "runAgain": "Avvia di nuovo",
+      "otherThings": "Cambia anche altre cose",
+      "submit": "Rifallo",
+      "settingsTitle": "Impostazioni dell'esecuzione",
+      "addToSet": "Aggiungi alle modifiche",
+      "openFields": "Modifica i campi dell'app"
+    },
+    "page": {
+      "addAtLeastOne": "{role, select, video {Aggiungi almeno una clip video} code {Aggiungi almeno un file di codice} music {Aggiungi almeno un brano musicale} sfx {Aggiungi almeno un effetto sonoro} image {Aggiungi almeno un'immagine} insertContent {Scegli cosa va sullo schermo} overlay {Aggiungi un'immagine o un video da mostrare} other {Aggiungi almeno un documento}}",
+      "addAtLeast": "{role, select, video {Aggiungi almeno {min} clip video} code {Aggiungi almeno {min} file di codice} music {Aggiungi almeno {min} brani musicali} sfx {Aggiungi almeno {min} effetti sonori} image {Aggiungi almeno {min} immagini} insertContent {Aggiungi almeno {min} immagini o video} overlay {Aggiungi almeno {min} immagini o video} other {Aggiungi almeno {min} documenti}}",
+      "addOne": "{role, select, video {Aggiungi una clip} code {Aggiungi un file di codice} music {Aggiungi un brano musicale} sfx {Aggiungi un effetto sonoro} image {Aggiungi un'immagine} insertContent {Aggiungi un'immagine o un video} overlay {Aggiungi un'immagine o un video} other {Aggiungi un documento}}",
+      "yourFilesLower": "{role, select, video {le tue clip video} code {i tuoi file di codice} music {i tuoi brani musicali} sfx {i tuoi effetti sonori} image {le tue immagini} insertContent {un'immagine o un video per lo schermo} overlay {immagini o video da mostrare} other {i tuoi documenti}}",
+      "screenClipNeed": "Questa clip richiede uno schermo o un pannello di un solo colore uniforme, come verde o blu, sempre in vista e quasi del tutto libero.",
+      "screenClipNeedLink": "Cosa conta come schermo",
+      "editSteps": "Modifica i passaggi (avanzato)",
+      "gettingReady": "Preparazione dell'app…",
+      "run": "Avvia",
+      "documentTitle": "{title} · {project} · ReelBolt",
+      "projectFallback": "Progetto",
+      "narrationNeedsVoice": "Nessuna voce è ancora configurata. Chiedi all'amministratore dello spazio di lavoro di aggiungerne una.",
+      "openVoices": "Apri Voci",
+      "needConsent": "Serve un consenso registrato per questa voce",
+      "chooseAnotherVoice": "Scegli un'altra voce",
+      "errorTitle": "Errore",
+      "planRefusal": "Il tuo piano non include una di queste scelte.",
+      "videoNotChosen": "“{step}” ha bisogno di un video, ma per questa esecuzione non ne è stato scelto nessuno. Scegli un video qui sopra e riavvia l'esecuzione.",
+      "videoNotChosenNoStep": "Un passaggio ha bisogno di un video, ma per questa esecuzione non ne è stato scelto nessuno. Scegli un video qui sopra e riavvia l'esecuzione.",
+      "avatarNotChosen": "«{step}» fa pronunciare la narrazione a un avatar, ma non ne è stato scelto nessuno. Scegli l'immagine di un avatar qui sopra e riavvia l'esecuzione.",
+      "avatarNotChosenNoStep": "Un passaggio fa pronunciare la narrazione a un avatar, ma non ne è stato scelto nessuno. Scegli l'immagine di un avatar qui sopra e riavvia l'esecuzione.",
+      "modelUnsupported": "«{step}» usa un modello video che il suo provider non supporta. Scegli un altro modello o collega un provider che lo abbia, poi riavvia l'esecuzione.",
+      "modelUnsupportedNoStep": "Un passaggio usa un modello video che il suo provider non supporta. Scegli un altro modello o collega un provider che lo abbia, poi riavvia l'esecuzione.",
+      "lipSyncModelNotSet": "«{step}» fa parlare un avatar, ma non è configurato nessun modello lip-sync. Chiedi a un amministratore dello spazio di lavoro di aggiungerne uno, poi riavvia l'esecuzione.",
+      "lipSyncModelNotSetNoStep": "Un passaggio fa parlare un avatar, ma non è configurato nessun modello lip-sync. Chiedi a un amministratore dello spazio di lavoro di aggiungerne uno, poi riavvia l'esecuzione.",
+      "retryFailed": "Non è stato possibile riavviare questa esecuzione.",
+      "resumeFailed": "Non è stato possibile riprendere questa esecuzione.",
+      "stopFailed": "Non è stato possibile fermare l'esecuzione. Riprova tra un attimo.",
+      "uploadFailedTitle": "Caricamento non riuscito",
+      "uploadFailedMessage": "Non è stato possibile caricare il file.",
+      "changePrompt": "Vorrei cambiare qualcosa nell'ultimo video creato da questa app.",
+      "useAuto": "Usa la risoluzione Auto",
+      "creditsNeeded": "Hai {have} {unit, select, one {credito} other {crediti}}; questa app richiede circa {needed}.",
+      "balance": "Hai {have} {unit, select, one {credito} other {crediti}}",
+      "addCredits": "Aggiungi crediti",
+      "defaultVoice": "Voce predefinita",
+      "consentNeeded": "{name} (serve il consenso)",
+      "anythingElse": "Qualcos'altro?",
+      "language": "Lingua",
+      "spokenLanguage": "Lingua parlata",
+      "length": "Durata",
+      "lengthSeconds": "Durata (secondi)",
+      "seconds": "{count} s",
+      "narration": "Voce narrante",
+      "narrationOn": "Una voce legge il copione ad alta voce.",
+      "narrationOff": "Nessuna voce narrante: il video si riproduce senza voce.",
+      "voice": "Voce",
+      "design": "Design",
+      "designProject": "Usa il design del brand di questo progetto",
+      "designNone": "Nessun design del brand",
+      "overlayCardAudio": "Sotto un'immagine a schermo intero",
+      "overlayCardAudioAgent": "Lascia scegliere all'agente",
+      "overlayCardAudioKeep": "Mantieni l'audio",
+      "overlayCardAudioMute": "Disattiva l'audio",
+      "pace": "Ritmo degli effetti",
+      "paceOff": "Spento",
+      "paceCalm": "Calmo",
+      "paceMedium": "Medio",
+      "paceFast": "Veloce",
+      "paceHelpOff": "Spento: nessun montaggio dinamico; il video è tagliato come lo taglia il flusso di lavoro.",
+      "paceHelpCalm": "Calmo: al massimo 1 effetto ogni 10 secondi dell'intero video (3 in un video di 30 secondi).",
+      "paceHelpMedium": "Medio: al massimo 3 effetti ogni 10 secondi dell'intero video (9 in un video di 30 secondi).",
+      "paceHelpFast": "Veloce: al massimo 6 effetti ogni 10 secondi dell'intero video (18 in un video di 30 secondi).",
+      "breadcrumbProjects": "Progetti",
+      "moreOptions": "Altre opzioni",
+      "choices": "Scelte",
+      "beingMade": "Il tuo video è in lavorazione.",
+      "history": "Cronologia delle esecuzioni",
+      "choosePlan": "Scegli un piano",
+      "describeAbove": "Descrivi cosa vuoi nel riquadro qui sopra, poi premi Avvia.",
+      "tellWhatToMake": "Dicci cosa vuoi creare",
+      "trialTitle": "Crediti insufficienti per avviare questa esecuzione",
+      "trialBody": "I crediti della tua prova gratuita sono finiti. Non è stato avviato nulla e non è stato addebitato nulla.",
+      "confirmTitle": "Avviare questa esecuzione?",
+      "confirmBalance": "Hai {balance} crediti. Paghi solo ciò che viene usato.",
+      "cancel": "Annulla",
+      "writeIt": "Scrivilo",
+      "shapeFollowsClips": "I tuoi clip non sono verticali, quindi il video ne mantiene la forma.",
+      "avatar": "Avatar",
+      "avatarNone": "Nessuno",
+      "avatarOption": "{name} · {status}",
+      "avatarDescription": "La persona mostrata nel video, dalla scheda Avatar del progetto. Puoi scegliere solo un avatar con il consenso registrato.",
+      "avatarDescriptionAny": "La persona o l'oggetto mostrato nel video, dalla scheda Avatar del progetto. Puoi scegliere solo quelli pronti.",
+      "avatarGroupPeople": "Persone",
+      "avatarGroupObjects": "Oggetti",
+      "avatarNoAvatars": "Questo progetto non ha ancora avatar.",
+      "avatarOpenTab": "Apri la scheda Avatar",
+      "avatarSends": "Immagini, video e campioni di voce di {name} vengono inviati al servizio video. Il passaggio video deve avere il permesso di inviarli: il controllo qui sotto lo segnala se non ce l'ha.",
+      "avatarSendsObject": "Le immagini e i video di \"{name}\" vengono inviati al servizio video. Il passaggio video deve avere il permesso di inviarli: il controllo qui sotto lo segnala se non ce l'ha.",
+      "avatarNoneChosen": "Nessun avatar scelto: il video non mostrerà nessuna persona e nessun oggetto della scheda Avatar.",
+      "retryFieldNote": "Riprova ha usato il valore di questa esecuzione, che non si può più usare."
+    },
+    "confirm": {
+      "body": "Questa esecuzione userà circa {typical} crediti.{usually, select, yes { Di solito da {low} a {high}.} other {}} Il massimo che può usare: {total} crediti{shots, select, yes {, comprese le inquadrature AI} other {}}."
+    },
+    "inputs": {
+      "moreOptions": "Altre opzioni ({count})",
+      "missing": "Compila “{input}” per avviare questa app.",
+      "fillIn": "Compila “{input}”",
+      "choose": "Scegli…",
+      "counter": "{count, number} / {max, number}",
+      "counterLeft": "{left, plural, one {# carattere rimasto} other {# caratteri rimasti}}",
+      "unitSuffix": {
+        "seconds": "s",
+        "takes": "take",
+        "percent": "%"
+      },
+      "unit": {
+        "takes": "{count, plural, one {# take} other {# take}}",
+        "percent": "{count, number}%"
+      },
+      "shape": {
+        "vertical": "Verticale",
+        "square": "Quadrato",
+        "landscape": "Orizzontale",
+        "portrait": "Ritratto"
+      },
+      "recommended": "Consigliato",
+      "chooseModel": "Scegli un modello",
+      "modelChosen": "{name}, Cambia",
+      "modelsLoading": "Caricamento dei modelli…",
+      "modelsUnavailable": "Non è stato possibile caricare l'elenco dei modelli. L'app usa il suo modello, a meno che tu ne scelga uno.",
+      "noModels": "Qui non si può ancora scegliere un modello. L'app usa il suo modello.",
+      "tryAgain": "Riprova",
+      "cost": {
+        "cheapest": "Il più economico",
+        "cheaper": "Più economico",
+        "same": "Prezzo simile",
+        "times": "Circa {times, number}× il prezzo"
+      },
+      "unavailable": {
+        "notInWorkspace": "Non disponibile nel tuo spazio di lavoro",
+        "wrongKind": "Non è il tipo di modello giusto",
+        "notAllowed": "Non offerto da questa app",
+        "wrongJob": "Non può creare questo tipo di clip",
+        "plan": {
+          "video_generation": "Il tuo piano non include la generazione di video",
+          "audio_generation": "Il tuo piano non include musica ed effetti sonori",
+          "avatars": "Il tuo piano non include gli avatar",
+          "avatar_objects": "Il tuo piano non include gli oggetti",
+          "resolution": "Il tuo piano non crea video a questa dimensione",
+          "other": "Il tuo piano non include questa funzione"
+        },
+        "other": "Non si può usare qui"
+      },
+      "refusal": {
+        "missing": "Compila questo campo per avviare l'app.",
+        "invalid": "Questo valore non si può usare qui. Modificalo, poi premi di nuovo Avvia.",
+        "model": "Questo modello non si può usare per questa app. Scegline un altro.",
+        "plan": "Il tuo piano non include questo tipo di modello. Scegline un altro o passa a un piano superiore."
+      }
+    },
+    "history": {
+      "heading": "Campi di questa esecuzione",
+      "on": "Attivo",
+      "off": "Disattivo",
+      "unknownModel": "Un modello di questo spazio di lavoro",
+      "label": "Campi con cui è stata fatta questa esecuzione"
+    },
+    "briefHelp": {
+      "label": "Esempi che puoi modificare",
+      "promptFootage": "{persona, select, creator {Di' chi lo guarda e quali momenti contano. Bastano una o due frasi.} business {Di' chi deve vederlo e cosa deve mostrare della tua attività. Bastano una o due frasi.} educator {Di' chi sta imparando e l'idea che deve restare. Bastano una o due frasi.} nonprofit {Di' chi deve vederlo e quale storia deve raccontare. Bastano una o due frasi.} software {Di' per chi è e cosa devono mostrare le tue registrazioni. Bastano una o due frasi.} agency {Di' chi vuole raggiungere il cliente e cosa deve mostrare il montaggio. Bastano una o due frasi.} other {Di' per chi è e cosa deve mostrare. Bastano una o due frasi.}}",
+      "promptPromo": "{persona, select, creator {Di' chi deve vederlo e quali pagine del tuo sito o della tua app mostrare. Bastano una o due frasi.} business {Di' per quali clienti è e quali pagine mostrare. Bastano una o due frasi.} educator {Di' chi sta imparando e quali schermate mostrare. Bastano una o due frasi.} nonprofit {Di' chi deve vederlo e quali pagine mostrare. Bastano una o due frasi.} software {Di' per chi è e quali schermate mostrare. Bastano una o due frasi.} agency {Di' chi vuole raggiungere il cliente e quali schermate mostrare. Bastano una o due frasi.} other {Di' per chi è e quali schermate mostrare. Bastano una o due frasi.}}",
+      "footage1": "{persona, select, creator {Per i miei follower. I momenti migliori dell'escursione, con un montaggio serrato, a partire dalla vista dalla cima.} business {Per chi abita in zona. Il nostro nuovo menu d'autunno: prima i piatti, poi la sala, e in chiusura l'ingresso del locale.} educator {Per i nuovi studenti. L'idea centrale di questa lezione, spiegata una volta sola, senza divagazioni.} nonprofit {Per chi ci sostiene. Cosa ha ottenuto la pulizia dello scorso weekend, con le parole dei volontari.} software {Per chi usa già l'app. Le novità di questa versione, una funzionalità alla volta, dalle mie registrazioni dello schermo.} agency {Per i canali social del cliente. Un primo montaggio dell'evento di lancio: gli arrivi, la presentazione, due reazioni.} other {Per chi non c'era. Cosa è successo e perché conta, nell'ordine in cui è successo.}}",
+      "footage2": "{persona, select, creator {Per chi si è perso la diretta. I tre momenti più divertenti, in ordine, senza tempi morti.} business {Per i nuovi clienti. Come nasce un ordine su misura, dal primo schizzo al pezzo finito.} educator {Per chi sta decidendo se iscriversi al corso. I momenti più chiari della prima lezione.} nonprofit {Per chi non ci conosce. Chi aiutiamo e come, raccontato da una famiglia.} software {Per chi ci sta confrontando con altri. La demo della call della settimana scorsa, tagliata sulle parti in cui si vede il prodotto.} agency {Da far rivedere al cliente. L'intervista tagliata sulle sue tre risposte più forti.} other {Per amici e famiglia. I momenti migliori della giornata, senza le parti vuote.}}",
+      "footage3": "{persona, select, creator {Un teaser per l'episodio di questa settimana. Apri con la frase più forte, poi due clip veloci dell'intervista.} business {Per le nostre pagine social. Un giro in negozio prima dei saldi del weekend, cordiale e veloce.} educator {Per i genitori. Cosa ha costruito la classe in questo trimestre, con gli studenti che spiegano il proprio lavoro.} nonprofit {Per i donatori. Dove sono andati i fondi della campagna di primavera, mostrato sul posto.} software {Per la pagina del team. I fondatori che spiegano perché l'abbiamo costruito, senza le pause.} agency {Per una proposta. Le riprese migliori della giornata, a ritmo veloce, così il cliente ha qualcosa su cui dire la sua.} other {Per chi non conosce l'argomento. Prima il punto principale, poi le due clip che lo mostrano meglio.}}",
+      "promo1": "{persona, select, creator {Per i miei follower. Mostra il mio nuovo sito: la home, poi la pagina per iscriversi.} business {Per chi abita in zona. Mostra come prenotare un tavolo sul nostro sito, dalla home alla conferma.} educator {Per i nuovi studenti. Mostra come iscriversi al corso e dove si trova la prima lezione.} nonprofit {Per i nuovi volontari. Mostra come iscriversi a un turno sul nostro sito.} software {Per sviluppatori che non hanno mai visto il prodotto. Mostra la dashboard, poi la creazione del primo progetto, poi il risultato.} agency {Per i clienti del cliente. Mostra il nuovo sito che abbiamo realizzato: home, pagina prodotto, pagina contatti.} other {Per chi non l'ha mai visto. Mostra la schermata iniziale, poi la cosa che fa meglio.}}",
+      "promo2": "{persona, select, creator {Per chi guarda i miei video. Mostra l'app che ho creato per loro e l'unica cosa che fa.} business {Per i nuovi clienti. Mostra il negozio online: il catalogo, la pagina di un prodotto, il pagamento.} educator {Per gli insegnanti. Mostra la pagina della lezione, gli esercizi e come vengono salvati i progressi.} nonprofit {Per i donatori. Mostra la pagina delle donazioni e quella che spiega dove vanno i fondi.} software {Per chi lo usa già. Mostra le tre novità di questa versione.} agency {Da far rivedere al cliente. Mostra le tre schermate cambiate in questa versione.} other {Per chi lo usa già. Mostra le novità.}}",
+      "promo3": "{persona, select, creator {Per i nuovi visitatori. Mostra come trovare un episodio e iniziare ad ascoltarlo.} business {Per i clienti abituali. Mostra la nuova pagina fedeltà e come accedere.} educator {Per i genitori. Mostra dove vedere su cosa ha lavorato il figlio questa settimana.} nonprofit {Per chi ha bisogno di aiuto. Mostra come trovare la sede più vicina e i suoi orari.} software {Per il post di lancio. Apri sulla schermata iniziale, poi mostra la funzionalità che lo distingue.} agency {Per un caso di studio. Mostra l'app dall'accesso alla schermata principale, senza fretta.} other {Per un primo post. Mostra come si inizia, un passaggio alla volta.}}"
+    },
+    "confirmEmail": {
+      "title": "Conferma la tua email prima di avviare",
+      "body": "Un'esecuzione parte solo dopo la conferma di {email}. Apri il link che ti abbiamo inviato, oppure fattene mandare uno nuovo. Nel frattempo puoi preparare tutto qui.",
+      "refused": "L'esecuzione non è partita, perché il tuo indirizzo email non è ancora confermato.",
+      "resend": "Invia di nuovo l'email",
+      "resendAgain": "Invialo di nuovo",
+      "sent": "Inviata. Controlla la posta in arrivo.",
+      "failed": "Non siamo riusciti a inviarla ora. Riprova più tardi.",
+      "readiness": "Conferma prima il tuo indirizzo email. Un'esecuzione parte solo dopo."
+    },
+    "first": {
+      "title": "Il tuo primo video è pronto",
+      "body": "Premi play su qualcosa di finito. È tuo: pubblicalo, modificalo o usalo come base.",
+      "dismiss": "Chiudi",
+      "video": "Il tuo primo video finito",
+      "factsLabel": "Questa esecuzione in numeri",
+      "beforeLabel": "Prima",
+      "before": "{count, plural, one {# clip} other {# clip}}, {length} di riprese",
+      "afterLabel": "Dopo",
+      "after": "Un video finito di {length}",
+      "afterParts": "Un video finito di {length}, montato con {count, plural, one {# parte} other {# parti}} di quelle riprese",
+      "lengthOnly": "Il tuo video dura {length}.",
+      "download": "Scarica",
+      "change": "Cambia qualcosa",
+      "subtitlesOrShape": "Aggiungi i sottotitoli o prova un altro formato",
+      "subtitles": "Aggiungi i sottotitoli",
+      "shape": "Prova un altro formato",
+      "recipes": "Prova un'altra ricetta",
+      "subtitlesHint": "Aggiungi i sottotitoli apre l'app dei sottotitoli: li imprime in una clip che scegli e ti dà i file SRT e VTT.",
+      "shapeHint": "Un altro formato riporta le scelte di questa esecuzione, così scegli il formato e premi di nuovo Avvia. È una nuova esecuzione.",
+      "subtitlesFailedTitle": "Non siamo riusciti a prepararla",
+      "tryAgainLater": "Riprova tra un momento.",
+      "failedLead": "Era la tua prima esecuzione e non è arrivata alla fine. Ecco cosa è successo.",
+      "failedOurs": "Questo passaggio non è riuscito per un problema nostro, quindi i crediti trattenuti per il passaggio vengono rimborsati. I tuoi file e le tue scelte sono ancora qui: puoi avviarla di nuovo così com'è.",
+      "failedRefundRule": "Se un passaggio non riesce per un problema nostro, i crediti trattenuti per quel passaggio vengono rimborsati. I tuoi file e le tue scelte sono ancora qui: puoi avviarla di nuovo così com'è.",
+      "failedYours": "I tuoi file e le tue scelte sono ancora qui. Sistema quello che indica il messaggio qui sopra, poi avviala di nuovo.",
+      "failedRetry": "I tuoi file e le tue scelte sono ancora qui: puoi avviarla di nuovo così com'è.",
+      "creditsUsed": "Questa esecuzione ha usato {credits} crediti per i passaggi finiti ({steps, plural, one {# passaggio} other {# passaggi}}); il passaggio che non è riuscito non ha addebitato nulla.",
+      "creditsUsedOnly": "Questa esecuzione ha usato {credits} crediti per i passaggi finiti ({steps, plural, one {# passaggio} other {# passaggi}}).",
+      "creditsNone": "Per questa esecuzione non è stato addebitato nulla.",
+      "creditsFailedRefunded": "Questa esecuzione ha usato {credits} crediti per i passaggi finiti ({steps, plural, one {# passaggio} other {# passaggi}}). Il passaggio che non è riuscito ha addebitato {failed} crediti, che vengono rimborsati.",
+      "creditsFailedCharged": "Questa esecuzione ha usato {credits} crediti in totale, di cui {failed} per il passaggio che non è riuscito."
+    }
+  },
+  "failures": {
+    "INPUT_MISSING": "Mancava qualcosa che serve a questa app: una clip che hai scelto non è più nel progetto, oppure un passaggio precedente non ha prodotto nulla su cui lavorare.",
+    "INPUT_TOO_LARGE": "Qualcosa che hai dato a questa app era troppo grande per un passaggio, ad esempio un video molto pesante o un testo molto lungo. Usa una copia più piccola e riavvia l'esecuzione.",
+    "SOURCE_TOO_LARGE": "Un video che hai scelto è più grande di quanto possiamo modificare. Accorcialo o esporta una copia più piccola, poi riavvia l'esecuzione.",
+    "SOURCE_TOO_LONG": "Un video che hai scelto è più lungo di quanto possiamo modificare. Accorcialo o esporta una copia più corta, poi riavvia l'esecuzione.",
+    "SOURCE_TOO_DEMANDING": "Questo video è troppo impegnativo da analizzare nel tempo che concediamo. Prova con una clip più corta o un'esportazione più piccola, ad esempio in 1080p, poi riavvia l'esecuzione. Non ti è stato addebitato nulla.",
+    "SCRATCH_BUSY": "I nostri server erano occupati con altri video pesanti e non avevano spazio per lavorare sul tuo. Non hai perso nulla. Riprova tra qualche minuto.",
+    "SOURCE_UNRESOLVED": "Una clip o un file che serve a questa app non è stato trovato nel progetto.",
+    "SOURCE_NOT_FOUND": "Una clip o un file che serve a questa app non è stato trovato nel progetto.",
+    "SOURCE_INVALID": "Una delle clip non si è potuta leggere.",
+    "CONFIG_INVALID": "Questa app è impostata in un modo che non può funzionare. Apri Modifica i passaggi per correggerla o chiedi all'assistente.",
+    "NO_AUDIO_PROVIDER": "Nessun servizio vocale è collegato. Chiedi al tuo amministratore di collegarne uno.",
+    "VOICE_CONSENT_MISSING": "La voce scelta non ha un consenso registrato. Scegli un'altra voce.",
+    "VOICE_NOT_FOUND": "La voce scelta non è stata trovata.",
+    "VOICE_RESOLVER_UNAVAILABLE": "Il servizio di voce narrante non era disponibile.",
+    "RUN_RATE_LIMITED": "Ci sono troppe esecuzioni in corso insieme. Riprova tra qualche minuto.",
+    "INSUFFICIENT_CREDITS": "Non c'erano abbastanza crediti per finire.",
+    "PLAN_NOT_ENTITLED": "Il tuo piano non include una delle scelte fatte per questa esecuzione.",
+    "CONTENT_BLOCKED": "Il contenuto è stato bloccato da un controllo di sicurezza.",
+    "TRANSCRIPTION_FAILED": "Non è stato possibile trascrivere il parlato nelle riprese.",
+    "AUDIO_GENERATE_FAILED": "Non è stato possibile creare la musica o il suono.",
+    "IMAGE_GENERATE_FAILED": "Non è stato possibile creare l'immagine.",
+    "NARRATION_OUTPUT_INVALID": "Non è stato possibile usare il copione della voce narrante. Riprova.",
+    "SCRIPTWRITER_OUTPUT_INVALID": "Non è stato possibile usare il copione. Riprova.",
+    "DELIVERY_FAILED": "Non è stato possibile salvare il video finito.",
+    "UNEXPECTED_ERROR": "Qualcosa è andato storto durante la creazione del video.",
+    "INSERT_NOT_APPLIED": "Non abbiamo trovato nella tua clip uno schermo che potessimo seguire, quindi non è stato cambiato nulla. Gli schermi piccoli o tenuti in mano, con un motivo o dei segni sopra, o che escono dall'inquadratura sono difficili da seguire. Puoi riavviare con una clip in cui lo schermo è grande, fermo e resta in inquadratura, oppure mettere il tuo video in un angolo o a schermo intero; l'assistente può farlo per te.",
+    "INSERT_TRACKING_FAILED": "La scansione della tua clip per trovare lo schermo non è finita. È un problema nostro e non è stato cambiato nulla. Riavvia l'esecuzione.",
+    "INSERT_CONTENT_UNUSABLE": "L'immagine o il video scelto per lo schermo non si può usare, quindi non è stato cambiato nulla. Scegli un'altra immagine o un altro video (in un formato comune come PNG, JPG o MP4) e riprova.",
+    "INSERT_CONTENT_MISSING": "Non è stato scelto nulla da mettere sullo schermo. Scegli un'immagine o un video per lo schermo, poi riprova.",
+    "INSERT_FILTER_UNAVAILABLE": "Ai nostri strumenti video manca una funzione necessaria per mettere un contenuto su uno schermo. Il problema è dalla nostra parte. Riprova più tardi o chiedi all'assistente.",
+    "generic": "Qualcosa è andato storto durante la creazione del video."
+  },
+  "viewToggle": {
+    "label": "Vista del flusso di lavoro",
+    "app": "App",
+    "advanced": "Avanzata"
+  },
+  "lint": {
+    "step": {
+      "named": "passaggio {order} ({label})",
+      "plain": "passaggio {order}",
+      "none": "nessun passaggio"
+    },
+    "list": {
+      "comma": "{head}, {tail}",
+      "and": "{head} e {tail}"
+    },
+    "ref": {
+      "previousFrom": "dal passaggio precedente",
+      "actor": {
+        "named": "Il passaggio {order} ({label})",
+        "plain": "Il passaggio {order}"
+      },
+      "subject": {
+        "named": "Il passaggio {order} ({label})",
+        "plain": "Il passaggio {order}"
+      },
+      "at": {
+        "named": "al passaggio {order} ({label})",
+        "plain": "al passaggio {order}"
+      },
+      "from": {
+        "plain": "dal passaggio {order}",
+        "none": "da nessun passaggio"
+      },
+      "to": {
+        "plain": "al passaggio {order}",
+        "none": "a nessun passaggio"
+      },
+      "over": {
+        "named": "sopra il passaggio {order} ({label})",
+        "plain": "sul passaggio {order}"
+      },
+      "definite": {
+        "named": "il passaggio {order} ({label})",
+        "plain": "il passaggio {order}"
+      }
+    },
+    "problem": {
+      "isNotSet": "non è impostato",
+      "notInWorkflow": "non è un passaggio di questo flusso di lavoro",
+      "comesAfter": "viene dopo, quindi il suo risultato non esiste ancora",
+      "wrongKind": "non è {expected} (è {found})",
+      "firstStep": "non esiste: è il primo passaggio",
+      "previousWrongKind": "non è {expected}: il passaggio subito prima è {found}",
+      "doesNotNameTheStep": "non dice quale passaggio della voce usare",
+      "noDefault": "nessun provider è impostato come predefinito per questa capacità",
+      "providerUnavailable": "il provider scelto nel passaggio non è disponibile per la tua organizzazione"
+    },
+    "expected": {
+      "scriptwriter": "un passaggio Scriptwriter",
+      "narrationWriter": "un passaggio NarrationWriter",
+      "pickupPlanner": "un passaggio PickupPlanner",
+      "voiceover": "un passaggio Voce narrante",
+      "videoGeneration": "un passaggio di generazione video",
+      "videoAnalysis": "un passaggio di analisi video",
+      "editDecision": "un passaggio che crea la decisione di montaggio",
+      "takeSelection": "un passaggio che sceglie le riprese",
+      "transcriptTranslation": "un passaggio che traduce la trascrizione",
+      "planWriter": "un passaggio che scrive il piano",
+      "overlayPlanner": "un passaggio OverlayPlanner",
+      "anyStep": "un passaggio"
+    },
+    "input": {
+      "editDecision": "la decisione di montaggio",
+      "analysis": "l'analisi",
+      "captionTranslation": "la traduzione dei sottotitoli",
+      "takeSelection": "la scelta delle riprese",
+      "graphicsPlan": "il piano grafico",
+      "musicPlan": "il piano musicale",
+      "colorGradePlan": "il piano di correzione colore",
+      "sfxPlan": "il piano degli effetti sonori",
+      "generatedClips": "le clip generate"
+    },
+    "role": {
+      "video": "video",
+      "code": "codice",
+      "music": "musica",
+      "sfx": "effetti sonori",
+      "image": "immagini",
+      "document": "documenti",
+      "insertContent": "un'immagine o un video per lo schermo",
+      "overlay": "un'immagine o un video per il film"
+    },
+    "fileRole": {
+      "video": "video",
+      "code": "codice",
+      "music": "musica",
+      "sfx": "effetti sonori",
+      "image": "immagini",
+      "document": "documenti",
+      "insertContent": "immagine o video",
+      "overlay": "immagine o video"
+    },
+    "capability": {
+      "speechSynthesis": "un provider di voce (sintesi vocale)",
+      "videoGeneration": "un provider di generazione video",
+      "musicGeneration": "un provider di generazione musicale",
+      "soundEffectGeneration": "un provider di generazione di effetti sonori",
+      "transcription": "un provider di trascrizione",
+      "vision": "un provider di visione (comprensione delle immagini)",
+      "audioIsolation": "un provider di pulizia audio",
+      "videoUpscale": "un provider di upscaling video",
+      "frameInterpolation": "un provider di interpolazione dei fotogrammi",
+      "videoOutpaint": "un provider per estendere il video oltre il bordo",
+      "lipSync": "un provider per il lip-sync (avatar parlanti)"
+    },
+    "feature": {
+      "music": "la musica",
+      "narration": "la voce narrante",
+      "reRecordedLines": "le battute registrate di nuovo",
+      "onScreenGraphics": "la grafica in sovrimpressione",
+      "soundEffects": "gli effetti sonori",
+      "colorGrade": "la correzione colore",
+      "insertedScreens": "le schermate inserite",
+      "generatedClips": "le clip generate",
+      "captions": "i sottotitoli",
+      "differentOutputFormat": "un formato di output diverso",
+      "duckedOrReplacedDialogue": "dialoghi abbassati o sostituiti",
+      "censoring": "la censura",
+      "fades": "le dissolvenze",
+      "regionEffects": "gli effetti di regione",
+      "transitions": "le transizioni",
+      "keyframesNotSnapped": "i tagli che cadono tra i fotogrammi chiave (l'aggancio ai fotogrammi chiave è disattivato)",
+      "rooms": "le stanze multi-agente",
+      "audioGeneration": "la generazione audio",
+      "videoGeneration": "la generazione video"
+    },
+    "field": {
+      "language": "Lingua",
+      "sourceLanguage": "Lingua di origine",
+      "lengthSec": "Durata",
+      "voice": "Scelta della voce",
+      "style": "Stile o tono",
+      "format": "Formato",
+      "resolution": "Risoluzione",
+      "designSystem": "Scelta del sistema di design",
+      "sourceFiles": "File di origine",
+      "avatar": "avatar"
+    },
+    "reason": {
+      "consentMissing": "il consenso non è stato registrato",
+      "consentRevoked": "il consenso è stato ritirato",
+      "retentionExpired": "il periodo di conservazione è terminato",
+      "notInProject": "non è in questo progetto"
+    },
+    "voice": {
+      "named": "«{name}»",
+      "youChose": "che hai scelto"
+    },
+    "avatar": {
+      "named": "«{name}»",
+      "youChose": "scelto per questo passaggio"
+    },
+    "voiceKind": {
+      "narration": "narrazione",
+      "pickups": "battute registrate di nuovo"
+    },
+    "later": {
+      "narration": "la voce narrante (passaggio {order})",
+      "music": "la musica (passaggio {order})",
+      "finalCut": "il montaggio finale (passaggio {order})"
+    },
+    "slot": {
+      "videoFile": "un file video",
+      "musicTrack": "una traccia musicale",
+      "insert": "il file da inserire"
+    },
+    "WL001": {
+      "isNotSet": "{actor} legge le battute {from}, che {problem}. La voce narrante non riuscirebbe a partire.",
+      "notInWorkflow": "{actor} legge le battute {from}, che {problem}. La voce narrante non riuscirebbe a partire.",
+      "comesAfter": "{actor} legge le battute {from}, che {problem}. La voce narrante non riuscirebbe a partire.",
+      "wrongKind": "{actor} legge le battute {from}, che {problem}. La voce narrante non riuscirebbe a partire."
+    },
+    "WL002": {
+      "doesNotNameTheStep": "{actor} è impostato per aggiungere la voce narrante, ma {problem}. Il video uscirebbe muto.",
+      "notInWorkflow": "{actor} è impostato per aggiungere la voce narrante, ma {problem}. Il video uscirebbe muto.",
+      "comesAfter": "{actor} è impostato per aggiungere la voce narrante, ma {problem}. Il video uscirebbe muto.",
+      "wrongKind": "{actor} è impostato per aggiungere la voce narrante, ma {problem}. Il video uscirebbe muto.",
+      "problem": "il passaggio della {voiceKind} che hai indicato {problem}"
+    },
+    "WL003": {
+      "isNotSet": "La revisione {at} torna indietro {to}, che {problem}. Il ciclo non migliorerebbe mai nulla.",
+      "notInWorkflow": "La revisione {at} torna indietro {to}, che {problem}. Il ciclo non migliorerebbe mai nulla.",
+      "comesAfter": "La revisione {at} torna indietro {to}, che {problem}. Il ciclo non migliorerebbe mai nulla.",
+      "noImprovement": "La revisione {at} ripassa {over} e sui passaggi successivi, ma nessuno di loro crea qualcosa di nuovo a ogni ripetizione. Il ciclo non migliorerebbe il risultato."
+    },
+    "WL004": {
+      "isNotSet": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe.",
+      "notInWorkflow": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe.",
+      "comesAfter": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe.",
+      "wrongKind": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe.",
+      "firstStep": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe.",
+      "previousWrongKind": "{actor} legge {input} {from}, che {problem}. Il montaggio verrebbe sbagliato o il passaggio si fermerebbe."
+    },
+    "WL005": "{actor} copia il girato senza ricodificarlo, ma non può anche aggiungere {features}. Il passaggio si fermerebbe.",
+    "WL006": {
+      "message": "{actor} ha bisogno di {capability}, ma {problem}. Si fermerebbe dopo che i passaggi precedenti sono già stati pagati.",
+      "providerOwnership": "{detail}: il provider scelto in questo passaggio non è disponibile per la tua organizzazione. Si fermerebbe all'avvio.",
+      "modelUnsupported": "{actor} usa il modello video {model}, che il provider video su cui verrebbe eseguito non supporta. Scegli un altro modello o collega un provider che lo abbia.",
+      "lipSyncModelNotSet": "{actor} fa parlare un avatar, ma non è configurato nessun modello lip-sync. Chiedi a un amministratore dello spazio di lavoro di aggiungerne uno in Lip-sync."
+    },
+    "WL007": {
+      "stepFeature": "Il tuo piano non include {feature} ({step}). L'esecuzione verrebbe rifiutata all'avvio.",
+      "resolution": "La risoluzione {resolution} non è inclusa nel tuo piano. Verrebbe rifiutata all'avvio dell'esecuzione."
+    },
+    "WL008": "La voce {voice} non è utilizzabile ({reason}). Il passaggio della voce narrante si fermerebbe.",
+    "WL009": "Il video è in {language}, ma la voce scelta parla {languages}. La voce narrante potrebbe suonare sbagliata.",
+    "WL010": {
+      "missingMedia": "{actor} ha bisogno di file di tipo {role}, ma in questo progetto non ce ne sono. L'esecuzione sarebbe vuota o fallirebbe.",
+      "archiveOnly": "{actor} ha bisogno di codice sorgente leggibile, ma il progetto contiene solo archivi (zip, tar). Carica il sorgente come .zip senza node_modules, collega GitHub o sincronizza una cartella.",
+      "unpacking": "{actor} ha bisogno di codice sorgente, ma il tuo zip è ancora in fase di estrazione. I suoi file compaiono nel progetto tra un attimo; riprova tra poco.",
+      "missingFile": "Il passaggio {stepOrder} punta a {slot}, ma quel file non è in questo progetto. Il passaggio si fermerebbe.",
+      "openVideoSlot": "{actor} ha bisogno di un video, ma per questa esecuzione non ne è stato scelto nessuno. Scegli un video e riavvia l'esecuzione."
+    },
+    "WL011": "Il campo {field} che hai impostato non serve a nessun passaggio di questo flusso di lavoro, quindi non cambierà il risultato.",
+    "WL012": {
+      "step": "{step} ha bisogno del sistema di design approvato del progetto, ma non ce n'è ancora uno approvato.",
+      "brief": "La tua richiesta ha bisogno del sistema di design approvato del progetto, ma non ce n'è ancora uno approvato."
+    },
+    "WL013": "{actor} costa denaro e sta dentro il ciclo di revisione al passaggio {loop}; ogni giro in più lo paga di nuovo.",
+    "WL014": "{actor} legge dal passaggio {target}, che viene dopo, quindi l'input non esiste ancora.",
+    "WL015": {
+      "tracksAnObjectByName": "{actor} invierebbe il tuo girato a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Segue un oggetto per nome.",
+      "startsFromFrame": "{actor} invierebbe il tuo girato a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Parte da un fotogramma del tuo girato.",
+      "cleansAudioWithAi": "{actor} invierebbe l'audio del tuo girato a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Pulisce l'audio con l'IA.",
+      "editsPictureWithAi": "{actor} invierebbe la tua immagine a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Modifica l'immagine con l'IA.",
+      "enhancesVideoWithAi": "{actor} invierebbe il tuo girato a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Invia il video a un servizio di IA esterno per migliorarlo.",
+      "showsAnAvatar": "{actor} invierebbe immagini, video e campioni di voce di un avatar a un servizio esterno, ma il permesso è disattivato. Verrebbe rifiutato. Mostra un avatar."
+    },
+    "WL016": "Hai chiesto un video con la voce narrante, ma questo flusso di lavoro non ha un passaggio per la voce, quindi il risultato sarebbe muto.",
+    "WL017": "Hai chiesto {length} secondi, ma il tuo girato arriva solo a circa {available} secondi.",
+    "WL018": {
+      "unreadField": "L'input \"{input}\" non è letto da nessun passaggio di questo flusso di lavoro, quindi verrebbe mostrato e ignorato. Rimuovilo o aggiungi un passaggio che lo usi.",
+      "unusedRole": "L'input \"{input}\" accetta file di tipo {role}, ma nessun passaggio di questo flusso di lavoro può usarli. Rimuovilo o aggiungi un passaggio che li accetti."
+    },
+    "WL019": "{actor} brucia i sottotitoli, ma nessuna voce narrante e nessun parlato trascritto gli danno testo. Non apparirebbe nulla.",
+    "WL020": "La revisione al passaggio {reviewOrder} gira prima di questi passaggi: {later}, quindi controlla un video muto. Sposta la revisione dopo il passaggio {lastOrder}.",
+    "WL021": "{actor} mette una voce narrante {over}, un video che ha già la sua narrazione, quindi la narrazione si sentirebbe due volte. Attiva muteSourceAudio così suonano solo la nuova voce narrante, la musica e gli effetti sonori, oppure disattiva la voce narrante di questo montaggio per tenere quella del video.",
+    "WL022": "La censura non si applicherà a {label}: censurare richiede una traccia di feature, e questa etichetta è tracciata solo con la segmentazione. Usa invece un effetto di regione su quella traccia.",
+    "WL026": "La narrazione al {step} è scritta direttamente, anche se {script} scrive le battute, quindi quello script non viene mai letto. Collega la voce allo script.",
+    "WL027": "{actor} mostra l'avatar {avatar}, ma non è utilizzabile ({reason}). Il passaggio si fermerebbe.",
+    "WL023": {
+      "missingFile": "Il passaggio {stepOrder} deve mostrare un'immagine o un video, ma quel file non è in questo progetto. Il passaggio si fermerebbe.",
+      "wrongKind": "Il passaggio {stepOrder} deve mostrare un'immagine o un video, ma quel file non è un'immagine o un video. Il passaggio si fermerebbe.",
+      "quarantined": "Il passaggio {stepOrder} deve mostrare un'immagine o un video, ma quel file è in quarantena. Il passaggio si fermerebbe.",
+      "badStep": "Il passaggio {stepOrder} deve mostrare un'immagine dal passaggio {sourceOrder}, ma quel passaggio non viene prima o non può produrre un'immagine o un video. Il passaggio si fermerebbe."
+    },
+    "WL024": "Il {actor} deve mostrare un'immagine o un video da {start} a {end}, ma non è un momento valido del film. Il passaggio si fermerebbe.",
+    "WL025": "Il {actor} tiene una scheda a schermo intero per {seconds} secondi. Una scheda dovrebbe restare sotto il 25% del film o 30 secondi.",
+    "WL028": "Il campo dell'app “{input}” è obbligatorio e non ha un valore. L'esecuzione verrebbe rifiutata.",
+    "WL029": "Il valore di “{input}” non è adatto all'impostazione che compila. L'esecuzione verrebbe rifiutata.",
+    "WL030": {
+      "message": "Il modello scelto per “{input}” non si può più usare. L'esecuzione verrebbe rifiutata.",
+      "recommended": "Il modello iniziale di “{input}” non si può più usare, quindi le persone dovranno sceglierne un altro."
+    },
+    "WL031": "Quando “{input}” è {value}, {count, plural, one {# passaggio non viene eseguito} other {# passaggi non vengono eseguiti}}.",
+    "WL032": "“{input}” cambia il modello di un agente usato da {count} passaggi, quindi tutti useranno il modello scelto.",
+    "WL033": "Con la scelta più costosa di “{input}”, {actor} potrebbe costare circa {credits} crediti, più del suo limite di {cap}. Un'esecuzione così si fermerebbe al limite.",
+    "WL034": {
+      "useSibling": "{actor} mostra un avatar o un oggetto, ma il suo modello “{model}” non accetta immagini. Usa invece “{sibling}”. Il passaggio verrebbe rifiutato prima di addebitare qualcosa.",
+      "noSibling": "{actor} mostra un avatar o un oggetto, ma il suo modello “{model}” non accetta immagini. Scegli un modello che accetta immagini. Il passaggio verrebbe rifiutato prima di addebitare qualcosa."
+    },
+    "inputValue": {
+      "on": "attivo",
+      "off": "disattivo"
+    },
+    "fix": {
+      "WL001": {
+        "retargetSource": "Punta la voce narrante a {expected}"
+      },
+      "WL002": {
+        "retargetVoiceover": "Punta il montaggio al passaggio Voce narrante"
+      },
+      "WL003": {
+        "retargetTarget": "Punta la revisione al passaggio a cui deve tornare",
+        "retargetModelStep": "Punta la revisione a un passaggio scritto da un modello"
+      },
+      "WL004": {
+        "retargetInput": "Punta {input} al passaggio giusto"
+      },
+      "WL005": {
+        "reencode": "Passa il montaggio alla ricodifica"
+      },
+      "WL006": {
+        "chooseProvider": "Collega o scegli un provider",
+        "chooseAvailableProvider": "Scegli un provider che puoi usare"
+      },
+      "WL007": {
+        "changePlan": "Scegli un passaggio diverso o cambia piano",
+        "changeResolution": "Scegli una risoluzione più bassa o cambia piano"
+      },
+      "WL008": {
+        "chooseVoice": "Scegli una voce con il consenso registrato"
+      },
+      "WL009": {
+        "chooseVoice": "Scegli una voce che parli la lingua del video"
+      },
+      "WL010": {
+        "upload": "Carica i file di tipo {role} nel progetto",
+        "pickFile": "Scegli un file che è nel progetto"
+      },
+      "WL012": {
+        "approveDesign": "Approva il sistema di design del progetto"
+      },
+      "WL013": {
+        "startLoopAfter": "Avvia il ciclo di revisione dopo questo passaggio"
+      },
+      "WL014": {
+        "earlierStep": "Punta l'input a un passaggio precedente"
+      },
+      "WL015": {
+        "allowEgress": "Consenti l'invio del girato per questo passaggio",
+        "allowOnAppPage": "Consenti l'invio dei tuoi file nella pagina dell'app"
+      },
+      "WL016": {
+        "addVoiceover": "Aggiungi un passaggio per la voce narrante"
+      },
+      "WL017": {
+        "shorterFilm": "Chiedi un video più corto o aggiungi altro girato"
+      },
+      "WL018": {
+        "removeReference": "Rimuovi il controllo o puntalo a un passaggio esistente"
+      },
+      "WL019": {
+        "voiceOrCaptions": "Attiva la voce narrante per questo montaggio oppure disattiva i sottotitoli"
+      },
+      "WL020": {
+        "moveReview": "Sposta la revisione dopo il montaggio finale"
+      },
+      "WL021": {
+        "muteSourceAudio": "Attiva muteSourceAudio (suonano solo la nuova voce narrante, la musica e gli effetti sonori)"
+      },
+      "WL026": {
+        "useScript": "Collega la voce allo script"
+      },
+      "WL027": {
+        "chooseAvatar": "Scegli un avatar pronto"
+      },
+      "WL023": {
+        "pickFile": "Scegli un'immagine o un video in questo progetto",
+        "earlierStep": "Punta l'immagine a un passaggio precedente che produce un video o un'immagine"
+      },
+      "WL024": {
+        "changeSpan": "Cambia la temporizzazione della sovrapposizione"
+      },
+      "WL025": {
+        "shortenCard": "Accorcia la scheda o trasformala in un riquadro"
+      },
+      "WL028": {
+        "fillInput": "Compila “{input}”"
+      },
+      "WL029": {
+        "changeInput": "Modifica “{input}”"
+      },
+      "WL030": {
+        "chooseModel": "Scegli un altro modello"
+      },
+      "WL033": {
+        "narrowRange": "Restringi i valori del campo o alza il limite del passaggio"
+      },
+      "WL034": {
+        "chooseModel": "Scegli un modello che accetta immagini"
+      }
+    }
+  },
+  "inputs": {
+    "moved": "{name} spostato alla posizione {position} di {total}",
+    "notSavedOrphan": "Non salvato: un input dell'app rimarrebbe senza un passaggio che lo usa",
+    "notSavedFix": "Non salvato: correggi gli input dell'app qui sotto",
+    "title": "Input dell'app",
+    "shown": "Mostrato nell'app",
+    "hidden": "Nascosto",
+    "shownLabel": "{state}: {name}",
+    "nameInApp": "Nome nell'app",
+    "nameInAppFor": "Nome nell'app per {name}",
+    "startsAs": "Parte da",
+    "startsAsFor": "Parte da, per {name}",
+    "moveUp": "Sposta su",
+    "moveDown": "Sposta giù",
+    "moveNameUp": "Sposta {name} su",
+    "moveNameDown": "Sposta {name} giù",
+    "addField": "Aggiungi un campo",
+    "checkingSteps": "Controllo cosa possono usare i passaggi...",
+    "chooseField": "Scegli un campo",
+    "noOtherField": "Nessun altro campo è usato da un passaggio",
+    "add": "Aggiungi",
+    "checkingFields": "Controllo dei campi",
+    "noOtherFieldWorkflow": "Nessun altro campo è usato da un passaggio di questo flusso di lavoro.",
+    "probeFailed": "Non siamo riusciti a controllare quali campi possono usare i passaggi, quindi per ora non ne proponiamo nessuno.",
+    "atMost": "Un'app può avere al massimo {max} input.",
+    "reset": "Ripristina gli input automatici",
+    "save": "Salva gli input dell'app",
+    "resetMessage": "Così dimentichi le modifiche fatte agli input di questa app. L'app chiederà ciò che serve ai suoi passaggi e tornerà visibile ogni input che avevi nascosto.",
+    "resetConfirm": "Ripristina",
+    "loading": "Caricamento degli input dell'app",
+    "loadFailed": "Non siamo riusciti a caricare gli input dell'app. Controlla la connessione e riprova.",
+    "tryAgain": "Riprova"
+  },
+  "runNudge": {
+    "title": "I tuoi file sono pronti per diventare un video",
+    "body": "{project} ha dei file ma ancora nessun video. Scegli un'app e avviala.",
+    "cta": "Scegli un'app e avviala",
+    "dismiss": "Non ora"
+  },
+  "oneClick": {
+    "title": "Pronto per il tuo primo video",
+    "body": "{app} è pronta con {count, plural, one {la tua clip} other {le tue # clip}}.",
+    "run": "Avvia",
+    "review": "Controlla e avvia",
+    "starting": "Avvio in corso",
+    "priceAbout": "Circa {amount} {unit, select, one {credito} other {crediti}}, ne hai {have}",
+    "priceFree": "Nessun credito usato",
+    "priceChecking": "Calcolo del prezzo",
+    "reason": {
+      "notes": "Questa app ha prima bisogno di una breve descrizione da parte tua.",
+      "consent": "Questa app ha bisogno del tuo permesso per inviare contenuti a un servizio di IA.",
+      "footage": "Scegli quali clip usare.",
+      "inputs": "Questa app ha alcune scelte per te.",
+      "shortfall": "Non hai ancora crediti sufficienti.",
+      "check": "Il controllo prima dell'avvio ha trovato qualcosa da vedere.",
+      "cost": "Questa esecuzione può costare fino a {amount} crediti, quindi controllala prima.",
+      "estimate": "Non siamo riusciti a calcolare il prezzo in questo momento."
+    },
+    "failedTitle": "Non siamo riusciti ad avviarlo",
+    "failedMessage": "Apri l'app per vedere il motivo."
+  },
+  "footageReady": {
+    "title": "I tuoi clip sono pronti",
+    "body": "{count, plural, one {# clip video è stato caricato.} other {# clip video sono stati caricati.}} Trasforma{count, plural, one {lo} other {li}} in un montaggio dei momenti migliori.",
+    "primary": "Crea un montaggio dei momenti migliori",
+    "secondary": "Vedi altre app per i filmati",
+    "settingUp": "Preparazione in corso",
+    "failedTitle": "Non siamo riusciti a prepararlo",
+    "tryAgainLater": "Riprova tra un momento."
+  },
+  "recipes": {
+    "inputs": {
+      "callToAction": {
+        "label": "Invito all'azione",
+        "help": "L'ultima cosa che il video chiede di fare.",
+        "example": "Provalo gratis oggi"
+      },
+      "scriptModel": {
+        "label": "Modello per il testo"
+      },
+      "builderModel": {
+        "label": "Modello che costruisce il video"
+      },
+      "backgroundLook": {
+        "label": "Aspetto degli sfondi",
+        "help": "I colori e l'atmosfera degli sfondi in movimento.",
+        "example": "blu profondo e viola, calmo"
+      },
+      "backgroundModel": {
+        "label": "Modello IA per gli sfondi"
+      },
+      "audience": {
+        "label": "Per chi è",
+        "help": "Le persone a cui parla il video.",
+        "example": "titolari di bar sempre di corsa"
+      },
+      "captions": {
+        "label": "Sottotitoli",
+        "help": "Mostra sullo schermo le parole pronunciate."
+      },
+      "musicVolume": {
+        "label": "Volume della musica",
+        "help": "Lascia vuoto per far scegliere al montatore."
+      },
+      "footageSounds": {
+        "label": "Suoni anche sulle riprese",
+        "help": "Disattivato: i suoni vanno sui momenti grafici, non sui semplici stacchi tra riprese."
+      },
+      "lookModel": {
+        "label": "Modello che guarda l'immagine"
+      },
+      "mostLooks": {
+        "label": "Numero massimo di sguardi all'immagine",
+        "help": "Lascia vuoto: decide la durata del video. Con 0 gli sguardi sono disattivati. Quando sono attivi, il sound designer può chiederne fino a 6 in più."
+      },
+      "videoModel": {
+        "label": "Modello video"
+      },
+      "bRollShots": {
+        "label": "Massimo di inquadrature extra",
+        "help": "Il massimo di inquadrature extra AI da pianificare e creare. Meno inquadrature costano meno."
+      },
+      "bRollModel": {
+        "label": "Modello video per le inquadrature extra"
+      },
+      "mostCredits": {
+        "label": "Spesa massima",
+        "help": "Il massimo di crediti che le inquadrature extra AI possono costare in questa esecuzione. La stima mostra quanto costerà."
+      },
+      "bRollCredits": {
+        "label": "Spesa massima per le inquadrature extra",
+        "help": "Il massimo di crediti che le inquadrature extra AI possono costare in questa esecuzione."
+      },
+      "mostShots": {
+        "label": "Massimo di inquadrature extra",
+        "help": "Il massimo di inquadrature extra AI da pianificare e creare. Meno inquadrature costano meno."
+      },
+      "takesPerShot": {
+        "label": "Versioni per inquadratura",
+        "help": "Quante versioni di ogni inquadratura extra creare per scegliere la migliore. Più versioni costano di più."
+      },
+      "whatToHide": {
+        "label": "Cosa nascondere",
+        "help": "Descrivi l'oggetto con parole semplici. Viene seguito per tutta la clip.",
+        "example": "la targa dell'auto"
+      },
+      "captionLook": {
+        "label": "Stile dei sottotitoli"
+      },
+      "liteMode": {
+        "label": "Modalità leggera (più economica)",
+        "help": "Più economica: una sola foto della persona, animata per dire le tue parole."
+      },
+      "whatTheyDo": {
+        "label": "Cosa fa",
+        "example": "Saluta con calore chi guarda in uno studio luminoso e guarda in camera"
+      },
+      "whatTheySay": {
+        "label": "Cosa dice",
+        "help": "Pronunciato parola per parola, fino a circa 15 secondi. Una riga vuota inizia una nuova frase parlata.",
+        "example": "Benvenuti al Caffè Lume! Da oggi c'è il nuovo menu d'autunno."
+      },
+      "clipShape": {
+        "label": "Formato"
+      },
+      "clipLength": {
+        "label": "Durata"
+      },
+      "liteModel": {
+        "label": "Modello di sincronizzazione labiale"
+      },
+      "pictureModel": {
+        "label": "Modello per l'immagine"
+      },
+      "footageCaptions": {
+        "label": "Sottotitoli",
+        "help": "Mostra sullo schermo le parole pronunciate nel tuo filmato."
+      },
+      "ending": {
+        "label": "Dissolvenza finale",
+        "help": "Sfuma immagine e audio alla fine."
+      },
+      "hideWith": {
+        "label": "Come nasconderlo"
+      },
+      "voiceover": {
+        "label": "Voce narrante",
+        "help": "Un narratore legge il copione sopra il video. Usa una voce."
+      },
+      "voiceModel": {
+        "label": "Modello vocale"
+      },
+      "ownWords": {
+        "label": "Scrivo io le parole",
+        "help": "Spento: indichi un argomento e le parole vengono scritte per te. Acceso: la persona dice esattamente ciò che scrivi."
+      },
+      "topic": {
+        "label": "Argomento",
+        "help": "Ciò che la persona deve spiegare, in una o due frasi.",
+        "example": "Perché il nostro nuovo menu d'autunno usa ingredienti locali"
+      },
+      "explainerWords": {
+        "label": "Cosa dice",
+        "help": "Pronunciato parola per parola, fino a circa 15 secondi. Una riga vuota inizia una nuova frase parlata.",
+        "example": "Ciao, sono Giulia. Il menu d'autunno è arrivato, e tutto ciò che c'è dentro nasce qui vicino."
+      },
+      "kind": {
+        "label": "Cosa creare"
+      },
+      "musicPrompt": {
+        "label": "Descrivi la musica",
+        "help": "L'atmosfera, gli strumenti e il ritmo.",
+        "example": "Chitarra acustica calda, ritmo tranquillo, speranzoso"
+      },
+      "sfxPrompt": {
+        "label": "Descrivi il suono",
+        "help": "Cosa produce il suono e dove avviene.",
+        "example": "Una porta di legno che cigola aprendosi in un corridoio silenzioso"
+      },
+      "musicLength": {
+        "label": "Durata"
+      },
+      "sfxLength": {
+        "label": "Durata"
+      },
+      "audioTakes": {
+        "label": "Versioni",
+        "help": "Quante versioni creare tra cui scegliere. Più versioni costano di più."
+      },
+      "musicModel": {
+        "label": "Modello musicale"
+      },
+      "sfxModel": {
+        "label": "Modello per effetti sonori"
+      },
+      "moment": {
+        "label": "Quale fotogramma"
+      },
+      "atTime": {
+        "label": "Momento nel video",
+        "help": "Il secondo del video da usare come copertina."
+      },
+      "coverText": {
+        "label": "Testo di copertina",
+        "help": "Una breve riga scritta sulla copertina. Lascialo vuoto per avere solo l'immagine.",
+        "example": "Il nostro menu d'autunno"
+      },
+      "textToSpeak": {
+        "label": "Testo da leggere",
+        "help": "Pronunciato parola per parola. Una riga vuota inizia un nuovo paragrafo.",
+        "example": "Benvenuti nel nostro negozio. Siamo aperti ogni giorno dalle nove alle diciotto."
+      },
+      "idea": {
+        "label": "La tua idea",
+        "help": "Cosa succede nella clip, in una o due frasi.",
+        "example": "Vapore che sale da un espresso appena fatto su un bancone di legno, luce del mattino"
+      },
+      "mood": {
+        "label": "Atmosfera e look",
+        "help": "Facoltativo: colori, luce e ritmo.",
+        "example": "caldo, dorato, lento"
+      },
+      "effort": {
+        "label": "Quanto impegno",
+        "help": "La bozza è la più economica. Il meglio di due crea due versioni da 10 secondi."
+      },
+      "options": {
+        "quiet": "Bassa",
+        "balanced": "Equilibrata",
+        "loud": "Alta",
+        "subtitle": "Semplice",
+        "karaoke": "Parola per parola",
+        "punch": "Una parola grande",
+        "blur": "Sfocatura",
+        "pixelate": "Pixelatura",
+        "music": "Musica",
+        "soundEffect": "Effetto sonoro",
+        "auto": "Scegli la migliore",
+        "atTime": "Uso un momento che scelgo io",
+        "draft": "Bozza",
+        "standard": "Standard",
+        "bestOfTwo": "Il meglio di due",
+        "rawFootage": "Girato grezzo",
+        "finishedAnimation": "Animazione finita",
+        "screenRecording": "Registrazione schermo",
+        "off": "No",
+        "subtle": "Leggero",
+        "strong": "Forte",
+        "dynamic": "Dinamico",
+        "on": "Sì",
+        "onBeat": "Sì, a tempo con il ritmo",
+        "bold": "Grande e marcato",
+        "titles": "Titoli",
+        "callouts": "Didascalie",
+        "autoTransitions": "Automatiche",
+        "expressive": "Espressive",
+        "natural": "Naturale",
+        "warm": "Caldo",
+        "cool": "Freddo",
+        "cinematic": "Cinematografico",
+        "burned": "Impressi",
+        "voice": "Traduzione parlata",
+        "blurObject": "Sfoca un oggetto",
+        "contentOnScreen": "Metti un contenuto su uno schermo",
+        "followSubject": "Segui un soggetto"
+      },
+      "whatIsIt": {
+        "label": "Che cos'è",
+        "help": "Dice al montatore che cosa cercare."
+      },
+      "soundEffects": {
+        "label": "Effetti sonori",
+        "help": "Colpi, fruscii e clic messi sull'azione."
+      },
+      "captionsStyle": {
+        "label": "Sottotitoli",
+        "help": "Mostra a schermo le parole pronunciate."
+      },
+      "quickMode": {
+        "label": "Modalità leggera (più economica)",
+        "help": "Un taglio semplice con sottotitoli e transizioni: gli extra qui sotto sono ignorati e non c'è revisione AI."
+      },
+      "music": {
+        "label": "Musica",
+        "help": "Spenta di default. Attivata, mette sotto le voci un brano dei file musicali del progetto, abbassato mentre si parla."
+      },
+      "motion": {
+        "label": "Zoom e movimenti di camera",
+        "help": "Attivi di default, leggeri: spinte, allontanamenti e scosse messi sull'azione nell'immagine. Scegli Spento per nessuno."
+      },
+      "speedRamps": {
+        "label": "Rampe di velocità",
+        "help": "Attive di default: rallenty e accelerazioni sull'azione. Funzionano con zoom e movimenti di camera."
+      },
+      "flashes": {
+        "label": "Lampi",
+        "help": "Attivi di default: un breve lampo sui colpi. Funzionano con zoom e movimenti di camera."
+      },
+      "graphics": {
+        "label": "Grafiche",
+        "help": "Parole e forme disegnate sull'immagine dove c'è spazio."
+      },
+      "transitions": {
+        "label": "Transizioni"
+      },
+      "colourLook": {
+        "label": "Look colore",
+        "help": "Una correzione colore scelta da un team AI."
+      },
+      "bRoll": {
+        "label": "Inquadrature AI extra",
+        "help": "Fino a quattro brevi inquadrature AI inserite. Sono a pagamento, con un tetto fisso che vedi prima di avviare."
+      },
+      "narrate": {
+        "label": "Voce fuori campo",
+        "help": "Una narrazione scritta per ciò che resta, parlata e sottotitolata. Scegli lingua e voce qui sotto."
+      },
+      "fixLines": {
+        "label": "Correggi le battute sbagliate",
+        "help": "Registra di nuovo le battute incerte con la voce del progetto. Serve parlato nel video."
+      },
+      "cutOnEvents": {
+        "label": "Taglia sull'azione",
+        "help": "Attivo di default: fa cadere i tagli su ciò che accade nell'immagine."
+      },
+      "subtitles": {
+        "label": "Sottotitoli",
+        "help": "Impressi nell'immagine; con loro arrivano i file SRT e VTT."
+      },
+      "translate": {
+        "label": "Traduci i sottotitoli",
+        "help": "Nella lingua scelta qui sotto, sempre impressi nell'immagine. Spento mantiene la lingua parlata."
+      },
+      "dub": {
+        "label": "Doppiaggio",
+        "help": "Sostituisce le voci con una traduzione parlata nella lingua di destinazione. Le labbra non sono risincronizzate."
+      },
+      "effect": {
+        "label": "Che cosa fare"
+      },
+      "hideTarget": {
+        "label": "Che cosa nascondere",
+        "help": "Nomina l'oggetto con parole semplici. Viene seguito per tutta la clip.",
+        "example": "la targa dell'auto"
+      },
+      "followTarget": {
+        "label": "Che cosa seguire",
+        "help": "Nomina il soggetto con parole semplici. La camera lo tiene in quadro.",
+        "example": "la ballerina con la giacca rossa"
+      }
+    }
+  },
+  "builder": {
+    "notSaved": "Non salvato: correggi la pagina dell’app qui sotto",
+    "fields": "Campi della pagina dell’app",
+    "open": "Modifica",
+    "done": "Fatto",
+    "moveUp": "Sposta su",
+    "moveDown": "Sposta giù",
+    "moveNameUp": "Sposta {name} su",
+    "moveNameDown": "Sposta {name} giù",
+    "remove": "Rimuovi",
+    "removeName": "Rimuovi {name}",
+    "removed": "{name} rimosso",
+    "moved": "{name} spostato alla posizione {position} di {total}",
+    "removeRefused": "Il passaggio {n} sceglie il suo percorso da questo campo. Cambia prima la sua condizione, poi rimuovi il campo.",
+    "addedNotUsed": "Aggiunto “{name}”. Ora usalo: apri un passaggio e scegli “Usa un campo per questa impostazione”, oppure inseriscilo nel messaggio per i passaggi IA.",
+    "add": "Aggiungi un campo",
+    "addNew": "Un nuovo campo",
+    "addBrief": "Una scelta che i passaggi già leggono",
+    "addHint": "I campi sono ciò che le persone compilano quando avviano l’app. Tieni solo ciò che cambia da un’esecuzione all’altra.",
+    "atMost": "Un’app può avere al massimo {max} campi.",
+    "reset": "Ripristina gli input automatici",
+    "save": "Salva la pagina dell’app",
+    "resetMessage": "Così dimentichi le modifiche fatte a questa pagina dell’app. L’app chiederà ciò che serve ai suoi passaggi e i campi che hai aggiunto lasciano la pagina (i passaggi che li usavano mantengono le proprie impostazioni).",
+    "resetConfirm": "Ripristina",
+    "badge": {
+      "required": "Obbligatorio",
+      "more": "Altre opzioni"
+    },
+    "used": {
+      "setting": "Passaggio {n} · {setting}",
+      "condition": "Passaggio {n} · sceglie il percorso",
+      "request": "Messaggio per i passaggi IA",
+      "agent": "Passaggio {n} · modello",
+      "none": "Non ancora usato: nessun elemento del flusso di lavoro lo legge."
+    },
+    "types": {
+      "shortText": "Testo breve",
+      "longText": "Testo lungo",
+      "number": "Numero",
+      "duration": "Durata",
+      "choice": "Scelta",
+      "toggle": "Interruttore",
+      "shape": "Formato",
+      "model": "Modello"
+    },
+    "newLabel": {
+      "shortText": "Risposta breve",
+      "longText": "Descrizione",
+      "number": "Quanti",
+      "duration": "Durata",
+      "choice": "Scegline uno",
+      "toggle": "Interruttore",
+      "shape": "Formato"
+    },
+    "kinds": {
+      "brief": "Impostazione dell’esecuzione",
+      "files": "File",
+      "notes": "Note"
+    },
+    "request": {
+      "label": "Messaggio per i passaggi IA",
+      "hint": "Facoltativo. Si aggiunge alla richiesta di ogni esecuzione, così gli autori IA vedono ciò che le persone hanno compilato. Usa “Inserisci un campo”.",
+      "insert": "Inserisci un campo"
+    },
+    "preview": {
+      "title": "Anteprima della pagina dell’app",
+      "note": "Ecco cosa vedono le persone. Prova i campi: non viene inviato nulla.",
+      "untitled": "App senza titolo",
+      "empty": "Questa app non chiede ancora nulla.",
+      "moreOptions": "Altre opzioni ({count})",
+      "modelStandIn": "Qui le persone scelgono tra le schede dei modelli.",
+      "filesStandIn": "Qui le persone scelgono i file.",
+      "briefStandIn": "Qui le persone scelgono."
+    },
+    "edit": {
+      "label": "Nome nella pagina",
+      "labelFor": "Nome nella pagina per {name}",
+      "help": "Riga di aiuto",
+      "helpHint": "Facoltativa. Una riga breve sotto il campo.",
+      "example": "Esempio",
+      "exampleHint": "Mostrato in grigio nella casella vuota, per far vedere cosa scrivere. Non viene mai inviato.",
+      "required": "Obbligatorio",
+      "more": "In “Altre opzioni”",
+      "startsAs": "Parte da",
+      "maxLength": "Risposta più lunga (caratteri)",
+      "min": "Minimo",
+      "max": "Massimo",
+      "step": "Aumenta di",
+      "unit": "Unità",
+      "unitNone": "Nessuna",
+      "units": {
+        "seconds": "Secondi",
+        "takes": "Take",
+        "percent": "Percentuale"
+      },
+      "lengths": "Durate da proporre",
+      "lengthsHint": "Facoltativo. Le persone ne scelgono una invece di scrivere un numero.",
+      "seconds": "{count, plural, one {# secondo} other {# secondi}}",
+      "startsOn": "Parte attivo",
+      "onLabel": "Parole quando è attivo",
+      "offLabel": "Parole quando è spento",
+      "shapes": "Formati da proporre",
+      "noDefault": "Nessun valore iniziale",
+      "showWhen": "Mostra solo quando",
+      "showWhenHint": "Nasconde questo campo finché un altro interruttore o scelta non ha un valore.",
+      "always": "Sempre",
+      "whenIs": "è",
+      "on": "Attivo",
+      "off": "Spento",
+      "options": "Opzioni",
+      "optionLabel": "Mostrata come",
+      "optionLabelFor": "Opzione {n} di {name}: mostrata come",
+      "optionValue": "Valore usato",
+      "optionValueFor": "Opzione {n} di {name}: valore usato",
+      "removeOption": "Rimuovi l’opzione",
+      "removeOptionFor": "Rimuovi l’opzione {n} di {name}",
+      "addOption": "Aggiungi un’opzione",
+      "optionN": "Opzione {n}",
+      "type": "Tipo di campo",
+      "typeHint": "Solo tipi con lo stesso genere di risposta: le impostazioni che usano questo campo continuano a funzionare.",
+      "typeFixed": "Tipo: {type}. Per chiedere qualcosa di un altro tipo, aggiungi un nuovo campo e usalo dove si usa questo."
+    },
+    "models": {
+      "saveFirst": "Salva la pagina dell’app, poi scegli quali modelli le persone possono usare.",
+      "loading": "Caricamento dei modelli",
+      "loadFailed": "Non siamo riusciti a caricare i modelli.",
+      "tryAgain": "Riprova",
+      "none": "Questo spazio di lavoro non ha ancora un modello di questo tipo.",
+      "any": "Le persone possono scegliere qualsiasi modello",
+      "anyHint": "Spento: vengono proposti solo i modelli che spunti.",
+      "allowed": "Modelli consentiti",
+      "recommended": "Consigliato",
+      "recommendedHint": "Mostrato per primo e scelto quando le persone non scelgono nulla.",
+      "recommendedDefault": "Il modello abituale dello spazio di lavoro"
+    },
+    "step": {
+      "legend": "Campi dell’app",
+      "intro": "Lascia che le persone compilino queste impostazioni nella pagina dell’app quando la avviano.",
+      "added": "Aggiunto il campo “{name}” alla pagina dell’app. Rinominalo in “Input dell’app”.",
+      "itemLabel": "{label} ({n})",
+      "governed": "Lo decide il campo “{field}” dell’app.",
+      "use": "Usa un campo per questa impostazione",
+      "useExisting": "Usa “{name}”",
+      "useNew": "Un nuovo campo",
+      "fromApp": "Dall’app: {name}",
+      "stop": "Smetti di usare il campo",
+      "agentModel": "Modello",
+      "letPick": "Lascia scegliere il modello di questo agente",
+      "stopAgent": "Non lasciarlo più scegliere",
+      "agentModelLabel": "Modello IA",
+      "textWithFields": "{label}, con campi",
+      "textWithFieldsHint": "Parole fisse e campi insieme. I campi vengono compilati quando l’app viene avviata.",
+      "insert": "Inserisci un campo",
+      "stopText": "Smetti di usare i campi",
+      "answersIntro": "Cosa imposta qui ogni risposta. Lascia “Tieni il valore del passaggio” per non cambiare nulla con quella risposta.",
+      "answerSets": "Quando “{name}” è {answer}",
+      "answerOn": "attivo",
+      "answerOff": "disattivo",
+      "keepOwn": "Tieni il valore del passaggio",
+      "valueOn": "Attivo",
+      "valueOff": "Disattivo",
+      "settingLabel": {
+        "spokenText": "Parole da pronunciare",
+        "stillModel": "Modello per l'immagine",
+        "visionModel": "Modello che guarda l'immagine"
+      }
+    },
+    "condition": {
+      "insert": "Leggi un campo dell’app",
+      "finish": "Termina l’esecuzione qui"
+    },
+    "drag": "Trascina per riordinare",
+    "changes": {
+      "title": "Cosa cambia quando salvi"
+    }
+  },
+  "permission": {
+    "mediaEgress": {
+      "label": "Consenti l'invio dei tuoi file ai servizi AI",
+      "title": "Permesso",
+      "neededBy": "Serve a: {steps}.",
+      "usedBy": "Usato da: {steps}.",
+      "alreadyAllowed": "Già consentito nelle impostazioni dei passaggi: {steps}. Per interromperlo, disattivalo in Modifica i passaggi.",
+      "step": "{name} ({reason})",
+      "thisRunOnly": "Vale solo per questa esecuzione. I passaggi salvati non cambiano.",
+      "required": "Consenti l'invio dei tuoi file ai servizi AI per avviare questa app.",
+      "allow": "Vai al permesso",
+      "reason": {
+        "tracksAnObjectByName": "trova l'oggetto",
+        "startsFromFrame": "parte da un fotogramma delle tue riprese",
+        "showsAnAvatar": "mostra un avatar",
+        "showsAnAvatarOptional": "mostra un avatar, quando ne scegli uno",
+        "plannedFrames": "può far partire una clip dalle tue riprese",
+        "plannedFramesAndSubjects": "può far partire una clip dalle tue riprese, o mostrare le persone e gli oggetti degli avatar del tuo progetto (le loro immagini vanno all'azienda di AI esterna che realizza il video)",
+        "enhancesVideoWithAi": "migliora il video",
+        "cleansAudioWithAi": "pulisce l'audio",
+        "other": "invia i tuoi file"
+      },
+      "allowedBy": {
+        "app": "Consentito nell'app",
+        "api_key": "Consentito da una chiave API",
+        "mcp": "Consentito da uno strumento collegato",
+        "assistant_card": "Approvato nell'assistente",
+        "other": "Consentito"
+      },
+      "builder": {
+        "locked": "Aggiunto dall'app",
+        "explain": "L'app mostra questo permesso nella sua pagina perché un passaggio invia file a un servizio AI. Non si può rimuovere, rinominare o collegare a un'altra impostazione."
+      },
+      "stepEditorNote": "Puoi consentirlo anche a ogni esecuzione, nella pagina dell'app."
+    }
+  },
+  "goals": {
+    "title": "Cosa vuoi fare?",
+    "hint": "Scegli un obiettivo e prepariamo noi l'app.",
+    "somethingElse": {
+      "label": "Altro",
+      "hint": "Racconta all'assistente cosa hai in mente."
+    },
+    "missing": "Non ancora disponibile in questo progetto.",
+    "cut": {
+      "label": "Monta le mie riprese",
+      "hint": "Trasforma le clip grezze in un video asciutto."
+    },
+    "subtitles": {
+      "label": "Sottotitoli",
+      "hint": "Aggiungi i sottotitoli a un video."
+    },
+    "voice": {
+      "label": "Voce (narrazione)",
+      "hint": "Aggiungi una voce al tuo video."
+    },
+    "translate": {
+      "label": "Traduci o doppia",
+      "hint": "Fai il tuo video in un'altra lingua."
+    },
+    "promo": {
+      "label": "Promo",
+      "hint": "Un breve video promo dal tuo progetto."
+    },
+    "blur": {
+      "label": "Sfoca o evidenzia",
+      "hint": "Nascondi un volto o indica qualcosa."
+    },
+    "greenScreen": {
+      "label": "Green screen",
+      "hint": "Metti un nuovo sfondo dietro una persona."
+    },
+    "thumbnail": {
+      "label": "Miniatura",
+      "hint": "Non ancora disponibile. Per ora chiedi all'assistente."
+    }
+  },
+  "briefLabels": {
+    "language": "Lingua",
+    "narrationLanguage": "Lingua della narrazione",
+    "spokenLanguage": "Lingua parlata",
+    "sourceLanguage": "Lingua di origine",
+    "length": "Durata",
+    "shape": "Formato",
+    "resolution": "Risoluzione",
+    "quality": "Qualità",
+    "narration": "Narrazione",
+    "style": "Stile",
+    "design": "Design",
+    "tone": "Tono",
+    "overlayCardAudio": "Sotto un'immagine a schermo intero"
+  }
+}

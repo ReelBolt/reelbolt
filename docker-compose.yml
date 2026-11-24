@@ -1,0 +1,1470 @@
+# Session-key guard: NOT in this file. go-api, inference and web read JWT_SIGNING_KEY below (go-api
+# and inference also refuse to start with an empty or short key). Compose checks `:?` in each file
+# before merging overlays, so a guard here would also stop the render hosts, which load this file
+# without the session key. The guard therefore lives in:
+#   - docker-compose.override.yml: loaded automatically only when no -f is given (single host);
+#   - docker-compose.control.yml and a cloud override that is not in the public repository (control).
+# Render hosts (docker-compose.media.yml, a cloud override that is not in the public repository) always pass
+# explicit -f files, never see it, and refuse to render without REELBOLT_RENDER_HOST=true instead.
+# Never nest `${A:-${B:?}}`: Compose v2.32.4 evaluates the inner `:?` eagerly.
+
+services:
+  postgres:
+    container_name: reelbolt-postgres
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-reelforge}
+    # Loopback-only. A published port binds 0.0.0.0 by default, which puts it on
+    # the host gateway address that every container — including a sandbox — can
+    # route to, as well as on the LAN. Only nginx is meant to be reachable.
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-reelforge}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      reelbolt:
+        aliases:
+          - postgres
+
+  # S3-compatible object storage. Was MinIO; switched to Garage (Deuxfleurs, AGPLv3,
+  # genuinely community-maintained) after MinIO pulled its community image off Docker
+  # Hub — see the git history of this file. Config keys keep the `MinIO`/`MINIO_*`
+  # names below (appsettings, env vars) to avoid a pointless rename of stable, working
+  # string keys; only the running backend changed.
+  #
+  # Bootstraps itself in one step via --single-node --default-bucket (Garage >=
+  # v2.3.0): no separate init container needed, unlike MinIO's `mc`-based minio-init.
+  # garage.toml (RPC/admin secrets, single-node replication_factor=1) is NOT
+  # templated from env vars — the image ships no shell (`sh` doesn't exist in it), so
+  # it's a real file at garage/garage.toml, gitignored; copy garage/garage.toml.example
+  # to create it (same pattern as .env.example -> .env). Its rpc_secret/admin_token
+  # never leave the docker network (no host port for 3901/3903), so committing a
+  # per-checkout generated file, not a secret value, is the whole risk surface.
+  garage:
+    image: dxflrs/garage:v2.4.1
+    restart: unless-stopped
+    command: ["/garage", "server", "--single-node", "--default-bucket"]
+    environment:
+      GARAGE_DEFAULT_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
+      GARAGE_DEFAULT_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}
+      GARAGE_DEFAULT_BUCKET: ${MINIO_BUCKET:-reelforge}
+    ports:
+      - "127.0.0.1:${MINIO_API_PORT:-9000}:3900"
+    volumes:
+      - ./garage/garage.toml:/etc/garage.toml:ro
+      - garagedata:/data
+      - garagemeta:/meta
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/garage", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - reelbolt
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env (see .env.example)}
+    ports:
+      - "127.0.0.1:${RABBITMQ_PORT:-5672}:5672"
+      - "127.0.0.1:${RABBITMQ_MGMT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+      - ./rabbitmq/conf.d:/etc/rabbitmq/conf.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - reelbolt
+
+  whisper:
+    image: ghcr.io/speaches-ai/speaches:latest-cpu
+    restart: unless-stopped
+    environment:
+      WHISPER__INFERENCE_DEVICE: cpu
+      WHISPER__COMPUTE_TYPE: int8
+    ports:
+      # Loopback by default: speaches has no auth (api_key unset), so an unauthenticated ASR
+      # API must not be published on every interface (Docker publishes bypass host firewalls).
+      # In-network consumers use the service name (http://whisper:8000): an OpenAICompatible
+      # provider, which is how speaches is registered, is exempt from the SSRF guard in
+      # InferenceProvidersController, so docker host names are accepted. To reach it from another
+      # machine instead, set WHISPER_BIND_ADDRESS to a private interface address, e.g. a Tailscale
+      # IP, never 0.0.0.0 on a machine that is reachable from the internet.
+      - "${WHISPER_BIND_ADDRESS:-127.0.0.1}:${WHISPER_PORT:-9002}:8000"
+    volumes:
+      - whisper-hf-cache:/home/ubuntu/.cache/huggingface/hub
+    networks:
+      - reelbolt
+
+  # Local CPU text-embedding server for semantic file search (Qdrant) — registered as an
+  # `Embedding`-capability inference_providers row (Kind: OpenAICompatible, endpoint
+  # http://embeddings:80/v1, model Qwen/Qwen3-Embedding-0.6B -> 1024-dim vectors), see
+  # docs/embeddings.md. text-embeddings-inference >= 1.7.2 supports the Qwen3 embedding
+  # architecture; it serves the OpenAI-compatible POST /v1/embeddings. Like `whisper` this binds
+  # loopback only: nothing off-host needs it, the in-network consumers use the service name.
+  embeddings:
+    image: ghcr.io/huggingface/text-embeddings-inference:${EMBEDDINGS_IMAGE_TAG:-cpu-1.8}
+    restart: unless-stopped
+    command: ["--model-id", "${EMBEDDINGS_MODEL:-Qwen/Qwen3-Embedding-0.6B}", "--port", "80", "--auto-truncate", "--max-batch-tokens", "4096"]
+    ports:
+      - "127.0.0.1:${EMBEDDINGS_PORT:-9003}:80"
+    volumes:
+      - embeddings-hf-cache:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:80/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+    networks:
+      - reelbolt
+
+  # OPTIONAL self-hosted reranker for the assistant's documentation search (`Rerank` capability, see
+  # docs/platform-docs-search.md "Model rerank"). NOT auto-wired: it is commented out, so `docker compose up`
+  # is unaffected and CI downloads no model. To use it, uncomment, `docker compose up -d reranker`, then
+  # register an inference provider row: capability Rerank, kind OpenAICompatible, endpoint
+  # http://reranker:80, model BAAI/bge-reranker-base (apply the suggested $0 price: self-hosted, free per
+  # call, nothing leaves the host). Same image family as `embeddings`; text-embeddings-inference serves
+  # `POST /rerank` for a sequence-classification (reranker) model. The image tag is pinned.
+  #
+  # reranker:
+  #   image: ghcr.io/huggingface/text-embeddings-inference:${RERANKER_IMAGE_TAG:-cpu-1.8}
+  #   restart: unless-stopped
+  #   command: ["--model-id", "${RERANKER_MODEL:-BAAI/bge-reranker-base}", "--port", "80", "--auto-truncate"]
+  #   volumes:
+  #     - reranker-hf-cache:/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -fsS http://localhost:80/health || exit 1"]
+  #     interval: 15s
+  #     timeout: 5s
+  #     retries: 20
+  #     start_period: 120s
+  #   networks:
+  #     - reelbolt
+  #   # Add `reranker-hf-cache:` under the top-level `volumes:` when enabling.
+
+  # Optional self-hosted System-One-compatible decision model server, used for
+  # Capability=Decision inference (see docs/decision-models.md). Opt-in via
+  # `docker compose --profile gpu up -d decision` — like `caddy`/`tls`, it is
+  # absent from the default stack, so `docker compose up` is unaffected.
+  #
+  # There is no pullable default image. Open-Jev, vllm-jev and Kev all ship
+  # source-only recipes you build and run yourself (`open-jev:2b`,
+  # `vllm-jev serve`, `kev.serve`), and none publishes a container image. Build
+  # one, tag it, and point DECISION_IMAGE at it: the default below is a LOCAL
+  # tag on purpose, so a missing image fails loudly at `up` instead of silently
+  # pulling an unrelated backend from a registry. The container port is pinned
+  # at 8791 (System One's own default — every recipe starts its server there);
+  # only the host side is configurable.
+  #
+  # Which backend that image serves is a decided call (option A,
+  # 2026-10-02): Kev-4B is the RECOMMENDED default for this host, the Open-Jev +
+  # vllm-jev recipe is documented for NVIDIA hosts, and the CPU/Open-Jev path is
+  # the fallback. The image therefore stays an env choice — DECISION_IMAGE — so
+  # switching backends is one variable, and an operator reading only this file
+  # still gets the right default. Long-form runbook: docs/decision-models.md.
+  #
+  # Nothing consumes DECISION_PORT. Exactly like `whisper`, this endpoint
+  # becomes usable only by registering it as an inference_providers row —
+  # capability "Decision", kind OpenJev — via
+  # POST /api/v1/inference-providers (admin only). The address to register is
+  # the in-network service address:
+  #
+  #   http://decision:8791
+  #
+  # No /v1/systemone suffix. DecisionClientFactory.BuildOpenJev takes the stored
+  # endpoint as HttpClient.BaseAddress and TypeSafeDecisionClient POSTs the
+  # relative path "v1/systemone" against it, so the suffix is appended for you;
+  # storing it would resolve to /v1/systemone/v1/systemone and 404.
+  #
+  # In-network reachability does NOT depend on the port mapping. A compose
+  # `ports:` entry publishes to the HOST only — container-to-container traffic
+  # never traverses it. `decision` joins the `reelbolt` network below, so the
+  # Inference API and the WorkflowEngine resolve `decision` to this container's
+  # address and reach 8791 directly, whatever DECISION_BIND_ADDRESS says. A
+  # loopback-only publish does not impede that; it is simply the most
+  # conservative publish available.
+  #
+  # The SSRF guard is not a constraint on this address either.
+  # IsDisallowedEndpoint (InferenceProvidersController) is kind-aware: for
+  # InferenceProviderKind.OpenJev it returns early and skips the entire address
+  # classification, the DNS lookup included, so a docker service name — which
+  # resolves onto this compose network, 172.19.0.0/16, inside the range it
+  # otherwise rejects — is accepted. The absolute-http(s)-URL requirement is
+  # unchanged. (For every other kind the guard still applies in full, including
+  # the DNS resolution.)
+  #
+  # DECISION_BIND_ADDRESS exists only for host-side and off-host access: a curl
+  # check against 127.0.0.1:8791 from the docker host, or reaching the port from
+  # another machine. A bare 0.0.0.0 bind publishes
+  # on every interface, which equally exposes this unauthenticated endpoint to
+  # every network the host is on. That is a wider blast radius than the default
+  # and a decision this file does not take for the operator.
+  # The option A decision (2026-10-02) chose the default BACKEND for this service,
+  # not this publish: option A did not widen the bind, so the loopback default
+  # below is unchanged and stays the default. The opt-in is still one variable.
+  #
+  # No healthcheck, deliberately. The upstreams disagree on health paths
+  # (`/health` on Open-Jev, nothing guaranteed elsewhere) and an operator-built
+  # image may expose neither, so a probe here would mostly manufacture false
+  # "unhealthy" verdicts. Nothing waits on this container either — same
+  # reasoning as `whisper`, which also declares none.
+  #
+  # No `deploy:`/`resources:`/`devices:`/`runtime:` block and no vendor key.
+  # That is still correct, and it is now a structural reason rather than an open
+  # question. It is decided (option A, 2026-10-02): Kev-4B is the recommended
+  # default backend for this host, the Open-Jev + vllm-jev recipe is documented
+  # for NVIDIA hosts, and the CPU/Open-Jev path is the fallback. The decision
+  # changes the default backend, not the plumbing, because a vendor-specific
+  # device block cannot be unconditional: NVIDIA needs
+  # `deploy.resources.reservations.devices` with `driver: nvidia`, while ROCm
+  # needs /dev/kfd + /dev/dri mounts plus the render group. Declaring either
+  # would break hosts of the other vendor, and a `devices:` entry naming a node
+  # that does not exist fails outright. So the snippet stays operator-supplied —
+  # and on this host (AMD Radeon AI PRO R9700, RDNA4 gfx1201) it is the ROCm one:
+  #
+  #   devices:
+  #     - /dev/kfd
+  #     - /dev/dri
+  #   group_add:
+  #     - render
+  #
+  # ...with the NVIDIA form below for the Open-Jev + vllm-jev recipe on an
+  # NVIDIA host:
+  #
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+  #
+  # Not a promise that the GPU path works: it has NOT been executed on this
+  # card, and Kev's ROCm support is upstream documentation we have not
+  # validated. That validation is a real run of this profile, and agents do not
+  # build or restart containers — the run is scheduled by the maintainers on
+  # the shared stack. Until then the CPU/Open-Jev path is the fallback.
+  decision:
+    profiles: ["gpu"]
+    image: ${DECISION_IMAGE:-reelbolt-decision:local}
+    restart: unless-stopped
+    ports:
+      - "${DECISION_BIND_ADDRESS:-127.0.0.1}:${DECISION_PORT:-8791}:8791"
+    volumes:
+      # First start downloads the model weights from Hugging Face; a named
+      # volume keeps them across container recreation instead of re-downloading
+      # gigabytes on every `up`.
+      - decision-model-cache:/root/.cache/huggingface
+    networks:
+      - reelbolt
+
+  # Self-hosted ComfyUI for the `ComfyUI` VideoGeneration provider kind (issue #93 phase 5, see
+  # docs/video-generation.md "Self-hosted ComfyUI"). Gated behind the same `gpu` profile as
+  # `decision`, so `docker compose up` ignores it entirely; bring it up with
+  #   docker compose --profile gpu up -d comfyui
+  #
+  # The image is operator-supplied on purpose. ComfyUI publishes NO official container image that
+  # this repository has verified; the community images we are aware of (for example
+  # ghcr.io/ai-dock/comfyui) were found by web search only and have not been pulled or run here, so
+  # none is baked in as a default that would silently pull a stranger's image. Point COMFYUI_IMAGE at
+  # an image you build or trust. The container must expose ComfyUI's HTTP API on 8188 and have the
+  # Wan 2.2 TI2V-5B weights the vetted templates name in its models directory:
+  #   models/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors
+  #   models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors
+  #   models/vae/wan2.2_vae.safetensors
+  # The provider test (Admin -> Inference providers -> Test) checks /system_stats and every node
+  # class the templates need without queueing a prompt, so a wrong image fails there, not mid-run.
+  #
+  # GPU plumbing is vendor-specific for exactly the reason the `decision` service's comment spells
+  # out above: the NVIDIA form is shown here because the Wan 2.2 recipe upstream is CUDA; a ROCm host
+  # replaces the `deploy:` block with the /dev/kfd + /dev/dri device mounts. Loopback-only publish:
+  # the in-network consumer is the workflow engine, which reaches it at http://comfyui:8188.
+  comfyui:
+    profiles: ["gpu"]
+    image: ${COMFYUI_IMAGE:-reelbolt-comfyui:local}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${COMFYUI_PORT:-8188}:8188"
+    volumes:
+      # Model weights (tens of GB) survive container recreation.
+      - comfyui-models:/opt/ComfyUI/models
+      - comfyui-output:/opt/ComfyUI/output
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - reelbolt
+
+  # Grafana, reading the six versioned dashboards through the provisioning
+  # provisioning files. Opt-in on purpose: it is never a default service, and it belongs on the
+  # CONTROL box only. It needs the app database (the Postgres datasource reads the billing ledger)
+  # and it is an operator UI, so it has no business on the media/engine plane — the cloud engine
+  # override pins it off beside the other control-plane-only services.
+  #
+  # The shipped cloud deployment does NOT run this container: it reads the same six dashboards from
+  # Grafana Cloud over OTLP (docs/observability.md). This one is for a self-host stack, or for
+  # a control box pointed at the organization's hosted Prometheus/Tempo instead.
+  #
+  # Start it with
+  #   docker compose --profile observability up -d grafana
+  #   The dashboards and provisioning are operator files and are not part of the public
+  #   repository: in a public checkout the two read-only mounts below are empty, so Grafana starts with no
+  #   dashboards. Put your own provisioning and dashboards in those directories first.
+  # A profiled service is excluded from the default service list (`docker compose config
+  # --services` omits it unless `--profile observability` is passed), but naming the service
+  # explicitly on the command line starts it without `--profile` — so `docker compose up -d grafana`
+  # works too. That second form matters here because the operator host script
+  # starts an explicit service list, not a profile.
+  #
+  # Every variable has a soft default and none is `:?`-required: a required variable in an opt-in
+  # service would still break `docker compose config` for every user of the default profile. An
+  # unset variable leaves its datasource provisioned but unreachable, which is intended.
+  grafana:
+    profiles: ["observability"]
+    image: grafana/grafana:12.4.2
+    container_name: reelbolt-grafana
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Loopback-only, like every other publish: only nginx is meant to be reachable. The default is
+    # 3300, not 3000 — `web` already publishes 127.0.0.1:3000, so the documented start command could
+    # not bind with the obvious default.
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3300}:3000"
+    # Fail closed on the one credential the operator must set. Grafana's shipped default is
+    # admin/admin and an empty variable does not change that (measured on 12.4.2: admin:admin answers
+    # 200 with isGrafanaAdmin: true, and nothing is generated or logged). `:?` cannot be used here —
+    # it would break `docker compose config` for every user of the default profile — and the operator host script's
+    # check_env is not on the README's own start path, so the container preflights itself.
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        if [ -z "$$GF_SECURITY_ADMIN_PASSWORD" ]; then
+          echo "reelbolt: GRAFANA_ADMIN_PASSWORD is empty; refusing to start Grafana with its admin/admin default" >&2
+          exit 1
+        fi
+        exec /run.sh
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      # Empty or absent leaves Grafana's built-in `admin` default in place (nothing is generated
+      # and nothing is logged), so set GRAFANA_ADMIN_PASSWORD. The publish is loopback-only.
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      # The provisioning file interpolates these at start-up (no endpoint or credential in the
+      # tree). All three datasources are covered: Prometheus, Tempo and Postgres.
+      GRAFANA_PROMETHEUS_URL: ${GRAFANA_PROMETHEUS_URL:-}
+      GRAFANA_PROMETHEUS_USER: ${GRAFANA_PROMETHEUS_USER:-}
+      GRAFANA_PROMETHEUS_TOKEN: ${GRAFANA_PROMETHEUS_TOKEN:-}
+      GRAFANA_TEMPO_URL: ${GRAFANA_TEMPO_URL:-}
+      GRAFANA_TEMPO_USER: ${GRAFANA_TEMPO_USER:-}
+      GRAFANA_TEMPO_TOKEN: ${GRAFANA_TEMPO_TOKEN:-}
+      GRAFANA_POSTGRES_HOST: ${GRAFANA_POSTGRES_HOST:-postgres}
+      GRAFANA_POSTGRES_PORT: ${GRAFANA_POSTGRES_PORT:-5432}
+      GRAFANA_POSTGRES_DATABASE: ${GRAFANA_POSTGRES_DATABASE:-reelforge}
+      GRAFANA_POSTGRES_USER: ${GRAFANA_POSTGRES_USER:-}
+      GRAFANA_POSTGRES_PASSWORD: ${GRAFANA_POSTGRES_PASSWORD:-}
+      GRAFANA_POSTGRES_SSLMODE: ${GRAFANA_POSTGRES_SSLMODE:-require}
+    volumes:
+      # Both mounted read-only: the JSON in the tree is the source of truth, so a change goes
+      # through a commit, not the UI.
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards/reelbolt:ro
+      - grafana-data:/var/lib/grafana
+    networks:
+      - reelbolt
+
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    restart: unless-stopped
+    volumes:
+      - ./data/qdrant:/qdrant/storage
+    networks:
+      - reelbolt
+
+  inference:
+    build:
+      context: ./inference
+      dockerfile: src/ReelBolt.Inference.Api/Dockerfile
+      # The /docs tree ships inside the image for the assistant's documentation search
+      # (docs/platform-docs-search.md); the Dockerfile copies it from this named context.
+      additional_contexts:
+        platform-docs: ./docs
+    restart: unless-stopped
+    extra_hosts:
+      # Lets provider rows point at a self-hosted server on the Docker host (e.g. a local fish-speech)
+      - "host.docker.internal:host-gateway"
+    environment:
+      VideoSources__MaxBytes: ${VIDEO_SOURCE_MAX_BYTES:-32212254720}
+      VideoSources__MaxSeconds: ${VIDEO_SOURCE_MAX_SECONDS:-3600}
+      VideoSources__MaxTooDemandingFailuresPerDay: ${VIDEO_SOURCE_MAX_TOO_DEMANDING_PER_DAY:-3}
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-reelforge};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-postgres}
+      # Connection pool ceiling and server connection sampling via pg_stat_database (docs/database-connections.md).
+      Database__MaxPoolSize: ${INFERENCE_DB_MAX_POOL_SIZE:-16}
+      # Public API (scoped API keys, /api/v1/org/api-keys). Off by default.
+      PublicApi__Enabled: ${PUBLIC_API_ENABLED:-false}
+      Database__ServerConnectionSampleSeconds: ${DB_CONNECTION_SAMPLE_SECONDS:-30}
+      Jwt__Issuer: ${JWT_ISSUER:-reelbolt-api}
+      Jwt__Audience: ${JWT_AUDIENCE:-reelbolt-inference}
+      # Required (see x-session-key-guard at the top of this file). The service also refuses to start
+      # with an empty or short key.
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:-}
+      # Optional second key (never the JWT_SIGNING_KEY value). When set, engine calls are validated with
+      # it and confined to the routes the engine uses; set it on workflow-engine too (.env.example).
+      EngineJwt__SigningKey: ${ENGINE_JWT_SIGNING_KEY:-}
+      # Cut-over only: true keeps accepting the engine's old session-key tokens (same two routes, logged).
+      EngineJwt__AcceptLegacyOnBehalfOf: ${ENGINE_JWT_ACCEPT_LEGACY_OBO:-false}
+      MinIO__Endpoint: http://garage:3900
+      MinIO__AccessKey: ${MINIO_ACCESS_KEY:-minioadmin}
+      MinIO__SecretKey: ${MINIO_SECRET_KEY:-minioadmin}
+      MinIO__BucketName: ${MINIO_BUCKET:-reelforge}
+      # Garage enforces the SigV4 region in the signature (MinIO didn't care) — must
+      # match garage.toml's s3_api.s3_region exactly or every request 403s.
+      MinIO__Region: garage
+      # Host that presigned URLs name (SigV4 signs Host, so runners outside the compose network need
+      # a reachable address). Empty falls back to MinIO__Endpoint.
+      MinIO__PublicEndpoint: ${MINIO_PUBLIC_ENDPOINT:-}
+      AzureOpenAI__Endpoint: ${AZURE_OPENAI_ENDPOINT:-}
+      AzureOpenAI__ApiKey: ${AZURE_OPENAI_API_KEY:-}
+      AzureOpenAI__DeploymentName: ${AZURE_OPENAI_DEPLOYMENT:-gpt-4o-mini}
+      # Read by the Anthropic SDK itself (not by any ReelBolt config binding) when an
+      # `inference_providers` row of kind Anthropic stores the literal `env:` as its api key, so a
+      # developer can run against their own credentials without persisting a secret. See
+      # docs/anthropic-provider.md for which credential is permitted where.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_AUTH_TOKEN: ${ANTHROPIC_AUTH_TOKEN:-}
+      # Content moderation master switch (docs/content-moderation.md). Off by default; a deployment
+      # opts in with CONTENT_MODERATION_ENABLED=true and a resolved ContentModeration capability.
+      # Enabling it with no resolved provider makes publishing fail closed, never silently allow.
+      ContentModeration__Enabled: ${CONTENT_MODERATION_ENABLED:-false}
+      # Avatars kill switch (docs/design/avatars.md). Avatars of people are live (the Terms and Privacy
+      # versions that cover objects, pictures and the workspace avatar library are published: 2026-11-17). Off by default: while false every /api/v1/projects/{id}/avatars route answers 404 and writes nothing.
+      Avatars__Enabled: ${AVATARS_ENABLED:-false}
+      # Avatars of objects (products, vehicles, places; docs/design/avatar-objects.md): their own switch, so they can
+      # be switched on or off apart from avatars of people. Off by default. With either switch on the
+      # avatar routes answer; a row of the kind that is off is treated as absent.
+      Avatars__Objects__Enabled: ${AVATAR_OBJECTS_ENABLED:-false}
+      # Who may generate a clip that shows a person (Off | PlatformAdminOnly | On), the same value the workflow engine
+      # reads: the API refuses a clip from the editor or the assistant that the engine would refuse
+      # (AVATAR_GENERATION_DISABLED) before anything is queued. The engine stays the authority at run time.
+      Avatars__Generation: ${AVATARS_GENERATION:-Off}
+      # A model on the customer's own computer, relayed through their desktop app (docs/local-llm-gateway.md).
+      # Only used when an organization registers a LocalRunner provider; must match the gateway's token.
+      # Leave empty when no runner gateway is deployed (the provider then answers "not set up").
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      # Read by ChatClientFactory when an `inference_providers` row of kind Gemini stores `env:`
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      # Read by ChatClientFactory when an `inference_providers` row of kind DeepSeek stores `env:`
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      # Project Arachnid Shield (docs/csam.md). The master switch is OFF by default on self-host;
+      # the cloud control overlay sets it true. Credentials come from /opt/reelbolt/.env; a blank
+      # credential is "not configured" and the matcher fails open (upload proceeds, audited
+      # not-scanned). Credentials are bound ONLY to the Inference API, never the engine.
+      Csam__Arachnid__Enabled: ${CSAM_ENABLED:-false}
+      Csam__Arachnid__Username: ${ARACHNID_API_USERNAME:-}
+      Csam__Arachnid__Password: ${ARACHNID_API_PASSWORD:-}
+      # C9 data-subject rights (docs/design/saas-accounts.md "Implemented export and deletion").
+      # InternalBaseUrl is the Go API's private surface inside the compose network; nginx never
+      # routes /internal/*, so it is unreachable from outside.
+      Account__InternalBaseUrl: ${ACCOUNT_INTERNAL_BASE_URL:-http://go-api:8080}
+      Account__InternalToken: ${INTERNAL_API_TOKEN:-}
+      # F-11: the origin the export link is minted against (this side's MinIO__PublicEndpoint /
+      # MinIO__Endpoint), so the Go mailer can tell whether it will accept it.
+      Account__MailLinkEndpoint: ${ACCOUNT_MAIL_LINK_ENDPOINT:-}
+      Account__Export__Enabled: ${ACCOUNT_EXPORT_ENABLED:-true}
+      Account__Purge__Enabled: ${ACCOUNT_PURGE_ENABLED:-true}
+      Account__Purge__GraceDays: ${ACCOUNT_PURGE_GRACE_DAYS:-30}
+      Account__Purge__PurgeUnverified: ${ACCOUNT_PURGE_UNVERIFIED:-false}
+      # Billing (WP B9, docs/billing.md). Off by default: self-host has no billing and every
+      # /api/v1/billing endpoint answers 404. Paddle values are SECRETS in the cloud (docs/secrets.md).
+      Billing__Enabled: ${BILLING_ENABLED:-false}
+      # Recipe marketplace (docs/marketplace.md "Before switching it on"). Off by default: every marketplace
+      # route answers a bare 404 and no worker acts. Inference API and engine MUST match: the API publishes the
+      # preview request, the engine does the work and answers a failure while it is off.
+      Marketplace__Enabled: ${MARKETPLACE_ENABLED:-false}
+      Billing__FirstVideoGrant__Abuse__IpInfoToken: ${IPINFO_TOKEN:-}
+      Billing__Paddle__ApiKey: ${PADDLE_API_KEY:-}
+      # The CLIENT-side (publishable) token, for the embedded Paddle.js checkout the dashboard opens.
+      # Not a secret: it ships to the browser through the billing summary and grants nothing on its
+      # own. Left blank, the dashboard sends the buyer to Paddle's hosted page for the same
+      # transaction instead.
+      Billing__Paddle__ClientToken: ${PADDLE_CLIENT_TOKEN:-}
+      Billing__Paddle__WebhookSecret: ${PADDLE_WEBHOOK_SECRET:-}
+      Billing__Paddle__Environment: ${PADDLE_ENVIRONMENT:-sandbox}
+      Billing__Paddle__TopUpPriceIds__500: ${PADDLE_TOPUP_PRICE_500:-}
+      Billing__Paddle__TopUpPriceIds__1000: ${PADDLE_TOPUP_PRICE_1000:-}
+      Billing__Paddle__TopUpPriceIds__3000: ${PADDLE_TOPUP_PRICE_3000:-}
+      # Stripe provider (Billing:Provider=Stripe; DEC-2/DEC-3). Paddle stays the default. ApiKey and
+      # WebhookSecret* are SECRETS. ReturnBaseUrl is the public origin checkout returns to.
+      Billing__Provider: ${BILLING_PROVIDER:-Paddle}
+      Billing__Stripe__ApiKey: ${STRIPE_API_KEY:-}
+      Billing__Stripe__WebhookSecret: ${STRIPE_WEBHOOK_SECRET:-}
+      Billing__Stripe__WebhookSecretPrevious: ${STRIPE_WEBHOOK_SECRET_PREVIOUS:-}
+      Billing__Stripe__ManagedPayments: ${STRIPE_MANAGED_PAYMENTS:-true}
+      Billing__Stripe__BaseUrl: ${STRIPE_API_BASE:-https://api.stripe.com}
+      Billing__Stripe__PortalConfigurationId: ${STRIPE_PORTAL_CONFIGURATION_ID:-}
+      Billing__Stripe__ReturnBaseUrl: ${STRIPE_RETURN_BASE_URL:-${PUBLIC_BASE_URL:-}}
+      Billing__Stripe__TopUpPriceIds__500: ${STRIPE_TOPUP_PRICE_500:-}
+      Billing__Stripe__TopUpPriceIds__1000: ${STRIPE_TOPUP_PRICE_1000:-}
+      Billing__Stripe__TopUpPriceIds__3000: ${STRIPE_TOPUP_PRICE_3000:-}
+      Billing__Stripe__Branding__BackgroundColor: ${STRIPE_BRANDING_BACKGROUND_COLOR-#0B0B12}
+      Billing__Stripe__Branding__ButtonColor: ${STRIPE_BRANDING_BUTTON_COLOR-#7C3AED}
+      Billing__Stripe__Branding__BorderStyle: ${STRIPE_BRANDING_BORDER_STYLE-rectangular}
+      Billing__Stripe__Branding__FontFamily: ${STRIPE_BRANDING_FONT_FAMILY-chakra_petch}
+      Billing__Stripe__Branding__DisplayName: ${STRIPE_BRANDING_DISPLAY_NAME-ReelBolt}
+      Billing__Stripe__Branding__LogoUrl: ${STRIPE_BRANDING_LOGO_URL-https://reelbolt.ai/brand/stripe-logo.png}
+      Billing__Stripe__Branding__IconUrl: ${STRIPE_BRANDING_ICON_URL-https://reelbolt.ai/brand/stripe-icon.png}
+      ModelCatalog__SeedPrices: ${MODEL_CATALOG_SEED_PRICES:-Apply}
+      ModelCatalog__SeedPricesAdopt: ${MODEL_CATALOG_SEED_PRICES_ADOPT:-}
+      ModelCatalog__SeedPricesLogLimit: ${MODEL_CATALOG_SEED_PRICES_LOG_LIMIT:-200}
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Username: ${RABBITMQ_USER:-guest}
+      RabbitMQ__Password: ${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env (see .env.example)}
+      VectorSearch__QdrantUrl: ${VECTOR_QDRANT_URL:-http://qdrant:6333}
+      # Hosted Qdrant only; when set, VECTOR_QDRANT_URL must be https:// or the API fails at startup
+      VectorSearch__QdrantApiKey: ${VECTOR_QDRANT_API_KEY:-}
+      VectorSearch__QdrantGrpcPort: ${VECTOR_QDRANT_GRPC_PORT:-6334}
+      VectorSearch__EmbeddingDeployment: ${AZURE_OPENAI_EMBEDDING_DEPLOYMENT:-text-embedding-3-large}
+      VectorSearch__ChunkSizeTokens: ${VECTOR_CHUNK_SIZE_TOKENS:-512}
+      VectorSearch__ChunkOverlapTokens: ${VECTOR_CHUNK_OVERLAP_TOKENS:-64}
+      VectorSearch__SmallFileThresholdTokens: ${VECTOR_SMALL_FILE_THRESHOLD_TOKENS:-1500}
+      PlatformDocs__Enabled: ${PLATFORM_DOCS_ENABLED:-true}
+      # Self-host default true; cloud sets false so a deploy never purges a shared broker (F4)
+      StartupCleanup__PurgeQueues: ${STARTUP_CLEANUP_PURGE_QUEUES:-true}
+      DataProtection__KeysPath: /keys
+      # GitHub App integration (docs/github-app.md). All four are SECRETS except the app id and the
+      # slug; the private key is the PEM GitHub generates for the app, pasted whole (a bind-mounted
+      # file path can be used instead via GitHub__PrivateKeyPath). With the app id or the key or the
+      # webhook secret missing, the webhook endpoint answers 503 and linking a repository is
+      # refused: the feature is inert, never insecure.
+      GitHub__AppId: ${GITHUB_APP_ID:-}
+      GitHub__AppSlug: ${GITHUB_APP_SLUG:-}
+      GitHub__PrivateKeyPem: ${GITHUB_APP_PRIVATE_KEY:-}
+      # A path INSIDE the container (bind-mount the PEM); used only when GITHUB_APP_PRIVATE_KEY is empty.
+      GitHub__PrivateKeyPath: ${GITHUB_APP_PRIVATE_KEY_PATH:-}
+      # .env.example has always documented GITHUB_APP_WEBHOOK_SECRET; the older name still works.
+      GitHub__WebhookSecret: ${GITHUB_APP_WEBHOOK_SECRET:-${GITHUB_WEBHOOK_SECRET:-}}
+      # Connecting a person's GitHub account (docs/github-app.md, "Connecting a GitHub account").
+      # The client id is the Iv1.… value on the App's page, NOT the App ID; the secret is generated
+      # under "Client secrets". The callback URL must match one of the App's registered Callback
+      # URLs byte for byte, which is why it is configured rather than derived from a Host header.
+      GitHub__ClientId: ${GITHUB_APP_CLIENT_ID:-}
+      GitHub__ClientSecret: ${GITHUB_APP_CLIENT_SECRET:-}
+      GitHub__OAuthCallbackUrl: ${GITHUB_APP_OAUTH_CALLBACK_URL:-}
+      # Cloud drive sync: Google Drive, OneDrive/SharePoint, Dropbox (docs/cloud-drive-sync.md).
+      # Each provider is inert (hidden, its endpoints 503) until its client id AND secret are set.
+      # PUBLIC_BASE_URL builds the redirect URI registered with each vendor:
+      # {PUBLIC_BASE_URL}/api/v1/cloud-storage/{google-drive|onedrive|dropbox}/oauth/callback
+      CloudStorage__PublicBaseUrl: ${PUBLIC_BASE_URL:-}
+      # Origin of the confirm/unsubscribe links in marketing-consent mail and the admin export.
+      # Empty falls back to CloudStorage__PublicBaseUrl (PUBLIC_BASE_URL) above.
+      Marketing__PublicBaseUrl: ${MARKETING_PUBLIC_BASE_URL:-}
+      # Shared with `site`: when it matches the request's
+      # X-ReelBolt-Site-Token, X-ReelBolt-Client-IP is trusted for the per-IP subscribe cap.
+      # Empty = that header is always ignored (docs/marketing-consent.md).
+      Marketing__SiteForwardToken: ${SITE_FORWARD_TOKEN:-}
+      # Campaigns: drafts, dry run and test send once enabled; a list send also needs MARKETING_LIST_SEND_ENABLED,
+      # the key and BREVO_LIST_ID (0 = not configured). docs/marketing-consent.md#campaigns-brevo.
+      Marketing__Campaigns__Enabled: ${MARKETING_CAMPAIGNS_ENABLED:-false}
+      Marketing__Campaigns__BrevoCampaignApiKey: ${BREVO_CAMPAIGN_API_KEY:-}
+      Marketing__Campaigns__BrevoListId: ${BREVO_LIST_ID:-0}
+      Marketing__Campaigns__BrevoTestListId: ${BREVO_TEST_LIST_ID:-0}
+      Marketing__Campaigns__ListSendEnabled: ${MARKETING_LIST_SEND_ENABLED:-false}
+      Marketing__Campaigns__WebhookToken: ${BREVO_WEBHOOK_TOKEN:-}
+      Marketing__Campaigns__FromAddress: ${MARKETING_FROM_ADDRESS:-hello@reelbolt.ai}
+      Marketing__Campaigns__TestRecipient: ${MARKETING_TEST_RECIPIENT:-}
+      Marketing__Campaigns__FooterControllerName: ${MARKETING_CONTROLLER_NAME:-}
+      Marketing__Campaigns__FooterVatNumber: ${MARKETING_FOOTER_VAT_NUMBER:-IT02862070030}
+      Marketing__Campaigns__FooterAddress: ${MARKETING_FOOTER_ADDRESS:-}
+      Marketing__ContactSync__Enabled: ${MARKETING_CONTACT_SYNC_ENABLED:-true}
+      # Keyed recipient reference in mail logs (rcpt=<12 hex of an HMAC>), same secret as go-api's
+      # MAIL_LOG_REF_KEY so one mailbox has one ref in both services. Empty = a random key per
+      # process (refs stop correlating across restarts) and a startup warning.
+      Mail__LogRefKey: ${MAIL_LOG_REF_KEY:-}
+      # Daily operator digest by mail (platform step failures, runs by status, new feedback). OFF unless
+      # OPERATOR_DIGEST_ENABLED=true; enabled without OPERATOR_DIGEST_EMAIL stops the service at startup.
+      # go-api must hold the SAME OPERATOR_DIGEST_EMAIL: it relays this mail to that address only.
+      Operations__FailureDigest__Enabled: ${OPERATOR_DIGEST_ENABLED:-false}
+      Operations__FailureDigest__RecipientEmail: ${OPERATOR_DIGEST_EMAIL:-}
+      CloudStorage__GoogleDrive__ClientId: ${GOOGLE_DRIVE_CLIENT_ID:-}
+      CloudStorage__GoogleDrive__ClientSecret: ${GOOGLE_DRIVE_CLIENT_SECRET:-}
+      CloudStorage__OneDrive__ClientId: ${MICROSOFT_GRAPH_CLIENT_ID:-}
+      CloudStorage__OneDrive__ClientSecret: ${MICROSOFT_GRAPH_CLIENT_SECRET:-}
+      CloudStorage__OneDrive__Tenant: ${MICROSOFT_GRAPH_TENANT:-common}
+      CloudStorage__Dropbox__ClientId: ${DROPBOX_APP_KEY:-}
+      CloudStorage__Dropbox__ClientSecret: ${DROPBOX_APP_SECRET:-}
+      CloudStorage__SweepIntervalMinutes: ${CLOUD_SYNC_SWEEP_MINUTES:-30}
+      # Social publishing (YouTube Shorts, LinkedIn): inert (platform hidden, connect answers 503
+      # provider_not_configured) until a platform's client id AND secret are set. Redirect URI:
+      # {PUBLIC_BASE_URL}/api/v1/social/{youtube|linkedin}/oauth/callback
+      SocialPublishing__PublicBaseUrl: ${PUBLIC_BASE_URL:-}
+      SocialPublishing__YouTube__ClientId: ${SOCIAL_YOUTUBE_CLIENT_ID:-}
+      SocialPublishing__YouTube__ClientSecret: ${SOCIAL_YOUTUBE_CLIENT_SECRET:-}
+      SocialPublishing__LinkedIn__ClientId: ${SOCIAL_LINKEDIN_CLIENT_ID:-}
+      SocialPublishing__LinkedIn__ClientSecret: ${SOCIAL_LINKEDIN_CLIENT_SECRET:-}
+      # Import worker (P3-09): the only place uploaded zip/PDF bytes are parsed. Blank token keeps
+      # the feature inert rather than handing the API an unauthenticated extraction endpoint.
+      Import__Worker__BaseUrl: http://import-worker:8080
+      Import__Worker__Token: ${IMPORT_WORKER_TOKEN:-}
+      # Observability (WP F9, docs/observability.md). Traces and metrics are exported only when
+      # OTEL_EXPORTER_OTLP_ENDPOINT is set; a blank endpoint leaves the no-op providers in place.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      OTEL_EXPORTER_OTLP_PROTOCOL: ${OTEL_EXPORTER_OTLP_PROTOCOL:-http/protobuf}
+      OTEL_EXPORTER_OTLP_HEADERS: ${OTEL_EXPORTER_OTLP_HEADERS:-}
+      OTEL_DEPLOYMENT_ENVIRONMENT: ${OTEL_DEPLOYMENT_ENVIRONMENT:-}
+      # The browser telemetry ingest endpoints (funnel events, client errors).
+      # Off by default, so an unopted deployment answers 404 exactly as it did before.
+      Telemetry__ClientIngestEnabled: ${TELEMETRY_CLIENT_INGEST_ENABLED:-false}
+      # false (the default) = the visit beacon answers 404 and no visitor row is written, so every tracked
+      # link reads 0 visitors; the admin Links funnel reports this switch as visitIngestEnabled.
+      Telemetry__VisitIngestEnabled: ${TELEMETRY_VISIT_INGEST_ENABLED:-false}
+      # New-user funnel (docs/design/new-user-funnel.md sections 6 and 7).
+      # Tracked links: GET /api/v1/l/{code} (the public /l/{code}) counts the click and redirects.
+      # On by default; false answers 404 there and nothing is counted.
+      Marketing__Links__Enabled: ${MARKETING_LINKS_ENABLED:-true}
+      # Mirror of the go-api switch of the same name (the SAME variable, set once in .env): the admin
+      # Links page reads it to say whether the account counts per link are complete. This service
+      # records nothing because of it; the Go API is the one that acts on it.
+      Attribution__UrlCaptureEnabled: ${ATTRIBUTION_URL_CAPTURE_ENABLED:-false}
+    volumes:
+      - dpkeys:/keys
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:8080/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - reelbolt
+      # The only route to the import worker (and the worker's only route to anything).
+      - import-net
+
+  mcp:
+    build:
+      context: ./mcp
+    restart: unless-stopped
+    environment:
+      # No JWT_SIGNING_KEY / JWT_ISSUER / JWT_AUDIENCE here on purpose. The MCP server is a thin
+      # proxy: it forwards the caller's bearer token and the Inference API authenticates it
+      # (docs/design/mcp-tool-bridge.md §9). Handing this container the platform's token-signing
+      # secret bought nothing and leaked material the same image ships to plugin users.
+      INFERENCE_API_URL: http://inference:8080
+      PORT: ${MCP_PORT:-3002}
+      MCP_TRANSPORT: http
+      # Public identities, used only to build the OAuth discovery documents
+      # (docs/design/mcp-oauth.md §7). The defaults match a local single-host stack
+      # reached through nginx on APP_PORT; a deployment sets its real origin here.
+      # Neither is read in stdio mode, which needs no OAuth at all.
+      MCP_PUBLIC_URL: ${MCP_PUBLIC_URL:-http://localhost/mcp}
+      OAUTH_ISSUER_URL: ${OAUTH_ISSUER_URL:-http://localhost}
+    depends_on:
+      inference:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:${MCP_PORT:-3002}/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - reelbolt
+
+  workflow-engine:
+    build:
+      context: ./inference
+      dockerfile: src/ReelBolt.WorkflowEngine/Dockerfile
+    restart: unless-stopped
+    extra_hosts:
+      # Lets provider rows point at a self-hosted server on the Docker host (e.g. a local fish-speech)
+      - "host.docker.internal:host-gateway"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-reelforge};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-postgres}
+      # Connection pool ceiling (docs/database-connections.md).
+      Database__MaxPoolSize: ${ENGINE_DB_MAX_POOL_SIZE:-12}
+      Jwt__Issuer: ${JWT_ISSUER:-reelbolt-api}
+      Jwt__Audience: ${JWT_AUDIENCE:-reelbolt-inference}
+      # Required on single host and control (x-session-key-guard in docker-compose.override.yml and the
+      # control overlays; the engine also refuses to start with neither key). A render host (docker-compose.media.yml,
+      # cloud.engine.yml) drops this entry and runs on ENGINE_JWT_SIGNING_KEY alone.
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:-}
+      # Optional. When set (never the JWT_SIGNING_KEY value), the engine signs its calls to the Inference
+      # API with this key and accepts only tokens the Inference API mints with it. Set it on BOTH services.
+      EngineJwt__SigningKey: ${ENGINE_JWT_SIGNING_KEY:-}
+      MinIO__Endpoint: http://garage:3900
+      MinIO__AccessKey: ${MINIO_ACCESS_KEY:-minioadmin}
+      MinIO__SecretKey: ${MINIO_SECRET_KEY:-minioadmin}
+      MinIO__BucketName: ${MINIO_BUCKET:-reelforge}
+      # Garage enforces the SigV4 region in the signature (MinIO didn't care) — must
+      # match garage.toml's s3_api.s3_region exactly or every request 403s.
+      MinIO__Region: garage
+      # Host that presigned URLs name (SigV4 signs Host, so runners outside the compose network need
+      # a reachable address). Empty falls back to MinIO__Endpoint.
+      MinIO__PublicEndpoint: ${MINIO_PUBLIC_ENDPOINT:-}
+      AzureOpenAI__Endpoint: ${AZURE_OPENAI_ENDPOINT:-}
+      AzureOpenAI__ApiKey: ${AZURE_OPENAI_API_KEY:-}
+      AzureOpenAI__DeploymentName: ${AZURE_OPENAI_DEPLOYMENT:-gpt-4o-mini}
+      # Read by the Anthropic SDK itself (not by any ReelBolt config binding) when an
+      # `inference_providers` row of kind Anthropic stores the literal `env:` as its api key, so a
+      # developer can run against their own credentials without persisting a secret. See
+      # docs/anthropic-provider.md for which credential is permitted where.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_AUTH_TOKEN: ${ANTHROPIC_AUTH_TOKEN:-}
+      # Content moderation master switch (docs/content-moderation.md). Off by default; a deployment
+      # opts in with CONTENT_MODERATION_ENABLED=true and a resolved ContentModeration capability.
+      # Enabling it with no resolved provider makes publishing fail closed, never silently allow.
+      ContentModeration__Enabled: ${CONTENT_MODERATION_ENABLED:-false}
+      # Read by ChatClientFactory when an `inference_providers` row of kind Gemini stores `env:`
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      # Read by ChatClientFactory when an `inference_providers` row of kind DeepSeek stores `env:`
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Username: ${RABBITMQ_USER:-guest}
+      RabbitMQ__Password: ${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env (see .env.example)}
+      InferenceApi__BaseUrl: http://inference:8080
+      Sandbox__BaseUrl: http://sandbox-executor:8080
+      Sandbox__ApiToken: ${SANDBOX_API_TOKEN:?set SANDBOX_API_TOKEN in .env to a long random value}
+      WorkflowEngine__MaxConcurrency: ${WORKFLOW_MAX_CONCURRENCY:-4}
+      # B8c: the execution queue is declared with x-max-priority so plan priority (Pro/Team, then
+      # Enterprise) is dequeued first. 0 is the ONE value that declares the old argument-less queue,
+      # which a broker that already holds one requires - redeclaring with a different argument is a
+      # PRECONDITION_FAILED startup failure. See docs/billing.md "Plan priority".
+      WorkflowEngine__QueuePriority__MaxPriority: ${WORKFLOW_QUEUE_MAX_PRIORITY:-10}
+      # Compute fabric (WP D6, docs/compute-fabric.md). Local is the SHIPPED value and the whole
+      # self-host story: with it the selector answers "Local" before reading the database or calling
+      # the gateway, so these two lines change nothing unless an operator opts in. Set COMPUTE_MODE=
+      # Fabric with a matching RUNNER_INTERNAL_TOKEN to make the engine call the gateway (start it
+      # with: docker compose --profile fabric up -d runner-gateway). NOTE: the fabric's callers
+      # are not in the tree, so Fabric currently routes no step to a runner - read
+      # docs/compute-fabric.md "What is wired today and what is not" first.
+      Compute__Mode: ${COMPUTE_MODE:-Local}
+      # On-demand pool (docs/pool-waker.md). All four are inert while Compute__Mode is Local, and the
+      # defaults keep today's behaviour: the waker flag off, every job type allowed, desktop runners allowed.
+      # Pool-only go-live: COMPUTE_CLOUD_POOL_JOB_TYPES=video.compile,video.analyze.extract and
+      # COMPUTE_ORG_RUNNERS_ENABLED=false keep every other step on this host.
+      Compute__PoolWaker__Enabled: ${POOL_WAKER_ENGINE_ENABLED:-false}
+      Compute__PoolWaker__WaitSeconds: ${POOL_WAKER_WAIT_SECONDS:-240}
+      Compute__CloudPoolJobTypes: ${COMPUTE_CLOUD_POOL_JOB_TYPES:-}
+      Compute__OrgRunnersEnabled: ${COMPUTE_ORG_RUNNERS_ENABLED:-true}
+      Compute__RequirePublicStorageForPool: ${COMPUTE_REQUIRE_PUBLIC_STORAGE_FOR_POOL:-true}
+      # One value configures both sides: the gateway reads this same variable for its /internal/v1
+      # surface. Empty is fine while Compute__Mode is Local.
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      # Billing (WP B6b/B8a). MUST match the inference service: the credit reservation gate
+      # and the engine-side plan re-check both read Billing:Enabled. With it unset the engine
+      # silently runs UNGATED - a cloud deployment would never reserve or settle a credit.
+      # Off by default, exactly like the API, so self-host is unchanged.
+      Billing__Enabled: ${BILLING_ENABLED:-false}
+      # Recipe marketplace (docs/marketplace.md "Before switching it on"). Off by default: every marketplace
+      # route answers a bare 404 and no worker acts. Inference API and engine MUST match: the API publishes the
+      # preview request, the engine does the work and answers a failure while it is off.
+      Marketplace__Enabled: ${MARKETPLACE_ENABLED:-false}
+      # Avatars (docs/design/avatars.md, phase 2). The same kill switch the Inference API reads, plus who may generate
+      # a clip with an avatar: Off (default), PlatformAdminOnly (the live smoke run) or On. Both must be on to generate.
+      Avatars__Enabled: ${AVATARS_ENABLED:-false}
+      Avatars__Generation: ${AVATARS_GENERATION:-Off}
+      # Avatars of objects (docs/design/avatar-objects.md): a clip that shows an object needs only this switch, not
+      # the two above (those gate avatars of people).
+      Avatars__Objects__Enabled: ${AVATAR_OBJECTS_ENABLED:-false}
+      # Decision-model shadow mode (Off|Shadow); see docs/decision-models.md.
+      Agents__Colorist__DecisionGate__Mode: ${COLORIST_DECISION_GATE_MODE:-Off}
+      Agents__MusicSupervisor__DecisionGate__Mode: ${MUSIC_SUPERVISOR_DECISION_GATE_MODE:-Off}
+      DataProtection__KeysPath: /keys
+      VideoEditing__ScratchPath: /var/tmp/reelbolt-video
+      VideoEditing__FfmpegPath: ffmpeg
+      VideoEditing__FfprobePath: ffprobe
+      VideoEditing__MaxConcurrentJobs: ${VIDEO_MAX_CONCURRENT_JOBS:-1}
+      VideoEditing__FfmpegThreads: ${VIDEO_FFMPEG_THREADS:-4}
+      VideoEditing__AnalyzeTimeoutSeconds: ${VIDEO_ANALYZE_TIMEOUT_SECONDS:-900}
+      VideoEditing__CompileTimeoutSeconds: ${VIDEO_COMPILE_TIMEOUT_SECONDS:-1800}
+      VideoSources__MaxBytes: ${VIDEO_SOURCE_MAX_BYTES:-32212254720}
+      VideoSources__MaxSeconds: ${VIDEO_SOURCE_MAX_SECONDS:-3600}
+      VideoEditing__FontFilePath: ${VIDEO_FONT_FILE:-/usr/share/fonts/dejavu/DejaVuSans.ttf}
+      Skills__CorpusPath: /app/skills
+      # Observability (WP F9, docs/observability.md). Same switch as the Inference API: exported
+      # only when the endpoint is set, so a deployment that has not opted in is unchanged.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      OTEL_EXPORTER_OTLP_PROTOCOL: ${OTEL_EXPORTER_OTLP_PROTOCOL:-http/protobuf}
+      OTEL_EXPORTER_OTLP_HEADERS: ${OTEL_EXPORTER_OTLP_HEADERS:-}
+      OTEL_DEPLOYMENT_ENVIRONMENT: ${OTEL_DEPLOYMENT_ENVIRONMENT:-}
+    volumes:
+      - dpkeys:/keys
+      - videoscratch:/var/tmp/reelbolt-video
+    depends_on:
+      postgres:
+        condition: service_healthy
+      inference:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:8080/api/v1/workflow-engine/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - reelbolt
+
+  # Builds the minimal image that untrusted, model-authored code runs in, then
+  # exits. It is a build-and-exit, one-shot service because the image has to exist
+  # on the daemon before sandbox-executor can `docker run` it — nothing pulls it,
+  # and the executor never builds images itself.
+  sandbox-runtime:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: sandbox-runtime
+    image: reelbolt-sandbox-runtime:local
+    command: ["true"]
+    restart: "no"
+    network_mode: none
+
+  sandbox-executor:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: control-plane
+      args:
+        GOPROXY: ${GOPROXY:-https://proxy.golang.org,direct}
+        GOSUMDB: ${GOSUMDB:-sum.golang.org}
+    image: reelbolt-sandbox-executor:local
+    restart: unless-stopped
+    environment:
+      PORT: 8080
+      # The untrusted runtime image, NOT this service's own image. Reusing the
+      # control-plane image here would hand every sandbox a Docker CLI.
+      SANDBOX_IMAGE: reelbolt-sandbox-runtime:local
+      SANDBOX_ROOT: /var/lib/reelbolt/sandboxes
+      # Owned and created by this service (with --internal), not by compose —
+      # see the note under `networks:` at the bottom of this file.
+      SANDBOX_NETWORK: sandbox-net
+      # false => the sandbox network is created --internal: no internet, and no
+      # route to the host gateway, which is the only thing that keeps sandboxed
+      # code away from every port published on the host. Turning this on also
+      # re-enables POST /packages. Read docs/sandbox-service.md before you do.
+      SANDBOX_NETWORK_EGRESS: ${SANDBOX_NETWORK_EGRESS:-false}
+      # No default on purpose: the service refuses to start without it rather
+      # than silently exposing an API that can start containers and write files.
+      SANDBOX_API_TOKEN: ${SANDBOX_API_TOKEN:?set SANDBOX_API_TOKEN in .env to a long random value}
+      SANDBOX_TTL: ${SANDBOX_TTL:-1h}
+      SANDBOX_EXEC_TIMEOUT: ${SANDBOX_EXEC_TIMEOUT:-5m}
+      SANDBOX_EXEC_MAX_TIMEOUT: ${SANDBOX_EXEC_MAX_TIMEOUT:-6h}
+      SANDBOX_MEMORY_LIMIT: ${SANDBOX_MEMORY_LIMIT:-2g}
+      SANDBOX_SHM_SIZE: ${SANDBOX_SHM_SIZE:-1g}
+      SANDBOX_CPU_LIMIT: ${SANDBOX_CPU_LIMIT:-2}
+      SANDBOX_PIDS_LIMIT: ${SANDBOX_PIDS_LIMIT:-256}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/reelbolt/sandboxes:/var/lib/reelbolt/sandboxes
+    depends_on:
+      sandbox-runtime:
+        condition: service_completed_successfully
+    healthcheck:
+      # curl, not wget — the control-plane Dockerfile stage installs curl (for the
+      # Docker apt repo's GPG key) but never wget, so wget silently 404'd every
+      # check and the container sat "unhealthy" while genuinely serving traffic.
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # Deliberately NOT attached to sandbox-net. This service reaches sandbox
+    # containers through the Docker socket (`docker exec`) and the bind-mounted
+    # workspace, never over TCP, so it has no reason to be routable from the
+    # network untrusted code sits on — and every reason not to be, since it holds
+    # the Docker socket.
+    networks:
+      - reelbolt
+
+  # P3-09 import-worker: the only place uploaded zip and PDF bytes are parsed. Deliberately the
+  # smallest service in the stack — no database, no storage, no provider keys, no published port,
+  # a read-only root, a 64 MiB tmpfs for pdftotext scratch and one shared token. Not proxied.
+  # It sits ONLY on `import-net` (internal: true, shared with `inference` and nothing else): it cannot
+  # reach postgres, rabbitmq, qdrant or the internet, and nothing but `inference` can reach it.
+  import-worker:
+    build:
+      context: ./inference
+      dockerfile: src/ReelBolt.ImportWorker/Dockerfile
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid,nodev
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    # 768m: /v1/unpack-zip holds a 64 MiB body plus up to 128 MiB of unpacked entries per request (2 at a time).
+    mem_limit: 768m
+    pids_limit: 128
+    environment:
+      IMPORT_WORKER_TOKEN: ${IMPORT_WORKER_TOKEN:?set IMPORT_WORKER_TOKEN in .env to a long random value (openssl rand -hex 32)}
+      ASPNETCORE_URLS: http://+:8080
+      # At most this many zip/pdf extractions run at once; the rest get 503 + Retry-After (never queued).
+      IMPORT_WORKER_MAX_CONCURRENCY: ${IMPORT_WORKER_MAX_CONCURRENCY:-2}
+      # pdftotext -l: pages parsed per PDF.
+      IMPORT_WORKER_PDF_MAX_PAGES: ${IMPORT_WORKER_PDF_MAX_PAGES:-50}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - import-net
+
+  # The compute fabric's control plane (WP D6, docs/compute-fabric.md): the WebSocket
+  # endpoint runners dial, its cluster-internal /internal/v1 job API, /healthz and
+  # /metrics. Inert and unstarted in the default stack — a plain `docker compose up`
+  # ignores it entirely — because the engine runs Compute:Mode=Local and never calls it.
+  # Opt in with:  docker compose --profile fabric up -d runner-gateway
+  # The worker half of the profile is not exist yet, so the gateway is
+  # still worth starting on its own: its service name is the engine's default
+  # Compute:GatewayBaseUrl, and it exposes the kill-switch metrics.
+  runner-gateway:
+    profiles: ["fabric"]
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      target: runner-gateway
+      args:
+        GOPROXY: ${GOPROXY:-https://proxy.golang.org,direct}
+        GOSUMDB: ${GOSUMDB:-sum.golang.org}
+    image: reelbolt-runner-gateway:local
+    restart: unless-stopped
+    environment:
+      # REQUIRED. The gateway authenticates every desktop runner against
+      # runner_devices.public_key and re-checks revoked_at, so it refuses to start
+      # without the device registry. It never migrates any of the tables it reads.
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-reelforge}?sslmode=disable
+      # Connection pool ceiling (docs/database-connections.md).
+      DATABASE_MAX_CONNS: ${RUNNER_GATEWAY_DB_MAX_CONNS:-4}
+      PORT: 8090
+      # Must match the engine's RUNNER_INTERNAL_TOKEN above — one value configures both
+      # sides. With neither set the whole /internal/v1 surface answers 503 and the
+      # engine reads that as 'the fabric is not deployed' and degrades on it.
+      RUNNER_INTERNAL_TOKEN: ${RUNNER_INTERNAL_TOKEN:-}
+      # Unset means a key minted per process: correct for this single replica, and
+      # logged as a warning. Set it for any multi-replica deployment.
+      RUNNER_JOB_TOKEN_KEY: ${RUNNER_JOB_TOKEN_KEY:-}
+      # Empty means no CloudPool worker can authenticate (logged at startup).
+      RUNNER_POOL_CREDENTIALS: ${RUNNER_POOL_CREDENTIALS:-}
+      # Signs the short-lived per-node tokens the pool waker mints. 32 characters or more. Empty: the pool routes
+      # answer 503 pool_tokens_disabled and no node can be created. openssl rand -hex 32
+      RUNNER_POOL_TOKEN_KEY: ${RUNNER_POOL_TOKEN_KEY:-}
+      # Empty leaves revocation to the 60 s revoked_at re-check instead of the
+      # RunnerDeviceRevoked fast path, which is the protocol's own backstop.
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-guest}:${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env (see .env.example)}@rabbitmq:5672/
+      # Empty takes the hostname from the request, which is what the hello signature
+      # binds when the gateway is reached over the compose network.
+      RUNNER_PUBLIC_HOST: ${RUNNER_PUBLIC_HOST:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # The engine migrates runner_jobs/runner_sessions; the Inference API migrates
+      # runner_devices/platform_settings. Neither exists before they run, and the
+      # gateway connects to all four eagerly at startup.
+      workflow-engine:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:8090/healthz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - reelbolt
+
+  go-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        GOPROXY: ${GOPROXY:-https://proxy.golang.org,direct}
+        GOSUMDB: ${GOSUMDB:-sum.golang.org}
+    restart: unless-stopped
+    # A generated bootstrap admin password is written here (0600, never logged) and must survive a
+    # container recreate. The image creates /var/lib/reelbolt owned by its non-root user, so the
+    # empty volume inherits that ownership on first mount.
+    volumes:
+      - go-api-secrets:/var/lib/reelbolt # secret-scan: allow (volume name, not a value)
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-reelforge}?sslmode=disable
+      # Connection pool limits (docs/database-connections.md).
+      DB_MAX_OPEN_CONNS: ${GO_API_DB_MAX_OPEN_CONNS:-8}
+      DB_MAX_IDLE_CONNS: ${GO_API_DB_MAX_IDLE_CONNS:-4}
+      DB_CONN_MAX_LIFETIME: ${GO_API_DB_CONN_MAX_LIFETIME:-30m}
+      INFERENCE_URL: http://inference:8080
+      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY:-}
+      JWT_ISSUER: ${JWT_ISSUER:-reelbolt-api}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-reelbolt-inference}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      # Where a person's reply to a transactional mail goes (Reply-To; empty = none, replies go to SMTP_FROM).
+      MAIL_REPLY_TO: ${MAIL_REPLY_TO:-}
+      # Cloudflare Email Sending. CLOUDFLARE_EMAIL_TOKEN is a
+      # Cloudflare user API token and CLOUDFLARE_EMAIL_ACCOUNT_ID the account the sending domain
+      # is onboarded on; they live in .env, never in the repository. Both set (with SMTP_FROM)
+      # selects Cloudflare over SMTP; either blank falls back to SMTP, then to console logging,
+      # which the service reports loudly at startup.
+      CLOUDFLARE_EMAIL_TOKEN: ${CLOUDFLARE_EMAIL_TOKEN:-}
+      CLOUDFLARE_EMAIL_ACCOUNT_ID: ${CLOUDFLARE_EMAIL_ACCOUNT_ID:-}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-ReelBolt}
+      # Keyed recipient reference in mail logs; shared with inference's Mail__LogRefKey.
+      MAIL_LOG_REF_KEY: ${MAIL_LOG_REF_KEY:-}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost}
+      # The wss:// address pairing hands a desktop runner. With every ReelBolt address on one
+      # host it is wss://<that host>/runner/v1/connect (nginx/runner-locations.conf.template).
+      # Empty: pairing is refused, because a runner with nowhere to connect is not paired.
+      RUNNER_GATEWAY_URL: ${RUNNER_GATEWAY_URL:-}
+      # F-11: the origin the Go API's own mail links are built from; defaults to PUBLIC_BASE_URL.
+      LINK_BASE_URL: ${LINK_BASE_URL:-}
+      # F-11: extra origins, besides LINK_BASE_URL, whose host a templated mail's link may name
+      # (comma-separated http(s) origins; the presigned storage endpoint when it is not the public
+      # site). Unset allows only the base URL's origin — an empty list must not degrade to "any host".
+      MAIL_LINK_HOSTS: ${MAIL_LINK_HOSTS:-}
+      # Shared secret the Inference API presents on POST /internal/mail/send (C0: all outbound mail
+      # is sent from here, the only service with SMTP credentials and the template set). Empty leaves
+      # the endpoint unexposed (404) and every .NET-triggered mail skipped with a log line.
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:-}
+      # The one address the operator_digest mail (production error text) may be relayed to. Read from
+      # here, never from the request: any other recipient is refused. Empty refuses the template.
+      OPERATOR_DIGEST_EMAIL: ${OPERATOR_DIGEST_EMAIL:-}
+      # Caps on marketing mail relayed for the Inference API (/internal/mail/send), counted in
+      # the shared mail_rate_counters table: per recipient domain and across the deployment.
+      MARKETING_RELAY_PER_DOMAIN_PER_HOUR: ${MARKETING_RELAY_PER_DOMAIN_PER_HOUR:-30}
+      MARKETING_RELAY_GLOBAL_PER_HOUR: ${MARKETING_RELAY_GLOBAL_PER_HOUR:-100}
+      SIGNUP_ENABLED: ${SIGNUP_ENABLED:-false}
+      # New-user funnel (docs/design/new-user-funnel.md section 7): record the campaign labels and
+      # the landing path a signup request itself carries (no cookie) on the new account, as
+      # capture = 'url', and let both travel through a Google or GitHub sign-in. Off by default:
+      # without it only a consented first-touch cookie attributes an account, and neither value is
+      # sent to Google or GitHub. A privacy
+      # switch the controller turns on after reading the Privacy text that describes it. The
+      # inference service mirrors the same variable for the admin Links page.
+      ATTRIBUTION_URL_CAPTURE_ENABLED: ${ATTRIBUTION_URL_CAPTURE_ENABLED:-false}
+      ABUSE_BLOCK_DISPOSABLE: ${ABUSE_BLOCK_DISPOSABLE:-true}
+      ABUSE_MX_CHECK: ${ABUSE_MX_CHECK:-false}
+      TURNSTILE_SECRET: ${TURNSTILE_SECRET:-}
+      TRIAL_REQUIRES_CARD: ${TRIAL_REQUIRES_CARD:-false}
+      # OAuth sign-in (C10). Empty by default: both endpoints answer 404 until a provider is given
+      # credentials, which is what keeps a self-hosted install invite-only.
+      OAUTH_GOOGLE_CLIENT_ID: ${OAUTH_GOOGLE_CLIENT_ID:-}
+      OAUTH_GOOGLE_CLIENT_SECRET: ${OAUTH_GOOGLE_CLIENT_SECRET:-}
+      OAUTH_GITHUB_CLIENT_ID: ${OAUTH_GITHUB_CLIENT_ID:-}
+      OAUTH_GITHUB_CLIENT_SECRET: ${OAUTH_GITHUB_CLIENT_SECRET:-}
+      APP_ENV: ${APP_ENV:-development}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@reelbolt.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:?set RABBITMQ_PASSWORD in .env (see .env.example)}
+      # Observability (WP F9, docs/observability.md): otelhttp server spans and the error-tracking
+      # counter. Exported only when the endpoint is set.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      OTEL_EXPORTER_OTLP_PROTOCOL: ${OTEL_EXPORTER_OTLP_PROTOCOL:-http/protobuf}
+      OTEL_EXPORTER_OTLP_HEADERS: ${OTEL_EXPORTER_OTLP_HEADERS:-}
+      OTEL_DEPLOYMENT_ENVIRONMENT: ${OTEL_DEPLOYMENT_ENVIRONMENT:-}
+    depends_on:
+      garage:
+        condition: service_healthy
+      inference:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - reelbolt
+
+  site:
+    build:
+      context: ./site
+      dockerfile: Dockerfile
+      # Switch between 'development' (Turbopack hot reload) and 'production' (precompiled standalone)
+      target: ${SITE_BUILD_TARGET:-development}
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://reelbolt.ai}
+        # "Start free" is the primary CTA only once self-serve signup is live; anything but
+        # "true" keeps the coming-soon state. Build-time, because NEXT_PUBLIC_* is inlined.
+        NEXT_PUBLIC_SIGNUP_ENABLED: ${NEXT_PUBLIC_SIGNUP_ENABLED:-false}
+        # GA4 ID is inlined at build time: without this arg the production image has none.
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID:-}
+        # Next build id and the feedback diagnostics' app version; empty = per-build timestamp.
+        GIT_SHA: ${GIT_SHA:-}
+        # Stable Next deploymentId for blue-green skew protection (the operator release script sets it); empty = unchanged.
+        NEXT_DEPLOYMENT_ID: ${NEXT_DEPLOYMENT_ID:-}
+    # ── Volume Mounts ──────────────────────────────────────
+    # REQUIRED for development mode (hot reload)
+    # MUST BE REMOVED/COMMENTED for production mode
+    # ───────────────────────────────────────────────────────
+    # volumes:
+    #   - ./site:/app
+    #   - /app/node_modules
+    #   - /app/.next
+    # ───────────────────────────────────────────────────────
+    environment:
+      NODE_ENV: ${SITE_NODE_ENV:-development}
+      PORT: 3000
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://reelbolt.ai}
+      # Read at runtime by the development target's `next dev`; the production image bakes it in.
+      NEXT_PUBLIC_SIGNUP_ENABLED: ${NEXT_PUBLIC_SIGNUP_ENABLED:-false}
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID:-}
+      # Dev server only: extra LAN hostnames/IPs allowed to load it (see .env.example).
+      NEXT_DEV_ALLOWED_ORIGINS: ${NEXT_DEV_ALLOWED_ORIGINS:-}
+      # Contact-form delivery: the same Cloudflare Email Sending credentials the go-api service
+      # uses, read by site/lib/marketing/mailer.ts. Any of the three blank and the form answers
+      # "Failed to deliver message" instead of accepting the enquiry into the void.
+      SMTP_FROM: ${SMTP_FROM:-}
+      CLOUDFLARE_EMAIL_ACCOUNT_ID: ${CLOUDFLARE_EMAIL_ACCOUNT_ID:-}
+      CLOUDFLARE_EMAIL_TOKEN: ${CLOUDFLARE_EMAIL_TOKEN:-}
+      # Server-side calls from the site to the Inference API (marketing-consent subscribe, wording),
+      # over the compose network, never through nginx.
+      REELBOLT_API_URL: ${REELBOLT_API_URL:-http://inference:8080}
+      # Sent as X-ReelBolt-Site-Token with the visitor's IP on subscribe forwards; must equal the
+      # Inference API's Marketing__SiteForwardToken (same variable). Empty = header not sent.
+      SITE_FORWARD_TOKEN: ${SITE_FORWARD_TOKEN:-}
+    # Loopback-only, same pattern as `web` — 3100 avoids clashing with web's 3000.
+    ports:
+      - "127.0.0.1:3100:3000"
+    restart: unless-stopped
+    # No depends_on: the marketing site must come up even if the backend is down.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1:3000/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    networks:
+      - reelbolt
+
+  docs:
+    # Documentation site (Docusaurus → static files behind nginx), served by the root nginx
+    # under /docs/. Content comes from ./docs/user-guide through a named build context: the
+    # developer docs are never published, so they never enter this build. See docs/docs-site.md.
+    build:
+      context: ./docs-site
+      dockerfile: Dockerfile
+      additional_contexts:
+        docs: ./docs/user-guide
+        # Translated user-guide pages and theme strings (docs/i18n.md); English falls back for any page missing there.
+        docs_i18n: ./docs/user-guide-i18n
+    restart: unless-stopped
+    # No depends_on, same as `site`: the docs must come up even if the backend is down.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1/healthz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - reelbolt
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      # Switch between 'development' (Turbopack hot reload) and 'production' (precompiled standalone)
+      target: ${WEB_BUILD_TARGET:-development}
+      args:
+        # A NEXT_PUBLIC_* value is inlined into the browser bundle at build
+        # time, so a PRODUCTION web image must carry the telemetry switch here. Off by default.
+        NEXT_PUBLIC_TELEMETRY_ENABLED: ${NEXT_PUBLIC_TELEMETRY_ENABLED:-false}
+        # product-analytics: GA4 for the app; loads only after cookie consent. Empty = off.
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID:-}
+        # Next build id and the feedback diagnostics' app version; empty = per-build timestamp.
+        GIT_SHA: ${GIT_SHA:-}
+        # Stable Next deploymentId for blue-green skew protection (the operator release script sets it); empty = unchanged.
+        NEXT_DEPLOYMENT_ID: ${NEXT_DEPLOYMENT_ID:-}
+    # ── Volume Mounts ──────────────────────────────────────
+    # REQUIRED for development mode (hot reload)
+    # MUST BE REMOVED/COMMENTED for production mode
+    # ───────────────────────────────────────────────────────
+    # volumes:
+    #   - ./web:/app
+    #   - /app/node_modules
+    #   - /app/.next
+    # ───────────────────────────────────────────────────────
+    environment:
+      - NODE_ENV=${WEB_NODE_ENV:-development}
+      # The Node inspector is unauthenticated arbitrary code execution for anyone
+      # who can open the port. It must stay bound to loopback on the host (below)
+      # and should be empty in any deployment that is not a developer's machine.
+      - NODE_OPTIONS=${WEB_NODE_OPTIONS:---inspect=127.0.0.1:9229}
+      - PORT=3000
+      # Dev server only: extra LAN hostnames/IPs allowed to load it (see .env.example).
+      - NEXT_DEV_ALLOWED_ORIGINS=${NEXT_DEV_ALLOWED_ORIGINS:-}
+      # Optional here: the session-key guard (top of this file) refuses an unset key except on a
+      # render host, which runs no web container.
+      - JWT_SIGNING_KEY=${JWT_SIGNING_KEY:-}
+      # web/proxy.ts and /api/auth/me verify the session token's iss/aud against the same values as go-api.
+      - JWT_ISSUER=${JWT_ISSUER:-reelbolt-api}
+      - JWT_AUDIENCE=${JWT_AUDIENCE:-reelbolt-inference}
+      # Display-only mirror of the Go API's signup settings (C7-UI): SIGNUP_ENABLED hides the
+      # signup form and the "Create account" link, and the Turnstile *site* key renders the
+      # challenge. Neither grants anything — POST /api/v1/auth/signup is refused with 404 unless
+      # the API itself has SIGNUP_ENABLED, and the challenge is verified server-side against
+      # TURNSTILE_SECRET. The site key is public by design; the secret is never passed here.
+      - SIGNUP_ENABLED=${SIGNUP_ENABLED:-false}
+      - TURNSTILE_SITE_KEY=${TURNSTILE_SITE_KEY:-}
+      # Google/GitHub sign-in buttons (C10). The pages ask the Go API at GO_API_URL which providers
+      # have credentials, so setting OAUTH_*_CLIENT_ID/_SECRET on go-api is all it takes. These two
+      # flags are only the fallback used when the API cannot be asked.
+      - GO_API_URL=http://go-api:8080
+      - OAUTH_GOOGLE_ENABLED=${OAUTH_GOOGLE_ENABLED:-false}
+      - OAUTH_GITHUB_ENABLED=${OAUTH_GITHUB_ENABLED:-false}
+      # The service that owns legal_documents (F-7). web/proxy.ts asks it for the current Terms
+      # version before deciding whether a session has to re-accept, and the auth pages read it to
+      # render and submit the version the deployment is actually serving. Same target the Go API
+      # already uses; a read that fails leaves the session alone rather than locking it out.
+      - INFERENCE_URL=http://inference:8080
+      # The public API surface (the workspace "API keys" page). Off by default, like the
+      # inference service's own PublicApi__Enabled; the page is absent unless this is "true".
+      - PUBLIC_API_ENABLED=${PUBLIC_API_ENABLED:-false}
+      # The app-side telemetry switch (funnel events, client errors, the consent
+      # surface). Off by default. A NEXT_PUBLIC_* value is inlined into the browser bundle, so a
+      # PRODUCTION web image must carry it at build time; in the default development target it is
+      # read at run time from here.
+      - NEXT_PUBLIC_TELEMETRY_ENABLED=${NEXT_PUBLIC_TELEMETRY_ENABLED:-false}
+      # New-user funnel: the welcome flow (/app/welcome: two questions, then the first project).
+      # Both are read by the server per request (web/lib/onboarding/config.ts), so a change is a
+      # container restart, not a rebuild. WELCOME_FLOW_ENABLED is on unless it is exactly "false",
+      # which switches the two welcome questions off, and only them: the dashboard keeps its
+      # first-video rail, so it is not a rollback. ONBOARDING_SAMPLE_CLIP_URLS is the operator's
+      # own sample clips for "try it with our sample clips": public https:// links separated by
+      # commas or spaces, at most 8 are used; empty (the default) hides the offer.
+      - WELCOME_FLOW_ENABLED=${WELCOME_FLOW_ENABLED:-true}
+      - ONBOARDING_SAMPLE_CLIP_URLS=${ONBOARDING_SAMPLE_CLIP_URLS:-}
+    # Loopback-only: 3000 bypasses nginx and therefore every auth check nginx
+    # performs, and 9229 is remote code execution in this container.
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:9229:9229"
+    restart: unless-stopped
+    depends_on:
+      inference:
+        condition: service_healthy
+      go-api:
+        condition: service_started
+    healthcheck:
+      # basePath '/app' means Next returns 404 for '/' — probe a real route under
+      # /app instead, or this service never becomes healthy and (via the
+      # depends_on: condition: service_healthy chain below) nginx never starts.
+      test: ["CMD-SHELL", "wget -qO/dev/null http://127.0.0.1:3000/app/login || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    networks:
+      - reelbolt
+
+  nginx:
+    build: ./nginx
+    restart: unless-stopped
+    labels:
+      autoheal: "true"
+    environment:
+      # See .env.example / docs/tls.md. Empty DOMAIN + FORCE_HTTPS=false (the
+      # defaults) means: serve a self-signed cert on :443 and keep :80 working
+      # unchanged, so nothing breaks before a real domain is configured.
+      - DOMAIN=${DOMAIN:-}
+      - FORCE_HTTPS=${FORCE_HTTPS:-false}
+      # Cloud-only knobs (docs/tls.md); every default reproduces the single-host stack.
+      - REAL_IP_FROM_CLOUDFLARE=${REAL_IP_FROM_CLOUDFLARE:-false}
+      - CLIENT_MAX_BODY_SIZE=${CLIENT_MAX_BODY_SIZE:-100M}
+      - UPSTREAM_WORKFLOW_ENGINE=${UPSTREAM_WORKFLOW_ENGINE:-http://workflow-engine:8080}
+      # Operator-supplied certificate, e.g. a Cloudflare Origin CA cert covering
+      # <domain> and *.<domain>. Both empty (the default) leaves nginx on the Caddy or
+      # self-signed choice in nginx/docker-entrypoint.sh, which reads the certificate
+      # ONCE at container start — so a certificate change needs
+      # `docker compose up -d --force-recreate nginx`. docs/tls.md.
+      - TLS_CERT_FILE=${TLS_CERT_FILE:-}
+      - TLS_KEY_FILE=${TLS_KEY_FILE:-}
+      # Restrict the Paddle webhook route to Paddle's published source IPs (docs/billing.md).
+      # Off by default: the Paddle-Signature HMAC is the credential, and a wrong allowlist
+      # breaks billing silently. nginx fetches the list at runtime; nothing is checked in.
+      - PADDLE_WEBHOOK_IP_ALLOWLIST=${PADDLE_WEBHOOK_IP_ALLOWLIST:-false}
+      - NGINX_LOG_RETENTION_DAYS=${NGINX_LOG_RETENTION_DAYS:-30}
+      # The marketing site's relay token, the same variable `inference` and `site` read. nginx
+      # compares it with X-ReelBolt-Site-Token on a tracked-link click (/l/<code>) and gives a
+      # verified relay the link_relay rate-limit zone instead of the per-address one
+      # (nginx/nginx.conf, nginx/auth.js). It decides the zone only and grants no access. Empty
+      # (the default) = no request is treated as the relay; it matters only where the site's
+      # Cloudflare Pages Function relays clicks to this origin.
+      - SITE_FORWARD_TOKEN=${SITE_FORWARD_TOKEN:-}
+    ports:
+      - "${APP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/auth.js:/etc/nginx/auth.js:ro
+      - ./nginx/i18n.js:/etc/nginx/i18n.js:ro
+      - ./nginx/pick-locale.js:/etc/nginx/pick-locale.js:ro
+      - ./nginx/locales.json:/etc/nginx/locales.json:ro
+      - ./nginx/locations.conf:/etc/nginx/locations.conf:ro
+      - ./nginx/http-server-dev.conf:/etc/nginx/http-server-dev.conf:ro
+      - ./nginx/http-server-redirect.conf:/etc/nginx/http-server-redirect.conf:ro
+      - ./nginx/https-server.conf.template:/etc/nginx/https-server.conf.template:ro
+      - ./nginx/common.conf.template:/etc/nginx/common.conf.template:ro
+      - ./nginx/runner-server.conf.template:/etc/nginx/runner-server.conf.template:ro
+      - ./nginx/runner-locations.conf.template:/etc/nginx/runner-locations.conf.template:ro
+      - ./nginx/cloudflare-realip.conf:/etc/nginx/cloudflare-realip.conf:ro
+      - ./nginx/proxy-client-headers.conf:/etc/nginx/proxy-client-headers.conf:ro
+      # Read-only: nginx only ever reads the cert Caddy wrote, never manages
+      # Caddy's storage itself.
+      - caddy_certs:/caddy-data:ro
+      # Persistent JSON access logs (survive recreate/--build; `down -v` deletes them).
+      - nginx_logs:/var/log/nginx
+      # The operator's certificate directory, mounted read-only at /etc/nginx/operator-certs.
+      # nginx reads a file inside it only when TLS_CERT_FILE/TLS_KEY_FILE point there, so an
+      # empty (the default) directory is inert and self-host/local dev are unchanged. The
+      # control box sets TLS_CERT_DIR=/opt/reelbolt/certs in /opt/reelbolt/.env. docs/tls.md.
+      - ${TLS_CERT_DIR:-./data/nginx-certs}:/etc/nginx/operator-certs:ro
+    depends_on:
+      site:
+        condition: service_healthy
+        restart: true
+      web:
+        condition: service_healthy
+        restart: true
+      go-api:
+        condition: service_healthy
+        restart: true
+      inference:
+        condition: service_healthy
+        restart: true
+      workflow-engine:
+        condition: service_healthy
+        restart: true
+      sandbox-executor:
+        condition: service_started
+        restart: true
+    healthcheck:
+      # Hits :443 (not :80) so this keeps working whether FORCE_HTTPS is on or
+      # off; --no-check-certificate because the self-signed default cert (and
+      # a Let's Encrypt cert checked by IP instead of hostname) won't validate.
+      test: ["CMD-SHELL", "wget --no-check-certificate -qO/dev/null https://127.0.0.1/health && wget --no-check-certificate -qO/dev/null https://127.0.0.1/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - reelbolt
+
+  # Obtains and auto-renews a Let's Encrypt certificate for DOMAIN; never
+  # serves real traffic itself. Opt-in via `docker compose --profile tls up -d
+  # caddy` once a real domain is pointed at this host. See docs/tls.md.
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    profiles: ["tls"]
+    # `docker compose config`/`up` validates every service's env interpolation
+    # even when its profile isn't active, so DOMAIN/ACME_EMAIL can't use the
+    # fail-closed `:?` syntax here without breaking the default (no-domain)
+    # `docker compose up` path for everyone. Soft-default to empty instead and
+    # fail loudly at container start if they're actually missing.
+    environment:
+      - DOMAIN=${DOMAIN:-}
+      - ACME_EMAIL=${ACME_EMAIL:-}
+    entrypoint: ["/docker-entrypoint.sh"]
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/docker-entrypoint.sh:/docker-entrypoint.sh:ro
+      - caddy_certs:/data
+    networks:
+      - reelbolt
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    restart: unless-stopped
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: autoheal
+      AUTOHEAL_INTERVAL: 10
+      AUTOHEAL_START_PERIOD: 20
+      AUTOHEAL_DEFAULT_STOP_TIMEOUT: 10
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  pgdata:
+  go-api-secrets:
+  garagedata:
+  garagemeta:
+  rabbitmqdata:
+  dpkeys:
+  videoscratch:
+  caddy_certs:
+  nginx_logs:
+  whisper-hf-cache:
+  embeddings-hf-cache:
+  decision-model-cache:
+  comfyui-models:
+  comfyui-output:
+  grafana-data:
+
+networks:
+  reelbolt:
+  # Internal (no gateway, no egress): shared by `inference` and `import-worker` only, so a compromised PDF/zip
+  # parser has no path to the datastores or the internet. Healthchecks use localhost and are unaffected.
+  import-net:
+    internal: true
+
+# `sandbox-net` is intentionally NOT declared here. Compose would create it as
+# `<project>_sandbox-net`, but sandbox containers are started by the executor via
+# the Docker API with `--network sandbox-net` — an unprefixed name — so a compose
+# declaration is a different network that nothing ever joins. Declaring it looked
+# like it applied isolation settings to the sandbox while applying them to
+# nothing at all. The executor creates the real network itself, with --internal,
+# and refuses to start if an existing network of that name lacks it.

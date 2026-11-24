@@ -1,0 +1,13 @@
+{
+  "id": "wipe-slide",
+  "version": "1.0.0",
+  "title": "Wipe slide",
+  "category": "transitions",
+  "description": "Directional wipe from one scene to the next: the arriving scene is revealed by a moving clip-path edge with an ease-in-out curve.",
+  "tags": ["transition", "wipe", "reveal", "scene change"],
+  "requires": ["remotion", "react"],
+  "sharedFiles": ["_shared/motion.ts"],
+  "previewComposition": {"compositionId": "Block-wipe-slide", "durationInFrames": 30, "width": 1280, "height": 720, "fps": 30, "frames": [18]},
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; direction?: 'left'|'right'|'up'|'down' /*'left'*/}",
+  "example": "import {WipeSlide} from './blocks/wipe-slide/WipeSlide.tsx';\n<WipeSlide from={<SceneA />} to={<SceneB />} startFrame={40} durationInFrames={20} direction=\"left\" />"
+}

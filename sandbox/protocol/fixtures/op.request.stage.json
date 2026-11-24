@@ -1,0 +1,18 @@
+{
+  "v": 1,
+  "type": "op.request",
+  "id": "01J9ZQ0000000000000OP0007",
+  "jobId": "7d1c2e0a-5b7e-4a43-9d57-3f0c1a9b2e11",
+  "sessionId": "0b6f3c58-91d2-4c7a-8e34-5a2d7f1e9c40",
+  "payload": {
+    "opId": "op-000007",
+    "op": "stage",
+    "args": {
+      "url": "https://storage.reelbolt.invalid/reelbolt/projects/p1/inputFiles/clip.mp4?X-Amz-Expires=900&X-Amz-Signature=fixture",
+      "path": "inputs/clip.mp4",
+      "maxBytes": 2147483648,
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "timeoutSec": 120
+  }
+}

@@ -1,0 +1,164 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-anim-03",
+ "videoType": "animation",
+ "frames": 300,
+ "theme": {
+  "bg": "#0f3d2e"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#0f3d2e",
+   "bgB": "#1e6b4f",
+   "deco": "dots",
+   "accent": "#b6f2c9",
+   "decoOpacity": 0.18
+  },
+  {
+   "from": 210,
+   "trans": "cut",
+   "bg": "#4a0f1a",
+   "bgB": "#7a1f2b",
+   "deco": "rings",
+   "accent": "#ff9aa8",
+   "decoOpacity": 0.2
+  }
+ ],
+ "camera": [
+  {
+   "start": 40,
+   "end": 90,
+   "x": -120,
+   "y": -40,
+   "s": 1.5
+  },
+  {
+   "start": 130,
+   "end": 190,
+   "x": 140,
+   "y": -20,
+   "s": 1.5
+  }
+ ],
+ "elements": [
+  {
+   "kind": "rect",
+   "id": "a",
+   "name": "panel a",
+   "x": 160,
+   "y": 160,
+   "w": 200,
+   "h": 140,
+   "color": "#b6f2c9",
+   "scene": 0,
+   "label": "A",
+   "textColor": "#0f3d2e",
+   "vis": [
+    {
+     "in": 20
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "b",
+   "name": "dim panel",
+   "x": 600,
+   "y": 330,
+   "w": 220,
+   "h": 120,
+   "color": "#1a5a43",
+   "scene": 0,
+   "peak": 0.45,
+   "vis": [
+    {
+     "in": 100,
+     "out": 200,
+     "fade": 12
+    }
+   ]
+  },
+  {
+   "kind": "ball",
+   "id": "ball",
+   "name": "ball",
+   "x": 450,
+   "y": 60,
+   "w": 54,
+   "h": 54,
+   "color": "#ffe27a",
+   "release": 150,
+   "floor": 480,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "scene": 0,
+   "e": 0.5,
+   "quiet": true
+  },
+  {
+   "kind": "text",
+   "id": "t",
+   "name": "alert title",
+   "text": "Alert",
+   "x": 330,
+   "y": 250,
+   "w": 300,
+   "h": 80,
+   "color": "#ffd6dc",
+   "scene": 1,
+   "skip": [
+    "text_out"
+   ],
+   "vis": [
+    {
+     "in": 216,
+     "out": 280,
+     "fade": 8
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "bar",
+   "name": "bar",
+   "x": 200,
+   "y": 400,
+   "w": 560,
+   "h": 40,
+   "color": "#ff9aa8",
+   "scene": 1,
+   "skip": [
+    "appear"
+   ],
+   "vis": [
+    {
+     "in": 226,
+     "fade": 6
+    }
+   ],
+   "hits": [
+    {
+     "kind": "shake",
+     "frame": 240,
+     "amp": 20
+    }
+   ]
+  }
+ ],
+ "speech": [
+  {
+   "start": 10,
+   "end": 70
+  },
+  {
+   "start": 218,
+   "end": 285
+  }
+ ]
+}

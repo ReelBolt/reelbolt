@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+The webhook endpoint {{.FileName}} in workspace {{.OrgName}} was disabled.
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+Fix the endpoint, then re-enable it from the webhooks tab:
+
+{{.Link}}
+
+-- {{.FooterNote}}

@@ -1,0 +1,98 @@
+{
+  "menu": {
+    "help": "Aiuto",
+    "takeTheTour": "Fai il tour",
+    "readTheGuides": "Leggi le guide",
+    "documentation": "Documentazione"
+  },
+  "tour": {
+    "steps": {
+      "welcome": {
+        "title": "Benvenuto in ReelBolt",
+        "body": "Questo menu ti porta ai tuoi progetti, all'editor e alle impostazioni. Su smartphone si trova dietro il pulsante del menu in alto."
+      },
+      "newProject": {
+        "title": "Parti da un progetto",
+        "body": "Un progetto è una cartella per un singolo lavoro video. Creane uno, poi aggiungi clip, immagini o audio."
+      },
+      "apps": {
+        "title": "Scegli un'app e avviala",
+        "body": "Dentro un progetto, la scheda App elenca quello che puoi fare. Scegline una, imposta qualche opzione e premi Avvia."
+      },
+      "appsOff": {
+        "title": "Scegli un'app e avviala",
+        "body": "Dentro un progetto, la scheda Flussi di lavoro elenca quello che puoi avviare. Scegline una, imposta qualche opzione e premi Avvia."
+      },
+      "progress": {
+        "title": "Guardalo al lavoro",
+        "body": "Ogni esecuzione mostra i progressi mentre procede. Puoi lasciare la pagina: il video va avanti e il risultato ti aspetta quando torni."
+      },
+      "assistant": {
+        "title": "Chiedi all'assistente",
+        "body": "Non sai da dove iniziare? Chiedi con parole tue. L'assistente può spiegarti le cose, suggerirti i prossimi passi e chiederti conferma prima di cambiare qualcosa."
+      },
+      "editor": {
+        "title": "Rifinisci nell'editor",
+        "body": "Apri un video finito per tagliare, riordinare e aggiungere testo. L'editor è un'anteprima anticipata, quindi alcune cose sono ancora in fase di rifinitura."
+      },
+      "pictures": {
+        "title": "Immagini e miniature",
+        "body": "Crea un'immagine di copertina o una miniatura per il tuo video dallo stesso posto, poi scaricala o usala nel video."
+      },
+      "credits": {
+        "title": "Crediti e il tuo piano",
+        "body": "Le esecuzioni usano crediti. Apri questo menu per vedere il tuo piano e il saldo, e per rifare questo tour quando vuoi."
+      }
+    },
+    "learnMore": "Scopri di più (si apre in una nuova scheda)",
+    "skip": "Salta il tour",
+    "back": "Indietro",
+    "next": "Avanti",
+    "finish": "Fine",
+    "announce": "Passaggio {n} di {total}: {title}",
+    "progress": "Passaggio {n} di {total}"
+  },
+  "checklist": {
+    "title": "Per iniziare",
+    "doneTitle": "Tutto fatto",
+    "doneBody": "Hai provato tutto quello che c'è in elenco. Ottimo lavoro.",
+    "progress": "{done} di {total} completati",
+    "dismiss": "Chiudi Per iniziare",
+    "closeDone": "Chiudi Per iniziare",
+    "showSteps": "Mostra i passaggi",
+    "hideSteps": "Nascondi i passaggi",
+    "how": "Come",
+    "howLabel": "Come: {label} (si apre in una nuova scheda)",
+    "doneMark": " (fatto)",
+    "freeFirstVideo": "il primo è gratis",
+    "items": {
+      "create_project": "Crea un progetto",
+      "upload_file": "Carica un file",
+      "run_video": "Avvia il tuo primo video",
+      "open_result": "Apri il risultato",
+      "try_assistant": "Prova l'assistente",
+      "open_editor": "Apri l'editor (anteprima anticipata)"
+    },
+    "assistantPrompt": "Cosa posso fare dalla dashboard? Suggeriscimi il prossimo passo più utile in base ai miei progetti e alle mie esecuzioni recenti."
+  },
+  "tourCard": {
+    "title": "Prima volta qui? Fai un giro",
+    "body": "Un breve tour del menu, dell'assistente e di dove arrivano i tuoi video. Resta nel menu Aiuto e nel menu dell'account se preferisci farlo più tardi.",
+    "dismiss": "Non ora"
+  },
+  "firstFilm": {
+    "title": "Fai il tuo primo film",
+    "body": "Non ne hai ancora fatto uno? Aggiungiamo una breve clip di esempio a un nuovo progetto e apriamo l'app pronta all'uso. Premi Avvia quando vuoi: non parte nulla da solo.",
+    "button": "Fai il tuo primo film",
+    "settingUp": "Preparazione...",
+    "dismiss": "Chiudi Fai il tuo primo film",
+    "failedTitle": "Impossibile preparare il tuo primo film",
+    "projectDescription": "Una clip di esempio per provare l'app di montaggio dei momenti migliori.",
+    "error": {
+      "unverified": "Prima conferma il tuo indirizzo email: apri il link che ti abbiamo inviato, poi riprova.",
+      "tooLarge": "Lo spazio è esaurito, quindi non è stato possibile aggiungere la clip di esempio. Libera un po' di spazio e riprova.",
+      "network": "Non siamo riusciti a raggiungere ReelBolt. Controlla la connessione e riprova.",
+      "generic": "Riprova tra un momento."
+    }
+  }
+}

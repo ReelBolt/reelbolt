@@ -1,0 +1,37 @@
+{
+  "v": 1,
+  "type": "hello",
+  "id": "01J9ZQ0000000000000000H002",
+  "payload": {
+    "protocolVersion": "1.0",
+    "auth": {
+      "kind": "pool",
+      "credential": "FIXTURE-POOL-CREDENTIAL",
+      "workerName": "pool-worker-fixture-01"
+    },
+    "capabilities": {
+      "protocolVersion": "1.0",
+      "agentVersion": "0.1.0",
+      "os": "linux",
+      "arch": "amd64",
+      "slots": 2,
+      "container": "docker",
+      "containerMode": "rootless",
+      "runtimeImageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "ffmpegVersion": "7.1",
+      "fontsetVersion": "1",
+      "jobTypes": [
+        "remotion.workspace-session",
+        "video.compile",
+        "video.analyze.extract"
+      ],
+      "maxOutputBytes": 4294967296
+    },
+    "running": [
+      {
+        "jobId": "7d1c2e0a-5b7e-4a43-9d57-3f0c1a9b2e11",
+        "leaseEpoch": 3
+      }
+    ]
+  }
+}

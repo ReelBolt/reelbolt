@@ -1,0 +1,7 @@
+{ "globs": [
+  "components/editor/audio/DuckSection.tsx",
+  "components/editor/audio/LoudnessTargetSection.tsx",
+  "components/editor/audio/AuditionSection.tsx",
+  "components/editor/audio/Fader.tsx",
+  "components/editor/audio/CleanVoice.tsx"
+] }

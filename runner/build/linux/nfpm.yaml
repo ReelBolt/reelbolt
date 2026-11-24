@@ -1,0 +1,97 @@
+# nfpm v2 configuration for the ReelBolt runner .deb (WP E10b).
+#
+#   VERSION=<1.4.2> ARCH=<amd64|arm64> DEBROOT=<staged tree> OUTDIR=<dir> \
+#     nfpm package --config runner/build/linux/nfpm.yaml --packager deb --target $OUTDIR
+#
+# package.sh stages a tree and runs nfpm FROM it, so every `src` below is a
+# relative path. They are deliberately not written as ${DEBROOT}/...: nfpm
+# substitutes ${VAR} in scalar fields (version, arch) but NOT inside a `src`
+# glob, so a ${DEBROOT}/... entry fails with "Glob failed: ${DEBROOT}/..." even
+# though DEBROOT is set in the environment.
+#
+# VERSION and ARCH, the two that ARE substituted, are expanded from the
+# environment.
+
+name: reelbolt-runner
+arch: ${ARCH}
+platform: linux
+version: ${VERSION}
+section: net
+priority: optional
+maintainer: ReelBolt <support@reelbolt.ai>
+vendor: ReelBolt
+homepage: https://reelbolt.ai
+license: Apache-2.0
+description: |
+  Runs ReelBolt render and media jobs on this computer.
+  .
+  The runner pairs this machine into a ReelBolt workspace and then serves
+  Remotion renders (inside a container) and ffmpeg work (natively) until it is
+  told to stop. It listens on no port and holds no provider credential: it
+  connects outbound to runner-gateway and uses presigned URLs for media.
+  .
+  This package bundles the ffmpeg and ffprobe builds ReelBolt releases with,
+  under /opt/reelbolt/runner, so that a job here produces the same output as
+  the same job in the cloud. They are separate GPL programs invoked as
+  subprocesses; see /usr/share/doc/reelbolt-runner/THIRD_PARTY_NOTICES.md.
+
+# The tray/window shell is a Wails application and therefore needs GTK and the
+# webview at runtime. These names are the Debian/Ubuntu ones for what the binary
+# ACTUALLY links — verified with `ldd reelbolt-runner-desktop` on the Ubuntu 24.04
+# the release builds on:
+#
+#   libgtk-4.so.1, libwebkitgtk-6.0.so.4, libjavascriptcoregtk-6.0.so.1,
+#   libsoup-3.0.so.0, libglycin-2.so.0  (the last three come in with the webview)
+#
+# Wails v3 beta.28 uses webkitgtk-6.0, not webkit2gtk-4.1, and it links no
+# appindicator at all, so the two names that used to be listed here were both
+# wrong: one was a different webview major and the other a library nothing
+# references. apt pulls the rest of the GTK/webview stack in transitively.
+depends:
+  - libgtk-4-1
+  - libwebkitgtk-6.0-4
+
+recommends:
+  # A container runtime is what makes a render possible; without one the
+  # runner still serves ffmpeg work and advertises only ffmpeg.* capabilities.
+  - docker.io | podman
+
+contents:
+  - src: reelbolt-runner
+    dst: /opt/reelbolt/runner/reelbolt-runner
+    file_info:
+      mode: 0755
+  # The tray and window. package.sh stages it; without it this package runs the
+  # daemon only and the menu entry's Exec would resolve to nothing.
+  - src: reelbolt-runner-desktop
+    dst: /opt/reelbolt/runner/reelbolt-runner-desktop
+    file_info:
+      mode: 0755
+  - src: ffmpeg
+    dst: /opt/reelbolt/runner/ffmpeg
+    file_info:
+      mode: 0755
+  - src: ffprobe
+    dst: /opt/reelbolt/runner/ffprobe
+    file_info:
+      mode: 0755
+  - src: ffmpeg-license.txt
+    dst: /usr/share/doc/reelbolt-runner/ffmpeg-license.txt
+  - src: THIRD_PARTY_NOTICES.md
+    dst: /usr/share/doc/reelbolt-runner/THIRD_PARTY_NOTICES.md
+  # /usr/bin/reelbolt-runner is a wrapper, not the binary: see the header of
+  # linux/reelbolt-runner-wrapper for why.
+  - src: reelbolt-runner-wrapper
+    dst: /usr/bin/reelbolt-runner
+    file_info:
+      mode: 0755
+  # Same reason as the daemon's wrapper, plus: the desktop entry's Exec names
+  # `reelbolt-runner-desktop` on PATH, so the tray needs a /usr/bin entry too.
+  - src: reelbolt-runner-desktop-wrapper
+    dst: /usr/bin/reelbolt-runner-desktop
+    file_info:
+      mode: 0755
+  - src: reelbolt-runner.desktop
+    dst: /usr/share/applications/reelbolt-runner.desktop
+  - src: reelbolt-runner.png
+    dst: /usr/share/icons/hicolor/256x256/apps/reelbolt-runner.png

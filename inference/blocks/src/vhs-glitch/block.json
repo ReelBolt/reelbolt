@@ -1,0 +1,31 @@
+{
+  "id": "vhs-glitch",
+  "version": "1.0.0",
+  "title": "VHS glitch",
+  "category": "effects",
+  "description": "Glitch a scene with RGB channel split and horizontal tear bands in seeded bursts. Use for tension cuts or retro intros.",
+  "tags": [
+    "glitch",
+    "vhs",
+    "rgb split",
+    "distortion"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-vhs-glitch",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      3,
+      12,
+      30
+    ]
+  },
+  "props": "{children: ReactNode; intensity?: number /*0.5*/; split?: number /*14*/; bands?: number /*3*/; stepFrames?: number /*3*/; seed?: string}",
+  "example": "import {VhsGlitch} from './blocks/vhs-glitch/VhsGlitch.tsx';\n<VhsGlitch intensity={0.6}><Scene /></VhsGlitch>"
+}

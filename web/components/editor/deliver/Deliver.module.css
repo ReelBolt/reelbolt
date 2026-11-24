@@ -1,0 +1,152 @@
+/* The Deliver page (pro UI wave 5): the preset list, the cost statement and the result column. Tokens only. */
+
+.presetList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.presetRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  min-height: var(--rb-control-h, 36px);
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-sm);
+  background: var(--rb-ed-surface);
+  color: inherit;
+  cursor: var(--rb-cursor-pointer);
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+.presetRow:hover {
+  border-color: var(--rb-ed-line-strong);
+}
+
+.presetRow:focus-visible {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 1px;
+}
+
+/* The choice is said three ways: the border, the tick and aria-selected. Never colour alone. */
+.presetRow[aria-selected='true'] {
+  border-color: var(--mantine-primary-color-filled);
+  box-shadow: inset 3px 0 0 var(--mantine-primary-color-filled);
+  background: var(--rb-ed-chip-bg);
+}
+
+.presetRow[aria-disabled='true'] {
+  cursor: var(--rb-cursor-not-allowed);
+  color: var(--rb-ed-fg-muted);
+  border-style: dashed;
+}
+
+.presetHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 8px;
+}
+
+.presetName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.presetFacts {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--rb-ed-fg-muted);
+}
+
+.presetNote {
+  color: var(--rb-ed-fg-muted);
+}
+
+.myPresetRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-sm);
+  background: var(--rb-ed-surface);
+}
+
+.myPresetRow[data-in-use='true'] {
+  border-color: var(--mantine-primary-color-filled);
+}
+
+/* The statement and Render stay in view while the settings above them scroll. */
+.costDock {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: var(--rb-ed-inspector-bg);
+  border: 1px solid var(--rb-ed-line-strong);
+  border-radius: var(--mantine-radius-sm);
+}
+
+.costList {
+  display: grid;
+  grid-template-columns: minmax(72px, max-content) minmax(0, 1fr);
+  gap: 2px 12px;
+  margin: 0;
+}
+
+.costList dt {
+  color: var(--rb-ed-fg-muted);
+}
+
+.costList dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The result column: the film and the queue on one side, sharing and hand-off beside them when there is room. */
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  min-width: 0;
+}
+
+.resultGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.section {
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-sm);
+  background: var(--rb-ed-inspector-bg);
+  min-width: 0;
+}
+
+.queueRow {
+  border: 1px solid var(--rb-ed-line);
+  border-radius: var(--mantine-radius-sm);
+  overflow-wrap: anywhere;
+}
+
+/* A finger needs a 44 px target wherever the primary input is touch. */
+@media (pointer: coarse) {
+  .presetRow {
+    min-height: 44px;
+  }
+
+  .touchTarget {
+    min-height: 44px;
+  }
+}

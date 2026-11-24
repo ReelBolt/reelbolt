@@ -1,0 +1,32 @@
+/*
+ * The signup page's two columns.
+ *
+ * Phones and tablets: one column in document order, so the form comes FIRST and the value panel
+ * follows it. Nothing here applies below the desktop breakpoint.
+ *
+ * Desktop: the auth layout centres every page in a 420px container, which is right for a lone form
+ * and too narrow for two columns. So the split breaks out of that container symmetrically (equal
+ * negative margins on both sides, computed from the container's own width) instead of the layout
+ * growing for every other signed-out page. The form keeps its usual 420px column; the value panel
+ * takes the rest and is shown on the left, where reading starts. The document order is unchanged
+ * (form first) and the panel holds nothing focusable, so the tab order is the same on every width.
+ */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mantine-spacing-xl);
+}
+
+@media (min-width: 62em) {
+  .split {
+    --signup-split-width: min(60rem, calc(100vw - 4rem));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 26.25rem);
+    align-items: center;
+    column-gap: calc(var(--mantine-spacing-xl) * 1.5);
+    margin-inline: calc((100% - var(--signup-split-width)) / 2);
+  }
+
+  .value {
+    order: -1;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "typewriter-cursor",
+  "version": "1.0.0",
+  "title": "Typewriter with cursor",
+  "category": "titles",
+  "description": "Text types out behind a blinking cursor; use for code, terminals, quotes and reveals of a sentence.",
+  "tags": [
+    "title",
+    "typewriter",
+    "cursor",
+    "terminal",
+    "text"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-typewriter-cursor",
+    "durationInFrames": 75,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      12,
+      30,
+      60
+    ]
+  },
+  "props": "{text: string; color?: string /*'#ffffff'*/; cursorColor?: string /*'#38bdf8'*/; fontSize?: number /*64*/; fontFamily?: string /*'JetBrains Mono, monospace'*/; startFrame?: number /*0*/; charsPerSecond?: number /*18*/; blinkFrames?: number /*16*/}",
+  "example": "import {TypewriterCursor} from './blocks/typewriter-cursor/TypewriterCursor.tsx';\n<TypewriterCursor text=\"npx create-video@latest\" />"
+}

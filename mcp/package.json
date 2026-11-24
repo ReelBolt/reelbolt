@@ -1,0 +1,26 @@
+{
+  "name": "reelbolt-mcp",
+  "version": "0.4.0-alpha",
+  "description": "ReelBolt Model Context Protocol server",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "reelbolt-mcp-watch": "dist/watch.js"
+  },
+  "engines": {
+    "node": ">=22.23.1"
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc",
+    "dev": "node --watch dist/server.js",
+    "test": "npm run build && node --test \"dist/**/*.test.js\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "typescript": "^5.6.3"
+  }
+}

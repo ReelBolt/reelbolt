@@ -1,0 +1,22 @@
+{
+  "name": "video-events-synthetic",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "specs": "node gen-specs.mjs",
+    "generate": "node generate.mjs",
+    "validate": "node validate.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/renderer": "4.0.535",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}

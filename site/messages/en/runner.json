@@ -1,0 +1,48 @@
+{
+  "page": {
+    "title": "Render on your own computer",
+    "introAvailable": "Install the ReelBolt runner and ReelBolt sends it work to do on your machine. Rendering on your own computer uses no credits.",
+    "introSoon": "The ReelBolt runner is the desktop app that will render on a computer you own instead of on ReelBolt’s capacity, which uses no credits. It is still being built, so there is nothing to download yet.",
+    "cta": {
+      "title": "Rendering on the machines you already own?",
+      "body": "Tell us what you would run on it — the machines, the operating systems and the kind of work. It is how we decide what to build first.",
+      "talk": "Talk to us about the runner",
+      "seeFeatures": "See what it does"
+    }
+  },
+  "notReady": {
+    "label": "Not available yet",
+    "p1": "There is no download, no installer and no version to install: the runner is still being built, and this page will not carry a download link that does not work.",
+    "p2": "When there is something real to install, this page will carry the downloads, the checksums and what your computer needs — and no release date we would have to guess at."
+  },
+  "platform": {
+    "windows-x64": "Windows (64-bit)",
+    "linux-x64": "Linux (x86-64)",
+    "linux-arm64": "Linux (ARM64)"
+  },
+  "copySha": "Copy SHA-256 for {label}",
+  "copyCmd": "Copy verify command for {label}",
+  "download": "Download",
+  "downloads": {
+    "title": "Download",
+    "version": "Version {version}",
+    "released": " · released {date}",
+    "all": "All downloads",
+    "checksum": "Check the checksum of the file you downloaded against the one above before you install it.",
+    "signedBy": "The installer is signed by {publisher}. ",
+    "windows": "Windows SmartScreen may warn about a new installer while its reputation builds. A matching SHA-256 only shows the file arrived intact, not who made it. Before you continue, check that the publisher shown by SmartScreen, or under the file’s Properties, Digital Signatures tab, is the signed ReelBolt publisher. If it is not, do not run it.",
+    "linuxTitle": "Linux",
+    "linux": "Pick the format that suits your system from the list above: a .deb package or an AppImage, whichever are offered for your architecture.",
+    "requirementsTitle": "Requirements",
+    "requirements": "A 64-bit Windows or Linux computer. The runner bundles ffmpeg, so ffmpeg renders work on their own. Renders that use Remotion also need Docker or Podman installed on that computer; without one, the runner can only do the ffmpeg-based work. Installing, pairing it with your ReelBolt account and uninstalling it are covered in the <guide>runner guide</guide>.",
+    "openSource": "The runner includes open-source software, including ffmpeg. The <source>source and licence information for this version</source> is available to download.",
+    "windowsTitle": "Windows"
+  },
+  "client": {
+    "downloadFor": "Download for {platform}",
+    "otherPlatforms": "{label}. Other platforms are listed below.",
+    "copied": "Copied",
+    "copy": "Copy",
+    "copiedStatus": "Copied to clipboard"
+  }
+}

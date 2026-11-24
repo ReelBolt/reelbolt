@@ -1,0 +1,6 @@
+reelbolt
+*.log
+.env*
+.git
+Dockerfile
+.dockerignore

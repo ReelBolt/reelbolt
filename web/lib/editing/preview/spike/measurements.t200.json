@@ -1,0 +1,3483 @@
+{
+  "harness": "T-200 demuxer spike",
+  "fixture": {
+    "path": "web/lib/editing/preview/spike/fixtures/proxy-1080p-12s.mp4",
+    "url": "./fixtures/proxy-1080p-12s.mp4",
+    "bytes": 3357815,
+    "sha256": "a95a0ac9be3e9f28d6ce63a79c68b18f13a3c5de0bbfc0e31807f491db4b8c6d"
+  },
+  "browser": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 32,
+    "deviceMemoryGb": 32,
+    "chromeVersion": "153.0.0.0",
+    "webCodecsVideoDecoder": true,
+    "timerResolutionUs": 100,
+    "playwrightBrowserVersion": "153.0.8010.12"
+  },
+  "gl": {
+    "available": true,
+    "contextType": "webgl2",
+    "debugRendererInfoExtension": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "vendor": "Google Inc. (Google)",
+    "maskedRenderer": "WebKit WebGL",
+    "maskedVendor": "WebKit",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "maxTextureSize": 8192,
+    "isSoftware": true
+  },
+  "driver": {
+    "runIndex": 0,
+    "playwright": "1.63.0",
+    "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+    "launchedArgs": [
+      "--no-sandbox",
+      "--ozone-platform=headless",
+      "--use-gl=angle",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--disable-gpu-sandbox"
+    ],
+    "channel": "chromium",
+    "headed": false,
+    "consoleMessages": []
+  },
+  "aggregate": {
+    "runs": 5,
+    "metrics": {
+      "headerParseMs": {
+        "mediabunny": 19.5,
+        "mp4box": 15.2
+      },
+      "sampleTableMs": {
+        "mediabunny": 2.2,
+        "mp4box": 0
+      },
+      "durationComputeMs": {
+        "mediabunny": 1.6,
+        "mp4box": 0
+      },
+      "parseMs": {
+        "mediabunny": 21.3,
+        "mp4box": 15.3
+      },
+      "packetsParsed": {
+        "mediabunny": 924,
+        "mp4box": 924
+      },
+      "enumerateMs": {
+        "mediabunny": 12.9,
+        "mp4box": 0.1
+      },
+      "firstKeyframeSeek_medianUs": {
+        "mediabunny": 0,
+        "mp4box": 100
+      },
+      "randomSeek_firstTouch_medianUs": {
+        "mediabunny": 0,
+        "mp4box": 100
+      },
+      "randomSeek_firstTouch_p95Us": {
+        "mediabunny": 100,
+        "mp4box": 640
+      },
+      "randomSeek_repeat_medianUs": {
+        "mediabunny": 0,
+        "mp4box": 100
+      },
+      "randomSeek_batchMeanUs": {
+        "mediabunny": 11.67,
+        "mp4box": 107.5
+      },
+      "randomSeek_plannerOnly_medianUs": {
+        "mediabunny": null,
+        "mp4box": 0
+      },
+      "openToFirstSample_medianUs": {
+        "mediabunny": 13000,
+        "mp4box": 7500
+      },
+      "openToFirstSampleFast_medianUs": {
+        "mediabunny": 11900,
+        "mp4box": 6900
+      },
+      "openToFirstDecodedFrame_medianUs": {
+        "mediabunny": 22900,
+        "mp4box": 16900
+      },
+      "openToFirstDecodedFrameFast_medianUs": {
+        "mediabunny": 23400,
+        "mp4box": 16500
+      },
+      "seekIntegrityFailures": {
+        "mediabunny": 0,
+        "mp4box": 0
+      }
+    },
+    "crossRunMedianOfMedians": true
+  },
+  "representativeRun": {
+    "harness": "T-200 demuxer spike",
+    "startedAt": "2026-10-03T06:26:36.309Z",
+    "fixture": {
+      "url": "./fixtures/proxy-1080p-12s.mp4",
+      "bytes": 3357815,
+      "sha256Note": "hashed by the driver from the committed file, not in the browser",
+      "initialFetchMs": 32.5
+    },
+    "browser": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "hardwareConcurrency": 32,
+      "deviceMemoryGb": 32,
+      "chromeVersion": "153.0.0.0",
+      "webCodecsVideoDecoder": true,
+      "timerResolutionUs": 100,
+      "playwrightBrowserVersion": "153.0.8010.12"
+    },
+    "gl": {
+      "available": true,
+      "contextType": "webgl2",
+      "debugRendererInfoExtension": true,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "vendor": "Google Inc. (Google)",
+      "maskedRenderer": "WebKit WebGL",
+      "maskedVendor": "WebKit",
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "maxTextureSize": 8192,
+      "isSoftware": true
+    },
+    "demuxers": {
+      "mediabunny": {
+        "headerParseMs": 19.5,
+        "durationComputeMs": 1.8,
+        "parseMs": 21.3,
+        "sampleTableMs": 3.1,
+        "computedPacketCount": 360,
+        "computedAveragePacketRate": 30,
+        "computedAverageBitrate": 2100812.666666667,
+        "formatName": "MP4",
+        "formatMimeType": "video/mp4",
+        "durationSec": 12,
+        "packetsParsed": 924,
+        "packetsPerTrack": {
+          "video": 360,
+          "audio": 564
+        },
+        "enumerateMs": 13.8,
+        "enumeratedSampleBytes": 3343811,
+        "firstKeyframeSeek": {
+          "n": 20,
+          "minUs": 0,
+          "medianUs": 0,
+          "p95Us": 100,
+          "maxUs": 100
+        },
+        "firstKeyframe": {
+          "startSec": 0,
+          "byteLength": 20424
+        },
+        "randomSeek": {
+          "distinctTimestamps": 24,
+          "rounds": 5,
+          "samples": 120,
+          "firstTouch": {
+            "n": 24,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 100
+          },
+          "repeat": {
+            "n": 96,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 600
+          },
+          "all": {
+            "n": 120,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 600
+          },
+          "batchMeanUs": 12.5,
+          "batchTotalMs": 1.5,
+          "integrityFailures": 0
+        },
+        "seekDetail": [
+          {
+            "targetSec": 0.25,
+            "keyPacketStartSec": 0,
+            "byteLength": 20424,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 0.75,
+            "keyPacketStartSec": 0,
+            "byteLength": 20424,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 1.25,
+            "keyPacketStartSec": 1,
+            "byteLength": 28336,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 1.75,
+            "keyPacketStartSec": 1,
+            "byteLength": 28336,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 2.25,
+            "keyPacketStartSec": 2,
+            "byteLength": 29761,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 2.75,
+            "keyPacketStartSec": 2,
+            "byteLength": 29761,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 3.25,
+            "keyPacketStartSec": 3,
+            "byteLength": 30921,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 3.75,
+            "keyPacketStartSec": 3,
+            "byteLength": 30921,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 4.25,
+            "keyPacketStartSec": 4,
+            "byteLength": 29385,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 4.75,
+            "keyPacketStartSec": 4,
+            "byteLength": 29385,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 5.25,
+            "keyPacketStartSec": 5,
+            "byteLength": 28999,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 5.75,
+            "keyPacketStartSec": 5,
+            "byteLength": 28999,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 6.25,
+            "keyPacketStartSec": 6,
+            "byteLength": 31162,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 6.75,
+            "keyPacketStartSec": 6,
+            "byteLength": 31162,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 7.25,
+            "keyPacketStartSec": 7,
+            "byteLength": 31423,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 7.75,
+            "keyPacketStartSec": 7,
+            "byteLength": 31423,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 8.25,
+            "keyPacketStartSec": 8,
+            "byteLength": 28929,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 8.75,
+            "keyPacketStartSec": 8,
+            "byteLength": 28929,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 9.25,
+            "keyPacketStartSec": 9,
+            "byteLength": 28450,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 9.75,
+            "keyPacketStartSec": 9,
+            "byteLength": 28450,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 10.25,
+            "keyPacketStartSec": 10,
+            "byteLength": 28746,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 10.75,
+            "keyPacketStartSec": 10,
+            "byteLength": 28746,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 11.25,
+            "keyPacketStartSec": 11,
+            "byteLength": 30393,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 11.75,
+            "keyPacketStartSec": 11,
+            "byteLength": 30393,
+            "integrityOk": true
+          }
+        ],
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hasDescription": true,
+          "descriptionBytes": 47
+        },
+        "openToFirstSample": {
+          "n": 5,
+          "minUs": 10500,
+          "medianUs": 11200,
+          "p95Us": 15160,
+          "maxUs": 15900
+        },
+        "openToFirstSampleFast": {
+          "n": 5,
+          "minUs": 9100,
+          "medianUs": 9700,
+          "p95Us": 9960,
+          "maxUs": 10000
+        },
+        "openToFirstDecodedFrame": {
+          "n": 5,
+          "minUs": 17600,
+          "medianUs": 21200,
+          "p95Us": 22740,
+          "maxUs": 23000
+        },
+        "openToFirstDecodedFrameFast": {
+          "n": 5,
+          "minUs": 34500,
+          "medianUs": 41800,
+          "p95Us": 75240,
+          "maxUs": 75300
+        }
+      },
+      "mp4box": {
+        "headerParseMs": 17.4,
+        "durationComputeMs": 0,
+        "parseMs": 17.4,
+        "sampleTableMs": 0,
+        "formatName": "MP4 (ISO base media)",
+        "durationSec": 12,
+        "trackTimescale": 15360,
+        "packetsParsed": 924,
+        "packetsPerTrack": {
+          "video": 360,
+          "audio": 564
+        },
+        "enumerateMs": 0.2,
+        "enumeratedSampleBytes": 3343811,
+        "firstKeyframeSeek": {
+          "n": 20,
+          "minUs": 0,
+          "medianUs": 100,
+          "p95Us": 210,
+          "maxUs": 400
+        },
+        "firstKeyframe": {
+          "startSec": 0.0667,
+          "byteLength": 20424
+        },
+        "randomSeek": {
+          "distinctTimestamps": 24,
+          "rounds": 5,
+          "samples": 120,
+          "firstTouch": {
+            "n": 24,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 200,
+            "maxUs": 200
+          },
+          "repeat": {
+            "n": 96,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 200,
+            "maxUs": 6400
+          },
+          "all": {
+            "n": 120,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 200,
+            "maxUs": 6400
+          },
+          "batchMeanUs": 143.33,
+          "batchTotalMs": 17.2,
+          "planOnly": {
+            "n": 120,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 100
+          },
+          "integrityFailures": 0
+        },
+        "seekDetail": [
+          {
+            "targetSec": 0.25,
+            "plannedOffset": 34428,
+            "keyPacketStartSec": 0.0667,
+            "byteLength": 20424,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 0.75,
+            "plannedOffset": 34428,
+            "keyPacketStartSec": 0.0667,
+            "byteLength": 20424,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 1.25,
+            "plannedOffset": 305858,
+            "keyPacketStartSec": 1.0667,
+            "byteLength": 28336,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 1.75,
+            "plannedOffset": 305858,
+            "keyPacketStartSec": 1.0667,
+            "byteLength": 28336,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 2.25,
+            "plannedOffset": 559108,
+            "keyPacketStartSec": 2.0667,
+            "byteLength": 29761,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 2.75,
+            "plannedOffset": 589567,
+            "keyPacketStartSec": 2.0667,
+            "byteLength": 29761,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 3.25,
+            "plannedOffset": 837737,
+            "keyPacketStartSec": 3.0667,
+            "byteLength": 30921,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 3.75,
+            "plannedOffset": 869348,
+            "keyPacketStartSec": 3.0667,
+            "byteLength": 30921,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 4.25,
+            "plannedOffset": 1122382,
+            "keyPacketStartSec": 4.0667,
+            "byteLength": 29385,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 4.75,
+            "plannedOffset": 1152121,
+            "keyPacketStartSec": 4.0667,
+            "byteLength": 29385,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 5.25,
+            "plannedOffset": 1408502,
+            "keyPacketStartSec": 5.0667,
+            "byteLength": 28999,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 5.75,
+            "plannedOffset": 1437860,
+            "keyPacketStartSec": 5.0667,
+            "byteLength": 28999,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 6.25,
+            "plannedOffset": 1697833,
+            "keyPacketStartSec": 6.0667,
+            "byteLength": 31162,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 6.75,
+            "plannedOffset": 1729329,
+            "keyPacketStartSec": 6.0667,
+            "byteLength": 31162,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 7.25,
+            "plannedOffset": 1968430,
+            "keyPacketStartSec": 7.0667,
+            "byteLength": 31423,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 7.75,
+            "plannedOffset": 2000537,
+            "keyPacketStartSec": 7.0667,
+            "byteLength": 31423,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 8.25,
+            "plannedOffset": 2253685,
+            "keyPacketStartSec": 8.0667,
+            "byteLength": 28929,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 8.75,
+            "plannedOffset": 2283299,
+            "keyPacketStartSec": 8.0667,
+            "byteLength": 28929,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 9.25,
+            "plannedOffset": 2539692,
+            "keyPacketStartSec": 9.0667,
+            "byteLength": 28450,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 9.75,
+            "plannedOffset": 2568827,
+            "keyPacketStartSec": 9.0667,
+            "byteLength": 28450,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 10.25,
+            "plannedOffset": 2825165,
+            "keyPacketStartSec": 10.0667,
+            "byteLength": 28746,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 10.75,
+            "plannedOffset": 2854590,
+            "keyPacketStartSec": 10.0667,
+            "byteLength": 28746,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 11.25,
+            "plannedOffset": 3091409,
+            "keyPacketStartSec": 11.0667,
+            "byteLength": 30393,
+            "integrityOk": true
+          },
+          {
+            "targetSec": 11.75,
+            "plannedOffset": 3122486,
+            "keyPacketStartSec": 11.0667,
+            "byteLength": 30393,
+            "integrityOk": true
+          }
+        ],
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hasDescription": true,
+          "descriptionBytes": 47
+        },
+        "keptMdatData": true,
+        "openToFirstSample": {
+          "n": 5,
+          "minUs": 18700,
+          "medianUs": 21400,
+          "p95Us": 38460,
+          "maxUs": 42500
+        },
+        "openToFirstSampleFast": {
+          "n": 5,
+          "minUs": 6500,
+          "medianUs": 11800,
+          "p95Us": 26040,
+          "maxUs": 28200
+        },
+        "openToFirstDecodedFrame": {
+          "n": 5,
+          "minUs": 16400,
+          "medianUs": 18400,
+          "p95Us": 40740,
+          "maxUs": 42700
+        },
+        "openToFirstDecodedFrameFast": {
+          "n": 5,
+          "minUs": 22600,
+          "medianUs": 37700,
+          "p95Us": 50340,
+          "maxUs": 52800
+        }
+      }
+    },
+    "errors": [],
+    "finishedAt": "2026-10-03T06:26:40.178Z",
+    "driver": {
+      "runIndex": 0,
+      "playwright": "1.63.0",
+      "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+      "launchedArgs": [
+        "--no-sandbox",
+        "--ozone-platform=headless",
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--disable-gpu-sandbox"
+      ],
+      "channel": "chromium",
+      "headed": false,
+      "consoleMessages": []
+    }
+  },
+  "runs": [
+    {
+      "harness": "T-200 demuxer spike",
+      "startedAt": "2026-10-03T06:26:36.309Z",
+      "fixture": {
+        "url": "./fixtures/proxy-1080p-12s.mp4",
+        "bytes": 3357815,
+        "sha256Note": "hashed by the driver from the committed file, not in the browser",
+        "initialFetchMs": 32.5
+      },
+      "browser": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "hardwareConcurrency": 32,
+        "deviceMemoryGb": 32,
+        "chromeVersion": "153.0.0.0",
+        "webCodecsVideoDecoder": true,
+        "timerResolutionUs": 100,
+        "playwrightBrowserVersion": "153.0.8010.12"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "demuxers": {
+        "mediabunny": {
+          "headerParseMs": 19.5,
+          "durationComputeMs": 1.8,
+          "parseMs": 21.3,
+          "sampleTableMs": 3.1,
+          "computedPacketCount": 360,
+          "computedAveragePacketRate": 30,
+          "computedAverageBitrate": 2100812.666666667,
+          "formatName": "MP4",
+          "formatMimeType": "video/mp4",
+          "durationSec": 12,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 13.8,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 100
+          },
+          "firstKeyframe": {
+            "startSec": 0,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 600
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 600
+            },
+            "batchMeanUs": 12.5,
+            "batchTotalMs": 1.5,
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 10500,
+            "medianUs": 11200,
+            "p95Us": 15160,
+            "maxUs": 15900
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 9100,
+            "medianUs": 9700,
+            "p95Us": 9960,
+            "maxUs": 10000
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 17600,
+            "medianUs": 21200,
+            "p95Us": 22740,
+            "maxUs": 23000
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 34500,
+            "medianUs": 41800,
+            "p95Us": 75240,
+            "maxUs": 75300
+          }
+        },
+        "mp4box": {
+          "headerParseMs": 17.4,
+          "durationComputeMs": 0,
+          "parseMs": 17.4,
+          "sampleTableMs": 0,
+          "formatName": "MP4 (ISO base media)",
+          "durationSec": 12,
+          "trackTimescale": 15360,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 0.2,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 210,
+            "maxUs": 400
+          },
+          "firstKeyframe": {
+            "startSec": 0.0667,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 200
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 6400
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 6400
+            },
+            "batchMeanUs": 143.33,
+            "batchTotalMs": 17.2,
+            "planOnly": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "plannedOffset": 559108,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "plannedOffset": 589567,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "plannedOffset": 837737,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "plannedOffset": 869348,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "plannedOffset": 1122382,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "plannedOffset": 1152121,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "plannedOffset": 1408502,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "plannedOffset": 1437860,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "plannedOffset": 1697833,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "plannedOffset": 1729329,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "plannedOffset": 1968430,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "plannedOffset": 2000537,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "plannedOffset": 2253685,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "plannedOffset": 2283299,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "plannedOffset": 2539692,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "plannedOffset": 2568827,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "plannedOffset": 2825165,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "plannedOffset": 2854590,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "plannedOffset": 3091409,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "plannedOffset": 3122486,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "keptMdatData": true,
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 18700,
+            "medianUs": 21400,
+            "p95Us": 38460,
+            "maxUs": 42500
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 6500,
+            "medianUs": 11800,
+            "p95Us": 26040,
+            "maxUs": 28200
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 16400,
+            "medianUs": 18400,
+            "p95Us": 40740,
+            "maxUs": 42700
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 22600,
+            "medianUs": 37700,
+            "p95Us": 50340,
+            "maxUs": 52800
+          }
+        }
+      },
+      "errors": [],
+      "finishedAt": "2026-10-03T06:26:40.178Z",
+      "driver": {
+        "runIndex": 0,
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "consoleMessages": []
+      }
+    },
+    {
+      "harness": "T-200 demuxer spike",
+      "startedAt": "2026-10-03T06:26:42.414Z",
+      "fixture": {
+        "url": "./fixtures/proxy-1080p-12s.mp4",
+        "bytes": 3357815,
+        "sha256Note": "hashed by the driver from the committed file, not in the browser",
+        "initialFetchMs": 106.3
+      },
+      "browser": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "hardwareConcurrency": 32,
+        "deviceMemoryGb": 32,
+        "chromeVersion": "153.0.0.0",
+        "webCodecsVideoDecoder": true,
+        "timerResolutionUs": 100,
+        "playwrightBrowserVersion": "153.0.8010.12"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "demuxers": {
+        "mediabunny": {
+          "headerParseMs": 63.5,
+          "durationComputeMs": 10.3,
+          "parseMs": 73.8,
+          "sampleTableMs": 12.7,
+          "computedPacketCount": 360,
+          "computedAveragePacketRate": 30,
+          "computedAverageBitrate": 2100812.666666667,
+          "formatName": "MP4",
+          "formatMimeType": "video/mp4",
+          "durationSec": 12,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 39.8,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 10,
+            "maxUs": 200
+          },
+          "firstKeyframe": {
+            "startSec": 0,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 185,
+              "maxUs": 300
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 800
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 800
+            },
+            "batchMeanUs": 20,
+            "batchTotalMs": 2.4,
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 18500,
+            "medianUs": 19700,
+            "p95Us": 24200,
+            "maxUs": 25000
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 16500,
+            "medianUs": 19400,
+            "p95Us": 26680,
+            "maxUs": 28200
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 24100,
+            "medianUs": 33300,
+            "p95Us": 36260,
+            "maxUs": 36900
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 25900,
+            "medianUs": 32700,
+            "p95Us": 51220,
+            "maxUs": 55700
+          }
+        },
+        "mp4box": {
+          "headerParseMs": 18.6,
+          "durationComputeMs": 0,
+          "parseMs": 18.6,
+          "sampleTableMs": 0,
+          "formatName": "MP4 (ISO base media)",
+          "durationSec": 12,
+          "trackTimescale": 15360,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 0.4,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 605,
+            "maxUs": 700
+          },
+          "firstKeyframe": {
+            "startSec": 0.0667,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 880,
+              "maxUs": 1100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 500,
+              "maxUs": 3300
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 505,
+              "maxUs": 3300
+            },
+            "batchMeanUs": 158.33,
+            "batchTotalMs": 19,
+            "planOnly": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 1000
+            },
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "plannedOffset": 559108,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "plannedOffset": 589567,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "plannedOffset": 837737,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "plannedOffset": 869348,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "plannedOffset": 1122382,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "plannedOffset": 1152121,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "plannedOffset": 1408502,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "plannedOffset": 1437860,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "plannedOffset": 1697833,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "plannedOffset": 1729329,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "plannedOffset": 1968430,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "plannedOffset": 2000537,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "plannedOffset": 2253685,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "plannedOffset": 2283299,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "plannedOffset": 2539692,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "plannedOffset": 2568827,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "plannedOffset": 2825165,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "plannedOffset": 2854590,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "plannedOffset": 3091409,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "plannedOffset": 3122486,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "keptMdatData": true,
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 7000,
+            "medianUs": 7800,
+            "p95Us": 8520,
+            "maxUs": 8700
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 6200,
+            "medianUs": 7400,
+            "p95Us": 11180,
+            "maxUs": 11300
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 16300,
+            "medianUs": 18400,
+            "p95Us": 21240,
+            "maxUs": 21500
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 16700,
+            "medianUs": 21300,
+            "p95Us": 26280,
+            "maxUs": 27100
+          }
+        }
+      },
+      "errors": [],
+      "finishedAt": "2026-10-03T06:26:45.851Z",
+      "driver": {
+        "runIndex": 1,
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "consoleMessages": []
+      }
+    },
+    {
+      "harness": "T-200 demuxer spike",
+      "startedAt": "2026-10-03T06:26:47.226Z",
+      "fixture": {
+        "url": "./fixtures/proxy-1080p-12s.mp4",
+        "bytes": 3357815,
+        "sha256Note": "hashed by the driver from the committed file, not in the browser",
+        "initialFetchMs": 45.1
+      },
+      "browser": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "hardwareConcurrency": 32,
+        "deviceMemoryGb": 32,
+        "chromeVersion": "153.0.0.0",
+        "webCodecsVideoDecoder": true,
+        "timerResolutionUs": 100,
+        "playwrightBrowserVersion": "153.0.8010.12"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "demuxers": {
+        "mediabunny": {
+          "headerParseMs": 22.8,
+          "durationComputeMs": 1.6,
+          "parseMs": 24.4,
+          "sampleTableMs": 1.8,
+          "computedPacketCount": 360,
+          "computedAveragePacketRate": 30,
+          "computedAverageBitrate": 2100812.666666667,
+          "formatName": "MP4",
+          "formatMimeType": "video/mp4",
+          "durationSec": 12,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 12.9,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 105,
+            "maxUs": 200
+          },
+          "firstKeyframe": {
+            "startSec": 0,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "batchMeanUs": 11.67,
+            "batchTotalMs": 1.4,
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 12500,
+            "medianUs": 13600,
+            "p95Us": 18200,
+            "maxUs": 19200
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 10500,
+            "medianUs": 11900,
+            "p95Us": 13860,
+            "maxUs": 14000
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 23200,
+            "medianUs": 25900,
+            "p95Us": 29240,
+            "maxUs": 29300
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 20900,
+            "medianUs": 23400,
+            "p95Us": 41120,
+            "maxUs": 45400
+          }
+        },
+        "mp4box": {
+          "headerParseMs": 15.2,
+          "durationComputeMs": 0,
+          "parseMs": 15.3,
+          "sampleTableMs": 0.1,
+          "formatName": "MP4 (ISO base media)",
+          "durationSec": 12,
+          "trackTimescale": 15360,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 0,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 315,
+            "maxUs": 600
+          },
+          "firstKeyframe": {
+            "startSec": 0.0667,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 150,
+              "p95Us": 1010,
+              "maxUs": 1100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 100,
+              "maxUs": 200
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 1100
+            },
+            "batchMeanUs": 107.5,
+            "batchTotalMs": 12.9,
+            "planOnly": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 200
+            },
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "plannedOffset": 559108,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "plannedOffset": 589567,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "plannedOffset": 837737,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "plannedOffset": 869348,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "plannedOffset": 1122382,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "plannedOffset": 1152121,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "plannedOffset": 1408502,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "plannedOffset": 1437860,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "plannedOffset": 1697833,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "plannedOffset": 1729329,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "plannedOffset": 1968430,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "plannedOffset": 2000537,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "plannedOffset": 2253685,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "plannedOffset": 2283299,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "plannedOffset": 2539692,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "plannedOffset": 2568827,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "plannedOffset": 2825165,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "plannedOffset": 2854590,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "plannedOffset": 3091409,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "plannedOffset": 3122486,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "keptMdatData": true,
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 6400,
+            "medianUs": 7500,
+            "p95Us": 7780,
+            "maxUs": 7800
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 6100,
+            "medianUs": 6900,
+            "p95Us": 7200,
+            "maxUs": 7200
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 13600,
+            "medianUs": 16000,
+            "p95Us": 16600,
+            "maxUs": 16700
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 11400,
+            "medianUs": 14300,
+            "p95Us": 19240,
+            "maxUs": 20300
+          }
+        }
+      },
+      "errors": [],
+      "finishedAt": "2026-10-03T06:26:49.352Z",
+      "driver": {
+        "runIndex": 2,
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "consoleMessages": []
+      }
+    },
+    {
+      "harness": "T-200 demuxer spike",
+      "startedAt": "2026-10-03T06:26:50.129Z",
+      "fixture": {
+        "url": "./fixtures/proxy-1080p-12s.mp4",
+        "bytes": 3357815,
+        "sha256Note": "hashed by the driver from the committed file, not in the browser",
+        "initialFetchMs": 27.9
+      },
+      "browser": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "hardwareConcurrency": 32,
+        "deviceMemoryGb": 32,
+        "chromeVersion": "153.0.0.0",
+        "webCodecsVideoDecoder": true,
+        "timerResolutionUs": 100,
+        "playwrightBrowserVersion": "153.0.8010.12"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "demuxers": {
+        "mediabunny": {
+          "headerParseMs": 16.2,
+          "durationComputeMs": 1.5,
+          "parseMs": 17.7,
+          "sampleTableMs": 2.2,
+          "computedPacketCount": 360,
+          "computedAveragePacketRate": 30,
+          "computedAverageBitrate": 2100812.666666667,
+          "formatName": "MP4",
+          "formatMimeType": "video/mp4",
+          "durationSec": 12,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 9.6,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 100,
+            "maxUs": 100
+          },
+          "firstKeyframe": {
+            "startSec": 0,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 100
+            },
+            "batchMeanUs": 10.83,
+            "batchTotalMs": 1.3,
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 10900,
+            "medianUs": 11800,
+            "p95Us": 12580,
+            "maxUs": 12700
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 9400,
+            "medianUs": 11600,
+            "p95Us": 13440,
+            "maxUs": 13800
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 15100,
+            "medianUs": 18200,
+            "p95Us": 20720,
+            "maxUs": 21200
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 19900,
+            "medianUs": 20700,
+            "p95Us": 21600,
+            "maxUs": 21800
+          }
+        },
+        "mp4box": {
+          "headerParseMs": 13.8,
+          "durationComputeMs": 0,
+          "parseMs": 13.8,
+          "sampleTableMs": 0,
+          "formatName": "MP4 (ISO base media)",
+          "durationSec": 12,
+          "trackTimescale": 15360,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 0.1,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 220,
+            "maxUs": 600
+          },
+          "firstKeyframe": {
+            "startSec": 0.0667,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 640,
+              "maxUs": 1000
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 600
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 1000
+            },
+            "batchMeanUs": 92.5,
+            "batchTotalMs": 11.1,
+            "planOnly": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 200
+            },
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "plannedOffset": 559108,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "plannedOffset": 589567,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "plannedOffset": 837737,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "plannedOffset": 869348,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "plannedOffset": 1122382,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "plannedOffset": 1152121,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "plannedOffset": 1408502,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "plannedOffset": 1437860,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "plannedOffset": 1697833,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "plannedOffset": 1729329,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "plannedOffset": 1968430,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "plannedOffset": 2000537,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "plannedOffset": 2253685,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "plannedOffset": 2283299,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "plannedOffset": 2539692,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "plannedOffset": 2568827,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "plannedOffset": 2825165,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "plannedOffset": 2854590,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "plannedOffset": 3091409,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "plannedOffset": 3122486,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "keptMdatData": true,
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 6300,
+            "medianUs": 6600,
+            "p95Us": 11300,
+            "maxUs": 12400
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 5500,
+            "medianUs": 6200,
+            "p95Us": 6660,
+            "maxUs": 6700
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 14400,
+            "medianUs": 15400,
+            "p95Us": 20760,
+            "maxUs": 22000
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 11300,
+            "medianUs": 12400,
+            "p95Us": 14160,
+            "maxUs": 14600
+          }
+        }
+      },
+      "errors": [],
+      "finishedAt": "2026-10-03T06:26:51.928Z",
+      "driver": {
+        "runIndex": 3,
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "consoleMessages": []
+      }
+    },
+    {
+      "harness": "T-200 demuxer spike",
+      "startedAt": "2026-10-03T06:26:52.725Z",
+      "fixture": {
+        "url": "./fixtures/proxy-1080p-12s.mp4",
+        "bytes": 3357815,
+        "sha256Note": "hashed by the driver from the committed file, not in the browser",
+        "initialFetchMs": 19.2
+      },
+      "browser": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "hardwareConcurrency": 32,
+        "deviceMemoryGb": 32,
+        "chromeVersion": "153.0.0.0",
+        "webCodecsVideoDecoder": true,
+        "timerResolutionUs": 100,
+        "playwrightBrowserVersion": "153.0.8010.12"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "demuxers": {
+        "mediabunny": {
+          "headerParseMs": 15.6,
+          "durationComputeMs": 1.2,
+          "parseMs": 16.8,
+          "sampleTableMs": 1.7,
+          "computedPacketCount": 360,
+          "computedAveragePacketRate": 30,
+          "computedAverageBitrate": 2100812.666666667,
+          "formatName": "MP4",
+          "formatMimeType": "video/mp4",
+          "durationSec": 12,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 6.9,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 0,
+            "p95Us": 5,
+            "maxUs": 100
+          },
+          "firstKeyframe": {
+            "startSec": 0,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 85,
+              "maxUs": 100
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 0,
+              "maxUs": 100
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 0,
+              "maxUs": 100
+            },
+            "batchMeanUs": 6.67,
+            "batchTotalMs": 0.8,
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "keyPacketStartSec": 0,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "keyPacketStartSec": 1,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "keyPacketStartSec": 2,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "keyPacketStartSec": 3,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "keyPacketStartSec": 4,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "keyPacketStartSec": 5,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "keyPacketStartSec": 6,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "keyPacketStartSec": 7,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "keyPacketStartSec": 8,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "keyPacketStartSec": 9,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "keyPacketStartSec": 10,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "keyPacketStartSec": 11,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 11600,
+            "medianUs": 13000,
+            "p95Us": 13580,
+            "maxUs": 13600
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 11300,
+            "medianUs": 12500,
+            "p95Us": 14280,
+            "maxUs": 14600
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 21700,
+            "medianUs": 22900,
+            "p95Us": 24760,
+            "maxUs": 25200
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 18300,
+            "medianUs": 20400,
+            "p95Us": 21580,
+            "maxUs": 21600
+          }
+        },
+        "mp4box": {
+          "headerParseMs": 10.7,
+          "durationComputeMs": 0,
+          "parseMs": 10.7,
+          "sampleTableMs": 0,
+          "formatName": "MP4 (ISO base media)",
+          "durationSec": 12,
+          "trackTimescale": 15360,
+          "packetsParsed": 924,
+          "packetsPerTrack": {
+            "video": 360,
+            "audio": 564
+          },
+          "enumerateMs": 0.1,
+          "enumeratedSampleBytes": 3343811,
+          "firstKeyframeSeek": {
+            "n": 20,
+            "minUs": 0,
+            "medianUs": 100,
+            "p95Us": 220,
+            "maxUs": 600
+          },
+          "firstKeyframe": {
+            "startSec": 0.0667,
+            "byteLength": 20424
+          },
+          "randomSeek": {
+            "distinctTimestamps": 24,
+            "rounds": 5,
+            "samples": 120,
+            "firstTouch": {
+              "n": 24,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 1400
+            },
+            "repeat": {
+              "n": 96,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 125,
+              "maxUs": 200
+            },
+            "all": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 100,
+              "p95Us": 200,
+              "maxUs": 1400
+            },
+            "batchMeanUs": 89.17,
+            "batchTotalMs": 10.7,
+            "planOnly": {
+              "n": 120,
+              "minUs": 0,
+              "medianUs": 0,
+              "p95Us": 100,
+              "maxUs": 700
+            },
+            "integrityFailures": 0
+          },
+          "seekDetail": [
+            {
+              "targetSec": 0.25,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 0.75,
+              "plannedOffset": 34428,
+              "keyPacketStartSec": 0.0667,
+              "byteLength": 20424,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.25,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 1.75,
+              "plannedOffset": 305858,
+              "keyPacketStartSec": 1.0667,
+              "byteLength": 28336,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.25,
+              "plannedOffset": 559108,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 2.75,
+              "plannedOffset": 589567,
+              "keyPacketStartSec": 2.0667,
+              "byteLength": 29761,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.25,
+              "plannedOffset": 837737,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 3.75,
+              "plannedOffset": 869348,
+              "keyPacketStartSec": 3.0667,
+              "byteLength": 30921,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.25,
+              "plannedOffset": 1122382,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 4.75,
+              "plannedOffset": 1152121,
+              "keyPacketStartSec": 4.0667,
+              "byteLength": 29385,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.25,
+              "plannedOffset": 1408502,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 5.75,
+              "plannedOffset": 1437860,
+              "keyPacketStartSec": 5.0667,
+              "byteLength": 28999,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.25,
+              "plannedOffset": 1697833,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 6.75,
+              "plannedOffset": 1729329,
+              "keyPacketStartSec": 6.0667,
+              "byteLength": 31162,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.25,
+              "plannedOffset": 1968430,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 7.75,
+              "plannedOffset": 2000537,
+              "keyPacketStartSec": 7.0667,
+              "byteLength": 31423,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.25,
+              "plannedOffset": 2253685,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 8.75,
+              "plannedOffset": 2283299,
+              "keyPacketStartSec": 8.0667,
+              "byteLength": 28929,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.25,
+              "plannedOffset": 2539692,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 9.75,
+              "plannedOffset": 2568827,
+              "keyPacketStartSec": 9.0667,
+              "byteLength": 28450,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.25,
+              "plannedOffset": 2825165,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 10.75,
+              "plannedOffset": 2854590,
+              "keyPacketStartSec": 10.0667,
+              "byteLength": 28746,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.25,
+              "plannedOffset": 3091409,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            },
+            {
+              "targetSec": 11.75,
+              "plannedOffset": 3122486,
+              "keyPacketStartSec": 11.0667,
+              "byteLength": 30393,
+              "integrityOk": true
+            }
+          ],
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hasDescription": true,
+            "descriptionBytes": 47
+          },
+          "keptMdatData": true,
+          "openToFirstSample": {
+            "n": 5,
+            "minUs": 4700,
+            "medianUs": 4800,
+            "p95Us": 8580,
+            "maxUs": 9500
+          },
+          "openToFirstSampleFast": {
+            "n": 5,
+            "minUs": 5200,
+            "medianUs": 5500,
+            "p95Us": 6740,
+            "maxUs": 6900
+          },
+          "openToFirstDecodedFrame": {
+            "n": 5,
+            "minUs": 14000,
+            "medianUs": 16900,
+            "p95Us": 21120,
+            "maxUs": 22000
+          },
+          "openToFirstDecodedFrameFast": {
+            "n": 5,
+            "minUs": 14100,
+            "medianUs": 16500,
+            "p95Us": 17600,
+            "maxUs": 17800
+          }
+        }
+      },
+      "errors": [],
+      "finishedAt": "2026-10-03T06:26:54.506Z",
+      "driver": {
+        "runIndex": 4,
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "consoleMessages": []
+      }
+    }
+  ],
+  "errors": []
+}

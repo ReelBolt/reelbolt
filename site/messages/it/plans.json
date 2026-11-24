@@ -1,0 +1,144 @@
+{
+  "credits": {
+    "trial": "{n} crediti, una tantum",
+    "perSeat": "{n} crediti a postazione ogni mese, in comune",
+    "monthly": "{n} crediti ogni mese",
+    "arrangement": "Volumi e condizioni da concordare"
+  },
+  "cta": {
+    "talk": "Parla con noi",
+    "startFree": "Inizia gratis",
+    "choose": "Scegli {name}"
+  },
+  "table": {
+    "unlimited": "Illimitato",
+    "perSeat": "{n} a postazione",
+    "notIncluded": "Non incluso",
+    "storage": "{gb} GB",
+    "storageShared": "{gb} GB condivisi",
+    "custom": "Su misura",
+    "yes": "Sì",
+    "no": "No"
+  },
+  "benefits": {
+    "exportFull": "Esporta in {res}",
+    "exportWatermark": "Esporta fino a {res} con filigrana",
+    "exportUpTo": "Esporta fino a {res}",
+    "assistant": "{n} crediti assistente al mese inclusi, nella dashboard e in Claude Code",
+    "assistantPerSeat": "{n} crediti assistente a postazione al mese inclusi, nella dashboard e in Claude Code",
+    "assistantUnlimited": "Uso illimitato dell'assistente",
+    "storage": "{gb} GB di spazio per le tue riprese e le tue esportazioni",
+    "storageShared": "{gb} GB di spazio condiviso per le tue riprese e le tue esportazioni",
+    "cancel": "Disdici quando vuoi e gestisci il piano in autonomia",
+    "topUp": "Ricarica con i pacchetti di crediti quando te ne servono altri"
+  },
+  "features": {
+    "noWatermark": "Nessuna filigrana sulle tue esportazioni",
+    "segmentation": "Ritaglia persone e oggetti dal tuo video",
+    "audioGen": "Crea musica ed effetti sonori",
+    "audioCleanup": "Ripulisci l'audio disturbato",
+    "byo": "Usa il tuo provider AI",
+    "oneJob": "Un lavoro video alla volta",
+    "jobs": "Fino a {n} lavori video in contemporanea",
+    "storageUnlimited": "Spazio illimitato"
+  },
+  "highlights": {
+    "trial": {
+      "0": "100 crediti per provare ReelBolt",
+      "1": "20 crediti assistente al mese",
+      "2": "Esportazioni a 720p con filigrana",
+      "3": "1 GB di spazio",
+      "4": "Nessuna carta richiesta"
+    },
+    "creator": {
+      "0": "1.000 crediti ogni mese",
+      "1": "100 crediti assistente al mese",
+      "2": "Esportazioni a 1080p, senza filigrana",
+      "3": "Usa il tuo provider AI",
+      "4": "15 GB di spazio",
+      "5": "Crediti di ricarica quando te ne servono altri"
+    },
+    "pro": {
+      "0": "3.500 crediti ogni mese",
+      "1": "300 crediti assistente al mese",
+      "2": "Esportazioni in 4K",
+      "3": "Stanze di montaggio multi-agente",
+      "4": "Clip di b-roll generate",
+      "5": "50 GB di spazio",
+      "6": "Rendering prioritario"
+    },
+    "team": {
+      "0": "1.500 crediti a postazione ogni mese, in comune",
+      "1": "100 crediti assistente a postazione al mese",
+      "2": "Spazio di lavoro condiviso con ruoli",
+      "3": "Tutto quello che c'è in Pro",
+      "4": "Esportazioni in 4K",
+      "5": "100 GB di spazio condiviso",
+      "6": "Rendering prioritario"
+    },
+    "enterprise": {
+      "0": "Single sign-on",
+      "1": "Uso illimitato dell'assistente",
+      "2": "Capacità dedicata",
+      "3": "Licenza di self-hosting",
+      "4": "Condizioni e assistenza su misura"
+    }
+  },
+  "card": {
+    "mostPopular": "Il più scelto",
+    "contactUs": "Contattaci",
+    "perSeatMonth": "/postazione/mese",
+    "perMonth": "/mese",
+    "toStart": "per iniziare",
+    "minSeats": "Minimo {count} postazioni",
+    "monthsFree": "{count, plural, one {# mese gratis} other {# mesi gratis}}",
+    "billedYearly": "{total} fatturati ogni anno",
+    "billedYearlySeat": "{total} a postazione, fatturati ogni anno",
+    "creditsEveryMonth": "I crediti arrivano comunque ogni mese."
+  },
+  "comparison": {
+    "caption": "Cosa include ogni piano ReelBolt, piano per piano.",
+    "compare": "Confronta",
+    "rows": {
+      "credits": "Crediti inclusi",
+      "watermark": "Esportazioni senza filigrana",
+      "resolution": "Risoluzione massima di esportazione",
+      "assistant": "Crediti assistente al mese",
+      "storage": "Spazio di archiviazione",
+      "byo": "Usa il tuo provider AI",
+      "rooms": "Stanze di montaggio multi-agente",
+      "videoGen": "Clip di b-roll generate",
+      "topUp": "Pacchetti di ricarica",
+      "priority": "Priorità di rendering"
+    },
+    "priority": {
+      "standard": "Standard",
+      "priority": "Prioritaria",
+      "high": "Alta",
+      "dedicated": "Dedicata"
+    }
+  },
+  "explainer": {
+    "title": "Come funzionano i crediti",
+    "intro": "Ogni piano include dei crediti e vedi una stima prima che parta qualsiasi esecuzione. Non ti addebitiamo mai un errore dovuto a noi, e nessun piano passa a uno superiore da solo.",
+    "packs": "Pacchetti di crediti",
+    "packsNote": "Acquista un pacchetto da Piano e fatturazione quando te ne servono altri, su qualsiasi piano a pagamento. I crediti dei pacchetti durano {months} mesi. Niente si ricarica in automatico.",
+    "packCredits": "{n} crediti",
+    "points": {
+      "supplied": "I crediti si usano quando ReelBolt mette a disposizione l'AI o fa il rendering per te.",
+      "estimate": "Prima di ogni esecuzione vedi quanti crediti userà, più o meno, di solito con un intervallo.",
+      "free": "Riassunti dei file, ricerca nei tuoi file e spazio compreso nel piano sono gratuiti.",
+      "byo": "Collega il tuo provider AI e quell'uso non costa crediti: paghi direttamente il provider.",
+      "runner": "Lavorare su una macchina tua, collegata al tuo spazio di lavoro, non costa crediti.",
+      "refund": "Se un'esecuzione fallisce per un problema da parte nostra, i crediti del passaggio fallito tornano automaticamente."
+    }
+  },
+  "list": {
+    "join": "{head} e {last}"
+  },
+  "billing": {
+    "label": "Periodo di fatturazione",
+    "monthly": "Mensile",
+    "annual": "Annuale"
+  }
+}

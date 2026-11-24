@@ -1,0 +1,36 @@
+{
+  "page": {
+    "hero": {
+      "title": "Prezzi",
+      "intro": "Inizia gratis e guarda cosa fa ReelBolt delle tue riprese.",
+      "from": "Piani da {price} al mese.",
+      "firstVideo": "Il tuo primo video è offerto da noi: {credits} crediti quando verifichi la tua email. Le esportazioni di prova sono a 720p con filigrana."
+    },
+    "offer": {
+      "eyebrow": "Prezzo di lancio",
+      "heading": "{percent}% di sconto per i nuovi abbonati",
+      "body": "Aperto ai nuovi abbonati fino al {date}. Lo sconto si applica automaticamente al checkout. Non c'è nessun codice da inserire.",
+      "until": "Aperto ai nuovi abbonati fino al {date}"
+    },
+    "plansHeading": "Piani",
+    "moneyBack": "Garanzia di rimborso di {days} giorni",
+    "notSure": "Non sai quale scegliere? Dicci cosa stai realizzando e ti diciamo di quale piano hai davvero bisogno. <link>Scrivici.</link>",
+    "compare": {
+      "title": "Confronta i piani",
+      "intro": "Gli stessi limiti che la piattaforma applica davvero, affiancati. Ogni piano può produrre gli stessi tipi di video; cambiano la risoluzione, gli extra, la priorità e quanti crediti sono inclusi."
+    },
+    "faq": {
+      "title": "Fatturazione, crediti e i tuoi dati"
+    },
+    "cta": {
+      "title": "Parti dal piano gratuito",
+      "body": "Nessuna carta richiesta. Fai il tuo primo video e decidi dopo di quale piano ha bisogno.",
+      "seeFeatures": "Scopri cosa fa"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "pricing": "Prezzi"
+    },
+    "taxNote": "I prezzi non includono IVA e imposte sulle vendite, che vengono aggiunte al checkout."
+  }
+}

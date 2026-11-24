@@ -1,0 +1,50 @@
+{
+  "title": {
+    "image": "Choose an image",
+    "video": "Choose a video",
+    "both": "Choose an image or video",
+    "audio": "Choose an audio file",
+    "videoAudio": "Choose a video or audio file"
+  },
+  "titleMulti": {
+    "image": "Choose images",
+    "video": "Choose videos",
+    "both": "Choose images or videos",
+    "audio": "Choose audio files",
+    "videoAudio": "Choose videos or audio files"
+  },
+  "search": {
+    "label": "Search files",
+    "placeholder": "Search by name"
+  },
+  "gridLabel": "Project files",
+  "selectAll": "Select all",
+  "clear": "Clear",
+  "selected": "{count, plural, one {# selected} other {# selected}}",
+  "selectedMax": "{count} of {max} selected",
+  "limit": "You can choose up to {max}.",
+  "needMin": "{min, plural, one {Choose at least # file.} other {Choose at least # files.}}",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "empty": {
+    "none": "This project has no matching files yet.",
+    "search": "No files match \"{query}\"."
+  },
+  "loading": "Loading files",
+  "loadError": "The files could not be loaded.",
+  "preview": {
+    "open": "Preview {name}",
+    "title": "Preview: {name}",
+    "close": "Close preview"
+  },
+  "field": {
+    "choose": "Choose",
+    "change": "Change",
+    "chooseMany": "Choose files",
+    "none": "Nothing chosen",
+    "missing": "File no longer available",
+    "empty": "This project has no matching files"
+  },
+  "tileMetaDuration": "{size} · {duration}",
+  "close": "Close"
+}

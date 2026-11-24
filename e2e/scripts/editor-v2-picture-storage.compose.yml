@@ -1,0 +1,8 @@
+# Layered over docker-compose.yml + the editor-v2 stack override by editor-v2-picture-storage.sh (lane D, picture editor).
+# The isolated stack leaves MINIO_PUBLIC_ENDPOINT empty, so presigned PUT URLs name http://garage:3900, which only the
+# compose network can resolve. A browser (the picture editor's "Save to project" and the erase/fill mask upload PUT straight
+# to storage) needs a host it can reach: the published Garage port on loopback.
+services:
+  inference:
+    environment:
+      MinIO__PublicEndpoint: http://localhost:${MINIO_API_PORT}

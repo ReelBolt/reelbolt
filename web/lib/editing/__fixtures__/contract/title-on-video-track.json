@@ -1,0 +1,70 @@
+{
+  "name": "title-on-video-track",
+  "description": "Baseline for the T-012 rules: a title clip on a video track, schemaVersion 2, recordIn 0. Valid on both sides.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "6f1b2c3d-0000-4000-8000-000000000002",
+    "projectId": "6f1b2c3d-0000-4000-8000-000000000001",
+    "name": "Contract fixture",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "type": "titleClip",
+            "id": "6f1b2c3d-0000-4000-8000-0000000000b1",
+            "name": "Title",
+            "recordIn": 0,
+            "recordOut": 90,
+            "text": "Hello",
+            "fontSize": 48,
+            "fontFamily": "Arial",
+            "color": "#FFFFFF",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a2",
+        "kind": "audio",
+        "name": "Audio",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": []
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

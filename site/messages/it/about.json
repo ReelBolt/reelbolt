@@ -1,0 +1,37 @@
+{
+  "page": {
+    "title": "Chi siamo"
+  },
+  "mission": {
+    "eyebrow": "Missione",
+    "title": "Le buone storie meritano di essere viste",
+    "p1": "Le persone fanno prima la parte difficile: il lavoro, la lezione, l'evento, il prodotto. Poi la storia resta nel rullino. Sanno che il video funziona, ma farne uno costa soldi che preferirebbero usare altrove, o un fine settimana che non hanno.",
+    "p2": "Pensiamo che questo compromesso non dovrebbe esistere. ReelBolt è un team video AI per chi ha una storia da raccontare e non ha il tempo di raccontarla. Carichi le clip che hai già girato e dici a cosa serve il video; lui trova la storia, monta le riprese, aggiunge sottotitoli e grafiche e ti consegna un video finito. Non un template con il tuo logo infilato dentro, ma un video costruito a partire da ciò che hai realizzato davvero.",
+    "p3": "E quando lavori con altri, funziona come lavora un team: in uno spazio di lavoro condiviso, dove progetti, riprese e montaggi finiti appartengono al team e non all'account di una sola persona, con ruoli, inviti e un pool di crediti a cui attinge l'intero spazio. Chi gestisce la fatturazione vede la fatturazione; chi fa il video fa il video.",
+    "p4": "Vuoi sapere cosa copre in pratica? <link>Guarda le funzionalità</link>."
+  },
+  "approach": {
+    "title": "Come la pensiamo",
+    "p1": "La maggior parte degli strumenti video AI è impressionante per trenta secondi e inutile per una storia vera, perché inventa le cose. Va bene per un video d'atmosfera ed è un disastro quando il video parla di te: un video che mostra qualcosa di non vero costa più di non avere nessun video.",
+    "p2": "Per questo ReelBolt è costruito al contrario. L'AI prende le decisioni creative, ma il video nasce dalle tue riprese reali e dalle tue parole e, per i team software, dal prodotto reale. Il b-roll generato, dove il tuo piano lo include, è pianificato attorno al tuo montaggio entro un tetto di spesa che imposti tu. L'ultimo agente della catena è un revisore che ha un solo compito: respingere il lavoro non ancora abbastanza buono, e tu puoi sempre aprire il risultato nell'editor e modificarlo.",
+    "l1": "Ogni video nasce dalle tue riprese reali e dalle tue parole",
+    "l2": "Giudizio creativo dall'AI, ancorato al tuo materiale",
+    "l3": "Ogni bozza valutata e rielaborata prima che qualcuno debba guardarla"
+  },
+  "ownership": {
+    "title": "Le chiavi restano a te",
+    "p1": "I video si fanno con lavori non ancora usciti, registrazioni private e materiale che nessuno vuole veder circolare. Così scegli tu quanto resta con te: collega il tuo account di un provider AI, fai il render su una macchina tua oppure, con una licenza di self-hosting Enterprise, fai girare l'intera piattaforma nel tuo ambiente.",
+    "p2": "Decidi tu quali modelli vedono il tuo materiale. Non addestriamo modelli AI sui tuoi contenuti e non li vendiamo.",
+    "l1": "Il tuo account di un provider AI, sui piani che lo includono",
+    "l2": "Rendering su una macchina tua, senza costo in crediti",
+    "l3": "Self-hosting per i team le cui regole di sicurezza lo richiedono"
+  },
+  "contact": {
+    "title": "Contatti",
+    "body": "Vuoi capire se ReelBolt si adatta al tuo modo di lavorare? <link>Scrivici due righe</link> e ti rispondiamo."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "about": "Chi siamo"
+  }
+}

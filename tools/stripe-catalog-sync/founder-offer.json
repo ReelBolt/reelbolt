@@ -1,0 +1,9 @@
+{
+  "couponKey": "founder_alpha",
+  "name": "Founder price",
+  "percentOff": 50,
+  "duration": "forever",
+  "redeemBy": "2027-01-31T23:59:00+01:00",
+  "appliesTo": "subscriptionPlans",
+  "maxRedemptions": null
+}

@@ -1,0 +1,36 @@
+{
+  "id": "kpi-ticker",
+  "version": "1.0.0",
+  "title": "KPI ticker",
+  "category": "charts",
+  "description": "Use to land one headline number: a big figure that counts up with a label and an optional change chip. The figure size fits the frame width (9:16 safe); override with fontSize.",
+  "tags": [
+    "kpi",
+    "number",
+    "counter",
+    "stat",
+    "metric"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-kpi-ticker",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      30,
+      70
+    ]
+  },
+  "props": "{value: number; label: string; from?: number /*0*/; prefix?: string; suffix?: string; valueFormat?: string /*',.0f'*/; delta?: string; deltaColor?: string /*'#34d399'*/; color?: string; startFrame?: number /*5*/; durationInFrames?: number /*40*/; fontSize?: number /*fits width*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/}",
+  "example": "import {KpiTicker} from './blocks/kpi-ticker/KpiTicker.tsx';\n<KpiTicker value={128400} prefix=\"$\" label=\"Monthly revenue\" delta=\"+12.4%\" />"
+}

@@ -1,0 +1,51 @@
+I'll begin by inspecting the project files and sandbox state.
+Typecheck passes. Let me read the key composition and scene files.
+Now let me read the scene components.
+Let me check the render output and the project manifest/script files.
+Let me consult the Remotion markup skill to verify timing/transition and animation best practices.
+I have enough information to complete the review. Let me verify my analysis of the key quality dimensions.
+
+The composition is complete, typechecks cleanly, and follows Remotion's frame-driven animation patterns (no CSS transitions, `interpolate` with `Easing.bezier`, `Sequence` overlaps). The render output exists (`out/reelbolt-promo.mp4`, 2.8 MB). The main deviations are the fallback (non-brand) fonts and a silent final video.
+
+```json
+{
+  "overallScore": 8,
+  "criteria": [
+    {
+      "name": "narrativeClarity",
+      "score": 9,
+      "feedback": "The six-scene arc is coherent and matches the brief precisely: brand hook (SceneOpen) -> problem (SceneProblem) -> how it works (SceneSteps) -> benefits (SceneBenefits) -> product/studio proof (SceneStudio) -> clear 'Start free' call to action (SceneCta). The messaging is drawn verbatim from the site's own copy (AI video team, real product footage, reviewer agent, reusable recipes, one workspace), so nothing over-promises and no testimonials/metrics were invented. On-screen headlines are short, scannable, and consistently restated by the payoff lines (e.g. 'ReelBolt gives a small team the video output of a studio, without hiring one'). The audience (founders/marketers at small SaaS) is named explicitly in the opener eyebrow. The only minor weakness is that the value framing repeats across SceneSteps/SceneBenefits, so a viewer gets no new information in the transition between them; tightening that overlap would sharpen the argument.",
+    {
+      "name": "visualAccuracy",
+      "score": 7,
+      "feedback": "Strong fidelity to the brand design language: exact palette tokens (#0B0B12 paper, #A855F7/#7C3AED accent, #2E1065 deep), hairline grid overlays, L-shaped corner brackets, registration marks, chrome widgets (close/target/plus/grid), mono uppercase eyebrows with 0.18em tracking, 2px radii and the signature -5deg skewed accent CTA with counter-skewed label. The brand bolt mark geometry is copied 1:1 from BrandMark and the 'Live render' viewfinder is faithfully recreated as a hand-projected wireframe+solid octahedron. However, the single biggest deviation is typographic: the brand typefaces (Chakra Petch display, JetBrains Mono) are NOT rendered - the composition falls back to Liberation/Noto/DejaVu system stacks. Because the site's entire identity is built on those two faces, the rendered video reads as a generic sans rather than ReelBolt. The environment lacked network access and no local font files were bundled (despite @remotion/google-fonts being installed), so this is a genuine, not cosmetic, fidelity gap.",
+    {
+      "name": "timing",
+      "score": 9,
+      "feedback": "Timing is correct and idiomatic. All animation is frame-driven via useCurrentFrame/interpolate/enter with a consistent cubic-bezier(0.16,1,0.3,1) ease-out for reveals and linear easing reserved for mechanical fills (accent rail, render progress). Scene overlaps (14/13 frames) are tuned so each outgoing useSceneFade fade-out coincides with the incoming fade-in, producing a genuine crossfade without a hard cut. Stagger cadences are deliberate (headline lines +7, friction rows +9, benefit cards +12, agent log +15) and the two dense scenes (Steps 211f, Benefits 187f) are given room to breathe. The final CTA correctly calls useSceneFade(duration, 12, 0) so it holds to the last frame, and the sine glow pulse (0.085) persists under the hold. Scene durations sum exactly to 900 frames (30s). No timing defects found.",
+    {
+      "name": "completeness",
+      "score": 8,
+      "feedback": "All six required scenes are present, wired into a single FinalVideo composition (1920x1080, 30fps, 900 frames), and the render artefact exists at out/reelbolt-promo.mp4 (~2.8 MB, matching the manifest). Typecheck passes with no errors (CheckLintAndTypeErrors clean). Shared primitives (theme, primitives.tsx, BrandMark, buttons, octahedron) are factored well and reduced-motion-independent. The key shortfall is audio: the final video is completely silent. The Scriptwriter step drafted full voiceover lines and an ambient/foley plan, and the manifest even carries per-scene voiceover strings, yet the assembly step explicitly drops narration ('this workflow has no narration step'), so the promo loses its music bed and VO. Additionally, the manifest lists captions per scene but no caption component or burned-in/burned captions are rendered, so those caption entries are effectively unused. Both are non-fatal but leave the deliverable short of a typical promo standard.",
+    }
+  ],
+  "strengths": [
+    "Clean, idiomatic Remotion code: fully frame-driven animation with interpolate/Easing.bezier, no CSS transitions, and correct Sequence overlap usage; typecheck passes with zero errors.",
+    "High brand fidelity in layout and language: exact palette tokens, grid overlays, corner brackets, registration marks, chrome widgets, mono eyebrows and the skewed 'Start free' CTA are all recreated from the design system.",
+    "Faithful, on-message narrative covering every requested beat (benefits + explicit start-free CTA) using only claims drawn from the site's own copy.",
+    "Deterministic SVG-projected octahedron for the 'Live render' viewfinder instead of WebGL, keeping the render reproducible while matching the site motif.",
+    "Deliberate pacing with staggered reveals, crossfaded scene boundaries, and a held final CTA frame; total runtime lands exactly on 30 seconds.",
+    "A complete render artefact was produced and matches the manifest metadata."
+  ],
+  "improvementAreas": [
+    "Brand typefaces are not rendered: Chakra Petch and JetBrains Mono fall back to system stacks, so the video loses ReelBolt's signature typographic identity. Bundle the woff2 files locally (public/fonts + @remotion/fonts) or use @remotion/google-fonts with a working cache to restore the real fonts.",
+    "The final video is silent. Add a music bed and the drafted voiceover (the script and audio plan already exist) so the promo has the audio energy a landing-page-style promo needs.",
+    "Per-scene captions are declared in the manifest but never rendered; either burn them in / add a captions component or remove the unused entries.",
+    "SceneSteps and SceneBenefits restate similar value framing back-to-back; sharpening the hand-off (new information, not a re-phrasing) would improve momentum.",
+    "The commentary mentions editable markup but the code uses raw `transform` strings rather than the newer `scale`/`translate`/`rotate` style shorthands; adopting those would make the composition more Studio-editable.",
+    "No still-frame sanity render was captured, so long headlines at type.hero=108 / type.h2=84 were not visually confirmed for overflow at 1920x1080."
+  ],
+  "passesReview": false,
+  "summary": "A well-crafted, idiomatic 30-second Remotion promo that nails the narrative brief and reproduces ReelBolt's design language closely, with a clean typecheck and a completed render. It falls short of production-ready on two concrete points: the brand typefaces are not rendered (system-font fallback erases the signature typography) and the video is entirely silent despite drafted voiceover and a music plan. Captions are also declared but unused. These are fixable but significant, so the output is a strong 8 rather than a pass (>=9)."
+}
+```

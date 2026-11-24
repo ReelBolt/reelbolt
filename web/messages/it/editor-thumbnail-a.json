@@ -1,0 +1,368 @@
+{
+  "common": {
+    "px": "{n}px",
+    "percent": "{n}%",
+    "credits": "{n, plural, one {# credito} other {# crediti}}",
+    "about": "circa {credits}",
+    "runWithPrice": "{action}, {line}",
+    "noProvider": {
+      "admin": "Gli strumenti per le immagini non sono ancora configurati in questo spazio di lavoro.",
+      "member": "Chiedi all'amministratore dello spazio di lavoro di configurare gli strumenti per le immagini."
+    }
+  },
+  "resultBar": {
+    "changed": {
+      "none": "{title} ha finito, ma non è arrivato niente di nuovo.",
+      "options": "{title} ha trovato {count} opzioni. Vedi l'opzione 1.",
+      "one": "{title} ha aggiunto un nuovo livello, \"{name}\". L'originale è intatto.",
+      "many": "{title} ha aggiunto {count} nuovi livelli. Gli originali sono intatti."
+    },
+    "charged": {
+      "cost": "Sono costati {credits}.",
+      "none": "Nessun credito è stato addebitato."
+    },
+    "option": "Opzione {n} di {total}",
+    "dismiss": "Chiudi questo messaggio",
+    "previous": "Opzione precedente",
+    "next": "Opzione successiva",
+    "keepOne": "Tieni questa",
+    "keepAll": "Tieni tutte come livelli",
+    "showingBefore": "Stai vedendo il prima",
+    "compare": "Confronta con il prima",
+    "undo": "Annulla",
+    "undoLabel": "Annulla questo risultato",
+    "tryAgain": "Riprova",
+    "tryAgainCost": "Riprova ({cost})"
+  },
+  "maskBar": {
+    "group": "Maschera di {layer}",
+    "painting": "Stai dipingendo la maschera di \"{layer}\"",
+    "brushLabel": "Pennello della maschera",
+    "hide": "Nascondi",
+    "show": "Mostra",
+    "hint": "Nascondi toglie parti del livello. Mostra le riporta. Tieni premuto Alt per cambiare per un solo tratto.",
+    "size": "Dimensione pennello",
+    "softness": "Morbidezza dei bordi",
+    "undoStroke": "Annulla tratto",
+    "redoStroke": "Ripristina tratto",
+    "maskOnly": "Mostra solo la maschera",
+    "saving": "Salvataggio della maschera…",
+    "discardAsk": "Vuoi scartare quello che hai dipinto?",
+    "keepPainting": "Continua a dipingere",
+    "throwAway": "Scarta",
+    "cancel": "Annulla",
+    "tryAgain": "Riprova",
+    "done": "Fatto"
+  },
+  "brush": {
+    "hintTarget": "Dipingi la parte di \"{layer}\" che vuoi cambiare. L'area dipinta appare in rosso.",
+    "hintNone": "Prima seleziona un livello immagine. I livelli di testo non hanno pixel su cui dipingere.",
+    "modeLabel": "Modalità pennello",
+    "paint": "Dipingi",
+    "erase": "Cancella",
+    "size": "Dimensione pennello",
+    "maskReady": "Maschera pronta.",
+    "nothingPainted": "Ancora niente di dipinto.",
+    "clear": "Azzera"
+  },
+  "subject": {
+    "intro": "Clicca ciò che vuoi ritagliare, oppure trascina un riquadro attorno. Per escludere qualcosa, scegli \"Escludi questo\" qui sotto e poi cliccalo (con la tastiera, Shift+clic fa lo stesso). Puoi anche scrivere il suo nome.",
+    "markLabel": "Cosa segna un clic",
+    "cutThis": "Ritaglia questo",
+    "leaveThisOut": "Escludi questo",
+    "cuttingFrom": "Stai ritagliando da <b>{name}</b>. Seleziona un altro livello immagine per ritagliare da quello.",
+    "describe": "Oppure descrivilo",
+    "describePlaceholder": "la persona a sinistra",
+    "marksTitle": "Segni sull'immagine",
+    "clearMarks": "Rimuovi segni",
+    "removeInclude": "Rimuovi il segno di inclusione {n}",
+    "removeLeaveOut": "Rimuovi il segno di esclusione {n}",
+    "removeBox": "Rimuovi il riquadro {n}",
+    "include": "Includi {n}",
+    "leaveOut": "Escludi {n}",
+    "box": "Riquadro {n}",
+    "options": "Dammi fino a {count} opzioni",
+    "optionsHint": "Ogni opzione diventa un livello a sé.",
+    "run": "Ritaglia",
+    "needInput": "Prima clicca sull'immagine, trascina un riquadro o scrivi un nome.",
+    "paidNote": "Questo invia l'immagine a un provider AI e aggiunge ciò che trova come nuovi livelli. A ogni pressione è una chiamata a pagamento."
+  },
+  "crop": {
+    "title": "Ritaglia {label}",
+    "intro": "Trascina il riquadro, oppure scrivi i numeri. La parte fuori dal riquadro è nascosta, non eliminata: puoi riaprire Ritaglia per allargarlo, e Annulla la ripristina.",
+    "handle": "Maniglia di ritaglio, {side}",
+    "handles": {
+      "nw": "angolo in alto a sinistra",
+      "n": "bordo superiore",
+      "ne": "angolo in alto a destra",
+      "e": "bordo destro",
+      "se": "angolo in basso a destra",
+      "s": "bordo inferiore",
+      "sw": "angolo in basso a sinistra",
+      "w": "bordo sinistro"
+    },
+    "fields": {
+      "x": "Sinistra",
+      "y": "Alto",
+      "w": "Larghezza",
+      "h": "Altezza"
+    },
+    "fieldAria": {
+      "x": "Ritaglio da sinistra in pixel",
+      "y": "Ritaglio dall'alto in pixel",
+      "w": "Larghezza del ritaglio in pixel",
+      "h": "Altezza del ritaglio in pixel"
+    },
+    "reset": "Reimposta",
+    "cancel": "Annulla",
+    "removeCrop": "Rimuovi ritaglio",
+    "apply": "Ritaglia"
+  },
+  "layers": {
+    "upload": "Carica un'immagine",
+    "uploadProgress": "Avanzamento del caricamento",
+    "empty": "Questa immagine non ha ancora livelli. Carica un'immagine, aggiungi del testo o crea un'immagine con l'AI.",
+    "listLabel": "Livelli, dal primo piano",
+    "pick": "Includi {name} nei livelli scelti",
+    "hide": "Nascondi {name}",
+    "show": "Mostra {name}",
+    "lock": "Blocca {name}",
+    "unlock": "Sblocca {name}",
+    "select": "Seleziona {name}",
+    "editMask": "Modifica la maschera di {name}",
+    "maskOptions": "Opzioni maschera per {name}",
+    "on": "Attiva",
+    "imageMissing": "Immagine mancante",
+    "moreActions": "Altre azioni per {name}",
+    "deleteLayer": "Elimina livello",
+    "moveForward": "Porta {name} avanti",
+    "moveBack": "Porta {name} indietro",
+    "delete": "Elimina {name}",
+    "changeGraphic": "Modifica questa grafica",
+    "name": "Nome",
+    "opacity": "Opacità",
+    "blend": "Fusione",
+    "role": "Ruolo",
+    "flipH": "Rifletti in orizzontale",
+    "flipV": "Rifletti in verticale",
+    "lockedHint": "Bloccato: sblocca per spostare, ridimensionare o riflettere.",
+    "history": {
+      "rename": "Rinomina livello",
+      "opacity": "Cambia opacità",
+      "blend": "Cambia modalità di fusione",
+      "role": "Cambia ruolo"
+    },
+    "menu": {
+      "forward": "Porta avanti",
+      "back": "Porta indietro",
+      "front": "Porta in primo piano",
+      "backmost": "Porta in fondo"
+    },
+    "maskMenu": {
+      "add": "Aggiungi maschera",
+      "edit": "Modifica maschera",
+      "invert": "Inverti maschera",
+      "delete": "Elimina maschera",
+      "only": "Mostra solo la maschera"
+    },
+    "kind": {
+      "source": "originale",
+      "cutout": "ritaglio",
+      "generated": "AI",
+      "text": "testo",
+      "image": "immagine"
+    },
+    "blendMode": {
+      "normal": "Normale",
+      "multiply": "Multiply",
+      "screen": "Screen",
+      "overlay": "Overlay",
+      "darken": "Scurisci",
+      "lighten": "Schiarisci",
+      "soft-light": "Luce soffusa",
+      "hard-light": "Luce intensa",
+      "difference": "Differenza"
+    },
+    "roleName": {
+      "background": "Sfondo",
+      "subject": "Soggetto",
+      "overlay": "Overlay"
+    },
+    "defaultText": "Testo",
+    "defaultMerged": "Livello unito",
+    "working": "Lavoro in corso su questo livello",
+    "aiMade": "Generato con l'AI · {names}",
+    "aiMadePlain": "Generato con l'AI"
+  },
+  "canvas": {
+    "label": "Area di lavoro della miniatura",
+    "help": "Seleziona un livello, poi usa le frecce per spostarlo di un pixel, oppure tieni premuto Shift per dieci. Tieni premuto Spazio e trascina, oppure trascina con due dita, per muoverti. Scorri o pizzica per fare zoom; premi 0 per adattare l'immagine, 1 per la dimensione reale.",
+    "picture": "La tua immagine",
+    "history": {
+      "move": "Sposta",
+      "resize": "Ridimensiona",
+      "rotate": "Ruota",
+      "nudge": "Sposta di poco"
+    },
+    "zoomOutTip": "Riduci (−)",
+    "zoomOut": "Riduci zoom",
+    "actualSizeTip": "Dimensione reale (1)",
+    "zoomActual": "Zoom {zoom}. Mostra alla dimensione reale",
+    "zoomInTip": "Ingrandisci (+)",
+    "zoomIn": "Aumenta zoom",
+    "fitTip": "Adatta l'immagine (0)",
+    "fit": "Adatta l'immagine allo schermo",
+    "working": "Lavoro in corso su questo livello"
+  },
+  "editor": {
+    "panelTitle": {
+      "layers": "Livelli",
+      "text": "Testo",
+      "ai": "Strumenti AI",
+      "canvas": "Canvas"
+    },
+    "dock": {
+      "layers": "Livelli",
+      "text": "Testo",
+      "ai": "AI",
+      "canvas": "Canvas"
+    },
+    "dockLabel": "Strumenti per l'immagine",
+    "toolsLabel": "Strumenti",
+    "tools": {
+      "select": "Seleziona e sposta",
+      "hand": "Muoviti nel canvas",
+      "text": "Testo",
+      "subject": "Ritaglia un soggetto",
+      "brush": "Maschera a pennello"
+    },
+    "croppedTool": "Questa immagine è ritagliata. Apri Ritaglia e scegli \"Rimuovi ritaglio\" prima, così funziona sull'immagine intera.",
+    "finishMaskFirst": "Prima premi Fatto o Annulla per finire la maschera.",
+    "noProviderFallback": "Per questo spazio di lavoro non è configurato nessun provider AI.",
+    "thisLayer": "questo livello",
+    "layerMoved": "Livello spostato",
+    "history": {
+      "nudge": "Sposta di poco",
+      "addText": "Aggiungi testo",
+      "addImage": "Aggiungi immagine",
+      "cutOut": "Ritaglia soggetto",
+      "keepOne": "Tieni un'opzione",
+      "keepAll": "Tieni tutte le opzioni",
+      "designGraphic": "Progetta una grafica",
+      "editText": "Modifica testo",
+      "assistant": "Assistente: {summary}",
+      "assistantChange": "Modifica dell'assistente",
+      "reviewShow": "Mostra il risultato conservato",
+      "reviewDiscard": "Scarta il risultato conservato"
+    },
+    "errors": {
+      "textAdd": "Non è stato possibile aggiungere il testo.",
+      "imageAdd": "Non è stato possibile aggiungere l'immagine.",
+      "uploadWith": "Non è stato possibile caricare l'immagine: {reason}",
+      "upload": "Non è stato possibile caricare l'immagine. Controlla la connessione e riprova.",
+      "subjectCut": "Non è stato possibile ritagliare il soggetto.",
+      "pictureLoading": "L'immagine si sta ancora caricando. Riprova tra un attimo.",
+      "opFailed": "{title} non ha funzionato.",
+      "layerRemove": "Non è stato possibile rimuovere il livello.",
+      "designFlush": "Le tue ultime modifiche non sono ancora state salvate, quindi il progetto non è partito. Riprova tra un attimo.",
+      "graphicAdd": "Non è stato possibile aggiungere la grafica finita.",
+      "assistantReload": "L'assistente ha modificato questa immagine, ma non è stato possibile ricaricarla.",
+      "designsLoad": "Non è stato possibile caricare i tuoi progetti grafici.",
+      "pictureOpening": "L'immagine si sta ancora aprendo.",
+      "exportFlush": "Le tue ultime modifiche non sono ancora state salvate. Riprova tra un attimo.",
+      "exportTooBig": "Questo file pesa {size}, più dei {max} che un progetto può contenere. Scaricalo invece."
+    },
+    "notes": {
+      "reconciled": "{title} ci ha messo più del previsto, ma è finito. Il risultato è sulla tua immagine e ti è stato addebitato una sola volta.",
+      "opDone": "{title} completato. {notice}",
+      "subjectDone": "{count, plural, one {Aggiunto un livello ritagliato.} other {Aggiunti # livelli ritagliati.}}",
+      "keptOption": "Hai tenuto questa opzione. Annulla riporta le altre.",
+      "graphicReady": "{count, plural, one {La tua grafica è pronta.{summary}} other {# grafiche sono pronte.{summary}}}",
+      "assistantSaid": "L'assistente: {summary}",
+      "assistantChanged": "L'assistente ha modificato questa immagine."
+    },
+    "export": {
+      "quoted": "\"{name}\"",
+      "unloadableOne": "{name} non è stato caricato, quindi non si può ancora esportare. Controlla la connessione e riprova.",
+      "unloadableMany": "{count, plural, one {# livello ({names}) non è stato caricato, quindi non si può ancora esportare.} other {# livelli ({names}) non sono stati caricati, quindi non si possono ancora esportare.}} Controlla la connessione e riprova.",
+      "waiting": "In attesa del caricamento di {what}.",
+      "layersCount": "{count, plural, one {# livello} other {# livelli}}",
+      "leftOutOne": "L'immagine di {name} non c'è più, quindi l'esportazione la lascia fuori.",
+      "leftOutMany": "Le immagini di {names} non ci sono più, quindi l'esportazione le lascia fuori.",
+      "downloaded": "Scaricato {fileName} ({size}, {bytes}).",
+      "saved": "Salvato come {fileName} nei file del tuo progetto ({size}).",
+      "button": "Esporta",
+      "aiLabel": "Generato con l'AI"
+    },
+    "loadFailed": "Non è stato possibile aprire questa immagine",
+    "tryAgain": "Riprova",
+    "opening": "Apertura della tua immagine…",
+    "subjectBlocker": {
+      "noLayer": "Seleziona un livello immagine da cui ritagliare un soggetto.",
+      "working": "Sto lavorando…"
+    },
+    "save": {
+      "saving": "Salvataggio…",
+      "unsaved": "Modifiche non salvate",
+      "error": "Non salvato",
+      "saved": "Tutte le modifiche sono salvate"
+    },
+    "saveFailed": "Non è stato possibile salvare le tue modifiche",
+    "undoTip": "Annulla: {label}",
+    "undoNone": "Niente da annullare",
+    "undo": "Annulla",
+    "redoTip": "Ripristina: {label}",
+    "redoNone": "Niente da ripristinare",
+    "redo": "Ripristina",
+    "deleteTitle": "Eliminare questo livello?",
+    "deleteMessage": "Il livello viene rimosso per sempre e la cronologia di annullamento viene cancellata, perché i passaggi precedenti non potrebbero più essere annullati in sicurezza.",
+    "addImage": {
+      "label": "Aggiungi un'immagine da questo progetto",
+      "pick": "Scegli un'immagine",
+      "none": "Nessuna immagine in questo progetto",
+      "noneDot": "Nessuna immagine in questo progetto.",
+      "add": "Aggiungi all'immagine",
+      "hint": "Un'immagine più grande del canvas viene adattata al suo interno. Trascina un angolo per ingrandirla."
+    },
+    "busyGuard": {
+      "title": "Questo livello è occupato",
+      "message": "Si sta ancora lavorando su questo livello. Se prosegui, il risultato seguirà la tua modifica quando sarà pronto.",
+      "goOn": "Prosegui",
+      "back": "Indietro",
+      "stop": "Ferma"
+    },
+    "review": {
+      "message": "Il livello per cui è stato creato è stato eliminato. Il risultato è stato conservato, nascosto.",
+      "show": "Mostralo",
+      "discard": "Scarta",
+      "label": "Il risultato attende la tua conferma"
+    },
+    "subjects": {
+      "noPictures": "Conferma di nuovo il consenso di questa persona nella scheda Avatar prima di usarla in un'immagine.",
+      "notUsable": "Una delle persone o degli oggetti che hai scelto al momento non può essere usata. Controlla nella scheda Avatar.",
+      "notUsableReason": "Una delle persone o degli oggetti che hai scelto al momento non può essere usata. {reason}",
+      "unsupported": "Il modello AI configurato per questo strumento non può ricevere persone o oggetti. Usalo senza, oppure chiedi a un amministratore di scegliere un altro modello.",
+      "unsupportedModels": "Il modello AI configurato per questo strumento non può ricevere persone o oggetti. Questi modelli possono: {models}.",
+      "plan": {
+        "avatars": "Il tuo piano non include gli avatar di persone. Guarda i piani per sbloccarli.",
+        "avatar_objects": "Il tuo piano non include gli oggetti. Guarda i piani per sbloccarli.",
+        "other": "Il tuo piano non lo include. Guarda i piani per sbloccarlo."
+      },
+      "consent": "Prima accetta di inviare i file."
+    }
+  },
+  "document": {
+    "openFailed": "Non è stato possibile aprire questa immagine.",
+    "changedElsewhere": "Questa immagine è stata modificata altrove, quindi è stata ricaricata. Le tue ultime modifiche non sono state applicate.",
+    "changedElsewhereMask": "Questa immagine è stata modificata altrove, quindi è stata ricaricata. La tua maschera è ancora qui: premi di nuovo Fatto.",
+    "saveFailed": "Non è stato possibile salvare le tue modifiche.",
+    "flushNotRun": "Le tue ultime modifiche non sono ancora state salvate, quindi non è stato eseguito nulla. Riprova tra un attimo.",
+    "flushNotRemoved": "Le tue ultime modifiche non sono ancora state salvate, quindi il livello non è stato rimosso. Riprova tra un attimo.",
+    "flush": "Le tue ultime modifiche non sono ancora state salvate. Riprova tra un attimo."
+  },
+  "maskEdit": {
+    "saveFailed": "Non è stato possibile salvare la maschera.",
+    "layerLoading": "Questo livello si sta ancora caricando. Riprova tra un attimo.",
+    "maskLoading": "La maschera si sta ancora caricando. Riprova tra un attimo."
+  }
+}

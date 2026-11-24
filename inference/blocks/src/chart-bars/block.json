@@ -1,0 +1,36 @@
+{
+  "id": "chart-bars",
+  "version": "1.0.0",
+  "title": "Bar chart",
+  "category": "charts",
+  "description": "Use to compare a handful of categories: horizontal bars grow in one after another with value labels. Transparent overlay with light text by default (theme 'dark'): put it on a dark backdrop, or pass theme=\"light\" for light backdrops.",
+  "tags": [
+    "chart",
+    "bar",
+    "compare",
+    "ranking",
+    "data"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-chart-bars",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      30,
+      70
+    ]
+  },
+  "props": "{data: {label: string; value: number}[]; title?: string; color?: string /*'#38bdf8'*/; valueFormat?: string /*',.0f'*/; startFrame?: number /*5*/; staggerFrames?: number /*6*/; fontFamily?: string; textColor?: string; theme?: 'dark'|'light' /*'dark'*/}",
+  "example": "import {ChartBars} from './blocks/chart-bars/ChartBars.tsx';\n<ChartBars title=\"Users by region\" data={[{label: \"Europe\", value: 420}, {label: \"Asia\", value: 610}]} />"
+}

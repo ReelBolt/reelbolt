@@ -1,0 +1,36 @@
+{
+  "id": "progress-ring",
+  "version": "1.0.0",
+  "title": "Progress ring",
+  "category": "charts",
+  "description": "Use to show completion or a score out of 100: a ring that fills while the percentage counts up.",
+  "tags": [
+    "chart",
+    "progress",
+    "ring",
+    "percent",
+    "gauge"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-progress-ring",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      30,
+      70
+    ]
+  },
+  "props": "{percent: number; label?: string; color?: string /*'#22d3ee'*/; trackColor?: string; textColor?: string; startFrame?: number /*5*/; durationInFrames?: number /*45*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/}",
+  "example": "import {ProgressRing} from './blocks/progress-ring/ProgressRing.tsx';\n<ProgressRing percent={78} label=\"Goal reached\" />"
+}

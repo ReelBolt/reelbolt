@@ -1,0 +1,5 @@
+{
+  "globs": [
+    "components/editor/shell/refusal-toast.ts"
+  ]
+}

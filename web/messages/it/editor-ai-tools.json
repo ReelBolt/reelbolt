@@ -1,0 +1,56 @@
+{
+  "launcher": {
+    "button": "Strumenti AI",
+    "title": "Strumenti AI",
+    "searchLabel": "Cerca strumenti AI",
+    "searchPlaceholder": "Cerca strumenti AI",
+    "listLabel": "Strumenti AI",
+    "empty": "Nessuno strumento AI corrisponde alla ricerca.",
+    "free": "Gratis",
+    "credits": "Usa crediti",
+    "needsClip": "Seleziona prima una clip",
+    "needsVideoClip": "Seleziona prima una clip video",
+    "needsRange": "Segna prima un punto di inizio e uno di fine",
+    "close": "Chiudi"
+  },
+  "groups": {
+    "picture": "Immagine",
+    "sound": "Audio",
+    "edit": "Montaggio",
+    "check": "Controlli"
+  },
+  "tools": {
+    "magicBlur": { "label": "Sfocatura magica", "description": "Segue un oggetto che nomini e lo sfoca, lo pixela o lo evidenzia." },
+    "cleanVoice": { "label": "Voce pulita", "description": "Rende il parlato più chiaro togliendo il rumore di fondo." },
+    "cleanupAudio": { "label": "Pulisci l'audio", "description": "Togli ronzio, vento, fruscio, eco o musica, oppure isola la voce. La versione pulita segue i tuoi tagli. Base è gratis, Studio costa crediti." },
+    "removeSilence": { "label": "Rimuovi silenzi", "description": "Taglia dalle clip le pause silenziose." },
+    "cutToMusic": { "label": "Taglia sulla musica", "description": "Trova il ritmo di un brano e taglia, dividi o adatta le clip al ritmo." },
+    "analyseFootage": { "label": "Analizza i filmati", "description": "Trova silenzi, inquadrature, movimento e parlato nei tuoi file." },
+    "editByTranscript": { "label": "Monta dalla trascrizione", "description": "Taglia e riordina modificando le parole pronunciate." },
+    "suggestRecut": { "label": "Suggerisci un rimontaggio", "description": "Rimuove, accorcia o disattiva le clip che trascinano." },
+    "suggestGraphics": { "label": "Suggerisci grafiche", "description": "Aggiunge titoli e sottopancia sopra le clip." },
+    "suggestGrade": { "label": "Suggerisci un aspetto colore", "description": "Propone un aspetto per le clip che puoi modificare." },
+    "suggestSoundEffects": { "label": "Suggerisci effetti sonori", "description": "Mette ai tagli i file audio del progetto." },
+    "suggestReview": { "label": "Rivedi il mio montaggio", "description": "Lascia note con timecode come marker e non cambia altro." },
+    "checkLoudness": { "label": "Controlla il volume", "description": "Misura il mix rispetto a un obiettivo come social o broadcast." },
+    "listenToMix": { "label": "Ascolta il mix", "description": "Riproduce il mix finito per sentire com'è." },
+    "preview3s": { "label": "Anteprima di 3 secondi", "description": "Genera una breve anteprima dell'immagine dove si trova il cursore." }
+  },
+  "recut": {
+    "did": {
+      "cut": "{count, plural, one {tagliato # passaggio parlato} other {tagliati # passaggi parlati}} ({seconds, number, ::.0} s)",
+      "quiet": "{count, plural, one {tagliata # pausa} other {tagliate # pause}} ({seconds, number, ::.0} s)",
+      "fillers": "{count, plural, one {tagliata # parola di riempimento} other {tagliate # parole di riempimento}} ({seconds, number, ::.0} s)",
+      "lines": "{count, plural, one {tagliata # battuta} other {tagliate # battute}} ({seconds, number, ::.0} s)",
+      "keep": "{count, plural, one {tenute solo le battute scelte, tagliando # tratto} other {tenute solo le battute scelte, tagliando # tratti}} ({seconds, number, ::.0} s)",
+      "trim": "{count, plural, one {# clip accorciata} other {# clip accorciate}}",
+      "mute": "{count, plural, one {# clip silenziata} other {# clip silenziate}}",
+      "remove": "{count, plural, one {# clip rimossa} other {# clip rimosse}}",
+      "other": "{count, plural, one {# altra modifica} other {# altre modifiche}}",
+      "join": "{head}, {tail}",
+      "line": "Cosa ha fatto: {parts}."
+    },
+    "tooManyCuts": "“{label}”: questo suggerimento ha troppi tagli da applicare in una volta ({count}). Segna un intervallo più breve e chiedi di nuovo.",
+    "swapsRefused": "Modifiche non corrispondenti alla tua richiesta saltate."
+  }
+}

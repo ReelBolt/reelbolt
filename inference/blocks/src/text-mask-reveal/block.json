@@ -1,0 +1,35 @@
+{
+  "id": "text-mask-reveal",
+  "version": "1.0.0",
+  "title": "Text mask reveal",
+  "category": "titles",
+  "description": "Huge letters filled with a drifting gradient, wiped in from the left; use for bold opening titles.",
+  "tags": [
+    "title",
+    "mask",
+    "gradient",
+    "reveal",
+    "text"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-text-mask-reveal",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      16,
+      40
+    ]
+  },
+  "props": "{text: string; colors?: string[]; fontSize?: number /*140*/; fontFamily?: string /*'Anton, sans-serif'*/; startFrame?: number /*0*/; durationInFrames?: number /*24*/}",
+  "example": "import {TextMaskReveal} from './blocks/text-mask-reveal/TextMaskReveal.tsx';\n<TextMaskReveal text=\"Summer sale\" />"
+}

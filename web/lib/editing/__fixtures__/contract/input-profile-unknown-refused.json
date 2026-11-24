@@ -1,0 +1,62 @@
+{
+  "name": "input-profile-unknown-refused",
+  "description": "An inputProfile outside the camera-profile catalogue is refused.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "3c9a1e7b-0000-4000-8000-000000000011",
+    "projectId": "3c9a1e7b-0000-4000-8000-000000000012",
+    "name": "Camera profiles",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "3c9a1e7b-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "id": "3c9a1e7b-0000-4000-8000-0000000000b1",
+            "type": "mediaClip",
+            "name": "Clip",
+            "recordIn": 0,
+            "recordOut": 100,
+            "assetRef": {
+              "kind": "projectFile",
+              "projectFileId": "3c9a1e7b-0000-4000-8000-0000000000c1"
+            },
+            "sourceIn": 0,
+            "playbackRate": 1,
+            "enabled": true,
+            "provenance": null,
+            "inputProfile": "notAProfile"
+          }
+        ]
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": false,
+    "errorPath": "tracks[0].items[0].inputProfile"
+  }
+}

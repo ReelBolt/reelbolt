@@ -1,0 +1,21 @@
+{
+  "name": "reelbolt-brand",
+  "private": true,
+  "type": "module",
+  "description": "Brand masters for ReelBolt. See docs/brand.md.",
+  "scripts": {
+    "wordmark": "node scripts/outline-wordmark.mjs",
+    "sync": "node scripts/sync.mjs",
+    "check": "node scripts/sync.mjs --check",
+    "preview": "node scripts/render-previews.mjs",
+    "watermark": "node scripts/render-watermark.mjs",
+    "email-logo": "node scripts/render-email-logo.mjs",
+    "runner-icons": "node scripts/runner-icons.mjs",
+    "stripe-branding": "node scripts/render-stripe-branding.mjs"
+  },
+  "devDependencies": {
+    "opentype.js": "^1.3.4",
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.5"
+  }
+}

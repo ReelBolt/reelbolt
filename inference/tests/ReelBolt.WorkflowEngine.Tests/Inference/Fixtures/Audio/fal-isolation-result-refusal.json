@@ -1,0 +1,1 @@
+{"detail": [{"loc": ["body", "audio_url"], "type": "file_download_error", "msg": "Failed to download https://storage.example.test/source/interview.wav?X-Amz-Signature=abc", "input": "https://storage.example.test/source/interview.wav?X-Amz-Signature=abc"}]}

@@ -1,0 +1,22 @@
+{
+  "color": {
+    "$type": "color",
+    "brand": {
+      "primary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.1019607843, 0.4509803922, 0.9098039216],
+          "hex": "#1a73e8"
+        }
+      },
+      "surface": {
+        "$value": "#ffffff"
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "sm": { "$value": "8px" },
+    "md": { "$value": "16px" }
+  }
+}

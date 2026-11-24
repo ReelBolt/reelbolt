@@ -1,0 +1,235 @@
+#cloud-config
+# Cloud-init for one on-demand CloudPool node (pool waker, docs/pool-waker.md).
+#
+# The pool waker creates a server from the baked snapshot (infra/worker/bake-snapshot.sh)
+# and passes THIS file as user-data with six placeholders filled in. Nothing else is
+# written to the node:
+#
+#   ${gateway_url}   ws://<private ip>:<port>/v1/connect over the private network, or wss://<host>/... on the public
+#                    internet (POOL_NODE_GATEWAY_URL)
+#   ${gateway_host} ${gateway_port}   host and port of that URL (default 443 for wss, 80 for ws); the node firewall
+#                    lets only this endpoint through into the private (RFC1918) ranges
+#   ${worker_name}   unique node name, rb-pool-<a-z0-9-> (also the server name)
+#   ${node_token}    the short-lived `rbn1.` token the gateway minted for that name
+#   ${cpu_limit}     SANDBOX_CPU_LIMIT; slots = floor(vCPU / cpu_limit). "all" (the default)
+#                    means every core of the node: one container, one slot, one heavy job at a time
+#
+# What is deliberately NOT here: no registry pull (both images are inside the snapshot,
+# pinned by digest in /etc/reelbolt/node-image.env), no datastore address, no enroll unit (the
+# gateway enrolled the name when it minted the token), no internal gateway token, no
+# other secret. The only credential on the node is the node token, bound to its name,
+# expiring and revocable. The node holds the Docker socket and runs customer media, so
+# one VM per node is the boundary and it must hold nothing else.
+#
+# Firewall: the node needs NO inbound port. The worker dials out to the gateway, over the
+# private network (ws://) or over wss. Attach a Hetzner Cloud firewall with zero inbound
+# rules (the waker does when HCLOUD_FIREWALL is set); the snapshot has no sshd key baked
+# in either. Defence in depth on the node itself (reelbolt-node-firewall.service): the
+# private interface drops all inbound except replies, and nothing on the node, container
+# egress included, may reach the private ranges (10/8, 172.16/12, 192.168/16) except the gateway endpoint;
+# containers and forwarded traffic cannot reach the cloud metadata address 169.254.169.254 either.
+# Public egress (object storage, presigned URLs) is untouched.
+#
+# Self-destruct: reelbolt-max-lifetime.timer powers the node off after 6 hours no matter
+# what. The waker deletes nodes long before; this is the last line against an orphan
+# that the waker lost track of. Change OnBootSec to move the limit. A powered-off server
+# still bills until deleted, so the waker's sweeper deletes it; the timer only stops the
+# worker, the Docker daemon and the egress.
+
+package_update: false
+
+write_files:
+  - path: /etc/reelbolt/worker.env
+    permissions: '0600'
+    owner: root:root
+    content: |
+      REELBOLT_GATEWAY_URL=${gateway_url}
+      REELBOLT_WORKER_NAME=${worker_name}
+      RUNNER_POOL_CREDENTIAL=${node_token}
+      SANDBOX_CPU_LIMIT=${cpu_limit}
+      # A node exists for one heavy job at a time, so that job gets the whole machine:
+      # three quarters of the memory for the sandbox, the rest for the OS and Docker, and
+      # ffmpeg threads / Remotion concurrency raised to the core count (docs/pool-waker.md).
+      SANDBOX_MEMORY_LIMIT=auto
+      SANDBOX_PIDS_LIMIT=2048
+      REELBOLT_WORKER_USE_ALL_CORES=true
+      SANDBOX_ROOT=/var/lib/reelbolt/sandboxes
+      REELBOLT_WORKER_SCRATCH=/var/lib/reelbolt/worker
+
+  # The worker and runtime image references, written when the snapshot was baked:
+  #   REELBOLT_WORKER_IMAGE=reelbolt-worker@sha256:...   (local image id/tag)
+  #   SANDBOX_IMAGE=reelbolt-sandbox-runtime@sha256:...
+  # It lives in the snapshot, not here, so a node cannot be pointed at another image.
+
+  # Bring up the private NIC (Hetzner names it enp7s0 or ens10) by DHCP, but never take a
+  # default route or DNS from it: the public interface stays the way out. The lease is a /32,
+  # so the way to the private network is an explicit route: Hetzner's router is the first
+  # address of the network (10.0.0.1), reachable on-link. Without it a dial to the gateway
+  # would leave by the public default route and time out.
+  - path: /etc/systemd/network/10-reelbolt-private.network
+    permissions: '0644'
+    content: |
+      [Match]
+      Name=enp7s0 ens10
+
+      [Network]
+      DHCP=ipv4
+      LinkLocalAddressing=no
+
+      [DHCPv4]
+      UseGateway=false
+      UseRoutes=false
+      UseDNS=false
+      UseNTP=false
+      UseHostname=false
+
+      [Route]
+      Destination=10.0.0.0/16
+      Gateway=10.0.0.1
+      GatewayOnLink=yes
+
+  - path: /usr/local/sbin/reelbolt-node-firewall.sh
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      set -eu
+      GW_HOST=${gateway_host}
+      GW_PORT=${gateway_port}
+      # Own chains, flushed and refilled on every run (idempotent); the jumps are added once, at the top.
+      rebuild() { iptables -N "$1" 2>/dev/null || iptables -F "$1"; }
+      jump() { iptables -C "$@" 2>/dev/null || iptables -I "$@"; }
+      # Hetzner's private-network router and DHCP server: the first address of the network range, the
+      # same address as the static route in the .network file above.
+      ROUTER=10.0.0.1
+      rc=0
+
+      # Packets from the private network (siblings, the boxes) never reach this host.
+      rebuild RB-NODE-IN
+      iptables -A RB-NODE-IN -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      iptables -A RB-NODE-IN -s $ROUTER -p udp --sport 67 --dport 68 -j ACCEPT
+      iptables -A RB-NODE-IN -j DROP
+      for IF in enp7s0 ens10; do jump INPUT -i $IF -j RB-NODE-IN; done
+
+      # Nothing leaves towards private ranges (RFC1918) except DHCP and the one gateway endpoint
+      # (only when it is an IPv4 literal; a public wss host never matches these ranges).
+      rebuild RB-NODE-OUT
+      # DHCP, to the router only (unicast renewals; the initial broadcast never matches a private range).
+      iptables -A RB-NODE-OUT -d $ROUTER -p udp --sport 68 --dport 67 -j ACCEPT
+      case "$GW_HOST" in
+        *[!0-9.]*) ;;
+        *) iptables -A RB-NODE-OUT -d "$GW_HOST" -p tcp --dport "$GW_PORT" -j ACCEPT ;;
+      esac
+      for NET in 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16; do iptables -A RB-NODE-OUT -d $NET -j DROP; done
+      jump OUTPUT -j RB-NODE-OUT
+
+      # Containers (forwarded traffic) get the same lockdown, with no exception: only the
+      # host-network worker needs the gateway. Docker may start late, so wait for its chain; if it
+      # is installed and the chain never shows, say so loudly and fail (the worker then does not
+      # start), but the INPUT and OUTPUT rules above are already in place.
+      if command -v docker >/dev/null 2>&1; then
+        i=0
+        until iptables -n -L DOCKER-USER >/dev/null 2>&1 && iptables -S FORWARD | grep -q -- '-j DOCKER-USER'; do
+          i=$((i + 1))
+          if [ "$i" -gt 60 ]; then
+            echo "reelbolt-node-firewall: DOCKER-USER is missing or not in the FORWARD path; container traffic is NOT locked down" >&2
+            rc=1
+            break
+          fi
+          sleep 1
+        done
+        if [ "$rc" = 0 ]; then
+          rebuild RB-NODE-FWD
+          # The metadata service holds this node's user-data (its token): the host keeps it for
+          # cloud-init, containers never get it.
+          iptables -A RB-NODE-FWD -d 169.254.169.254 -j DROP
+          # Replies to flows a container started itself (egress=true) pass; new private flows do not.
+          iptables -A RB-NODE-FWD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+          for NET in 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16; do iptables -A RB-NODE-FWD -d $NET -j DROP; done
+          jump DOCKER-USER -j RB-NODE-FWD
+        fi
+      fi
+      exit $rc
+
+  - path: /etc/systemd/system/reelbolt-node-firewall.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=ReelBolt node firewall: private network lockdown
+      Wants=docker.service
+      After=docker.service
+      Before=reelbolt-worker.service
+
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      ExecStart=/usr/local/sbin/reelbolt-node-firewall.sh
+
+      [Install]
+      WantedBy=multi-user.target
+
+  - path: /etc/systemd/system/reelbolt-worker.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=ReelBolt on-demand CloudPool worker
+      After=network-online.target docker.service reelbolt-node-firewall.service
+      Wants=network-online.target
+      Requires=docker.service reelbolt-node-firewall.service
+      ConditionPathExists=/etc/reelbolt/node-image.env
+
+      [Service]
+      EnvironmentFile=/etc/reelbolt/node-image.env
+      # No pull: the images were loaded when the snapshot was baked.
+      ExecStart=/usr/bin/docker run --rm --name reelbolt-worker \
+        --network host \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/lib/reelbolt:/var/lib/reelbolt \
+        --env-file /etc/reelbolt/worker.env \
+        --env SANDBOX_IMAGE \
+        $REELBOLT_WORKER_IMAGE
+      # The worker needs its 120 s drain window to send bye before the node goes.
+      TimeoutStopSec=150
+      KillSignal=SIGTERM
+      Restart=on-failure
+      RestartSec=15
+      # A terminal refusal is exit 4 (4401: expired, revoked or unknown token) and
+      # must not become a restart loop.
+      StartLimitBurst=3
+      StartLimitIntervalSec=300
+      NoNewPrivileges=true
+      ProtectHome=true
+      PrivateTmp=true
+
+      [Install]
+      WantedBy=multi-user.target
+
+  - path: /etc/systemd/system/reelbolt-max-lifetime.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=ReelBolt node hard lifetime reached: power off
+
+      [Service]
+      Type=oneshot
+      ExecStart=/sbin/shutdown -h now "reelbolt max lifetime reached"
+
+  - path: /etc/systemd/system/reelbolt-max-lifetime.timer
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=ReelBolt node hard maximum lifetime (default 6 h)
+
+      [Timer]
+      OnBootSec=6h
+      AccuracySec=1min
+      Unit=reelbolt-max-lifetime.service
+
+      [Install]
+      WantedBy=timers.target
+
+runcmd:
+  - [systemctl, daemon-reload]
+  - [sh, -c, "systemctl enable --now systemd-networkd || true; networkctl reload || true"]
+  - [systemctl, enable, --now, reelbolt-node-firewall.service]
+  - [systemctl, enable, --now, reelbolt-max-lifetime.timer]
+  - [systemctl, enable, --now, reelbolt-worker.service]

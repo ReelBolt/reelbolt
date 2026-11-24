@@ -1,0 +1,34 @@
+{
+  "id": "check-draw",
+  "version": "1.0.0",
+  "title": "Check draw",
+  "category": "shapes",
+  "description": "Animated checkmark inside a circle that draws itself; use for success, done and completed states.",
+  "tags": [
+    "check",
+    "success",
+    "done",
+    "icon"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-check-draw",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      25,
+      50
+    ]
+  },
+  "props": "{children?: ReactNode; size?: number /*360*/; startFrame?: number /*5*/; durationInFrames?: number /*36*/; color?: string; strokeWidth?: number /*18*/; fill?: boolean}",
+  "example": "import {CheckDraw} from './blocks/check-draw/CheckDraw.tsx';\n<CheckDraw size={300} />"
+}

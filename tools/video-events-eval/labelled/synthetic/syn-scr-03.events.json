@@ -1,0 +1,71 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "move_start-ev1",
+   "frame": 21,
+   "label": "move start"
+  },
+  {
+   "name": "move_start-ev2",
+   "frame": 42,
+   "label": "move start"
+  },
+  {
+   "name": "move_start-ev3",
+   "frame": 131,
+   "label": "move start"
+  },
+  {
+   "name": "appear-ev4",
+   "frame": 177,
+   "label": "appear"
+  },
+  {
+   "name": "appear-ev5",
+   "frame": 193,
+   "label": "appear"
+  },
+  {
+   "name": "move_start-ev6",
+   "frame": 201,
+   "label": "move start"
+  },
+  {
+   "name": "disappear-ev7",
+   "frame": 228,
+   "label": "disappear"
+  },
+  {
+   "name": "hit-ev8",
+   "frame": 228,
+   "label": "hit"
+  },
+  {
+   "name": "disappear-ev9",
+   "frame": 238,
+   "label": "disappear"
+  },
+  {
+   "name": "transition-ev10",
+   "frame": 240,
+   "label": "transition"
+  },
+  {
+   "name": "text_in-ev11",
+   "frame": 265,
+   "label": "text in"
+  },
+  {
+   "name": "appear-ev12",
+   "frame": 300,
+   "label": "appear"
+  },
+  {
+   "name": "hit-ev13",
+   "frame": 330,
+   "label": "hit"
+  }
+ ]
+}

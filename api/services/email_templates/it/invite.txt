@@ -1,0 +1,11 @@
+Ciao,
+
+{{.InviterName}} ti ha invitato a unirti a {{.OrgName}} su ReelBolt come {{.Role}}.
+
+Accetta l'invito:
+
+{{.Link}}
+
+Questo invito scade tra {{.ExpiresIn}}.
+
+-- {{.FooterNote}}

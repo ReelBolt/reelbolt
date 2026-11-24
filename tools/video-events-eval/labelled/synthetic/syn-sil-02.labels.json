@@ -1,0 +1,71 @@
+{
+ "clip": "syn-sil-02",
+ "videoType": "silent",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 600,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "appear",
+   "frame": 95,
+   "region": [
+    300,
+    190,
+    240,
+    150
+   ],
+   "note": "amber card reaches half of its peak opacity"
+  },
+  {
+   "id": "ev2",
+   "type": "camera_move_start",
+   "frame": 208,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom begins"
+  },
+  {
+   "id": "ev3",
+   "type": "camera_move_stop",
+   "frame": 413,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "global camera pan/zoom at rest"
+  },
+  {
+   "id": "ev4",
+   "type": "transition",
+   "frame": 480,
+   "region": [
+    0,
+    0,
+    960,
+    540
+   ],
+   "note": "scene 1 fade: midpoint of the blend"
+  },
+  {
+   "id": "ev5",
+   "type": "text_in",
+   "frame": 540,
+   "region": [
+    360,
+    400,
+    240,
+    50
+   ],
+   "note": "closing caption reaches half of its peak opacity"
+  }
+ ]
+}

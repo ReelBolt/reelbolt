@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "agentType": "AuthorAgent",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "DirectorAgent",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "ScriptwriterAgent",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "AnimationStrategyAgent",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "RemotionComponentTranslator",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "ReviewAgent",
+      "kind": "DeepSeek",
+      "modelCode": "deepseek-flash",
+      "why": "Best results on promo and video writing in our comparison"
+    },
+    {
+      "agentType": "CodeStructureAnalyzer",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    },
+    {
+      "agentType": "DependencyAnalyzer",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    },
+    {
+      "agentType": "ComponentInventoryAnalyzer",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    },
+    {
+      "agentType": "RouteAndApiAnalyzer",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    },
+    {
+      "agentType": "StyleAndThemeExtractor",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    },
+    {
+      "agentType": "FileSummarizerAgent",
+      "kind": "OpenAICompatible",
+      "modelCode": "gpt-6-luna",
+      "why": "Reads code just as well at a fraction of the cost"
+    }
+  ]
+}

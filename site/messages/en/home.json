@@ -1,0 +1,105 @@
+{
+  "hero": {
+    "title": "You have a story. ReelBolt makes the video.",
+    "eyebrow": "AI video team · for anyone with a story to tell",
+    "intro": "Drop in the clips you already shot and say what the video is for. An AI video team cuts it and reviews it before you see it, and adds captions when you ask. No editing skills, no blank timeline.",
+    "support": "No card required. Your first video is on us.",
+    "seeFeatures": "See what it does",
+    "liveRender": "Live render"
+  },
+  "useCases": {
+    "scrollLeft": "Scroll the video types left",
+    "scrollRight": "Scroll the video types right",
+    "items": {
+      "highlights": "Highlight edits",
+      "stories": "Narrated stories",
+      "subtitles": "Subtitled clips",
+      "testimonials": "Testimonial reels",
+      "lessons": "Lesson clips",
+      "launches": "Launch videos",
+      "thumbnails": "Thumbnails and post text"
+    }
+  },
+  "page": {
+    "beforeAfter": {
+      "title": "From a full camera roll to a finished cut",
+      "intro": "The blank timeline is the hard part, and a first cut you can react to is the easy part.",
+      "before": {
+        "summary": "A camera roll full of clips. A blank timeline. A weekend gone.",
+        "points": {
+          "0": "Long pauses, false starts and the same line recorded several times",
+          "1": "Clips in the order you shot them, not the order of the story",
+          "2": "Captions, a cover picture and a post caption still to do"
+        }
+      },
+      "after": {
+        "summary": "A finished cut with the dead air gone, in the shape each channel wants.",
+        "points": {
+          "0": "Dead air, false starts and retakes removed, with every cut on a full sentence",
+          "1": "Captions when you switch them on, and subtitle files to upload",
+          "2": "Landscape, vertical, square or portrait, chosen before the run",
+          "3": "A draft that was scored before you saw it, and that you can still change"
+        }
+      }
+    },
+    "steps": {
+      "drop": {
+        "title": "Drop in what you have",
+        "description": "Upload the clips you already shot. A few different shots make a better edit than one long take. Screen recordings and brand files work too, and software teams can connect their code."
+      },
+      "say": {
+        "title": "Say what it is for",
+        "description": "Pick a recipe, such as a highlight edit or a narrated story, and say in a sentence what the video is for and who will watch it."
+      },
+      "review": {
+        "title": "Get a reviewed cut you can change",
+        "description": "An AI video team cuts it and scores the draft before you see it. A low score sends it back for another pass. Then change a line, a clip or the whole cut in the editor."
+      }
+    },
+    "features": {
+      "team": {
+        "title": "A whole production team, on demand",
+        "description": "An editor, a scriptwriter, a motion designer, a colorist and a sound designer work on your video at the same time. A reviewer scores every draft and sends weak ones back before you see them."
+      },
+      "footage": {
+        "title": "Your raw footage, already edited",
+        "description": "Upload unedited clips and get a tight cut back. Pauses, stumbles and weaker takes come out, the cut lands on full sentences, and the story stays intact."
+      },
+      "editor": {
+        "title": "A real editor when you want one",
+        "description": "Open any finished video as an editable timeline. Trim, re-cut from the transcript, grade, mix and add subtitles, with autosave and version history. The editor is an early preview."
+      },
+      "brand": {
+        "title": "Your brand, applied everywhere",
+        "description": "Give ReelBolt a brand PDF or a design export and it builds a brand kit with your colors, fonts and tone. A shared brand library keeps every project consistent, and you approve each change."
+      },
+      "voice": {
+        "title": "Narration in a voice you choose",
+        "description": "Narration is written to fit the cut and spoken in a stock voice, or in a cloned voice once the speaker has recorded their consent. Subtitles and captions come with it."
+      },
+      "broll": {
+        "title": "B-roll on a budget you set",
+        "description": "Cutaways, cold opens and end cards are planned from your edit and generated under a spending cap you set. Each shot gets several takes and the best one is kept. On {plans}."
+      }
+    },
+    "how": {
+      "title": "Three steps to a finished video",
+      "intro": "You bring the clips and the reason. ReelBolt does the work between the camera roll and the export, and you keep the last word.",
+      "detail": "Want the detail behind each step? <link>See the full feature breakdown</link>."
+    },
+    "inside": {
+      "title": "Everything an in‑house video team would do",
+      "link": "See everything ReelBolt does"
+    },
+    "faq": {
+      "title": "Frequently asked",
+      "deciding": "Still deciding? <link>Read what we are building and why</link>."
+    },
+    "start": {
+      "title": "Press play on something finished",
+      "bodySignup": "Create a free workspace, drop in your clips and see the first cut. No card required. Your first video is on us.",
+      "bodyContact": "Tell us what you want to make and what you have to make it from. We will show you what ReelBolt does with it.",
+      "pricing": "See pricing"
+    }
+  }
+}

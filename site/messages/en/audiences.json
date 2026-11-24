@@ -1,0 +1,466 @@
+{
+  "picker": {
+    "title": "What is your story?",
+    "intro": "ReelBolt is for anyone who has a story to tell and no time to tell it. Pick the one closest to yours and see what you can make today.",
+    "link": "ReelBolt for {audience}"
+  },
+  "page": {
+    "eyebrow": "ReelBolt for {audience}",
+    "support": "No card required. Your first video is on us.",
+    "breadcrumbHome": "Home",
+    "beforeAfter": {
+      "title": "Before ReelBolt, and after"
+    },
+    "make": {
+      "title": "What you can make today",
+      "intro": "Everything here ships today. Each item says whether it runs on the free trial or needs a paid plan. Free trial items use credits, and you see an estimate before every run.",
+      "gate": {
+        "trial": "Free trial",
+        "paid": "On {plans}"
+      },
+      "resolutionTier": "up to {resolution} on {plans}",
+      "pricing": "Compare the plans"
+    },
+    "how": {
+      "title": "Three steps to a finished video"
+    },
+    "faq": {
+      "title": "Asked before starting"
+    },
+    "final": {
+      "bodySignup": "Create a free workspace, drop in your clips and see the first cut. No card required. Your first video is on us.",
+      "bodyContact": "Tell us what you want to make and what you have to make it from. We will show you what ReelBolt does with it.",
+      "pricing": "See pricing"
+    },
+    "others": {
+      "title": "ReelBolt for other stories"
+    }
+  },
+  "steps": {
+    "drop": {
+      "title": "Drop in what you have"
+    },
+    "say": {
+      "title": "Say what it is for"
+    },
+    "review": {
+      "title": "Get a reviewed cut you can change",
+      "description": "An AI video team cuts it and scores the draft before you see it. A low score sends it back for another pass. Then change a line, a clip or the whole cut in the editor. It takes minutes for a small job, sometimes half an hour for a big one."
+    }
+  },
+  "costFaq": {
+    "q": "What does it cost to try?",
+    "a": "Nothing to start, and no card is required. The free trial comes with {trialCredits} credits, and your first video is on us: {credits} more credits when you verify your email, to use within {days, plural, one {# day} other {# days}}. The first-video credits are given once per person, and they are not available from some connections or with a temporary email address. Trial exports are {resolution} with a watermark. The plans and what each one includes are on the pricing page."
+  },
+  "capabilities": {
+    "highlightEdit": {
+      "title": "Highlight edit from raw footage",
+      "description": "Dead air, false starts and retakes come out, and every cut lands on a full sentence. Works with 1 to 20 clips."
+    },
+    "titledEdit": {
+      "title": "Footage edit with titles and callouts",
+      "description": "The same tight edit, with titles and callouts placed on screen at the right moments."
+    },
+    "musicEdit": {
+      "title": "Footage edit with music or sound effects",
+      "description": "Background music or sound effects from files you upload, mixed under the edit. There is no built-in music library."
+    },
+    "narratedStory": {
+      "title": "Narrated story with captions",
+      "description": "Your clips and a short brief become a narrated video with captions, in a stock voice or in a voice cloned with recorded consent."
+    },
+    "subtitles": {
+      "title": "Subtitles",
+      "description": "Burned into the video in the language spoken, plus SRT and VTT files."
+    },
+    "translatedSubtitles": {
+      "title": "Subtitles in another language",
+      "description": "The same subtitles translated, with the original timing."
+    },
+    "dub": {
+      "title": "Dub in another language",
+      "description": "The spoken track replaced by a translated narration. Mouth movement on camera is not changed."
+    },
+    "testimonialReel": {
+      "title": "Testimonial reel",
+      "description": "One person speaking to camera and a screenshot, cut into a short reel."
+    },
+    "thumbnail": {
+      "title": "Thumbnail and cover text",
+      "description": "A cover picture taken from your video, with a title on it. It uses very few credits: only the processing time is charged."
+    },
+    "postText": {
+      "title": "Post text",
+      "description": "A caption and hashtags written for the video you just made."
+    },
+    "codePromo": {
+      "title": "Promo video from your code",
+      "description": "A short promo built from your app’s source code and its real screens, with no footage needed."
+    },
+    "shapes": {
+      "title": "The shape each channel wants",
+      "description": "Landscape, vertical, square or portrait, chosen before the run."
+    },
+    "editor": {
+      "title": "An editor for the last changes",
+      "description": "Open any cut as a timeline and change a line, a clip or the whole cut. The editor is an early preview."
+    },
+    "brandKit": {
+      "title": "Brand kit",
+      "description": "Your colors, fonts and tone, built from a brand PDF or a design export. You approve it before it is used."
+    },
+    "githubSync": {
+      "title": "Sync from GitHub",
+      "description": "Pick a repository, a branch and the files you need. New pushes update the project."
+    },
+    "claudeCode": {
+      "title": "Ask from Claude Code",
+      "description": "Connect Claude Code to your workspace and start a video from the terminal. Claude Code asks you before it changes or spends anything."
+    },
+    "reviewLinks": {
+      "title": "Guest review links",
+      "description": "A client watches one finished film and leaves notes at exact moments, without an account. Early preview."
+    },
+    "handoff": {
+      "title": "Hand-off to your own editor",
+      "description": "Export the timeline as OTIO, EDL or Final Cut XML, with the media. Early preview."
+    },
+    "generatedClips": {
+      "title": "AI-generated clips and b-roll",
+      "description": "Cutaways, a cold open or an end card, generated under a spending cap you set."
+    },
+    "generatedAudio": {
+      "title": "Generated music and sound effects",
+      "description": "A music track or a sound effect made from a description."
+    },
+    "ownProvider": {
+      "title": "Your own AI provider",
+      "description": "Connect your own provider account and choose the model each agent uses. That usage costs no ReelBolt credits."
+    },
+    "api": {
+      "title": "API and webhooks",
+      "description": "Start runs from your own systems and get a signed webhook when they end. The API is in alpha."
+    },
+    "fullResolution": {
+      "title": "No watermark, higher resolution",
+      "description": "Exports without the watermark the trial adds: {tiers}."
+    }
+  },
+  "items": {
+    "creator": {
+      "name": "Creators",
+      "audience": "creators",
+      "who": "Vloggers, streamers and podcasters who film and post",
+      "pain": "I film all week and edit all weekend.",
+      "outcome": "A first cut ready while you plan the next video.",
+      "seo": {
+        "title": "AI video editing for creators",
+        "description": "Drop in this week’s clips and get a first cut with the dead air gone, subtitles, a thumbnail and post text. See what works on the free trial and what does not yet."
+      },
+      "hero": {
+        "title": "Film all week. Keep your weekend.",
+        "intro": "Drop in the clips from this week’s shoot and say what the video is for. ReelBolt takes out the dead air, the false starts and the retakes, lands every cut on a full sentence and scores the draft before you see it. You start from a first cut, not from a blank timeline."
+      },
+      "before": {
+        "summary": "A camera roll full of takes. A blank timeline. A weekend gone.",
+        "points": {
+          "0": "Takes you have not watched back since you shot them",
+          "1": "A blank timeline waiting on Saturday morning",
+          "2": "Subtitles, a thumbnail and a post caption still to do"
+        }
+      },
+      "after": {
+        "summary": "A first cut with the dead air gone, in the shape each channel wants.",
+        "points": {
+          "0": "Dead air, false starts and retakes removed, with cuts on full sentences",
+          "1": "Subtitles burned in, plus the subtitle files to upload",
+          "2": "A thumbnail and post text for the same video",
+          "3": "Vertical, square, portrait or landscape, chosen before the run"
+        }
+      },
+      "steps": {
+        "drop": "Upload the clips from your phone or camera, from 1 to 20 for a highlight edit. Several different shots give the edit something to work with.",
+        "say": "Pick the highlight edit and say in a sentence what the video is for, such as “a one-minute recap of the trip, vertical, for my channel”."
+      },
+      "faq": {
+        "0": {
+          "q": "Will it cut the parts I wanted to keep?",
+          "a": "It removes dead air, false starts and repeated takes, and it cuts on full sentences. Every draft is scored before you see it, and a low score sends it back for another pass. You stay in charge: open the cut in the editor and change a line, a clip or the whole cut."
+        },
+        "1": {
+          "q": "Can it edit a long episode for my channel?",
+          "a": "Not yet. ReelBolt is built for short videos, about 90 seconds or less. If you give it one long take, it can only trim it. Several different shots make a real edit."
+        },
+        "2": {
+          "q": "Is there music I can use?",
+          "a": "There is no built-in music library. You can upload a track you have the rights to and ReelBolt mixes it under the edit. Generating a music track or a sound effect from a description is on {audioGenPlans}."
+        }
+      },
+      "final": {
+        "title": "Press play on this week’s video"
+      }
+    },
+    "business": {
+      "name": "Small businesses",
+      "audience": "small businesses",
+      "who": "Shops, studios, restaurants, local services and solo marketers",
+      "pain": "I know we need video. I run a business, I am not an editor.",
+      "outcome": "A video for the shop, the launch or the offer, in your brand.",
+      "seo": {
+        "title": "Video for your small business, without an editor",
+        "description": "Film a few clips on your phone and get a finished video for the shop, the launch or the offer, with titles and captions when you want them. Honest about what it can and cannot do today."
+      },
+      "hero": {
+        "title": "You run the business. ReelBolt edits the video.",
+        "intro": "Film a few clips of the shop, the product or a happy customer on your phone. Say what the video is for, and an AI video team cuts it and reviews the draft before you see it. Add titles and captions when you want them. No editing skills, no blank timeline."
+      },
+      "before": {
+        "summary": "Clips on your phone that never became a post.",
+        "points": {
+          "0": "Clips from the shop that never left your phone",
+          "1": "An agency quote that does not fit the budget",
+          "2": "An evening lost to an editing app you did not want to learn"
+        }
+      },
+      "after": {
+        "summary": "A short video for the shop, the launch or the offer, ready to post.",
+        "points": {
+          "0": "A tight edit with titles and callouts on screen",
+          "1": "Captions for people watching with the sound off, when you switch them on",
+          "2": "A happy customer’s words, cut into a testimonial reel",
+          "3": "One shape for each place you post"
+        }
+      },
+      "steps": {
+        "drop": "Film a handful of short clips on your phone: the front of the shop, the product in use, a customer, you saying one line. Upload them as they are.",
+        "say": "Say what it is for in a sentence, such as “a thirty-second video for the spring opening, vertical”. Add your brand PDF if you have one."
+      },
+      "faq": {
+        "0": {
+          "q": "I have never edited a video. Can I still use it?",
+          "a": "Yes. You upload clips and say what the video is for, and the AI video team does the cutting. Titles and captions are choices you make before the run, not things you build by hand. Every cut is scored before you see it. Opening the editor is optional."
+        },
+        "1": {
+          "q": "Can it make a video if I have no footage?",
+          "a": "Not on the free trial. ReelBolt edits clips you filmed, and no recipe turns only a text prompt or only photos into a video on the free trial. A handful of phone clips is enough to start. AI-generated clips are on {videoGenPlans}."
+        },
+        "2": {
+          "q": "Will the video look like my brand?",
+          "a": "Give ReelBolt a brand PDF or a design export and it builds a brand kit with your colors, fonts and tone. You approve the kit before it is used, and designed graphics follow it."
+        }
+      },
+      "final": {
+        "title": "Turn the clips on your phone into a video"
+      }
+    },
+    "educator": {
+      "name": "Educators",
+      "audience": "educators",
+      "who": "Coaches, teachers and course makers",
+      "pain": "My best lessons are stuck in hour-long recordings.",
+      "outcome": "Short, captioned clips made from the lessons you already teach.",
+      "seo": {
+        "title": "Short, captioned lesson clips for educators",
+        "description": "Turn the takes from a lesson into a tight clip with subtitles, translated subtitles or a dub in another language."
+      },
+      "hero": {
+        "title": "Teach it once. Share it as a short, captioned clip.",
+        "intro": "Upload the takes from your lesson and say who it is for. ReelBolt removes the pauses, the false starts and the repeats, and scores the cut before you see it. It can also burn in subtitles, translate them or dub the lesson into another language."
+      },
+      "before": {
+        "summary": "Good lessons, buried in long recordings.",
+        "points": {
+          "0": "The key point sits in the middle of a long recording",
+          "1": "Pauses, restarts and “let me say that again”",
+          "2": "No subtitles, and only one language"
+        }
+      },
+      "after": {
+        "summary": "A tight, captioned clip of the point you wanted to make.",
+        "points": {
+          "0": "A tight clip with the pauses and false starts gone",
+          "1": "Subtitles burned in, plus the subtitle files",
+          "2": "The same lesson with subtitles or a dub in another language"
+        }
+      },
+      "steps": {
+        "drop": "Upload the takes of the lesson you want to share. A few shorter takes work better than one long recording, which can only be trimmed.",
+        "say": "Say who it is for and what they should take away, such as “a one-minute tip for beginners, with subtitles”."
+      },
+      "faq": {
+        "0": {
+          "q": "Can it turn a one-hour lecture into short clips?",
+          "a": "Not on its own, yet. ReelBolt is built for short videos, about 90 seconds or less, and one long take can only be trimmed. It works best when you record the lesson in a few shorter takes, or upload only the part you want to share."
+        },
+        "1": {
+          "q": "Which languages can it subtitle or dub?",
+          "a": "Subtitles are made in the language spoken and can be translated into another language with the original timing. A dub replaces the spoken track with a translated narration, and mouth movement on camera is not changed. We do not publish a fixed language list yet, so try your language on a short clip first."
+        },
+        "2": {
+          "q": "Can the narration use my own voice?",
+          "a": "Yes. Narration is spoken in a stock voice, or in a voice cloned from your recordings once you have recorded your consent."
+        }
+      },
+      "final": {
+        "title": "Get your best lesson out of the recording"
+      }
+    },
+    "nonprofit": {
+      "name": "Nonprofits",
+      "audience": "nonprofits",
+      "who": "Charities, community groups and campaigns",
+      "pain": "We have the stories and the clips. Nobody on the team edits.",
+      "outcome": "The cause, told well, without an agency budget.",
+      "seo": {
+        "title": "Tell your cause in video, without an editor",
+        "description": "Turn clips from the event, the visit or the interview into a narrated story with captions or a testimonial reel. See what runs on the free trial."
+      },
+      "hero": {
+        "title": "You have the stories. ReelBolt does the editing.",
+        "intro": "Drop in the clips from the event, the visit or the interview and write a short brief. ReelBolt builds a narrated story with captions, or a testimonial reel from one person speaking to camera, and reviews the draft before you see it."
+      },
+      "before": {
+        "summary": "The stories are filmed. Nobody has the time to edit them.",
+        "points": {
+          "0": "Clips from the event sitting on three different phones",
+          "1": "A volunteer who meant to edit them",
+          "2": "A campaign that needs a video and has no agency budget"
+        }
+      },
+      "after": {
+        "summary": "The cause, told in a short video you can share.",
+        "points": {
+          "0": "A narrated story with captions, made from your own clips",
+          "1": "A testimonial reel in the speaker’s own words",
+          "2": "Subtitles for the sound-off viewer, and in another language"
+        }
+      },
+      "steps": {
+        "drop": "Collect the clips from everyone’s phones and upload them: the event, the people, one person telling their story to camera.",
+        "say": "Write a short brief: who the story is about, what you want the viewer to do, and how long the video should be."
+      },
+      "faq": {
+        "0": {
+          "q": "Nobody here edits video. Is that a problem?",
+          "a": "No. You upload clips and write a short brief, and the AI video team does the editing, the narration and the captions. Every draft is scored before you see it, and a low score sends it back for another pass."
+        },
+        "1": {
+          "q": "Is there a discount for nonprofits?",
+          "a": "Not today. The plans, the free trial and what each one includes are on the pricing page. If we add a nonprofit discount, that page will say so."
+        },
+        "2": {
+          "q": "Where does our footage go?",
+          "a": "On the hosted service, your projects, footage and finished videos stay in your workspace, and the AI services only receive what a job needs. We do not train AI models on your content, and we do not sell it."
+        }
+      },
+      "final": {
+        "title": "Tell the story you already filmed"
+      }
+    },
+    "software": {
+      "name": "Software teams",
+      "audience": "software teams",
+      "who": "Founders and product teams",
+      "pain": "We ship every week and announce it with a screenshot.",
+      "outcome": "A launch video for every release.",
+      "seo": {
+        "title": "Launch videos for software teams, from your code",
+        "description": "ReelBolt builds a promo video from your app’s source code and real screens, edits your demo recordings and works from GitHub and Claude Code."
+      },
+      "hero": {
+        "title": "Ship the release. ReelBolt makes the launch video.",
+        "intro": "Connect your repository or upload your code. ReelBolt works out what the product does, writes the script, builds the video from your real screens and your brand, and reviews the draft before you see it. Screen recordings and raw footage work too."
+      },
+      "before": {
+        "summary": "The feature ships. The launch video does not.",
+        "points": {
+          "0": "The release goes out with a screenshot and a changelog line",
+          "1": "Nobody has a day to spend in an editing timeline",
+          "2": "The launch video slips to the next sprint, again"
+        }
+      },
+      "after": {
+        "summary": "A launch video built from the product itself.",
+        "points": {
+          "0": "A promo video built from your app’s own code and screens",
+          "1": "The same recipe, run again for the next release",
+          "2": "Demo recordings cut down to the moments that matter"
+        }
+      },
+      "steps": {
+        "drop": "Connect a GitHub repository or upload your code. Add screen recordings, raw footage and brand files if you have them.",
+        "say": "Pick the promo from code and say what the release is and who it is for. The estimate shows what the run will use before it starts."
+      },
+      "faq": {
+        "0": {
+          "q": "Do I need footage, or is the code enough?",
+          "a": "The code is enough for a promo video: ReelBolt builds the scenes from your app’s real screens. If you also have screen recordings or camera footage, the footage recipes edit those into a finished cut."
+        },
+        "1": {
+          "q": "Can I use my own AI provider and models?",
+          "a": "On {ownProviderPlans}, you can connect your own AI provider account and choose which model each agent uses. That usage costs no ReelBolt credits, because you pay the provider directly."
+        },
+        "2": {
+          "q": "Does it work from Claude Code?",
+          "a": "Yes. Connect Claude Code to your workspace and it can do what the assistant in the app does. Claude Code asks you before a step that changes something or uses credits."
+        }
+      },
+      "final": {
+        "title": "Make the launch video for this release"
+      }
+    },
+    "agency": {
+      "name": "Agencies",
+      "audience": "agencies",
+      "who": "Studios and freelancers who edit for clients",
+      "pain": "First cuts eat the margin.",
+      "outcome": "A reviewed first cut, then a hand-off to the editor you already use.",
+      "seo": {
+        "title": "First cuts for agencies and freelance editors",
+        "description": "Get a reviewed first cut from a client’s raw footage, share a review link for notes and hand the timeline to your own editor. Early-preview parts are labelled."
+      },
+      "hero": {
+        "title": "First cuts eat the margin. Hand them to ReelBolt.",
+        "intro": "Upload the client’s raw footage and the brief. ReelBolt returns a reviewed first cut: minutes for a small job, sometimes half an hour for a big one. Send the client a review link, then finish in ReelBolt or hand the timeline to the editor you already use."
+      },
+      "before": {
+        "summary": "A day of rough-cutting before the creative work starts.",
+        "points": {
+          "0": "Hours of logging and rough-cutting before any creative decision",
+          "1": "Client notes scattered across emails and messages",
+          "2": "The brand guide looked up again for every project"
+        }
+      },
+      "after": {
+        "summary": "A reviewed first cut, and your time spent on the part clients pay for.",
+        "points": {
+          "0": "A reviewed first cut from the client’s raw footage",
+          "1": "A review link where the client leaves notes at exact moments",
+          "2": "A brand kit for each client project",
+          "3": "A hand-off package for the editing app you already use"
+        }
+      },
+      "steps": {
+        "drop": "Create a project for the client and upload their raw footage and their brand PDF.",
+        "say": "Paste the client’s brief in a sentence or two: what the video is for, who watches it, and the shape it should have."
+      },
+      "faq": {
+        "0": {
+          "q": "Can I finish the cut in my own editing app?",
+          "a": "Yes, as an early preview. You can export the timeline as OTIO, EDL or Final Cut XML, with the media or a list of it. We have not yet opened these packages in the major editing apps ourselves, so try one on a small project first."
+        },
+        "1": {
+          "q": "How do clients review a cut?",
+          "a": "Make a review link for a finished render. The client watches it without an account, leaves notes at exact moments and approves it or asks for changes. They see only that one film, and you can turn the link off at any time."
+        },
+        "2": {
+          "q": "Can my team share projects?",
+          "a": "Yes. A team workspace holds the projects, the footage and the run history, with roles for owners, admins, members and billing, and invitations in place of shared passwords. A team workspace is priced per seat; the pricing page has the details."
+        }
+      },
+      "final": {
+        "title": "Start the next client project from a first cut"
+      }
+    }
+  }
+}

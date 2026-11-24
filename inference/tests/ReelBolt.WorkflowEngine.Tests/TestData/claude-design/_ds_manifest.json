@@ -1,0 +1,301 @@
+{
+  "namespace": "NorthwindDesignSystem_05b194",
+  "components": [
+    {
+      "name": "Button",
+      "sourcePath": "components/core/Button.jsx"
+    },
+    {
+      "name": "ButtonGroup",
+      "sourcePath": "components/core/ButtonGroup.jsx"
+    },
+    {
+      "name": "Chip",
+      "sourcePath": "components/core/Chip.jsx"
+    },
+    {
+      "name": "Icon",
+      "sourcePath": "components/core/Icon.jsx"
+    },
+    {
+      "name": "IconButton",
+      "sourcePath": "components/core/IconButton.jsx"
+    },
+    {
+      "name": "Switch",
+      "sourcePath": "components/core/Switch.jsx"
+    },
+    {
+      "name": "TextField",
+      "sourcePath": "components/core/TextField.jsx"
+    },
+    {
+      "name": "DataGrid",
+      "sourcePath": "components/data/DataGrid.jsx"
+    },
+    {
+      "name": "DraftCard",
+      "sourcePath": "components/drafts/DraftCard.jsx"
+    },
+    {
+      "name": "DraftGroupHeader",
+      "sourcePath": "components/drafts/DraftGroupHeader.jsx"
+    },
+    {
+      "name": "DRAFT_KINDS",
+      "sourcePath": "components/drafts/DraftPill.jsx"
+    },
+    {
+      "name": "DraftPill",
+      "sourcePath": "components/drafts/DraftPill.jsx"
+    },
+    {
+      "name": "Dialog",
+      "sourcePath": "components/feedback/Dialog.jsx"
+    },
+    {
+      "name": "Snackbar",
+      "sourcePath": "components/feedback/Snackbar.jsx"
+    },
+    {
+      "name": "AppBar",
+      "sourcePath": "components/layout/AppBar.jsx"
+    },
+    {
+      "name": "NORTHWIND_NAV",
+      "sourcePath": "components/layout/NavMenu.jsx"
+    },
+    {
+      "name": "NavMenu",
+      "sourcePath": "components/layout/NavMenu.jsx"
+    },
+    {
+      "name": "KpiGroupLabel",
+      "sourcePath": "components/overview/KpiGroupLabel.jsx"
+    },
+    {
+      "name": "PeriodRangeChips",
+      "sourcePath": "components/overview/PeriodRangeChips.jsx"
+    },
+    {
+      "name": "ScopeSwitch",
+      "sourcePath": "components/overview/ScopeSwitch.jsx"
+    },
+    {
+      "name": "SectionHeader",
+      "sourcePath": "components/overview/SectionHeader.jsx"
+    },
+    {
+      "name": "StatTile",
+      "sourcePath": "components/overview/StatTile.jsx"
+    },
+    {
+      "name": "SummaryHero",
+      "sourcePath": "components/overview/SummaryHero.jsx"
+    },
+    {
+      "name": "StatusChip",
+      "sourcePath": "components/status/StatusChip.jsx"
+    },
+    {
+      "name": "Card",
+      "sourcePath": "components/surfaces/Card.jsx"
+    },
+    {
+      "name": "ExpansionPanel",
+      "sourcePath": "components/surfaces/ExpansionPanel.jsx"
+    }
+  ],
+  "startingPoints": [
+    {
+      "name": "DraftCard",
+      "path": "components/drafts/DraftCard.jsx",
+      "previewPath": "components/drafts/drafts.card.html",
+      "kind": "component",
+      "section": "Drafts",
+      "subtitle": "Expense draft row card (phone inbox)",
+      "viewport": "420x80"
+    },
+    {
+      "name": "AppBar",
+      "path": "components/layout/AppBar.jsx",
+      "previewPath": "components/layout/layout.card.html",
+      "kind": "component",
+      "section": "Layout",
+      "subtitle": "Northwind Staffing portal top bar",
+      "viewport": "1100x64"
+    },
+    {
+      "name": "StatTile",
+      "path": "components/overview/StatTile.jsx",
+      "previewPath": "components/overview/overview.card.html",
+      "kind": "component",
+      "section": "Overview",
+      "subtitle": "Clickable KPI tile from the Overview dashboard",
+      "viewport": "300x110"
+    }
+  ],
+  "cards": [
+    {
+      "path": "guidelines/colors-brand.html",
+      "group": "Colors",
+      "viewport": "700x130",
+      "subtitle": "Primary violet + the gradient used on the hero CTA",
+      "name": "Brand"
+    },
+    {
+      "path": "components/core/core.card.html",
+      "group": "Components",
+      "viewport": "700x360",
+      "subtitle": "Button, ButtonGroup, IconButton, Chip, Switch, TextField, Icon",
+      "name": "Core"
+    },
+    {
+      "path": "components/overview/overview.card.html",
+      "group": "Components",
+      "viewport": "700x470",
+      "subtitle": "SectionHeader, SummaryHero, PeriodRangeChips, ScopeSwitch, KpiGroupLabel, StatTile",
+      "name": "Overview"
+    }
+  ],
+  "globalCssPaths": [
+    "tokens/fonts.css",
+    "tokens/colors.css",
+    "tokens/typography.css",
+    "tokens/spacing.css",
+    "tokens/elevation.css"
+  ],
+  "tokens": [
+    {
+      "name": "--font-sans",
+      "value": "\"Roboto\",\"Helvetica\",\"Arial\",sans-serif",
+      "kind": "font",
+      "definedIn": "tokens/fonts.css"
+    },
+    {
+      "name": "--font-mono",
+      "value": "ui-monospace,monospace",
+      "kind": "font",
+      "definedIn": "tokens/fonts.css"
+    },
+    {
+      "name": "--nws-primary",
+      "value": "#7e6fff",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-brand-violet",
+      "value": "#594ae2",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-brand-violet-light",
+      "value": "#7467ef",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-secondary",
+      "value": "#ff4081",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-tertiary",
+      "value": "#1ec8a5",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-info",
+      "value": "#4a86ff",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-success",
+      "value": "#4caf50",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-warning",
+      "value": "#ff9800",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-error",
+      "value": "#f44336",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-background",
+      "value": "#ffffff",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-surface",
+      "value": "#ebedef",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-text-primary",
+      "value": "#333333",
+      "kind": "font",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-text-secondary",
+      "value": "#757575",
+      "kind": "font",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-lines",
+      "value": "#e0e0e0",
+      "kind": "color",
+      "definedIn": "tokens/colors.css"
+    },
+    {
+      "name": "--nws-background",
+      "value": "#1a1a27",
+      "kind": "color",
+      "definedIn": "tokens/colors.css",
+      "scope": ".theme-dark"
+    },
+    {
+      "name": "--nws-surface",
+      "value": "#1e1e2d",
+      "kind": "color",
+      "definedIn": "tokens/colors.css",
+      "scope": ".theme-dark"
+    },
+    {
+      "name": "--nws-text-primary",
+      "value": "#b2b0bf",
+      "kind": "font",
+      "definedIn": "tokens/colors.css",
+      "scope": ".theme-dark"
+    },
+    {
+      "name": "--nws-text-secondary",
+      "value": "#92929f",
+      "kind": "font",
+      "definedIn": "tokens/colors.css",
+      "scope": ".theme-dark"
+    }
+  ],
+  "themes": [
+    {
+      "selector": ".theme-dark",
+      "label": "Dark"
+    }
+  ],
+  "source": "spa"
+}

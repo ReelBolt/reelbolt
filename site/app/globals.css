@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-paper: #0B0B12;
+  --color-paper-2: #15131D;
+  --color-paper-3: #1D1927;
+  --color-ink: #F5F3F8;
+  --color-ink-2: #C7C2D3;
+  --color-ink-muted: #A79FB4;
+  --color-ink-faint: #8B8699;
+  --color-line: #221E2C;
+  --color-line-strong: #6F6A7D;
+  --color-accent: #A855F7;
+  --color-accent-hover: #C084FC;
+  --color-accent-strong: #7C3AED;
+  --color-accent-ink: #C4B5FD;
+  --color-accent-deep: #2E1065;
+  --color-accent-tint: #221A38;
+  --color-danger: #F87171;
+  --color-danger-border: #EF4444;
+  --color-danger-tint: #2A1215;
+  --tracking-eyebrow: 0.18em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scroll-linked entrance for <Reveal>. Nothing here hides an element unless the browser supports
+   animation-timeline AND the visitor has not asked for reduced motion; otherwise content is visible. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    /* Transform only: animating opacity left text mid-fade for axe's contrast check. */
+    @keyframes reveal-in {
+      from {
+        transform: translateY(1rem);
+      }
+      to {
+        transform: none;
+      }
+    }
+  }
+}
+
+/* ─── Branded pointer set (UI subset) ─────────────────────────────────────────────────────────
+   The marketing site carries the UI cursors only: default, pointer, text, not-allowed, progress,
+   grab/grabbing, move. The editor's tool cursors are dashboard-only. PNGs are masters under
+   brand/cursors, copied here by `node brand/scripts/sync.mjs` (the catalog marks the site subset
+   with "site": true); never hand-copy or hand-write a url() outside this block. Each token keeps a
+   standard keyword last, so with images blocked every rule falls back to a keyword rather than to
+   nothing. */
+:root {
+  --rb-cursor-default: url('/cursors/default.png') 6 2, url('/cursors/default@2x.png') 12 4, default;
+  --rb-cursor-pointer: url('/cursors/pointer.png') 12 2, url('/cursors/pointer@2x.png') 24 4, pointer;
+  --rb-cursor-text: url('/cursors/text.png') 16 16, url('/cursors/text@2x.png') 32 32, text;
+  --rb-cursor-not-allowed: url('/cursors/not-allowed.png') 16 16, url('/cursors/not-allowed@2x.png') 32 32, not-allowed;
+  --rb-cursor-progress: url('/cursors/progress.png') 16 16, url('/cursors/progress@2x.png') 32 32, progress;
+  --rb-cursor-grab: url('/cursors/grab.png') 16 16, url('/cursors/grab@2x.png') 32 32, grab;
+  --rb-cursor-grabbing: url('/cursors/grabbing.png') 16 16, url('/cursors/grabbing@2x.png') 32 32, grabbing;
+  --rb-cursor-move: url('/cursors/move.png') 16 16, url('/cursors/move@2x.png') 32 32, move;
+}
+
+/* Touch is a cursor-free surface, and a forced-colors visitor is relying on the OS cursor for
+   contrast: in both cases every token collapses to its keyword. */
+@media (pointer: coarse), (forced-colors: active) {
+  :root {
+    --rb-cursor-default: default;
+    --rb-cursor-pointer: pointer;
+    --rb-cursor-text: text;
+    --rb-cursor-not-allowed: not-allowed;
+    --rb-cursor-progress: progress;
+    --rb-cursor-grab: grab;
+    --rb-cursor-grabbing: grabbing;
+    --rb-cursor-move: move;
+  }
+}
+
+/* Opt-in utilities for a surface that wants one explicitly. Base rules below cover the common
+   elements; a utility class wins over them because Tailwind's utilities layer comes last. */
+@utility cursor-brand-default {
+  cursor: var(--rb-cursor-default);
+}
+@utility cursor-brand-pointer {
+  cursor: var(--rb-cursor-pointer);
+}
+@utility cursor-brand-text {
+  cursor: var(--rb-cursor-text);
+}
+@utility cursor-brand-not-allowed {
+  cursor: var(--rb-cursor-not-allowed);
+}
+@utility cursor-brand-progress {
+  cursor: var(--rb-cursor-progress);
+}
+@utility cursor-brand-grab {
+  cursor: var(--rb-cursor-grab);
+}
+@utility cursor-brand-grabbing {
+  cursor: var(--rb-cursor-grabbing);
+}
+@utility cursor-brand-move {
+  cursor: var(--rb-cursor-move);
+}
+
+@layer base {
+  /* The branded arrow is the resting pointer on the public site. */
+  html {
+    cursor: var(--rb-cursor-default);
+  }
+
+  /* Zero specificity: a component that knows better keeps its own rule. */
+  :where(a[href], button, [role='button'], [role='link'], [role='tab'], summary, label[for], select) {
+    cursor: var(--rb-cursor-pointer);
+  }
+  :where(button:disabled, [aria-disabled='true']) {
+    cursor: var(--rb-cursor-not-allowed);
+  }
+
+  /* The I-beam stays native inside editable text (Owner Phase-3 rule). */
+  :where(
+    input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='reset']):not([type='range']):not([type='color']):not([type='file']):not([type='image']),
+    textarea,
+    [contenteditable=''],
+    [contenteditable='true'],
+    [contenteditable='plaintext-only']
+  ) {
+    cursor: text;
+  }
+}

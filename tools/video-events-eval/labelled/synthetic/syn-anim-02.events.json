@@ -1,0 +1,76 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "speech_start-ev1",
+   "frame": 15,
+   "label": "speech start"
+  },
+  {
+   "name": "text_in-ev2",
+   "frame": 20,
+   "label": "text in"
+  },
+  {
+   "name": "appear-ev3",
+   "frame": 34,
+   "label": "appear"
+  },
+  {
+   "name": "speech_end-ev4",
+   "frame": 95,
+   "label": "speech end"
+  },
+  {
+   "name": "transition-ev5",
+   "frame": 150,
+   "label": "transition"
+  },
+  {
+   "name": "move_start-ev6",
+   "frame": 186,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev7",
+   "frame": 230,
+   "label": "move stop"
+  },
+  {
+   "name": "move_start-ev8",
+   "frame": 240,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev9",
+   "frame": 269,
+   "label": "move stop"
+  },
+  {
+   "name": "transition-ev10",
+   "frame": 290,
+   "label": "transition"
+  },
+  {
+   "name": "speech_start-ev11",
+   "frame": 300,
+   "label": "speech start"
+  },
+  {
+   "name": "text_in-ev12",
+   "frame": 310,
+   "label": "text in"
+  },
+  {
+   "name": "hit-ev13",
+   "frame": 322,
+   "label": "hit"
+  },
+  {
+   "name": "speech_end-ev14",
+   "frame": 385,
+   "label": "speech end"
+  }
+ ]
+}

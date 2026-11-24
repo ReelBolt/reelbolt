@@ -1,0 +1,9 @@
+# Single-host session-key guard. Tracked on purpose: compose loads this file automatically ONLY when
+# no -f is given, which is how a single host runs (`docker compose up -d`). Control and render hosts
+# always pass explicit -f files, so they never load it: control carries its own guard
+# (docker-compose.control.yml, an operator file (not in the public repository)) and a render host
+# (media, cloud engine) must render without the session key. It cannot live in docker-compose.yml:
+# compose checks `:?` per file before merging, so the render hosts would fail too.
+# Self-hosters who already keep their own docker-compose.override.yml must carry the line below into
+# it (or list both files in COMPOSE_FILE). Extension field: no container gets it.
+x-session-key-guard: ${JWT_SIGNING_KEY:?set JWT_SIGNING_KEY in .env to a random value of at least 32 characters (openssl rand -hex 32)}

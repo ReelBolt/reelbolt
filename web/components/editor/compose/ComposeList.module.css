@@ -1,0 +1,10 @@
+/* A list row is 32 px, and 44 px on a touch (coarse) pointer: Mantine style props cannot express this media query. */
+.entry {
+  min-height: 32px;
+}
+
+@media (pointer: coarse) {
+  .entry {
+    min-height: 44px;
+  }
+}

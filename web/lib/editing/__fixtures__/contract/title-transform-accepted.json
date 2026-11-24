@@ -1,0 +1,97 @@
+{
+  "name": "title-transform-accepted",
+  "description": "A title with a free move, scale, rotation and opacity is accepted.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "6f1b2c3d-0000-4000-8000-000000000002",
+    "projectId": "6f1b2c3d-0000-4000-8000-000000000001",
+    "name": "Contract fixture",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "type": "titleClip",
+            "id": "6f1b2c3d-0000-4000-8000-0000000000b1",
+            "name": "Title",
+            "recordIn": 0,
+            "recordOut": 90,
+            "text": "Hello",
+            "fontSize": 48,
+            "fontFamily": "Arial",
+            "color": "#FFFFFF",
+            "enabled": true,
+            "position": "bottomRight",
+            "transform": {
+              "positionX": {
+                "value": 0.1,
+                "keys": null
+              },
+              "positionY": {
+                "value": -0.05,
+                "keys": null
+              },
+              "scale": {
+                "value": 1.5,
+                "keys": null
+              },
+              "scaleY": {
+                "value": 1.2,
+                "keys": null
+              },
+              "rotation": {
+                "value": 15,
+                "keys": null
+              },
+              "opacity": {
+                "value": 0.8,
+                "keys": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a2",
+        "kind": "audio",
+        "name": "Audio",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": []
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

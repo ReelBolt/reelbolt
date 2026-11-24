@@ -1,0 +1,34 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-speech-01",
+ "videoType": "speech",
+ "frames": 720,
+ "theme": {
+  "bg": "#2b2f3a"
+ },
+ "scenes": [],
+ "elements": [],
+ "expect": {
+  "noBeats": true
+ },
+ "speech": [
+  {
+   "start": 20,
+   "end": 150
+  },
+  {
+   "start": 200,
+   "end": 330
+  },
+  {
+   "start": 380,
+   "end": 520
+  },
+  {
+   "start": 570,
+   "end": 700
+  }
+ ]
+}

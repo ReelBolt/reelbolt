@@ -1,0 +1,576 @@
+/* The app run page. Colours read the editor's tokens (read-only) where one exists; every text and
+   chip pairing below is a fixed, checked pairing (4.5:1 or better) because Mantine's "dimmed" grey on
+   white is only about 3.5:1. */
+.root {
+  --wa-text: var(--mantine-color-text);
+  --wa-muted: var(--mantine-color-dimmed);
+  --wa-pane: var(--rb-surface-raised);
+  --wa-line: var(--rb-border);
+  --wa-line-strong: var(--rb-border-strong);
+  --wa-ok: var(--rb-status-done);
+  --wa-bad: var(--rb-status-failed);
+  --wa-warn-bg: var(--rb-status-warn-bg);
+  --wa-warn-fg: var(--rb-status-warn);
+  --wa-bad-bg: var(--rb-status-failed-bg);
+  --wa-ok-bg: var(--rb-status-done-bg);
+  --wa-note-bg: var(--rb-surface-raised);
+  --wa-bar-h: 9rem;
+  min-height: 100dvh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mantine-spacing-xl);
+  align-items: start;
+}
+
+.inputs,
+.results {
+  display: grid;
+  /* One explicit column that may shrink to the track. Without it the implicit `auto` column sizes to
+     the widest child's max-content (a nowrap button row, a picture grid), so on a narrower desktop the
+     pane grew past its track and ran over the page edge. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mantine-spacing-md);
+  min-width: 0;
+}
+
+.muted {
+  color: var(--wa-muted);
+}
+
+.field {
+  scroll-margin-bottom: var(--wa-bar-h);
+}
+
+.fieldLabel {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--wa-text);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.segments :global(.mantine-SegmentedControl-label) {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Mantine keeps a label on one line; a long one ("2K (~2048 px) 12,6 cr") must wrap, never push the control off screen. */
+  white-space: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.segments {
+  max-width: 100%;
+}
+
+.fileList {
+  display: grid;
+  gap: 6px;
+  /* Three whole rows (44px each, 6px gaps, 2px padding): a row is never cut in half at the edge. */
+  max-height: calc(3 * 44px + 2 * 6px + 4px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y proximity;
+  padding: 2px;
+  margin-bottom: 8px;
+}
+
+.fileRow {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+}
+
+.bar {
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+}
+
+.summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.progressItem[data-state='working'] {
+  font-weight: 600;
+}
+
+.actions {
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+}
+
+.strip {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--wa-line);
+  border-radius: var(--mantine-radius-md);
+  color: var(--wa-text);
+  background: var(--wa-pane);
+}
+
+.stripFix {
+  border-color: var(--wa-bad);
+  background: var(--wa-bad-bg);
+}
+
+.stripCheck {
+  background: var(--wa-warn-bg);
+  color: var(--wa-warn-fg);
+}
+
+.stripReady {
+  background: var(--wa-ok-bg);
+}
+
+.stripNote {
+  background: var(--wa-note-bg);
+}
+
+.stripItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.word {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.wordFix {
+  color: var(--wa-bad);
+}
+
+.wordCheck {
+  color: var(--wa-warn-fg);
+}
+
+.wordReady {
+  color: var(--wa-ok);
+}
+
+.wordNote {
+  color: var(--wa-text);
+}
+
+.runButton {
+  min-height: 48px;
+  width: 100%;
+}
+
+.priceRange {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+}
+
+.reason {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-text);
+}
+
+.resultPane {
+  border: 1px solid var(--wa-line);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-md);
+  background: var(--wa-pane);
+  color: var(--wa-text);
+  min-height: 12rem;
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+  align-content: start;
+}
+
+.video {
+  width: 100%;
+  max-height: 60vh;
+  border-radius: var(--mantine-radius-sm);
+  background: var(--mantine-color-black);
+}
+
+.progress {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.progressItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.banner {
+  border: 1px solid var(--wa-bad);
+  background: var(--wa-bad-bg);
+  color: var(--wa-text);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  display: grid;
+  gap: 8px;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* A long button label wraps inside its row instead of pushing past the pane (Mantine labels never wrap by default). */
+.buttonRow > * {
+  max-width: 100%;
+  height: auto;
+}
+
+.buttonRow :global(.mantine-Button-label) {
+  white-space: normal;
+  text-align: start;
+}
+
+/* Every stacked block on this page is ONE explicit column that may shrink to its track. A bare
+   `display: grid` makes an implicit `auto` column sized to its widest child, which let the result
+   pane, the picture grid and the run bar run past the page edge on a narrower desktop window. */
+.fileList,
+.bar,
+.actions,
+.strip,
+.resultPane,
+.progress,
+.moreBody,
+.permission,
+.examples,
+.exampleList,
+.firstResult {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Two columns (the form beside the result) only from 70em: the app shell's navigation takes 250 px, so
+   below that the result pane would be squeezed under ~300 px and its text would run over itself. */
+@media (min-width: 70em) {
+  .layout {
+    grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+  }
+
+  .inputs { grid-column: 1; grid-row: 1; }
+  .results { grid-column: 2; grid-row: 1 / span 2; }
+  .bar { grid-column: 1; grid-row: 2; }
+}
+
+/* On the tablet class and below (<= 1100 px, lib/breakpoints.ts): one column, and the run bar sticks to the
+   bottom with the safe-area inset, so the keyboard and the home indicator never cover it. */
+@media (max-width: 1100.98px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mantine-spacing-lg);
+  }
+
+  .inputs, .results, .bar { grid-column: auto; grid-row: auto; }
+  .inputs { order: 1; }
+  .bar { order: 2; }
+  .results { order: 3; }
+}
+
+/* Phone (lib/breakpoints.ts PHONE_QUERY): the run bar sticks to the bottom with the safe-area inset, so
+   the keyboard and the home indicator never cover it. It is short by design (one summary line, Run, one
+   price line), so Run is reachable without scrolling inside it. */
+@media (max-width: 599.98px), (max-height: 499.98px) and (pointer: coarse) {
+  .results { order: 2; }
+
+  /* Last in the visual order, so it stays stuck to the bottom for the whole page. */
+  .bar {
+    order: 3;
+    gap: var(--mantine-spacing-xs);
+    max-height: 45dvh;
+    overflow-y: auto;
+    position: sticky;
+    bottom: 0;
+    z-index: var(--mantine-z-index-app, 100);
+    background: var(--mantine-color-body);
+    border-top: 1px solid var(--wa-line-strong);
+    margin: 0 calc(var(--mantine-spacing-md) * -1);
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md) calc(var(--mantine-spacing-xs) + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* The button leads the bar: whatever the reasons above it add, Run is the first thing in view and
+     the reasons scroll underneath it, never the other way round. */
+  .bar { max-height: 40dvh; }
+
+  .actions { display: contents; }
+
+  .runButton {
+    order: -1;
+    min-height: 48px;
+  }
+}
+
+/* The phone readiness panel: a one-line summary that opens to the whole list. */
+.stripSummary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: var(--rb-cursor-pointer);
+  min-width: 0;
+}
+
+.stripChevron {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+details[open] > .stripSummary .stripChevron {
+  transform: rotate(180deg);
+}
+
+.stripSummaryText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.balance {
+  color: var(--wa-text);
+  font-weight: 500;
+}
+
+/* A blocked Run: a muted solid button (white text on grey, about 6:1) with no dashed edge, so it is not
+   mistaken for a drop zone. The reason sits right above it in plain words. */
+.runButton.blocked {
+  background: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-4));
+  background-image: none;
+  color: var(--mantine-color-white);
+  border: 1px solid transparent;
+  cursor: var(--rb-cursor-not-allowed);
+}
+
+/* The run bar's blocked reason, kept for screen readers when the readiness strip already shows the
+   same sentence and the fix, so the two are never printed twice side by side. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* App inputs (docs/design/app-inputs.md 12.1): "More options", model cards, shape chips, counters. Every row wraps,
+   nothing is wider than the column, so a phone never scrolls sideways. */
+.moreToggle {
+  min-height: 44px;
+  justify-self: start;
+  max-width: 100%;
+}
+
+.moreBody {
+  display: grid;
+  gap: var(--mantine-spacing-md);
+  padding-top: var(--mantine-spacing-xs);
+  min-width: 0;
+}
+
+.fieldError {
+  color: var(--mantine-color-error);
+  margin-top: 4px;
+}
+
+/* The permission to send media: its own bordered block above Run, apart from the creative fields. */
+.permission {
+  border: 1px solid var(--wa-line-strong);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  scroll-margin-bottom: var(--wa-bar-h);
+}
+
+.permissionTitle {
+  color: var(--wa-text);
+}
+
+.counter {
+  margin-top: 2px;
+  text-align: right;
+}
+
+.modelList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.modelCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--wa-line);
+  border-radius: var(--mantine-radius-md);
+  background: var(--wa-pane);
+  color: var(--wa-text);
+  cursor: var(--rb-cursor-pointer);
+  min-width: 0;
+}
+
+.modelCardSelected {
+  border-color: var(--mantine-primary-color-filled);
+  box-shadow: 0 0 0 1px var(--mantine-primary-color-filled);
+}
+
+.modelCardDisabled {
+  cursor: var(--rb-cursor-not-allowed);
+  opacity: 0.75;
+}
+
+.modelRadio {
+  margin-top: 3px;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.modelText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.modelName {
+  font-weight: 600;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.modelNote {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-text);
+}
+
+.modelTrigger {
+  min-height: 44px;
+  white-space: normal;
+  height: auto;
+}
+
+.shapeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.shapeIcon {
+  display: inline-block;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  flex: none;
+}
+
+.shapeIcon[data-shape='9:16'] { width: 9px; height: 16px; }
+.shapeIcon[data-shape='1:1'] { width: 13px; height: 13px; }
+.shapeIcon[data-shape='16:9'] { width: 16px; height: 9px; }
+.shapeIcon[data-shape='4:5'] { width: 12px; height: 15px; }
+
+/* Example briefs under the "what should it show" box: full sentences, so they wrap and stack. */
+.examples {
+  display: grid;
+  gap: 6px;
+  margin-top: -4px;
+}
+
+.examplesLabel {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--wa-muted);
+}
+
+.exampleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.exampleChip {
+  width: 100%;
+  min-height: 44px;
+  text-align: start;
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+  line-height: 1.4;
+  color: var(--wa-text);
+  background: var(--wa-pane);
+  border: 1px solid var(--wa-line-strong);
+  border-radius: var(--mantine-radius-md);
+  padding: 8px 12px;
+  cursor: var(--rb-cursor-pointer);
+}
+
+.exampleChip:hover {
+  border-color: var(--mantine-primary-color-filled);
+}
+
+.exampleChip:focus-visible {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 2px;
+}
+
+/* "Your first video is ready": a quiet frame inside the result pane, never an overlay. */
+.firstResult {
+  /* The tokens are read directly: the moment also stands on the run's own page, outside `.root`. */
+  border: 1px solid var(--rb-status-done);
+  background: var(--rb-status-done-bg);
+  color: var(--mantine-color-text);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  display: grid;
+  gap: var(--mantine-spacing-sm);
+  min-width: 0;
+}
+
+.firstResult video {
+  width: 100%;
+  max-height: 60vh;
+  border-radius: var(--mantine-radius-sm);
+  background: var(--mantine-color-black);
+}
+
+.firstResultHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.facts dt {
+  font-weight: 600;
+}
+
+.facts dd {
+  margin: 0;
+}

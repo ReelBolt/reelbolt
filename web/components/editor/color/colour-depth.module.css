@@ -1,0 +1,279 @@
+/* Colour depth (pro UI wave 4): the node list, the serial grade graph, the compare bar and the scopes layouts. Tokens only. */
+
+/* ── Node list ─────────────────────────────────────────────────────────────── */
+.nodeRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  min-width: 0;
+}
+
+.nodeRow[data-selected='true'] {
+  background: var(--mantine-color-default-hover);
+}
+
+.nodeRow[data-lifted='true'] {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: -2px;
+}
+
+.nodeRow[data-dragging='true'] {
+  opacity: 0.5;
+}
+
+.nodeRow[data-drop='before'] {
+  border-top-color: var(--mantine-primary-color-filled);
+}
+
+.nodeRow[data-drop='after'] {
+  border-bottom-color: var(--mantine-primary-color-filled);
+}
+
+.nodeRow[data-solo='true'] {
+  box-shadow: inset 3px 0 0 var(--mantine-color-yellow-filled);
+}
+
+.nodeHandle {
+  cursor: var(--rb-cursor-grab);
+  touch-action: none;
+}
+
+.nodeHandle[aria-pressed='true'] {
+  cursor: var(--rb-cursor-grabbing);
+}
+
+.nodeName {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* ── Serial grade graph ────────────────────────────────────────────────────── */
+.graph {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 6px;
+  border: 1px solid var(--rb-ed-line);
+  border-radius: 4px;
+  background: var(--rb-ed-subtle);
+}
+
+.graphCap {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 6px;
+  border-radius: 4px;
+  border: 1px solid var(--rb-ed-line-strong);
+  color: var(--rb-ed-fg-muted);
+  font-size: 12px;
+}
+
+.graphLink {
+  flex: 0 0 10px;
+  height: 1px;
+  margin-bottom: 20px;
+  background: var(--rb-ed-line-strong);
+}
+
+.graphSegment {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.graphSegment[data-owner='group'] {
+  padding: 0 4px 0;
+  border-left: 1px dashed var(--rb-ed-dashed);
+  border-right: 1px dashed var(--rb-ed-dashed);
+}
+
+.graphSegmentLabel {
+  max-width: 132px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--rb-ed-fg-muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.graphSegmentNodes {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.graphNode {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 44px;
+  height: 40px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid var(--rb-ed-line-strong);
+  background: var(--rb-ed-chip-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  cursor: var(--rb-cursor-pointer);
+}
+
+/* A correction that is off (or whose stack is bypassed) is drawn hollow. */
+.graphNode[data-enabled='false'] {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--rb-ed-dashed);
+  color: var(--rb-ed-fg-muted);
+}
+
+.graphNode[aria-selected='true'] {
+  border-color: var(--mantine-primary-color-filled);
+  box-shadow: 0 0 0 1px var(--mantine-primary-color-filled);
+}
+
+.graphNode[data-solo='true'] {
+  border-color: var(--mantine-color-yellow-filled);
+  box-shadow: 0 0 0 2px var(--mantine-color-yellow-filled);
+}
+
+.graphNode:focus-visible {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 2px;
+}
+
+.graphGlyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  height: 12px;
+}
+
+.graphSoloMark {
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  padding: 0 3px;
+  border-radius: 6px;
+  background: var(--mantine-color-yellow-filled);
+  color: var(--mantine-color-black);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+/* ── Compare bar (before / after, wipe, reference) and the solo line ───────── */
+.compareBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 6px;
+  border-bottom: 1px solid var(--rb-ed-line);
+  margin-bottom: 6px;
+}
+
+.soloLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 2px 8px;
+  border-left: 3px solid var(--mantine-color-yellow-filled);
+  background: var(--rb-ed-subtle);
+}
+
+/* ── Scopes ────────────────────────────────────────────────────────────────── */
+.scopesResize {
+  flex: 0 0 auto;
+  height: 6px;
+  margin: 0 -8px;
+  cursor: var(--rb-cursor-resize-ns);
+  touch-action: none;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--rb-ed-line);
+  padding: 0;
+  position: relative;
+}
+
+.scopesResize:hover {
+  background: var(--mantine-primary-color-light);
+}
+
+/* A visible ring for the keyboard, drawn outside the 6 px bar so it stays readable. */
+.scopesResize:focus-visible {
+  background: var(--mantine-primary-color-light);
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 1px;
+}
+
+/* The splitter is drawn only for a fine pointer (ScopesPanel), so there is no touch band: a finger uses the layout buttons. */
+.scopesGrid {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.scopeCell {
+  position: relative;
+  min-width: 0;
+}
+
+.scopeCanvas {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  background: var(--rb-ed-thumb-bg);
+}
+
+.scopeCaption {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: var(--rb-ed-chip-bg);
+  color: var(--rb-ed-studio-fg);
+  font-size: 12px;
+  line-height: 16px;
+  pointer-events: none;
+}
+
+/* A finger needs a 44 px target. */
+@media (pointer: coarse) {
+  .graphNode,
+  .graphCap {
+    width: auto;
+    min-width: 44px;
+    height: 44px;
+  }
+
+  .graphSegmentNodes {
+    min-height: 44px;
+  }
+
+  .graphLink {
+    margin-bottom: 22px;
+  }
+
+  .nodeRow,
+  .nodeName {
+    min-height: 44px;
+  }
+}

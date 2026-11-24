@@ -1,0 +1,167 @@
+{
+ "clip": "syn-scr-02",
+ "videoType": "screen",
+ "source": "synthetic",
+ "fps": 30,
+ "frames": 300,
+ "width": 960,
+ "height": 540,
+ "events": [
+  {
+   "id": "ev1",
+   "type": "move_start",
+   "frame": 7,
+   "region": [
+    696,
+    447,
+    24,
+    24
+   ],
+   "note": "cursor starts moving"
+  },
+  {
+   "id": "ev2",
+   "type": "text_in",
+   "frame": 20,
+   "region": [
+    200,
+    100,
+    143,
+    28
+   ],
+   "note": "code line one reaches half of its peak opacity"
+  },
+  {
+   "id": "ev3",
+   "type": "text_in",
+   "frame": 52,
+   "region": [
+    200,
+    135,
+    195,
+    28
+   ],
+   "note": "code line two reaches half of its peak opacity"
+  },
+  {
+   "id": "ev4",
+   "type": "hit",
+   "frame": 90,
+   "region": [
+    215,
+    112,
+    24,
+    24
+   ],
+   "note": "cursor click (ripple starts)"
+  },
+  {
+   "id": "ev5",
+   "type": "appear",
+   "frame": 98,
+   "region": [
+    330,
+    170,
+    260,
+    110
+   ],
+   "note": "autocomplete popup reaches half of its peak opacity"
+  },
+  {
+   "id": "ev6",
+   "type": "hit",
+   "frame": 100,
+   "region": [
+    215,
+    112,
+    24,
+    24
+   ],
+   "note": "cursor click (ripple starts)"
+  },
+  {
+   "id": "ev7",
+   "type": "disappear",
+   "frame": 153,
+   "region": [
+    330,
+    170,
+    260,
+    110
+   ],
+   "note": "autocomplete popup drops below half of its peak opacity"
+  },
+  {
+   "id": "ev8",
+   "type": "move_start",
+   "frame": 161,
+   "region": [
+    214,
+    112,
+    24,
+    24
+   ],
+   "note": "cursor starts moving"
+  },
+  {
+   "id": "ev9",
+   "type": "hit",
+   "frame": 182,
+   "region": [
+    130,
+    74,
+    24,
+    24
+   ],
+   "note": "cursor click (ripple starts)"
+  },
+  {
+   "id": "ev10",
+   "type": "transition",
+   "frame": 190,
+   "region": [
+    0,
+    70,
+    960,
+    470
+   ],
+   "note": "scene 1 cut: first frame of new scene"
+  },
+  {
+   "id": "ev11",
+   "type": "text_in",
+   "frame": 194,
+   "region": [
+    200,
+    100,
+    91,
+    28
+   ],
+   "note": "notes text reaches half of its peak opacity"
+  },
+  {
+   "id": "ev12",
+   "type": "transition",
+   "frame": 250,
+   "region": [
+    0,
+    70,
+    960,
+    470
+   ],
+   "note": "scene 2 cut: first frame of new scene"
+  },
+  {
+   "id": "ev13",
+   "type": "text_in",
+   "frame": 260,
+   "region": [
+    200,
+    120,
+    400,
+    30
+   ],
+   "note": "run result reaches half of its peak opacity"
+  }
+ ]
+}

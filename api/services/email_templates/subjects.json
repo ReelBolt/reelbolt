@@ -1,0 +1,58 @@
+{
+  "subjects": {
+    "en": {
+      "verify_email": "Confirm your ReelBolt email",
+      "reset_password": "Reset your ReelBolt password",
+      "welcome": "Welcome to ReelBolt",
+      "invite": "{{.InviterName}} invited you to {{.OrgName}} on ReelBolt",
+      "deletion_scheduled": "Your ReelBolt account is scheduled for deletion",
+      "export_ready": "Your ReelBolt data export is ready",
+      "low_balance": "Low credit balance for {{.OrgName}}",
+      "runner_paired": "A new runner was paired to {{.OrgName}}",
+      "job_succeeded": "Your video job finished: {{.ProjectName}}",
+      "job_failed": "Your video job failed: {{.ProjectName}}",
+      "file_created": "A file was added to {{.ProjectName}}",
+      "graphics_edited": "A thumbnail graphic was edited in {{.ProjectName}}",
+      "review_activity": "New review activity{{if .FileName}} on {{.FileName}}{{end}}",
+      "api_key_expiring": "Your API key {{.FileName}} expires soon",
+      "webhook_disabled": "Webhook disabled: {{.FileName}}",
+      "social_publishing": "{{.FileName}}",
+      "avatar_retention": "The avatar {{.FileName}} will be deleted in 7 days",
+      "marketing-confirm": "Confirm your ReelBolt email subscription",
+      "marketplace_notice": "An update on your community recipe",
+      "email_change_confirm": "Confirm the change of your ReelBolt sign-in email",
+      "email_change_done": "Your ReelBolt sign-in email was changed",
+      "operator_digest": "ReelBolt operator digest: {{if .Digest}}{{len .Digest.Groups}} failure group(s), {{.Digest.FeedbackCount}} feedback report(s){{end}}"
+    },
+    "it": {
+      "verify_email": "Conferma la tua email di ReelBolt",
+      "reset_password": "Reimposta la password di ReelBolt",
+      "welcome": "Ti diamo il benvenuto su ReelBolt",
+      "invite": "{{.InviterName}} ti ha invitato in {{.OrgName}} su ReelBolt",
+      "deletion_scheduled": "Il tuo account ReelBolt è in programma per l'eliminazione",
+      "export_ready": "L'esportazione dei tuoi dati ReelBolt è pronta",
+      "low_balance": "Crediti in esaurimento per {{.OrgName}}",
+      "runner_paired": "Un nuovo runner è stato collegato a {{.OrgName}}",
+      "job_succeeded": "Il tuo video è pronto: {{.ProjectName}}",
+      "job_failed": "Il tuo video non è riuscito: {{.ProjectName}}",
+      "file_created": "È stato aggiunto un file a {{.ProjectName}}",
+      "graphics_edited": "Una grafica della miniatura è stata modificata in {{.ProjectName}}",
+      "review_activity": "Nuova attività di revisione{{if .FileName}} su {{.FileName}}{{end}}",
+      "api_key_expiring": "La tua chiave API {{.FileName}} sta per scadere",
+      "webhook_disabled": "Webhook disattivato: {{.FileName}}",
+      "social_publishing": "{{.FileName}}",
+      "avatar_retention": "L'avatar {{.FileName}} verrà eliminato tra 7 giorni",
+      "marketing-confirm": "Conferma l'iscrizione alle email di ReelBolt",
+      "marketplace_notice": "Novità sulla tua ricetta della community",
+      "email_change_confirm": "Conferma la modifica dell'email di accesso a ReelBolt",
+      "email_change_done": "L'email di accesso a ReelBolt è stata modificata"
+    }
+  },
+  "footerNote": {
+    "it": "alpha pubblica. Possono esserci imperfezioni e le cose potrebbero cambiare."
+  },
+  "fallbackName": {
+    "en": "there",
+    "it": ""
+  }
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{.Subject}}</title></head>
+<body style="margin:0;padding:0;background:#f4f3f8;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1c1b22;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f8;padding:24px 0;"><tr><td align="center">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#ffffff;border-radius:8px;padding:32px;">
+<tr><td style="font-size:20px;font-weight:700;color:#6d28d9;padding-bottom:16px;">ReelBolt operator digest</td></tr>
+<tr><td style="font-size:14px;line-height:1.5;">
+{{with .Digest}}<p>Last {{.WindowHours}} hours (to {{.GeneratedAt}}).</p>
+<p><strong>Runs by final status</strong></p>
+<ul>{{range .Runs}}<li>{{.Label}}: {{.Count}}</li>{{else}}<li>none finished in the window</li>{{end}}</ul>
+<p><strong>Platform failures (refunded steps)</strong></p>
+<ul>{{range .Groups}}<li>{{.Code}} / {{.StepType}}: {{.Count}} step(s), {{.Organizations}} organization(s), first {{.First}}, last {{.Last}}</li>{{else}}<li>none</li>{{end}}</ul>
+{{if .Failures}}<p><strong>Latest failures</strong></p>
+<ul style="font-size:13px;">{{range .Failures}}<li>{{.Time}} {{.StepType}} {{.Code}} run {{.RunID}}: {{.Error}}</li>{{end}}{{if .FailuresOmitted}}<li>... and {{.FailuresOmitted}} more not listed</li>{{end}}</ul>{{end}}
+<p><strong>Feedback reports: {{.FeedbackCount}}</strong></p>
+<ul style="font-size:13px;">{{range .Feedback}}<li>{{.Time}} [{{.Kind}}] {{.Text}}</li>{{end}}</ul>{{end}}
+</td></tr>{{if .FooterNote}}<tr><td style="font-size:12px;color:#6b6a75;padding-top:24px;">{{.FooterNote}}</td></tr>{{end}}
+</table></td></tr></table></body></html>

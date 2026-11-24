@@ -1,0 +1,7 @@
+services:
+  inference:
+    environment:
+      Marketing__Campaigns__ProcessPollMs: "200"
+      Marketing__Campaigns__BrevoMinCallIntervalMs: "20"
+      Marketing__Campaigns__TestSendsPerHour: "1000"
+      Marketing__Campaigns__ResultsRefreshMinutes: "1"

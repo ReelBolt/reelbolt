@@ -1,0 +1,54 @@
+{
+  "form": {
+    "network": "We couldn't reach the server. Check your connection and try again.",
+    "fixFields": "Please fix the highlighted fields.",
+    "server": "Something went wrong on our end. Email us at <link>{email}</link> and we'll pick it up.",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "firstName": "First name (optional)",
+    "optional": "optional",
+    "topic": "Topic",
+    "message": "Message",
+    "enterpriseIntro": "For larger teams we can arrange the following. Each is available by arrangement, so tell us what you need and we will scope it with you.",
+    "enterpriseItems": {
+      "sso": "Single sign-on",
+      "capacity": "Dedicated capacity",
+      "selfHosted": "A self-hosted licence"
+    },
+    "byArrangement": "available by arrangement",
+    "website": "Website",
+    "sending": "Sending…",
+    "submit": "Send message",
+    "topics": {
+      "general": "General question",
+      "enterprise": "Enterprise",
+      "billing": "Billing",
+      "runner": "Rendering on my own computer"
+    },
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "nameLength": "Name must be between 2 and 100 characters.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "companyLength": "Company name must be 100 characters or fewer.",
+      "topicInvalid": "Please choose a topic from the list.",
+      "messageRequired": "Please enter a message.",
+      "messageLength": "Message must be between 20 and 5000 characters.",
+      "invalid": "Invalid submission."
+    }
+  },
+  "subscribeNotice": "Check your inbox to confirm your subscription.",
+  "page": {
+    "title": "Contact",
+    "intro": "Tell us what you want to make and what you have to make it from. We'll show you what ReelBolt does with it.",
+    "otherWays": "Other ways to reach us"
+  },
+  "thanks": {
+    "title": "Thanks, your message is on its way",
+    "body": "Someone from our team will read it and get back to you. Our target response time is {time}.",
+    "home": "Back to home",
+    "seeFeatures": "See what it does",
+    "sooner": "Need to reach us sooner?"
+  }
+}

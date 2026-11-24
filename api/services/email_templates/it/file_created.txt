@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+{{if .ActorName}}{{.ActorName}} ha aggiunto un file{{else}}È stato aggiunto un file{{end}} a {{.ProjectName}} (spazio di lavoro {{.OrgName}}).
+{{if .FileName}}
+File: {{.FileName}}
+{{end}}
+Vedi i file del progetto:
+
+{{.Link}}
+
+-- {{.FooterNote}}

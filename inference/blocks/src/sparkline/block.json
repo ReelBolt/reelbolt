@@ -1,0 +1,36 @@
+{
+  "id": "sparkline",
+  "version": "1.0.0",
+  "title": "Sparkline card",
+  "category": "charts",
+  "description": "Use for a small trend callout next to a metric: a compact card with the latest value and a self-drawing line.",
+  "tags": [
+    "chart",
+    "sparkline",
+    "trend",
+    "card",
+    "metric"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-sparkline",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      10,
+      30,
+      70
+    ]
+  },
+  "props": "{values: number[]; label?: string; valueFormat?: string /*',.0f'*/; color?: string /*'#f472b6'*/; textColor?: string; cardColor?: string; startFrame?: number /*5*/; durationInFrames?: number /*40*/; fontFamily?: string}",
+  "example": "import {Sparkline} from './blocks/sparkline/Sparkline.tsx';\n<Sparkline label=\"Signups\" values={[4, 6, 5, 9, 12, 11, 16]} />"
+}

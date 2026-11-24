@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ReelBolt Runner
+Comment=Run ReelBolt render jobs on this computer
+Exec=reelbolt-runner-desktop
+Icon=reelbolt-runner
+Terminal=false
+Categories=Utility;
+StartupNotify=false
+StartupWMClass=reelbolt-runner-desktop

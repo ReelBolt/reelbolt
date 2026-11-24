@@ -1,0 +1,529 @@
+/*
+ * control-shape-restyle T-001: dev-only preview styles.
+ *
+ * Shape geometry and colours come from the --rb-control-* tokens declared in web/app/global.css
+ * (variant A) and overridden per variant on [data-control-variant]. Page chrome uses Mantine's own
+ * tokens; the only local constants are --preview-* (layout of this preview, never a control shape).
+ *
+ * Mantine selectors are wrapped in :global() because this is a CSS module.
+ */
+
+.page {
+  --preview-min-col: 280px;
+  --preview-narrow-w: 120px;
+  --preview-wide-min-w: 280px;
+  --preview-hairline: 1px;
+  --preview-focus-w: 2px;
+  --preview-focus-offset: 4px;
+  --preview-metrics-gap: 2px;
+  --preview-edge-room: 12px;
+  min-height: 100dvh;
+  padding: var(--mantine-spacing-xl);
+  background: var(--rb-body);
+  color: var(--mantine-color-text);
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-sm);
+  max-width: 68ch;
+}
+
+.intro {
+  margin: 0;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+}
+
+.toggle {
+  display: flex;
+  gap: var(--mantine-spacing-xs);
+}
+
+.toggleButton {
+  min-width: var(--rb-control-hit);
+  min-height: var(--rb-control-hit);
+  padding-inline: var(--mantine-spacing-md);
+  border: var(--preview-hairline) solid var(--rb-border-strong);
+  border-radius: var(--rb-control-track-radius);
+  background: var(--rb-surface);
+  color: var(--mantine-color-text);
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-sm);
+  cursor: var(--rb-cursor-pointer);
+}
+
+.toggleButton[aria-pressed='true'] {
+  background: var(--mantine-color-violet-6);
+  border-color: var(--rb-control-focus);
+  color: var(--mantine-color-white);
+}
+
+.toggleButton:focus-visible {
+  outline: var(--preview-focus-w) solid var(--rb-control-focus);
+  outline-offset: var(--preview-focus-offset);
+}
+
+.section {
+  margin-top: var(--mantine-spacing-xl);
+  padding-top: var(--mantine-spacing-lg);
+  border-top: var(--preview-hairline) solid var(--rb-border);
+}
+
+.blurb {
+  max-width: 68ch;
+  margin: var(--mantine-spacing-xs) 0 0;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+}
+
+.grid {
+  display: grid;
+  /* min(100%, ...) keeps the minimum track smaller than the container on a phone; the
+     edge room absorbs the thumb's 44 px hit extension at the 100 % end. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--preview-min-col)), 1fr));
+  align-items: start;
+  gap: var(--mantine-spacing-xl) var(--mantine-spacing-lg);
+  margin-top: var(--mantine-spacing-lg);
+  padding-inline: var(--preview-edge-room);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  min-width: 0;
+}
+
+.controlLabel {
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.controlValue {
+  color: var(--mantine-color-dimmed);
+  font-weight: 400;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: var(--preview-metrics-gap) var(--mantine-spacing-md);
+  margin: 0;
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-xs);
+  color: var(--mantine-color-dimmed);
+}
+
+.metricRow {
+  display: contents;
+}
+
+.metrics dt {
+  font-weight: 500;
+}
+
+.metrics dd {
+  margin: 0;
+  color: var(--mantine-color-text);
+}
+
+.variantMetrics {
+  margin-top: var(--mantine-spacing-lg);
+  padding-inline: var(--preview-edge-room);
+}
+
+.metricsHeading {
+  margin: 0 0 var(--mantine-spacing-sm);
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.metricColumns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--preview-min-col)), 1fr));
+  gap: var(--mantine-spacing-lg);
+}
+
+.metricGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  min-width: 0;
+}
+
+.metricGroupLabel {
+  font-family: var(--rb-font-mono);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+}
+
+.shortRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--mantine-spacing-lg);
+  margin-top: var(--mantine-spacing-lg);
+  padding-inline: var(--preview-edge-room);
+}
+
+.shortCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+}
+
+.narrow {
+  width: var(--preview-narrow-w);
+}
+
+.wide {
+  width: 100%;
+  min-width: var(--preview-wide-min-w);
+}
+
+/* ---- Slider: the track is the skew carrier; bar, thumb and marks are its children. ---- */
+
+[data-control-variant] :global(.mantine-Slider-root),
+[data-control-variant] :global(.mantine-RangeSlider-root) {
+  /* Preview-only vars: the applied app rules on the same root derive these tokens from Mantine's
+     --slider-size, so reading them back here would create a custom-property cycle. */
+  --rb-control-track-h: var(--preview-track-h) !important;
+  --rb-control-track-radius: var(--preview-track-radius) !important;
+  --rb-control-thumb-radius: var(--preview-thumb-radius) !important;
+  --rb-control-thumb-size: var(--preview-thumb-size) !important;
+  --slider-size: var(--preview-track-h) !important;
+  --slider-thumb-size: var(--preview-thumb-size) !important;
+  --slider-radius: var(--preview-thumb-radius) !important;
+  height: var(--rb-control-hit);
+  min-height: var(--rb-control-hit);
+}
+
+/* The hit row: 44 px tall whatever the visual track height, with the track centred in it. */
+[data-control-variant] :global(.mantine-Slider-trackContainer),
+[data-control-variant] :global(.mantine-RangeSlider-trackContainer) {
+  height: var(--rb-control-hit);
+}
+
+[data-control-variant] :global(.mantine-Slider-track),
+[data-control-variant] :global(.mantine-RangeSlider-track) {
+  height: var(--rb-control-track-h);
+  transform: skewX(var(--rb-control-slant));
+  transform-origin: center;
+}
+
+[data-control-variant] :global(.mantine-Slider-track::before) {
+  background-color: var(--rb-control-track-bg);
+  border-radius: var(--rb-control-track-radius);
+}
+
+[data-control-variant] :global(.mantine-RangeSlider-track::before) {
+  background-color: var(--rb-control-track-bg);
+  border-radius: var(--rb-control-track-radius);
+}
+
+[data-control-variant] :global(.mantine-Slider-track[data-disabled]::before) {
+  background-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant] :global(.mantine-RangeSlider-track[data-disabled]::before) {
+  background-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant] :global(.mantine-Slider-bar),
+[data-control-variant] :global(.mantine-RangeSlider-bar) {
+  background-color: var(--rb-control-fill-bg);
+  border-radius: var(--rb-control-track-radius);
+}
+
+[data-control-variant] :global(.mantine-Slider-bar[data-disabled]),
+[data-control-variant] :global(.mantine-RangeSlider-bar[data-disabled]) {
+  background-color: var(--rb-control-fill-bg-disabled);
+}
+
+[data-control-variant] :global(.mantine-Slider-thumb),
+[data-control-variant] :global(.mantine-RangeSlider-thumb) {
+  width: var(--rb-control-thumb-size);
+  height: var(--rb-control-thumb-size);
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+  border-radius: var(--rb-control-thumb-radius);
+  background-color: var(--rb-control-thumb-bg);
+  box-shadow: none;
+}
+
+/* 44 px invisible extension of the thumb, so a finger can grab it without hitting the track. */
+[data-control-variant] :global(.mantine-Slider-thumb::after) {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--rb-control-hit);
+  height: var(--rb-control-hit);
+  transform: translate(-50%, -50%);
+}
+
+[data-control-variant] :global(.mantine-RangeSlider-thumb::after) {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--rb-control-hit);
+  height: var(--rb-control-hit);
+  transform: translate(-50%, -50%);
+}
+
+/* Mantine hides the disabled thumb entirely (Slider.css `.m_c9a9a60a[data-disabled]` is
+   display:none). The proposal keeps a muted knob instead, so disabled sliders keep the same
+   anatomy as disabled switches; the document records this as one required app override. */
+[data-control-variant] :global(.mantine-Slider-thumb[data-disabled]),
+[data-control-variant] :global(.mantine-RangeSlider-thumb[data-disabled]) {
+  display: flex;
+  background-color: var(--rb-control-track-bg);
+  border-width: calc(var(--rb-control-thumb-rim) / 2);
+  border-color: var(--rb-control-track-bg-disabled);
+  box-shadow: none;
+}
+
+/* Two-tone focus ring: a solid halo band next to the thumb (measured against the fill/track)
+   plus an outer outline (measured against the page). A single colour cannot clear the page, the
+   mid-gray track and the fill at once, so the two bands split the adjacency; the 2 px gap is the
+   offset. The ring is solid, never a glow-only cue. */
+[data-control-variant] :global(.mantine-Slider-thumb:focus-visible) {
+  outline: var(--preview-focus-w) solid var(--rb-control-focus);
+  outline-offset: var(--preview-focus-offset);
+  box-shadow: 0 0 0 var(--preview-focus-w) var(--rb-control-focus-halo);
+}
+
+[data-control-variant] :global(.mantine-RangeSlider-thumb:focus-visible) {
+  outline: var(--preview-focus-w) solid var(--rb-control-focus);
+  outline-offset: var(--preview-focus-offset);
+  box-shadow: 0 0 0 var(--preview-focus-w) var(--rb-control-focus-halo);
+}
+
+/* ---- Switch: skew the track; the thumb and the on/off label are its children. ---- */
+
+[data-control-variant] :global(.mantine-Switch-root) {
+  /* Preview-only vars, same reason as the slider root above: the applied app rules derive these
+     tokens from --switch-height on this element. */
+  --rb-control-switch-h: var(--preview-switch-h) !important;
+  --rb-control-switch-w: var(--preview-switch-w) !important;
+  --rb-control-switch-thumb: var(--preview-switch-thumb) !important;
+  --switch-height: var(--preview-switch-h) !important;
+  --switch-width: var(--preview-switch-w) !important;
+  --switch-thumb-size: var(--preview-switch-thumb) !important;
+  --switch-radius: var(--preview-switch-radius) !important;
+  --switch-track-label-padding: calc(
+    (var(--preview-switch-h) - var(--preview-switch-thumb)) / 2
+  ) !important;
+}
+
+/* The labelled row is the touch target: the track alone is smaller than 44 px. */
+[data-control-variant] :global(.mantine-Switch-body) {
+  align-items: center;
+  min-height: var(--rb-control-hit);
+}
+
+[data-control-variant] :global(.mantine-Switch-track) {
+  width: var(--rb-control-switch-w);
+  min-width: var(--rb-control-switch-w);
+  height: var(--rb-control-switch-h);
+  border-radius: var(--rb-control-switch-radius);
+  background-color: var(--rb-control-switch-off-bg);
+  transform: skewX(var(--rb-control-slant));
+  transform-origin: center;
+}
+
+[data-control-variant] :global(.mantine-Switch-input:checked + .mantine-Switch-track) {
+  background-color: var(--rb-control-switch-on-bg);
+}
+
+[data-control-variant] :global(.mantine-Switch-thumb) {
+  width: var(--rb-control-switch-thumb);
+  height: var(--rb-control-switch-thumb);
+  border-radius: var(--rb-control-switch-radius);
+  background-color: var(--rb-control-switch-thumb-bg);
+}
+
+[data-control-variant] :global(.mantine-Switch-input:focus-visible + .mantine-Switch-track) {
+  outline: var(--preview-focus-w) solid var(--rb-control-focus);
+  outline-offset: var(--preview-focus-offset);
+  box-shadow: 0 0 0 var(--preview-focus-w) var(--rb-control-focus-halo);
+}
+
+[data-control-variant] :global(.mantine-Switch-input:disabled + .mantine-Switch-track) {
+  background-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant] :global(.mantine-Switch-input:checked:disabled + .mantine-Switch-track) {
+  background-color: var(--rb-control-fill-bg-disabled);
+}
+
+[data-control-variant]
+  :global(.mantine-Switch-input:disabled + .mantine-Switch-track .mantine-Switch-thumb) {
+  background-color: var(--rb-control-track-bg);
+  border-style: solid;
+  border-width: calc(var(--rb-control-thumb-rim) / 2);
+  border-color: var(--rb-control-track-bg-disabled);
+  box-shadow: none;
+}
+
+/* Mantine paints disabled labels gray-5, 2.8:1 on the light page. Dimmed is 6.0:1 / 7.7:1. */
+[data-control-variant]
+  :global(.mantine-Switch-labelWrapper .mantine-Switch-label[data-disabled]) {
+  color: var(--mantine-color-dimmed);
+}
+
+/* ---- Variant B: blade. Variant C: capsule cut. Variant A is pinned here too now that the app
+   ships B as its default: the preview must keep showing the three proposal shapes unchanged. ---- */
+
+.section[data-control-variant='a'] {
+  --rb-control-slant: 8deg;
+  --rb-control-track-h: 16px;
+  --rb-control-track-radius: 4px;
+  --rb-control-thumb-size: 32px;
+  --rb-control-thumb-radius: 4px;
+  --rb-control-thumb-rim: 2px;
+  --rb-control-switch-w: 46px;
+  --rb-control-switch-h: 26px;
+  --rb-control-switch-radius: 6px;
+  --rb-control-switch-thumb: 20px;
+  --rb-control-glow: none;
+  --preview-track-h: 16px;
+  --preview-track-radius: 4px;
+  --preview-thumb-size: 32px;
+  --preview-thumb-radius: 4px;
+  --preview-switch-w: 46px;
+  --preview-switch-h: 26px;
+  --preview-switch-thumb: 20px;
+  --preview-switch-radius: 6px;
+}
+
+.section[data-control-variant='b'] {
+  --rb-control-slant: 15deg;
+  --rb-control-track-h: 18px;
+  --rb-control-track-radius: 3px;
+  --rb-control-thumb-size: 36px;
+  --rb-control-thumb-radius: 3px;
+  --rb-control-thumb-rim: 1px;
+  --rb-control-switch-w: 46px;
+  --rb-control-switch-h: 26px;
+  --rb-control-switch-radius: 3px;
+  --rb-control-switch-thumb: 18px;
+  --rb-control-glow: 0 0 10px 2px color-mix(in srgb, var(--rb-control-focus) 40%, transparent);
+  --preview-track-h: 18px;
+  --preview-track-radius: 3px;
+  --preview-thumb-size: 36px;
+  --preview-thumb-radius: 3px;
+  --preview-switch-w: 46px;
+  --preview-switch-h: 26px;
+  --preview-switch-thumb: 18px;
+  --preview-switch-radius: 3px;
+}
+
+/* Variant B's 1 px rim: the slider track surface and fill, and the switch thumb, so "track and
+   thumb" is true on both controls. box-sizing keeps the rim inside the 18 px track and the 18 px
+   switch thumb, so the measured geometry and the drag mapping are unchanged. The pseudo-element
+   rule is written alone: Turbopack drops a `:global(...::before)` selector from a grouped list. */
+[data-control-variant='b'] :global(.mantine-Slider-track::before) {
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+}
+
+[data-control-variant='b'] :global(.mantine-RangeSlider-track::before) {
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+}
+
+[data-control-variant='b'] :global(.mantine-Slider-bar),
+[data-control-variant='b'] :global(.mantine-RangeSlider-bar) {
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+}
+
+[data-control-variant='b'] :global(.mantine-Switch-thumb),
+[data-control-variant='b'] :global(.mantine-RangeSlider-thumb) {
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+}
+
+[data-control-variant='b'] :global(.mantine-Switch-root .mantine-Switch-track) {
+  border: var(--rb-control-thumb-rim) solid var(--rb-control-thumb-rim-color);
+}
+
+[data-control-variant='b'] :global(.mantine-Switch-track) {
+  overflow: visible;
+}
+
+[data-control-variant='b'] :global(.mantine-Slider-thumb:hover),
+[data-control-variant='b'] :global(.mantine-Slider-thumb[data-dragging]),
+[data-control-variant='b'] :global(.mantine-RangeSlider-thumb:hover),
+[data-control-variant='b'] :global(.mantine-RangeSlider-thumb[data-dragging]) {
+  box-shadow: var(--rb-control-glow);
+}
+
+/* The focus ring comes with the glow, never instead of it. */
+[data-control-variant='b'] :global(.mantine-Slider-thumb:focus-visible) {
+  box-shadow:
+    0 0 0 var(--preview-focus-w) var(--rb-control-focus-halo),
+    var(--rb-control-glow);
+}
+
+[data-control-variant='b'] :global(.mantine-RangeSlider-thumb:focus-visible) {
+  box-shadow:
+    0 0 0 var(--preview-focus-w) var(--rb-control-focus-halo),
+    var(--rb-control-glow);
+}
+
+[data-control-variant='b'] :global(.mantine-Switch-root:hover .mantine-Switch-thumb),
+[data-control-variant='b']
+  :global(.mantine-Switch-input:focus-visible + .mantine-Switch-track .mantine-Switch-thumb) {
+  box-shadow: var(--rb-control-glow);
+}
+
+/* Disabled B keeps the rim, but muted: the accent rim is a live-state cue. */
+[data-control-variant='b'] :global(.mantine-Slider-track[data-disabled]::before) {
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant='b'] :global(.mantine-RangeSlider-track[data-disabled]::before) {
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant='b'] :global(.mantine-Slider-bar[data-disabled]),
+[data-control-variant='b'] :global(.mantine-RangeSlider-bar[data-disabled]) {
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+[data-control-variant='b'] :global(.mantine-Switch-input:disabled + .mantine-Switch-track) {
+  border-color: var(--rb-control-track-bg-disabled);
+}
+
+.section[data-control-variant='c'] {
+  --rb-control-slant: 5deg;
+  --rb-control-track-h: 16px;
+  --rb-control-track-radius: 999px;
+  --rb-control-thumb-size: 32px;
+  --rb-control-thumb-radius: 999px;
+  --rb-control-thumb-rim: 2px;
+  --rb-control-switch-w: 48px;
+  --rb-control-switch-h: 26px;
+  --rb-control-switch-radius: 999px;
+  --rb-control-switch-thumb: 20px;
+  --rb-control-glow: none;
+  --preview-track-h: 16px;
+  --preview-track-radius: 999px;
+  --preview-thumb-size: 32px;
+  --preview-thumb-radius: 999px;
+  --preview-switch-w: 48px;
+  --preview-switch-h: 26px;
+  --preview-switch-thumb: 20px;
+  --preview-switch-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-control-variant] :global(.mantine-Slider-thumb),
+  [data-control-variant] :global(.mantine-RangeSlider-thumb),
+  [data-control-variant] :global(.mantine-Switch-thumb),
+  [data-control-variant] :global(.mantine-Switch-track) {
+    transition: none !important;
+  }
+}

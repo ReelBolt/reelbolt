@@ -1,0 +1,70 @@
+{
+  "name": "caption-look-unknown-refused",
+  "description": "A caption look outside the catalogue is refused.",
+  "document": {
+    "schemaVersion": 2,
+    "id": "6f1b2c3d-0000-4000-8000-000000000002",
+    "projectId": "6f1b2c3d-0000-4000-8000-000000000001",
+    "name": "Contract fixture",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "type": "caption",
+            "id": "6f1b2c3d-0000-4000-8000-0000000000b2",
+            "name": "Caption",
+            "recordIn": 0,
+            "recordOut": 90,
+            "text": "Hello",
+            "enabled": true,
+            "language": "en",
+            "look": "neon"
+          }
+        ]
+      },
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a2",
+        "kind": "audio",
+        "name": "Audio",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": []
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": false,
+    "errorPath": "tracks[0].items[0].look"
+  }
+}

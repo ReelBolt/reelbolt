@@ -1,0 +1,9 @@
+Hello {{.Name}},
+
+Your ReelBolt account is scheduled for deletion on {{.DeletionDate}}. Until then you can change your mind: sign in and the deletion is cancelled.
+
+{{.Link}}
+
+After that date your projects, files and workflows are permanently removed. Billing records we must keep by law are retained without your email address.
+
+-- {{.FooterNote}}

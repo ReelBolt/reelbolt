@@ -1,0 +1,9 @@
+Hello {{.Name}},
+
+Your ReelBolt data export is ready:
+
+{{.Link}}
+
+The download link expires in {{.ExpiresIn}}.
+
+-- {{.FooterNote}}

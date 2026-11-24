@@ -1,0 +1,34 @@
+{
+  "id": "char-stagger",
+  "version": "1.0.0",
+  "title": "Character stagger",
+  "category": "titles",
+  "description": "Letters pop in one by one with a springy overshoot; use for playful or punchy short titles.",
+  "tags": [
+    "title",
+    "letters",
+    "spring",
+    "kinetic type"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-char-stagger",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      16,
+      40
+    ]
+  },
+  "props": "{text: string; color?: string /*'#ffffff'*/; fontSize?: number /*110*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/; fontWeight?: number /*700*/; startFrame?: number /*0*/; staggerFrames?: number /*2*/}",
+  "example": "import {CharStagger} from './blocks/char-stagger/CharStagger.tsx';\n<CharStagger text=\"Hello world\" />"
+}

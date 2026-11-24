@@ -1,0 +1,20 @@
+# Code owners. With "Require review from Code Owners" on in the main ruleset, a change to any path
+# below needs an approving review from an owner. See docs/ci.md, "Protecting the scanner itself".
+# A pull request can edit the scanner that checks it, so the scanner and the workflows are owned.
+
+/.github/                     @vecchiotom
+/.gitleaks.toml               @vecchiotom
+/.gitleaksignore              @vecchiotom
+**/.gitattributes             @vecchiotom
+
+# The Claude Code plugin is published from here to its mirror repository: a change reaches users' machines.
+/plugins/reelbolt/            @vecchiotom
+
+# Licence, contributor agreement, trademark and notices are legal text.
+/LICENSE                      @vecchiotom
+/COMMERCIAL.md                @vecchiotom
+/CLA.md                       @vecchiotom
+/TRADEMARK.md                 @vecchiotom
+/THIRD_PARTY_NOTICES.md       @vecchiotom
+/SECURITY.md                  @vecchiotom
+/docs/third-party/            @vecchiotom

@@ -1,0 +1,64 @@
+name: CLA
+
+# Contributor License Agreement check (see CLA.md and CONTRIBUTING.md).
+#
+# pull_request_target is REQUIRED by contributor-assistant/github-action: it must run in the base
+# repository to write signatures, which a plain pull_request run from a fork cannot do. That event
+# also gets a write token and runs on the base branch's workflow file, so this workflow is built
+# to be harmless to untrusted pull requests:
+#   - it never checks out the pull request and never runs its code, scripts or workflow files;
+#   - the one third-party action is pinned to a full commit SHA and reads the PR through the API;
+#   - workflow-level permissions are empty; the single job asks for the minimum the action needs;
+#   - it uses only the automatic GITHUB_TOKEN (no repository secrets, no personal access token).
+#
+# Signatures are stored on the branch `cla-signatures` of THIS repository
+# (signatures/cla.json, content {"signedContributors": []} when empty). That branch must exist and must not be
+# protected. One-time setup after the first push of the default branch: see the repository maintainers (the setup is not published).
+# Then make "CLA" a required status check for the default branch.
+
+on:
+  pull_request_target:
+    types: [opened, closed, synchronize]
+  issue_comment:
+    types: [created]
+
+permissions: {}
+
+concurrency:
+  group: cla-${{ github.event.pull_request.number || github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  cla:
+    name: CLA
+    # Not on forks of the project, and for comments only on pull requests with the two known phrases.
+    if: >-
+      github.event.repository.fork == false &&
+      (github.event_name == 'pull_request_target' ||
+       (github.event.issue.pull_request &&
+        (github.event.comment.body == 'recheck' ||
+         github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write        # re-run the check after a signature comment
+      contents: write       # commit the signature file to the cla-signatures branch
+      pull-requests: write  # comment on the pull request and lock it after merge
+      statuses: write       # report the CLA status
+    steps:
+      - name: Check or collect the CLA signature
+        uses: contributor-assistant/github-action@ca4a40a7d1004f18d9960b404b97e5f30a505a08 # v2.6.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path-to-document: https://github.com/${{ github.repository }}/blob/${{ github.event.repository.default_branch }}/CLA.md
+          path-to-signatures: signatures/cla.json
+          branch: cla-signatures
+          allowlist: dependabot[bot],github-actions[bot],vecchiotom # the project owner is the licensor, not a contributor
+          lock-pullrequest-aftermerge: "true"
+          custom-notsigned-prcomment: >-
+            Thank you for your contribution. Before we can merge it, please read the
+            [Contributor License Agreement](https://github.com/${{ github.repository }}/blob/${{ github.event.repository.default_branch }}/CLA.md)
+            and sign it once by posting the sentence below as a comment on this pull request.
+            Your signature covers all your future contributions. Contributing on behalf of a
+            company? See the corporate note at the end of the CLA.

@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "type": "llm.request",
+  "id": "01J9ZQ0000000000000LR0002",
+  "payload": {
+    "requestId": "b8d2f4a1-7c3e-4a6b-8e21-5f9a0c4d6e12",
+    "method": "POST",
+    "path": "/v1/embeddings",
+    "body": "{\"model\":\"nomic-embed-text\",\"input\":[\"first passage\",\"second passage\"]}",
+    "stream": false,
+    "timeoutSec": 120
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "editor-thumbnail-b.aiPicker.title": "Tool titles/descriptions, group titles, operation labels, credit lines and blocker text come from lib/editor/*.ts (outside this lane) and stay English until those are extracted.",
+  "editor-thumbnail-b.text.hint": "Validation problems shown in the yellow alert come from validateTextContent in lib/editor/text-content.ts (outside this lane), still English.",
+  "editor-media.smartBin.matchesNow": "Summary line before this comes from describeRule in lib/editing/media/pool-browse.ts (outside this lane), still English.",
+  "editor-media.annotation.flag": "'Flag' (verb/toggle) rendered as 'Segnala'; check against the media-flag wording elsewhere.",
+  "editor-media.metadata.empty": "Values (codec names, durations, bitrates, NOT_PROBED / NOT_ANALYSED labels) come from lib/editing/media/format.ts (outside this lane) and stay English.",
+  "editor-media.pool.smartBinFilter": "Refers to the root bin 'All media' (BinTree label, translated 'Tutti i media'); keep both in sync.",
+  "editor-media.pool.mediaPool": "'Pool' kept as an editor term; alternative 'Libreria dei media'.",
+  "editor-media.bins.matches": "formatItemCount, smartBinRefusal, drop-plan reasons and row.kind are English from lib/editing/media/* (outside this lane).",
+  "editor-media.bins.title": "'Bin' translated 'raccoglitore' (Premiere IT wording); not in glossary, confirm.",
+  "editor-media.bins.smart": "Badge 'smart' kept as-is in Italian."
+}

@@ -1,0 +1,12 @@
+{
+  "name": "reelbolt-runner-tray-icons",
+  "private": true,
+  "type": "module",
+  "description": "Rasterises brand/tray-template.svg into the tray PNGs the shell embeds. Not part of any build: run by hand, output committed.",
+  "scripts": {
+    "generate": "node generate.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.35.5"
+  }
+}

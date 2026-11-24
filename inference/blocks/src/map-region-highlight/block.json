@@ -1,0 +1,38 @@
+{
+  "id": "map-region-highlight",
+  "version": "1.0.0",
+  "title": "Map region highlight",
+  "category": "maps",
+  "description": "Use to call out a country by ISO code on a world map: it lights up and the camera eases toward it (offline). The label sits on the country.",
+  "tags": [
+    "map",
+    "country",
+    "region",
+    "highlight",
+    "world"
+  ],
+  "requires": [
+    "remotion",
+    "react",
+    "d3"
+  ],
+  "sharedFiles": [
+    "_shared/geo.ts",
+    "_shared/worldData.ts",
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-map-region-highlight",
+    "durationInFrames": 90,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      30,
+      70
+    ]
+  },
+  "props": "{code?: string /*'ITA' (ISO alpha-3 or alpha-2)*/; label?: string /*country name*/; zoom?: number /*0.5*/; landColor?: string; strokeColor?: string; highlightColor?: string /*'#38bdf8'*/; textColor?: string; startFrame?: number /*10*/; durationInFrames?: number /*40*/; fontFamily?: string}",
+  "example": "import {MapRegionHighlight} from './blocks/map-region-highlight/MapRegionHighlight.tsx';\n<MapRegionHighlight code=\"BRA\" label=\"Brazil\" zoom={0.6} />"
+}

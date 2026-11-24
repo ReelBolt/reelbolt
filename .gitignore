@@ -1,0 +1,125 @@
+# Environment
+# Every .env variant (.env.local, .env.bak, .env.production, web/.env.local ...) holds real values;
+# only the template is source. The compose templates infra/compose/env.*.example do not start with
+# a dot, so they are not matched.
+.env
+.env*
+!.env.example
+# Key material never belongs in the tree, whatever directory it was generated in (the runner
+# release key is created OUTSIDE the checkout, see runner/build/README.md; this is the backstop).
+*.key
+*.pem
+*.pfx
+*.p12
+# Synthetic staging accounts from infra/scripts/staging-seed-orgs.sh: generated passwords.
+staging-accounts.json
+*.staging-accounts.json
+# Garage's live RPC/admin secrets — generated locally, see garage/garage.toml.example
+garage/garage.toml
+
+# Go
+/api/reelbolt
+/api/reelbolt.exe
+/sandbox/sandbox
+/sandbox/sandbox.exe
+
+# .NET
+inference/**/bin/
+inference/**/obj/
+inference/**/*.user
+
+# Node / Next.js
+# Dependencies always come from npm ci/install against the lockfile, never
+# from the tree (sandbox/template/node_modules was once committed: ~560 MB).
+node_modules/
+web/node_modules/
+web/.next/
+web/out/
+site/node_modules/
+site/.next/
+site/out/
+# The desktop runner's local build output (runner/build/desktop-local.sh): the
+# binaries, the .deb and the tarball. Release artifacts come from the release
+# workflow, not from the tree.
+runner/build/out/
+# The Wails host embeds this bundle; build.mjs regenerates it.
+runner/cmd/reelbolt-runner-desktop/dist/
+# TypeScript incremental build cache — a local build artifact, never committed.
+*.tsbuildinfo
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.swp
+*~
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Claude Code
+.claude/*
+# The shared project agent setting is committed
+!.claude/settings.json
+
+# QDrant
+# docker-compose.yml bind-mounts ./data/qdrant; its raft state is local runtime data.
+data/
+
+# On-host release state and key material (the release freeze procedure,
+# docs/tls.md "Serving reelbolt.ai from the two boxes"): a box's record files and the
+# operator's Origin CA certificate directory must never be committed.
+.deploy.env
+.deploy.sha
+.deploy.prev
+.deploy/
+/certs/
+
+# WP X1 load/cost test artifacts (infra/loadtest/x1-run.sh writes one report pair per run)
+test-results/x1/
+# Playwright run state (.last-run.json etc.) is local output, never source.
+test-results/
+playwright-report/
+
+# Remotion bundle output (`remotion bundle`): contains Remotion's own code, never committed.
+/sandbox/template/build/
+
+# Local scratch helpers (token minters, exported workflow dumps): never source.
+/jwt_gen.py
+/current_workflow.json
+
+# Local package caches and agent scratch space (never source)
+.dsh-*/
+.nuget-packages/
+.nuget-http-cache/
+.reelforge-scratch/
+.scratch-mgr/
+.t2*/
+
+# Isolated e2e stacks (e2e/scripts/up-isolated.sh): generated secrets, garage.toml, seeded users.
+e2e/.stack/
+
+# Local gate artifacts (infra/scripts/local-gate.sh). A gate run must leave `git status` clean:
+# it writes a transcript, one Go coverage profile per module, and a dotnet TestResults directory.
+# None of these is source, and none may be committed.
+local-gate.log
+coverage.out
+inference/TestResults/
+inference/**/TestResults/
+
+# A token saved next to a checkout on the production box (infra/scripts/post-release-hook.sh)
+.release-record-token
+
+# Local scratch (e.g. perf credentials)
+.local/
+
+# Private keys for the runner-gateway internal TLS link
+/certs/
+
+# Cloudflare CLI cache (account id, owner email): never commit
+.cloudflare/
+
+# Local git worktrees
+.worktrees/

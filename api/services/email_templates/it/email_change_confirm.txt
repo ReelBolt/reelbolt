@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+Un amministratore ha chiesto di cambiare l'email che usi per accedere a ReelBolt in {{.NewEmail}}. Non cambia nulla finché non confermi.
+
+Apri questa pagina per confermare la modifica o annullarla:
+
+{{.Link}}
+
+Questo link scade tra {{.ExpiresIn}} e si può usare una sola volta. Se non te lo aspettavi, non confermare. Annulla la richiesta in quella pagina, oppure ignora questa email.
+
+-- {{.FooterNote}}

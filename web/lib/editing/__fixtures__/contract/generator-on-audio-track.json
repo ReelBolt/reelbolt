@@ -1,0 +1,68 @@
+{
+  "name": "generator-on-audio-track",
+  "description": "A picture-only item (generator clip) cannot sit on an audio track (audit d1 N5).",
+  "document": {
+    "schemaVersion": 2,
+    "id": "6f1b2c3d-0000-4000-8000-000000000002",
+    "projectId": "6f1b2c3d-0000-4000-8000-000000000001",
+    "name": "Contract fixture",
+    "settings": {
+      "width": 1920,
+      "height": 1080,
+      "rate": {
+        "num": 30,
+        "den": 1
+      },
+      "sampleRate": 48000,
+      "pixelAspect": {
+        "num": 1,
+        "den": 1
+      },
+      "aspectPolicy": "fit",
+      "startTimecodeFrames": 0
+    },
+    "tracks": [
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a1",
+        "kind": "video",
+        "name": "Video",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": []
+      },
+      {
+        "id": "6f1b2c3d-0000-4000-8000-0000000000a2",
+        "kind": "audio",
+        "name": "Audio",
+        "color": null,
+        "height": 100,
+        "locked": false,
+        "enabled": true,
+        "mute": false,
+        "solo": false,
+        "busId": null,
+        "items": [
+          {
+            "type": "generatorClip",
+            "id": "6f1b2c3d-0000-4000-8000-0000000000b1",
+            "name": "Bars",
+            "recordIn": 0,
+            "recordOut": 90,
+            "generatorType": "bars",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "markers": []
+  },
+  "expected": {
+    "valid": false,
+    "errorPath": "tracks[1].items[0]"
+  }
+}

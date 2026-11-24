@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "type": "llm.error",
+  "id": "01J9ZQ0000000000000LX0001",
+  "payload": {
+    "requestId": "a4c7e3f2-6b1d-4f0a-9c55-2d8e1b7a3c90",
+    "code": "busy",
+    "message": "the runner is already serving its maximum number of requests"
+  }
+}

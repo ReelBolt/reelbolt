@@ -1,0 +1,104 @@
+{
+  "deliver": {
+    "statusWord": {
+      "Queued": "In attesa",
+      "Running": "In render",
+      "Passed": "Completato",
+      "Failed": "Non completato",
+      "Cancelled": "Interrotto"
+    },
+    "fitWarning": "Questa forma ritaglia l'immagine o aggiunge bande nere: la tua timeline è {aspect} e {format} no.",
+    "statusLine": {
+      "latest": "Ultimo render: la tua ultima modifica",
+      "behind": "Ultimo render: prima delle tue ultime modifiche ({count, plural, one {# modifica} other {# modifiche}} da allora)"
+    },
+    "estimate": {
+      "credits": "Circa {credits, number} {credits, plural, one {credito} other {crediti}}",
+      "withMinutes": "{credits}, circa {minutes, number} min",
+      "underMinute": "{credits}, meno di 1 min"
+    },
+    "missing": "{missing, plural, one {Ti serve ancora # credito} other {Ti servono ancora # crediti}}",
+    "saveFailure": {
+      "conflict": "Questa timeline è stata modificata altrove, quindi le tue modifiche qui non sono salvate.",
+      "offline": "Sei offline, quindi le tue ultime modifiche non sono ancora salvate.",
+      "saving": "Le tue ultime modifiche sono ancora in salvataggio. Riprova tra un attimo.",
+      "generic": "Non è stato possibile salvare le tue ultime modifiche."
+    },
+    "refusal": {
+      "notConnected": "Non è stato possibile avviare il render. Controlla la connessione e riprova.",
+      "unreadable": "Non è stato possibile leggere le impostazioni del render. Ricarica la pagina e riprova.",
+      "needCredits": "{missing, plural, one {Per questo render ti serve ancora # credito.} other {Per questo render ti servono ancora # crediti.}}",
+      "notEnoughCredits": "Non hai abbastanza crediti per questo render.",
+      "planLacks": "Il tuo piano non include {feature, select, none {questo formato di render} other {questa opzione di render ({feature})}}. Scegli un altro formato o passa a un piano che la include.",
+      "forbidden": "Non puoi avviare un render su questa timeline.",
+      "notFound": "Non è stato possibile trovare questa timeline. Potrebbe essere stata eliminata.",
+      "tooMany": "Ci sono troppe esecuzioni in corso. Aspetta che una finisca, poi avvia di nuovo il render.",
+      "serverError": "Non è stato possibile avviare il render per un problema da parte nostra. Riprova tra un attimo.",
+      "startFailed": "Non è stato possibile avviare il render. Riprova tra un attimo."
+    },
+    "notes": {
+      "kind": {
+        "MediaClip": "Clip",
+        "TitleClip": "Titolo",
+        "GeneratorClip": "Generatore",
+        "InsertClip": "Inserto",
+        "Caption": "Sottotitolo",
+        "Transition": "Transizione",
+        "CompoundClip": "Clip composta",
+        "MulticamClip": "Clip multicamera",
+        "AdjustmentClip": "Clip di regolazione"
+      },
+      "skippedLine": "{prefix}: {message}",
+      "skippedPart": "{count, plural, one {# elemento è stato escluso da questo render} other {# elementi sono stati esclusi da questo render}}",
+      "warningsPart": "{count, plural, one {# nota} other {# note}}",
+      "summaryBoth": "{skipped} · {warnings}"
+    },
+    "failureFallback": "Questo render non è stato completato. Controlla che i media della tua timeline siano ancora nel progetto, poi riprova.",
+    "sizeLine": {
+      "aboutMb": "Circa {size} MB",
+      "aboutGb": "Circa {size} GB"
+    }
+  },
+  "shell": {
+    "refusalTitle": "Modifica rifiutata"
+  },
+  "panels": {
+    "versions": {
+      "rule": "I salvataggi automatici vengono conservati per 30 giorni. Dai un nome a una versione per tenerla per sempre.",
+      "cause": {
+        "named": "Versione con nome",
+        "beforeRestore": "Prima del ripristino",
+        "beforeRender": "Prima di un render",
+        "beforeProposal": "Prima di un suggerimento AI",
+        "duplicate": "Copiata da un'altra timeline",
+        "import": "Importata",
+        "original": "Versione originale",
+        "auto": "Punto di salvataggio automatico"
+      },
+      "retention": {
+        "forever": "conservata per sempre",
+        "today": "eliminata oggi",
+        "inDays": "{days, plural, one {eliminata tra # giorno} other {eliminata tra # giorni}}"
+      },
+      "session": {
+        "today": "Oggi",
+        "yesterday": "Ieri",
+        "label": "{day} {range}"
+      }
+    }
+  },
+  "phone": {
+    "readiness": {
+      "processing": "Anteprima in elaborazione",
+      "ready": "Pronto",
+      "notReady": "Anteprima non pronta: puoi comunque aggiungerlo"
+    },
+    "upload": {
+      "queued": "In attesa di caricamento",
+      "uploading": "Caricamento al {progress, number}%",
+      "done": "Aggiunto",
+      "error": "Non caricato",
+      "quota": "Non caricato: il tuo spazio è esaurito"
+    }
+  }
+}

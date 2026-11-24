@@ -1,0 +1,274 @@
+{
+  "account": "Account",
+  "meta": {
+    "usage": "Utilizzo",
+    "notifications": "Notifiche",
+    "data": "I tuoi dati"
+  },
+  "appearance": {
+    "title": "Aspetto",
+    "description": "Come appare la dashboard. Viene salvato in questo browser, quindi non ti segue su un altro dispositivo.",
+    "auto": "Segui il sistema",
+    "light": "Chiaro",
+    "dark": "Scuro",
+    "ariaLabel": "Combinazione di colori",
+    "hint": "Il pulsante con sole e luna nella barra in alto imposta direttamente Chiaro o Scuro. Scegli \"Segui il sistema\" qui per tornare al tema del tuo sistema."
+  },
+  "storage": {
+    "title": "Spazio di archiviazione",
+    "description": "Lo spazio usato dai file di questo spazio di lavoro, in tutti i progetti. Contano i file sincronizzati dal tuo computer o dal cloud, e anche i risultati di agenti e flussi di lavoro.",
+    "seePlans": "Vedi i piani",
+    "hint": "Elimina i file che non ti servono più, oppure passa a un piano più grande.",
+    "loading": "Sto leggendo l'uso dello spazio…",
+    "failed": "Non riusciamo a leggere l'uso dello spazio. Riprova."
+  },
+  "displayName": {
+    "saved": "Nome salvato.",
+    "saveFailed": "Non siamo riusciti a salvare il nome.",
+    "label": "Il tuo nome",
+    "description": "Compare nei saluti. Da 1 a 100 caratteri.",
+    "save": "Salva nome"
+  },
+  "data": {
+    "title": "I tuoi dati",
+    "breadcrumbAccount": "Account",
+    "intro": "Scarica una copia di tutto ciò che ReelBolt conserva su di te, oppure chiudi il tuo account."
+  },
+  "mcp": {
+    "title": "Strumenti di amministrazione via MCP",
+    "description": "Permette a un agente collegato tramite MCP di vedere e usare i {count} strumenti di amministrazione. Conta solo se hai già questa autorità. Disattivato di default.",
+    "saveFailed": "Non siamo riusciti a salvare. La modifica non è stata applicata.",
+    "loadFailed": "Non riusciamo a caricare le tue impostazioni MCP. Riprova.",
+    "switchLabel": "Consenti gli strumenti di amministrazione via MCP",
+    "stateOn": "Attivo: un agente MCP può usare gli strumenti di amministrazione.",
+    "stateOff": "Disattivato: un agente MCP non può usare gli strumenti di amministrazione."
+  },
+  "marketing": {
+    "title": "Email di marketing",
+    "description": "Novità sul prodotto, consigli e offerte. Le email sull'account e sulla fatturazione le inviamo comunque.",
+    "status": {
+      "optedInOn": "Hai accettato le email di marketing il {date}.",
+      "optedIn": "Hai accettato le email di marketing.",
+      "pending": "Aspettiamo la tua conferma dalla posta in arrivo. Non inviamo nulla finché non confermi.",
+      "withdrawnOn": "Ti sei disiscritto il {date}.",
+      "withdrawn": "Sei disiscritto.",
+      "none": "Non ti sei iscritto alle email di marketing."
+    },
+    "errors": {
+      "unavailable": "Al momento non possiamo attivare le email di marketing. Riprova tra un attimo.",
+      "wordingChanged": "Il testo di questa opzione è appena cambiato. Rileggilo e attivala di nuovo se vuoi ancora riceverle.",
+      "subscribeFailed": "Non è andata a buon fine. Non è stato cambiato nulla.",
+      "unsubscribeFailed": "Non siamo riusciti a disiscriverti. Riprova."
+    },
+    "subscribed": "Iscritto",
+    "notSubscribed": "Non iscritto",
+    "verifyEmail": "Verifica il tuo indirizzo email per gestire le email di marketing.",
+    "readFailed": "Al momento non riusciamo a leggere la tua preferenza sulle email di marketing. Ogni email di marketing ha comunque un link per disiscriversi.",
+    "reading": "Sto leggendo la tua preferenza…"
+  },
+  "export": {
+    "title": "Scarica i tuoi dati",
+    "description": "Un file zip con il tuo account, i progetti, i file e le esecuzioni del tuo spazio di lavoro personale, le chat con l'assistente e lo storico della fatturazione.",
+    "checking": "Controllo se esiste una copia dei tuoi dati",
+    "unavailable": "Su questo server non è possibile scaricare una copia dei tuoi dati. Chiedine una a chi lo gestisce.",
+    "preparingTitle": "Stiamo preparando il tuo file",
+    "preparingBody": "Può volerci qualche minuto se hai molti filmati. Ti mandiamo un link via email quando è pronto, e compare anche qui. Puoi lasciare questa pagina.",
+    "ready": "{previous, select, yes {La copia precedente} other {L'ultima copia}} {made, select, none {è pronta} other {è stata creata il {made}}}{size, select, none {} other { ({size})}}.{until, select, none {} other { Puoi scaricarla fino al {until}.}}",
+    "background": "Prepariamo il file in background e ti mandiamo un link via email. Puoi richiedere una copia al giorno.",
+    "checkFailed": "Non siamo riusciti a controllare se esiste una copia precedente.",
+    "tooSoon": "Puoi richiedere una copia al giorno. La prossima sarà possibile {unit, select, hours {tra {n, plural, one {# ora} other {# ore}}} other {tra {n, plural, one {# minuto} other {# minuti}}}}.",
+    "requestFailed": "Non siamo riusciti ad avviare la tua copia. Riprova tra un attimo.",
+    "downloadFailed": "Non siamo riusciti ad avviare il download. Riprova tra un attimo.",
+    "expired": "Questa copia è scaduta. Richiedine una nuova.",
+    "download": "Scarica i tuoi dati (zip)",
+    "requestNew": "Richiedi una nuova copia",
+    "request": "Richiedi una copia"
+  },
+  "deleteAccount": {
+    "title": "Elimina account",
+    "description": "Chiudi il tuo account ReelBolt e rimuovi tutto ciò che contiene.",
+    "summary": "Verrai disconnesso subito da tutti i dispositivi, e i tuoi progetti, file, esecuzioni e chat vengono rimossi dopo {days} giorni. Accedi in qualsiasi momento prima di allora e l'eliminazione viene annullata: non perdi nulla.",
+    "notes": "Se sei l'unico proprietario di un team che ha ancora altri membri, passa prima la gestione del team a qualcun altro. Un piano a pagamento non viene annullato automaticamente: annullalo da <link>Piano e fatturazione</link> → Annulla piano prima di andare. Vuoi una copia dei tuoi dati? Scaricala prima, qui sopra.",
+    "openButton": "Elimina account…",
+    "modalTitle": "Eliminare il tuo account?",
+    "modalBody": "L'eliminazione del tuo account verrà programmata e uscirai da ogni dispositivo. Hai {days} giorni per cambiare idea accedendo di nuovo.",
+    "passwordLabel": "La tua password",
+    "passwordHint": "Per essere sicuri che sia proprio tu.",
+    "useProvider": "Accedo con Google o GitHub",
+    "providerNote": "Confermerai accedendo con Google o GitHub invece che con una password. Non viene eliminato nulla finché non torni da quell'accesso.",
+    "usePassword": "Usa invece la mia password",
+    "typeToConfirm": "Scrivi {word} per confermare",
+    "cancel": "Annulla",
+    "confirmPassword": "Elimina il mio account",
+    "confirmProvider": "Continua",
+    "outcome": {
+      "wrongPassword": "La password non è corretta. Riprova.",
+      "passwordRequired": "Questo account accede con una password. Inseriscila qui sopra per continuare.",
+      "soleOwner": "Sei l'unico proprietario di “{team}”, che ha ancora altri membri. Prima rendi proprietario qualcun altro o rimuovi i membri: passa a quel team con il selettore dello spazio di lavoro, poi apri <link>Spazio di lavoro → Membri</link>. Non è stato eliminato nulla.",
+      "aTeam": "un team",
+      "providerTitle": "Conferma con {name}",
+      "providerBody": "Non è stato ancora eliminato nulla. Accedi con {name} per dimostrare che l'account è tuo: l'eliminazione verrà programmata quando torni.",
+      "providerContinue": "Continua con {name}",
+      "unavailable": "L'accesso con Google o GitHub non è configurato su questo server, quindi non può confermare l'eliminazione. Imposta una password con “Password dimenticata?” nella pagina di accesso, poi torna qui e usala.",
+      "signedOut": "Sei stato disconnesso. Accedi di nuovo, poi torna qui.",
+      "failed": "Qualcosa è andato storto e il tuo account non è stato eliminato. Riprova tra un attimo."
+    }
+  },
+  "page": {
+    "title": "Account",
+    "breadcrumbDashboard": "Dashboard",
+    "intro": "Il tuo account e dove trovare consumi e piano di questo spazio di lavoro. Le modifiche qui valgono per te e ti seguono tra gli spazi di lavoro; le impostazioni dello spazio di lavoro restano sotto Spazio di lavoro.",
+    "tabs": {
+      "profile": "Profilo",
+      "security": "Sicurezza",
+      "notifications": "Notifiche",
+      "data": "I tuoi dati"
+    },
+    "profile": {
+      "title": "Profilo",
+      "description": "Con chi hai effettuato l'accesso. Questi dati arrivano dalla tua sessione.",
+      "email": "Email",
+      "emailConfirmed": "Email confermata",
+      "notConfirmed": "Non confermata",
+      "confirmed": "Confermata",
+      "workspace": "Spazio di lavoro",
+      "platformAdmin": "Amministratore della piattaforma",
+      "yes": "Sì",
+      "roleHint": "Il tuo ruolo in questo spazio di lavoro lo cambia un Proprietario o un Amministratore da <link>Spazio di lavoro → Membri</link>."
+    },
+    "workspace": {
+      "title": "Spazio di lavoro",
+      "body": "Lo spazio di lavoro in cui ti trovi ora si sceglie con il selettore in alto nel menu a sinistra. Quanto ha usato e su quale piano si trova lo vedi in <usage>Utilizzo</usage> e <billing>Piano e fatturazione</billing>."
+    },
+    "security": {
+      "passwordTitle": "Password",
+      "passwordDescription": "Se la cambi, esci dagli altri dispositivi.",
+      "toolsTitle": "Collegare altri strumenti",
+      "toolsDescription": "ReelBolt non usa chiavi API personali, quindi qui non c'è nulla da creare o copiare.",
+      "toolsBody": "Un agente AI come Claude Code si collega tramite MCP aprendo un accesso a ReelBolt nel tuo browser e chiedendo la tua approvazione. Agisce come te, con i limiti del tuo spazio di lavoro, e puoi fermarlo cambiando la password."
+    },
+    "notificationsNote": "Le email sulle tue esecuzioni completate o fallite si gestiscono nella pagina <link>Notifiche</link>.",
+    "data": {
+      "title": "I tuoi dati",
+      "intro": "Scarica una copia di tutto ciò che ReelBolt conserva su di te, oppure chiudi il tuo account."
+    }
+  },
+  "notifications": {
+    "title": "Notifiche",
+    "breadcrumbSettings": "Impostazioni",
+    "switches": {
+      "jobSucceeded": {
+        "label": "Esecuzione completata",
+        "description": "Una email quando un lavoro video che hai avviato finisce correttamente."
+      },
+      "jobFailed": {
+        "label": "Esecuzione fallita",
+        "description": "Una email quando un lavoro video che hai avviato fallisce, con il motivo del fallimento."
+      },
+      "fileCreated": {
+        "label": "File aggiunto",
+        "description": "Una email quando viene aggiunto un file a un progetto del tuo spazio di lavoro."
+      },
+      "graphicsEdited": {
+        "label": "Grafica della miniatura modificata",
+        "description": "Una email quando viene modificata una grafica di miniatura in un progetto del tuo spazio di lavoro."
+      },
+      "reviewActivity": {
+        "label": "Attività di revisione",
+        "description": "Scrivimi quando qualcuno lascia una nota o una decisione su un link di revisione che ho condiviso."
+      },
+      "avatarRetention": {
+        "label": "Avatar in scadenza",
+        "description": "Scrivimi una settimana prima che un avatar che ho creato venga eliminato perché il periodo di conservazione finisce, così posso rinnovarlo."
+      },
+      "socialPublishing": {
+        "label": "Pubblicazione social",
+        "description": "Scrivimi quando un post che ho creato viene pubblicato o non riesce, o quando un account collegato va ricollegato."
+      }
+    },
+    "saveFailed": "Non siamo riusciti a salvare la modifica. L'interruttore è tornato com'era. Riprova.",
+    "loadFailed": "Non riusciamo a caricare le impostazioni delle notifiche. Riprova.",
+    "emailMe": "Scrivimi via email",
+    "emailMeAria": "Scrivimi via email: {label}",
+    "recent": {
+      "title": "Attività recente",
+      "description": "Le ultime email che ti abbiamo inviato, dalla più recente. Un punto rosso indica che l'invio è fallito.",
+      "empty": "Non c'è ancora nulla. Quando un lavoro finisce o viene aggiunto un file, lo vedrai qui."
+    }
+  },
+  "usage": {
+    "title": "Utilizzo",
+    "breadcrumbDashboard": "Dashboard",
+    "ranges": {
+      "d7": "7 giorni",
+      "d30": "30 giorni",
+      "d90": "90 giorni"
+    },
+    "axes": {
+      "day": "Per giorno",
+      "project": "Per progetto",
+      "model": "Per modello",
+      "kind": "Per tipo di passaggio",
+      "mode": "Chi paga",
+      "source": "Per origine"
+    },
+    "axisPhrase": {
+      "day": "giorno per giorno, in UTC",
+      "project": "per progetto",
+      "model": "per modello che ha svolto il lavoro",
+      "kind": "per ciò che è stato consumato",
+      "mode": "per chi ha pagato il provider",
+      "source": "per ciò su cui sono stati spesi i crediti"
+    },
+    "noBilling": {
+      "title": "La fatturazione non è attiva su questa installazione",
+      "body": "Questa installazione funziona senza fatturazione, quindi non tiene un saldo di crediti e non addebita l'uso. Il tuo account non ha problemi: la vista di utilizzo e crediti qui è semplicemente disattivata. Nulla di ciò che fai in questa pagina è stato misurato o addebitato."
+    },
+    "loadFailed": {
+      "title": "Non riusciamo a caricare i tuoi consumi",
+      "fallback": "Riprova tra un attimo.",
+      "retry": "Riprova"
+    },
+    "loadingAria": "Caricamento dei consumi",
+    "intro": "Ogni chiamata che la piattaforma fa per tuo conto viene registrata con ciò che ha consumato, il provider e il modello che hanno svolto il lavoro e i crediti addebitati. L'addebito viene calcolato quando la chiamata viene eseguita, quindi un cambio di prezzo successivo non modifica mai quanto ti è stato fatturato.",
+    "breakdown": {
+      "title": "Dettaglio",
+      "periodAria": "Periodo",
+      "groupByAria": "Raggruppa per",
+      "empty": "Nessun consumo misurato negli ultimi {days} giorni. Esecuzioni, upload e risposte dell'assistente scrivono tutti un record qui, quindi un elenco vuoto significa che non è ancora stato misurato nulla.",
+      "showing": "Righe mostrate: {count, plural, one {# riga} other {# righe}}, raggruppate {axis}. “Chiamate misurate” conta le chiamate registrate, non i passaggi: un passaggio può fare più chiamate."
+    },
+    "credits": {
+      "available": "Crediti disponibili",
+      "loadingAria": "Caricamento dei crediti",
+      "heldLine": "{balance} nell'account · {reserved} riservati al lavoro in corso",
+      "renews": "{plan} si rinnova il {date}"
+    },
+    "totals": {
+      "used": "Crediti usati",
+      "calls": "{events, plural, one {# chiamata misurata} other {# chiamate misurate}} negli ultimi {days} giorni",
+      "providerCost": "Il nostro costo dei provider: {cost}"
+    },
+    "whoPays": {
+      "title": "Chi ha pagato il provider",
+      "empty": "Nulla di misurato in questo periodo.",
+      "shareAria": "Quota di crediti: {mode}",
+      "note": "Il lavoro sui tuoi provider o runner viene addebitato alla tariffa della piattaforma, mai al prezzo del provider."
+    }
+  },
+  "emailChange": {
+    "title": "Cambio email in attesa",
+    "body": "Aspettiamo che tu confermi {email} dal tuo indirizzo attuale. La richiesta scade il {date}.",
+    "cancel": "Annulla la modifica",
+    "cancelFailed": "Impossibile annullare la modifica. Riprova."
+  },
+  "mcpMediaEgress": {
+    "title": "File e strumenti collegati (MCP)",
+    "description": "Permette a uno strumento collegato tramite MCP di consentire l'invio dei tuoi file ai provider di modelli AI esterni (altre aziende) per una sola azione alla volta: un'esecuzione che avvia, una clip che mostra i tuoi avatar e oggetti, una variante creata con l'AI, un oggetto estratto da un video o un'immagine. Ogni azione deve comunque chiederlo, e la scheda di un'esecuzione mostra chi l'ha consentito. Disattivato per impostazione predefinita.",
+    "saveFailed": "Impossibile salvare. La modifica non è stata applicata.",
+    "loadFailed": "Impossibile caricare questa impostazione. Riprova.",
+    "switchLabel": "Permetti agli strumenti collegati (MCP) di consentire l'invio dei miei file ai provider di modelli AI esterni (altre aziende)",
+    "stateOn": "Attivo: uno strumento collegato può consentire l'invio dei tuoi file per un'esecuzione, una clip, una variante, un oggetto o un'immagine.",
+    "stateOff": "Disattivato: uno strumento collegato non può consentire l'invio dei tuoi file."
+  }
+}

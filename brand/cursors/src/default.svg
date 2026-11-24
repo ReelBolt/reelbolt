@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- default: angled arrow, paper body, deep rim, lavender inner facet -->
+  <path d="M6 2 L6 24.5 L11.8 18.7 L15.5 27 L19.3 25.3 L15.6 17.3 L23 17.3 Z"
+        fill="#F5F3F8" stroke="#2E1065" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="M9 6.5 L9 17 L12.2 13.8 Z" fill="#C4B5FD"/>
+  <circle cx="7.4" cy="4.4" r="1.5" fill="#A855F7"/>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "v": 1,
+  "type": "drain",
+  "id": "01J9ZQ0000000000000DR0001",
+  "payload": {
+    "reason": "sigterm",
+    "deadlineSec": 120
+  }
+}

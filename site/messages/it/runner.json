@@ -1,0 +1,48 @@
+{
+  "page": {
+    "title": "Fai il render sul tuo computer",
+    "introAvailable": "Installa il runner di ReelBolt e ReelBolt gli manda il lavoro da svolgere sulla tua macchina. Il rendering sul tuo computer non usa crediti.",
+    "introSoon": "Il runner di ReelBolt è l'app desktop che farà il render su un computer tuo invece che sulla capacità di ReelBolt, senza usare crediti. È ancora in costruzione, quindi per ora non c'è nulla da scaricare.",
+    "cta": {
+      "title": "Fare il render sulle macchine che hai già?",
+      "body": "Dicci cosa ci faresti girare: le macchine, i sistemi operativi e il tipo di lavoro. È così che decidiamo cosa costruire per primo.",
+      "talk": "Parla con noi del runner",
+      "seeFeatures": "Scopri cosa fa"
+    }
+  },
+  "notReady": {
+    "label": "Non ancora disponibile",
+    "p1": "Non c'è nessun download, nessun installer e nessuna versione da installare: il runner è ancora in costruzione e questa pagina non mostrerà un link di download che non funziona.",
+    "p2": "Quando ci sarà qualcosa di reale da installare, questa pagina avrà i download, i checksum e ciò che serve al tuo computer, senza una data di uscita che dovremmo inventare."
+  },
+  "platform": {
+    "windows-x64": "Windows (64 bit)",
+    "linux-x64": "Linux (x86-64)",
+    "linux-arm64": "Linux (ARM64)"
+  },
+  "copySha": "Copia lo SHA-256 di {label}",
+  "copyCmd": "Copia il comando di verifica di {label}",
+  "download": "Scarica",
+  "downloads": {
+    "title": "Download",
+    "version": "Versione {version}",
+    "released": " · rilasciata il {date}",
+    "all": "Tutti i download",
+    "checksum": "Prima di installarlo, confronta il checksum del file che hai scaricato con quello qui sopra.",
+    "signedBy": "L'installer è firmato da {publisher}. ",
+    "windows": "Windows SmartScreen può segnalare un installer nuovo finché non si costruisce la sua reputazione. Un SHA-256 corrispondente dimostra solo che il file è arrivato integro, non chi lo ha creato. Prima di continuare, controlla che l'editore mostrato da SmartScreen, o nella scheda Firme digitali delle Proprietà del file, sia l'editore firmato di ReelBolt. Se non lo è, non eseguirlo.",
+    "linuxTitle": "Linux",
+    "linux": "Scegli dall'elenco qui sopra il formato adatto al tuo sistema: un pacchetto .deb o un AppImage, a seconda di ciò che è offerto per la tua architettura.",
+    "requirementsTitle": "Requisiti",
+    "requirements": "Un computer Windows o Linux a 64 bit. Il runner include ffmpeg, quindi i render con ffmpeg funzionano da soli. I render che usano Remotion richiedono anche Docker o Podman installato su quel computer; senza, il runner può svolgere solo il lavoro basato su ffmpeg. Installazione, collegamento al tuo account ReelBolt e disinstallazione sono spiegati nella <guide>guida al runner</guide>.",
+    "openSource": "Il runner include software open source, tra cui ffmpeg. Il <source>codice sorgente e le informazioni sulla licenza di questa versione</source> si possono scaricare.",
+    "windowsTitle": "Windows"
+  },
+  "client": {
+    "downloadFor": "Scarica per {platform}",
+    "otherPlatforms": "{label}. Le altre piattaforme sono elencate qui sotto.",
+    "copied": "Copiato",
+    "copy": "Copia",
+    "copiedStatus": "Copiato negli appunti"
+  }
+}

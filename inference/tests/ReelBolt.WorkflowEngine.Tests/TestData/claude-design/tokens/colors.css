@@ -1,0 +1,18 @@
+/* Trimmed fixture: a representative slice of the base palette plus the dark overrides. */
+:root{
+--nws-primary:#7e6fff;
+--nws-primary-tint-4:color-mix(in srgb,#7e6fff 4%,var(--nws-surface));
+--nws-gradient-primary:linear-gradient(82deg,#594ae2 0%,#7467ef 100%,#594ae2 200%);
+--nws-brand-violet:#594ae2;--nws-brand-violet-light:#7467ef;
+--nws-secondary:#ff4081;--nws-tertiary:#1ec8a5;
+--nws-info:#4a86ff;--nws-success:#4caf50;--nws-warning:#ff9800;--nws-error:#f44336;
+--nws-background:#ffffff;--nws-surface:#ebedef;
+--nws-text-primary:#333333;--nws-text-secondary:#757575;--nws-lines:#e0e0e0;
+--surface-page:var(--nws-background);--text-body:var(--nws-text-primary);
+}
+.theme-dark{
+--nws-primary-tint-4:color-mix(in srgb,#7e6fff 4%,#1e1e2d);
+--nws-background:#1a1a27;--nws-surface:#1e1e2d;
+--nws-text-primary:#b2b0bf;--nws-text-secondary:#92929f;--nws-lines:#33323e;
+--nws-success:#3dcb6c;--nws-warning:#ffb545;--nws-error:#ff3f5f;
+}

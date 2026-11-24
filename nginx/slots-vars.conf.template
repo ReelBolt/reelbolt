@@ -1,0 +1,5 @@
+# Previous blue-green slot (default: the active upstream). Rendered by render-config.sh in slots mode
+# only, into conf.d/slots-vars.inc, which common.conf.template includes by glob.
+set $inference_prev ${UPSTREAM_INFERENCE_PREV};
+set $web_prev ${UPSTREAM_WEB_PREV};
+set $site_prev ${UPSTREAM_SITE_PREV};

@@ -1,0 +1,31 @@
+{
+  "globs": [
+    "lib/auth/oauth.ts",
+    "lib/auth/password.ts",
+    "lib/auth/signup-copy.ts",
+    "lib/account/format.ts",
+    "lib/utils/run-status.ts",
+    "lib/utils/run-summary.ts",
+    "lib/utils/agent-roles.ts",
+    "lib/utils/agent-labels.ts",
+    "lib/utils/usage-labels.ts",
+    "lib/utils/runners.ts",
+    "lib/utils/compute-target.ts",
+    "lib/utils/compute-preference.ts",
+    "lib/utils/video-generate-validation.ts",
+    "lib/files/model.ts",
+    "lib/files/delete-failures.ts",
+    "lib/org-label.ts",
+    "lib/hooks/use-media-derivatives.ts",
+    "lib/hooks/use-assistant-preferences.ts",
+    "lib/hooks/use-execution-stream.ts",
+    "lib/hooks/use-workflow-monitor.ts",
+    "lib/hooks/use-upload-queue.ts",
+    "lib/calibration-summary.ts",
+    "lib/feedback/context.ts",
+    "lib/workflow-apps/app-inputs.ts",
+    "lib/types/notifications.ts",
+    "lib/types/storage.ts",
+    "lib/utils/run-failure.ts"
+  ]
+}

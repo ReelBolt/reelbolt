@@ -1,0 +1,11 @@
+- concepts.md: "New workflow" -> "Nuovo flusso di lavoro" : glossary says buttons are imperative, but "Nuovo ..." is natural for create buttons; align with dashboard catalogue
+- concepts.md: "Run" button -> "Avvia" (glossary); "Stop" -> "Interrompi", "Retry" -> "Riprova", "Move to..." -> "Sposta in...": dashboard wording unknown
+- concepts.md: "Max Spend" -> "Spesa massima", "Cache Mode" -> "Modalità cache", "System Prompt" -> "Prompt di sistema", "Regenerate (costs money)" -> "Rigenera (a pagamento)": dashboard wording unknown
+- concepts.md: "Promo video from your code v1" left in English : it is a literal template name, check whether the dashboard translates it
+- concepts.md: "reused from cache" -> "riusato dalla cache" : UI label, dashboard wording unknown
+- workspaces.md: "Leave workspace?" -> "Uscire dallo spazio di lavoro?" ; "the last owner cannot be removed or demoted" left in English : quoted server message, check if API error is localised
+- your-data.md: "Privacy Policy" -> "Informativa sulla privacy"; "Terms of Service" -> "Termini di servizio"; consent/retention wording : legal-adjacent, review
+- self-hosting.md: "Grab a frame" -> "Cattura un fotogramma" ; "Platform → Inference" -> "Piattaforma → Inferenza" : UI labels, dashboard wording unknown. Remotion licence section is legal-adjacent (licence tier names kept in English)
+- design-system.md: "Build brand and product profile" -> "Crea profilo di brand e prodotto"; "Save as drafts" -> "Salva come bozze"; "Locked, kept as is" -> "Bloccato, mantenuto così com'è"; "Used brand v7 / product v3" -> "Usati brand v7 / prodotto v3": UI labels, dashboard wording unknown
+- troubleshooting.md: quoted UI/server messages translated (e.g. "Content search is not available yet" -> "La ricerca nei contenuti non è ancora disponibile"); a few raw error strings left in English (TRANSCRIPTION_UNAVAILABLE text, "Endpoint must be a public...", "Agent '…' timed out", "Stopped by user") : unclear whether the API/dashboard localises them
+- troubleshooting.md: run status badges RUNNING/QUEUED/CANCELLED/FAILED -> IN ESECUZIONE/IN CODA/ANNULLATA/FALLITA ; "Footage edit with AI-generated b-roll" template name left English : check dashboard

@@ -1,0 +1,5 @@
+- admin/*, assistant/*, projects/*: UI labels (e.g. "New User" -> "Nuovo utente", "Allow" -> "Consenti", "Sync now" -> "Sincronizza ora", "Cloud storage" -> "Archiviazione cloud") : chosen without the dashboard catalogue; verify against web/messages/it
+- admin/inference-providers.md: "Platform -> Billing / Inference" -> "Piattaforma -> Fatturazione / Inferenza" : sidebar labels not yet fixed by glossary
+- admin/inference-providers.md: "Runner -> Pair a device" -> "Runner -> Abbina un dispositivo" (projects/local-folder-sync.md) : "pair" not in glossary
+- admin/promotions.md: "Redemptions" -> "Riscatti"; "Pack bonus" -> "Bonus sul pacchetto" : domain terms, no glossary entry
+- assistant/index.md: "thread" kept as "thread" : established product word, no glossary entry

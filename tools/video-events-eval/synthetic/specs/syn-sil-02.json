@@ -1,0 +1,98 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-sil-02",
+ "videoType": "silent",
+ "frames": 600,
+ "theme": {
+  "bg": "#2b1b12"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#2b1b12",
+   "bgB": "#3d281a",
+   "deco": "grid",
+   "accent": "#caa27a",
+   "decoOpacity": 0.1
+  },
+  {
+   "from": 480,
+   "trans": "fade",
+   "dur": 60,
+   "bg": "#1a2b24",
+   "bgB": "#244036",
+   "deco": "grid",
+   "accent": "#7ac2a0",
+   "decoOpacity": 0.1
+  }
+ ],
+ "camera": [
+  {
+   "start": 200,
+   "end": 420,
+   "x": -150,
+   "y": 20,
+   "s": 1.12
+  }
+ ],
+ "drift": true,
+ "elements": [
+  {
+   "kind": "rect",
+   "id": "card",
+   "name": "amber card",
+   "x": 300,
+   "y": 190,
+   "w": 240,
+   "h": 150,
+   "color": "#caa27a",
+   "scene": 0,
+   "label": "Archive",
+   "textColor": "#2b1b12",
+   "vis": [
+    {
+     "in": 90,
+     "fade": 10
+    }
+   ]
+  },
+  {
+   "kind": "circle",
+   "id": "o",
+   "name": "small orb",
+   "x": 700,
+   "y": 120,
+   "w": 44,
+   "h": 44,
+   "color": "#e6c9a8",
+   "scene": 0,
+   "peak": 0.6,
+   "vis": [
+    {
+     "in": 0
+    }
+   ]
+  },
+  {
+   "kind": "text",
+   "id": "t",
+   "name": "closing caption",
+   "text": "later",
+   "x": 360,
+   "y": 400,
+   "w": 240,
+   "h": 50,
+   "color": "#bfe6d2",
+   "scene": 1,
+   "fontSize": 44,
+   "vis": [
+    {
+     "in": 520,
+     "fade": 40
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "wipe-edges",
+  "version": "1.0.0",
+  "title": "Wipe edges",
+  "category": "transitions",
+  "description": "Wipe between two scenes with a coloured bar riding the moving edge; use for energetic section changes.",
+  "tags": [
+    "transition",
+    "wipe",
+    "edge",
+    "bar"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-wipe-edges",
+    "durationInFrames": 30,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      14,
+      20
+    ]
+  },
+  "props": "{from: ReactNode; to: ReactNode; startFrame?: number /*0*/; durationInFrames?: number /*20*/; direction?: 'left'|'right' /*'left'*/; edgeColor?: string /*'#facc15'*/; edgeWidth?: number /*24*/}",
+  "example": "import {WipeEdges} from './blocks/wipe-edges/WipeEdges.tsx';\n<WipeEdges from={<SceneA />} to={<SceneB />} startFrame={40} direction=\"left\" edgeColor=\"#facc15\" />"
+}

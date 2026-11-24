@@ -1,0 +1,60 @@
+/*
+ * The builder header docks under the app shell's fixed header on desktop, so Save stays reachable
+ * while the canvas scrolls. Only from 48.01em: on a phone a sticky block would eat an already short
+ * viewport and fight the canvas's own scroll, so below that the header stays exactly as it was.
+ */
+.headerDock {
+  position: static;
+}
+
+@media (min-width: 48.01em) {
+  .headerDock {
+    position: sticky;
+    top: var(--app-shell-header-height, 60px);
+    /* Above the run-history rail (which has no stacking context of its own) and opaque, so
+       content scrolling underneath is never visible through the dock. The padding keeps the
+       background painting past the header's own edge. */
+    z-index: 5;
+    background: var(--mantine-color-body);
+    padding-block: 12px;
+  }
+}
+
+/*
+ * One column until there is room for a rail: run history follows the form, exactly as it always
+ * has on a phone. `minmax(0, 1fr)` lets the canvas shrink instead of forcing a horizontal scroll.
+ */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.runs {
+  min-width: 0;
+  /* The divider that used to separate the form from run history is gone; the stacked layout keeps
+     the same breathing room with spacing instead. */
+  margin-top: var(--mantine-spacing-xl);
+}
+
+/* The rail sits below the measured dock, never at a guessed 76px: the dock is as tall as its
+   breadcrumb, title and (possibly wrapped) action row, so the two share one CSS variable. 80em
+   rather than 75em leaves the canvas ~590px at the breakpoint instead of ~510px. 380px is a
+   comfortable run-card rail; the card itself switches to `compact` inside it. */
+@media (min-width: 80em) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .runs {
+    position: sticky;
+    top: calc(var(--app-shell-header-height, 60px) + var(--workflow-dock-height, 0px) + 16px);
+    max-height: calc(
+      100dvh - var(--app-shell-header-height, 60px) - var(--workflow-dock-height, 0px) - 32px
+    );
+    overflow-y: auto;
+    /* The grid gap spaces the column on desktop; the stacked margin is not wanted here. */
+    margin-top: 0;
+  }
+}

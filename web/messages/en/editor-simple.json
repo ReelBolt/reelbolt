@@ -1,0 +1,124 @@
+{
+  "shell": {
+    "simple": "Simple",
+    "full": "Full",
+    "switchLabel": "Editor layout",
+    "switchHint": "Simple shows the essentials. Full shows every page and tool. Your timeline is the same in both.",
+    "backToAllTimelines": "Back to all timelines",
+    "allTimelines": "All timelines",
+    "saved": "Saved",
+    "retry": "Retry",
+    "signIn": "Sign in",
+    "keyboardShortcuts": "Keyboard shortcuts",
+    "export": "Export",
+    "intro": "This is the simple editor: the essentials for a first video. Every page and tool is in the full editor, one click away.",
+    "openFull": "Open the full editor",
+    "dismissIntro": "Hide this note",
+    "places": "Places",
+    "place": {
+      "edit": "Edit",
+      "look": "Look",
+      "export": "Export"
+    },
+    "backToTasks": "Back",
+    "aiTools": "AI tools",
+    "needsFullTitle": "{action} is in the full editor",
+    "needsFullBody": "Your timeline stays as it is."
+  },
+  "timeline": {
+    "deleteSelected": "Delete the selected clips"
+  },
+  "tasks": {
+    "lead": "What do you want to do? Pick a task, or select a clip on the timeline to change it.",
+    "leadEmpty": "Start by dragging a file from Media onto the timeline. Then pick a task here.",
+    "selectHint": "Select a clip to trim it, move it, or change its speed, size and volume.",
+    "silence": {
+      "title": "Remove the silences",
+      "hint": "Finds the quiet parts and cuts them in one step. Free."
+    },
+    "captions": {
+      "title": "Add captions",
+      "hint": "Writes captions from what is said. Reading the speech uses credits; you see the price first."
+    },
+    "title": {
+      "title": "Add a title",
+      "hint": "Words on the picture, at the playhead."
+    },
+    "beats": {
+      "title": "Cut to the music",
+      "hint": "Finds the beats in your music and lines the cuts up with them. Free."
+    },
+    "sound": {
+      "title": "Fix the sound",
+      "hint": "Track volume, music that lowers under a voice, a cleaner voice, a voice-over."
+    },
+    "format": {
+      "title": "Change the shape",
+      "hint": "Vertical, square or wide, and the frame rate."
+    },
+    "tighten": {
+      "title": "Tighten the edit",
+      "hint": "A helper suggests cuts. You see the price first and accept only what you like."
+    }
+  },
+  "ask": {
+    "label": "Ask for a change",
+    "helper": "Which helper",
+    "go": "Continue",
+    "helpers": {
+      "recut": "Edit",
+      "graphics": "Titles",
+      "grade": "Colour",
+      "sfx": "Sound",
+      "review": "Check my video"
+    },
+    "placeholders": {
+      "recut": "Ask for a change, for example: cut the pauses in the first half",
+      "graphics": "Ask for a change, for example: add a title with the product name",
+      "grade": "Ask for a change, for example: make it warmer",
+      "sfx": "Ask for a change, for example: add a whoosh on each cut",
+      "review": "Ask for a check, for example: is the opening too slow?"
+    }
+  },
+  "selection": {
+    "split": "Split here",
+    "duplicate": "Duplicate",
+    "remove": "Delete",
+    "captionLead": "A caption is edited with the others, so the words stay in step.",
+    "openCaptions": "Open captions",
+    "thisItem": "This item",
+    "otherItem": "{name} is edited in the full editor. It plays and exports here as it is.",
+    "openInFull": "Open in the full editor",
+    "fullWorkLead": "This clip has work made in the full editor: {list}.",
+    "fullWorkNote": "It shows in the picture and in your export. Change it in the full editor.",
+    "work": {
+      "colour": "{count, plural, one {# colour step} other {# colour steps}}",
+      "mask": "a mask",
+      "keyer": "a green-screen key",
+      "effects": "{count, plural, one {# effect} other {# effects}}",
+      "cornerPin": "a corner pin",
+      "stabilize": "stabilisation",
+      "reframe": "a reframe",
+      "crop": "a crop",
+      "reverse": "reverse playback",
+      "freeze": "a freeze frame",
+      "animation": "animation"
+    },
+    "animatedNote": "Animated in the full editor. Change it there.",
+    "many": "{count, plural, one {# clip selected} other {# clips selected}}",
+    "manyHint": "Select one clip to change its picture, speed or volume."
+  },
+  "panel": {
+    "tasks": "What next",
+    "selection": "Clip",
+    "selectionMany": "{count, plural, one {# clip} other {# clips}}",
+    "look": "Look",
+    "export": "Export",
+    "captions": "Captions",
+    "title": "Title",
+    "sound": "Sound",
+    "format": "Shape and frame rate",
+    "ask": "Suggestions",
+    "trackVolume": "Volume {name}"
+  }
+}

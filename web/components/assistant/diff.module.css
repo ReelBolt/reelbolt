@@ -1,0 +1,133 @@
+/*
+ * Diff-kind tokens shared by the assistant's review tray (WorkflowDiffPreview) and the canvas
+ * overlay (FlowchartBuilder's DiffBadgeNode + node outlines), so both surfaces read as one system.
+ *
+ * Every kind is carried by colour AND a glyph AND a word ("Added"/"Removed"/"Changed") — never
+ * colour alone. Contrast (WCAG AA): each --fg is >= 4.5:1 on its --bg and on the panel surface in
+ * both themes; each --line is >= 3:1 against the surface it sits on (non-text UI).
+ */
+
+.kind {
+  --diff-fg: var(--mantine-color-text);
+  --diff-bg: transparent;
+  --diff-line: var(--mantine-color-default-border);
+}
+
+.kind[data-kind='added'] {
+  --diff-fg: light-dark(var(--mantine-color-green-8), var(--mantine-color-green-3));
+  --diff-bg: light-dark(var(--mantine-color-green-0), color-mix(in srgb, var(--mantine-color-green-6) 14%, transparent));
+  --diff-line: light-dark(var(--mantine-color-green-6), var(--mantine-color-green-4));
+}
+
+.kind[data-kind='removed'] {
+  --diff-fg: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  --diff-bg: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-6) 14%, transparent));
+  --diff-line: light-dark(var(--mantine-color-red-6), var(--mantine-color-red-4));
+}
+
+.kind[data-kind='changed'] {
+  --diff-fg: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+  --diff-bg: light-dark(var(--mantine-color-orange-0), color-mix(in srgb, var(--mantine-color-orange-6) 14%, transparent));
+  --diff-line: light-dark(var(--mantine-color-orange-8), var(--mantine-color-orange-4));
+}
+
+/* ---- Tag: glyph + word, the unit both surfaces share -------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px 2px 6px;
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--diff-line);
+  background: var(--diff-bg);
+  color: var(--diff-fg);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+/* ---- Canvas badge (a React Flow node) ------------------------------------------------------ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 260px;
+  padding: 4px 10px 4px 4px;
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--diff-line);
+  background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  box-shadow: none;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.badgeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--mantine-color-text);
+  font-weight: 500;
+}
+
+/* A proposed step that doesn't exist yet: a dashed "ghost" card in the added colour. */
+.ghost {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 320px; /* the width of a step card, so ghosts line up under the column */
+  padding: 12px 14px;
+  border-radius: var(--mantine-radius-md);
+  border: 2px dashed var(--diff-line);
+  background: var(--diff-bg);
+  pointer-events: none;
+}
+
+.ghost > .tag {
+  align-self: flex-start;
+}
+
+.ghostHandle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ghostName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mantine-color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ghostMeta {
+  font-family: var(--mantine-font-family-monospace);
+  font-size: 12px;
+  color: var(--diff-fg);
+}
+
+/* Outline applied to an existing step node. React Flow puts the node's className on its own
+   wrapper, which is larger than the card; every step node renders
+   <Handle/> <motion.div><Card/></motion.div> <Handle/>, so the outline is drawn on that Card —
+   an outline, not a border, so it never shifts the layout, and it follows the card's radius. */
+.nodeChanged > div > :global(.mantine-Card-root),
+.nodeRemoved > div > :global(.mantine-Card-root) {
+  outline-offset: 3px;
+}
+
+.nodeChanged > div > :global(.mantine-Card-root) {
+  outline: 2px solid light-dark(var(--mantine-color-orange-8), var(--mantine-color-orange-4));
+}
+
+.nodeRemoved > div > :global(.mantine-Card-root) {
+  outline: 2px dashed light-dark(var(--mantine-color-red-6), var(--mantine-color-red-4));
+}
+
+.addedEdge :global(.react-flow__edge-path) {
+  stroke: light-dark(var(--mantine-color-green-6), var(--mantine-color-green-4));
+  stroke-width: 2px;
+  stroke-dasharray: 6 5;
+}

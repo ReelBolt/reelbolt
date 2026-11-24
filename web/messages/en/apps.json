@@ -1,0 +1,1508 @@
+{
+  "gallery": {
+    "categories": {
+      "all": "All",
+      "promo": "Promo",
+      "footage": "Footage",
+      "brand": "Brand",
+      "utility": "Utility"
+    },
+    "status": {
+      "never": "Not run yet",
+      "finished": "Finished",
+      "failed": "Failed",
+      "running": "Running",
+      "stopped": "Stopped"
+    },
+    "statusWhen": "{word} {when}",
+    "openApp": "Open {title}",
+    "open": "Open",
+    "settingUp": "Setting up {title}…",
+    "suggested": "Suggested for your project",
+    "ready": "Ready: your project has what this needs",
+    "needs": "Needs:",
+    "useRecipe": "Use this recipe",
+    "useRecipeFor": "for {title}",
+    "recipeFailedTitle": "Could not set up the app",
+    "tryAgainLater": "Please try again.",
+    "loading": "Loading your apps",
+    "search": "Search apps",
+    "category": "Category",
+    "settingUpRecipe": "Setting up an app. The others are unavailable until it is ready.",
+    "results": "{count, plural, one {# result} other {# results}}",
+    "refreshFailed": "We could not refresh just now. Showing what was loaded.",
+    "yourApps": "Your apps",
+    "noApps": "No apps yet",
+    "noAppsHint": "An app turns your files into a video. Pick one below to get your first result.",
+    "noAppsMatch": "No apps match your search.",
+    "startFromRecipe": "All apps",
+    "recipeHint": "Pick one to set up a ready-made app in this project and open it.",
+    "customTitle": "Build your own (advanced)",
+    "customTagline": "Build your own app from scratch.",
+    "customCta": "Build your own app",
+    "noRecipesMatch": "We do not make that yet. Try the assistant, or browse all apps.",
+    "settingUpLabel": "Setting up {title}",
+    "modelChoices": "Model choices",
+    "hideModelChoices": "Hide model choices",
+    "modelChoicesFailed": "The model choices could not be loaded.",
+    "noModelChoices": "This recipe has no model to choose."
+  },
+  "cost": {
+    "noCredits": {
+      "label": "No credits",
+      "hint": "Free to run. Very large files can use processing time from your plan."
+    },
+    "credits": {
+      "label": "Uses credits",
+      "hint": "This app uses credits when it runs."
+    },
+    "creditsVoice": {
+      "label": "Uses credits and a voice",
+      "hint": "This app uses credits and generates a voice-over."
+    },
+    "creditsShots": {
+      "label": "Uses credits and AI-made clips",
+      "hint": "This app uses credits and generates video or audio. That spend is capped for each run."
+    },
+    "other": "{label}"
+  },
+  "run": {
+    "languages": {
+      "sameAsSource": "Same as the source",
+      "detect": "Detect automatically"
+    },
+    "roles": {
+      "video": {
+        "one": "video clip",
+        "other": "video clips"
+      },
+      "code": {
+        "one": "code file",
+        "other": "code files"
+      },
+      "music": {
+        "one": "music track",
+        "other": "music tracks"
+      },
+      "sfx": {
+        "one": "sound effect",
+        "other": "sound effects"
+      },
+      "image": {
+        "one": "image",
+        "other": "images"
+      },
+      "document": {
+        "one": "document",
+        "other": "documents"
+      },
+      "insertContent": {
+        "one": "picture or video",
+        "other": "pictures or videos"
+      },
+      "overlay": {
+        "one": "picture or video",
+        "other": "pictures or videos"
+      }
+    },
+    "readiness": {
+      "fix": "Fix needed",
+      "check": "Check",
+      "ready": "Ready",
+      "note": "Note"
+    },
+    "price": {
+      "run": "Run",
+      "noCreditsUsed": "No credits used",
+      "about": "Run, about {amount} {unit, select, one {credit} other {credits}}",
+      "rangeUsually": "usually {low} to {high}"
+    },
+    "strip": {
+      "label": "Readiness check",
+      "checking": "Checking",
+      "lookingOver": "looking over this app…",
+      "unavailable": "We could not check this app just now. You can still run it.",
+      "allGood": "Everything this app needs is in place.",
+      "more": "{count, plural, one {1 more thing to know} other {# more things to know}}"
+    },
+    "slot": {
+      "yourFiles": "{role, select, video {Your video clips} code {Your code files} music {Your music tracks} sfx {Your sound effects} image {Your images} insertContent {What goes on the screen} overlay {Pictures or videos to show} other {Your documents}}",
+      "none": "{role, select, video {No video clips in this project yet.} code {No code files in this project yet.} music {No music tracks in this project yet.} sfx {No sound effects in this project yet.} image {No images in this project yet.} insertContent {No pictures or videos in this project yet.} overlay {No pictures or videos in this project yet.} other {No documents in this project yet.}}",
+      "upload": "{role, select, video {Upload video clip} code {Upload code file} music {Upload music track} sfx {Upload sound effect} image {Upload image} insertContent {Upload picture or video} overlay {Upload picture or video} other {Upload document}}",
+      "choose": "{role, select, video {Choose video clips} code {Choose code files} music {Choose music tracks} sfx {Choose sound effects} image {Choose images} insertContent {Choose a picture or video} overlay {Choose a picture or video} other {Choose documents}}",
+      "summaryNone": "None chosen (up to {max})",
+      "summaryChosen": "{count, plural, one {# chosen} other {# chosen}} (up to {max})",
+      "done": "Done"
+    },
+    "overlays": {
+      "title": "Pictures over the film",
+      "applied": "What was shown",
+      "fullScreen": "Full screen",
+      "corner": "Corner (bottom right)",
+      "timeRange": "{start}–{end}",
+      "opacity": "{percent}% opacity",
+      "borderLight": "Light border",
+      "borderDark": "Dark border",
+      "soundKept": "sound kept",
+      "soundMuted": "sound muted",
+      "soundAt": "sound at {level, select, Quiet {Quiet} Balanced {Balanced} Prominent {Prominent} other {a balanced level}}",
+      "notShown": "Not shown",
+      "notShownRow": "{name}: {reason}",
+      "reasonCut": "the moment was cut out",
+      "reasonUnreadable": "that picture could not be read",
+      "reasonDuplicate": "it was chosen twice",
+      "reasonTooLarge": "that picture is too large",
+      "reasonNotChosen": "not chosen for this edit",
+      "reasonTooMany": "there was room for only a few pictures",
+      "reasonInvisible": "it was set to be invisible",
+      "unnamedPicture": "A picture"
+    },
+    "bar": {
+      "stop": "Stop",
+      "whyPrice": "Why this price?",
+      "priceUnavailable": "We could not work out the price just now.",
+      "tryAgain": "Try again"
+    },
+    "result": {
+      "announceEmpty": "Your video will appear here",
+      "announceActive": "Making your video",
+      "announceReady": "Your video is ready",
+      "announceFailed": "The last run did not finish",
+      "announceStopped": "The last run was stopped",
+      "label": "Result",
+      "fillIn": "Fill in the choices {where, select, above {above} other {on the left}} and press Run. The finished video shows up here.",
+      "needs": "This app needs: {list}.",
+      "progress": "Progress",
+      "stateDone": "Done",
+      "stateWorking": "In progress",
+      "stateWaiting": "Waiting",
+      "seeEveryStep": "See every step",
+      "failed": "Failed",
+      "resume": "Resume",
+      "retry": "Retry",
+      "askAssistant": "Ask the assistant",
+      "seeWhatHappened": "See what happened",
+      "stopped": "That run was stopped before it finished. Press Run to start again.",
+      "finishedVideo": "The finished video",
+      "videoNotFound": "We could not find the finished video yet. Open the run to check it.",
+      "download": "Download",
+      "editInEditor": "Edit in the editor",
+      "preparing": "The video is being prepared.",
+      "runFinished": "This run is finished.",
+      "openRun": "Open the run",
+      "changeOne": "Change one thing and re-run",
+      "askToChange": "Ask the assistant to change something",
+      "insertNext": {
+        "heading": "What to do next",
+        "chooseClip": "Choose another clip",
+        "retry": "Try again",
+        "notCharged": "You were not charged.",
+        "whatWorks": "What clips work",
+        "askCorner": "Ask the assistant to put it in a corner instead",
+        "runAgain": "Run again",
+        "cornerPrompt": "The screen in my clip could not be followed, so the insert did not work. Please put the picture or video in a corner of the clip instead."
+      }
+    },
+    "change": {
+      "title": "Change one thing and make it again",
+      "intro": "Change a field and only the parts of the video that use it are made again. Everything else is kept from this run at no cost.",
+      "redoes": "Changing this makes again: {steps}",
+      "picksBranch": "This choice takes the app down another path, so it makes a different video.",
+      "fixedTitle": "Can't be changed here",
+      "fixedLine": "{label}: {reason}",
+      "fixedReason": "run the app again to change it",
+      "estimating": "Working out what changes…",
+      "changeLine": "{label}: {before} → {after}",
+      "redone": "Made again: {steps}",
+      "reused": "{count, plural, one {# step is kept from this run} other {# steps are kept from this run}}",
+      "branchNote": "“{label}” with this value picks another path through the app. Run the app again instead.",
+      "runAgain": "Run it again instead",
+      "otherThings": "Change other things too",
+      "submit": "Make it again",
+      "settingsTitle": "Run settings",
+      "addToSet": "Add to the changes",
+      "openFields": "Change the app's fields"
+    },
+    "page": {
+      "addAtLeastOne": "{role, select, video {Add at least one video clip} code {Add at least one code file} music {Add at least one music track} sfx {Add at least one sound effect} image {Add at least one image} insertContent {Choose what goes on the screen} overlay {Add a picture or video to show} other {Add at least one document}}",
+      "addAtLeast": "{role, select, video {Add at least {min} video clips} code {Add at least {min} code files} music {Add at least {min} music tracks} sfx {Add at least {min} sound effects} image {Add at least {min} images} insertContent {Add at least {min} pictures or videos} overlay {Add at least {min} pictures or videos} other {Add at least {min} documents}}",
+      "addOne": "{role, select, video {Add a clip} code {Add a code file} music {Add a music track} sfx {Add a sound effect} image {Add an image} insertContent {Add a picture or video} overlay {Add a picture or video} other {Add a document}}",
+      "yourFilesLower": "{role, select, video {your video clips} code {your code files} music {your music tracks} sfx {your sound effects} image {your images} insertContent {a picture or video for the screen} overlay {pictures or videos to show} other {your documents}}",
+      "screenClipNeed": "This clip needs a screen or panel filled with one flat colour, such as green or blue, that stays in view and is mostly uncovered.",
+      "screenClipNeedLink": "What counts as a screen",
+      "editSteps": "Edit the steps (advanced)",
+      "gettingReady": "Getting this app ready…",
+      "run": "Run",
+      "documentTitle": "{title} · {project} · ReelBolt",
+      "projectFallback": "Project",
+      "narrationNeedsVoice": "No voice is set up yet. Ask your workspace admin to add one.",
+      "openVoices": "Open Voices",
+      "needConsent": "You need consent on file for this voice",
+      "chooseAnotherVoice": "Choose another voice",
+      "errorTitle": "Error",
+      "planRefusal": "Your plan does not include one of these choices.",
+      "videoNotChosen": "“{step}” needs a video and none was chosen for this run. Choose a video above, then run it again.",
+      "videoNotChosenNoStep": "A step needs a video and none was chosen for this run. Choose a video above, then run it again.",
+      "avatarNotChosen": "“{step}” makes an avatar say its narration, and no avatar was chosen. Choose an avatar picture above, then run it again.",
+      "avatarNotChosenNoStep": "A step makes an avatar say its narration, and no avatar was chosen. Choose an avatar picture above, then run it again.",
+      "modelUnsupported": "“{step}” uses a video model its provider does not support. Choose another model, or connect a provider that has it, then run it again.",
+      "modelUnsupportedNoStep": "A step uses a video model its provider does not support. Choose another model, or connect a provider that has it, then run it again.",
+      "lipSyncModelNotSet": "“{step}” makes an avatar talk, and no lip-sync model is set up. Ask a workspace admin to add one, then run it again.",
+      "lipSyncModelNotSetNoStep": "A step makes an avatar talk, and no lip-sync model is set up. Ask a workspace admin to add one, then run it again.",
+      "retryFailed": "This run could not be started again.",
+      "resumeFailed": "This run could not be continued.",
+      "stopFailed": "The run could not be stopped. Try again in a moment.",
+      "uploadFailedTitle": "Upload failed",
+      "uploadFailedMessage": "The file could not be uploaded.",
+      "changePrompt": "I would like to change something in the last video this app made.",
+      "useAuto": "Use Auto resolution",
+      "creditsNeeded": "You have {have} {unit, select, one {credit} other {credits}}; this app needs about {needed}.",
+      "balance": "You have {have} {unit, select, one {credit} other {credits}}",
+      "addCredits": "Add credits",
+      "defaultVoice": "Default voice",
+      "consentNeeded": "{name} (consent needed)",
+      "anythingElse": "Anything else?",
+      "language": "Language",
+      "spokenLanguage": "Spoken language",
+      "length": "Length",
+      "lengthSeconds": "Length (seconds)",
+      "seconds": "{count}s",
+      "narration": "Narration",
+      "narrationOn": "A voice reads the script aloud.",
+      "narrationOff": "No narration: the video plays without a voice.",
+      "voice": "Voice",
+      "design": "Design",
+      "designProject": "Use this project's brand design",
+      "designNone": "No brand design",
+      "overlayCardAudio": "Under a full-screen picture",
+      "overlayCardAudioAgent": "Let the agent choose",
+      "overlayCardAudioKeep": "Keep the sound",
+      "overlayCardAudioMute": "Mute the sound",
+      "pace": "Pace",
+      "paceOff": "Off",
+      "paceCalm": "Calm",
+      "paceMedium": "Medium",
+      "paceFast": "Fast",
+      "paceHelpOff": "Off: no dynamic edit is added; the film is cut as the workflow cuts it.",
+      "paceHelpCalm": "Calm: at most 1 effect per 10 seconds of the whole film (3 in a 30-second film).",
+      "paceHelpMedium": "Medium: at most 3 effects per 10 seconds of the whole film (9 in a 30-second film).",
+      "paceHelpFast": "Fast: at most 6 effects per 10 seconds of the whole film (18 in a 30-second film).",
+      "breadcrumbProjects": "Projects",
+      "moreOptions": "More options",
+      "choices": "Choices",
+      "beingMade": "Your video is being made.",
+      "history": "Run history",
+      "choosePlan": "Choose a plan",
+      "describeAbove": "Describe what you want in the box above, then press Run.",
+      "tellWhatToMake": "Tell us what you want to make",
+      "trialTitle": "Not enough credits to start this run",
+      "trialBody": "Your free trial credits have run out. Nothing was started and nothing was charged.",
+      "confirmTitle": "Start this run?",
+      "confirmBalance": "You have {balance} credits. You are only charged for what is used.",
+      "cancel": "Cancel",
+      "writeIt": "Write it",
+      "shapeFollowsClips": "Your clips are not vertical, so the video keeps their shape.",
+      "avatar": "Avatar",
+      "avatarNone": "None",
+      "avatarOption": "{name} · {status}",
+      "avatarDescription": "The person the video shows, from the project's Avatars tab. Only an avatar whose consent is on record can be chosen.",
+      "avatarDescriptionAny": "The person or object the video shows, from the project's Avatars tab. Only one that is ready can be chosen.",
+      "avatarGroupPeople": "People",
+      "avatarGroupObjects": "Objects",
+      "avatarNoAvatars": "This project has no avatars yet.",
+      "avatarOpenTab": "Open the Avatars tab",
+      "avatarSends": "{name}'s pictures, videos and voice samples are sent to the video service. The video step must be allowed to send them: the check below says so if it is not.",
+      "avatarSendsObject": "The pictures and videos of \"{name}\" are sent to the video service. The video step must be allowed to send them: the check below says so if it is not.",
+      "avatarNoneChosen": "No avatar chosen: the video will not show anyone or anything from your Avatars tab.",
+      "retryFieldNote": "Retry used this run's value, which can no longer be used."
+    },
+    "confirm": {
+      "body": "This run will use about {typical} credits.{usually, select, yes { Usually {low} to {high}.} other {}} Most it can use: {total} credits{shots, select, yes {, including AI shots} other {}}."
+    },
+    "inputs": {
+      "moreOptions": "More options ({count})",
+      "missing": "Fill in “{input}” to run this app.",
+      "fillIn": "Fill in “{input}”",
+      "choose": "Choose…",
+      "counter": "{count, number} / {max, number}",
+      "counterLeft": "{left, plural, one {# character left} other {# characters left}}",
+      "unitSuffix": {
+        "seconds": "s",
+        "takes": "takes",
+        "percent": "%"
+      },
+      "unit": {
+        "takes": "{count, plural, one {# take} other {# takes}}",
+        "percent": "{count, number}%"
+      },
+      "shape": {
+        "vertical": "Vertical",
+        "square": "Square",
+        "landscape": "Landscape",
+        "portrait": "Portrait"
+      },
+      "recommended": "Recommended",
+      "chooseModel": "Choose a model",
+      "modelChosen": "{name}, Change",
+      "modelsLoading": "Loading the models…",
+      "modelsUnavailable": "The list of models could not be loaded. The app uses its own model unless you choose one.",
+      "noModels": "No model can be chosen here yet. The app uses its own model.",
+      "tryAgain": "Try again",
+      "cost": {
+        "cheapest": "Cheapest",
+        "cheaper": "Cheaper",
+        "same": "About the same price",
+        "times": "About {times, number}× the price"
+      },
+      "unavailable": {
+        "notInWorkspace": "Not available to your workspace",
+        "wrongKind": "Not this kind of model",
+        "notAllowed": "Not offered by this app",
+        "wrongJob": "Cannot make this kind of clip",
+        "plan": {
+          "video_generation": "Your plan does not include video generation",
+          "audio_generation": "Your plan does not include music and sound effects",
+          "avatars": "Your plan does not include avatars",
+          "avatar_objects": "Your plan does not include objects",
+          "resolution": "Your plan does not render at this size",
+          "other": "Your plan does not include this"
+        },
+        "other": "Cannot be used here"
+      },
+      "refusal": {
+        "missing": "Fill this in to run the app.",
+        "invalid": "This value cannot be used here. Change it, then press Run again.",
+        "model": "This model cannot be used for this app. Choose another one.",
+        "plan": "Your plan does not include this kind of model. Choose another one or upgrade your plan."
+      }
+    },
+    "history": {
+      "heading": "Fields of this run",
+      "on": "On",
+      "off": "Off",
+      "unknownModel": "A model of this workspace",
+      "label": "Fields this run was made with"
+    },
+    "briefHelp": {
+      "label": "Examples you can edit",
+      "promptFootage": "{persona, select, creator {Say who watches and which moments matter. One or two sentences are enough.} business {Say who should see it and what it should show about your business. One or two sentences are enough.} educator {Say who is learning and the one idea they should keep. One or two sentences are enough.} nonprofit {Say who should see it and which story it should tell. One or two sentences are enough.} software {Say who it is for and what your recordings should show. One or two sentences are enough.} agency {Say who the client wants to reach and what the cut should show. One or two sentences are enough.} other {Say who it is for and what it should show. One or two sentences are enough.}}",
+      "promptPromo": "{persona, select, creator {Say who should see it and which pages of your site or app to show. One or two sentences are enough.} business {Say which customers it is for and which pages to show. One or two sentences are enough.} educator {Say who is learning and which screens to show. One or two sentences are enough.} nonprofit {Say who should see it and which pages to show. One or two sentences are enough.} software {Say who it is for and which screens to show. One or two sentences are enough.} agency {Say who the client wants to reach and which screens to show. One or two sentences are enough.} other {Say who it is for and which screens to show. One or two sentences are enough.}}",
+      "footage1": "{persona, select, creator {For my followers. The best moments of the hike, cut tight, starting with the view from the summit.} business {For people who live nearby. Our new autumn menu: the dishes first, then the room, ending on the front door.} educator {For new students. The one idea of this lesson, explained once, without the tangents.} nonprofit {For our supporters. What last weekend's clean-up achieved, in the volunteers' own words.} software {For people who already use the app. What is new in this release, one feature at a time, from my screen recordings.} agency {For the client's social channels. A first cut of the launch event: the arrivals, the reveal, two reactions.} other {For people who were not there. What happened and why it matters, in the order it happened.}}",
+      "footage2": "{persona, select, creator {For people who missed the stream. The three funniest moments, in order, with no dead air.} business {For new customers. How we make a custom order, from the first sketch to the finished piece.} educator {For people deciding whether to join the course. The clearest moments of the first class.} nonprofit {For people who have never heard of us. Who we help and how, told by one family.} software {For people comparing us with others. The demo from last week's call, trimmed to the parts where the product is on screen.} agency {For the client to review. The interview trimmed to her three strongest answers.} other {For friends and family. The best moments of the day, with the quiet parts removed.}}",
+      "footage3": "{persona, select, creator {A teaser for this week's episode. Open with the strongest line, then two quick clips from the interview.} business {For our social pages. A look around the shop before the weekend sale, friendly and quick.} educator {For parents. What the class built this term, with the students explaining their own work.} nonprofit {For donors. Where the money from the spring campaign went, shown on site.} software {For the team page. The founders explaining why we built this, without the pauses.} agency {For a pitch. The best shots from the shoot day, fast, so the client has something to react to.} other {For anyone new to this. The main point first, then the two clips that show it best.}}",
+      "promo1": "{persona, select, creator {For my followers. Show my new site: the home page, then the page where they can join.} business {For people who live nearby. Show how to book a table on our site, from the home page to the confirmation.} educator {For new students. Show how to sign up for the course and where the first lesson is.} nonprofit {For new volunteers. Show how to sign up for a shift on our site.} software {For developers who have never seen the product. Show the dashboard, then creating a first project, then the result.} agency {For the client's customers. Show the new site we built: home page, product page, contact page.} other {For people who have never seen it. Show the home screen, then the one thing it does best.}}",
+      "promo2": "{persona, select, creator {For people who watch my videos. Show the app I built for them and the one thing it does.} business {For new customers. Show the online shop: browsing, one product page, the checkout.} educator {For teachers. Show the lesson page, the exercises and how progress is saved.} nonprofit {For donors. Show the donation page and the page that says where the money goes.} software {For people who already use it. Show the three things that are new in this release.} agency {For the client to review. Show the three screens that changed in this version.} other {For people who already use it. Show what is new.}}",
+      "promo3": "{persona, select, creator {For new visitors. Show how to find an episode and start listening.} business {For regulars. Show the new loyalty page and how to sign in.} educator {For parents. Show where they can see what their child worked on this week.} nonprofit {For people who need help. Show how to find the nearest location and its opening hours.} software {For a launch post. Open on the home screen, then show the one feature that sets it apart.} agency {For a case study. Show the app from sign-in to the main screen, at an unhurried pace.} other {For a first post about it. Show how someone gets started, one step at a time.}}"
+    },
+    "confirmEmail": {
+      "title": "Confirm your email before you run",
+      "body": "A run starts only after {email} is confirmed. Open the link we sent you, or get a new one. You can set everything up here in the meantime.",
+      "refused": "That run did not start, because your email address is not confirmed yet.",
+      "resend": "Resend the email",
+      "resendAgain": "Send it again",
+      "sent": "Sent. Check your inbox.",
+      "failed": "We could not send it just now. Please try again later.",
+      "readiness": "Confirm your email address first. A run starts only after that."
+    },
+    "first": {
+      "title": "Your first video is ready",
+      "body": "Press play on something finished. It is yours to post, change or build on.",
+      "dismiss": "Close",
+      "video": "Your first finished video",
+      "factsLabel": "This run in numbers",
+      "beforeLabel": "Before",
+      "before": "{count, plural, one {# clip} other {# clips}}, {length} of footage",
+      "afterLabel": "After",
+      "after": "A finished video of {length}",
+      "afterParts": "A finished video of {length}, cut from {count, plural, one {# part} other {# parts}} of that footage",
+      "lengthOnly": "Your video runs {length}.",
+      "download": "Download",
+      "change": "Change something",
+      "subtitlesOrShape": "Add subtitles or try another shape",
+      "subtitles": "Add subtitles",
+      "shape": "Try another shape",
+      "recipes": "Try another recipe",
+      "subtitlesHint": "Add subtitles opens the subtitles app. It burns subtitles into a clip you choose and gives you SRT and VTT files.",
+      "shapeHint": "Another shape brings this run's choices back, so you can pick a shape and press Run again. That is a new run.",
+      "subtitlesFailedTitle": "We could not set that up",
+      "tryAgainLater": "Try again in a moment.",
+      "failedLead": "This was your first run, and it did not finish. Here is what happened.",
+      "failedOurs": "This step failed on our side, so the credits held for it are refunded. Your files and choices are still here, so you can run it again as it is.",
+      "failedRefundRule": "If a step fails on our side, the credits held for it are refunded. Your files and choices are still here, so you can run it again as it is.",
+      "failedYours": "Your files and choices are still here. Fix what the message above names, then run it again.",
+      "failedRetry": "Your files and choices are still here, so you can run it again as it is.",
+      "creditsUsed": "This run used {credits} credits for the steps that finished ({steps, plural, one {# step} other {# steps}}); the step that failed charged nothing.",
+      "creditsUsedOnly": "This run used {credits} credits for the steps that finished ({steps, plural, one {# step} other {# steps}}).",
+      "creditsNone": "Nothing was charged for this run.",
+      "creditsFailedRefunded": "This run used {credits} credits for the steps that finished ({steps, plural, one {# step} other {# steps}}). The step that failed was charged {failed} credits, and those are refunded.",
+      "creditsFailedCharged": "This run used {credits} credits in total, including {failed} for the step that failed."
+    }
+  },
+  "failures": {
+    "INPUT_MISSING": "Something this app needs was missing: a clip you chose is no longer in the project, or an earlier step produced nothing to work with.",
+    "INPUT_TOO_LARGE": "Something you gave this app was too big for a step to handle, such as a very large video or a very long text. Use a smaller copy and run again.",
+    "SOURCE_TOO_LARGE": "A video you chose is larger than we can edit. Trim it or export a smaller copy, then run again.",
+    "SOURCE_TOO_LONG": "A video you chose is longer than we can edit. Trim it or export a shorter copy, then run again.",
+    "SOURCE_TOO_DEMANDING": "This video is too demanding for us to analyse in the time we allow. Try a shorter clip or a smaller export, for example 1080p, then run again. You were not charged.",
+    "SCRATCH_BUSY": "Our servers were busy with other large videos and had no room to work on yours. Nothing was lost. Try again in a few minutes.",
+    "SOURCE_UNRESOLVED": "A clip or file this app needs could not be found in the project.",
+    "SOURCE_NOT_FOUND": "A clip or file this app needs could not be found in the project.",
+    "SOURCE_INVALID": "One of the clips could not be read.",
+    "CONFIG_INVALID": "This app is set up in a way that cannot run. Open Edit the steps to fix it, or ask the assistant.",
+    "NO_AUDIO_PROVIDER": "No voice service is connected. Ask your admin to connect one.",
+    "VOICE_CONSENT_MISSING": "The chosen voice has no consent on file. Choose another voice.",
+    "VOICE_NOT_FOUND": "The chosen voice could not be found.",
+    "VOICE_RESOLVER_UNAVAILABLE": "The narration service was not available.",
+    "RUN_RATE_LIMITED": "Too many runs are going at once. Try again in a few minutes.",
+    "INSUFFICIENT_CREDITS": "There were not enough credits to finish.",
+    "PLAN_NOT_ENTITLED": "Your plan does not include one of the choices made for this run.",
+    "CONTENT_BLOCKED": "The content was blocked by a safety check.",
+    "TRANSCRIPTION_FAILED": "The speech in the footage could not be transcribed.",
+    "AUDIO_GENERATE_FAILED": "The music or sound could not be made.",
+    "IMAGE_GENERATE_FAILED": "The picture could not be made.",
+    "NARRATION_OUTPUT_INVALID": "The narration script could not be used. Try again.",
+    "SCRIPTWRITER_OUTPUT_INVALID": "The script could not be used. Try again.",
+    "DELIVERY_FAILED": "The finished video could not be saved.",
+    "UNEXPECTED_ERROR": "Something unexpected went wrong while making your video.",
+    "INSERT_NOT_APPLIED": "We could not find a screen we could follow in your clip, so nothing was changed. Screens that are small or hand-held, have a pattern or markers across them, or leave the frame are hard to follow. You can run it again with a clip where the screen is large, steady and stays in view, or put your video in a corner or full screen instead; the assistant can do that for you.",
+    "INSERT_TRACKING_FAILED": "Scanning your clip for the screen did not finish. This was on our side, and nothing was changed. Run it again.",
+    "INSERT_CONTENT_UNUSABLE": "The picture or video you chose for the screen could not be used, so nothing was changed. Choose a different picture or video (a common format such as PNG, JPG or MP4) and run it again.",
+    "INSERT_CONTENT_MISSING": "Nothing was chosen to put on the screen. Choose a picture or video for the screen, then run it again.",
+    "INSERT_FILTER_UNAVAILABLE": "Our video tools are missing a feature needed to put content on a screen. This was on our side. Try again later or ask the assistant.",
+    "generic": "Something went wrong while making your video."
+  },
+  "viewToggle": {
+    "label": "Workflow view",
+    "app": "App",
+    "advanced": "Advanced"
+  },
+  "lint": {
+    "step": {
+      "named": "step {order} ({label})",
+      "plain": "step {order}",
+      "none": "no step"
+    },
+    "list": {
+      "comma": "{head}, {tail}",
+      "and": "{head} and {tail}"
+    },
+    "ref": {
+      "previousFrom": "from the step before it",
+      "actor": {
+        "named": "The step {order} ({label})",
+        "plain": "The step {order}"
+      },
+      "subject": {
+        "named": "step {order} ({label})",
+        "plain": "step {order}"
+      },
+      "at": {
+        "named": "at step {order} ({label})",
+        "plain": "at step {order}"
+      },
+      "from": {
+        "plain": "from step {order}",
+        "none": "from no step"
+      },
+      "to": {
+        "plain": "to step {order}",
+        "none": "to no step"
+      },
+      "over": {
+        "named": "over step {order} ({label})",
+        "plain": "over step {order}"
+      },
+      "definite": {
+        "named": "step {order} ({label})",
+        "plain": "step {order}"
+      }
+    },
+    "problem": {
+      "isNotSet": "is not set",
+      "notInWorkflow": "is not a step in this workflow",
+      "comesAfter": "comes after it, so its result does not exist yet",
+      "wrongKind": "is not {expected} (it is {found})",
+      "firstStep": "does not exist: it is the first step",
+      "previousWrongKind": "is not {expected}: the step right before it is {found}",
+      "doesNotNameTheStep": "does not say which voiceover step to use",
+      "noDefault": "no provider is set as the default for it",
+      "providerUnavailable": "the provider chosen on the step is not available to your organization"
+    },
+    "expected": {
+      "scriptwriter": "a Scriptwriter step",
+      "narrationWriter": "a NarrationWriter step",
+      "pickupPlanner": "a PickupPlanner step",
+      "voiceover": "a Voiceover step",
+      "videoGeneration": "a video generation step",
+      "videoAnalysis": "a video analysis step",
+      "editDecision": "a step that makes the edit decision",
+      "takeSelection": "a step that selects takes",
+      "transcriptTranslation": "a step that translates the transcript",
+      "planWriter": "a step that writes the plan",
+      "overlayPlanner": "an OverlayPlanner step",
+      "anyStep": "a step"
+    },
+    "input": {
+      "editDecision": "edit decision",
+      "analysis": "analysis",
+      "captionTranslation": "caption translation",
+      "takeSelection": "take selection",
+      "graphicsPlan": "graphics plan",
+      "musicPlan": "music plan",
+      "colorGradePlan": "colour grade plan",
+      "sfxPlan": "sound-effects plan",
+      "generatedClips": "generated clips"
+    },
+    "role": {
+      "video": "video footage",
+      "code": "source code",
+      "music": "a music track",
+      "sfx": "sound effect files",
+      "image": "images",
+      "document": "documents",
+      "insertContent": "a picture or video for the screen",
+      "overlay": "a picture or video for the film"
+    },
+    "fileRole": {
+      "video": "video",
+      "code": "code",
+      "music": "music",
+      "sfx": "sfx",
+      "image": "image",
+      "document": "document",
+      "insertContent": "picture or video",
+      "overlay": "picture or video"
+    },
+    "capability": {
+      "speechSynthesis": "a voice (speech) provider",
+      "videoGeneration": "a video generation provider",
+      "musicGeneration": "a music generation provider",
+      "soundEffectGeneration": "a sound effect generation provider",
+      "transcription": "a transcription provider",
+      "vision": "a vision (image understanding) provider",
+      "audioIsolation": "an audio cleanup provider",
+      "videoUpscale": "a video upscaling provider",
+      "frameInterpolation": "a frame interpolation provider",
+      "videoOutpaint": "a video extension provider",
+      "lipSync": "a lip-sync provider"
+    },
+    "feature": {
+      "music": "music",
+      "narration": "narration",
+      "reRecordedLines": "re-recorded lines",
+      "onScreenGraphics": "on-screen graphics",
+      "soundEffects": "sound effects",
+      "colorGrade": "a colour grade",
+      "insertedScreens": "inserted screens",
+      "generatedClips": "generated clips",
+      "captions": "captions",
+      "differentOutputFormat": "a different output format",
+      "duckedOrReplacedDialogue": "ducked or replaced dialogue",
+      "censoring": "censoring",
+      "fades": "fades",
+      "regionEffects": "region effects",
+      "transitions": "transitions",
+      "keyframesNotSnapped": "cuts that land between keyframes (allowKeyframeSnapping is off)",
+      "rooms": "Multi-agent rooms",
+      "audioGeneration": "Audio generation",
+      "videoGeneration": "Video generation"
+    },
+    "field": {
+      "language": "language",
+      "sourceLanguage": "source language",
+      "lengthSec": "length",
+      "voice": "voice choice",
+      "style": "style or tone",
+      "format": "format",
+      "resolution": "resolution",
+      "designSystem": "design system choice",
+      "sourceFiles": "source files",
+      "avatar": "avatar"
+    },
+    "reason": {
+      "consentMissing": "consent has not been recorded for it",
+      "consentRevoked": "its consent was withdrawn",
+      "retentionExpired": "its retention period ended",
+      "notInProject": "it is not in this project"
+    },
+    "voice": {
+      "named": "\"{name}\"",
+      "youChose": "you chose"
+    },
+    "avatar": {
+      "named": "\"{name}\"",
+      "youChose": "this step chose"
+    },
+    "voiceKind": {
+      "narration": "narration",
+      "pickups": "re-recorded lines"
+    },
+    "later": {
+      "narration": "the narration (step {order})",
+      "music": "the music (step {order})",
+      "finalCut": "the final cut (step {order})"
+    },
+    "slot": {
+      "videoFile": "a video file",
+      "musicTrack": "a music track",
+      "insert": "the file to insert"
+    },
+    "WL001": {
+      "isNotSet": "{actor} speaks lines {from}, which {problem}. The voiceover would fail when it runs.",
+      "notInWorkflow": "{actor} speaks lines {from}, which {problem}. The voiceover would fail when it runs.",
+      "comesAfter": "{actor} speaks lines {from}, which {problem}. The voiceover would fail when it runs.",
+      "wrongKind": "{actor} speaks lines {from}, which {problem}. The voiceover would fail when it runs."
+    },
+    "WL002": {
+      "doesNotNameTheStep": "{actor} is set to mix in the narration, but {problem}. The film would come out silent.",
+      "notInWorkflow": "{actor} is set to mix in the narration, but {problem}. The film would come out silent.",
+      "comesAfter": "{actor} is set to mix in the narration, but {problem}. The film would come out silent.",
+      "wrongKind": "{actor} is set to mix in the narration, but {problem}. The film would come out silent.",
+      "problem": "the {voiceKind} step it names {problem}"
+    },
+    "WL003": {
+      "isNotSet": "The review {at} goes back {to}, which {problem}. The loop would never improve anything.",
+      "notInWorkflow": "The review {at} goes back {to}, which {problem}. The loop would never improve anything.",
+      "comesAfter": "The review {at} goes back {to}, which {problem}. The loop would never improve anything.",
+      "noImprovement": "The review {at} goes back {over} and the steps after it, but none of them makes anything new on a repeat. The loop would not improve the result."
+    },
+    "WL004": {
+      "isNotSet": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop.",
+      "notInWorkflow": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop.",
+      "comesAfter": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop.",
+      "wrongKind": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop.",
+      "firstStep": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop.",
+      "previousWrongKind": "{actor} reads its {input} {from}, which {problem}. The cut would be wrong or the step would stop."
+    },
+    "WL005": "{actor} copies the footage without re-encoding, which cannot also add {features}. The step would stop.",
+    "WL006": {
+      "message": "{actor} needs {capability}, but {problem}. It would stop after earlier steps had already been paid for.",
+      "providerOwnership": "{detail}: the provider chosen on this step is not available to your organization. It would stop when it runs.",
+      "modelUnsupported": "{actor} uses the video model {model}, which the video provider it would run on does not support. Choose another model, or connect a provider that has it.",
+      "lipSyncModelNotSet": "{actor} makes an avatar talk, and no lip-sync model is set up. Ask a workspace admin to add one under Lip-sync."
+    },
+    "WL007": {
+      "stepFeature": "{feature} ({step}) is not included in your plan. It would be refused when the run starts.",
+      "resolution": "The {resolution} resolution is not included in your plan. It would be refused when the run starts."
+    },
+    "WL008": "The voice {voice} cannot be used ({reason}). The narration step would stop.",
+    "WL009": "The film is in {language}, but the chosen voice speaks {languages}. The narration may sound wrong.",
+    "WL010": {
+      "missingMedia": "{actor} needs {role}, but there are none in this project. The run would be empty or fail.",
+      "archiveOnly": "{actor} needs source code it can read, but the project only has archives (zip, tar). Upload the source as a .zip without node_modules, connect GitHub, or sync a folder.",
+      "unpacking": "{actor} needs source code, but your zip is still being unpacked. Its files appear in the project in a moment; try again shortly.",
+      "missingFile": "Step {stepOrder} points at {slot}, but that file is not in this project. The step would stop.",
+      "openVideoSlot": "{actor} needs a video, but none was chosen for this run. Choose a video and run it again."
+    },
+    "WL011": "The {field} you set is not used by any step in this workflow, so it will not change the result.",
+    "WL012": {
+      "step": "{step} needs the project's approved design system, and none is approved yet.",
+      "brief": "Your brief needs the project's approved design system, and none is approved yet."
+    },
+    "WL013": "{actor} costs money and sits inside the review loop at step {loop}; every extra round pays for it again.",
+    "WL014": "{actor} reads from step {target}, which comes later, so the input does not exist yet.",
+    "WL015": {
+      "tracksAnObjectByName": "{actor} would send your footage to an outside service, but the permission is off. It would be refused. It tracks an object by name.",
+      "startsFromFrame": "{actor} would send your footage to an outside service, but the permission is off. It would be refused. It starts from a frame of your footage.",
+      "cleansAudioWithAi": "{actor} would send your footage's audio to an outside service, but the permission is off. It would be refused. It cleans the audio with AI.",
+      "editsPictureWithAi": "{actor} would send your picture to an outside service, but the permission is off. It would be refused. It edits the picture with AI.",
+      "enhancesVideoWithAi": "{actor} would send your footage to an outside service, but the permission is off. It would be refused. It sends the video to an outside AI service to enhance it.",
+      "showsAnAvatar": "{actor} would send an avatar's pictures, videos and voice samples to an outside service, but the permission is off. It would be refused. It shows an avatar."
+    },
+    "WL016": "You asked for a narrated film, but this workflow has no voice step, so the result would be silent.",
+    "WL017": "You asked for {length} seconds, but your footage only adds up to about {available} seconds.",
+    "WL018": {
+      "unreadField": "The input \"{input}\" is not read by any step of this workflow, so it would be shown and ignored. Remove it or add a step that uses it.",
+      "unusedRole": "The input \"{input}\" takes {role} files, but no step of this workflow can use them. Remove it or add a step that takes them."
+    },
+    "WL019": "{actor} burns captions, but no narration and no transcribed speech gives it any text. Nothing would appear.",
+    "WL020": "The review at step {reviewOrder} runs before {later}, so it checks a silent picture. Move the review after step {lastOrder}.",
+    "WL021": "{actor} lays a voiceover {over}, a film that already has its own narration, so the narration would be heard twice. Turn on muteSourceAudio so only the new voiceover, music and sound effects play, or switch this compile's voiceover off to keep the film's own narration.",
+    "WL022": "The censor won't apply to {label}: censoring needs a feature track, and this label is tracked with segmentation only. Use a region effect on that track instead.",
+    "WL026": "The narration at {step} is typed inline even though {script} writes the lines, so that script is never spoken. Point the voiceover at the script.",
+    "WL027": "{actor} shows the avatar {avatar}, but it cannot be used ({reason}). The step would stop.",
+    "WL023": {
+      "missingFile": "Step {stepOrder} is set to show a picture or video, but that file is not in this project. The step would stop.",
+      "wrongKind": "Step {stepOrder} is set to show a picture or video, but that file is not an image or a video. The step would stop.",
+      "quarantined": "Step {stepOrder} is set to show a picture or video, but that file is quarantined. The step would stop.",
+      "badStep": "Step {stepOrder} is set to show a picture from step {sourceOrder}, but that step does not come earlier or cannot produce a picture or video. The step would stop."
+    },
+    "WL024": "The {actor} is set to show a picture or video from {start} to {end}, but that is not a valid moment in the film. The step would stop.",
+    "WL025": "The {actor} keeps a full-screen card on screen for {seconds} seconds. A card should stay under 25% of the film or 30 seconds.",
+    "WL028": "The app field “{input}” is required and has no value. The run would be refused.",
+    "WL029": "The value of “{input}” does not fit the setting it fills. The run would be refused.",
+    "WL030": {
+      "message": "The model chosen for “{input}” can no longer be used. The run would be refused.",
+      "recommended": "The model “{input}” starts with can no longer be used, so people will have to choose another one."
+    },
+    "WL031": "When “{input}” is {value}, {count, plural, one {# step does} other {# steps do}} not run.",
+    "WL032": "“{input}” changes the model of an agent that {count} steps use, so all of them use the model chosen.",
+    "WL033": "With the dearest choice of “{input}”, {actor} could cost about {credits} credits, more than its cap of {cap}. Such a run would stop at the cap.",
+    "WL034": {
+      "useSibling": "{actor} shows an avatar or an object, but its model “{model}” takes no pictures. Use “{sibling}” instead. The step would be refused before anything is charged.",
+      "noSibling": "{actor} shows an avatar or an object, but its model “{model}” takes no pictures. Choose a model that takes pictures. The step would be refused before anything is charged."
+    },
+    "inputValue": {
+      "on": "on",
+      "off": "off"
+    },
+    "fix": {
+      "WL001": {
+        "retargetSource": "Point the voiceover at {expected}"
+      },
+      "WL002": {
+        "retargetVoiceover": "Point the compile at the Voiceover step"
+      },
+      "WL003": {
+        "retargetTarget": "Point the review at the step it should send back",
+        "retargetModelStep": "Point the review at a step a model writes"
+      },
+      "WL004": {
+        "retargetInput": "Point the {input} at the right step"
+      },
+      "WL005": {
+        "reencode": "Switch the compile to re-encode"
+      },
+      "WL006": {
+        "chooseProvider": "Connect or choose a provider",
+        "chooseAvailableProvider": "Choose a provider you can use"
+      },
+      "WL007": {
+        "changePlan": "Choose a different step or change your plan",
+        "changeResolution": "Choose a lower resolution or change your plan"
+      },
+      "WL008": {
+        "chooseVoice": "Choose a voice with consent on record"
+      },
+      "WL009": {
+        "chooseVoice": "Choose a voice that speaks the film's language"
+      },
+      "WL010": {
+        "upload": "Upload {role} to the project",
+        "pickFile": "Pick a file that is in the project"
+      },
+      "WL012": {
+        "approveDesign": "Approve the project's design system"
+      },
+      "WL013": {
+        "startLoopAfter": "Start the review loop after this step"
+      },
+      "WL014": {
+        "earlierStep": "Point the input at an earlier step"
+      },
+      "WL015": {
+        "allowEgress": "Allow the footage to be sent for this step",
+        "allowOnAppPage": "Allow sending your media on the app page"
+      },
+      "WL016": {
+        "addVoiceover": "Add a voiceover step"
+      },
+      "WL017": {
+        "shorterFilm": "Ask for a shorter film or add more footage"
+      },
+      "WL018": {
+        "removeReference": "Remove the control or point it at an existing step"
+      },
+      "WL019": {
+        "voiceOrCaptions": "Turn on the narration for this compile, or turn captions off"
+      },
+      "WL020": {
+        "moveReview": "Move the review after the final cut"
+      },
+      "WL021": {
+        "muteSourceAudio": "Turn on muteSourceAudio (only the new voiceover, music and sound effects play)"
+      },
+      "WL026": {
+        "useScript": "Point the voiceover at the script"
+      },
+      "WL027": {
+        "chooseAvatar": "Choose an avatar that is ready"
+      },
+      "WL023": {
+        "pickFile": "Pick a picture or video in this project",
+        "earlierStep": "Point the picture at an earlier step that makes a video or image"
+      },
+      "WL024": {
+        "changeSpan": "Change the overlay's timing"
+      },
+      "WL025": {
+        "shortenCard": "Shorten the card or make it an inset"
+      },
+      "WL028": {
+        "fillInput": "Fill in “{input}”"
+      },
+      "WL029": {
+        "changeInput": "Change “{input}”"
+      },
+      "WL030": {
+        "chooseModel": "Choose another model"
+      },
+      "WL033": {
+        "narrowRange": "Narrow the input's range or raise the step's cap"
+      },
+      "WL034": {
+        "chooseModel": "Choose a model that takes pictures"
+      }
+    }
+  },
+  "inputs": {
+    "moved": "Moved {name} to position {position} of {total}",
+    "notSavedOrphan": "Not saved: an app input would be left without a step to use it",
+    "notSavedFix": "Not saved: fix the app inputs below",
+    "title": "App inputs",
+    "shown": "Shown in the app",
+    "hidden": "Hidden",
+    "shownLabel": "{state}: {name}",
+    "nameInApp": "Name in the app",
+    "nameInAppFor": "Name in the app for {name}",
+    "startsAs": "Starts as",
+    "startsAsFor": "Starts as, for {name}",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "moveNameUp": "Move {name} up",
+    "moveNameDown": "Move {name} down",
+    "addField": "Add a field",
+    "checkingSteps": "Checking what the steps can use...",
+    "chooseField": "Choose a field",
+    "noOtherField": "No other field is used by a step",
+    "add": "Add",
+    "checkingFields": "Checking fields",
+    "noOtherFieldWorkflow": "No other field is used by a step in this workflow.",
+    "probeFailed": "We could not check which fields the steps can use, so none are offered right now.",
+    "atMost": "An app can have at most {max} inputs.",
+    "reset": "Reset to automatic inputs",
+    "save": "Save app inputs",
+    "resetMessage": "This forgets the changes you made to this app's inputs. The app will ask for what its steps need, and any input you hid comes back.",
+    "resetConfirm": "Reset",
+    "loading": "Loading app inputs",
+    "loadFailed": "We could not load the app inputs. Check your connection and try again.",
+    "tryAgain": "Try again"
+  },
+  "runNudge": {
+    "title": "Your files are ready to become a video",
+    "body": "{project} has files and no video yet. Pick an app and run it.",
+    "cta": "Pick an app and run it",
+    "dismiss": "Not now"
+  },
+  "oneClick": {
+    "title": "Ready to make your first video",
+    "body": "{app} is set up with {count, plural, one {your clip} other {your # clips}}.",
+    "run": "Run it",
+    "review": "Review and run",
+    "starting": "Starting",
+    "priceAbout": "About {amount} {unit, select, one {credit} other {credits}}, you have {have}",
+    "priceFree": "No credits used",
+    "priceChecking": "Checking the price",
+    "reason": {
+      "notes": "This app needs a short description from you first.",
+      "consent": "This app needs your permission to send media to an AI service.",
+      "footage": "Choose which clips to use.",
+      "inputs": "This app has a few choices for you.",
+      "shortfall": "You do not have enough credits yet.",
+      "check": "The pre-run check found something to look at.",
+      "cost": "This run can cost up to {amount} credits, so check it first.",
+      "estimate": "We could not work out the price just now."
+    },
+    "failedTitle": "We could not start that",
+    "failedMessage": "Open the app to see why."
+  },
+  "footageReady": {
+    "title": "Your clips are ready",
+    "body": "{count, plural, one {# video clip is uploaded.} other {# video clips are uploaded.}} Turn {count, plural, one {it} other {them}} into a highlight edit.",
+    "primary": "Make a highlight edit",
+    "secondary": "See other footage apps",
+    "settingUp": "Setting up",
+    "failedTitle": "We could not set that up",
+    "tryAgainLater": "Try again in a moment."
+  },
+  "recipes": {
+    "inputs": {
+      "callToAction": {
+        "label": "Call to action",
+        "help": "The last thing the video asks people to do.",
+        "example": "Try it free today"
+      },
+      "scriptModel": {
+        "label": "Script model"
+      },
+      "builderModel": {
+        "label": "Video builder model"
+      },
+      "backgroundLook": {
+        "label": "Background look",
+        "help": "The colours and mood of the soft moving backgrounds.",
+        "example": "deep blue and violet, calm"
+      },
+      "backgroundModel": {
+        "label": "AI background model"
+      },
+      "audience": {
+        "label": "Who it is for",
+        "help": "The people the video speaks to.",
+        "example": "busy café owners"
+      },
+      "captions": {
+        "label": "Captions",
+        "help": "Shows the spoken words on screen."
+      },
+      "musicVolume": {
+        "label": "Music volume",
+        "help": "Leave it empty to let the editor choose."
+      },
+      "footageSounds": {
+        "label": "Sounds on filmed footage too",
+        "help": "Off: sounds go on designed moments, not on plain cuts between filmed shots."
+      },
+      "lookModel": {
+        "label": "Model that looks at the picture"
+      },
+      "mostLooks": {
+        "label": "Most looks at the picture",
+        "help": "Leave it empty and the length of the video decides. 0 switches the looks off. When looks are on, the sound designer may ask for up to 6 more."
+      },
+      "videoModel": {
+        "label": "Video model"
+      },
+      "bRollShots": {
+        "label": "Most extra shots",
+        "help": "The most extra AI shots to plan and make. Fewer shots cost less."
+      },
+      "bRollModel": {
+        "label": "Video model for the extra shots"
+      },
+      "mostCredits": {
+        "label": "Most credits to spend",
+        "help": "The most credits the extra AI shots may cost this run. The estimate shows what it will cost."
+      },
+      "bRollCredits": {
+        "label": "Most credits to spend on extra shots",
+        "help": "The most credits the extra AI shots may cost this run."
+      },
+      "mostShots": {
+        "label": "Most extra shots",
+        "help": "The most extra AI shots to plan and make. Fewer shots cost less."
+      },
+      "takesPerShot": {
+        "label": "Versions per shot",
+        "help": "How many versions of each extra shot to make and choose from. More versions cost more."
+      },
+      "whatToHide": {
+        "label": "What to hide",
+        "help": "Name the object in plain words. It is followed through the whole clip.",
+        "example": "the car's number plate"
+      },
+      "captionLook": {
+        "label": "Caption look"
+      },
+      "liteMode": {
+        "label": "Lite mode (cheaper)",
+        "help": "Cheaper: one still picture of the person, animated to speak your words."
+      },
+      "whatTheyDo": {
+        "label": "What they do",
+        "example": "Greets the viewer warmly in a bright studio and looks into the camera"
+      },
+      "whatTheySay": {
+        "label": "What they say",
+        "help": "Spoken word for word, up to about 15 seconds. A blank line starts a new spoken line.",
+        "example": "Welcome to Caffè Lume! Our new autumn menu starts today."
+      },
+      "clipShape": {
+        "label": "Shape"
+      },
+      "clipLength": {
+        "label": "Length"
+      },
+      "liteModel": {
+        "label": "Lip-sync model"
+      },
+      "pictureModel": {
+        "label": "Picture model"
+      },
+      "footageCaptions": {
+        "label": "Captions",
+        "help": "Shows the words spoken in your footage on screen."
+      },
+      "ending": {
+        "label": "Ending fade",
+        "help": "Fades the picture and the sound out at the very end."
+      },
+      "hideWith": {
+        "label": "How to hide it"
+      },
+      "voiceover": {
+        "label": "Spoken voiceover",
+        "help": "A narrator reads the script over the video. Uses a voice."
+      },
+      "voiceModel": {
+        "label": "Voice model"
+      },
+      "ownWords": {
+        "label": "I will write the words",
+        "help": "Off: you give a topic and the words are written for you. On: the person says exactly what you type."
+      },
+      "topic": {
+        "label": "Topic",
+        "help": "What the person should explain, in a sentence or two.",
+        "example": "Why our new autumn menu uses local ingredients"
+      },
+      "explainerWords": {
+        "label": "What they say",
+        "help": "Spoken word for word, up to about 15 seconds. A blank line starts a new spoken line.",
+        "example": "Hi, I'm Giulia. Our autumn menu is here, and everything on it is grown nearby."
+      },
+      "kind": {
+        "label": "What to make"
+      },
+      "musicPrompt": {
+        "label": "Describe the music",
+        "help": "The mood, the instruments and the pace.",
+        "example": "Warm acoustic guitar, easy pace, hopeful"
+      },
+      "sfxPrompt": {
+        "label": "Describe the sound",
+        "help": "What makes the sound and where it happens.",
+        "example": "A wooden door creaking open in a quiet hall"
+      },
+      "musicLength": {
+        "label": "Length"
+      },
+      "sfxLength": {
+        "label": "Length"
+      },
+      "audioTakes": {
+        "label": "Takes",
+        "help": "How many versions to make and choose from. More takes cost more."
+      },
+      "musicModel": {
+        "label": "Music model"
+      },
+      "sfxModel": {
+        "label": "Sound effect model"
+      },
+      "moment": {
+        "label": "Which frame"
+      },
+      "atTime": {
+        "label": "Time in the video",
+        "help": "The second of the video to use as the cover."
+      },
+      "coverText": {
+        "label": "Cover text",
+        "help": "A short line written on the cover. Leave it empty for a picture only.",
+        "example": "Our autumn menu"
+      },
+      "textToSpeak": {
+        "label": "Text to read",
+        "help": "Spoken word for word. A blank line starts a new paragraph.",
+        "example": "Welcome to our shop. We are open every day from nine to six."
+      },
+      "idea": {
+        "label": "Your idea",
+        "help": "What happens in the clip, in a sentence or two.",
+        "example": "Steam rising from a fresh espresso on a wooden counter, morning light"
+      },
+      "mood": {
+        "label": "Mood and look",
+        "help": "Optional: colours, light and pace.",
+        "example": "warm, golden, slow"
+      },
+      "effort": {
+        "label": "How much effort",
+        "help": "Draft is the cheapest. Best of two makes two 10-second versions."
+      },
+      "options": {
+        "quiet": "Quiet",
+        "balanced": "Balanced",
+        "loud": "Loud",
+        "subtitle": "Plain",
+        "karaoke": "Word by word",
+        "punch": "One big word",
+        "blur": "Blur",
+        "pixelate": "Pixelate",
+        "music": "Music",
+        "soundEffect": "Sound effect",
+        "auto": "Pick the best one",
+        "atTime": "Use a time I choose",
+        "draft": "Draft",
+        "standard": "Standard",
+        "bestOfTwo": "Best of two",
+        "rawFootage": "Raw footage",
+        "finishedAnimation": "Finished animation",
+        "screenRecording": "Screen recording",
+        "off": "Off",
+        "subtle": "Subtle",
+        "strong": "Strong",
+        "dynamic": "Dynamic",
+        "on": "On",
+        "onBeat": "On, cutting to the beat",
+        "bold": "Big and bold",
+        "titles": "Titles",
+        "callouts": "Callouts",
+        "autoTransitions": "Automatic",
+        "expressive": "Expressive",
+        "natural": "Natural",
+        "warm": "Warm",
+        "cool": "Cool",
+        "cinematic": "Cinematic",
+        "burned": "Burned in",
+        "voice": "Spoken translation",
+        "blurObject": "Blur an object",
+        "contentOnScreen": "Put content on a screen",
+        "followSubject": "Follow a subject"
+      },
+      "whatIsIt": {
+        "label": "What is it",
+        "help": "Tells the editor what to look for."
+      },
+      "soundEffects": {
+        "label": "Sound effects",
+        "help": "Hits, whooshes and clicks placed on the action."
+      },
+      "captionsStyle": {
+        "label": "Captions",
+        "help": "Shows the spoken words on screen."
+      },
+      "quickMode": {
+        "label": "Lite mode (cheaper)",
+        "help": "A plain cut with captions and transitions: the extras below are ignored and there is no AI review."
+      },
+      "music": {
+        "label": "Music",
+        "help": "Off by default. On mixes a track from this project's music files under the voices, lowered while people speak."
+      },
+      "motion": {
+        "label": "Zooms and camera moves",
+        "help": "On by default, subtle: pushes, pulls and shakes placed on the action in the picture. Choose Off for none."
+      },
+      "speedRamps": {
+        "label": "Speed ramps",
+        "help": "On by default: slow motion and speed-ups on the action. Works with zooms and camera moves."
+      },
+      "flashes": {
+        "label": "Flashes",
+        "help": "On by default: a short flash on the hits. Works with zooms and camera moves."
+      },
+      "graphics": {
+        "label": "Graphics",
+        "help": "Words and shapes drawn over the picture where it has room."
+      },
+      "transitions": {
+        "label": "Transitions"
+      },
+      "colourLook": {
+        "label": "Colour look",
+        "help": "A grade chosen by an AI colour team."
+      },
+      "bRoll": {
+        "label": "Extra AI shots",
+        "help": "Up to four short AI shots cut in. They are paid, with a fixed cap you see before you run."
+      },
+      "narrate": {
+        "label": "Voice-over",
+        "help": "A narration written for what is kept, spoken and captioned. Pick its language and voice below."
+      },
+      "fixLines": {
+        "label": "Fix flubbed lines",
+        "help": "Re-records stumbled lines in your project voice. Needs speech in the video."
+      },
+      "cutOnEvents": {
+        "label": "Cut on the action",
+        "help": "On by default: lets cuts land on things that happen in the picture."
+      },
+      "subtitles": {
+        "label": "Subtitles",
+        "help": "Burned into the picture; SRT and VTT files come with them."
+      },
+      "translate": {
+        "label": "Translate the subtitles",
+        "help": "Into the language chosen below, always burned in. Off keeps the spoken language."
+      },
+      "dub": {
+        "label": "Dub",
+        "help": "Replaces the voices with a spoken translation in the target language. The lips are not re-synced."
+      },
+      "effect": {
+        "label": "What to do"
+      },
+      "hideTarget": {
+        "label": "What to hide",
+        "help": "Name the object in plain words. It is followed through the whole clip.",
+        "example": "the car's number plate"
+      },
+      "followTarget": {
+        "label": "What to follow",
+        "help": "Name the subject in plain words. The camera keeps it in frame.",
+        "example": "the dancer in the red jacket"
+      }
+    }
+  },
+  "builder": {
+    "notSaved": "Not saved: fix the app page below",
+    "fields": "Fields on the app page",
+    "open": "Edit",
+    "done": "Done",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "moveNameUp": "Move {name} up",
+    "moveNameDown": "Move {name} down",
+    "remove": "Remove",
+    "removeName": "Remove {name}",
+    "removed": "Removed {name}",
+    "moved": "Moved {name} to position {position} of {total}",
+    "removeRefused": "Step {n} chooses its path from this field. Change its condition first, then remove the field.",
+    "addedNotUsed": "Added “{name}”. Now use it: open a step and choose “Use a field for this setting”, or put it in the message for the AI steps.",
+    "add": "Add a field",
+    "addNew": "A new field",
+    "addBrief": "A choice the steps already read",
+    "addHint": "Fields are what people fill in when they run the app. Keep only what changes from run to run.",
+    "atMost": "An app can have at most {max} fields.",
+    "reset": "Reset to automatic inputs",
+    "save": "Save the app page",
+    "resetMessage": "This forgets the changes you made to this app page. The app will ask for what its steps need, and the fields you added leave the page (steps that used them keep their own settings).",
+    "resetConfirm": "Reset",
+    "badge": {
+      "required": "Must be filled",
+      "more": "More options"
+    },
+    "used": {
+      "setting": "Step {n} · {setting}",
+      "condition": "Step {n} · chooses the path",
+      "request": "Message for the AI steps",
+      "agent": "Step {n} · model",
+      "none": "Not used yet: nothing in the workflow reads it."
+    },
+    "types": {
+      "shortText": "Short text",
+      "longText": "Long text",
+      "number": "Number",
+      "duration": "Length",
+      "choice": "Choice",
+      "toggle": "Switch",
+      "shape": "Shape",
+      "model": "Model"
+    },
+    "newLabel": {
+      "shortText": "Short answer",
+      "longText": "Description",
+      "number": "How many",
+      "duration": "Length",
+      "choice": "Pick one",
+      "toggle": "Switch",
+      "shape": "Shape"
+    },
+    "kinds": {
+      "brief": "Run setting",
+      "files": "Files",
+      "notes": "Notes"
+    },
+    "request": {
+      "label": "Message for the AI steps",
+      "hint": "Optional. Added to each run’s request, so the AI writers see what people filled in. Use “Insert a field”.",
+      "insert": "Insert a field"
+    },
+    "preview": {
+      "title": "Preview of the app page",
+      "note": "This is what people see. Try the fields: nothing is sent.",
+      "untitled": "Untitled app",
+      "empty": "This app asks for nothing yet.",
+      "moreOptions": "More options ({count})",
+      "modelStandIn": "People pick from the model cards here.",
+      "filesStandIn": "People choose files here.",
+      "briefStandIn": "People choose here."
+    },
+    "edit": {
+      "label": "Name on the page",
+      "labelFor": "Name on the page for {name}",
+      "help": "Help line",
+      "helpHint": "Optional. One short line under the field.",
+      "example": "Example",
+      "exampleHint": "Shown greyed in the empty box, to show what to write. Never sent.",
+      "required": "Must be filled",
+      "more": "Under “More options”",
+      "startsAs": "Starts as",
+      "maxLength": "Longest answer (characters)",
+      "min": "Lowest",
+      "max": "Highest",
+      "step": "Goes up by",
+      "unit": "Unit",
+      "unitNone": "None",
+      "units": {
+        "seconds": "Seconds",
+        "takes": "Takes",
+        "percent": "Percent"
+      },
+      "lengths": "Lengths to offer",
+      "lengthsHint": "Optional. People pick one of these instead of typing a number.",
+      "seconds": "{count, plural, one {# second} other {# seconds}}",
+      "startsOn": "Starts on",
+      "onLabel": "Words when on",
+      "offLabel": "Words when off",
+      "shapes": "Shapes to offer",
+      "noDefault": "No starting value",
+      "showWhen": "Show only when",
+      "showWhenHint": "Hide this field unless another switch or choice has a value.",
+      "always": "Always",
+      "whenIs": "is",
+      "on": "On",
+      "off": "Off",
+      "options": "Options",
+      "optionLabel": "Shown as",
+      "optionLabelFor": "Option {n} of {name}: shown as",
+      "optionValue": "Value used",
+      "optionValueFor": "Option {n} of {name}: value used",
+      "removeOption": "Remove option",
+      "removeOptionFor": "Remove option {n} of {name}",
+      "addOption": "Add an option",
+      "optionN": "Option {n}",
+      "type": "Kind of field",
+      "typeHint": "Only kinds with the same sort of answer: the settings that use this field keep working.",
+      "typeFixed": "Kind: {type}. To ask something of another kind, add a new field and use it where this one is used."
+    },
+    "models": {
+      "saveFirst": "Save the app page, then choose which models people may pick.",
+      "loading": "Loading the models",
+      "loadFailed": "We could not load the models.",
+      "tryAgain": "Try again",
+      "none": "This workspace has no model of this kind yet.",
+      "any": "People may pick any model",
+      "anyHint": "Off: only the models you tick are offered.",
+      "allowed": "Allowed models",
+      "recommended": "Recommended",
+      "recommendedHint": "Shown first and chosen when people pick nothing.",
+      "recommendedDefault": "The workspace’s usual model"
+    },
+    "step": {
+      "legend": "App fields",
+      "intro": "Let people fill these settings on the app page when they run it.",
+      "added": "Added the field “{name}” to the app page. Rename it in “App inputs”.",
+      "itemLabel": "{label} ({n})",
+      "governed": "The app’s “{field}” field decides this.",
+      "use": "Use a field for this setting",
+      "useExisting": "Use “{name}”",
+      "useNew": "A new field",
+      "fromApp": "From the app: {name}",
+      "stop": "Stop using the field",
+      "agentModel": "Model",
+      "letPick": "Let people pick this agent’s model",
+      "stopAgent": "Stop letting people pick",
+      "agentModelLabel": "AI model",
+      "textWithFields": "{label}, with fields",
+      "textWithFieldsHint": "Fixed words and fields together. Fields are filled in when the app runs.",
+      "insert": "Insert a field",
+      "stopText": "Stop using fields",
+      "answersIntro": "What each answer sets here. Leave one on “Keep the step’s own” to change nothing for it.",
+      "answerSets": "When “{name}” is {answer}",
+      "answerOn": "on",
+      "answerOff": "off",
+      "keepOwn": "Keep the step’s own",
+      "valueOn": "On",
+      "valueOff": "Off",
+      "settingLabel": {
+        "spokenText": "Words to speak",
+        "stillModel": "Picture model",
+        "visionModel": "Model that looks at the picture"
+      }
+    },
+    "condition": {
+      "insert": "Read an app field",
+      "finish": "Finish the run here"
+    },
+    "drag": "Drag to reorder",
+    "changes": {
+      "title": "What changes when you save"
+    }
+  },
+  "permission": {
+    "mediaEgress": {
+      "label": "Allow sending your media to AI services",
+      "title": "Permission",
+      "neededBy": "Needed by: {steps}.",
+      "usedBy": "Used by: {steps}.",
+      "alreadyAllowed": "Already allowed in the step settings for: {steps}. To stop it, switch it off in Edit the steps.",
+      "step": "{name} ({reason})",
+      "thisRunOnly": "It applies to this run only. The saved steps do not change.",
+      "required": "Allow sending your media to AI services to run this app.",
+      "allow": "Go to the permission",
+      "reason": {
+        "tracksAnObjectByName": "finds the object",
+        "startsFromFrame": "starts from a frame of your footage",
+        "showsAnAvatar": "shows an avatar",
+        "showsAnAvatarOptional": "shows an avatar, when you choose one",
+        "plannedFrames": "can start a clip from your footage",
+        "plannedFramesAndSubjects": "can start a clip from your footage, or show the people and objects of your project's avatars (their pictures go to the outside AI company that makes the video)",
+        "enhancesVideoWithAi": "enhances the video",
+        "cleansAudioWithAi": "cleans the audio",
+        "other": "sends your media"
+      },
+      "allowedBy": {
+        "app": "Allowed in the app",
+        "api_key": "Allowed by an API key",
+        "mcp": "Allowed by a connected tool",
+        "assistant_card": "Approved in the assistant",
+        "other": "Allowed"
+      },
+      "builder": {
+        "locked": "Added by the app",
+        "explain": "The app shows this permission on its page because a step sends media to an AI service. It cannot be removed, renamed or connected to another setting."
+      },
+      "stepEditorNote": "You can also allow this each time you run, on the app page."
+    }
+  },
+  "goals": {
+    "title": "What do you want to make?",
+    "hint": "Pick a goal and we set up the app for you.",
+    "somethingElse": {
+      "label": "Something else",
+      "hint": "Tell the assistant what you have in mind."
+    },
+    "missing": "Not available in this project yet.",
+    "cut": {
+      "label": "Cut my footage",
+      "hint": "Turn raw clips into a tight video."
+    },
+    "subtitles": {
+      "label": "Subtitles",
+      "hint": "Add subtitles to a video."
+    },
+    "voice": {
+      "label": "Voice (narration)",
+      "hint": "Add a spoken voice to your video."
+    },
+    "translate": {
+      "label": "Translate or dub",
+      "hint": "Make your video in another language."
+    },
+    "promo": {
+      "label": "Promo",
+      "hint": "A short promo video from your project."
+    },
+    "blur": {
+      "label": "Blur or highlight",
+      "hint": "Hide a face or point at something."
+    },
+    "greenScreen": {
+      "label": "Green screen",
+      "hint": "Put a new background behind a person."
+    },
+    "thumbnail": {
+      "label": "Thumbnail",
+      "hint": "Not here yet. Ask the assistant for now."
+    }
+  },
+  "briefLabels": {
+    "language": "Language",
+    "narrationLanguage": "Narration language",
+    "spokenLanguage": "Spoken language",
+    "sourceLanguage": "Source language",
+    "length": "Length",
+    "shape": "Shape",
+    "resolution": "Resolution",
+    "quality": "Quality",
+    "narration": "Narration",
+    "style": "Style",
+    "design": "Design",
+    "tone": "Tone",
+    "overlayCardAudio": "Under a full-screen picture"
+  }
+}

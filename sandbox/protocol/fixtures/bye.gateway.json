@@ -1,0 +1,8 @@
+{
+  "v": 1,
+  "type": "bye",
+  "id": "01J9ZQ0000000000000BY0002",
+  "payload": {
+    "reason": "revoked"
+  }
+}

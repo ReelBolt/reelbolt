@@ -1,0 +1,7 @@
+services:
+  inference:
+    extra_hosts:
+      - "api.brevo.com:127.0.0.1"
+      - "host.docker.internal:host-gateway"
+    environment:
+      Marketing__Campaigns__BrevoApiBase: http://host.docker.internal:${FAKE_PORT:-19741}/v3

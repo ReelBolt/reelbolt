@@ -1,0 +1,22 @@
+{
+  "auth.pages.signup.title": "New-user funnel: outcome-led signup headline (marketing claim wording)",
+  "auth.pages.signup.subtitle": "Trust fact: free account, no card",
+  "auth.signup.checkNext": "Says what happens after the confirmation link; must stay enumeration-safe (never 'account created')",
+  "auth.value.trustNoCard": "Trust fact shown before sign-in; must stay true on every deployment",
+  "auth.value.trustReviewed": "Trust fact, scoped like the site's (site/messages/it/proof.json 'reviewed'): the edited cut is scored, not every output (subtitles, thumbnails and post text are made in a single pass); same Italian wording as the site; meaning must not change",
+  "auth.value.general.outcome": "Hero line of the messaging brief",
+  "auth.value.creator.outcome": "Audience outcome line (messaging brief); no numbers",
+  "auth.value.business.outcome": "Audience outcome line (messaging brief); no numbers",
+  "auth.value.educator.outcome": "Audience outcome line (messaging brief); no numbers",
+  "auth.value.nonprofit.outcome": "Audience outcome line (messaging brief); no numbers",
+  "auth.value.software.outcome": "Audience outcome line (messaging brief); no numbers",
+  "auth.value.agency.outcome": "Audience outcome line (messaging brief); 'editor' here is the customer's own editing tool or person",
+  "auth.value.next3Title": "'first cut' rendered as 'primo montaggio'",
+  "auth.oauth.inAppGoogle": "Shown inside another app's built-in browser, where Google refuses sign-in; 'Apri nel browser' is the menu item most apps show",
+  "auth.value.next1Body": "Says the email step applies to an email sign-up only, and that the link lasts a day (no digit: the panel shows no numbers)",
+  "auth.value.educator.before": "Reworded with the site's educator page: a long recording cannot be turned into clips on its own",
+  "auth.value.educator.after": "'takes' here are the person's own short recordings, so 'riprese' (the glossary keeps 'take' for generated attempts)",
+  "auth.verify.resendSent": "Uniform answer of the resend on the verification page; must stay enumeration-safe (never says an email was sent to an account)",
+  "billing.pickedPlan.body": "Notice for a plan picked on the pricing page before sign-up; no price, no trial claim beyond 'start without paying'",
+  "projects.form.startFrom": "New-project form: what the video is made from decides the first app; options mirror the welcome question"
+}

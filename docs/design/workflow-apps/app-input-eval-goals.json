@@ -1,0 +1,220 @@
+{
+  "version": 2,
+  "description": "Five app-input goals for the assistant (docs/design/app-inputs.md 13.3, 23, 26, 29). Kept out of eval-goals.json, which is the pinned 50-goal recipe-first gate (check-eval-goals.mjs and AssistantEvalHarnessTests require exactly 50 goals and a closed set of routes). Each goal's expected.score is what the scorer checks (AppInputEvalScoring in inference/tests/.../AssistantEval): the proposal tool, the app-page operations (aliases link a field to the binding that uses it), Apply, and the must-nots. Check the fixture with node docs/design/workflow-apps/check-app-input-eval-goals.mjs; the scorer's own tests run with dotnet test --filter AppInputEvalScoringTests. No paid run has been made. The switch Workflows:AppInputs:Enabled must be on.",
+  "goals": [
+    {
+      "id": "AI01",
+      "locale": "en",
+      "goal": "Make an app where my team types the video idea and picks the shape.",
+      "context": "A project with a workflow that has one VideoGenerate step (Inline prompt) and no app page of its own.",
+      "expected": {
+        "tools": [
+          "ProposePatchWorkflow",
+          "ApplyPatchWorkflow"
+        ],
+        "patchOps": [
+          "setAppInput: a longText field (the video idea), required, with an example",
+          "bindAppInput: the VideoGenerate step's inlinePrompt to {{input.<id>}}",
+          "setAppInput: a shape field offering the shapes the step's model makes",
+          "bindAppInput: appInputs.ratio of the same step"
+        ],
+        "mustNot": [
+          "turn on allowSourceMediaEgress",
+          "show an id in the reply"
+        ],
+        "score": {
+          "proposal": "patch",
+          "apply": true,
+          "ops": [
+            {
+              "op": "setAppInput",
+              "type": "longText",
+              "required": true,
+              "example": true,
+              "as": "idea"
+            },
+            {
+              "op": "bindAppInput",
+              "field": "inlinePrompt",
+              "mode": "placeholder",
+              "input": "idea"
+            },
+            {
+              "op": "setAppInput",
+              "type": "shape",
+              "as": "shape"
+            },
+            {
+              "op": "bindAppInput",
+              "field": "ratio",
+              "mode": "value",
+              "input": "shape"
+            }
+          ],
+          "mustNot": [
+            "egress",
+            "ids"
+          ]
+        }
+      }
+    },
+    {
+      "id": "AI02",
+      "locale": "en",
+      "goal": "Add a cheaper mode to this app.",
+      "context": "An app with a full VideoGenerate branch and a cheaper model of the same capability in the workspace.",
+      "expected": {
+        "tools": [
+          "GetWorkflow",
+          "ProposePatchWorkflow",
+          "ApplyPatchWorkflow"
+        ],
+        "patchOps": [
+          "setAppInput: a toggle field (Lite mode / cheaper), default off",
+          "a Conditional step reading input.<id> that picks the cheaper branch, the other branch finishing with \"end\""
+        ],
+        "alternates": [
+          "clarify_first: ask what may be cheaper (model, length, takes) when nothing obvious is"
+        ],
+        "mustNot": [
+          "add a tool call outside the closed set"
+        ],
+        "score": {
+          "proposal": "patchOrSave",
+          "apply": true,
+          "ops": [
+            {
+              "op": "setAppInput",
+              "type": "toggle",
+              "default": false,
+              "as": "lite"
+            }
+          ],
+          "conditional": {
+            "reads": "lite",
+            "endBranch": true
+          },
+          "alternates": [
+            "clarify_first"
+          ],
+          "mustNot": [
+            "ids"
+          ]
+        }
+      }
+    },
+    {
+      "id": "AI03",
+      "locale": "en",
+      "goal": "Let people choose the video model, recommend the cheapest.",
+      "context": "An app with one VideoGenerate step and three selectable video models of different price.",
+      "expected": {
+        "tools": [
+          "GetWorkflow",
+          "ProposePatchWorkflow",
+          "ApplyPatchWorkflow"
+        ],
+        "patchOps": [
+          "setAppInput: a model field of capability VideoGeneration, more: true, recommended = the option with the lowest costIndex",
+          "bindAppInput: appInputs.@model of the VideoGenerate step"
+        ],
+        "mustNot": [
+          "quote a price in credits or money for a model",
+          "show a model id"
+        ],
+        "score": {
+          "proposal": "patch",
+          "apply": true,
+          "ops": [
+            {
+              "op": "setAppInput",
+              "type": "model",
+              "capability": "VideoGeneration",
+              "more": true,
+              "recommended": "cheapest",
+              "as": "model"
+            },
+            {
+              "op": "bindAppInput",
+              "field": "@model",
+              "mode": "value",
+              "input": "model"
+            }
+          ],
+          "mustNot": [
+            "prices",
+            "ids"
+          ]
+        }
+      }
+    },
+    {
+      "id": "AI04",
+      "locale": "en",
+      "goal": "Run the avatar clip in Lite mode saying 'Welcome to Caffè Lume'.",
+      "context": "A project with avatar-clip created from the recipe and one consented avatar.",
+      "expected": {
+        "tools": [
+          "GetWorkflow",
+          "ExecuteWorkflow"
+        ],
+        "templateKey": "avatar-clip",
+        "brief": {
+          "inputs": {
+            "liteMode": true,
+            "whatTheySay": "Welcome to Caffè Lume"
+          }
+        },
+        "card": "lists Lite mode (cheaper) and What they say by label, and prices only the Lite path",
+        "mustNot": [
+          "turn on allowSourceMediaEgress"
+        ],
+        "score": {
+          "proposal": "execute",
+          "inputs": {
+            "liteMode": true,
+            "whatTheySay": "Welcome to Caffè Lume"
+          },
+          "mustNot": [
+            "egress",
+            "ids"
+          ]
+        }
+      }
+    },
+    {
+      "id": "AI05",
+      "locale": "en",
+      "goal": "Remove the music volume field from this app.",
+      "context": "A workflow made from video-derush-edit-music with the app-input edition (musicVolume under More options).",
+      "expected": {
+        "tools": [
+          "ProposePatchWorkflow",
+          "ApplyPatchWorkflow"
+        ],
+        "patchOps": [
+          "removeAppInput: musicVolume (the step's musicGainDb goes back to a fixed value)"
+        ],
+        "mustNot": [
+          "remove any other field"
+        ],
+        "score": {
+          "proposal": "patch",
+          "apply": true,
+          "ops": [
+            {
+              "op": "removeAppInput",
+              "id": "musicVolume"
+            }
+          ],
+          "onlyRemoves": [
+            "musicVolume"
+          ],
+          "mustNot": [
+            "ids"
+          ]
+        }
+      }
+    }
+  ]
+}

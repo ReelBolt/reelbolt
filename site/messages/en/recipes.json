@@ -1,0 +1,143 @@
+{
+  "seo": {
+    "title": "Recipe gallery: ready-made video recipes",
+    "description": "Browse video recipes shared by the ReelBolt community. Preview each one, read the steps and instructions, then copy it to your workspace and make it yours.",
+    "detailTitleFallback": "Video recipe",
+    "detailDescriptionFallback": "A shared ReelBolt video recipe with {steps} steps. Preview it, read the steps and copy it to your workspace.",
+    "unavailableTitle": "Recipe no longer available",
+    "unavailableDescription": "This recipe has been removed or is no longer shared."
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "recipes": "Recipes"
+  },
+  "page": {
+    "eyebrow": "Recipe gallery",
+    "title": "Video recipes you can copy",
+    "intro": "A recipe is a video workflow someone on ReelBolt has shared. Watch the preview, read what each step does, then copy it to your own workspace and run it with your own footage and settings."
+  },
+  "gallery": {
+    "searchLabel": "Search recipes",
+    "searchPlaceholder": "Search by name or description",
+    "sortLabel": "Sort by",
+    "categoryLabel": "Category",
+    "stepTypeLabel": "Step",
+    "languageLabel": "Language",
+    "all": "All",
+    "clear": "Clear filters",
+    "loadMore": "Load more",
+    "loading": "Loading recipes",
+    "empty": "No recipes are shared yet. Check back soon.",
+    "emptyFiltered": "No recipe matches those filters.",
+    "resultsLabel": "Recipes",
+    "costLabel": "Cost",
+    "loadFailed": "We could not load the recipes.",
+    "loadMoreFailed": "We could not load more recipes.",
+    "retry": "Try again",
+    "resultCount": "{count, plural, one {# recipe} other {# recipes}}"
+  },
+  "sort": {
+    "new": "Newest",
+    "copied": "Most copied",
+    "rated": "Top rated"
+  },
+  "card": {
+    "steps": "{count, plural, one {# step} other {# steps}}",
+    "by": "by {author}",
+    "copies": "{count, plural, one {Copied once} other {Copied # times}}",
+    "previewLabel": "Preview of {name}",
+    "open": "Open recipe"
+  },
+  "cost": {
+    "label": "Cost",
+    "none": "No credits",
+    "credits": "Uses credits",
+    "creditsVoice": "Uses credits and a voice",
+    "creditsShots": "Uses credits and AI shots"
+  },
+  "detail": {
+    "back": "All recipes",
+    "by": "Shared by {author}",
+    "copy": "Copy to my workspace",
+    "copyHint": "You will be asked to sign in. The copy is yours to edit.",
+    "stepsTitle": "Steps",
+    "stepsIntro": "What the recipe does, in order.",
+    "needTitle": "What you will need",
+    "needNone": "Nothing beyond your own footage and settings.",
+    "needInputs": "You provide",
+    "needSlots": "You choose",
+    "promptsTitle": "Instructions for the AI",
+    "promptsNote": "Shown exactly as the author wrote them. You can change them after copying.",
+    "promptStep": "Step {step}",
+    "stats": "At a glance",
+    "length": "Preview length",
+    "copiesLabel": "Copies",
+    "ratingLabel": "Rating",
+    "rating": "{average} out of 5 from {count} ratings",
+    "ratingNone": "Not enough ratings yet",
+    "costNoteLabel": "Cost note",
+    "loading": "Loading recipe",
+    "unavailableTitle": "This recipe is no longer available",
+    "unavailableBody": "It may have been removed by its author or by our team. Browse the gallery for others.",
+    "unavailableCta": "Back to the gallery",
+    "ctaTitle": "Make it yours",
+    "ctaBody": "Copy it, swap in your own footage and instructions, and run it in your workspace.",
+    "limitsLabel": "Limits for this step",
+    "loadFailed": "We could not load this recipe. Check your connection and try again.",
+    "retry": "Try again"
+  },
+  "slot": {
+    "provider": "An AI provider",
+    "file": "A file",
+    "voice": "A voice",
+    "other": "Something to choose"
+  },
+  "preview": {
+    "play": "Play preview",
+    "pause": "Pause preview",
+    "none": "Preview not ready yet"
+  },
+  "stepType": {
+    "other": "Step",
+    "agent": "AI task",
+    "conditional": "Decision",
+    "foreach": "Repeat for each item",
+    "reviewloop": "Review and improve",
+    "parallel": "Run side by side",
+    "extract": "Pull out information",
+    "videoanalyze": "Video analysis",
+    "videocompile": "Video assembly",
+    "editroom": "Editing room",
+    "graphicsroom": "Graphics room",
+    "colorgraderoom": "Color grading room",
+    "videogenerate": "Video generation",
+    "voiceover": "Voice-over",
+    "thumbnailgenerate": "Thumbnail",
+    "designgraphic": "Graphic design",
+    "revise": "Revision"
+  },
+  "category": {
+    "other": "Other",
+    "promo": "Promo videos",
+    "footage": "Footage",
+    "brand": "Brand",
+    "utility": "Utilities"
+  },
+  "field": {
+    "other": "Text",
+    "prompt": "Instruction",
+    "instructions": "Instructions",
+    "script": "Script",
+    "style": "Style",
+    "brief": "Brief",
+    "title": "Title",
+    "text": "Text",
+    "negativeprompt": "What to avoid",
+    "systemprompt": "Role"
+  },
+  "limit": {
+    "reviewRounds": "Reviews and improves, up to {count} rounds",
+    "passMark": "Pass mark {score} out of 10",
+    "spendCap": "Spending capped at {credits} credits"
+  }
+}

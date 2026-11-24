@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+The avatar {{.FileName}} in {{if .ProjectName}}{{.ProjectName}}{{else}}the workspace avatar library{{end}} (workspace {{.OrgName}}) reaches the end of the period it is kept for in 7 days, and will then be deleted with its reference files.
+{{if .ErrorDetail}}
+{{.ErrorDetail}}
+{{end}}
+To keep it, open the avatar and confirm the person's consent again. Nothing is extended without a new confirmation.
+
+{{.Link}}
+
+-- {{.FooterNote}}

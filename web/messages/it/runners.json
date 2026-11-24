@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "runners": "Runner",
+    "pair": "Collega un runner"
+  },
+  "chips": {
+    "notConnected": "Questa macchina non si è ancora connessa, quindi non ha ancora indicato cosa può eseguire. Comparirà qui dopo la prima connessione.",
+    "notReported": "Non ancora indicato"
+  },
+  "presence": {
+    "never": "Questa macchina non si è mai connessa da quando è stata collegata.",
+    "online": "Ha dato segni di vita negli ultimi minuti.",
+    "offline": "Non ha dato segni di vita di recente. Accanto trovi l'ultimo segnale registrato.",
+    "onlineAria": "Attivo di recente",
+    "offlineAria": "Non attivo di recente"
+  },
+  "table": {
+    "never": "Mai",
+    "machine": "Macchina",
+    "platform": "Piattaforma",
+    "runner": "Runner",
+    "lastSeen": "Ultimo contatto",
+    "canRun": "Può eseguire",
+    "pairedBy": "Collegato da",
+    "revokeAria": "Revoca {name}"
+  },
+  "page": {
+    "title": "Runner",
+    "pairButton": "Collega un dispositivo",
+    "intro": "I runner sono computer di tua proprietà, come il portatile, la workstation o un computer di riserva, che generano i tuoi video al posto del cloud. Ognuno viene collegato a questo spazio di lavoro approvando il codice che mostra e puoi scollegarlo da qui in qualsiasi momento.",
+    "supportedPlatforms": "Windows (x64) e Linux (x64 o arm64). macOS non è supportato.",
+    "revokedTitleAlready": "Già revocato",
+    "revokedTitle": "Revocato",
+    "revokedAlready": "{name} era già stato revocato. Non riceverà più lavoro.",
+    "revokedNow": "{name} non può più ricevere lavoro. Collegalo di nuovo dalla macchina per usarlo.",
+    "revokeFailedTitle": "Non siamo riusciti a revocare",
+    "noWorkspaceTitle": "Nessuno spazio di lavoro attivo",
+    "noWorkspaceBody": "La tua sessione non ha uno spazio di lavoro attivo, quindi non ci sono runner da mostrare. Passa a uno spazio di lavoro e torna qui.",
+    "loadFailedTitle": "Non riusciamo a caricare i runner",
+    "loadFailedFallback": "Riprova tra un attimo.",
+    "empty": {
+      "title": "Ancora nessun runner",
+      "description": "Collega un computer tuo e genererà i tuoi video al posto del cloud. Il runner di ReelBolt mostra un breve codice all'avvio: approvandolo qui, la macchina si collega a questo spazio di lavoro. I runner sono disponibili per {platforms}",
+      "havePairingCode": "Ho un codice di collegamento",
+      "desktopRunner": "Runner desktop"
+    },
+    "revokeDialog": {
+      "title": "Revoca runner",
+      "confirm": "Revoca",
+      "message": "Revocare {name}? Viene scollegato subito e non riceverà più lavoro, e sparisce da questo elenco: lo spazio di lavoro non conserva qui nessuna traccia di un dispositivo revocato. Per usare di nuovo la macchina devi collegarla da capo, dalla macchina stessa.",
+      "thisDevice": "questo dispositivo"
+    }
+  },
+  "pair": {
+    "title": "Collega un runner",
+    "code": {
+      "heading": "Inserisci il codice mostrato sul dispositivo",
+      "intro": "Il runner di ReelBolt sul computer che vuoi collegare sta mostrando un breve codice. Scrivilo qui, esattamente come appare.",
+      "label": "Codice di collegamento",
+      "placeholder": "XXXX-XXXX",
+      "invalid": "Questo non è un codice di collegamento. I codici sono di otto lettere e cifre, come 7HQD-4M2R.",
+      "continue": "Continua"
+    },
+    "approved": {
+      "title": "Dispositivo approvato",
+      "body": "La macchina è ora collegata al tuo spazio di lavoro e può iniziare a ricevere lavoro. Tutti i Proprietari di quello spazio di lavoro hanno ricevuto un'email, quindi non sarai l'unico a saperlo."
+    },
+    "denied": {
+      "title": "Richiesta rifiutata",
+      "body": "Alla macchina è stato comunicato che la richiesta è stata rifiutata e non è stato collegato nulla. Non succede altro: se la richiesta era legittima, potrai approvare più avanti un nuovo codice."
+    },
+    "notFound": {
+      "title": "Nessuna richiesta di collegamento corrispondente",
+      "another": "Inserisci un altro codice",
+      "back": "Torna ai runner"
+    },
+    "approve": {
+      "title": "Approva questo dispositivo",
+      "breadcrumbRunners": "Runner",
+      "breadcrumbPair": "Collega un dispositivo",
+      "warnTitle": "Approva solo un codice mostrato su un dispositivo che possiedi",
+      "warnBody1": "Approvare collega un computer a questo spazio di lavoro, e quel computer potrà ricevere i tuoi media e generare i tuoi video. Se qualcuno ti ha dato questo codice invece di fartelo vedere da una macchina, rifiutalo: sta cercando di collegare la sua macchina al tuo spazio di lavoro.",
+      "warnBody2": "Controlla che il codice qui sotto corrisponda a quello sullo schermo carattere per carattere. Tutti i Proprietari dello spazio di lavoro ricevono un'email quando un dispositivo viene approvato, quindi un errore si nota, anche se solo a cose fatte.",
+      "platform": "Piattaforma",
+      "version": "Versione del runner",
+      "notReported": "Non indicata",
+      "requested": "Richiesto",
+      "expires": "Scade",
+      "expiredValue": "Scaduto {when}. Chiedi al dispositivo di mostrare un nuovo codice.",
+      "withRelative": "{date} ({when})",
+      "requestedFrom": "Richiesto da",
+      "notRecorded": "Non registrato",
+      "ipHint": "L'indirizzo di rete da cui è arrivata la richiesta. Questo prodotto non ne ricava una posizione."
+    },
+    "workspace": {
+      "heading": "In quale spazio di lavoro?",
+      "intro": "La macchina viene collegata allo spazio di lavoro che scegli qui, e solo le persone di quello spazio di lavoro la vedranno. Puoi approvare in uno spazio di lavoro in cui sei Proprietario o Amministratore, oppure nel tuo spazio di lavoro Personale.",
+      "none": "Non sei Proprietario né Amministratore di nessuno spazio di lavoro, quindi non puoi approvare un dispositivo in nessuno. Chiedi a un Proprietario dello spazio di lavoro che vuoi usare.",
+      "label": "Spazio di lavoro",
+      "placeholder": "Scegli uno spazio di lavoro"
+    },
+    "failedTitle": "Non ha funzionato",
+    "approveButton": "Approva questo dispositivo",
+    "deny": "Rifiuta",
+    "cancel": "Annulla",
+    "goToRunners": "Vai ai runner"
+  }
+}

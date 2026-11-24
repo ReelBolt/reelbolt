@@ -1,0 +1,22 @@
+{
+  "libLabels.billingActions.cancel_scheduled": "Quotes the English button label 'Keep my plan' as 'Mantieni il mio piano'; must match the billing page button once translated.",
+  "libLabels.billingActions.already_subscribed": "Refers to the 'Plan & billing' page; written as 'Piano e fatturazione' per glossary, must match the nav label.",
+  "libLabels.auth.oauthError.oauth_account_unverified": "Quotes the login link 'Forgot password?' as 'Password dimenticata?'; must match the login page link.",
+  "libLabels.billingActions.plan_not_self_serve": "'Self-service' kept as an English loanword for plans bought without sales; confirm.",
+  "libLabels.billingActions.below_min_seats": "'Seat' rendered as 'postazione'; glossary has no entry for seats.",
+  "libLabels.runSummary.shapePortrait": "'Portrait' (generic) vs 'Vertical 9:16': both could read as 'verticale' in Italian; 'Ritratto' chosen for the generic one, confirm.",
+  "libLabels.runSummary.warnings.voiceProviderUnhealthy": "'Voice provider' wording softened to 'la voce narrante potrebbe non funzionare'.",
+  "libLabels.runStatus.Passed": "Run status 'Passed' rendered as 'Completata' (not 'Superata'); confirm with the run badges elsewhere.",
+  "libLabels.verdicts.KeepShadow": "Admin calibration jargon 'Shadow' / 'Gate' left in English as product terms.",
+  "libLabels.verdicts.TryGate": "Admin calibration jargon 'Gate' left in English as a product term.",
+  "libLabels.agentRoles.DailiesDirector": "'Dailies' (film review of takes) has no clean Italian equivalent; rendered as 'revisione delle riprese' / 'giuria'.",
+  "libLabels.stepRoles.DailiesRoom": "'Panel of judges' rendered as 'giuria'; confirm tone.",
+  "libLabels.compute.options.Auto.label": "'Runner' kept as a loanword per glossary; 'machine' rendered as 'macchina' (paired = 'collegata').",
+  "libLabels.runners.slots": "'jobs at a time' rendered 'job alla volta'; 'job' kept as English noun.",
+  "libLabels.billing.stepAgain": "Appended clause, joined to the range by the stepRange template; word order may need review.",
+  "libLabels.hooks.stage.Proxy": "'Playback copy' (proxy) rendered as 'copia di riproduzione'.",
+  "libLabels.hooks.stage.Peaks": "'Reading the sound' (audio peaks) rendered as 'lettura dell'audio'.",
+  "libLabels.usageKinds.StorageGbDay": "'GB-days stored' rendered 'GB-giorno archiviati', a technical unit.",
+  "libLabels.usageKinds.RerankSearches": "'Rerank' has no common Italian term; rendered 'riordino'.",
+  "libLabels.appBriefFields.format": "Brief field 'Shape' (video aspect) rendered 'Formato'; confirm against the run form."
+}

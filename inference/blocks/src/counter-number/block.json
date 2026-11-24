@@ -1,0 +1,35 @@
+{
+  "id": "counter-number",
+  "version": "1.0.0",
+  "title": "Counter number",
+  "category": "titles",
+  "description": "Big number that counts to a target with a label; use for stats, milestones and KPIs.",
+  "tags": [
+    "counter",
+    "number",
+    "stat",
+    "kpi",
+    "count up"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "sharedFiles": [
+    "_shared/motion.ts"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-counter-number",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      8,
+      24,
+      50
+    ]
+  },
+  "props": "{from?: number /*0*/; to?: number /*12840*/; prefix?: string; suffix?: string; label?: string; decimals?: number /*0*/; color?: string; labelColor?: string; fontSize?: number /*180*/; fontFamily?: string /*'Space Grotesk, sans-serif'*/; startFrame?: number /*0*/; durationInFrames?: number /*45*/}",
+  "example": "import {CounterNumber} from './blocks/counter-number/CounterNumber.tsx';\n<CounterNumber to={12840} label=\"Videos rendered\" />"
+}

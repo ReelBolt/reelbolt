@@ -1,0 +1,11 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+La tua chiave API {{.FileName}} nello spazio di lavoro {{.OrgName}} scade il {{.ExpiryDate}}.
+
+Per evitare interruzioni, crea una nuova chiave, passa la tua integrazione alla nuova chiave e poi revoca quella vecchia.
+
+Apri le chiavi API:
+
+{{.Link}}
+
+-- {{.FooterNote}}

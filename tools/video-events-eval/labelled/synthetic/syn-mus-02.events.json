@@ -1,0 +1,256 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "beat-ev1",
+   "frame": 21,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev2",
+   "frame": 35,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev3",
+   "frame": 49,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev4",
+   "frame": 63,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev5",
+   "frame": 77,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev6",
+   "frame": 91,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev7",
+   "frame": 105,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev8",
+   "frame": 119,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev9",
+   "frame": 134,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev10",
+   "frame": 148,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev11",
+   "frame": 162,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev12",
+   "frame": 176,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev13",
+   "frame": 190,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev14",
+   "frame": 204,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev15",
+   "frame": 218,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev16",
+   "frame": 232,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev17",
+   "frame": 246,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev18",
+   "frame": 260,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev19",
+   "frame": 274,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev20",
+   "frame": 288,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev21",
+   "frame": 302,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev22",
+   "frame": 316,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev23",
+   "frame": 330,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev24",
+   "frame": 344,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev25",
+   "frame": 359,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev26",
+   "frame": 373,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev27",
+   "frame": 387,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev28",
+   "frame": 401,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev29",
+   "frame": 415,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev30",
+   "frame": 429,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev31",
+   "frame": 443,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev32",
+   "frame": 457,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev33",
+   "frame": 471,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev34",
+   "frame": 485,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev35",
+   "frame": 499,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev36",
+   "frame": 513,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev37",
+   "frame": 527,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev38",
+   "frame": 541,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev39",
+   "frame": 555,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev40",
+   "frame": 569,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev41",
+   "frame": 584,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev42",
+   "frame": 598,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev43",
+   "frame": 612,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev44",
+   "frame": 626,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev45",
+   "frame": 640,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev46",
+   "frame": 654,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev47",
+   "frame": 668,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev48",
+   "frame": 682,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev49",
+   "frame": 696,
+   "label": "beat"
+  },
+  {
+   "name": "beat-ev50",
+   "frame": 710,
+   "label": "beat"
+  }
+ ]
+}

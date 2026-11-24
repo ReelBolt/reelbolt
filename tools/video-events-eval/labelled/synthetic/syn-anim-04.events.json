@@ -1,0 +1,76 @@
+{
+ "version": 1,
+ "fps": 30,
+ "events": [
+  {
+   "name": "speech_start-ev1",
+   "frame": 12,
+   "label": "speech start"
+  },
+  {
+   "name": "appear-ev2",
+   "frame": 44,
+   "label": "appear"
+  },
+  {
+   "name": "move_start-ev3",
+   "frame": 71,
+   "label": "move start"
+  },
+  {
+   "name": "move_stop-ev4",
+   "frame": 90,
+   "label": "move stop"
+  },
+  {
+   "name": "hit-ev5",
+   "frame": 100,
+   "label": "hit"
+  },
+  {
+   "name": "speech_end-ev6",
+   "frame": 105,
+   "label": "speech end"
+  },
+  {
+   "name": "hit-ev7",
+   "frame": 108,
+   "label": "hit"
+  },
+  {
+   "name": "transition-ev8",
+   "frame": 240,
+   "label": "transition"
+  },
+  {
+   "name": "speech_start-ev9",
+   "frame": 262,
+   "label": "speech start"
+  },
+  {
+   "name": "move_start-ev10",
+   "frame": 269,
+   "label": "move start"
+  },
+  {
+   "name": "hit-ev11",
+   "frame": 330,
+   "label": "hit"
+  },
+  {
+   "name": "speech_end-ev12",
+   "frame": 372,
+   "label": "speech end"
+  },
+  {
+   "name": "transition-ev13",
+   "frame": 380,
+   "label": "transition"
+  },
+  {
+   "name": "text_in-ev14",
+   "frame": 388,
+   "label": "text in"
+  }
+ ]
+}

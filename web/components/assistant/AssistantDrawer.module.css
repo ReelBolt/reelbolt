@@ -1,0 +1,147 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  /* The messages viewport is the only Y scroller inside the dialog: the stack above it is fixed-height. */
+  overflow: hidden;
+  min-height: 0;
+}
+
+.header {
+  padding: 12px 12px 12px 20px;
+  min-height: 60px;
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+
+  /* The sheet's breakpoint is the drawer's own: below it the chrome is a full-width bottom
+     sheet, so the desktop's asymmetric left padding reads as a mistake. */
+  @media (max-width: 48em) {
+    padding: 8px 8px 8px 16px;
+    min-height: 0;
+  }
+}
+
+/* Full-height on phones: no gap remains, so no top corners; the notch/status bar is cleared instead.
+   Below the same breakpoint the drawer is anchored to the viewport's bottom edge; the desktop left
+   drawer draws none of its own. */
+.sheet {
+  padding-top: env(safe-area-inset-top);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--mantine-radius-sm);
+  color: var(--mantine-color-white);
+  background: linear-gradient(135deg, var(--mantine-color-violet-6), var(--mantine-color-violet-8));
+}
+
+.titleText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+}
+
+.tagline {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+}
+
+/* The ask-before-changes switch: a strip under the header, tinted while auto mode is on so the
+   setting is visible without opening anything. Glyph + words carry it as well as the tint. */
+.modeBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  min-height: 44px;
+  padding: 6px 12px 6px 20px;
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+
+  @media (max-width: 48em) {
+    padding: 6px 10px 6px 16px;
+  }
+}
+
+.modeBar[data-mode='auto'] {
+  background: light-dark(var(--mantine-color-orange-0), color-mix(in srgb, var(--mantine-color-orange-6) 14%, transparent));
+}
+
+.modeNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  color: light-dark(color-mix(in srgb, var(--mantine-color-orange-9) 70%, black), var(--mantine-color-orange-3));
+}
+
+/* The cost-limit sentence: its own full-width line under the switch and the badge, never clipped. */
+.modeLimit {
+  flex: 1 1 100%;
+  min-width: 0;
+  padding-bottom: 2px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* C4: Close is a 44px target on touch (Mantine's default is 28px). */
+.close {
+  @media (pointer: coarse), (max-width: 48em) {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* C4: phone settings strip: one 44px row holding the settings button, instead of two toggles. */
+.settingsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 10px 0 16px;
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.settingsPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* C2: the sticky app header (z-index lifted over the overlay while the assistant is open) used to
+   cover the drawer's title and Close button. Start the desktop/tablet drawer below it. */
+.inner {
+  top: var(--app-shell-header-height, 60px);
+  height: calc(100dvh - var(--app-shell-header-height, 60px));
+}

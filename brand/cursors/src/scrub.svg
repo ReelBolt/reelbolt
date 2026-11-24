@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- scrub: playhead = flat-topped pentagon head on a full-height line, plus drag chevrons either side (not a map pin) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 9 V28.4" stroke="#2E1065" stroke-width="5"/>
+    <path d="M16 9 V28.4" stroke="#F5F3F8" stroke-width="2.2"/>
+  </g>
+  <path d="M8.5 3 H23.5 V10 L16 15.5 L8.5 10 Z" fill="#A855F7" stroke="#2E1065" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="M8.5 21 L3.3 24.5 L8.5 28 Z" fill="#A855F7" stroke="#2E1065" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M23.5 21 L28.7 24.5 L23.5 28 Z" fill="#A855F7" stroke="#2E1065" stroke-width="1.2" stroke-linejoin="round"/>
+</svg>

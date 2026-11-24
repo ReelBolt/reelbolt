@@ -1,0 +1,12 @@
+{
+  "globs": [
+    "components/editor/panels/syncConfidence.ts",
+    "components/editor/panels/useProposalFlow.ts",
+    "components/editor/phone/clip-sheet-bus.ts",
+    "components/editor/phone/sheet-history.ts",
+    "components/editor/phone/use-transcript-words.ts",
+    "components/editor/phone/phone-actions.ts",
+    "components/editor/shell/index.ts",
+    "components/editor/viewer/index.ts"
+  ]
+}

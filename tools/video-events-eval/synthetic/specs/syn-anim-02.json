@@ -1,0 +1,211 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-anim-02",
+ "videoType": "animation",
+ "frames": 420,
+ "theme": {
+  "bg": "#f4ead5"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#f4ead5",
+   "bgB": "#fbe3b8",
+   "deco": "dots",
+   "accent": "#c9822b",
+   "decoOpacity": 0.25
+  },
+  {
+   "from": 150,
+   "trans": "wipe",
+   "dur": 24,
+   "bg": "#c9f0dc",
+   "bgB": "#9fe0c0",
+   "deco": "rings",
+   "accent": "#2f9e6e",
+   "decoOpacity": 0.2
+  },
+  {
+   "from": 290,
+   "trans": "fade",
+   "dur": 30,
+   "bg": "#d9cdfa",
+   "bgB": "#b9a6f2",
+   "deco": "stripes",
+   "accent": "#6b4fd1",
+   "decoOpacity": 0.1
+  }
+ ],
+ "elements": [
+  {
+   "kind": "text",
+   "id": "t1",
+   "name": "sale title",
+   "text": "Spring Sale",
+   "x": 90,
+   "y": 50,
+   "w": 520,
+   "h": 70,
+   "color": "#5a3510",
+   "scene": 0,
+   "skip": [
+    "text_out"
+   ],
+   "vis": [
+    {
+     "in": 15,
+     "out": 140,
+     "fade": 10
+    }
+   ]
+  },
+  {
+   "kind": "circle",
+   "id": "sun",
+   "name": "sun",
+   "x": 120,
+   "y": 250,
+   "w": 110,
+   "h": 110,
+   "color": "#f5a623",
+   "scene": 0,
+   "skip": [
+    "disappear",
+    "move_start",
+    "move_stop"
+   ],
+   "vis": [
+    {
+     "in": 30,
+     "out": 145,
+     "fade": 8
+    }
+   ],
+   "moves": [
+    {
+     "start": 50,
+     "end": 110,
+     "x": 700,
+     "y": 160
+    }
+   ]
+  },
+  {
+   "kind": "ball",
+   "id": "b1",
+   "name": "ball",
+   "x": 330,
+   "y": 120,
+   "w": 56,
+   "h": 56,
+   "color": "#d9534f",
+   "release": 60,
+   "floor": 470,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "scene": 0,
+   "e": 0.6,
+   "quiet": true
+  },
+  {
+   "kind": "char",
+   "id": "ch",
+   "name": "shopper",
+   "x": 100,
+   "y": 260,
+   "w": 110,
+   "h": 180,
+   "color": "#2f9e6e",
+   "color2": "#1d6b4a",
+   "scene": 1,
+   "skip": [
+    "appear"
+   ],
+   "vis": [
+    {
+     "in": 170,
+     "fade": 6
+    }
+   ],
+   "moves": [
+    {
+     "start": 185,
+     "end": 230,
+     "x": 480,
+     "y": 260
+    },
+    {
+     "start": 238,
+     "end": 270,
+     "x": 480,
+     "y": 360
+    }
+   ]
+  },
+  {
+   "kind": "text",
+   "id": "t2",
+   "name": "thanks",
+   "text": "Thanks!",
+   "x": 300,
+   "y": 200,
+   "w": 380,
+   "h": 80,
+   "color": "#3b2a8a",
+   "scene": 2,
+   "skip": [
+    "text_out"
+   ],
+   "vis": [
+    {
+     "in": 305,
+     "out": 395,
+     "fade": 10
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "stamp",
+   "name": "stamp",
+   "x": 380,
+   "y": 330,
+   "w": 200,
+   "h": 90,
+   "color": "#6b4fd1",
+   "scene": 2,
+   "label": "SOLD",
+   "skip": [
+    "appear"
+   ],
+   "vis": [
+    {
+     "in": 322,
+     "fade": 0
+    }
+   ],
+   "hits": [
+    {
+     "kind": "pop",
+     "frame": 322,
+     "amp": 0.5
+    }
+   ]
+  }
+ ],
+ "speech": [
+  {
+   "start": 15,
+   "end": 95
+  },
+  {
+   "start": 300,
+   "end": 385
+  }
+ ]
+}

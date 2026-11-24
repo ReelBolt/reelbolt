@@ -1,0 +1,254 @@
+.root {
+  position: fixed;
+  inset: 0;
+  /* Above Mantine's notifications (400), modals (200) and popovers (300). */
+  z-index: 500;
+}
+
+.blocker {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.dim {
+  position: absolute;
+  inset: 0;
+  background: rgb(14 11 24 / 62%);
+}
+
+.spot {
+  position: fixed;
+  border-radius: var(--mantine-radius-md);
+  box-shadow:
+    0 0 0 3px var(--rb-accent),
+    0 0 0 9999px rgb(14 11 24 / 62%);
+  pointer-events: none;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      top 160ms ease,
+      left 160ms ease,
+      width 160ms ease,
+      height 160ms ease;
+  }
+}
+
+.card {
+  position: fixed;
+  width: min(22.5rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: var(--mantine-spacing-md);
+  border: 1px solid var(--rb-border-strong);
+  border-radius: var(--mantine-radius-md);
+  background: var(--rb-surface);
+  color: var(--mantine-color-text);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 35%);
+  outline: none;
+}
+
+.centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sheet {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  max-height: 75dvh;
+  border-width: 1px 0 0;
+  border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
+  padding-bottom: calc(var(--mantine-spacing-md) + env(safe-area-inset-bottom, 0px));
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: sheetIn 180ms ease-out;
+  }
+}
+
+@keyframes sheetIn {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.title {
+  margin: 0 0 var(--mantine-spacing-xs);
+  font-family: var(--rb-font-display);
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.body {
+  margin: 0 0 var(--mantine-spacing-xs);
+  font-size: var(--mantine-font-size-sm);
+  line-height: 1.5;
+}
+
+.learn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--rb-accent-strong);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+:global([data-mantine-color-scheme='dark']) .learn {
+  color: var(--rb-accent-ink);
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-xs);
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rb-border-strong);
+}
+
+.dotActive {
+  background: var(--rb-accent-strong);
+}
+
+:global([data-mantine-color-scheme='dark']) .dotActive {
+  background: var(--rb-accent-ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-xs);
+}
+
+.actionsMain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mantine-spacing-xs);
+}
+
+/* Longer translations wrap inside the button instead of being clipped (44px stays the minimum). */
+.actions :global(.mantine-Button-root),
+.checkHead :global(.mantine-Button-root) {
+  height: auto;
+  padding-block: var(--mantine-spacing-xs);
+}
+
+.actions :global(.mantine-Button-label),
+.checkHead :global(.mantine-Button-label) {
+  white-space: normal;
+  text-align: center;
+}
+
+/* Getting started card */
+.checklist {
+  border: 1px solid var(--rb-border);
+  border-radius: var(--mantine-radius-md);
+  background: var(--rb-surface);
+  padding: var(--mantine-spacing-md);
+  min-width: 0;
+}
+
+.checkHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+}
+
+.checkHead > div:first-child {
+  min-width: 0;
+}
+
+.checkTitle {
+  margin: 0;
+  font-family: var(--rb-font-display);
+  font-size: var(--mantine-font-size-md);
+  font-weight: 700;
+}
+
+.checkMeta {
+  color: var(--rb-text-dim);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.checkList {
+  display: grid;
+  gap: 2px;
+  margin: var(--mantine-spacing-xs) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+  min-height: 44px;
+}
+
+.checkLink {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+  min-height: 44px;
+  min-width: 0;
+  color: inherit;
+  font-size: var(--mantine-font-size-sm);
+  text-decoration: none;
+}
+
+.checkLink:hover {
+  text-decoration: underline;
+}
+
+.checkDone {
+  color: var(--rb-text-dim);
+  text-decoration: line-through;
+}
+
+.how {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--mantine-spacing-xs);
+  color: var(--rb-accent-strong);
+  font-size: var(--mantine-font-size-sm);
+  text-decoration: underline;
+}
+
+:global([data-mantine-color-scheme='dark']) .how {
+  color: var(--rb-accent-ink);
+}

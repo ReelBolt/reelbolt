@@ -1,0 +1,691 @@
+/* The editing workspace's chrome. One structural language: hairline separators, 36-48px bars,
+   tabular numerals for every time, the app's violet as the single accent, and no shadows inside
+   the work surface (elevation is reserved for menus and dialogs). */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--app-shell-header-offset, 60px));
+  min-height: 480px;
+  padding-left: var(--rb-safe-left, 0px);
+  padding-right: var(--rb-safe-right, 0px);
+  background: var(--rb-ed-studio-bg);
+  color: var(--mantine-color-text);
+}
+
+/* Every layout but the phone's ends in the status bar; the phone's ends in the dock, which pads itself. */
+.root:not([data-layout='phone']) {
+  padding-bottom: var(--rb-safe-bottom, 0px);
+}
+
+/* ── header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 10px 0 6px;
+  background: var(--rb-ed-header-bg);
+  border-bottom: 1px solid var(--rb-ed-line);
+  flex: 0 0 auto;
+}
+
+.headerStart,
+.headerEnd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.headerEnd {
+  justify-content: flex-end;
+}
+
+.title {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.revision {
+  font-size: 12px;
+  color: var(--mantine-color-dimmed);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ── workspace switcher ─────────────────────────────────────────────────── */
+
+/* T-002: the 40 px page band under the 48 px header. Labels are never hidden at any desktop width. */
+.pageBand {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 8px;
+  background: var(--rb-ed-header-bg);
+  border-bottom: 1px solid var(--rb-ed-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 0 0 auto;
+}
+
+.pageBand::-webkit-scrollbar {
+  display: none;
+}
+
+/* Only transform/opacity: the band never animates layout. */
+@keyframes pageBandEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pageBand {
+  animation: pageBandEnter 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The page name is the h1 for the active page; it is announced and focused, never drawn twice. */
+.pageHeading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.switcherItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--rb-ed-fg-muted);
+  transition:
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.switcherItem:hover {
+  color: var(--mantine-color-text);
+}
+
+.switcherItem[aria-current='page'] {
+  background: var(--rb-ed-chip-bg);
+  color: var(--mantine-color-text);
+  box-shadow: inset 0 -2px 0 var(--mantine-color-violet-filled);
+}
+
+.switcherItem[aria-current='page'] svg {
+  color: var(--mantine-color-violet-filled);
+}
+
+.switcherItem:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-filled);
+  outline-offset: 1px;
+}
+
+/* Labels never disappear on a desktop width; a narrow band scrolls instead. */
+.switcherItem {
+  flex: 0 0 auto;
+}
+
+/* The phone dock: the same seven entries along the bottom edge, thumb-reachable, scrollable. */
+.dock {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-top: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+  padding-bottom: var(--rb-safe-bottom, 0px);
+  flex: 0 0 auto;
+}
+
+.dock::-webkit-scrollbar {
+  display: none;
+}
+
+.dockItem {
+  flex: 1 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 52px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+}
+
+.dockItem[aria-current='page'] {
+  color: var(--mantine-color-violet-filled);
+}
+
+/* ── panels ─────────────────────────────────────────────────────────────── */
+
+.pane {
+  background: var(--rb-ed-inspector-bg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.paneTabsRow {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rb-ed-line);
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.paneTabsMore {
+  flex: 0 0 auto;
+  width: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--mantine-color-dimmed);
+  cursor: var(--rb-cursor-pointer);
+}
+
+.paneTabsMore:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-filled);
+  outline-offset: -2px;
+}
+
+/* inline-block so its natural width can be read (an inline box reports 0). */
+.paneTabLabel {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* An icon-only tab keeps its text for assistive technology (and its width is measured), but draws none of it. */
+.paneTabLabelHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 26 px wide: 6 px either side of a 14 px glyph (PanelTabs.fitTabs knows this number). */
+.paneTab[data-collapsed='true'] {
+  padding: 0 6px;
+}
+
+.paneTab[data-collapsed='true'] > :global(.mantine-Tabs-tabSection) {
+  margin: 0;
+}
+
+.paneTabs {
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 6px;
+  gap: 0;
+}
+
+.paneTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.paneTabs::before {
+  display: none;
+}
+
+.paneTab {
+  flex: 0 0 auto;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+  border-bottom-width: 2px;
+}
+
+.paneTab[data-active] {
+  color: var(--mantine-color-text);
+}
+
+.paneBody {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 10px;
+}
+
+/* T-008: a tab whose content is the surface's own EditorPanel — the panel owns the padding and scroll. */
+.paneBodyFlush {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ── viewer ─────────────────────────────────────────────────────────────── */
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--rb-ed-studio-bg);
+}
+
+/* The viewer on the whole screen: the picture takes every pixel the transport does not need. */
+.viewer:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.transport {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 4px;
+  column-gap: 8px;
+  padding: 6px 10px;
+  border-top: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+  flex: 0 0 auto;
+}
+
+/* ── timeline ───────────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 40px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+  flex: 0 0 auto;
+  /* Scroll inside the bar when the tools do not fit: an overflow here widened the whole page on a
+     phone (mobile Chrome grows the layout viewport to the content), pushing dialogs off screen. */
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+/* Still more tools than room after folding: the edge fades to say the bar scrolls. */
+.toolbar[data-more-end='true'] {
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+
+/* Phone layout: the tools wrap onto two rows instead of scrolling sideways, so Select, Add and the
+   zoom buttons are on screen without a hidden swipe. The two button groups are dissolved
+   (display: contents) and every control gets an explicit order: row 1 = tools, undo/redo, split,
+   snap and zoom; row 2 = trim mode, clip, remove silence, select and add. */
+.toolbar[data-wrap='true'] {
+  height: auto;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 2px 3px;
+  padding: 4px 6px;
+  overflow: visible;
+}
+
+.toolbar[data-wrap='true'] > div {
+  display: contents;
+}
+
+.toolbar[data-wrap='true'] .toolDivider {
+  display: none;
+}
+
+.toolbar[data-wrap='true'] .toolGroup {
+  order: 1;
+}
+
+.toolbar[data-wrap='true'] [data-testid='undo'] { order: 2; }
+.toolbar[data-wrap='true'] [data-testid='redo'] { order: 3; }
+.toolbar[data-wrap='true'] [data-testid='blade-at-playhead'] { order: 4; }
+.toolbar[data-wrap='true'] [data-testid='snap-toggle'] { order: 5; }
+.toolbar[data-wrap='true'] [data-testid='zoom-out'] { order: 6; }
+.toolbar[data-wrap='true'] [data-testid='zoom-in'] { order: 7; }
+.toolbar[data-wrap='true'] [data-testid='zoom-fit'] { order: 8; }
+.toolbar[data-wrap='true'] .toolbarBreak { display: block; flex: 0 0 100%; height: 0; order: 9; }
+.toolbar[data-wrap='true'] [data-testid='trim-mode'] { order: 10; }
+.toolbar[data-wrap='true'] [data-testid='clip-actions-open'] { order: 11; }
+.toolbar[data-wrap='true'] [data-testid='remove-silence-open'] { order: 12; }
+.toolbar[data-wrap='true'] [data-testid='select-menu'] { order: 13; }
+.toolbar[data-wrap='true'] [data-testid='add-menu'] { order: 14; }
+
+.toolbarBreak {
+  display: none;
+}
+
+.toolGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--rb-ed-chip-bg);
+}
+
+.toolDivider {
+  width: 1px;
+  height: 20px;
+  background: var(--rb-ed-line-strong);
+  margin: 0 4px;
+}
+
+.timelineBody {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--rb-ed-pane-bg);
+}
+
+/* ── status bar ─────────────────────────────────────────────────────────── */
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 28px;
+  padding: 0 12px;
+  border-top: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+  font-size: 12px;
+  color: var(--mantine-color-dimmed);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.statusGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.statusItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+
+.timecode {
+  font-family: var(--mantine-font-family-monospace);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mantine-color-text);
+}
+
+/* ── resize handles: a hairline you can see, a 9px band you can grab ────── */
+
+.handle {
+  position: relative;
+  flex: 0 0 1px;
+  background: var(--rb-ed-line-strong);
+  touch-action: none;
+  z-index: 1;
+  transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.handle::after {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+}
+
+.handleRow::after {
+  inset: -4px 0;
+}
+
+.handle:hover,
+.handle:active,
+.handle:focus-visible {
+  background: var(--mantine-color-violet-filled);
+  outline: 2px solid var(--mantine-color-violet-filled);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switcherItem,
+  .handle {
+    transition: none;
+  }
+}
+
+/* A finger needs a 44 px target; the timeline toolbar grows to hold one. */
+@media (pointer: coarse) {
+  .toolbar {
+    height: 48px;
+  }
+  .paneTabsMore {
+    width: 44px;
+    min-height: 44px;
+  }
+  .status {
+    min-height: 44px;
+  }
+}
+
+/* ── tablet (RM.15) ─────────────────────────────────────────────────────── */
+
+/* A coarse pointer grabs a 44 px band around the 1 px handle, not a 9 px one. */
+@media (pointer: coarse) {
+  .handle::after {
+    inset: 0 -22px;
+  }
+  .handleRow::after {
+    inset: -22px 0;
+  }
+}
+
+/* Under 900 px the side panels are drawers over the viewer. */
+.drawerBar {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 0 6px;
+  border-bottom: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+}
+
+.drawerToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.drawerToggle[aria-expanded='true'] {
+  background: var(--rb-ed-chip-bg);
+}
+
+.drawerScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  width: min(360px, 86%);
+  overflow: auto;
+  background: var(--rb-ed-header-bg);
+  border-right: 1px solid var(--rb-ed-line-strong);
+}
+
+.drawerRight {
+  left: auto;
+  right: 0;
+  border-right: 0;
+  border-left: 1px solid var(--rb-ed-line-strong);
+}
+
+/* The 64 px workspace rail (tablet): the seven workspaces down the left edge, icon over label. */
+.rail {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 64px;
+  width: 64px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-right: 1px solid var(--rb-ed-line);
+  background: var(--rb-ed-header-bg);
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 0 0 64px;
+  width: 64px;
+  min-height: 56px;
+  padding: 4px 2px;
+  font-size: 12px;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--rb-ed-fg-muted);
+}
+
+.railItem[aria-current='page'] {
+  color: var(--mantine-color-text);
+  background: var(--rb-ed-chip-bg);
+  box-shadow: inset 2px 0 0 var(--mantine-color-violet-filled);
+}
+
+.railItem:focus-visible {
+  outline: 2px solid var(--mantine-color-violet-filled);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switcherItem,
+  .railItem {
+    transition: none;
+  }
+  .pageBand {
+    animation: none;
+  }
+}
+
+.tabletNote {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--mantine-color-dimmed);
+}
+
+/* The tablet's saved-layouts button: shown once the side panels are panels (the 56 px rail leaves 900 px of panel area). */
+.tabletLayouts { display: contents; }
+@media (max-width: 955.98px) {
+  .tabletLayouts { display: none; }
+}
+
+/* The status bar's Playback details button: a finger-sized target on touch. */
+@media (pointer: coarse) {
+  .status {
+    height: 44px;
+  }
+  .playbackToggle {
+    min-height: 44px !important;
+    min-width: 44px;
+  }
+}
+
+/* ── page compositions (T-003) ──────────────────────────────────────────────
+   The frame owns the zones; these wrappers fill them. The page's own content
+   scrolls inside its zone, never the page/document. */
+.mediaZone,
+.deliverZone {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px;
+  background: var(--rb-ed-inspector-bg);
+}
+
+.mediaPoolZone {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--rb-ed-inspector-bg);
+}
+
+/* Media keeps its own padding inside the centre zone (the frame's left/right zones have their own). */
+.mediaPoolZone > * {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.deliverZoneResult {
+  padding: 0;
+}
+
+/* Cut's overview band: the whole timeline at a fit zoom, no scroll of its own. */
+.cutOverview {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 4px 8px;
+  background: var(--rb-ed-inspector-bg);
+}

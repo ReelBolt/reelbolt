@@ -1,0 +1,652 @@
+/*
+ * Workflow assistant chat. Colour tokens are defined once here with light-dark() so both themes
+ * stay in lockstep. Contrast notes (WCAG AA):
+ *   --asst-muted   gray-7 #495057 on white 8.9:1 · dark-1 #b8b8b8 on dark-7 #242424 8.4:1
+ *   --asst-accent  violet-7 #7048e8 on white 5.3:1 · violet-3 #b197fc on dark-7 7.4:1
+ *   user bubble text uses the default text colour on a violet tint (>= 12:1 in both themes)
+ */
+
+.root {
+  --asst-muted: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
+  --asst-accent: light-dark(var(--mantine-color-violet-7), var(--mantine-color-violet-3));
+  --asst-border: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  --asst-surface: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  --asst-bg: var(--mantine-color-body);
+  --asst-subtle: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  --asst-user-bg: light-dark(var(--mantine-color-violet-0), color-mix(in srgb, var(--mantine-color-violet-4) 16%, transparent));
+  --asst-user-border: light-dark(var(--mantine-color-violet-1), color-mix(in srgb, var(--mantine-color-violet-4) 28%, transparent));
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* C4: in the drawer's column the panel takes what the strips above leave (basis 0), instead of
+     its full 100% height, which pushed the history row over the helper text on a phone sheet. */
+  flex: 1 1 0;
+  min-height: 0;
+  background: var(--asst-bg);
+}
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 20px 24px;
+
+  @media (max-width: 30em) {
+    padding: 16px 16px 20px;
+  }
+
+  /* 48em is the drawer's own sheet breakpoint (the header and the settings strip switch there too), and
+     the message layout follows it on purpose: a 600-768px window gets the same right-hand 560px panel, and
+     the avatar column plus the user indent only take width away from the text. Above 48em nothing changes. */
+  @media (max-width: 48em) {
+    padding: 16px 12px 20px;
+  }
+}
+
+/* ---- Messages ------------------------------------------------------------------------------ */
+
+.userRow {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 15%;
+
+  /* Sheet widths (see `.thread`): no indent, the bubble gets the whole column. */
+  @media (max-width: 48em) {
+    padding-left: 0;
+  }
+}
+
+.userBubble {
+  max-width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--mantine-radius-md) var(--mantine-radius-md) var(--mantine-radius-sm) var(--mantine-radius-md);
+  background: var(--asst-user-bg);
+  border: 1px solid var(--asst-user-border);
+  color: var(--mantine-color-text);
+  font-size: 14.5px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+
+  & p {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+}
+
+.eventRow {
+  display: flex;
+  justify-content: center;
+}
+
+.eventText {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  overflow-wrap: anywhere;
+}
+
+.assistantRow {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+
+  /* Sheet widths (see `.thread`): drop the mark column so the text takes the full inner width. */
+  @media (max-width: 48em) {
+    grid-template-columns: minmax(0, 1fr);
+
+    & > .mark {
+      display: none;
+    }
+  }
+}
+
+.assistantBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--mantine-radius-sm);
+  color: var(--mantine-color-white);
+  /* violet-6 -> violet-8: white glyph stays >= 4.7:1 across the whole gradient */
+  background: linear-gradient(135deg, var(--mantine-color-violet-6), var(--mantine-color-violet-8));
+  box-shadow: none;
+
+  &[data-size='lg'] {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--mantine-radius-md);
+  }
+}
+
+.actionBar {
+  display: flex;
+  gap: 2px;
+  margin-left: -6px;
+
+  & :global(.mantine-ActionIcon-root) {
+    color: var(--asst-muted);
+  }
+}
+
+/* ---- Thinking ------------------------------------------------------------------------------- */
+
+.thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  font-size: 14px;
+  color: var(--asst-muted);
+}
+
+/* Each new tool caption slides up and fades in (the span is re-keyed per caption). */
+.caption {
+  display: inline-block;
+  animation: captionIn 260ms ease-out;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 32ch;
+}
+
+@keyframes captionIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caption {
+    animation: none;
+  }
+}
+
+.dots {
+  display: inline-flex;
+  gap: 4px;
+
+  & span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--asst-accent);
+    animation: dot 1.2s ease-in-out infinite;
+  }
+
+  & span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  & span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    & span {
+      animation: none;
+      opacity: 0.8;
+    }
+  }
+}
+
+@keyframes dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.elapsed {
+  font-family: var(--mantine-font-family-monospace);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Error --------------------------------------------------------------------------------- */
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid light-dark(var(--mantine-color-red-3), color-mix(in srgb, var(--mantine-color-red-4) 45%, transparent));
+  background: light-dark(var(--mantine-color-red-0), color-mix(in srgb, var(--mantine-color-red-6) 12%, transparent));
+  font-size: 13.5px;
+  color: var(--mantine-color-text);
+}
+
+.errorIcon {
+  flex: none;
+  margin-top: 2px;
+  color: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+}
+
+.errorText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.errorDetail {
+  color: var(--asst-muted);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Empty state ---------------------------------------------------------------------------- */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto 0;
+  padding: 24px 0;
+}
+
+.emptyTitle {
+  margin: 16px 0 6px;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--mantine-color-text);
+}
+
+.emptyCopy {
+  margin: 0 0 22px;
+  max-width: 380px;
+  text-wrap: balance;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--asst-muted);
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+
+  @media (max-width: 30em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid var(--asst-border);
+  background: var(--asst-surface);
+  text-align: left;
+  font: inherit;
+  cursor: var(--rb-cursor-pointer);
+  transition: border-color 120ms ease, background-color 120ms ease;
+
+  &:hover {
+    border-color: light-dark(var(--mantine-color-violet-3), var(--mantine-color-violet-5));
+    background: light-dark(var(--mantine-color-violet-0), color-mix(in srgb, var(--mantine-color-violet-4) 8%, transparent));
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
+}
+
+.suggestionTitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--mantine-color-text);
+}
+
+.suggestionPrompt {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--asst-muted);
+}
+
+/* ---- Footer: review tray + composer, pinned to the bottom of the scroll viewport ------------- */
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px 16px;
+  /* Fade the conversation out under the composer instead of a hard edge. */
+  background: linear-gradient(to bottom, transparent, var(--asst-bg) 18px);
+  padding-top: 18px;
+
+  @media (max-width: 30em) {
+    padding: 14px 12px max(12px, env(safe-area-inset-bottom));
+  }
+}
+
+.scrollToBottom {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: none;
+
+  &:disabled {
+    visibility: hidden;
+  }
+}
+
+/* Why the composer cannot be used yet. Docked directly above it, so the reason and the thing it is
+   explaining are read together rather than across the drawer. */
+.threadNotice {
+  padding-inline: 4px;
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid var(--asst-border);
+  background: var(--asst-surface);
+  box-shadow: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+
+  &:focus-within {
+    border-color: var(--mantine-primary-color-filled);
+    box-shadow: 0 0 0 2px light-dark(var(--mantine-color-violet-3), var(--mantine-color-violet-4));
+  }
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 16px 4px;
+  border: 0;
+  outline: 0;
+  resize: none;
+  background: transparent;
+  color: var(--mantine-color-text);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+
+  &::placeholder {
+    /* placeholder is a hint, but still held to 4.5:1 */
+    color: var(--asst-muted);
+  }
+}
+
+.composerBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* Wraps so the attach control's inline error can take a row of its own underneath the controls
+     instead of being squeezed beside them or floated over the text the user is typing. */
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 8px 8px 16px;
+}
+
+/* ---- Attach control -------------------------------------------------------------------------- */
+
+.attach {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.attachButton {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--asst-muted);
+  cursor: var(--rb-cursor-pointer);
+  transition: background-color 120ms ease, color 120ms ease;
+
+  &:hover {
+    background: var(--asst-subtle);
+    color: var(--asst-accent);
+  }
+
+  &[data-disabled] {
+    color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+    cursor: var(--rb-cursor-not-allowed);
+  }
+}
+
+/* The real control is the clipped file input inside the label, so the focus ring has to land on
+   what the user can actually see. */
+.attach:focus-within .attachButton {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 2px;
+}
+
+.attachReason {
+  font-size: 12px;
+  color: var(--asst-muted);
+}
+
+.attachError {
+  flex: 1 0 100%;
+  margin: 0;
+  text-align: right;
+  font-size: 12.5px;
+  color: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-3));
+  overflow-wrap: anywhere;
+}
+
+.hint {
+  flex: 1;
+  font-size: 12px;
+  color: var(--asst-muted);
+
+  & kbd {
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 11px;
+    padding: 1px 5px;
+    border-radius: var(--mantine-radius-sm);
+    border: 1px solid var(--asst-border);
+    background: var(--asst-subtle);
+  }
+
+  /* No physical keyboard shortcut to teach on touch devices. */
+  @media (pointer: coarse) {
+    visibility: hidden;
+  }
+}
+
+.send:disabled {
+  background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2));
+}
+
+/* ---- Markdown -------------------------------------------------------------------------------- */
+
+.markdown {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--mantine-color-text);
+  overflow-wrap: anywhere;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  & p {
+    margin: 0 0 10px;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    margin: 18px 0 8px;
+    font-weight: 650;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  & h1 {
+    font-size: 18px;
+  }
+
+  & h2 {
+    font-size: 16.5px;
+  }
+
+  & h3,
+  & h4 {
+    font-size: 15px;
+  }
+
+  & ul,
+  & ol {
+    margin: 0 0 10px;
+    padding-left: 22px;
+  }
+
+  & li {
+    margin: 3px 0;
+  }
+
+  & li::marker {
+    color: var(--asst-muted);
+  }
+
+  & strong {
+    font-weight: 650;
+  }
+
+  & a {
+    color: var(--asst-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  & blockquote {
+    margin: 0 0 10px;
+    padding: 2px 0 2px 12px;
+    border-left: 3px solid var(--asst-border);
+    color: var(--asst-muted);
+  }
+
+  & hr {
+    border: 0;
+    border-top: 1px solid var(--asst-border);
+    margin: 16px 0;
+  }
+
+  & :not(pre) > code {
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 0.86em;
+    padding: 1px 5px;
+    border-radius: var(--mantine-radius-sm);
+    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+    /* a long token wrapped across lines keeps its padding and border on every line */
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  & pre {
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border-radius: 0 0 var(--mantine-radius-sm) var(--mantine-radius-sm);
+    border: 1px solid var(--asst-border);
+    border-top: 0;
+    background: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+    overflow-x: auto;
+    font-family: var(--mantine-font-family-monospace);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  & table {
+    width: 100%;
+    margin: 0 0 12px;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    display: block;
+    overflow-x: auto;
+  }
+
+  & th,
+  & td {
+    padding: 6px 10px;
+    border: 1px solid var(--asst-border);
+    text-align: left;
+  }
+
+  & th {
+    background: var(--asst-subtle);
+    font-weight: 600;
+  }
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 4px 12px;
+  border: 1px solid var(--asst-border);
+  border-radius: var(--mantine-radius-sm) var(--mantine-radius-sm) 0 0;
+  background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
+  font-family: var(--mantine-font-family-monospace);
+  font-size: 12px;
+  color: var(--asst-muted);
+}

@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)">
+  <path d="M0 0 L10 10" onload="alert(2)" onclick="alert(3)" onmouseover="alert(4)" fill="#123"/>
+</svg>

@@ -1,0 +1,355 @@
+{
+  "$comment": "ReelBolt cursor set \u2014 masters and contract. Sources: brand/cursors/src/*.svg. Rendered by brand/scripts/cursors.mjs; copied into the apps by brand/scripts/sync.mjs. Hotspots are in 32 px space (the @1x canvas). See docs/design/cursors.md.",
+  "version": 1,
+  "sizePx": 32,
+  "scales": [
+    {
+      "suffix": "",
+      "px": 32
+    },
+    {
+      "suffix": "@2x",
+      "px": 64
+    }
+  ],
+  "palette": {
+    "paper": "#F5F3F8",
+    "rim": "#2E1065",
+    "violet": "#A855F7",
+    "lavender": "#C4B5FD"
+  },
+  "cursors": [
+    {
+      "name": "default",
+      "group": "ui",
+      "site": true,
+      "file": "default.png",
+      "at2x": "default@2x.png",
+      "hotspot": {
+        "x": 6,
+        "y": 2
+      },
+      "fallback": "default",
+      "intent": "The resting pointer: an angled arrow whose tip is the exact click point."
+    },
+    {
+      "name": "pointer",
+      "group": "ui",
+      "site": true,
+      "file": "pointer.png",
+      "at2x": "pointer@2x.png",
+      "hotspot": {
+        "x": 12,
+        "y": 2
+      },
+      "fallback": "pointer",
+      "intent": "A pointing hand for links and buttons, fingertip on the target."
+    },
+    {
+      "name": "text",
+      "group": "ui",
+      "site": true,
+      "file": "text.png",
+      "at2x": "text@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "text",
+      "intent": "An I-beam that marks where typing will land in editable text."
+    },
+    {
+      "name": "not-allowed",
+      "group": "ui",
+      "site": true,
+      "file": "not-allowed.png",
+      "at2x": "not-allowed@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "not-allowed",
+      "intent": "A barred disc for a control that cannot take the action."
+    },
+    {
+      "name": "progress",
+      "group": "ui",
+      "site": true,
+      "file": "progress.png",
+      "at2x": "progress@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "progress",
+      "intent": "A static busy arc for work in flight; never animated."
+    },
+    {
+      "name": "grab",
+      "group": "ui",
+      "site": true,
+      "file": "grab.png",
+      "at2x": "grab@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "grab",
+      "intent": "An open hand for content that can be dragged."
+    },
+    {
+      "name": "grabbing",
+      "group": "ui",
+      "site": true,
+      "file": "grabbing.png",
+      "at2x": "grabbing@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "grabbing",
+      "intent": "A closed fist for a drag already in progress."
+    },
+    {
+      "name": "move",
+      "group": "ui",
+      "site": true,
+      "file": "move.png",
+      "at2x": "move@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "move",
+      "intent": "A four-way arrow for repositioning an element in any direction."
+    },
+    {
+      "name": "resize-ew",
+      "group": "ui",
+      "file": "resize-ew.png",
+      "at2x": "resize-ew@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "A horizontal double arrow for left-right sizing."
+    },
+    {
+      "name": "resize-ns",
+      "group": "ui",
+      "file": "resize-ns.png",
+      "at2x": "resize-ns@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ns-resize",
+      "intent": "A vertical double arrow for up-down sizing."
+    },
+    {
+      "name": "resize-nwse",
+      "group": "ui",
+      "file": "resize-nwse.png",
+      "at2x": "resize-nwse@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "nwse-resize",
+      "intent": "A corner double arrow for the top-left to bottom-right diagonal."
+    },
+    {
+      "name": "resize-nesw",
+      "group": "ui",
+      "file": "resize-nesw.png",
+      "at2x": "resize-nesw@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "nesw-resize",
+      "intent": "A corner double arrow for the top-right to bottom-left diagonal."
+    },
+    {
+      "name": "razor",
+      "group": "editor",
+      "file": "razor.png",
+      "at2x": "razor@2x.png",
+      "hotspot": {
+        "x": 6,
+        "y": 27
+      },
+      "fallback": "crosshair",
+      "intent": "The blade tool's cut point, for splitting a clip at the click."
+    },
+    {
+      "name": "trim-left",
+      "group": "editor",
+      "file": "trim-left.png",
+      "at2x": "trim-left@2x.png",
+      "hotspot": {
+        "x": 13,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "The in-point trim edge: a vertical bar with an arrow pointing left."
+    },
+    {
+      "name": "trim-right",
+      "group": "editor",
+      "file": "trim-right.png",
+      "at2x": "trim-right@2x.png",
+      "hotspot": {
+        "x": 19,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "The out-point trim edge: a vertical bar with an arrow pointing right."
+    },
+    {
+      "name": "ripple",
+      "group": "editor",
+      "file": "ripple.png",
+      "at2x": "ripple@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "A ripple edit closing the gap toward the cut line."
+    },
+    {
+      "name": "slip",
+      "group": "editor",
+      "file": "slip.png",
+      "at2x": "slip@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "A slip trim: the clip frame stays, its source shifts inside it."
+    },
+    {
+      "name": "slide",
+      "group": "editor",
+      "file": "slide.png",
+      "at2x": "slide@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "A slide trim: the clip and its neighbours shift along the track; arrows point outward."
+    },
+    {
+      "name": "pan",
+      "group": "editor",
+      "file": "pan.png",
+      "at2x": "pan@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "grab",
+      "intent": "The hand tool for moving the viewer or timeline without editing: an open hand framed by four arrowheads."
+    },
+    {
+      "name": "scrub",
+      "group": "editor",
+      "file": "scrub.png",
+      "at2x": "scrub@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "ew-resize",
+      "intent": "Dragging the playhead: a pentagon head on a full-height line with drag chevrons either side."
+    },
+    {
+      "name": "mask-draw",
+      "group": "editor",
+      "file": "mask-draw.png",
+      "at2x": "mask-draw@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "crosshair",
+      "intent": "Drawing a mask region with a precise targeting crosshair."
+    },
+    {
+      "name": "mask-brush",
+      "group": "editor",
+      "file": "mask-brush.png",
+      "at2x": "mask-brush@2x.png",
+      "hotspot": {
+        "x": 4,
+        "y": 28
+      },
+      "fallback": "crosshair",
+      "intent": "Painting a layer mask; the bristle tip is the point of action."
+    },
+    {
+      "name": "eyedropper",
+      "group": "editor",
+      "file": "eyedropper.png",
+      "at2x": "eyedropper@2x.png",
+      "hotspot": {
+        "x": 5,
+        "y": 28
+      },
+      "fallback": "crosshair",
+      "intent": "Picking a colour from the canvas; the dropper tip is the point of action."
+    },
+    {
+      "name": "keyframe",
+      "group": "editor",
+      "file": "keyframe.png",
+      "at2x": "keyframe@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "pointer",
+      "intent": "A keyframe diamond for marking a point on an animated channel."
+    },
+    {
+      "name": "zoom-in",
+      "group": "editor",
+      "file": "zoom-in.png",
+      "at2x": "zoom-in@2x.png",
+      "hotspot": {
+        "x": 13,
+        "y": 13
+      },
+      "fallback": "zoom-in",
+      "intent": "Zooming in; the lens centre is the point of action."
+    },
+    {
+      "name": "zoom-out",
+      "group": "editor",
+      "file": "zoom-out.png",
+      "at2x": "zoom-out@2x.png",
+      "hotspot": {
+        "x": 13,
+        "y": 13
+      },
+      "fallback": "zoom-out",
+      "intent": "Zooming out; the lens centre is the point of action."
+    },
+    {
+      "name": "crosshair",
+      "group": "editor",
+      "file": "crosshair.png",
+      "at2x": "crosshair@2x.png",
+      "hotspot": {
+        "x": 16,
+        "y": 16
+      },
+      "fallback": "crosshair",
+      "intent": "A bare crosshair for precise or freeform placement."
+    }
+  ]
+}

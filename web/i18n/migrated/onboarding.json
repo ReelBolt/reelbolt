@@ -1,0 +1,8 @@
+{
+  "globs": [
+    "components/onboarding/GettingStartedCard.tsx",
+    "components/onboarding/FirstFilmCard.tsx",
+    "components/onboarding/OnboardingTour.tsx",
+    "components/shell/HelpMenu.tsx"
+  ]
+}

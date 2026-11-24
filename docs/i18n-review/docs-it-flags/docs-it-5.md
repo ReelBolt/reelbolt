@@ -1,0 +1,8 @@
+- index.md / getting-started.md: "Promo video from your code v1" -> kept in English : built-in workflow name; confirm whether the dashboard translates seeded workflow names
+- getting-started.md: "Embedding provider" -> "provider di Embedding" : follows the dashboard label; confirm
+- account/*.md: "Cancel plan" -> "Annulla piano" (and "Cancels on {date}" -> "Annullamento il {date}") : glossary gives cancel = annulla; "Disdici" would read more natural for a subscription
+- account/*.md: "assistant allowance" -> "allocazione dell'assistente" : no glossary term; "quota" is the alternative
+- account/desktop-runner.md: desktop-app labels (Home, Activity, Folders, Pause/Resume, "Pausa a batteria", "Quando non ci sono") : app UI strings not in glossary; align with the desktop app catalogue
+- account/desktop-runner.md: "compute fabric", "governor", "pool cloud", "worker", "egress" left as technical terms : no glossary entry
+- account/plans-and-credits.md: "Trial" kept as plan name in the table, "Prova gratuita" in prose : glossary lists "trial" = "prova gratuita" but plan names stay
+- runner/install-windows.md: Windows UI strings ("Windows ha protetto il PC", "Ulteriori informazioni", "Esegui comunque") : taken from the Italian Windows locale, verify

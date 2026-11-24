@@ -1,0 +1,56 @@
+{
+  "launcher": {
+    "button": "AI tools",
+    "title": "AI tools",
+    "searchLabel": "Search AI tools",
+    "searchPlaceholder": "Search AI tools",
+    "listLabel": "AI tools",
+    "empty": "No AI tool matches your search.",
+    "free": "Free",
+    "credits": "Uses credits",
+    "needsClip": "Select a clip first",
+    "needsVideoClip": "Select a video clip first",
+    "needsRange": "Mark an in and out point first",
+    "close": "Close"
+  },
+  "groups": {
+    "picture": "Picture",
+    "sound": "Sound",
+    "edit": "Edit",
+    "check": "Check"
+  },
+  "tools": {
+    "magicBlur": { "label": "Magic blur", "description": "Follow an object you name and blur, pixelate or highlight it." },
+    "cleanVoice": { "label": "Clean voice", "description": "Make speech clearer by taking out background noise." },
+    "cleanupAudio": { "label": "Clean up audio", "description": "Remove hum, wind, hiss, echo or music, or isolate the voice. The clean version follows your edits. Basic is free, Studio costs credits." },
+    "removeSilence": { "label": "Remove silence", "description": "Cut the quiet gaps out of your clips." },
+    "cutToMusic": { "label": "Cut to the music", "description": "Find the beat of a song and cut, split or fit your clips to it." },
+    "analyseFootage": { "label": "Analyse footage", "description": "Find silences, shots, motion and speech in your media." },
+    "editByTranscript": { "label": "Edit by transcript", "description": "Cut and rearrange by editing the words that were said." },
+    "suggestRecut": { "label": "Suggest a re-cut", "description": "Removes, trims or disables clips that drag." },
+    "suggestGraphics": { "label": "Suggest graphics", "description": "Adds titles and lower thirds over clips." },
+    "suggestGrade": { "label": "Suggest a colour look", "description": "Proposes a look for your clips that you can edit." },
+    "suggestSoundEffects": { "label": "Suggest sound effects", "description": "Places sound files from your project at the cuts." },
+    "suggestReview": { "label": "Review my edit", "description": "Leaves timecoded notes as markers and changes nothing else." },
+    "checkLoudness": { "label": "Check loudness", "description": "Measure the mix against a target such as social or broadcast." },
+    "listenToMix": { "label": "Listen to the mix", "description": "Play the finished mix to hear how it sounds." },
+    "preview3s": { "label": "3-second preview", "description": "Render a short preview of the picture at the playhead." }
+  },
+  "recut": {
+    "did": {
+      "cut": "{count, plural, one {cut # spoken passage} other {cut # spoken passages}} ({seconds, number, ::.0} s)",
+      "quiet": "{count, plural, one {cut # silence} other {cut # silences}} ({seconds, number, ::.0} s)",
+      "fillers": "{count, plural, one {cut # filler word} other {cut # filler words}} ({seconds, number, ::.0} s)",
+      "lines": "{count, plural, one {cut # line} other {cut # lines}} ({seconds, number, ::.0} s)",
+      "keep": "{count, plural, one {kept only the chosen lines, cutting # stretch} other {kept only the chosen lines, cutting # stretches}} ({seconds, number, ::.0} s)",
+      "trim": "{count, plural, one {trimmed # clip} other {trimmed # clips}}",
+      "mute": "{count, plural, one {muted # clip} other {muted # clips}}",
+      "remove": "{count, plural, one {removed # clip} other {removed # clips}}",
+      "other": "{count, plural, one {# other change} other {# other changes}}",
+      "join": "{head}, {tail}",
+      "line": "What it did: {parts}."
+    },
+    "tooManyCuts": "“{label}”: this suggestion has too many cuts to apply at once ({count}). Mark a shorter range and ask again.",
+    "swapsRefused": "Skipped changes that did not match your request."
+  }
+}

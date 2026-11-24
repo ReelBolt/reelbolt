@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "runners": "Runners",
+    "pair": "Pair a runner"
+  },
+  "chips": {
+    "notConnected": "This machine has not connected yet, so it has not reported what it can run. It will show up here after its first connection.",
+    "notReported": "Not reported yet"
+  },
+  "presence": {
+    "never": "This machine has never connected since it was paired.",
+    "online": "Heard from in the last few minutes.",
+    "offline": "Not heard from recently. The last recorded heartbeat is shown next to this.",
+    "onlineAria": "Recently active",
+    "offlineAria": "Not recently active"
+  },
+  "table": {
+    "never": "Never",
+    "machine": "Machine",
+    "platform": "Platform",
+    "runner": "Runner",
+    "lastSeen": "Last seen",
+    "canRun": "Can run",
+    "pairedBy": "Paired by",
+    "revokeAria": "Revoke {name}"
+  },
+  "page": {
+    "title": "Runners",
+    "pairButton": "Pair a device",
+    "intro": "Runners are computers you own, such as your laptop, your workstation or a spare box, that render your videos instead of the cloud. Each one is paired to this workspace by approving the code it shows, and it can be cut off here at any time.",
+    "supportedPlatforms": "Windows (x64) and Linux (x64 or arm64). macOS is not supported.",
+    "revokedTitleAlready": "Already revoked",
+    "revokedTitle": "Revoked",
+    "revokedAlready": "{name} had already been revoked. It will not receive any more work.",
+    "revokedNow": "{name} can no longer receive work. Pair it again from the machine to use it.",
+    "revokeFailedTitle": "Could not revoke",
+    "noWorkspaceTitle": "No active workspace",
+    "noWorkspaceBody": "Your session has no active workspace, so there are no runners to show. Switch to one and come back.",
+    "loadFailedTitle": "Could not load runners",
+    "loadFailedFallback": "Try again in a moment.",
+    "empty": {
+      "title": "No runners yet",
+      "description": "Pair a computer you own and it renders your videos instead of the cloud. The ReelBolt runner shows a short code when it starts; approving that code here connects the machine to this workspace. Runners are available for {platforms}",
+      "havePairingCode": "I have a pairing code",
+      "desktopRunner": "Desktop runner"
+    },
+    "revokeDialog": {
+      "title": "Revoke runner",
+      "confirm": "Revoke",
+      "message": "Revoke {name}? It is disconnected immediately and will receive no more work, and it disappears from this list: the workspace keeps no record of a revoked device here. To use the machine again you pair it afresh from the machine itself.",
+      "thisDevice": "this device"
+    }
+  },
+  "pair": {
+    "title": "Pair a runner",
+    "code": {
+      "heading": "Enter the code on the device",
+      "intro": "The ReelBolt runner on the computer you want to pair is showing a short code. Type it here, exactly as it appears.",
+      "label": "Pairing code",
+      "placeholder": "XXXX-XXXX",
+      "invalid": "That is not a pairing code. Codes are eight letters and digits, like 7HQD-4M2R.",
+      "continue": "Continue"
+    },
+    "approved": {
+      "title": "Device approved",
+      "body": "The machine is now paired to your workspace and can start receiving work. Every Owner of that workspace has been emailed about it, so you will not be the only person who knows."
+    },
+    "denied": {
+      "title": "Request denied",
+      "body": "The machine was told its request was refused, and nothing was paired. Nothing else happens; a fresh code can be approved later if the request was genuine."
+    },
+    "notFound": {
+      "title": "No matching pairing request",
+      "another": "Enter another code",
+      "back": "Back to runners"
+    },
+    "approve": {
+      "title": "Approve this device",
+      "breadcrumbRunners": "Runners",
+      "breadcrumbPair": "Pair a device",
+      "warnTitle": "Only approve a code shown on a device you own",
+      "warnBody1": "Approving connects a computer to this workspace, and that computer will be able to receive your media and render your videos. If someone gave you this code instead of a machine showing it to you, deny it: they are trying to attach their machine to your workspace.",
+      "warnBody2": "Check the code below matches the one on the screen character for character. Every Owner of the workspace is emailed when a device is approved, so a mistake is visible, though only after the fact.",
+      "platform": "Platform",
+      "version": "Runner version",
+      "notReported": "Not reported",
+      "requested": "Requested",
+      "expires": "Expires",
+      "expiredValue": "Expired {when}. Ask the device to show a fresh code.",
+      "withRelative": "{date} ({when})",
+      "requestedFrom": "Requested from",
+      "notRecorded": "Not recorded",
+      "ipHint": "The network address the request came from. This product does not look up a location for it."
+    },
+    "workspace": {
+      "heading": "Which workspace?",
+      "intro": "The machine is paired into the workspace you pick here, and only people in that workspace will see it. You can approve into a workspace where you are an Owner or Admin, or into your own Personal workspace.",
+      "none": "You are not an Owner or Admin of any workspace, so there is none you can approve a device into. Ask an Owner of the workspace you want to use.",
+      "label": "Workspace",
+      "placeholder": "Choose a workspace"
+    },
+    "failedTitle": "That did not work",
+    "approveButton": "Approve this device",
+    "deny": "Deny",
+    "cancel": "Cancel",
+    "goToRunners": "Go to runners"
+  }
+}

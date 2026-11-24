@@ -1,0 +1,31 @@
+{
+  "id": "laptop-frame",
+  "version": "1.0.0",
+  "title": "Laptop frame",
+  "category": "devices",
+  "description": "Put a desktop UI inside a laptop with base; use for SaaS and software showcases.",
+  "tags": [
+    "laptop",
+    "desktop",
+    "device",
+    "mockup"
+  ],
+  "requires": [
+    "remotion",
+    "react"
+  ],
+  "previewComposition": {
+    "compositionId": "Block-laptop-frame",
+    "durationInFrames": 60,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": [
+      0,
+      30,
+      59
+    ]
+  },
+  "props": "{children?: ReactNode; width?: number /*1200*/; body?: string}",
+  "example": "import {LaptopFrame} from './blocks/laptop-frame/LaptopFrame.tsx';\n<LaptopFrame><Page /></LaptopFrame>"
+}

@@ -1,0 +1,274 @@
+{
+  "page": {
+    "title": "Features",
+    "intro": "Every job a video team does, done by AI agents and reviewed before it reaches you. Then open it in the editor and make it yours.",
+    "navLabel": "Features"
+  },
+  "bands": {
+    "make": {
+      "heading": "Make the video",
+      "alt": "The workflow builder for a promo video workflow, with its run button, credit estimate line and the first steps on the canvas."
+    },
+    "edit": {
+      "heading": "Edit and design",
+      "alt": "The timeline editor with a demo timeline holding three video clips on track V1 and one audio clip on track A1."
+    },
+    "voice": {
+      "heading": "Voice and b-roll",
+      "alt": "The Files tab of the Acme Notes demo project, listing five uploaded source files with sizes and upload times."
+    },
+    "assistant": {
+      "heading": "Assistant and automation",
+      "alt": "The assistant side panel open over the dashboard, showing the welcome state with suggested prompts."
+    },
+    "team": {
+      "heading": "Team, files and control",
+      "alt": "The Brand and product tab of a demo project, showing the approved brand colours and typography."
+    }
+  },
+  "blocks": {
+    "team": {
+      "heading": "A production crew that never books out",
+      "intro": "A good video takes a dozen jobs: understanding the material, finding the story, writing, picking shots, designing titles, grading and choosing the music. ReelBolt gives you a specialist agent for each one, and they work on your video at the same time.",
+      "bullets": {
+        "0": "A researcher that works out what your material is about and who it is for",
+        "1": "A scriptwriter and a director that turn that into a story worth watching",
+        "2": "An editor, a motion designer, a colorist and a sound designer that finish it",
+        "3": "A reviewer that scores the result and sends weak drafts back"
+      }
+    },
+    "rooms": {
+      "heading": "More than one opinion on the big calls",
+      "intro": "In a room, several AI specialists work on one decision and a director chooses what to keep. You get options weighed against each other instead of the first idea that came up.",
+      "bullets": {
+        "0": "Edit room: several AI editors propose cuts and a director decides what stays",
+        "1": "Graphics room: layout, timing, copy and insert artists work on the on-screen graphics together",
+        "2": "Color grade room: one look for the whole video, from None, Warm, Cool, Filmic, Vibrant, Muted or Mono, at Subtle, Normal or Strong",
+        "3": "Dailies room: the best take is picked for each generated shot",
+        "4": "If a room can’t finish, the step falls back to a single editor so your run still completes"
+      },
+      "notes": {
+        "0": "Rooms are included on {roomsPlans}. A room uses more credits than a single step, and the estimate shows it before you start."
+      }
+    },
+    "editing": {
+      "heading": "Upload the raw take, get back the finished cut",
+      "intro": "Record it in one go, mistakes and all. ReelBolt finds where you paused, restarted or lost the thread, keeps the moments that carry the story, and cuts on full sentences, not mid-word.",
+      "bullets": {
+        "0": "Dead air, stumbles and false starts removed automatically",
+        "1": "The strongest take kept when you recorded the same thing twice",
+        "2": "Speech transcribed, so the edit follows what was actually said",
+        "3": "Clean transitions and fades in and out, done for you"
+      }
+    },
+    "timeline": {
+      "heading": "Open the cut and change anything",
+      "intro": "Every finished video opens as an editable timeline, or you can start from a blank one. Change what the agents did, keep what they got right, and render again.",
+      "bullets": {
+        "0": "Cut, trim and move clips, add markers, and undo anything, with autosave and version history you can restore",
+        "1": "Edit from the transcript, remove silences, and change speed, reverse or freeze a frame",
+        "2": "Keyframes, transitions, color grading with scopes, masks, keys, corner pins, effects and title templates",
+        "3": "An audio mixer that ducks the music under the voice, subtitles, and voiceover you record yourself",
+        "4": "Comments from reviewers, a review page that works on a phone, and an offline mode that catches up when you reconnect"
+      },
+      "notes": {
+        "0": "Working with another editor? Export the edit as OTIO, EDL or Final Cut XML, and subtitles as SRT or VTT. The Final Cut export carries the cut and the clips; titles, grades and effects stay in ReelBolt.",
+        "1": "Want a second opinion? Assist suggests a re-cut, graphics, a grade, sound effects or a review note, and you accept or reject each one. Suggestions use credits."
+      }
+    },
+    "pictures": {
+      "heading": "Thumbnails and stills, edited in layers",
+      "intro": "Make the thumbnail, the cover image or the social still in the same place you made the video. Every change sits on its own layer, so your original image is never touched.",
+      "bullets": {
+        "0": "Cut out a subject, remove or replace the background, and erase and fill",
+        "1": "Describe the change in words, expand the frame, upscale and relight",
+        "2": "Create a new picture from a description, then add text",
+        "3": "Export PNG, JPEG or a layered PSD"
+      },
+      "notes": {
+        "0": "The AI tools in the picture editor use credits. Layers, text and export do not."
+      }
+    },
+    "design": {
+      "heading": "Titles, captions, color and sound that look designed",
+      "intro": "Lower thirds, headline cards and callouts that point at what you just mentioned are what separate a polished video from a screen recording. They are timed to what is being said and placed where they don’t cover anything important.",
+      "bullets": {
+        "0": "Lower thirds, titles and callouts timed to the narration",
+        "1": "Color grading across the whole video for a consistent look",
+        "2": "Background music and sound effects mixed under the voice",
+        "3": "Karaoke, subtitle and punch captions"
+      }
+    },
+    "graphics": {
+      "heading": "Describe the graphic, get it drawn",
+      "intro": "Ask for a title, a badge, a price tag, an arrow or a big number, and an AI designer draws it on a transparent layer with your exact text in your brand colors and fonts. Ask for \"bolder\" and it revises.",
+      "bullets": {
+        "0": "Exact text, spelled the way you typed it",
+        "1": "Your brand colors and fonts; a brand font that isn’t available is matched to the closest installed one",
+        "2": "Each revision is a new layer, and the previous version is kept hidden in case you want it back",
+        "3": "Takes minutes, with progress and an estimate before it starts",
+        "4": "If the designer fails, the credits come back"
+      }
+    },
+    "inserts": {
+      "heading": "Your own video on every screen in the shot",
+      "intro": "Film a phone, a laptop or a monitor showing a green, blue or magenta screen, and ReelBolt fills it with your own video or animation. The insert follows the screen as the camera or the device moves.",
+      "bullets": {
+        "0": "Tracks moving screens, curved surfaces and several screens in one shot",
+        "1": "Keeps the edges and reflections of the real device",
+        "2": "Your own recording or animation, placed on the screen",
+        "3": "Shots it can’t track with confidence are left alone instead of being covered badly"
+      }
+    },
+    "privacy": {
+      "heading": "Blur what should not be in the shot",
+      "intro": "Real footage has things you can’t publish: a license plate behind the presenter, a visitor badge, a screen showing a customer’s data. Name what to look for, and ReelBolt finds it, follows it as the camera moves, and blurs, pixelates or fills it.",
+      "bullets": {
+        "0": "Describe the object in plain words; you don’t draw masks by hand",
+        "1": "Followed through camera moves, zooms and tilts",
+        "2": "Blurred, pixelated or filled, your choice",
+        "3": "Review the result before you publish; automatic tracking can miss a frame"
+      }
+    },
+    "brand": {
+      "heading": "Built from your brand, not a template",
+      "intro": "ReelBolt keeps a brand kit for each project, with your colors, type and voice, and builds every video from it. A shared brand library keeps every project in the workspace on the same brand.",
+      "bullets": {
+        "0": "Import design tokens, CSS and Tailwind, DESIGN.md, shadcn or Storybook themes, design-tool exports, a brand PDF, or Figma variables where enabled",
+        "1": "Export your brand as design tokens, CSS, Tailwind, DESIGN.md or JSON",
+        "2": "Projects inherit the workspace library, and values you lock always win",
+        "3": "ReelBolt watches your sources and proposes changes when they drift, and you approve or reject each one",
+        "4": "Version history, and every run records which brand version it used"
+      },
+      "notes": {
+        "0": "Importing, exporting and drift checks are free. If the files leave gaps, AI can fill them after you confirm the estimate."
+      }
+    },
+    "narration": {
+      "heading": "A voice to carry the story",
+      "intro": "Not every product video has someone talking on camera. ReelBolt writes narration to fit the cut, speaks it in the voice you choose, and mixes it under the picture with the music and dialogue.",
+      "bullets": {
+        "0": "Narration written to fit the edit, or your own lines spoken word for word",
+        "1": "A stock voice, or a cloned voice of a named speaker who has recorded a consent statement",
+        "2": "Consent can be revoked and the voice deleted at any time; cloned voices are kept for up to two years",
+        "3": "Mixed under the picture with the music and dialogue"
+      }
+    },
+    "dubs": {
+      "heading": "Fix a line or change the language without a reshoot",
+      "intro": "A flubbed line no longer means booking the presenter again, and a new market no longer means a new video. Pickups and dubs use the consented cloned voice.",
+      "bullets": {
+        "0": "Pickups re-record a flubbed line in the speaker’s consented cloned voice",
+        "1": "Dubs translate the narration and replace the dialogue",
+        "2": "The mouth movement on camera is not changed, so dubs suit narration and off-camera voice best"
+      }
+    },
+    "b-roll": {
+      "heading": "B-roll you never had to shoot, on a budget you set",
+      "intro": "A talking-head demo needs something to cut away to. A shot director reads your edit and plans short clips, such as a cutaway, a cold open, an end card or a bridge between two scenes, and they are generated and placed in the cut.",
+      "bullets": {
+        "0": "Cutaways, cold opens, end cards, scene bridges and screen content planned from your actual edit",
+        "1": "A spending cap per run and a daily budget, checked before anything is generated",
+        "2": "Several takes per shot, and the dailies room keeps the best one",
+        "3": "On a re-run, reuse the clips you already have or generate new ones"
+      },
+      "notes": {
+        "0": "Generated video is included on {videoGenPlans} and uses credits. The estimate shows the most it can cost before you start."
+      }
+    },
+    "quality": {
+      "heading": "Nothing mediocre reaches your inbox",
+      "intro": "A reviewer agent checks every draft against the brief: does it hold together, does it say what it set out to say, does the pacing work. Anything that falls short goes back for another pass, so the first version you see has already been reviewed.",
+      "bullets": {
+        "0": "Every draft scored against your brief",
+        "1": "Weak drafts sent back automatically",
+        "2": "You review a version that already passed, then change what you like in the editor"
+      }
+    },
+    "repeat": {
+      "heading": "One video, then the next one in a click",
+      "intro": "The way your video gets made is saved as a reusable recipe. Film the next batch of clips, or ship the next release, run it again, and the new video follows the same structure and tone with the new content.",
+      "bullets": {
+        "0": "Save the steps that made a video you liked and reuse them",
+        "1": "Adjust one stage without rebuilding the whole thing",
+        "2": "Make several cuts at once: a long one for the site, a vertical one for social"
+      }
+    },
+    "assistant": {
+      "heading": "Ask it in plain language, here or in Claude Code",
+      "intro": "A chat assistant sits on every page of the dashboard and knows what you are looking at. It answers questions about your projects, workflows and runs, edits pictures, and starts runs with the style, shape and resolution you ask for.",
+      "bullets": {
+        "0": "\"Why did my last run fail?\" answered from the actual run",
+        "1": "Each change appears as an approval card with the exact edit and its cost, and waits for your yes; auto mode is there if you want it",
+        "2": "Saved threads, so you can pick up a conversation later",
+        "3": "Connect Claude Code or another MCP client to your workspace and it can do what the assistant here does; there, your own client asks you before a step that changes something or spends credits",
+        "4": "It can’t manage users, see other people’s projects or change admin settings"
+      },
+      "notes": {
+        "0": "Lookups are free. Chat is free up to your plan’s monthly assistant allowance, shared with Claude Code; past that it uses credits. Runs, paid picture tools, designed graphics and generated video use credits as usual."
+      }
+    },
+    "sync": {
+      "heading": "Bring your files from where they already live",
+      "intro": "Connect the places your team already keeps its files, and ReelBolt keeps the project up to date. Your files are never deleted automatically.",
+      "bullets": {
+        "0": "Google Drive, OneDrive and SharePoint, and Dropbox: view-only, synced in the background or when you press Sync now",
+        "1": "A folder on your computer, including iCloud Drive, OneDrive or Dropbox folders, synced one way and read-only from a paired computer. The desktop app download has not been released yet.",
+        "2": "GitHub: pick a repo, a branch and the files you need, and new pushes update the project",
+        "3": "Nothing is ever written back to your drives or folders"
+      },
+      "notes": {
+        "0": "Storage depends on your plan, from {storageFrom} on {storageFromPlan} up to {storageTo} on {storageToPlan}. See pricing."
+      }
+    },
+    "teams": {
+      "heading": "One workspace the whole team shares",
+      "intro": "Projects, footage, workflows and run history belong to the workspace, not to one person’s account, so the video doesn’t leave with someone who moves on. Invite the people who need it, with a role that fits what they should do.",
+      "bullets": {
+        "0": "Shared projects, footage and run history",
+        "1": "Roles for owners, admins, members and the people who handle billing",
+        "2": "Invitations to bring people in, without sharing a password",
+        "3": "A credit pool the whole workspace draws from, with an estimate before every run"
+      }
+    },
+    "own-machine": {
+      "heading": "Render on a machine you own",
+      "intro": "Pair a Windows or Linux machine with your workspace and it takes on the rendering and media work. Work done there costs no credits, while model calls and billing stay on ReelBolt.",
+      "bullets": {
+        "0": "Rendering and media work on your own hardware, at no credit cost",
+        "1": "Owners and admins approve a paired machine and can revoke it at any time",
+        "2": "Every run shows where it ran",
+        "3": "The self-serve download has not been released yet; until a machine is paired, runs use ReelBolt’s capacity"
+      }
+    },
+    "resolution": {
+      "heading": "The size and shape each channel needs",
+      "intro": "Choose the resolution and shape when you start a run. Resolution is measured on the short side of the frame, so a vertical video and a landscape one are treated the same way.",
+      "bullets": {
+        "0": "Up to {topRes} on {topPlans}; each plan’s limit is on the pricing page",
+        "1": "Landscape, vertical, square, portrait or audio-only",
+        "2": "Loudness targets for the platforms you publish on",
+        "3": "Higher resolution uses more render credits and lower uses fewer, and the estimate shows it before you start"
+      }
+    },
+    "control": {
+      "heading": "Your AI provider, your models, your data",
+      "intro": "ReelBolt does not lock you into one AI vendor. Connect your own provider account and choose which model each agent uses, or keep the leading AI models your workspace comes with.",
+      "bullets": {
+        "0": "Bring your own AI provider account on {byoPlans}",
+        "1": "Pick a different model for each agent, or one for everything",
+        "2": "Usage on your own provider costs no ReelBolt credits; you pay the provider directly",
+        "3": "Search inside your project files by meaning, not just by name",
+        "4": "Self-hosting license on Enterprise, to run the whole platform inside your own infrastructure"
+      },
+      "after": "Everything the platform does is written up in the <docs>documentation</docs>, a plain-language user guide. More on the thinking behind it on the <about>about page</about>."
+    }
+  },
+  "cta": {
+    "title": "Want to see this on your own footage?"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "features": "Features"
+  }
+}

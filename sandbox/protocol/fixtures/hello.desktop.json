@@ -1,0 +1,34 @@
+{
+  "v": 1,
+  "type": "hello",
+  "id": "01J9ZQ0000000000000000H001",
+  "payload": {
+    "protocolVersion": "1.0",
+    "auth": {
+      "kind": "device",
+      "deviceId": "c3a1f0de-2b4c-4d8e-9a10-6e5f7b8c9d01",
+      "ts": "2026-10-05T09:00:00Z",
+      "nonce": "Zml4dHVyZS1ub25jZS0wMDAxMjM0NTY3",
+      "sig": "Zml4dHVyZS1zaWduYXR1cmUtbm90LXJlYWw"
+    },
+    "capabilities": {
+      "protocolVersion": "1.0",
+      "agentVersion": "0.1.0",
+      "os": "linux",
+      "arch": "amd64",
+      "slots": 2,
+      "container": "docker",
+      "containerMode": "rootless",
+      "runtimeImageDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "ffmpegVersion": "7.1",
+      "fontsetVersion": "1",
+      "jobTypes": [
+        "remotion.workspace-session",
+        "video.compile",
+        "video.analyze.extract"
+      ],
+      "maxOutputBytes": 4294967296
+    },
+    "running": []
+  }
+}

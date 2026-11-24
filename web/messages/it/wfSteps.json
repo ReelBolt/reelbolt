@@ -1,0 +1,2479 @@
+{
+  "forEach": {
+    "loopSource": "Origine del ciclo",
+    "earlierFields": {
+      "label": "Campi prodotti dai passaggi precedenti",
+      "description": "Nomi dei campi che puoi usare nell'espressione qui sopra."
+    }
+  },
+  "parallel": {
+    "intro": "Gli agenti vengono eseguiti in parallelo. I loro risultati vengono uniti in un array JSON per il passaggio successivo.",
+    "agentColumn": "Agente",
+    "removeAgent": "Rimuovi {name}",
+    "addPlaceholder": "Aggiungi un agente al gruppo parallelo…",
+    "outputFormat": "Formato del risultato:"
+  },
+  "agentOptions": {
+    "notStarted": "non avviata",
+    "loading": "Caricamento…",
+    "runNotListed": "Un'esecuzione non più in elenco",
+    "continue": {
+      "label": "Continua dalla composizione di un'esecuzione precedente",
+      "description": "L'agente riparte dal video finito di un'esecuzione precedente di questo progetto, invece di iniziare da zero."
+    },
+    "savedVersion": "Continua da una versione di composizione salvata ({versionId}). Disattiva e riattiva l'opzione per scegliere un'esecuzione.",
+    "runSelect": {
+      "label": "Esecuzione da cui continuare",
+      "loading": "Caricamento esecuzioni…",
+      "select": "Scegli un'esecuzione",
+      "empty": "Questo progetto non ha ancora esecuzioni"
+    },
+    "saveOutput": {
+      "label": "Salva il risultato come file del progetto",
+      "description": "Elenca in File ciò che consegna questo passaggio, così le esecuzioni successive e gli altri passaggi possono usarlo."
+    }
+  },
+  "pinInsert": {
+    "contentKind": {
+      "Step": "Il video o l'immagine di un passaggio precedente",
+      "ProjectFile": "Un video o un'immagine caricati",
+      "StepResult": "Il risultato di un'esecuzione precedente (ID del risultato del passaggio)"
+    },
+    "intro": "Inserisce un video o un'immagine negli schermi verdi, blu o magenta che un passaggio Analizza video ha tracciato nelle tue riprese. Non usa nessun modello AI e non costa nulla. Collega il piano grafico di un passaggio Monta video a questo passaggio e attiva lì gli inserti sugli schermi.",
+    "trackedScreens": {
+      "legend": "Schermi tracciati",
+      "foundBy": "Schermi trovati da",
+      "previousStep": "Il passaggio precedente"
+    },
+    "contentLegend": "Cosa va sugli schermi",
+    "screenIdHint": "L'ID di uno schermo è del tipo r0, r1, ...",
+    "screen": {
+      "label": "Schermo",
+      "description": "r0, r1, ... come li elenca l'analisi; vuoto per tutti gli schermi"
+    },
+    "removePin": "Rimuovi inserto {n}",
+    "content": "Contenuto",
+    "step": {
+      "label": "Passaggio",
+      "placeholder": "Scegli un passaggio"
+    },
+    "file": {
+      "label": "File"
+    },
+    "stepResult": {
+      "label": "ID del risultato del passaggio",
+      "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto (lo trovi nella pagina dell'esecuzione)"
+    },
+    "addPin": "Aggiungi contenuto per un altro schermo",
+    "requireApplied": {
+      "label": "Fermati se qualcosa non può essere messo su uno schermo",
+      "description": "Disattivato: inserisce ciò che funziona ed elenca il resto nel risultato del passaggio"
+    }
+  },
+  "extractFrame": {
+    "sourceKind": {
+      "ProjectFile": "Un file video caricato",
+      "PreviousStepOutput": "Il risultato del passaggio precedente",
+      "StepOutput": "Il risultato di un passaggio specifico",
+      "StepResult": "Il risultato di un'esecuzione precedente (ID del risultato del passaggio)"
+    },
+    "at": {
+      "Last": "L'ultimo fotogramma (consigliato per continuare una ripresa)",
+      "First": "Il primo fotogramma",
+      "Time": "Un momento a scelta"
+    },
+    "format": {
+      "png": "PNG (nitido, file più grande)",
+      "jpeg": "JPEG (file più piccolo)"
+    },
+    "intro": "Salva un fotogramma di un video come immagine. Usalo per tenere l'ultimo fotogramma di una clip generata e far partire la clip successiva da lì, oppure per ottenere un fermo immagine. Non usa nessun modello AI e non costa nulla.",
+    "video": {
+      "legend": "Quale video",
+      "takeFrom": "Prendi il fotogramma da",
+      "file": "File video",
+      "step": "Passaggio",
+      "stepPlaceholder": "Scegli un passaggio",
+      "stepResult": {
+        "label": "ID del risultato del passaggio",
+        "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto (lo trovi nella pagina dell'esecuzione)"
+      }
+    },
+    "frame": {
+      "legend": "Quale fotogramma",
+      "label": "Fotogramma",
+      "moment": {
+        "label": "Momento (secondi)",
+        "description": "Contato dall'inizio del video"
+      }
+    },
+    "image": {
+      "legend": "Immagine",
+      "format": "Formato",
+      "longestSide": {
+        "label": "Lato più lungo (pixel)",
+        "description": "Da {min} a {max}. Se vuoto, mantiene la dimensione del video."
+      },
+      "save": {
+        "label": "Salva nei file del progetto",
+        "description": "Mostra l'immagine in File così puoi scaricarla e riusarla nelle esecuzioni successive"
+      }
+    }
+  },
+  "audioGenerate": {
+    "kind": {
+      "Music": "Musica",
+      "SoundEffect": "Effetto sonoro"
+    },
+    "intro": "Genera musica o un effetto sonoro a partire da una descrizione e lo salva nei file del progetto, dove i passaggi successivi possono usarlo. Ogni take si paga in crediti.",
+    "what": {
+      "legend": "Cosa generare",
+      "kind": "Tipo",
+      "kindAria": "Tipo di audio",
+      "description": {
+        "label": "Descrizione",
+        "music": "Stile, atmosfera, strumenti e ritmo, per esempio \"chitarra acustica calda, ricca di speranza, che cresce verso un finale luminoso\"",
+        "soundEffect": "Il suono, per esempio \"una pesante porta di legno che cigola e si apre, poi un tonfo leggero\""
+      },
+      "planNote": "Un piano di composizione è impostato in Avanzate; le sue sezioni stabiliscono la durata, quindi qui non ci sono descrizione né durata.",
+      "length": {
+        "label": "Durata (secondi)",
+        "description": "Da {min} a {max} secondi per take. Il modello scelto può consentire un intervallo più stretto."
+      },
+      "instrumental": "Solo strumentale (senza voce)",
+      "loop": {
+        "label": "Rendilo un loop continuo",
+        "description": "Solo per i modelli che supportano il loop"
+      },
+      "influence": {
+        "label": "Quanto seguire la descrizione (da 0 a 1)",
+        "description": "Se vuoto, usa il valore predefinito del modello"
+      }
+    },
+    "cost": {
+      "legend": "Costo e risultato",
+      "provider": "Provider",
+      "nullMeansMusic": "Se vuoto, usa il provider musicale predefinito.",
+      "nullMeansSoundEffect": "Se vuoto, usa il provider predefinito per gli effetti sonori.",
+      "takes": {
+        "label": "Take",
+        "description": "Versioni separate tra cui scegliere, da 1 a {max}. Ognuna si paga."
+      },
+      "limit": {
+        "label": "Limite di spesa (crediti)",
+        "description": "Ferma il passaggio prima che spenda più di questa cifra. Se vuoto, valgono solo il tuo limite video giornaliero (se ne hai impostato uno) e il tuo saldo crediti."
+      },
+      "noLimitWarning": "Non hai impostato un limite di spesa. Impostane uno, così un errore nella durata o nel numero di take non può costarti più del previsto.",
+      "save": {
+        "label": "Salva nei file del progetto",
+        "description": "Mostra ogni take in File, così puoi ascoltarla, scaricarla e riusarla"
+      }
+    },
+    "advanced": {
+      "description": "Un modello specifico, un piano di composizione musicale e il nome del file salvato. I valori predefiniti vanno bene per quasi tutti i passaggi.",
+      "model": {
+        "label": "Modello",
+        "description": "Se vuoto, usa il modello del provider, altrimenti quello predefinito. Il server rifiuta un modello che non conosce."
+      },
+      "plan": {
+        "label": "Piano di composizione (JSON)",
+        "description": "Solo per la musica, al posto della descrizione: il piano sezione per sezione del fornitore. Le sezioni stabiliscono la durata."
+      },
+      "prefix": {
+        "label": "Prefisso del nome file",
+        "description": "Lettere, cifre, - e _ (da 1 a 40). Se vuoto, usa music o sfx."
+      }
+    }
+  },
+  "imageGenerate": {
+    "mode": {
+      "Generate": "Crea immagini",
+      "Edit": "Modifica un'immagine"
+    },
+    "sourceKind": {
+      "ProjectFile": "Un file del progetto",
+      "PreviousStepOutput": "L'immagine del passaggio precedente",
+      "StepOutput": "Un'immagine di un passaggio precedente",
+      "StepResult": "Un'immagine di un'esecuzione precedente",
+      "BriefFiles": "Un'immagine per ogni file ricevuto dall'app"
+    },
+    "intro": "Crea immagini da una descrizione, o modifica un'immagine con un'istruzione, usando un modello AI per le immagini, e le salva tra i file del progetto. Ogni immagine si paga in crediti.",
+    "what": {
+      "legend": "Cosa creare",
+      "mode": "Cosa fare",
+      "modeAria": "Crea nuove immagini o modificane una",
+      "prompt": {
+        "label": "Descrizione",
+        "description": "Cosa deve mostrare l'immagine, per esempio \"un faro al crepuscolo, luce morbida, inquadratura ampia\""
+      },
+      "instruction": {
+        "label": "Cosa cambiare",
+        "description": "La modifica da fare all'immagine, per esempio \"rendila notturna e aggiungi le stelle\""
+      },
+      "itemList": {
+        "label": "Elementi (uno per riga)",
+        "description": "Viene creata un'immagine per ogni elemento, fino a 24. Scrivine uno per riga o separali con virgole. Usa '{'item'}' nella descrizione o nella modifica per indicare dove va l'elemento, per esempio \"un divano '{'item'}' in un soggiorno luminoso\". Lascia vuoto per creare una sola immagine."
+      }
+    },
+    "source": {
+      "legend": "Immagine da modificare",
+      "takeFrom": "Prendi l'immagine da",
+      "file": "File immagine",
+      "step": "Passaggio",
+      "stepPlaceholder": "Scegli un passaggio",
+      "stepResult": {
+        "label": "ID del risultato del passaggio",
+        "description": "L'ID di un risultato concluso di un'esecuzione precedente di questo progetto"
+      },
+      "egress": {
+        "label": "Consenti l'invio di questa immagine al servizio AI",
+        "description": "Necessario per la modifica. L'immagine viene condivisa con il modello ospitato per 10 minuti. Finché non lo selezioni, l'esecuzione si ferma con EGRESS_REFUSED e non viene inviato nulla."
+      }
+    },
+    "cost": {
+      "legend": "Costo e risultato",
+      "provider": "Provider",
+      "nullMeansGenerate": "Se vuoto usa il provider predefinito per la generazione di immagini.",
+      "nullMeansEdit": "Se vuoto usa il provider predefinito per la modifica di immagini.",
+      "variations": {
+        "label": "Immagini",
+        "description": "Immagini separate tra cui scegliere, da 1 a {max}. Ognuna si paga."
+      },
+      "limit": {
+        "label": "Limite di spesa (crediti)",
+        "description": "Ferma il passaggio prima che spenda più di così. Se vuoto, il limite è il totale calcolato."
+      },
+      "noLimitWarning": "Non è impostato alcun limite di spesa. Impostane uno, così un numero di immagini scritto per errore non spende più del previsto.",
+      "save": {
+        "label": "Salva tra i file del progetto",
+        "description": "Mostra ogni immagine in File, così puoi vederla, scaricarla e riusarla"
+      }
+    },
+    "advanced": {
+      "description": "La forma dell'immagine e il nome del file salvato. I valori predefiniti vanno bene quasi sempre.",
+      "aspect": {
+        "label": "Proporzioni",
+        "description": "Per esempio 16:9 o 1:1, se il modello le accetta. Non insieme a larghezza e altezza."
+      },
+      "width": {
+        "label": "Larghezza (pixel)",
+        "description": "Da usare con l'altezza. Non insieme alle proporzioni."
+      },
+      "height": {
+        "label": "Altezza (pixel)",
+        "description": "Da usare con la larghezza. Non insieme alle proporzioni."
+      },
+      "size": {
+        "legend": "Dimensione dell'immagine",
+        "resolution": {
+          "label": "Risoluzione",
+          "automatic": "Automatica"
+        },
+        "outputWidth": {
+          "label": "Larghezza esatta (pixel)"
+        },
+        "outputHeight": {
+          "label": "Altezza esatta (pixel)"
+        },
+        "helper": "L'immagine viene creata alla dimensione più vicina che il modello sa disegnare, poi ridimensionata esattamente a questa dimensione. Per esempio 2000 x 2000.",
+        "tierTooSmall": "Troppo piccola: {tier} crea immagini fino a {edge} pixel sul lato lungo, ma la dimensione esatta ne richiede {need}. Scegli una risoluzione maggiore o Automatica.",
+        "clearExactFirst": "Svuota la dimensione esatta per usarla."
+      },
+      "prefix": {
+        "label": "Prefisso del nome file",
+        "description": "Lettere, cifre, - e _ (da 1 a 40). Se vuoto usa image."
+      }
+    }
+  },
+  "conditional": {
+    "intro": "Scegli quale passaggio viene eseguito dopo quando la condizione è vera o falsa.",
+    "condition": "Condizione",
+    "labels": {
+      "mode": "Come decidere",
+      "conditionExpression": "Espressione della condizione",
+      "decisionQuestion": "Nome della domanda di decisione",
+      "threshold": "Soglia di probabilità del sì",
+      "providerId": "Provider di decisione",
+      "timeoutSeconds": "Timeout della decisione (secondi)"
+    },
+    "hints": {
+      "conditionExpression": "Una formula sui risultati precedenti, per esempio steps[1].score >= 7. In modalità Decisione serve anche a impostare la domanda posta al modello.",
+      "decisionQuestion": "Nome breve facoltativo per la domanda sì/no. Lascia vuoto per ricavarlo dall'espressione.",
+      "thresholdDecision": "Il ramo è Vero quando la probabilità di \"sì\" del modello è almeno questa. 0,5 = testa o croce.",
+      "thresholdExpression": "Usata solo in modalità Decisione (ignorata con Espressione selezionata).",
+      "timeoutSeconds": "Quanto aspettare il provider di decisione. Allo scadere il passaggio vale Falso, non fallisce mai."
+    },
+    "mode": {
+      "expression": "Espressione: valuta una formula (predefinita)",
+      "decision": "Decisione: fai una domanda sì/no a un modello",
+      "decisionHint": "Il passaggio fa prima una domanda sì/no a un provider di decisione. Senza un provider di decisione configurato passa al ramo Falso. Usa un modello, quindi può costare token.",
+      "expressionHint": "Deterministico: l'espressione della condizione viene valutata in locale, senza chiamare un modello."
+    },
+    "provider": {
+      "description": "Quale provider con capacità di decisione risponde. Se vuoto, usa quello predefinito.",
+      "nullMeans": "Senza provider, un passaggio in modalità Decisione vale Falso.",
+      "onlyDecision": "Provider di decisione: usato solo in modalità Decisione."
+    },
+    "branch": {
+      "trueLabel": "Se vera, vai a",
+      "trueDescription": "Passaggio eseguito quando la condizione è soddisfatta",
+      "falseLabel": "Se falsa, vai a",
+      "falseDescription": "Passaggio eseguito altrimenti"
+    },
+    "earlierFields": {
+      "label": "Campi prodotti dai passaggi precedenti",
+      "description": "Nomi dei campi che puoi usare nell'espressione qui sopra."
+    }
+  },
+  "designSystem": {
+    "op": {
+      "Parse": "Leggi i miei file di design",
+      "Compose": "Combina e salva il profilo",
+      "Require": "Richiedi un profilo approvato"
+    },
+    "intro": "Legge i tuoi file di design e la struttura dell'app e li trasforma in un profilo di brand e di prodotto. Gratis: non usa nessun modello AI.",
+    "whatItDoes": "Cosa fa questo passaggio",
+    "parse": {
+      "legend": "Lettura",
+      "includeDesign": "Leggi il brand (colori, font, spaziature)",
+      "includeProductMap": "Leggi la struttura del prodotto (pagine, parti, librerie)",
+      "chooseOne": "Scegli almeno una cosa da leggere.",
+      "limits": {
+        "label": "Limiti",
+        "description": "Quanti file leggere e quanto possono essere grandi.",
+        "maxFiles": "Numero massimo di file da leggere",
+        "maxBytesPerFile": "File più grande (byte)",
+        "maxTotalBytes": "Totale massimo (byte)"
+      },
+      "extraGlobs": {
+        "label": "Leggi anche i file che corrispondono a",
+        "description": "Scrivi un pattern, per esempio docs/**/*.md. Fino a 20 pattern, di 100 caratteri ciascuno.",
+        "placeholder": "docs/**/*.md"
+      }
+    },
+    "compose": {
+      "legend": "Combinazione",
+      "parseStep": {
+        "label": "Quale passaggio precedente ha letto i tuoi file",
+        "description": "Il suo risultato viene unito nel profilo che questo passaggio salva.",
+        "missing": "Scegli quale passaggio precedente ha letto i tuoi file: senza, questo passaggio non combina nulla."
+      },
+      "designFallback": {
+        "label": "Passaggi di riserva per il brand (facoltativi)",
+        "description": "Passaggi il cui risultato può completare un profilo di brand mancante."
+      },
+      "productFallback": {
+        "label": "Passaggi di riserva per il profilo prodotto (facoltativi)",
+        "description": "Passaggi il cui risultato può completare un profilo prodotto mancante."
+      },
+      "noFallback": "Nessun passaggio di riserva",
+      "ingest": "Salva il profilo per questo progetto"
+    },
+    "require": {
+      "legend": "Richiesta",
+      "design": "Richiede un profilo di brand approvato",
+      "product": "Richiede un profilo prodotto approvato",
+      "chooseOne": "Scegli almeno una voce: un profilo richiesto dal passaggio, altrimenti fallisce sempre."
+    }
+  },
+  "reviewLoop": {
+    "intro": "Un revisore dà un punteggio al risultato del passaggio di destinazione; sotto il punteggio minimo la destinazione viene eseguita di nuovo, fino al limite di iterazioni.",
+    "labels": {
+      "loopTargetStepOrder": "Passaggio da rieseguire se il punteggio è troppo basso",
+      "minScore": "Punteggio minimo per passare (1-10)",
+      "maxIterations": "Numero massimo di revisioni",
+      "enabled": "Arresto anticipato con un modello di decisione",
+      "acceptAt": "Affidabilità per l'arresto anticipato",
+      "bimodalMargin": "Margine per l'arresto anticipato",
+      "providerId": "Provider di decisione",
+      "timeoutSeconds": "Timeout della decisione (secondi)"
+    },
+    "hints": {
+      "minScore": "Lascia vuoto per far decidere all'agente revisore quando il lavoro è abbastanza buono.",
+      "maxIterations": "Un limite fisso, così un ciclo non può girare all'infinito. Ogni giro costa una revisione più una nuova esecuzione.",
+      "enabled": "Disattivato (predefinito): il revisore viene sempre eseguito. Attivato: un provider di decisione può accettare il lavoro in anticipo e saltare una revisione, risparmiando token. Se c'è un dubbio, decide comunque il revisore.",
+      "acceptAt": "Quanto deve essere sicuro il modello di decisione che il punteggio sia sufficiente (0-1). Più alto = meno arresti anticipati. 0,85 è un valore predefinito non ottimizzato.",
+      "bimodalMargin": "Se i due livelli di punteggio più alti sono più vicini di questo valore, viene eseguito il revisore. 0,15 è un valore predefinito non ottimizzato.",
+      "timeoutSeconds": "Tempo massimo per il controllo; allo scadere il revisore viene eseguito normalmente.",
+      "loopTargetStepOrder": "Il passaggio il cui risultato viene rivisto e rieseguito, di solito il passaggio autore o montatore qui sopra."
+    },
+    "provider": {
+      "description": "Usato solo con l'arresto anticipato attivo. Se vuoto, usa il provider di decisione predefinito.",
+      "nullMeans": "Senza un provider di decisione il revisore viene sempre eseguito."
+    },
+    "advanced": {
+      "label": "Avanzate: controllo visivo",
+      "description": "Facoltativo: guarda i fotogrammi del video per trovare testo tagliato o illeggibile prima di ogni revisione."
+    },
+    "scoreHint": "L'agente revisore si aspetta che il passaggio di destinazione produca un campo 'score' (1-10) nel suo risultato.",
+    "visualCheck": {
+      "enabled": {
+        "label": "Controlla l'immagine prima di ogni revisione",
+        "description": "Guarda alcuni fotogrammi del video per trovare testo tagliato, troppo vicino al bordo o troppo piccolo per essere letto, e lo segnala al revisore."
+      },
+      "frames": {
+        "label": "Fotogrammi da guardare",
+        "description": "Da 2 a 16. Più fotogrammi trovano più problemi e costano di più."
+      },
+      "failScoreCap": "Punteggio massimo se si trova un problema serio (0-10)",
+      "safeMargin": {
+        "label": "Margine di sicurezza (% del fotogramma)",
+        "description": "Il testo più vicino al bordo di questo valore viene segnalato. Da 0 a 20."
+      },
+      "minText": {
+        "label": "Testo leggibile più piccolo (% dell'altezza del fotogramma)",
+        "description": "Il testo più piccolo viene segnalato. Da 0,5 a 20."
+      },
+      "vision": {
+        "label": "Modello di visione",
+        "description": "Il modello che guarda i fotogrammi. Se vuoto, usa il modello di visione predefinito."
+      }
+    }
+  },
+  "extract": {
+    "inputSource": {
+      "Previous": "Risultato del passaggio precedente",
+      "Step": "Passaggio specifico",
+      "Accumulated": "Risultato accumulato del flusso di lavoro",
+      "ProjectFiles": "File del progetto"
+    },
+    "step": "Passaggio",
+    "selectStep": "Scegli un passaggio",
+    "noEarlierSteps": "Nessun passaggio precedente",
+    "stepFallback": "Passaggio {n}",
+    "operation": {
+      "label": "Operazione",
+      "description": "Cosa fa questo passaggio con i risultati precedenti. Non usa nessuna AI.",
+      "Project": "Tieni i dettagli chiave: riduci un elenco ai campi che scegli",
+      "Resolve": "Cerca gli elementi scelti: recupera le voci complete per un elenco di selezioni",
+      "Files": "Leggi i file del progetto: elencali o riassumili"
+    },
+    "inputs": {
+      "legend": "Input",
+      "source": "Origine",
+      "path": {
+        "label": "Percorso",
+        "description": "Percorso JSON risolto sull'origine, per esempio $.components"
+      },
+      "ids": "ID",
+      "idsPath": {
+        "label": "Percorso degli ID",
+        "description": "Percorso JSON dentro l'input degli ID, per esempio $.selectedIds"
+      },
+      "records": "Record",
+      "recordsPath": {
+        "label": "Percorso dei record",
+        "description": "Percorso JSON dentro l'input dei record, per esempio $.view.items"
+      },
+      "categories": "Categorie",
+      "includeExtensions": "Includi estensioni",
+      "excludePathContains": "Escludi percorsi che contengono"
+    },
+    "idSkip": {
+      "legend": "Gestione di ID e salti"
+    },
+    "output": {
+      "legend": "Forma del risultato",
+      "expectations": "Verifiche (si ferma subito prima che parta il passaggio successivo)",
+      "requiredPaths": {
+        "label": "Percorsi obbligatori",
+        "description": "Percorsi JSON che devono essere presenti nella vista del risultato"
+      },
+      "minItems": "Elementi minimi",
+      "maxItems": "Elementi massimi",
+      "nonEmpty": {
+        "label": "Percorsi con testo non vuoto",
+        "description": "Percorsi che devono contenere un testo non vuoto"
+      }
+    },
+    "technical": {
+      "label": "Dettagli tecnici",
+      "description": "Il formato esatto che questo passaggio consegna al successivo.",
+      "handsOver": "Cosa consegna questo passaggio al successivo"
+    }
+  },
+  "kit": {
+    "fieldNote": {
+      "rejected": "Il server l'ha rifiutato: {message}",
+      "proposes": "L'assistente propone: {before} → {after}"
+    },
+    "askAssistant": "Chiedi all'assistente",
+    "advanced": "Avanzate",
+    "egressTitle": "I dati escono da questo server",
+    "stepOrder": {
+      "unlabelled": "Passaggio {stepType}",
+      "unavailable": "{order}. (passaggio non disponibile qui)",
+      "select": "Scegli un passaggio",
+      "none": "Non ci sono ancora altri passaggi"
+    },
+    "provider": {
+      "model": "Modello",
+      "unknownModel": "Modello sconosciuto",
+      "groupWorkspace": "Questo spazio di lavoro",
+      "groupUnavailable": "Non più disponibile",
+      "capability": {
+        "Chat": "chat",
+        "Transcription": "trascrizione",
+        "Vision": "visione",
+        "Decision": "decisione",
+        "VideoGeneration": "generazione video",
+        "SpeechSynthesis": "sintesi vocale",
+        "Embedding": "embedding",
+        "ImageGeneration": "generazione di immagini",
+        "ImageEdit": "modifica di immagini",
+        "Segmentation": "segmentazione",
+        "Depth": "profondità",
+        "ImageErase": "rimozione di oggetti",
+        "ImageFill": "riempimento di aree",
+        "ImageExpand": "espansione",
+        "ImageBackgroundReplace": "sostituzione dello sfondo",
+        "ImageRelight": "rilluminazione",
+        "ImageUpscale": "upscale",
+        "VideoSegmentation": "segmentazione video",
+        "Compute": "calcolo",
+        "MusicGeneration": "generazione musicale",
+        "SoundEffectGeneration": "generazione di effetti sonori",
+        "AudioIsolation": "pulizia audio",
+        "LipSync": "lip-sync"
+      },
+      "placeholder": {
+        "denied": "Modello predefinito per {noun} (non disponibile per il tuo ruolo)",
+        "loading": "Caricamento modelli...",
+        "none": "Nessun modello per {noun} configurato",
+        "default": "Usa il modello predefinito per {noun}"
+      },
+      "deniedNote": "Il tuo ruolo non può scegliere un modello, quindi per {noun} si usa quello predefinito dello spazio di lavoro.",
+      "emptyNote": "Nessun modello per {noun} configurato.",
+      "addPlatform": "Aggiungine uno in <link>Piattaforma → Inferenza</link>",
+      "addOrg": "Aggiungine uno in <link>Organizzazione → Provider</link>",
+      "askAdmin": "Chiedi a un Proprietario o a un Amministratore di questo spazio di lavoro di aggiungerne uno.",
+      "sentenceEnd": "."
+    },
+    "noAudio": {
+      "what": {
+        "music": "musicali",
+        "sfx": "di effetti sonori",
+        "both": "musicali o di effetti sonori"
+      },
+      "without": {
+        "music": "la musica",
+        "sfx": "gli effetti sonori",
+        "both": "questi elementi"
+      },
+      "title": "Non ci sono ancora file {what}",
+      "body": "Il tuo progetto non ha file {what}. Carica una traccia audio in <link>File</link>: per ora non c'è una libreria integrata. Senza, il video esce senza {without}."
+    },
+    "assistantPrompt": {
+      "withTopic": "Sto configurando il passaggio {order} ({stepType}) di questo flusso di lavoro. {topic}",
+      "generic": "Sto configurando il passaggio {order} ({stepType}) di questo flusso di lavoro. Spiega cosa fa ogni impostazione e suggerisci una buona configurazione per il mio obiettivo."
+    }
+  },
+  "schemaForm": {
+    "select": "Scegli...",
+    "defaultValue": "Predefinito: {value}",
+    "addItems": "Aggiungi elementi...",
+    "arrayUnsupported": "Array (non supportato in questo modulo)",
+    "nestedObject": "Configurazione di un oggetto annidato",
+    "unknownType": "Tipo sconosciuto: {type}",
+    "advancedOptions": "Opzioni avanzate",
+    "unapplied": "Modifiche non applicate: premi Applica per mantenerle",
+    "apply": "Applica",
+    "nestedRef": "Oggetto annidato: {ref}"
+  },
+  "timelineRender": {
+    "preset": {
+      "Hd1080p16x9": "HD 1080p (16:9)",
+      "Uhd4k16x9": "4K (16:9)",
+      "Vertical9x16": "Verticale (9:16, smartphone)",
+      "Square1x1": "Quadrato (1:1)",
+      "Portrait4x5": "Ritratto (4:5)",
+      "Master": "Master — la dimensione originale della timeline, qualità massima",
+      "AudioOnly": "Solo audio (.m4a)"
+    },
+    "codec": {
+      "H264": "H.264 (si riproduce ovunque)",
+      "H265": "H.265 (file più piccoli, lettori più recenti)"
+    },
+    "speed": {
+      "Fast": "Veloce (file più grande)",
+      "Medium": "Bilanciata",
+      "Slow": "Lenta (file più piccolo)"
+    },
+    "intro": "Trasforma una delle timeline dell'editor di questo progetto in un video finito. Il montaggio, i livelli e i volumi audio arrivano dalla timeline stessa; questo passaggio sceglie solo il formato di consegna. Non usa nessun modello AI.",
+    "what": {
+      "legend": "Cosa esportare"
+    },
+    "timeline": {
+      "label": "Timeline",
+      "description": "Una timeline dell'editor di questo progetto",
+      "option": "{name} (revisione {revision})",
+      "notListed": "{id} (non presente nell'elenco di questo progetto)",
+      "none": "Questo progetto non ha ancora timeline",
+      "choose": "Scegli una timeline",
+      "loading": "Caricamento timeline…",
+      "noMatch": "Nessuna timeline corrisponde",
+      "idLabel": "ID della timeline",
+      "idDescription": "L'ID della timeline dell'editor da esportare",
+      "required": "Scegli una timeline: senza, il passaggio non può partire."
+    },
+    "revision": {
+      "label": "Revisione",
+      "description": "Lascia vuoto per esportare l'ultima revisione all'avvio del passaggio; l'esecuzione registra la revisione usata."
+    },
+    "delivery": {
+      "legend": "Consegna",
+      "format": "Formato",
+      "fileName": {
+        "label": "Nome del file",
+        "description": "Lettere, cifre, spazi, trattini, trattini bassi e il carattere «.»; niente cartelle"
+      },
+      "register": "Mostra il file anche in File di questo progetto"
+    },
+    "advanced": {
+      "label": "Avanzate",
+      "description": "Parte della timeline, codifica personalizzata e normalizzazione del volume."
+    },
+    "range": {
+      "legend": "Parte della timeline",
+      "only": "Esporta solo un intervallo di fotogrammi",
+      "first": "Primo fotogramma",
+      "end": "Fotogramma finale (escluso)"
+    },
+    "encoding": {
+      "legend": "Codifica",
+      "override": "Sostituisci le impostazioni di codifica del preset",
+      "codec": "Codec video",
+      "speed": "Velocità o dimensione",
+      "quality": "Qualità (0 migliore – 51 più piccola)",
+      "audioBitrate": "Bitrate audio (kbps)",
+      "customSize": "Dimensione personalizzata",
+      "width": "Larghezza (pari, 16–7680)",
+      "height": "Altezza (pari, 16–4320)",
+      "rateControl": "Come scegliere la dimensione del file",
+      "rateMode": {
+        "Quality": "Aspetto costante",
+        "Capped": "Prima l’aspetto, con un limite",
+        "Average": "Punta a una dimensione"
+      },
+      "videoBitrate": "Bitrate video (kbps, 200–100000)"
+    },
+    "loudness": {
+      "legend": "Volume",
+      "normalise": {
+        "label": "Normalizza il volume del programma",
+        "description": "Misurazione in due passaggi verso un obiettivo in stile broadcast. Disattivato: il mix viene misurato ma lasciato come impostato nella timeline."
+      },
+      "target": "Obiettivo (LUFS)",
+      "truePeak": "True peak (dBTP)",
+      "range": "Gamma (LU)"
+    }
+  },
+  "thumbnailGenerate": {
+    "fontColor": {
+      "white": "Bianco",
+      "black": "Nero",
+      "yellow": "Giallo"
+    },
+    "boxColor": {
+      "black_0_45": "Pannello scuro (trasparente)",
+      "black_0_6": "Pannello scuro (più marcato)",
+      "white_0_4": "Pannello chiaro (trasparente)",
+      "none": "Nessun pannello"
+    },
+    "selection": {
+      "Auto": "Scegli tu il momento migliore (consigliato)",
+      "AtTime": "Prendi un momento preciso che scelgo io"
+    },
+    "fit": {
+      "Cover": "Riempi l'immagine e ritaglia i bordi",
+      "Contain": "Mostra tutto il fotogramma, con bande dove non entra"
+    },
+    "position": {
+      "None": "Nessun testo (predefinito)",
+      "LowerThird": "Terzo inferiore dell'immagine",
+      "UpperThird": "Terzo superiore dell'immagine",
+      "Center": "Al centro"
+    },
+    "stepFallback": "Passaggio {n}",
+    "setElsewhere": "{value} (impostato altrove)",
+    "intro": "Prende un fotogramma dalle tue riprese e lo salva come immagine: quella che le persone vedono prima di premere play. Non usa nessun modello AI e il video non cambia in nessun modo.",
+    "frame": {
+      "legend": "Quale fotogramma",
+      "how": "Come viene scelto il momento",
+      "autoHint": "Il momento viene scelto in base a ciò che il passaggio Analizza video ha misurato: il take migliore, quanto è nitido e fermo il fotogramma, e se lo stesso momento è stato girato più volte. Per iniziare, aggiungi un passaggio <b>Analizza video</b> sopra questo.",
+      "atTimeHint": "Indichi tu il momento esatto. Non viene scelto nulla al posto tuo, quindi funziona anche su una clip che il passaggio Analizza video non ha mai visto.",
+      "footage": {
+        "label": "Riprese",
+        "description": "Il passaggio 'Analizza video' da cui prendere il fotogramma"
+      },
+      "footageNumber": {
+        "label": "Numero del passaggio delle riprese",
+        "description": "Il numero del passaggio 'Analizza video' da cui prendere il fotogramma"
+      },
+      "noFootage": "Nessun passaggio 'Analizza video' viene prima di questo, quindi non c'è ancora nessun fotogramma da prendere. Aggiungine uno e spostalo sopra questo passaggio.",
+      "moment": {
+        "label": "Momento (secondi)",
+        "description": "Il punto della clip da cui prendere il fotogramma, contato dall'inizio"
+      },
+      "clip": {
+        "label": "Numero della clip",
+        "description": "Quale clip analizzata leggere, contando da 1. 1 è la prima."
+      },
+      "candidates": {
+        "label": "Momenti da valutare",
+        "description": "Più momenti possono trovare un fotogramma migliore e richiedono un po' più di tempo (da 1 a 500)"
+      },
+      "minShot": {
+        "label": "Ignora i momenti più brevi di (secondi)",
+        "description": "Un'inquadratura molto breve di solito è un fotogramma lampo"
+      },
+      "bestTake": {
+        "label": "Preferisci il tentativo migliore",
+        "description": "Se lo stesso momento è stato girato più volte, usa il take migliore invece del solo punteggio più alto."
+      }
+    },
+    "output": {
+      "legend": "Risultato",
+      "width": {
+        "label": "Larghezza (pixel)",
+        "description": "Da 16 a 4096. 1280 va bene per l'immagine di copertina di ogni piattaforma."
+      },
+      "height": {
+        "label": "Altezza (pixel)",
+        "description": "Da 16 a 4096. 720 con la larghezza qui sopra è la solita copertina 16:9."
+      },
+      "fit": "Quando la forma del fotogramma è diversa",
+      "quality": {
+        "label": "Qualità dell'immagine",
+        "description": "2 è la qualità migliore e 31 il file più piccolo. 4 è un buon valore predefinito."
+      },
+      "fileName": {
+        "label": "Nome del file",
+        "description": "Solo un nome, non una cartella"
+      },
+      "save": {
+        "label": "Salva nei file del progetto",
+        "description": "Mostra l'immagine in File così puoi scaricarla o usarla come copertina del video"
+      }
+    },
+    "overlay": {
+      "legend": "Testo sovrapposto (facoltativo)",
+      "text": {
+        "label": "Testo sull'immagine",
+        "description": "Di solito il titolo del video. Lascia vuoto per non avere testo."
+      },
+      "position": "Dove va il testo",
+      "nothingDrawn": "Per ora non verrà disegnato nulla: scrivi il testo qui sopra.",
+      "burnedIn": "Il testo viene scritto nell'immagine, quindi dopo non si può modificare né tradurre. Tienilo breve: un testo lungo si rimpicciolisce per starci.",
+      "size": "Dimensione del testo (% dell'altezza dell'immagine)",
+      "maxChars": {
+        "label": "Testo più lungo (caratteri)",
+        "description": "Quello che supera il limite viene tagliato. Da 1 a 400."
+      },
+      "fontColor": "Colore del testo",
+      "boxColor": {
+        "label": "Pannello dietro il testo",
+        "description": "Mantiene il testo leggibile su un'immagine movimentata"
+      }
+    },
+    "advanced": {
+      "description": "Riuso dell'analisi delle riprese di un'esecuzione precedente. I valori predefiniti vanno bene per quasi tutte le miniature.",
+      "reuse": {
+        "label": "Riusa l'analisi delle riprese di un'esecuzione precedente (ID del risultato)",
+        "placeholder": "Lascia vuoto per usare l'analisi di questa esecuzione"
+      }
+    }
+  },
+  "voiceover": {
+    "intro": "Legge ad alta voce la tua narrazione con una voce AI.",
+    "selectStep": "Scegli un passaggio",
+    "noEarlierSteps": "Nessun passaggio precedente",
+    "source": {
+      "title": "Origine",
+      "description": "Da dove arrivano le parole: scrivile tu, usa lo script scritto da un passaggio precedente oppure usa la narrazione che un passaggio precedente ha scritto per il montaggio.",
+      "aria": "Origine della voce narrante",
+      "kind": {
+        "Inline": "Scrivi le righe qui",
+        "ScriptScenes": "Dalle scene dello sceneggiatore",
+        "NarrationPlan": "Dal piano di narrazione",
+        "PickupPlan": "Righe da registrare di nuovo"
+      }
+    },
+    "lines": {
+      "title": "Righe della voce narrante",
+      "add": "Aggiungi riga",
+      "empty": "Nessuna riga di voce narrante. Premi \"Aggiungi riga\" per iniziare.",
+      "text": {
+        "label": "Testo",
+        "placeholder": "Testo della voce narrante"
+      },
+      "start": "Inizio (sec)",
+      "voice": {
+        "label": "Voce",
+        "placeholder": "Voce predefinita"
+      },
+      "remove": "Rimuovi riga"
+    },
+    "script": {
+      "label": "Passaggio dello script",
+      "description": "Il passaggio precedente che ha scritto lo script. La narrazione di ogni scena viene letta ad alta voce."
+    },
+    "narration": {
+      "label": "Passaggio che scrive la narrazione",
+      "description": "Il passaggio precedente che scrive la narrazione. Ogni sua riga viene letta ad alta voce.",
+      "readOnly": "Le righe arrivano da quel passaggio, quindi qui non si possono modificare."
+    },
+    "pickup": {
+      "label": "Passaggio che pianifica le nuove registrazioni",
+      "description": "Il passaggio precedente che ha scelto quali frasi registrare di nuovo. Scegli qui sotto la voce del presentatore, così le nuove righe coincidono."
+    },
+    "voice": {
+      "divider": "Voce",
+      "label": "Voce",
+      "descriptionProject": "Una voce di questo progetto. Vengono proposte solo le voci che hai il permesso di usare.",
+      "descriptionNoProject": "Salva il flusso di lavoro dentro un progetto per scegliere una delle sue voci.",
+      "defaultPlaceholder": "La voce predefinita del servizio",
+      "none": "Questo progetto non ha ancora voci",
+      "language": {
+        "label": "Lingua (facoltativa)",
+        "description": "per esempio en-US, oppure es-ES per una versione in spagnolo"
+      },
+      "manage": "Scegli o aggiungi voci nella scheda Voci di questo progetto"
+    },
+    "service": {
+      "divider": "Servizio vocale",
+      "cost": "Il servizio vocale addebita ogni carattere letto. Eseguire di nuovo le stesse righe riusa l'audio già creato.",
+      "label": "Servizio vocale",
+      "description": "Quale servizio vocale legge le righe. Se vuoto, usa quello predefinito.",
+      "nullMeans": "Senza un servizio vocale questo passaggio non può creare audio."
+    },
+    "advanced": {
+      "description": "Modello e ID della voce, limite di dimensione, pronuncia e scelta automatica della voce.",
+      "providerDefault": "predefinito del provider",
+      "providerDefaultCapital": "Predefinito del provider",
+      "model": {
+        "label": "Modello (facoltativo)",
+        "descriptionProvider": "Se vuoto, usa il modello di {name} ({model}).",
+        "descriptionService": "Se vuoto, usa il modello del servizio."
+      },
+      "voiceId": {
+        "label": "ID della voce predefinita",
+        "description": "L'ID di una voce del servizio vocale, usato quando non scegli nessuna voce del progetto. Se vuoto, usa la sua voce predefinita."
+      },
+      "maxBytes": {
+        "label": "Limite di dimensione dell'audio (byte)",
+        "description": "Tetto di sicurezza per l'audio di ogni riga (2.000.000 sono circa 1 minuto di parlato)."
+      },
+      "pronunciation": {
+        "label": "Aiuto per la pronuncia",
+        "description": "Con Auto la voce impara a pronunciare i nomi di prodotti e tecnologie trovati nel tuo codice (solo Fish Audio).",
+        "Off": "Disattivato (predefinito)",
+        "Auto": "Auto"
+      },
+      "casting": {
+        "label": "Scelta automatica della voce",
+        "description": "Un modello di decisione sceglie una delle voci del progetto per queste righe. Disattivato usa la voce indicata sopra.",
+        "Off": "Disattivato (predefinito)",
+        "Decision": "Attivo: sceglie il modello di decisione"
+      }
+    }
+  },
+  "captionStyle": {
+    "style": {
+      "label": "Stile dei sottotitoli",
+      "Subtitle": "Subtitle: una o due righe alla volta, su un riquadro",
+      "Karaoke": "Karaoke: ogni parola si illumina mentre viene pronunciata",
+      "Punch": "Punch: una sola grande parola in grassetto alla volta",
+      "Bold": "Bold: parole grandi, poche alla volta, in stile Reels/TikTok"
+    },
+    "styleName": {
+      "Subtitle": "Subtitle",
+      "Karaoke": "Karaoke",
+      "Punch": "Punch",
+      "Bold": "Bold"
+    },
+    "font": {
+      "label": "Font",
+      "licence": "Tutti i font qui sono inclusi e con licenza per uso commerciale.",
+      "autoNote": "{name} ({font} per {style})",
+      "Auto": {
+        "name": "Automatico",
+        "hint": "Il font migliore per lo stile scelto"
+      },
+      "Inter": {
+        "name": "Inter",
+        "hint": "Pulito e molto leggibile"
+      },
+      "Montserrat": {
+        "name": "Montserrat",
+        "hint": "Ampio e deciso"
+      },
+      "Poppins": {
+        "name": "Poppins",
+        "hint": "Arrotondato e amichevole"
+      },
+      "BebasNeue": {
+        "name": "Bebas Neue",
+        "hint": "Maiuscole alte e strette"
+      },
+      "Anton": {
+        "name": "Anton",
+        "hint": "Pesante e incisivo, il classico look dei social"
+      },
+      "DejaVuSans": {
+        "name": "DejaVu Sans",
+        "hint": "Semplice, il font originale dei sottotitoli"
+      }
+    },
+    "position": {
+      "label": "Posizione",
+      "description": "I sottotitoli restano sempre lontani dai bordi e dai pulsanti dell'app nei video verticali.",
+      "Auto": "Automatica: in basso, o al centro per Punch",
+      "Bottom": "In basso",
+      "Center": "Al centro",
+      "Top": "In alto"
+    },
+    "size": {
+      "auto": {
+        "label": "Dimensione del testo automatica",
+        "description": "Calibrata sullo stile e sugli smartphone. Disattivala per impostarla tu."
+      },
+      "label": "Dimensione del testo (% dell'altezza del video)"
+    },
+    "textColor": {
+      "white": "Bianco",
+      "yellow": "Giallo",
+      "black": "Nero"
+    },
+    "boxColor": {
+      "black_0_6": "Scuro, trasparente",
+      "black_0_45": "Chiaro, trasparente",
+      "black": "Nero pieno",
+      "none": "Nessun riquadro (testo con contorno)"
+    },
+    "colour": {
+      "text": "Colore del testo",
+      "highlight": "Colore della parola pronunciata",
+      "box": "Riquadro dietro il testo",
+      "noBox": "{style} non usa mai un riquadro: le sue parole hanno un contorno spesso."
+    },
+    "maxChars": {
+      "label": "Sottotitolo più lungo (caratteri)",
+      "description": "Una frase più lunga viene divisa a un'interruzione di parola."
+    },
+    "preview": {
+      "title": "Anteprima (approssimativa)",
+      "sample": "Pubblicalo oggi",
+      "ship": "Lancia",
+      "shipIt": "Lancialo",
+      "today": "oggi"
+    }
+  },
+  "reframe": {
+    "errors": {
+      "notList": "I reframe devono essere un elenco JSON: [ '{' ... '}', '{' ... '}' ].",
+      "notObject": "Ogni reframe deve essere un oggetto con un sourceIndex e i suoi keyframe.",
+      "invalidJson": "JSON non valido: {detail}"
+    },
+    "legend": "Reframe, adattamenti e inserti per riferimento",
+    "reframes": {
+      "label": "Reframe (JSON)",
+      "description": "Zoom e panoramica su un tratto di clip, con transizione fluida tra i keyframe. Richiede la modalità Ricodifica. Il server controlla ordine dei keyframe, sovrapposizioni e intervalli quando salvi e ti dice cosa correggere."
+    },
+    "fits": {
+      "title": "Adattamento per le singole clip",
+      "description": "Sostituisce \"Quando una clip ha una forma diversa\" per una clip, per esempio un titolo mostrato intero mentre le riprese attorno riempiono il fotogramma. Ignorato quando la forma è \"Come girato\".",
+      "clip": {
+        "label": "Numero della clip",
+        "description": "Posizione nel passaggio Analizza video (1 = la prima)"
+      },
+      "fit": "Adattamento",
+      "option": {
+        "Crop": "Riempi il fotogramma, ritaglia i bordi",
+        "Pad": "Mostra tutta la clip, riempi il resto",
+        "Subject": "Riempi il fotogramma attorno al soggetto"
+      },
+      "remove": "Rimuovi",
+      "add": "Adatta una clip in modo diverso"
+    },
+    "insertRef": {
+      "label": "Inserisci contenuto per riferimento",
+      "description": "Indica il contenuto che uno schermo mostra quando nessuna voce qui sopra corrisponde (prende il posto del file singolo qui sopra). Un video o un'immagine.",
+      "from": {
+        "ProjectFile": "Un file caricato",
+        "Step": "Il risultato di un passaggio precedente",
+        "StepResult": "Il risultato di un'esecuzione precedente (ID del risultato del passaggio)"
+      },
+      "none": "Nessuno",
+      "file": {
+        "label": "File",
+        "select": "Scegli un file",
+        "empty": "Nessun video o immagine caricati in questo progetto"
+      },
+      "step": {
+        "label": "Passaggio",
+        "select": "Scegli un passaggio",
+        "none": "Nessun passaggio precedente"
+      },
+      "stepResult": {
+        "label": "ID del risultato del passaggio",
+        "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto"
+      }
+    },
+    "needsReencode": "I reframe richiedono la modalità Ricodifica; il server li rifiuta con la copia del flusso.",
+    "safeArea": {
+      "label": "Margine di sicurezza attorno al testo (frazione del fotogramma)",
+      "description": "Solo quando una clip è adattata attorno al soggetto: il testo resta a questa distanza dal bordo. Da 0 a 0,25. Se vuoto usa 0,05; 0 lo disattiva."
+    }
+  },
+  "videoGenerate": {
+    "stepFallback": "Passaggio {n}",
+    "intro": "Genera nuove clip video a partire da un testo. Ogni clip è una chiamata a pagamento.",
+    "cost": "Costa denaro vero. Il passaggio non parte se la sua stima supera la spesa massima, e in più vale il tuo limite video giornaliero (Impostazioni > Utilizzo, nessuno per impostazione predefinita). La spesa massima è un tetto in crediti, come ogni altra cifra di spesa in ReelBolt. Le esecuzioni identiche riusano le clip in cache, a meno che tu non imposti la modalità cache su Mai.",
+    "what": {
+      "label": "Cosa generare",
+      "description": "Scrivi tu un prompt, oppure crea una clip per ogni nuova inquadratura proposta da un passaggio di pianificazione precedente."
+    },
+    "planSource": {
+      "Inline": "Prompt scritto qui",
+      "StepRef": "Piano da un passaggio di pianificazione"
+    },
+    "prompt": {
+      "label": "Prompt",
+      "unused": "Non usato finché il prompt arriva da un passaggio di pianificazione",
+      "description": "Prompt di testo che descrive il video da generare (max 7000 caratteri)",
+      "placeholder": "Un paesaggio sereno con montagne e nuvole..."
+    },
+    "plan": {
+      "step": "Passaggio del piano",
+      "analysis": "Passaggio di analisi (facoltativo)",
+      "lookMatching": {
+        "label": "Adatta l'aspetto alle riprese attorno",
+        "description": "Aggiunge a ogni prompt i termini di colore misurati dell'inquadratura di riferimento (caldo/freddo, contrasto, saturazione). Richiede il passaggio Analizza video qui sopra."
+      },
+      "camera": {
+        "label": "Continua il movimento di camera dell'inquadratura di riferimento",
+        "description": "Se il pianificatore lascia vuota la parola sulla camera, usa il movimento misurato della ripresa reale (solo fissa o a mano). Richiede il passaggio Analizza video qui sopra."
+      }
+    },
+    "provider": {
+      "label": "Provider di generazione video",
+      "description": "Quale provider genera le clip. Se vuoto, usa quello predefinito.",
+      "nullMeans": "Senza un provider di generazione video questo passaggio fallisce prima di spendere qualsiasi cosa."
+    },
+    "model": {
+      "label": "Modello",
+      "comfyT2v": "ComfyUI: Wan 2.2 TI2V-5B da testo a video (self-hosted, budget GPU)",
+      "comfyI2v": "ComfyUI: Wan 2.2 TI2V-5B da immagine a video (self-hosted, budget GPU)"
+    },
+    "resolution": "Risoluzione",
+    "duration": {
+      "label": "Durata (secondi)",
+      "description": "{min}-{max} secondi"
+    },
+    "ratio": "Proporzioni",
+    "takes": {
+      "label": "Take",
+      "description": "Numero di tentativi di generazione (1-{max})"
+    },
+    "maxClips": {
+      "label": "Clip massime",
+      "description": "Limita le clip a pagamento ({min}-{max}). Conta ogni take: inquadrature x take devono starci"
+    },
+    "maxSpend": {
+      "label": "Spesa massima (crediti)",
+      "description": "Tetto fisso alla spesa di questo passaggio, in crediti: l'unità di ogni altra cifra di spesa in ReelBolt"
+    },
+    "maxGpu": {
+      "label": "Minuti GPU massimi (ComfyUI)",
+      "description": "Tetto fisso al tempo GPU per un provider ComfyUI self-hosted, che non addebita nulla. Ignorato dai fornitori a pagamento; per ComfyUI è richiesto al posto della spesa massima."
+    },
+    "loopBack": {
+      "label": "Quando questo passaggio viene rieseguito (ritorno)",
+      "description": "Riusa (predefinito) restituisce, senza costi, le clip già generate con lo stesso prompt, modello, durata e take. Rigenera paga clip nuove a ogni ritorno. Anche la finestra Avvia/Riprova può forzare la rigenerazione.",
+      "Reuse": "Riusa le clip generate in precedenza",
+      "Regenerate": "Rigenera (costa denaro a ogni ciclo)"
+    },
+    "egress": {
+      "label": "Consenti l'invio dei tuoi file al servizio video",
+      "description": "Se disattivato, il passaggio si ferma prima di inviare qualsiasi cosa: nessun fotogramma delle tue riprese, nessuna immagine iniziale, nessuna immagine, video o campione di voce di un avatar. Solo tu puoi attivarlo, qui nell'app.",
+      "avatar": "Un avatar richiede che sia attivo: le sue immagini e i suoi video, e i campioni di voce di una persona, vengono inviati al servizio video."
+    },
+    "advanced": "Avanzate",
+    "frames": {
+      "none": "Nessuno",
+      "previousStep": "Il passaggio precedente",
+      "intro": "Fai partire la clip da un'immagine: il primo fotogramma, e se vuoi l'ultimo, presi da un passaggio precedente che ha prodotto un'immagine (per esempio un passaggio \"Cattura un fotogramma\"). Solo per un prompt scritto e solo per i modelli che lo supportano; il server te lo dice prima di spendere qualsiasi cosa.",
+      "first": "Primo fotogramma dal passaggio",
+      "last": "Ultimo fotogramma dal passaggio",
+      "pickFirst": "Scegli prima un primo fotogramma",
+      "egressWarning": "L'immagine viene inviata al servizio video, quindi attiva qui sopra \"Consenti l'invio dei tuoi file al servizio video\", altrimenti il passaggio si ferma prima di spendere qualsiasi cosa."
+    },
+    "conform": {
+      "fps": {
+        "label": "Adegua la frequenza di fotogrammi",
+        "description": "Interpola i fotogrammi di una clip a frequenza più bassa fino a questi fps (ffmpeg minterpolate). 0 mantiene la frequenza della clip; non riduce mai."
+      },
+      "height": {
+        "label": "Adegua l'altezza (px)",
+        "description": "Ingrandisce una clip più piccola a questa altezza, mantenendo le proporzioni. 0 mantiene la dimensione della clip; non riduce mai."
+      }
+    },
+    "poll": {
+      "label": "Intervallo di controllo (secondi)",
+      "description": "{min}-{max} secondi"
+    },
+    "timeout": {
+      "label": "Timeout (secondi)",
+      "description": "{min}-{max} secondi"
+    },
+    "avatar": {
+      "title": "Avatar",
+      "intro": "Mostra in ogni take una persona della scheda Avatar del progetto. Puoi scegliere solo un avatar con il consenso registrato.",
+      "introAny": "Mostra in ogni take una persona o un oggetto della scheda Avatar del progetto. Puoi scegliere solo quelli pronti.",
+      "introObjects": "Mostra in ogni take un oggetto della scheda Avatar del progetto. Puoi scegliere solo quelli pronti.",
+      "groupPeople": "Persone",
+      "groupObjects": "Oggetti",
+      "label": "Avatar da mostrare",
+      "none": "Nessuno",
+      "option": "{name} · {status}",
+      "noneMeansRun": "Con Nessuno viene mostrato l'avatar scelto all'avvio dell'esecuzione (il campo Avatar nella pagina dell'app), se lì ne è stato scelto uno.",
+      "blocked": {
+        "plan": "Un avatar funziona solo con \"Prompt scritto qui\": un passaggio che crea clip da un passaggio di pianificazione non può mostrarne uno.",
+        "frames": "Un avatar non si può combinare con un primo o un ultimo fotogramma. Rimuovi i fotogrammi in Avanzate per scegliere un avatar."
+      },
+      "unusable": "\"{name}\" non è utilizzabile: {reason} Il passaggio si fermerebbe. Scegli un altro avatar, oppure sistemalo nella scheda Avatar.",
+      "missing": "Un avatar che non esiste più",
+      "missingHint": "L'avatar scelto è stato eliminato. Scegline un altro, oppure Nessuno.",
+      "noAvatars": "Questo progetto non ha ancora avatar.",
+      "openAvatars": "Apri la scheda Avatar",
+      "roles": {
+        "label": "Riferimenti da inviare",
+        "description": "Quali file dell'avatar vengono inviati al servizio video. Togli la spunta a un tipo per escluderlo.",
+        "needPicture": "Tieni almeno un'immagine (Viso, Mezzo busto o Figura intera).",
+        "needPictureObject": "Tieni almeno un'immagine (Vista frontale, Altra angolazione o Dettaglio da vicino)."
+      },
+      "speech": {
+        "label": "Parlato che la persona dice",
+        "notForObjects": "Un oggetto non parla, quindi non c'è un parlato da scegliere.",
+        "hint": {
+          "yes": "Questo modello fa dire alla persona questo parlato, parola per parola. La clip dura quanto il parlato, al massimo la durata indicata sopra.",
+          "no": "Questo modello non fa dire alla persona una traccia parlata: con una traccia, il passaggio viene rifiutato. Per battute precise usa un modello che fa parlare la persona, come fa la ricetta \"Talking avatar (budget)\".",
+          "unknown": "Solo i modelli che fanno parlare la persona (come nella ricetta \"Talking avatar (budget)\") le fanno dire una traccia parlata. Qualsiasi altro modello rifiuta il passaggio quando viene eseguito."
+        },
+        "none": "Nessuno",
+        "fromStep": "Passaggio Voce narrante",
+        "fromFile": "File audio",
+        "stepLabel": "Passaggio Voce narrante per il parlato",
+        "pickStep": "Scegli un passaggio Voce narrante",
+        "noVoiceoverStep": "Nessun passaggio precedente di questo flusso di lavoro è un passaggio Voce narrante.",
+        "stepFallback": "Passaggio {n}",
+        "fileLabel": "File audio per il parlato",
+        "pickFile": "Scegli un file audio",
+        "noAudioFiles": "Il progetto non ha file audio. Caricane uno nella scheda File."
+      },
+      "egressNeeded": "Attiva \"Consenti l'invio dei tuoi file al servizio video\" qui sotto, altrimenti il passaggio si ferma prima di inviare qualsiasi cosa."
+    }
+  },
+  "room": {
+    "stepFallback": "Passaggio {n}",
+    "gateNote": "Il controllo di convocazione non ha effetto su {badge} (non ha un insieme fisso di risposte tra cui un modello di decisione possa scegliere). Lascialo su Disattivato.",
+    "footage": "Riprese da discutere",
+    "EditRoom": {
+      "badge": "Team di montaggio",
+      "summary": "Più editor AI discutono le tue riprese e un editor capo sceglie un unico montaggio, di solito migliore di quello di un editor che lavora da solo.",
+      "viewHelp": "Quali riprese discute il team: di solito il passaggio che ha guardato le tue riprese. Il passaggio del video finale può usare la scelta di questo team esattamente come quella di un singolo editor.",
+      "labelPlaceholder": "Etichetta del passaggio (es. Discussione del montaggio)"
+    },
+    "GraphicsRoom": {
+      "badge": "Team di grafica",
+      "summary": "Designer AI per layout, tempi e testi discutono dove mettere titoli e didascalie, e un designer capo sceglie un unico piano. Nessun titolo è un risultato valido.",
+      "viewHelp": "Quali riprese discute il team: scegli il passaggio che ha guardato le tue riprese, con \"Trova le posizioni per i titoli\" attivato. Sceglilo per nome: \"passaggio precedente\" di solito è invece la scelta dell'editor.",
+      "labelPlaceholder": "Etichetta del passaggio (es. Discussione della grafica)"
+    },
+    "ColorGradeRoom": {
+      "badge": "Team colore",
+      "summary": "Colorist AI discutono l'aspetto delle tue riprese e un colorist capo sceglie un unico look di colore per tutto il video. Mantenere l'aspetto originale è un risultato valido.",
+      "viewHelp": "Quali riprese discute il team: scegli per nome il passaggio che ha guardato le tue riprese; \"passaggio precedente\" di solito è invece la scelta dell'editor.",
+      "labelPlaceholder": "Etichetta del passaggio (es. Discussione del color grading)"
+    },
+    "DailiesRoom": {
+      "badge": "STANZA DAILIES",
+      "summary": "Giudici di continuità, movimento e immagine + un regista confrontano i take generati per ogni inquadratura pianificata, poi scelgono UN take per inquadratura tramite il suo ID: mai un punteggio o un numero.",
+      "viewHelp": "Di quale passaggio vedono la busta delimitata '{'view, meta'}' i giudici: il passaggio Analizza video la cui origine sono le GeneratedClips del passaggio di generazione (un'origine analizzata per ogni take consegnato, ognuna con il suo ID). Una selezione vuota è un risultato valido: ogni inquadratura mantiene allora la prima ripresa consegnata.",
+      "labelPlaceholder": "Etichetta del passaggio (es. Stanza dailies: un take per inquadratura)"
+    },
+    "labels": {
+      "rounds": "Giri di discussione",
+      "maxTurns": "Numero massimo di interventi",
+      "persistTranscript": "Salva la trascrizione della discussione",
+      "fallbackToSoloEditor": "Se il team si blocca, decide un solo editor",
+      "fallbackToSoloPlanner": "Se il team si blocca, decide un solo designer",
+      "fallbackToSoloColorist": "Se il team si blocca, decide un solo colorist",
+      "fallbackToSoloSelector": "Se il team si blocca, decide un solo giudice",
+      "decisionScheduling": "Pianificazione delle decisioni",
+      "conveneGate": "Controllo di convocazione",
+      "conveneAcceptAt": "Affidabilità del controllo",
+      "conveneMinMargin": "Margine del controllo",
+      "conveneProviderId": "Provider di decisione del controllo"
+    },
+    "placeholders": {
+      "rounds": "Predefinito: 2",
+      "maxTurns": "Predefinito: 8"
+    },
+    "hints": {
+      "rounds": "Quante volte parla ogni membro del team prima che decida il capo (1-6). Più giri richiedono più tempo e costano di più.",
+      "maxTurns": "Limite massimo di quante volte parla chiunque in totale, così una discussione non può andare avanti all'infinito.",
+      "persistTranscript": "Conserva la discussione, così puoi leggerla poi nella pagina dell'esecuzione.",
+      "conveneAcceptAt": "Letto solo quando il controllo non è su Disattivato. 0,85 è un valore predefinito non ottimizzato.",
+      "conveneMinMargin": "Letto solo quando il controllo non è su Disattivato. 0,25 è un valore predefinito non ottimizzato."
+    },
+    "scheduling": {
+      "Off": "Disattivato: turni fissi a rotazione (predefinito)",
+      "Questions": "Domande: registra la convergenza e le risposte su chi parla dopo",
+      "Adaptive": "Adattivo: per ora uguale a Domande",
+      "questionsHint": "Dopo ogni intervento del regista si chiede a un modello di decisione \"la stanza è arrivata a una conclusione?\" e \"chi parla dopo?\". Le risposte sono registrate solo per la calibrazione; l'ordine degli interventi non cambia. Usa il provider di decisione predefinito.",
+      "fixedHint": "La stanza parla in un ordine fisso. Nessuna chiamata a modelli di decisione."
+    },
+    "gate": {
+      "Off": "Disattivato: convoca sempre la stanza (predefinito)",
+      "Shadow": "Ombra: solo osservazione, non cambia mai il risultato",
+      "Gate": "Controllo: un modello di decisione può saltare la discussione",
+      "gateHint": "Un provider di decisione stabilisce se la stanza deve proprio riunirsi; quando è sicuro, la stanza viene saltata e si risparmia un'intera discussione. Se c'è un dubbio, la stanza si riunisce come sempre.",
+      "shadowHint": "Il modello di decisione gira in parallelo e la sua risposta viene registrata per la pagina di calibrazione, ma la stanza si riunisce sempre.",
+      "offHint": "La stanza si riunisce sempre.",
+      "providerDescription": "Usato solo quando il controllo è su Ombra o Controllo. Se vuoto, usa il provider di decisione predefinito.",
+      "providerNullMeans": "Senza provider il controllo non fa nulla e la stanza si riunisce."
+    },
+    "advanced": {
+      "description": "Opzioni del modello di decisione per i team che raccolgono dati di calibrazione. Lasciale disattivate.",
+      "legend": "Modello di decisione (avanzate)"
+    }
+  },
+  "panel": {
+    "stepLabel": {
+      "label": "Etichetta del passaggio",
+      "placeholder": "Etichetta per questo passaggio"
+    },
+    "inputMapping": {
+      "label": "Cosa vede questo agente (mappatura dell'input)",
+      "description": "Lascia vuoto per dare all'agente tutto ciò che hanno prodotto i passaggi precedenti. Compila per scegliere esattamente quali risultati precedenti vede."
+    },
+    "cache": {
+      "label": "Riusa i risultati precedenti",
+      "description": "Normale riusa il risultato di questo passaggio quando nulla da cui dipende è cambiato. Mai lo riesegue sempre (utile per un take creativo nuovo).",
+      "Default": "Normale (consigliato)",
+      "Always": "Riusa sempre",
+      "Never": "Non riusare mai"
+    },
+    "agentAdvanced": "Cosa vede l'agente dai passaggi precedenti e quando il suo risultato viene riusato.",
+    "legend": {
+      "agent": "Agente AI",
+      "condition": "Condizione",
+      "loopSource": "Origine del ciclo",
+      "reviewLoop": "Ciclo di revisione",
+      "parallel": "Agenti in parallelo",
+      "room": "Configurazione di {type}",
+      "stepSettings": "Impostazioni del passaggio"
+    },
+    "title": "Impostazioni del passaggio {n}: {role}",
+    "rejected": "L'ultimo salvataggio è stato rifiutato per questo passaggio",
+    "proposes": "L'assistente propone modifiche a {count, plural, one {# campo} other {# campi}} di questo passaggio",
+    "proposesNote": "Evidenziati qui sotto. Non cambia nulla finché non applichi la proposta dell'assistente."
+  },
+  "sheet": {
+    "stepLabel": {
+      "label": "Etichetta del passaggio",
+      "placeholder": "Etichetta per questo passaggio"
+    },
+    "inputMapping": {
+      "label": "JSON di mappatura dell'input",
+      "description": "Avanzato. Lascia vuoto per dare all'agente tutti i risultati precedenti. Compila per scegliere esattamente quali risultati precedenti vede."
+    },
+    "cache": {
+      "label": "Modalità cache",
+      "description": "Predefinita riusa il risultato di questo passaggio quando nulla da cui dipende è cambiato. Mai lo riesegue sempre (utile per take creativi nuovi).",
+      "Default": "Predefinita (regola integrata)",
+      "Always": "Usa sempre la cache",
+      "Never": "Non usare mai la cache"
+    },
+    "legend": {
+      "agent": "Agente",
+      "condition": "Condizione",
+      "loopSource": "Origine del ciclo",
+      "reviewLoop": "Ciclo di revisione",
+      "parallel": "Agenti in parallelo",
+      "room": "Configurazione di {type}",
+      "stepSettings": "Impostazioni del passaggio"
+    },
+    "proposes": "L'assistente propone modifiche a {count, plural, one {# campo} other {# campi}} di questo passaggio",
+    "proposesNote": "Evidenziati qui sotto. Non cambia nulla finché non applichi la proposta dell'assistente.",
+    "dragHandle": "Maniglia di trascinamento",
+    "configure": "Configura {type}",
+    "done": "Fine"
+  },
+  "videoAnalyze": {
+    "videoSourceRefPicker": {
+      "sourceVideo": {
+        "aria": "Video di origine",
+        "title": "Video di origine"
+      },
+      "step": {
+        "label": "Passaggio",
+        "placeholder": "Scegli un passaggio"
+      },
+      "stepResultId": {
+        "label": "ID del risultato del passaggio",
+        "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto (lo trovi nella pagina dell'esecuzione)"
+      },
+      "videoFile": {
+        "label": "File video"
+      },
+      "useFromSeconds": {
+        "label": "Usa da (secondi)",
+        "description": "Se vuoto = dall'inizio"
+      },
+      "useUntilSeconds": {
+        "label": "Usa fino a (secondi)",
+        "description": "Se vuoto = fino alla fine"
+      },
+      "mustBeAfterStart": "Deve essere dopo l'inizio"
+    },
+    "videoMultiSourceRefPicker": {
+      "chooseClips": {
+        "label": "Scegli le clip…",
+        "description": "Scegli tutte le clip da usare. Vengono montate insieme nell'ordine dell'elenco qui sotto."
+      },
+      "clipsTitle": "Clip ({count})",
+      "clipN": "Clip {n}",
+      "removeClip": "Rimuovi la clip {n}",
+      "addClip": "Aggiungi un'altra clip"
+    },
+    "yourFootage": {
+      "legend": "Le tue riprese"
+    },
+    "useSeveralClips": {
+      "label": "Usa più clip",
+      "description": "Monta più clip insieme in un unico video."
+    },
+    "whatToLook": {
+      "legend": "Cosa cercare"
+    },
+    "detectSilence": {
+      "label": "Rileva il silenzio",
+      "description": "Trova le pause, così si può togliere il tempo morto."
+    },
+    "detectShots": {
+      "label": "Rileva le inquadrature",
+      "description": "Trova dove finisce un'inquadratura e inizia la successiva."
+    },
+    "analyzeVisuals": {
+      "label": "Analizza le immagini",
+      "description": "Misura movimento, luminosità e colore, e individua i take ripetuti."
+    },
+    "analyzeAudioLevels": {
+      "label": "Analizza i livelli audio",
+      "description": "Misura quanto è forte ogni inquadratura e quanta parte è parlato."
+    },
+    "maxShotSec": {
+      "label": "Dividi le inquadrature più lunghe di (secondi)",
+      "description": "Taglia le inquadrature lunghe in parti più brevi, così l'editor può tenerne solo una parte. 0 = non dividere mai."
+    },
+    "subShotMode": {
+      "label": "Tagli nelle inquadrature lunghe",
+      "description": "Dove un'inquadratura lunga viene tagliata in parti tra cui l'editor può scegliere.",
+      "Off": "Disattivato",
+      "Even": "Uniforme",
+      "Content": "Dove l'immagine si ferma o cambia"
+    },
+    "minSubShotSec": {
+      "label": "Parte più breve (secondi)",
+      "description": "Nessuna parte viene tagliata più breve di così."
+    },
+    "maxSubShotSec": {
+      "label": "Parte più lunga (secondi)",
+      "description": "Le parti restano di questa durata o più brevi."
+    },
+    "maxSubShotsPerShot": {
+      "label": "Massimo di parti per inquadratura",
+      "description": "Un'inquadratura molto lunga ottiene parti più lunghe invece di più parti."
+    },
+    "ask": {
+      "label": "Chiedi"
+    },
+    "transcription": {
+      "label": "Trascrivi ciò che viene detto"
+    },
+    "speechToText": {
+      "label": "Servizio di trascrizione vocale",
+      "description": "Se vuoto, usa quello predefinito.",
+      "nullMeans": "Senza, la trascrizione viene saltata (o l'esecuzione si ferma, se impostato su Sempre)."
+    },
+    "language": {
+      "label": "Lingua",
+      "description": "Codice di due lettere, per esempio en o fr. Lascia vuoto per rilevarla.",
+      "placeholder": "en"
+    },
+    "vision": {
+      "label": "Descrivi le inquadrature"
+    },
+    "imageAi": {
+      "label": "AI per le immagini",
+      "description": "Se vuoto, usa quella predefinita.",
+      "nullMeans": "Senza, le inquadrature non vengono descritte."
+    },
+    "captionSelection": {
+      "label": "Quali inquadrature"
+    },
+    "maxCaptionedShots": {
+      "label": "Al massimo questo numero di inquadrature",
+      "description": "Limita il numero di chiamate AI"
+    },
+    "locateSubjects": {
+      "label": "Trova il soggetto di ogni inquadratura",
+      "description": "Permette a una versione verticale o quadrata di mantenere ciò che conta nel fotogramma invece di ritagliare il centro. Usa l'AI per le immagini qui sopra: due chiamate per inquadratura."
+    },
+    "subjectLabel": {
+      "label": "Cosa cercare",
+      "description": "Se vuoto, trova il soggetto principale",
+      "placeholder": "es. lo smartphone, il presentatore"
+    },
+    "maxSubjectShots": {
+      "label": "Al massimo questo numero di inquadrature",
+      "description": "Limita il numero di chiamate AI"
+    },
+    "prepareMaterialFor": {
+      "legend": "Prepara il materiale per i passaggi successivi"
+    },
+    "emitOverlayPlacements": {
+      "label": "Trova le posizioni per i titoli",
+      "description": "Serve a un passaggio di titoli e grafica o a un team di grafica."
+    },
+    "offerMusicTracks": {
+      "label": "Offri le tue tracce musicali",
+      "description": "Serve a un passaggio musicale. Usa i file audio che hai caricato."
+    },
+    "offerSfxClips": {
+      "label": "Offri le tue clip di effetti sonori",
+      "description": "Serve a un passaggio di effetti sonori. Usa i file audio che hai caricato."
+    },
+    "detectInsertRegions": {
+      "label": "Trova gli schermi verdi",
+      "description": "Trova uno schermo verde (o blu) nell'inquadratura, così il video finale può mostrarci sopra i tuoi contenuti. Più lento."
+    },
+    "analyzeMusicBeats": {
+      "label": "Misura il ritmo della musica",
+      "description": "Comunica all'editor il tempo, le battute, il drop e la fine della tua musica, così può montare a tempo quando glielo chiedi."
+    },
+    "musicBeatTrackProjectFileId": {
+      "label": "Musica su cui è montato il video",
+      "description": "Di solito la stessa traccia del passaggio finale. Vengono misurate anche le tracce musicali offerte.",
+      "onlyOffered": "Solo le tracce offerte",
+      "empty": "Nessun file audio caricato in questo progetto"
+    },
+    "insertRegionColor": {
+      "label": "Colore dello schermo",
+      "green": "verde",
+      "blue": "blu",
+      "magenta": "magenta"
+    },
+    "whatToFollow": {
+      "label": "Cosa seguire / prompt",
+      "placeholder": "targa",
+      "description": "Fino a {max} caratteri. Viene ripulito prima dell'invio e non diventa mai parte di un comando video."
+    },
+    "howToFollow": {
+      "label": "Come seguirlo",
+      "descriptionSegmentation": "Invia la clip al provider per seguire questo oggetto fotogramma per fotogramma.",
+      "descriptionFeature": "Gira su questo server e non costa nulla."
+    },
+    "howManyTo": {
+      "label": "Quanti seguirne",
+      "descriptionSingle": "Un solo oggetto: il primo che il modello trova, o quello che hai segnato a mano.",
+      "descriptionAll": "Ogni corrispondenza, così nascondere o sfocare li copre tutti e non solo il primo."
+    },
+    "sendThisClip": {
+      "label": "Invia questa clip al provider configurato",
+      "description": "Obbligatorio per la segmentazione. Finché non lo selezioni, l'esecuzione si ferma con EGRESS_REFUSED e indica la clip; non viene caricato nulla."
+    },
+    "segmentationProvider": {
+      "label": "Provider di segmentazione",
+      "description": "Quale provider configurato segue l'oggetto. Ognuno è fatturato ogni 16 fotogrammi di video.",
+      "nullMeans": "Usa il provider di segmentazione predefinito dello spazio di lavoro"
+    },
+    "maxSegmentationSeconds": {
+      "label": "Clip analizzata più lunga (secondi)",
+      "description": "Un'origine più lunga viene rifiutata e il messaggio ne indica la durata."
+    },
+    "segmentationDetectionThreshold": {
+      "label": "Soglia di rilevamento",
+      "description": "Più bassa trova più oggetti, anche sbagliati (da 0,01 a 1)."
+    },
+    "maxSegmentationObjects": {
+      "label": "Massimo di oggetti per clip",
+      "description": "Ognuno aggiunge lavoro alla stessa chiamata a pagamento."
+    },
+    "segmentationTimeoutSeconds": {
+      "label": "Timeout del provider (secondi)",
+      "description": "Quanto può durare una chiamata prima di essere abbandonata."
+    },
+    "detectionSensitivityLimits": {
+      "description": "Sensibilità del rilevamento, limiti, quanto dettaglio vede l'editor AI e altre impostazioni tecniche."
+    },
+    "silenceDetection": {
+      "legend": "Rilevamento del silenzio"
+    },
+    "silenceThresholdDb": {
+      "label": "Più silenzioso di (dB) conta come silenzio"
+    },
+    "minSilenceMs": {
+      "label": "Pausa più breve (ms)"
+    },
+    "shotDetection": {
+      "legend": "Rilevamento delle inquadrature"
+    },
+    "sceneThreshold": {
+      "label": "Sensibilità al cambio di inquadratura",
+      "description": "Da 0 a 1. Più bassa trova più cambi di inquadratura."
+    },
+    "visualDetail": {
+      "legend": "Dettaglio visivo",
+      "label": "Quanto dettaglio visivo vede l'editor AI",
+      "description": "Meno dettaglio lascia spazio a più inquadrature quando le riprese sono lunghe."
+    },
+    "detectNearDuplicates": {
+      "label": "Individua i take ripetuti"
+    },
+    "analyzeColorGrading": {
+      "label": "Misura colore e tono"
+    },
+    "detectLookGroups": {
+      "label": "Raggruppa le inquadrature con un aspetto simile"
+    },
+    "detectLetterbox": {
+      "label": "Rileva le bande nere"
+    },
+    "shotDescriptions": {
+      "legend": "Descrizioni delle inquadrature"
+    },
+    "keyframesPerShot": {
+      "label": "Fotogrammi per inquadratura",
+      "description": "1 è un singolo fermo immagine; 2-3 mostrano all'AI come si muove l'inquadratura"
+    },
+    "keyframeMaxWidth": {
+      "label": "Larghezza dei fotogrammi inviati all'AI (px)"
+    },
+    "persistKeyframes": {
+      "label": "Conserva i fotogrammi",
+      "description": "Salva ogni fotogramma descritto accanto all'analisi"
+    },
+    "howManyOptions": {
+      "legend": "Quante opzioni ricevono i passaggi successivi"
+    },
+    "maxPlacements": {
+      "label": "Posizioni per i titoli"
+    },
+    "maxMusicTracks": {
+      "label": "Tracce musicali"
+    },
+    "maxSfxClips": {
+      "label": "Clip di effetti sonori"
+    },
+    "minInsertRegionSeconds": {
+      "label": "Momento più breve con schermo verde (s)"
+    },
+    "maxInsertRegions": {
+      "label": "Massimo di schermi verdi"
+    },
+    "objectTracking": {
+      "legend": "Tracciamento degli oggetti"
+    },
+    "objectDetectEverySec": {
+      "label": "Riguarda ogni (s)",
+      "description": "Individua gli oggetti che compaiono più tardi"
+    },
+    "maxObjectDetectFrames": {
+      "label": "Massimo di controlli per clip",
+      "description": "Ognuno costa una o due chiamate AI"
+    },
+    "objectTrackMaxSide": {
+      "label": "Risoluzione di tracciamento (px)",
+      "description": "Più alta trova oggetti più piccoli, ma è più lenta"
+    },
+    "transcriptionDetail": {
+      "legend": "Dettaglio della trascrizione"
+    },
+    "wordTimestamps": {
+      "label": "Segna il tempo di ogni parola",
+      "description": "Serve per i sottotitoli parola per parola e per i tagli precisi."
+    },
+    "maxAsrChunkBytes": {
+      "label": "Dimensione dei blocchi audio inviati per la trascrizione (byte)"
+    },
+    "limits": {
+      "legend": "Limiti"
+    },
+    "maxDurationSeconds": {
+      "label": "Video più lungo da modificare (minuti)",
+      "description": "Lascia vuoto per usare il video più lungo che la piattaforma può modificare."
+    },
+    "maxInputBytes": {
+      "label": "Video più grande da modificare (GB)",
+      "description": "Lascia vuoto per usare il video più grande che la piattaforma può modificare."
+    },
+    "howMuchThe": {
+      "legend": "Quanto legge l'editor AI"
+    },
+    "maxOutputChars": {
+      "label": "Dimensione totale (caratteri)"
+    },
+    "maxViewSegments": {
+      "label": "Righe di trascrizione"
+    },
+    "maxSegmentTextChars": {
+      "label": "Caratteri per riga"
+    },
+    "checksBeforeThe": {
+      "legend": "Controlli prima che parta il passaggio successivo"
+    },
+    "expect": {
+      "label": "Almeno questo numero di inquadrature",
+      "description": "Da 0 a 1"
+    },
+    "expect_atLeastThis": {
+      "label": "Almeno questo numero di righe di trascrizione"
+    },
+    "expect_atMostThis": {
+      "label": "Al massimo questa quota di silenzio"
+    },
+    "decisionModelFor": {
+      "legend": "Modello di decisione (per i team che raccolgono dati di calibrazione)"
+    },
+    "derushPrePass": {
+      "label": "Valuta ogni inquadratura prima del montaggio",
+      "description": "Dà all'editor un suggerimento tieni-o-scarta per ogni inquadratura. Non rimuove mai nulla."
+    },
+    "derushAcceptAt": {
+      "label": "Sicuro a partire da",
+      "description": "Da 0 a 1. 0,85 è un punto di partenza, non un valore ottimizzato."
+    },
+    "derushMinMargin": {
+      "label": "Margine minimo",
+      "description": "Quanto una risposta deve distare dal 50/50. 0,25 è un punto di partenza."
+    },
+    "screenInstructionLikeSpans": {
+      "label": "Segnala il testo nelle riprese che sembra un'istruzione per l'AI",
+      "description": "Un testo del genere viene segnalato all'editor (mai rimosso). Per le revisioni di sicurezza."
+    },
+    "sourceKind": {
+      "ProjectFile": "File del progetto caricato",
+      "PreviousStepOutput": "Risultato del passaggio precedente",
+      "StepOutput": "Passaggio specifico",
+      "StepResult": "Risultato di un'esecuzione precedente"
+    },
+    "intro": "Guarda le tue riprese per trovare le inquadrature, le pause e ciò che viene detto, così i passaggi successivi possono scegliere i momenti migliori.",
+    "speech": {
+      "legend": "Parlato"
+    },
+    "describeShots": {
+      "legend": "Descrivi ogni inquadratura con l'AI (facoltativo)",
+      "intro": "Un'AI guarda un fotogramma di ogni inquadratura e lo descrive, aiutando l'editor a capire cosa c'è sullo schermo. Costa una chiamata AI per ogni inquadratura descritta."
+    },
+    "trackObjects": {
+      "legend": "Traccia gli oggetti (facoltativo)",
+      "intro": "Una riga per oggetto. Il tracker gratuito segue bene le cose piatte e rigide. La segmentazione segue le cose che si piegano, girano o finiscono nascoste dietro qualcos'altro, ed è a pagamento.",
+      "empty": "Ancora nessun oggetto. Aggiungine uno per sfocarlo, evidenziarlo o mostrarci sopra dei contenuti nel video finale.",
+      "remove": "Rimuovi questo oggetto",
+      "add": "Aggiungi un oggetto",
+      "marked": "Più {count, plural, one {# area segnata} other {# aree segnate}} a mano o dall'assistente."
+    },
+    "transcriptionMode": {
+      "Off": "Disattivata: non trascrivere",
+      "Optional": "Se possibile (consigliato): saltala se non c'è un servizio vocale configurato",
+      "Required": "Sempre: ferma l'esecuzione se non riesce a trascrivere"
+    },
+    "visionMode": {
+      "Off": "Disattivata (predefinito)",
+      "Optional": "Se possibile: saltala se non c'è un'AI per le immagini configurata",
+      "Required": "Sempre: ferma l'esecuzione se non riesce a descrivere le inquadrature"
+    },
+    "captionSelectionMode": {
+      "PerDuplicateGroup": "Una per gruppo di take simili (meno chiamate)",
+      "LongestShots": "Prima le inquadrature più lunghe",
+      "EvenlySpaced": "Distribuite uniformemente nel video"
+    },
+    "prepareHint": "Attiva solo ciò che usa un passaggio successivo. Ognuna rende questo passaggio un po' più lento.",
+    "trackMethod": {
+      "Feature": "Tracker gratuito (predefinito)",
+      "Segmentation": "Segmentazione AI (a pagamento)"
+    },
+    "matchScope": {
+      "AllInstances": "Ogni corrispondenza (predefinito)",
+      "SingleTrack": "Un solo oggetto"
+    },
+    "segmentation": {
+      "title": "Tracciamento con segmentazione",
+      "egress": "Ogni clip di questo passaggio viene caricata sul provider di segmentazione perché possa seguire l'oggetto. Al provider viene chiesto di non conservarne una copia e nient'altro della clip lascia questo server.",
+      "blocked": "La segmentazione è attiva per almeno un oggetto e questa opzione è disattivata, quindi questo passaggio non può ancora partire. Seleziona la casella per consentire il caricamento, oppure riporta quell'oggetto al tracker gratuito.",
+      "cost": "La segmentazione è fatturata ogni 16 fotogrammi di video, arrotondando per eccesso, oltre al normale costo del passaggio. Se il risultato è già in cache non viene fatta nessuna chiamata al provider e non si paga nulla."
+    },
+    "visualDetailMode": {
+      "None": "Nessuno",
+      "Compact": "Compatto: l'essenziale per inquadratura",
+      "Full": "Completo: tutto ciò che è stato misurato"
+    },
+    "limitsHint": "Con riprese molto lunghe gli elementi meno importanti vengono lasciati fuori per restare entro queste dimensioni.",
+    "checksHint": "Ferma subito l'esecuzione se le riprese non sembrano corrette. Lascia vuoto per saltare un controllo.",
+    "decision": {
+      "hint": "Entrambe le opzioni inviano del testo al tuo servizio di decisione. Lasciale disattivate a meno che un amministratore ne abbia configurato uno.",
+      "Off": "Disattivata (predefinito)",
+      "Prior": "Attiva",
+      "cost": "Una chiamata di decisione per ogni gruppo di inquadrature e righe di trascrizione.",
+      "egress": "Il testo sullo schermo e la trascrizione del tuo video vengono inviati al servizio di decisione per il controllo. Usane uno self-hosted se quel testo è riservato."
+    },
+    "technical": "Tecnico: cosa questo passaggio consegna al successivo"
+  },
+  "videoCompile": {
+    "objectCombobox": {
+      "pickAnObject": {
+        "placeholder": "Scegli un oggetto o scrivilo"
+      }
+    },
+    "keepWholeSources": {
+      "label": "Mantieni intere tutte le origini (nessun montaggio)",
+      "description": "Usa ogni clip per intero, senza che un editor ne scelga delle parti, per esempio per sfocare soltanto degli oggetti o aggiungere un inserto su uno schermo."
+    },
+    "whichClipsTo": {
+      "label": "Quali clip tenere"
+    },
+    "keepOrder": {
+      "label": "Ordine delle clip",
+      "description": "Se l'editor può spostare un momento da fondo clip all'inizio, per esempio per aprire con l'inquadratura più forte"
+    },
+    "analysisStepOrder": {
+      "label": "Riprese",
+      "description": "Il passaggio 'Analizza video' da cui questo video prende le clip"
+    },
+    "analysisStepOrder_footageStepNumber": {
+      "label": "Numero del passaggio delle riprese",
+      "description": "Il numero del passaggio 'Analizza video' da cui questo video prende le clip"
+    },
+    "formatAndLength": {
+      "legend": "Formato e durata"
+    },
+    "outputFormat": {
+      "label": "Formato",
+      "description": "Dove verrà pubblicato il video"
+    },
+    "outputFit": {
+      "label": "Quando una clip ha una forma diversa"
+    },
+    "loudnessTarget": {
+      "label": "Volume",
+      "description": "Porta il video finito allo stesso volume degli altri video dove verrà pubblicato. Il bilanciamento tra voce e musica resta lo stesso."
+    },
+    "targetDurationSec": {
+      "label": "Durata desiderata (secondi)",
+      "description": "Più o meno quanto deve durare il video. Lascia 0 per mantenere la durata che serve al montaggio."
+    },
+    "saving": {
+      "legend": "Salvataggio"
+    },
+    "outputFileName": {
+      "label": "Nome del file"
+    },
+    "registerProjectFile": {
+      "label": "Salva nei file del progetto",
+      "description": "Mostra il video finito in File così puoi scaricarlo o rimontarlo"
+    },
+    "ask": {
+      "label": "Chiedi"
+    },
+    "enableGraphics": {
+      "label": "Aggiungi titoli e grafica",
+      "description": "Aggiunge i titoli, i nomi e le didascalie pianificati da un passaggio di titoli e grafica."
+    },
+    "titlesGraphicsPlan": {
+      "label": "Piano di titoli e grafica da"
+    },
+    "enableInserts": {
+      "label": "Mostra contenuti su uno schermo verde",
+      "description": "Posiziona un tuo video o una tua immagine su uno schermo verde di telefono o monitor nelle riprese, seguendolo mentre si muove. Richiede 'Trova gli schermi verdi' attivo nel passaggio Analizza video."
+    },
+    "insertContentProjectFileId": {
+      "label": "Contenuto da inserire (il tuo file)",
+      "description": "Mostrato su ogni schermo verde trovato. Sceglilo qui, non come clip nel passaggio Analizza video: quelle sono clip da montare, questo è ciò che appare sullo schermo.",
+      "none": "Nessuno: usa il piano di titoli e grafica",
+      "empty": "Nessun video o immagine caricati in questo progetto"
+    },
+    "file": {
+      "label": "File"
+    },
+    "onlyOnScreens": {
+      "label": "Solo sugli schermi nella clip numero",
+      "description": "La posizione della clip nel passaggio Analizza video (1 = la prima). Se vuoto = qualsiasi clip."
+    },
+    "onlyOnScreen": {
+      "label": "Solo sullo schermo",
+      "description": "L'ID di uno schermo dal risultato del passaggio Analizza video, come r2. Se vuoto = qualsiasi schermo."
+    },
+    "fit": {
+      "label": "Adattamento"
+    },
+    "insertContentDips": {
+      "label": "Quando il tuo video sfuma al nero",
+      "description": "Le registrazioni dello schermo spesso passano al nero tra una schermata e l'altra, e il telefono sembra spento"
+    },
+    "insertFit": {
+      "label": "Adattamento del contenuto",
+      "description": "Come un contenuto di forma diversa viene adattato alla superficie"
+    },
+    "insertSurface": {
+      "label": "Superficie",
+      "description": "Gli schermi curvi ricevono una deformazione a griglia se misurati come curvi",
+      "Auto": "Auto (dalla curvatura misurata)",
+      "Planar": "Fissaggio piatto agli angoli",
+      "Mesh": "Deformazione a griglia"
+    },
+    "enableInsertMatte": {
+      "label": "Ritaglia alla forma reale dello schermo",
+      "description": "Mantiene gli angoli arrotondati, il notch della fotocamera e le dita che passano davanti allo schermo, sopra il contenuto"
+    },
+    "mixInsertAudio": {
+      "label": "Mixa l'audio della clip inserita",
+      "description": "L'audio del tuo file si sente mentre la sua immagine è sullo schermo: per esempio i clic e le notifiche di una registrazione dello schermo. Un file senza audio, come un'immagine, resta semplicemente in silenzio."
+    },
+    "insertAudioGainDb": {
+      "label": "Volume dell'audio inserito (dB)",
+      "description": "0 mantiene il volume del tuo file. Un numero negativo lo abbassa, uno positivo lo alza."
+    },
+    "maxInserts": {
+      "label": "Massimo di inserti"
+    },
+    "minInsertConfidence": {
+      "label": "Affidabilità minima del tracciamento",
+      "description": "Da 0 a 1. Sotto questo valore uno schermo viene saltato invece di essere coperto male"
+    },
+    "object": {
+      "label": "Oggetto"
+    },
+    "censorStyle": {
+      "label": "Effetto"
+    },
+    "censorPadding": {
+      "label": "Margine",
+      "description": "Quanto si allarga attorno all'oggetto (0-1)"
+    },
+    "censorHoldSec": {
+      "label": "Mantenimento (s)",
+      "description": "Copertura extra prima e dopo ogni traccia"
+    },
+    "effect": {
+      "label": "Effetto"
+    },
+    "strength": {
+      "label": "Intensità",
+      "description": "Da 0 a 2. Più è alta, più è forte; il valore predefinito è 1."
+    },
+    "softEdgePx": {
+      "label": "Bordo morbido (px)",
+      "description": "0 mantiene un bordo netto; fino a 64 lo ammorbidisce."
+    },
+    "opacity": {
+      "label": "Opacità",
+      "description": "1 applica pienamente l'effetto, 0 lascia l'immagine intatta."
+    },
+    "everythingExceptThis": {
+      "label": "Tutto tranne questo oggetto",
+      "description": "Applica l'effetto a tutta l'immagine tranne l'oggetto."
+    },
+    "enableColorGrade": {
+      "label": "Applica un look di colore",
+      "description": "Applica a tutto il video il look di colore scelto da un passaggio o da un team di colore."
+    },
+    "colourLookFrom": {
+      "label": "Look di colore da"
+    },
+    "enableMusic": {
+      "label": "Aggiungi musica di sottofondo",
+      "description": "Riproduce una delle tue tracce caricate sotto il video, più piano quando le persone parlano."
+    },
+    "muteSourceAudio": {
+      "label": "Silenzia l'audio originale delle clip",
+      "description": "Si sentono solo musica, narrazione ed effetti sonori. Utile per le clip generate che arrivano con il proprio audio."
+    },
+    "musicTrackProjectFileId": {
+      "label": "Traccia musicale",
+      "hint": "Scegli tu una traccia, oppure lascia vuoto e fai scegliere a un passaggio musicale una delle tue tracce.",
+      "letStep": "Lascia scegliere a un passaggio musicale",
+      "empty": "Nessun file audio caricato in questo progetto"
+    },
+    "musicChoiceFrom": {
+      "label": "Scelta della musica da"
+    },
+    "musicDucking": {
+      "label": "Mentre le persone parlano",
+      "description": "Come si comporta la musica sotto il parlato"
+    },
+    "musicFitPolicy": {
+      "label": "Se la traccia è più corta del video"
+    },
+    "musicFadeInMs": {
+      "label": "Dissolvenza in entrata della musica (ms)"
+    },
+    "musicFadeOutMs": {
+      "label": "Dissolvenza in uscita della musica (ms)"
+    },
+    "beatSync": {
+      "label": "Taglia a tempo",
+      "description": "Sposta ogni taglio sul battito o sulla battuta della musica e taglia sul drop"
+    },
+    "enableSfx": {
+      "label": "Aggiungi effetti sonori",
+      "description": "Aggiunge i whoosh, i clic e i colpi scelti da un passaggio di effetti sonori tra le tue clip caricate."
+    },
+    "soundEffectsFrom": {
+      "label": "Effetti sonori da"
+    },
+    "maxSfxCues": {
+      "label": "Al massimo questo numero di effetti sonori"
+    },
+    "maxSfxCueSeconds": {
+      "label": "Effetto sonoro più lungo (s)",
+      "description": "Le clip più lunghe vengono accorciate"
+    },
+    "enableVoiceover": {
+      "label": "Mixa la narrazione da un passaggio Voce narrante",
+      "description": "Posiziona sulla timeline di uscita le righe sintetizzate da un passaggio Voce narrante precedente e le mixa sopra il programma. Richiede la modalità Ricodifica."
+    },
+    "voiceoverStep": {
+      "label": "Passaggio Voce narrante",
+      "description": "Il passaggio Voce narrante precedente di cui mixare le righe."
+    },
+    "voiceoverMode": {
+      "label": "Dialoghi originali sotto la narrazione",
+      "description": "Cosa succede ai dialoghi originali mentre una riga è in riproduzione. Sostituirli è la base di doppiaggi e registrazioni di recupero."
+    },
+    "voiceoverDuckDb": {
+      "label": "Profondità dell'abbassamento (dB)"
+    },
+    "voiceoverDuckRampMs": {
+      "label": "Rampa (ms)"
+    },
+    "enableCaptions": {
+      "label": "Incorpora i sottotitoli",
+      "description": "Incorpora la narrazione nell'immagine partendo dalle parole effettivamente pronunciate dalla voce e dai loro tempi misurati. Karaoke e Punch richiedono i tempi delle parole (un provider di trascrizione); Subtitle funziona senza."
+    },
+    "enablePickups": {
+      "label": "Inserisci le registrazioni di recupero",
+      "description": "Sostituisce i dialoghi dei segmenti di trascrizione che un passaggio Voce narrante da registrazioni di recupero ha registrato di nuovo, lasciando intatta l'immagine. Richiede la modalità Ricodifica."
+    },
+    "pickupVoiceoverStep": {
+      "label": "Passaggio Voce narrante di recupero",
+      "description": "Il passaggio Voce narrante (tipo di origine PickupPlan) le cui righe sono le registrazioni di recupero."
+    },
+    "enableGeneratedClips": {
+      "label": "Aggiungi clip generate",
+      "description": "Inserisce nel video le clip generate da un passaggio 'Nuove clip'."
+    },
+    "generatedClipsFrom": {
+      "label": "Clip generate da"
+    },
+    "maxGeneratedClips": {
+      "label": "Massimo di clip generate",
+      "description": "Le clip in più vengono lasciate fuori"
+    },
+    "takeSelection": {
+      "label": "Usa una selezione dei dailies",
+      "description": "Quando il passaggio di generazione ha prodotto più take per inquadratura, inserisce solo il take scelto da un passaggio Stanza dailies (altrimenti il primo consegnato). Disattivato inserisce tutti i take consegnati come prima."
+    },
+    "takeSelectionStep": {
+      "label": "Passaggio di selezione dei take"
+    },
+    "transitionPolicy": {
+      "label": "Transizioni tra le clip",
+      "description": "Disattivate danno tagli netti. Auto sceglie una transizione morbida dove si adatta alle riprese. Espressive ne ammette di più evidenti."
+    },
+    "programFadeInMs": {
+      "label": "Dissolvenza in entrata del video (ms)"
+    },
+    "programFadeOutMs": {
+      "label": "Dissolvenza in uscita del video (ms)"
+    },
+    "programAudioFadeInMs": {
+      "label": "Dissolvenza in entrata dell'audio (ms)"
+    },
+    "programAudioFadeOutMs": {
+      "label": "Dissolvenza in uscita dell'audio (ms)"
+    },
+    "programFadeColor": {
+      "label": "Colore della dissolvenza"
+    },
+    "encodingCutTiming": {
+      "description": "Codifica, tempi di taglio, tempi delle transizioni, controlli, reframe e inserti per riferimento. I valori predefiniti vanno bene per quasi tutti i video."
+    },
+    "mode": {
+      "label": "Modalità"
+    },
+    "allowKeyframeSnapping": {
+      "label": "Consenti l'aggancio ai keyframe",
+      "description": "Necessario per la copia del flusso. In un taglio continuo unico, i tagli si spostano sul keyframe più vicino."
+    },
+    "videoCodec": {
+      "label": "Codec video",
+      "description": "L'output è sempre MP4 4:2:0 a gamma standard, così telefoni e app di messaggistica possono riprodurlo"
+    },
+    "audioCodec": {
+      "label": "Codec audio"
+    },
+    "preset": {
+      "label": "Preset"
+    },
+    "crf": {
+      "label": "Qualità (CRF)",
+      "description": "Più basso significa qualità migliore e file più grandi. 20 è un buon valore predefinito."
+    },
+    "prePaddingMs": {
+      "label": "Margine prima (ms)"
+    },
+    "postPaddingMs": {
+      "label": "Margine dopo (ms)"
+    },
+    "minSegmentMs": {
+      "label": "Segmento minimo (ms)"
+    },
+    "maxSegments": {
+      "label": "Massimo di segmenti"
+    },
+    "analysisStepResultId": {
+      "label": "Riusa l'analisi delle riprese di un'esecuzione precedente (ID del risultato)",
+      "placeholder": "Lascia vuoto per usare l'analisi di questa esecuzione"
+    },
+    "audioSeamRampMs": {
+      "label": "Rampa della giunzione audio (ms)",
+      "description": "Metà ampiezza della rampa anti-click che un trattamento di sola giunzione audio applica attorno al taglio"
+    },
+    "softCutMs": {
+      "label": "Taglio morbido (ms)",
+      "description": "Durata di un trattamento a taglio morbido (breve dissolvenza incrociata)"
+    },
+    "dissolveMs": {
+      "label": "Dissolvenza (ms)",
+      "description": "Durata di un trattamento a dissolvenza"
+    },
+    "dipToBlackMs": {
+      "label": "Passaggio al nero (ms)",
+      "description": "Durata di un trattamento con passaggio al nero"
+    },
+    "dipCutMs": {
+      "label": "Taglio con passaggio al nero (ms)",
+      "description": "Durata di un trattamento di taglio con breve passaggio al nero (senza un passaggio al nero completo)"
+    },
+    "sectionBreakGapMs": {
+      "label": "Pausa per cambio di sezione (ms)",
+      "description": "Pausa di silenzio che conta come cambio di sezione invece che come semplice taglio"
+    },
+    "maxTransitionMs": {
+      "label": "Transizione massima (ms)",
+      "description": "Limite massimo alla durata di una singola transizione"
+    },
+    "maxTransitionRatioPct": {
+      "label": "Rapporto massimo di transizioni (%)",
+      "description": "Limita la percentuale di tagli che possono avere un trattamento in stile dissolvenza incrociata; i tagli in eccesso passano alla sola giunzione audio"
+    },
+    "maxTransitionSegments": {
+      "label": "Segmenti con transizione al massimo",
+      "description": "Limita quanti tagli in tutto il montaggio possono ricevere un trattamento diverso dal taglio netto"
+    },
+    "checksBeforeEncoding": {
+      "legend": "Controlli prima della codifica"
+    },
+    "expect": {
+      "label": "Secondi minimi in uscita",
+      "description": "Rifiuta un montaggio che scarta quasi tutto"
+    },
+    "expect_maxOutputSeconds": {
+      "label": "Secondi massimi in uscita"
+    },
+    "expect_minRetainedRatio": {
+      "label": "Rapporto minimo di materiale tenuto"
+    },
+    "expect_maxRetainedRatio": {
+      "label": "Rapporto massimo di materiale tenuto"
+    },
+    "insertAudioProblem": {
+      "insertsOff": {
+        "title": "Gli inserti sugli schermi sono disattivati",
+        "body": "L'audio della clip inserita si sente solo quando gli inserti sugli schermi sono attivi. Attiva \"Mostra contenuti su uno schermo verde\" qui sopra, oppure disattiva di nuovo questo audio."
+      },
+      "copyAudio": {
+        "title": "Questo audio non può essere mixato",
+        "body": "L'audio del programma è impostato per essere copiato così com'è, e questo non lascia spazio per aggiungervi altro. Scegli un altro codec audio in Avanzate qui sotto, oppure disattiva di nuovo questo audio."
+      }
+    },
+    "engine": {
+      "Tracker": "tracciato",
+      "Segmentation": "segmentazione (a pagamento)"
+    },
+    "objectOption": "{text} — {engine}",
+    "keepOrderMode": {
+      "SourceOrder": "Nell'ordine in cui è stato girato (predefinito)",
+      "AsListed": "Nell'ordine dell'editor"
+    },
+    "outputFormatMode": {
+      "Source": "Dimensione originale",
+      "Vertical": "Verticale 9:16 — Reels/TikTok/Shorts",
+      "Square": "Quadrato 1:1 — feed",
+      "Landscape": "Orizzontale 16:9 — YouTube",
+      "Portrait": "Ritratto 4:5 — feed"
+    },
+    "outputFitMode": {
+      "Crop": "Riempi il fotogramma (ritaglia il centro)",
+      "Subject": "Riempi il fotogramma, mantieni il soggetto in campo",
+      "Pad": "Adatta l'intera clip (bande)"
+    },
+    "loudnessMode": {
+      "Off": "Come mixato",
+      "Social": "Social media (−14 LUFS)",
+      "Web": "Sito web (−16 LUFS)",
+      "Broadcast": "Trasmissione TV (−23 LUFS)"
+    },
+    "insertFitMode": {
+      "sameAsAbove": "Come sopra",
+      "Auto": "Auto (mantieni la forma del tuo file)",
+      "Contain": "Contieni (bande nere)",
+      "Cover": "Copri (ritaglia per riempire)",
+      "Stretch": "Stira"
+    },
+    "insertDipMode": {
+      "Freeze": "Continua a mostrare l'ultima immagine (predefinito)",
+      "Cut": "Salta la parte nera",
+      "Keep": "Lascia com'è"
+    },
+    "trackedEffect": {
+      "Blur": "Sfocatura",
+      "Pixelate": "Pixel",
+      "Fill": "Nero pieno (il più forte)"
+    },
+    "regionEffect": {
+      "Blur": "Sfocatura",
+      "Pixelate": "Pixel",
+      "Highlight": "Evidenzialo e oscura il resto",
+      "Spotlight": "Spotlight: oscura tutto il resto",
+      "ColorPop": "Color pop: mantieni il colore solo su di esso",
+      "Outline": "Contorno"
+    },
+    "beatSyncMode": {
+      "Off": "Disattivato (predefinito)",
+      "Beat": "Su ogni battito",
+      "Bar": "Su ogni battuta (quattro battiti)"
+    },
+    "voiceoverModeOption": {
+      "OverMusic": "Sopra il programma (predefinito): dialoghi intatti",
+      "DuckDialogue": "Abbassa i dialoghi sotto ogni riga",
+      "ReplaceDialogue": "Sostituisci i dialoghi sotto ogni riga (doppiaggi)"
+    },
+    "transitionPolicyMode": {
+      "Off": "Disattivate: tagli netti (predefinito)",
+      "AudioOnly": "Solo audio: elimina il click a ogni giunzione",
+      "Auto": "Auto: sceglie un trattamento per ogni taglio",
+      "Expressive": "Espressive: ammette transizioni evidenti",
+      "Editor": "Editor: l'editor sceglie ogni transizione e la sua velocità"
+    },
+    "videoCodecMode": {
+      "libx264": "H.264 — si riproduce ovunque",
+      "libx265": "H.265 — più piccolo, dispositivi più recenti"
+    },
+    "intro": "Monta il video finale con le clip scelte dall'editor. Gli extra come musica, narrazione e titoli sono disattivati finché non li attivi qui sotto.",
+    "subjectFitNote": "Ogni clip viene ritagliata attorno a uno schermo tracciato, oppure attorno al soggetto trovato da <b>Trova il soggetto di ogni inquadratura</b> nel passaggio Analizza video. Le clip senza nessuno dei due vengono ritagliate al centro.",
+    "insertContents": {
+      "remove": "Rimuovi questo contenuto",
+      "add": "Aggiungi contenuto per altri schermi",
+      "hint": "Schermi diversi possono mostrare file diversi: per esempio una registrazione del telefono sul telefono e una registrazione del desktop sul portatile. Uno schermo per cui non è previsto nessun contenuto extra mostra il file qui sopra.",
+      "nothingShown": "Scegli un file qui sopra, oppure imposta qui sopra un piano di titoli e grafica. Senza nessuno dei due, sullo schermo non viene mostrato nulla."
+    },
+    "effects": {
+      "legend": "Effetti sugli oggetti (facoltativo)",
+      "intro": "Una riga per oggetto, scelto tra quelli che il passaggio Analizza video segue. Un oggetto tracciato viene nascosto dal tracker gratuito. Un oggetto in segmentazione viene gestito da quello a pagamento, che può anche evidenziarlo, illuminarlo, lasciarlo a colori o contornarlo. Il resto dell'immagine resta intatto.",
+      "empty": "Ancora nessun effetto. Aggiungi un oggetto per sfocarlo o farlo risaltare.",
+      "remove": "Rimuovi questo effetto",
+      "invalid": "EFFECT_INVALID: indica l'oggetto a cui si applica questo effetto, altrimenti il passaggio viene rifiutato.",
+      "cancel": "Annulla",
+      "add": "Aggiungi un effetto",
+      "limit": "Il limite è di {max} effetti: uno in più viene rifiutato con EFFECT_LIMIT_EXCEEDED invece di essere scartato.",
+      "limitExceeded": "EFFECT_LIMIT_EXCEEDED: questa configurazione elenca {count} effetti e il limite è {max}. Rimuovine alcuni, altrimenti il passaggio viene rifiutato.",
+      "requiresReencode": "EFFECT_REQUIRES_REENCODE: un effetto cambia i pixel, quindi la modalità deve essere Reencode.",
+      "trackedShared": "Stile, margine e mantenimento sono impostati una sola volta per tutti gli oggetti che nascondi, perché il tracker gratuito li nasconde tutti allo stesso modo.",
+      "order": "Gli effetti vengono applicati all'immagine finita: dopo gli inserti sugli schermi e prima della dissolvenza del programma."
+    },
+    "musicDuckingMode": {
+      "SpeechEnvelope": "Si abbassa sotto il parlato, più alta nelle pause",
+      "Off": "Resta a basso volume per tutto il tempo"
+    },
+    "musicFitMode": {
+      "LoopToFit": "Ripeti per coprire tutto il montaggio",
+      "PlayOnce": "Riproduci una volta, poi silenzio"
+    },
+    "fades": {
+      "title": "Dissolvenza in entrata all'inizio e in uscita alla fine"
+    },
+    "encoding": {
+      "legend": "Codifica"
+    },
+    "encodingMode": {
+      "Reencode": "Ricodifica: precisa al fotogramma (predefinito)",
+      "StreamCopy": "Copia del flusso: un taglio continuo è una copia senza perdita; un taglio con più parti viene ricodificato"
+    },
+    "cutTiming": {
+      "legend": "Tempi di taglio"
+    },
+    "transitionTiming": {
+      "title": "Tempi delle transizioni",
+      "hint": "Usati solo quando le transizioni non sono disattivate."
+    },
+    "checksHint": "Ferma subito l'esecuzione se il montaggio non sembra corretto. Lascia vuoto per saltare un controllo.",
+    "narration": {
+      "legend": "Narrazione e sottotitoli (facoltativo)"
+    },
+    "motionLegend": "Titoli e grafica (facoltativo)",
+    "insertsLegend": "Inserti schermo (facoltativo)",
+    "colourLegend": "Look colore (facoltativo)",
+    "musicLegend": "Musica di sottofondo (facoltativo)",
+    "sfxLegend": "Effetti sonori (facoltativo)",
+    "generatedLegend": "Clip generate (facoltativo)",
+    "transitionsLegend": "Transizioni e dissolvenze",
+    "rateControl": {
+      "label": "Come scegliere la dimensione del file",
+      "description": "“Prima l’aspetto, con un limite” e “Punta a una dimensione” richiedono un bitrate video. “Aspetto costante” è la codifica di qualità normale.",
+      "options": {
+        "Quality": "Aspetto costante",
+        "Capped": "Prima l’aspetto, con un limite",
+        "Average": "Punta a una dimensione"
+      }
+    },
+    "videoBitrateKbps": {
+      "label": "Bitrate video (kbps)"
+    }
+  },
+  "prompts": {
+    "audioGenerate": "Cosa devo chiedere, quanto deve durare e che tetto di spesa devo impostare?",
+    "imageGenerate": "Cosa devo descrivere, quale immagine devo modificare e che tetto di spesa devo impostare?",
+    "conditional": "Come devo scrivere la condizione e scegliere i rami vero/falso? Meglio la modalità Espressione o Decisione?",
+    "designSystem": "Cosa deve leggere o richiedere questo passaggio del profilo di brand e prodotto?",
+    "extractFrame": "Quale video e quale fotogramma deve prelevare questo passaggio, e cosa devo farne dell'immagine?",
+    "pinInsert": "Cosa deve inserire questo passaggio e su quale schermata tracciata?",
+    "reviewLoop": "Che punteggio minimo e che limite di iterazioni devo usare, e conviene attivare l'arresto anticipato con decisione?",
+    "room": "Quale vista di analisi devo usare e quanti round e turni hanno senso? Devo attivare la pianificazione delle decisioni?",
+    "agent": "Quale agente va bene qui, e servono una mappatura degli input o una cache personalizzata?",
+    "forEach": "Quale espressione di origine del ciclo devo usare e quante iterazioni?",
+    "parallel": "Quali agenti devono essere eseguiti in parallelo qui?",
+    "extract": "Quale operazione e quali input deve usare questo passaggio Estrai?",
+    "thumbnailGenerate": "Quale fotogramma deve usare questa miniatura, e che dimensione di output e che testo deve avere?",
+    "timelineRender": "Quale timeline e quale preset di consegna deve usare questo rendering?",
+    "videoAnalyze": "Quali clip e quali opzioni di trascrizione e descrizione delle inquadrature vanno bene per il mio girato, e quanto costeranno?",
+    "videoAnalyzeSpeech": "Spiega le impostazioni di trascrizione: cosa fanno, quanto costano e una buona configurazione di partenza.",
+    "videoAnalyzeShots": "Spiega le impostazioni di descrizione delle inquadrature: cosa fanno, quanto costano e una buona configurazione di partenza.",
+    "videoAnalyzeTrack": "Spiega la sezione \"Traccia oggetti\": come vengono trovati e seguiti gli oggetti, la differenza tra il tracker gratuito e la segmentazione, quanto costa la segmentazione e come sfocarli dopo.",
+    "videoCompile": "Quali extra (titoli, musica, colore, effetti sonori, clip generate) devo attivare, e di cosa hanno bisogno dai passi precedenti?",
+    "compileMotion": "Spiega la sezione \"Grafica animata\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "compileInserts": "Spiega la sezione \"Inserti schermo\": cosa fa ogni impostazione, quanto costa, se l'audio della clip inserita viene mixato e una buona configurazione di partenza.",
+    "compileEffects": "Spiega \"Effetti sugli oggetti\": la differenza tra un oggetto seguito dal tracker gratuito e uno seguito con la segmentazione, quali effetti consente ciascuno, quanto costa la segmentazione e una buona configurazione di partenza.",
+    "compileColour": "Spiega la sezione \"Look colore\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "compileMusic": "Spiega la sezione \"Musica di sottofondo\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "compileSfx": "Spiega la sezione \"Effetti sonori\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "compileNarration": "Spiega la sezione \"Narrazione e sottotitoli\": come vengono mixate le battute del voiceover, cosa fanno le modalità di dialogo, come vengono impressi i sottotitoli e una buona configurazione di partenza.",
+    "compileGenerated": "Spiega la sezione \"Clip generate\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "compileTransitions": "Spiega la sezione \"Transizioni e dissolvenze di programma\": cosa fa ogni impostazione, quanto costa e una buona configurazione di partenza.",
+    "videoGenerate": "Devo scrivere un solo prompt o usare un piano Shot Director? Quali budget e numero di take sono sensati?",
+    "voiceover": "Quale sorgente e quale voce devo usare, e quanto costerà?",
+    "videoEnhance": "Quale video e quale miglioramento deve applicare questo passaggio, ed è gratis o usa crediti?",
+    "audioCleanup": "Quale registrazione deve pulire questo passaggio, cosa deve correggere e vale la pena usare crediti?"
+  },
+  "videoEnhance": {
+    "sourceKind": {
+      "ProjectFile": "Un file caricato",
+      "PreviousStepOutput": "L'output del passaggio precedente",
+      "StepOutput": "L'output di un passaggio specifico",
+      "StepResult": "L'output di un'esecuzione precedente (ID risultato del passaggio)"
+    },
+    "intro": "Migliora un video e salva il risultato nei file del progetto. Ingrandirlo e renderlo più fluido può essere gratis su questo server oppure su un servizio AI esterno che usa crediti; estendere l'immagine usa sempre il servizio AI esterno; pulire il disturbo e aggiungere l'effetto mosso sono sempre gratis su questo server.",
+    "source": {
+      "legend": "Quale video",
+      "takeFrom": "Prendi il video da",
+      "file": "File",
+      "step": "Passaggio",
+      "stepPlaceholder": "Seleziona un passaggio",
+      "nothingBefore": "Nulla viene prima di questo passaggio: scegli invece un file caricato.",
+      "stepResult": {
+        "label": "ID risultato del passaggio",
+        "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto (mostrato nella pagina dell'esecuzione)"
+      }
+    },
+    "op": {
+      "Upscale": "Ingrandiscilo",
+      "Interpolate": "Rendi il movimento più fluido",
+      "Denoise": "Pulisci grana e disturbo",
+      "MotionBlur": "Aggiungi un naturale effetto mosso",
+      "Extend": "Estendi l'immagine",
+      "legend": "Cosa migliorare",
+      "label": "Miglioramento",
+      "hostedCapableHint": "Può essere gratis su questo server oppure su un servizio esterno che usa crediti.",
+      "extendHostedHint": "Questo usa sempre il servizio esterno e consuma crediti.",
+      "localOnlyHint": "Funziona sempre gratis su questo server."
+    },
+    "engine": {
+      "label": "Dove viene eseguito",
+      "Local": "Su questo server (gratis)",
+      "Hosted": "Servizio esterno (usa crediti)",
+      "freeHint": "Funziona su questo server e non costa nulla.",
+      "creditsHint": "Usa crediti e il video viene inviato a un servizio esterno."
+    },
+    "options": {
+      "legend": "Impostazioni"
+    },
+    "upscale": {
+      "label": "Nuova dimensione",
+      "size": {
+        "x2": "Grande il doppio",
+        "x4": "Grande quattro volte",
+        "h720": "Alto 720 pixel",
+        "h1080": "Alto 1080 pixel",
+        "h1440": "Alto 1440 pixel",
+        "h2160": "Alto 2160 pixel (4K)"
+      }
+    },
+    "interpolate": {
+      "label": "Fotogrammi da aggiungere",
+      "multiplier": {
+        "2": "Il doppio dei fotogrammi",
+        "4": "Quattro volte i fotogrammi",
+        "8": "Otto volte i fotogrammi"
+      }
+    },
+    "denoise": {
+      "strength": "Intensità",
+      "strengthValue": {
+        "Light": "Leggera",
+        "Strong": "Forte"
+      },
+      "keepGrain": {
+        "label": "Mantieni un po' di grana",
+        "description": "Toglie il disturbo ma lascia un po' di texture, così non sembra plastica"
+      }
+    },
+    "motionBlur": {
+      "label": "Angolo dell'otturatore (gradi)",
+      "description": "Lascia vuoto per l'aspetto naturale. Un angolo maggiore dà più effetto mosso."
+    },
+    "extend": {
+      "mode": {
+        "label": "Come scegliere il nuovo quadro",
+        "aspect": "Scegli una forma",
+        "sides": "Imposta ogni lato"
+      },
+      "aspect": {
+        "label": "Nuova forma",
+        "16:9": "Orizzontale 16:9",
+        "9:16": "Verticale 9:16",
+        "1:1": "Quadrato 1:1",
+        "4:5": "4:5"
+      },
+      "side": {
+        "amount": "Quanto aggiungere",
+        "left": "Aggiungi a sinistra",
+        "right": "Aggiungi a destra",
+        "top": "Aggiungi in alto",
+        "bottom": "Aggiungi in basso",
+        "description": "Percentuale di quel lato, da 1 a 50. Ogni lato scelto cresce della stessa quantità."
+      },
+      "prompt": {
+        "label": "Cosa devono mostrare i nuovi bordi? (facoltativo)",
+        "description": "Parole semplici, fino a {max} caratteri. Lascia vuoto per continuare la scena in modo naturale."
+      }
+    },
+    "maxSeconds": {
+      "label": "Video più lungo (secondi)",
+      "description": "Ferma il passaggio su un video più lungo di questo. Può solo abbassare il limite che il tuo spazio di lavoro ha già."
+    },
+    "output": {
+      "save": {
+        "label": "Salva nei File",
+        "description": "Elenca il risultato migliorato nei file del progetto"
+      }
+    },
+    "hosted": {
+      "legend": "Servizio esterno"
+    },
+    "provider": {
+      "label": "Provider",
+      "nullMeans": "Se vuoto usa il provider predefinito."
+    },
+    "consent": {
+      "warning": "Il video scelto viene inviato a un servizio esterno per essere migliorato. Al servizio viene chiesto di non conservarne una copia e nient'altro lascia questo server.",
+      "label": "Consenti di inviare questo video al servizio esterno",
+      "description": "Necessario per questa opzione. Finché non lo spunti, l'esecuzione si ferma e indica il file; nulla viene caricato.",
+      "blocked": "È disattivato, quindi questo passaggio non può ancora essere eseguito. Spunta la casella per consentirlo, oppure scegli l'opzione gratuita."
+    }
+  },
+  "audioCleanup": {
+    "target": {
+      "VoiceBasic": "Migliora una voce (gratis)",
+      "Hum": "Elimina il ronzio (gratis)",
+      "Wind": "Riduci il rumore del vento (gratis)",
+      "Hiss": "Elimina il fruscio (gratis)",
+      "Echo": "Riduci l'eco (gratis)",
+      "IsolateVoice": "Tieni solo la voce (usa crediti)",
+      "RemoveMusic": "Rimuovi la musica di sottofondo (usa crediti)"
+    },
+    "sourceKind": {
+      "ProjectFile": "Un file caricato",
+      "PreviousStepOutput": "Il risultato del passaggio precedente",
+      "StepOutput": "Il risultato di un passaggio specifico",
+      "StepResult": "Il risultato di un'esecuzione precedente (ID del risultato del passaggio)"
+    },
+    "outputKind": {
+      "Auto": "Come l'originale",
+      "Audio": "Solo audio",
+      "VideoWithCleanAudio": "Video con l'audio pulito"
+    },
+    "intro": "Migliora il suono di un video o di un file audio e salva il risultato nei file del progetto. Eliminare ronzio, vento, fruscio ed eco e migliorare una voce è gratis; tenere solo la voce o rimuovere la musica usa crediti.",
+    "source": {
+      "legend": "Quale registrazione",
+      "takeFrom": "Prendi l'audio da",
+      "file": "File",
+      "step": "Passaggio",
+      "stepPlaceholder": "Scegli un passaggio",
+      "stepResult": {
+        "label": "ID del risultato del passaggio",
+        "description": "L'ID di un risultato di passaggio di un'esecuzione precedente di questo progetto (lo trovi nella pagina dell'esecuzione)"
+      }
+    },
+    "what": {
+      "legend": "Cosa correggere",
+      "target": "Correzione",
+      "freeHint": "Gira su questo server e non costa nulla.",
+      "creditsHint": "Usa crediti e l'audio viene inviato a un servizio esterno."
+    },
+    "provider": {
+      "label": "Provider",
+      "nullMeans": "Se vuoto usa il provider di pulizia audio predefinito."
+    },
+    "consent": {
+      "warning": "L'audio del file scelto viene inviato a un servizio esterno perché possa essere pulito. Al servizio viene chiesto di non conservarne una copia e nient'altro lascia questo server.",
+      "label": "Consenti l'invio di questo audio al servizio esterno",
+      "description": "Obbligatorio per questa correzione. Finché non lo selezioni, l'esecuzione si ferma e indica il file; non viene caricato nulla.",
+      "blocked": "Questa opzione è disattivata, quindi il passaggio non può ancora partire. Selezionala per consentirlo, oppure scegli una correzione gratuita."
+    },
+    "maxMinutes": {
+      "label": "Registrazione più lunga (minuti)",
+      "description": "Ferma il passaggio su una registrazione più lunga di questo valore. Può solo abbassare il limite già previsto dal tuo spazio di lavoro."
+    },
+    "output": {
+      "legend": "Risultato",
+      "kind": "Tipo di risultato",
+      "save": {
+        "label": "Salva nei File",
+        "description": "Mostra il risultato pulito tra i file del progetto"
+      }
+    }
+  }
+}

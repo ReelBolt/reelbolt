@@ -1,0 +1,12 @@
+{
+  "wfSteps.videoGenerate.maxGpu.label": "'GPU' and 'ComfyUI' left as product/jargon names; 'self-hosted' left in English (no natural Italian rendering).",
+  "wfSteps.videoCompile.effects.invalid": "Server error codes (EFFECT_INVALID, EFFECT_LIMIT_EXCEEDED, EFFECT_REQUIRES_REENCODE) kept verbatim inside the sentence because the user may search for them; confirm.",
+  "wfSteps.videoCompile.encodingMode.Reencode": "'Re-encode' rendered as 'Ricodifica' and 'Stream copy' as 'Copia del flusso' (also in the reframe note); confirm preferred terms.",
+  "wfSteps.videoAnalyze.trackMethod.Segmentation": "'segmentation' kept as 'segmentazione'; owner to confirm vs. 'maschera'/'rotoscopia' used by Italian editors.",
+  "wfSteps.captionStyle.style.Punch": "Caption style names Subtitle/Karaoke/Punch/Bold are enum words kept in English; only the explanation is translated.",
+  "wfSteps.captionStyle.preview.sample": "Sample caption text translated ('Pubblicalo oggi'); purely a demo string.",
+  "wfSteps.videoCompile.beatSync.description": "'drop' (music) kept in English as used by Italian editors.",
+  "wfSteps.room.DailiesRoom.badge": "'DAILIES ROOM' translated as 'STANZA DAILIES' per the glossary step-type table; 'dailies' kept (film-industry term).",
+  "wfSteps.videoCompile.insertSurface.Planar": "'corner pin' / 'mesh warp' translated descriptively ('Fissaggio piatto agli angoli', 'Deformazione a griglia'); editors may prefer the English terms.",
+  "wfSteps.kit.provider.capability.Embedding": "Technical capability nouns (embedding, upscale) left in English."
+}

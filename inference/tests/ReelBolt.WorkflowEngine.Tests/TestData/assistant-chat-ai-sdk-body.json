@@ -1,0 +1,18 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "hello"
+        }
+      ]
+    }
+  ],
+  "tools": {},
+  "unstable_assistantMessageId": "<client-message-id>",
+  "parentId": "<client-parent-id>",
+  "runConfig": {},
+  "projectId": "11111111-1111-1111-1111-111111111111"
+}

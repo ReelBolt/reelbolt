@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0 L3 3">
+    <set attributeName="fill" to="red" begin="0s"/>
+    <animate attributeName="d" to="M1 1" dur="1s"/>
+  </path>
+  <rect x="1" y="1" width="2" height="2"/>
+</svg>

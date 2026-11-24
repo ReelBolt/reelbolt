@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Linux build of the ReelBolt Runner per-user MSI, for wixl (msitools).
+
+  Same package as runner.wxs, which is the WiX 6 source for a Windows host. This
+  copy exists because WiX 6 cannot produce an MSI on Linux: it refuses Directory
+  names on a non-Windows host and then needs native msi.dll / wixnative.exe to
+  bind. wixl reads the WiX v3 schema, so the namespace and a few attributes
+  differ; the INSTALLED RESULT must not: per-user into %LOCALAPPDATA%\ReelBolt\Runner,
+  the user's PATH entry first, a Start Menu shortcut, MajorUpgrade that refuses a
+  downgrade, the same UpgradeCode. If you change one source, change the other.
+
+    wixl -a x64 -D Version=1.4.2 -D SemVer=1.4.2 -D DistDir=<dir> -D UpgradeCode=<guid> -o out.msi runner.wixl.wxs
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product
+    Id="*"
+    Name="ReelBolt Runner"
+    Manufacturer="ReelBolt"
+    Language="1033"
+    Version="$(var.Version)"
+    UpgradeCode="$(var.UpgradeCode)">
+
+    <Package
+      Description="ReelBolt Runner $(var.SemVer)"
+      Manufacturer="ReelBolt"
+      InstallerVersion="500"
+      InstallScope="perUser"
+      Compressed="yes" />
+
+    <!-- A downgrade is never an update (see runner.wxs). Windows Installer compares
+         only the first three ProductVersion fields, and the promoted stable MSI is the
+         same bytes as its beta, so builds that differ only in the prerelease number
+         (1.4.2.1 vs 1.4.2.2, or a beta vs the stable of the same x.y.z) have EQUAL
+         versions: AllowSameVersionUpgrades makes such an MSI replace the installed one
+         instead of installing beside it. See msi-version.sh. -->
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of ReelBolt Runner is already installed." />
+
+    <Media Id="1" Cabinet="runner.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="ReelBoltDir" Name="ReelBolt">
+          <Directory Id="RunnerDir" Name="Runner">
+            <Component Id="TrayExe" Guid="{8B311265-0D2E-4319-B009-0AC090162F40}">
+              <File Id="reelboltRunnerDesktopExe" Source="$(var.DistDir)/reelbolt-runner-desktop.exe" KeyPath="yes" />
+            </Component>
+            <Component Id="DaemonExe" Guid="{1968A06D-ACFF-467D-ADAC-7D0CAADD2D9B}">
+              <File Id="reelboltRunnerExe" Source="$(var.DistDir)/reelbolt-runner.exe" KeyPath="yes" />
+            </Component>
+            <Component Id="FfmpegExe" Guid="{D5F0962B-96F1-4059-B83C-DF8FCC2DA1D5}">
+              <File Id="ffmpegExe" Source="$(var.DistDir)/ffmpeg.exe" KeyPath="yes" />
+            </Component>
+            <Component Id="FfprobeExe" Guid="{362CDE09-B64F-4FEA-A6D8-A5CE2BED524A}">
+              <File Id="ffprobeExe" Source="$(var.DistDir)/ffprobe.exe" KeyPath="yes" />
+            </Component>
+            <Component Id="Licence" Guid="{8B9A75C8-0640-461B-8C74-357952EE0242}">
+              <File Id="thirdPartyNotices" Source="$(var.DistDir)/THIRD_PARTY_NOTICES.md" KeyPath="yes" />
+            </Component>
+            <!-- The user's PATH, first, so this release's pinned ffmpeg wins. -->
+            <Component Id="UserPath" Guid="{76C62926-071B-4B4D-8D85-8D40CD57FB2B}">
+              <RegistryValue Root="HKCU" Key="Software\ReelBolt\Runner" Name="Path" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="AppMenuDir" Name="ReelBolt">
+          <Component Id="StartMenuShortcut" Guid="{8B9A75C8-0640-461B-8C74-357952EE0243}">
+            <Shortcut Id="TrayShortcut" Name="ReelBolt Runner" Description="Run ReelBolt render jobs on this computer"
+                      Target="[RunnerDir]reelbolt-runner-desktop.exe" WorkingDirectory="RunnerDir" />
+            <RemoveFolder Id="RemoveAppMenuDir" On="uninstall" />
+            <RegistryValue Root="HKCU" Key="Software\ReelBolt\Runner" Name="Shortcut" Type="integer" Value="1" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="Main" Title="ReelBolt Runner" Level="1">
+      <ComponentRef Id="TrayExe" />
+      <ComponentRef Id="DaemonExe" />
+      <ComponentRef Id="FfmpegExe" />
+      <ComponentRef Id="FfprobeExe" />
+      <ComponentRef Id="Licence" />
+      <ComponentRef Id="UserPath" />
+      <ComponentRef Id="StartMenuShortcut" />
+    </Feature>
+  </Product>
+</Wix>

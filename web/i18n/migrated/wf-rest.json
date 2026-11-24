@@ -1,0 +1,27 @@
+{
+  "globs": [
+    "components/workflows/AddStepModal.tsx",
+    "components/workflows/AgentPicker.tsx",
+    "components/workflows/EditRoomTranscriptPanel.tsx",
+    "components/workflows/ExecutionEventCard.tsx",
+    "components/workflows/ExecutionHistory.tsx",
+    "components/workflows/FlowchartBuilder.tsx",
+    "components/workflows/JsonViewer.tsx",
+    "components/workflows/OutputSchemaViewer.tsx",
+    "components/workflows/RegenerateVideoClipsModal.tsx",
+    "components/workflows/RunStepList.tsx",
+    "components/workflows/SilentRunNotice.tsx",
+    "components/workflows/StepCard.tsx",
+    "components/workflows/StepResultPanel.tsx",
+    "components/workflows/StepTypeBadge.tsx",
+    "components/workflows/StepTypeSelector.tsx",
+    "components/workflows/TemplatePicker.tsx",
+    "components/workflows/VoiceProviderStatusNotice.tsx",
+    "components/workflows/WorkflowStepList.tsx",
+    "components/workflows/flowchart-layout.ts",
+    "components/workflows/step-type-i18n.ts",
+    "components/workflows/nodes/*Node.tsx",
+    "components/workflows/nodes/StepNodeShell.tsx",
+    "app/(app)/projects/[[]id]/workflows/**/*.tsx"
+  ]
+}

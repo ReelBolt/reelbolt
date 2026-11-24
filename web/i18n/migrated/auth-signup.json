@@ -1,0 +1,5 @@
+{
+  "globs": [
+    "components/auth/SignupValuePanel.tsx"
+  ]
+}

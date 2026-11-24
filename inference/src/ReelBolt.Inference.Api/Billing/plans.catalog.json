@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "currency": "USD",
+  "taxNote": "Prices exclude VAT and sales tax, which are added at checkout.",
+  "plans": [
+    {
+      "id": "trial",
+      "name": "Trial",
+      "kind": "trial",
+      "includedCredits": 0,
+      "creditsOneTime": 100,
+      "highlights": [
+        "100 credits to try ReelBolt",
+        "20 assistant credits a month",
+        "720p exports with a watermark",
+        "1 GB of storage",
+        "No card required"
+      ],
+      "limits": {
+        "maxResolution": "720p",
+        "watermark": true,
+        "byoProviders": false,
+        "rooms": false,
+        "videoGeneration": false,
+        "priority": "standard"
+      },
+      "cta": "signup",
+      "topUpAllowed": false,
+      "entitlements": {
+        "byoAllowed": false,
+        "maxConcurrentExecutions": 1,
+        "maxOutputHeight": 720,
+        "watermark": true,
+        "roomsAllowed": false,
+        "videoGenAllowed": false,
+        "segmentationAllowed": false,
+        "audioGenAllowed": false,
+        "apiAccess": false,
+        "audioCleanupAllowed": false,
+        "videoEnhanceAllowed": false,
+        "avatarsAllowed": false,
+        "avatarObjectsAllowed": false,
+        "socialPublishingAllowed": false,
+        "priority": 0,
+        "storageGb": 1,
+        "retentionDays": 30,
+        "assistantMonthlyCredits": 20,
+        "runnerAllowed": true
+      }
+    },
+    {
+      "id": "creator",
+      "name": "Creator",
+      "kind": "subscription",
+      "priceMonthly": 29,
+      "priceAnnual": 290,
+      "includedCredits": 1000,
+      "highlights": [
+        "1,000 credits every month",
+        "100 assistant credits a month",
+        "1080p exports, no watermark",
+        "Bring your own AI provider",
+        "15 GB of storage",
+        "Top-up credits when you need more"
+      ],
+      "limits": {
+        "maxResolution": "1080p",
+        "watermark": false,
+        "byoProviders": true,
+        "rooms": false,
+        "videoGeneration": false,
+        "priority": "standard"
+      },
+      "cta": "signup",
+      "topUpAllowed": true,
+      "entitlements": {
+        "byoAllowed": true,
+        "maxConcurrentExecutions": 2,
+        "maxOutputHeight": 1080,
+        "watermark": false,
+        "roomsAllowed": false,
+        "videoGenAllowed": false,
+        "segmentationAllowed": true,
+        "audioGenAllowed": true,
+        "apiAccess": true,
+        "audioCleanupAllowed": true,
+        "videoEnhanceAllowed": true,
+        "avatarsAllowed": false,
+        "avatarObjectsAllowed": true,
+        "socialPublishingAllowed": true,
+        "priority": 0,
+        "storageGb": 15,
+        "retentionDays": 30,
+        "assistantMonthlyCredits": 100,
+        "runnerAllowed": true
+      }
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "kind": "subscription",
+      "priceMonthly": 79,
+      "priceAnnual": 790,
+      "includedCredits": 3500,
+      "highlights": [
+        "3,500 credits every month",
+        "300 assistant credits a month",
+        "4K exports",
+        "Multi-agent editing rooms",
+        "Generated b-roll clips",
+        "50 GB of storage",
+        "Priority rendering"
+      ],
+      "limits": {
+        "maxResolution": "4K",
+        "watermark": false,
+        "byoProviders": true,
+        "rooms": true,
+        "videoGeneration": true,
+        "priority": "high"
+      },
+      "cta": "signup",
+      "featured": true,
+      "topUpAllowed": true,
+      "entitlements": {
+        "byoAllowed": true,
+        "maxConcurrentExecutions": 4,
+        "maxOutputHeight": 2160,
+        "watermark": false,
+        "roomsAllowed": true,
+        "videoGenAllowed": true,
+        "segmentationAllowed": true,
+        "audioGenAllowed": true,
+        "apiAccess": true,
+        "audioCleanupAllowed": true,
+        "videoEnhanceAllowed": true,
+        "avatarsAllowed": true,
+        "avatarObjectsAllowed": true,
+        "socialPublishingAllowed": true,
+        "priority": 1,
+        "storageGb": 50,
+        "retentionDays": 90,
+        "assistantMonthlyCredits": 300,
+        "runnerAllowed": true
+      }
+    },
+    {
+      "id": "team",
+      "name": "Team",
+      "kind": "perSeat",
+      "priceMonthly": 49,
+      "priceAnnual": 490,
+      "minSeats": 3,
+      "includedCredits": 1500,
+      "highlights": [
+        "1,500 credits per seat every month, pooled",
+        "100 assistant credits per seat a month",
+        "Shared workspace with roles",
+        "Everything in Pro",
+        "4K exports",
+        "100 GB of shared storage",
+        "Priority rendering"
+      ],
+      "limits": {
+        "maxResolution": "4K",
+        "watermark": false,
+        "byoProviders": true,
+        "rooms": true,
+        "videoGeneration": true,
+        "priority": "high"
+      },
+      "cta": "signup",
+      "topUpAllowed": true,
+      "entitlements": {
+        "byoAllowed": true,
+        "maxConcurrentExecutions": 8,
+        "maxOutputHeight": 2160,
+        "watermark": false,
+        "roomsAllowed": true,
+        "videoGenAllowed": true,
+        "segmentationAllowed": true,
+        "audioGenAllowed": true,
+        "apiAccess": true,
+        "audioCleanupAllowed": true,
+        "videoEnhanceAllowed": true,
+        "avatarsAllowed": true,
+        "avatarObjectsAllowed": true,
+        "socialPublishingAllowed": true,
+        "priority": 1,
+        "storageGb": 100,
+        "retentionDays": 90,
+        "assistantMonthlyCreditsPerSeat": 100,
+        "runnerAllowed": true
+      }
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "kind": "contact",
+      "includedCredits": 0,
+      "highlights": [
+        "Single sign-on",
+        "Unlimited assistant use",
+        "Dedicated capacity",
+        "Self-hosting licence",
+        "Custom terms and support"
+      ],
+      "limits": {
+        "maxResolution": "4K",
+        "watermark": false,
+        "byoProviders": true,
+        "rooms": true,
+        "videoGeneration": true,
+        "priority": "dedicated"
+      },
+      "cta": "contact",
+      "topUpAllowed": false,
+      "entitlements": {
+        "byoAllowed": true,
+        "watermark": false,
+        "roomsAllowed": true,
+        "videoGenAllowed": true,
+        "segmentationAllowed": true,
+        "audioGenAllowed": true,
+        "apiAccess": true,
+        "audioCleanupAllowed": true,
+        "videoEnhanceAllowed": true,
+        "avatarsAllowed": true,
+        "avatarObjectsAllowed": true,
+        "socialPublishingAllowed": true,
+        "priority": 2,
+        "retentionDays": 2147483647,
+        "runnerAllowed": true,
+        "assistantUnlimited": true
+      }
+    }
+  ],
+  "topUp": {
+    "credits": 1000,
+    "price": 25,
+    "packs": [
+      { "credits": 500, "price": 15 },
+      { "credits": 1000, "price": 25 },
+      { "credits": 3000, "price": 60 }
+    ],
+    "paidPlansOnly": true,
+    "expiresAfterMonths": 12
+  }
+}

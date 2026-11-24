@@ -1,0 +1,190 @@
+{
+  "axes": {
+    "pacing": {
+      "label": "Pace",
+      "description": "How quickly the video moves from shot to shot.",
+      "options": {
+        "slow": "Slow — let moments breathe",
+        "medium": "Medium — a natural rhythm",
+        "fast": "Fast — quick cuts, no dead air",
+        "beatSynced": "On the beat — cut to the music"
+      }
+    },
+    "storytelling": {
+      "label": "Story order",
+      "description": "How the video is told from start to finish.",
+      "options": {
+        "chronological": "In order — as it happened",
+        "hookFirst": "Hook first — open on the best moment",
+        "problemSolution": "Problem, then solution",
+        "montage": "Montage — moments set to mood"
+      }
+    },
+    "editing": {
+      "label": "Cuts",
+      "description": "How one shot joins the next.",
+      "options": {
+        "jumpCuts": "Jump cuts — hard and punchy",
+        "smooth": "Smooth — gentle joins",
+        "mixed": "Mixed"
+      }
+    },
+    "tone": {
+      "label": "Tone",
+      "description": "The feeling the video should leave.",
+      "options": {
+        "calm": "Calm",
+        "upbeat": "Upbeat",
+        "energetic": "Energetic",
+        "serious": "Serious",
+        "playful": "Playful",
+        "inspirational": "Inspirational"
+      }
+    },
+    "captions": {
+      "label": "Captions",
+      "description": "How burned-in captions look, when the workflow adds them.",
+      "options": {
+        "clean": "Clean subtitles",
+        "karaoke": "Words light up as spoken",
+        "punch": "One big word at a time",
+        "bold": "Big bold words, Reels/TikTok style"
+      }
+    },
+    "color": {
+      "label": "Colour",
+      "description": "The colour look, when the workflow grades the footage.",
+      "options": {
+        "natural": "Natural",
+        "warm": "Warm",
+        "cool": "Cool",
+        "filmic": "Filmic",
+        "vibrant": "Vibrant",
+        "muted": "Muted",
+        "mono": "Black and white"
+      }
+    },
+    "music": {
+      "label": "Music energy",
+      "description": "How lively the background music should be.",
+      "options": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "graphics": {
+      "label": "On-screen text",
+      "description": "How many titles and labels appear.",
+      "options": {
+        "none": "None",
+        "minimal": "Minimal",
+        "moderate": "Some",
+        "rich": "Lots"
+      }
+    },
+    "dynamics": {
+      "label": "Dynamic effects",
+      "description": "How many punch-ins, flashes and speed changes land on the beat.",
+      "options": {
+        "calm": "Calm effects",
+        "medium": "Medium effects",
+        "fast": "Fast effects"
+      }
+    }
+  },
+  "format": {
+    "original": {
+      "label": "As set up",
+      "hint": "Keep the shape the workflow is set up with."
+    },
+    "vertical": {
+      "label": "9:16",
+      "hint": "Vertical — Reels, TikTok, Shorts"
+    },
+    "square": {
+      "label": "1:1",
+      "hint": "Square — feed posts"
+    },
+    "portrait": {
+      "label": "4:5",
+      "hint": "Portrait — feed posts that fill more of the screen"
+    },
+    "landscape": {
+      "label": "16:9",
+      "hint": "Landscape — YouTube and websites"
+    }
+  },
+  "resolution": {
+    "auto": {
+      "label": "Auto",
+      "hint": "Same as today: up to 1080p, or your plan's limit if lower"
+    },
+    "p720": {
+      "label": "720p",
+      "hint": "Smaller files, faster renders"
+    },
+    "p1080": {
+      "label": "1080p",
+      "hint": "Full HD"
+    },
+    "p2160": {
+      "label": "4K",
+      "hint": "Ultra HD, 2160p. Uses about 4x the render credits of 1080p"
+    }
+  },
+  "cap": {
+    "under1080": "Your plan renders up to {cap}p. Upgrade to render at 1080p or 4K.",
+    "from1080": "Your plan renders up to {cap}p. Upgrade to render in 4K."
+  },
+  "describe": {
+    "notes": "notes"
+  },
+  "form": {
+    "submit": "Save style",
+    "name": "Name",
+    "description": "Description",
+    "descriptionHint": "Optional. A reminder of when to use this style.",
+    "noPreference": "No preference",
+    "notes": "Notes for the AI",
+    "notesHint": "Optional. Anything else about the look and feel, in a sentence or two. It is treated as a preference, never as an instruction.",
+    "projectOnly": "Only use in this project",
+    "pickOne": "Pick at least one choice or write a note.",
+    "cancel": "Cancel"
+  },
+  "picker": {
+    "noStyleGroup": "No style",
+    "noStyle": "No particular style",
+    "builtInGroup": "Built-in styles",
+    "yourGroup": "Your styles",
+    "styleLabel": "Editing style",
+    "styleHint": "How the AI should cut this video. Manage your own styles on the Styles page.",
+    "shape": "Video shape",
+    "resolution": "Resolution",
+    "seePlans": "See plans"
+  },
+  "page": {
+    "title": "Styles",
+    "new": "New style",
+    "intro": "A style tells the AI how to cut your video: how fast, in what order, how shots join, and how captions, colour, music and on-screen text should feel. Pick one when you run a workflow: the same footage can come out as a quick social reel or a calm documentary.",
+    "yours": "Your styles",
+    "oneProject": "One project",
+    "edit": "Edit",
+    "delete": "Delete",
+    "emptyTitle": "No styles of your own yet",
+    "emptyBody": "Create one from scratch, or start from a built-in style below and make it yours.",
+    "builtIn": "Built-in styles",
+    "copy": "Make a copy",
+    "copyName": "My {name}",
+    "savedTitle": "Saved",
+    "savedBody": "\"{name}\" is ready to use when you run a workflow.",
+    "notSavedTitle": "Not saved",
+    "saveFailed": "Failed to save the style",
+    "notDeletedTitle": "Not deleted",
+    "deleteFailed": "Failed to delete",
+    "editTitle": "Edit “{name}”",
+    "newTitle": "New style",
+    "deleteTitle": "Delete style",
+    "deleteBody": "Delete the style “{name}”? Runs that already used it keep their own copy."
+  }
+}

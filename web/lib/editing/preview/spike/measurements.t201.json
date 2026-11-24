@@ -1,0 +1,4767 @@
+{
+  "harness": "T-201 compositor budget",
+  "ticket": "T-201",
+  "initiative": "editor-v2-complete",
+  "howToRead": "One entry per measured mode. `summaries` holds each mode's cross-run median block; `runs` holds every run unmodified, per mode. Never quote a figure from here without its mode and its GL label: every non-fallback mode on this host is SOFTWARE GL (SwiftShader). The decisive figures are `controls` and `glComposite.totalSyncedMs`; `glComposite.totalMs` ends at gl.finish(), which is NOT a WebGL sync and under-reports the composite by ~100x on this host (see README finding 4).",
+  "host": {
+    "cpu": "AMD Ryzen 9 5950X 16-Core Processor (32 threads)",
+    "memoryGb": 76,
+    "gpuPresentOnPci": "AMD Radeon AI PRO R9700 (Navi 48), PCI 29:00.0",
+    "gpuUsable": false,
+    "gpuNote": "no /dev/dri inside this sandbox, so Chromium cannot open the Radeon and falls back to SwiftShader",
+    "chromium": "153.0.8010.12 (Playwright 1.63.0, channel 'chromium')",
+    "loadAverageAtRun": "26-36 on 32 threads (other agents shared this worktree)"
+  },
+  "modes": {
+    "main": {
+      "harness": "T-201 compositor budget",
+      "mode": "main",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "browser": {
+        "userAgent": null,
+        "timerResolutionUs": 100,
+        "webCodecs": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hardwareAcceleration": null,
+          "isConfigSupported": true
+        },
+        "hardwareConcurrency": null
+      },
+      "path": "webcodecs-4layer-gl2-composite",
+      "driver": {
+        "runIndex": 0,
+        "mode": "main",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": null,
+        "poolOverride": null,
+        "consoleMessages": [
+          "log: 06:59:55.752  playback harness ready \u2014 call window.runScenario()",
+          "log: 06:59:55.782  runScenario {\"seconds\":32,\"warmupSec\":5,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+          "log: 06:59:56.278  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+          "log: 06:59:57.280  control rAF (bare page, no canvas): 61.94 Hz over 62 ticks",
+          "log: 06:59:57.333  proxy fetched: 6512582 bytes in 52.5 ms",
+          "log: 06:59:57.449  4 layers opened in 90.5 ms; codec=avc1.640028",
+          "log: 06:59:58.464  control rAF (canvas attached, gl.clear only): 61.54 Hz",
+          "log: 06:59:58.696  audio: 6 stems, ctx.state=running, rate=48000",
+          "log: 07:00:01.271  control rAF (full composite of 4 static frames, no decoders): 5.52 Hz",
+          "log: 07:00:03.281  control rAF (4 decoders flat out, no composite): 41.84 Hz; chunks=[673,673,673,672]"
+        ]
+      },
+      "aggregate": {
+        "runs": 3,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 6.13,
+          "displayedFps": 6.59,
+          "droppedFrames": 767,
+          "droppedFramesPct": 79.56,
+          "targetDeadlines": 964,
+          "framesPresented": 212,
+          "rafHz": 8.08,
+          "rafIntervalMs_p95": 288.37,
+          "deadlineLatenessMs_p50": 16.917,
+          "deadlineLatenessMs_p95": 31.55,
+          "decodeLatencyUs_p50": 105100,
+          "decodeLatencyUs_p95": 236285,
+          "decodeLatencyUs_p99": 538542,
+          "decodeLatencyUs_max": 810700,
+          "bufferedAheadFrames_min": 0,
+          "bufferedAheadFrames_p50": 8,
+          "evictedUndisplayed_total": 28,
+          "glUploadMs_p50": 2.8,
+          "glUploadMs_p95": 4.695,
+          "glDrawMs_p50": 0.1,
+          "glDrawMs_p95": 0.2,
+          "glCompositeMs_p50": 2.85,
+          "glCompositeMs_p95": 4.895,
+          "layersVerified": 4,
+          "audioDriftMs": -3.67,
+          "audioStemRms_min_of_means": 0.038,
+          "controls_bareRafHz": 62.01,
+          "controls_canvasClearOnlyRafHz": 61.54,
+          "controls_fullCompositeNoDecodersRafHz": 5.52,
+          "controls_fourDecodersFlatOutRafHz": 41.84,
+          "glCompositeSyncedMs_p50": 339.55,
+          "glCompositeSyncedMs_p95": 491.15,
+          "decodeDeliveredFpsPerLayer": 29.75,
+          "openMs": 85.2,
+          "fetchMs": 40.2
+        }
+      },
+      "errors": []
+    },
+    "native": {
+      "harness": "T-201 compositor budget",
+      "mode": "native",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "browser": {
+        "userAgent": null,
+        "timerResolutionUs": 100,
+        "webCodecs": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hardwareAcceleration": null,
+          "isConfigSupported": true
+        },
+        "hardwareConcurrency": null
+      },
+      "path": "webcodecs-4layer-gl2-composite",
+      "driver": {
+        "runIndex": 0,
+        "mode": "native",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": null,
+        "poolOverride": null,
+        "consoleMessages": [
+          "log: 07:02:14.816  playback harness ready \u2014 call window.runScenario()",
+          "log: 07:02:14.840  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1920,\"compositeHeight\":1080,\"scalingProbeRequested\":false}",
+          "log: 07:02:15.035  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+          "log: 07:02:16.041  control rAF (bare page, no canvas): 62.67 Hz over 63 ticks",
+          "log: 07:02:16.081  proxy fetched: 6512582 bytes in 39.8 ms",
+          "log: 07:02:16.184  4 layers opened in 78.0 ms; codec=avc1.640028",
+          "log: 07:02:17.208  control rAF (canvas attached, gl.clear only): 62.04 Hz",
+          "log: 07:02:17.461  audio: 6 stems, ctx.state=running, rate=48000",
+          "log: 07:02:19.877  control rAF (full composite of 4 static frames, no decoders): 6.96 Hz",
+          "log: 07:02:21.878  control rAF (4 decoders flat out, no composite): 40 Hz; chunks=[560,560,560,559]"
+        ]
+      },
+      "aggregate": {
+        "runs": 1,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 5.23,
+          "displayedFps": 5.43,
+          "droppedFrames": 373,
+          "droppedFramesPct": 82.52,
+          "targetDeadlines": 452,
+          "framesPresented": 82,
+          "rafHz": 6.36,
+          "rafIntervalMs_p95": 541.08,
+          "deadlineLatenessMs_p50": 11,
+          "deadlineLatenessMs_p95": 27.1,
+          "decodeLatencyUs_p50": 108700,
+          "decodeLatencyUs_p95": 238755,
+          "decodeLatencyUs_p99": 720782,
+          "decodeLatencyUs_max": 1395000,
+          "bufferedAheadFrames_min": 0,
+          "bufferedAheadFrames_p50": 8,
+          "evictedUndisplayed_total": 44,
+          "glUploadMs_p50": 2.7,
+          "glUploadMs_p95": 4.49,
+          "glDrawMs_p50": 0.1,
+          "glDrawMs_p95": 0.2,
+          "glCompositeMs_p50": 2.8,
+          "glCompositeMs_p95": 4.59,
+          "layersVerified": 4,
+          "audioDriftMs": -25.43,
+          "audioStemRms_min_of_means": 0.035,
+          "controls_bareRafHz": 62.67,
+          "controls_canvasClearOnlyRafHz": 62.04,
+          "controls_fullCompositeNoDecodersRafHz": 6.96,
+          "controls_fourDecodersFlatOutRafHz": 40,
+          "glCompositeSyncedMs_p50": 919.25,
+          "glCompositeSyncedMs_p95": 1220.885,
+          "decodeDeliveredFpsPerLayer": 29.72,
+          "openMs": 78,
+          "fetchMs": 39.8
+        }
+      },
+      "errors": []
+    },
+    "pool6": {
+      "harness": "T-201 compositor budget",
+      "mode": "pool",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "browser": {
+        "userAgent": null,
+        "timerResolutionUs": 100,
+        "webCodecs": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hardwareAcceleration": null,
+          "isConfigSupported": true
+        },
+        "hardwareConcurrency": null
+      },
+      "path": "webcodecs-4layer-gl2-composite",
+      "driver": {
+        "runIndex": 0,
+        "mode": "pool",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": null,
+        "poolOverride": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 6,
+          "lookAheadSec": 0.2,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "consoleMessages": [
+          "log: 07:02:43.045  playback harness ready \u2014 call window.runScenario()",
+          "log: 07:02:43.074  pool set: {\"decodersPerLayer\":1,\"lookAheadFrames\":6,\"lookAheadSec\":0.2,\"maxDecodedBufferedFrames\":18,\"maxEncodedQueuedChunks\":8}",
+          "log: 07:02:43.077  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+          "log: 07:02:43.451  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+          "log: 07:02:44.457  control rAF (bare page, no canvas): 62.66 Hz over 63 ticks",
+          "log: 07:02:44.501  proxy fetched: 6512582 bytes in 44.1 ms",
+          "log: 07:02:44.598  4 layers opened in 71.9 ms; codec=avc1.640028",
+          "log: 07:02:45.607  control rAF (canvas attached, gl.clear only): 61.82 Hz",
+          "log: 07:02:45.791  audio: 6 stems, ctx.state=running, rate=48000",
+          "log: 07:02:48.339  control rAF (full composite of 4 static frames, no decoders): 6.99 Hz",
+          "log: 07:02:50.357  control rAF (4 decoders flat out, no composite): 42.65 Hz; chunks=[751,751,751,750]"
+        ]
+      },
+      "aggregate": {
+        "runs": 1,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 7.39,
+          "displayedFps": 7.79,
+          "droppedFrames": 342,
+          "droppedFramesPct": 75.33,
+          "targetDeadlines": 454,
+          "framesPresented": 118,
+          "rafHz": 9.97,
+          "rafIntervalMs_p95": 182.39,
+          "deadlineLatenessMs_p50": 14.783,
+          "deadlineLatenessMs_p95": 31.353,
+          "decodeLatencyUs_p50": 101900,
+          "decodeLatencyUs_p95": 236200,
+          "decodeLatencyUs_p99": 434748,
+          "decodeLatencyUs_max": 806800,
+          "bufferedAheadFrames_min": 0,
+          "bufferedAheadFrames_p50": 2,
+          "evictedUndisplayed_total": 0,
+          "glUploadMs_p50": 2.7,
+          "glUploadMs_p95": 3.645,
+          "glDrawMs_p50": 0.1,
+          "glDrawMs_p95": 0.2,
+          "glCompositeMs_p50": 2.75,
+          "glCompositeMs_p95": 3.7,
+          "layersVerified": 4,
+          "audioDriftMs": 10.33,
+          "audioStemRms_min_of_means": 0.041,
+          "controls_bareRafHz": 62.66,
+          "controls_canvasClearOnlyRafHz": 61.82,
+          "controls_fullCompositeNoDecodersRafHz": 6.99,
+          "controls_fourDecodersFlatOutRafHz": 42.65,
+          "glCompositeSyncedMs_p50": 284.3,
+          "glCompositeSyncedMs_p95": 286.64,
+          "decodeDeliveredFpsPerLayer": 29.3,
+          "openMs": 71.9,
+          "fetchMs": 44.1
+        }
+      },
+      "errors": []
+    },
+    "pool24": {
+      "harness": "T-201 compositor budget",
+      "mode": "pool",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "browser": {
+        "userAgent": null,
+        "timerResolutionUs": 100,
+        "webCodecs": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hardwareAcceleration": null,
+          "isConfigSupported": true
+        },
+        "hardwareConcurrency": null
+      },
+      "path": "webcodecs-4layer-gl2-composite",
+      "driver": {
+        "runIndex": 0,
+        "mode": "pool",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": null,
+        "poolOverride": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 24,
+          "lookAheadSec": 0.8,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "consoleMessages": [
+          "log: 07:03:11.752  playback harness ready \u2014 call window.runScenario()",
+          "log: 07:03:11.771  pool set: {\"decodersPerLayer\":1,\"lookAheadFrames\":24,\"lookAheadSec\":0.8,\"maxDecodedBufferedFrames\":18,\"maxEncodedQueuedChunks\":8}",
+          "log: 07:03:11.773  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+          "log: 07:03:11.974  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+          "log: 07:03:12.989  control rAF (bare page, no canvas): 62.09 Hz over 63 ticks",
+          "log: 07:03:13.020  proxy fetched: 6512582 bytes in 31.0 ms",
+          "log: 07:03:13.126  4 layers opened in 81.3 ms; codec=avc1.640028",
+          "log: 07:03:14.139  control rAF (canvas attached, gl.clear only): 61.7 Hz",
+          "log: 07:03:14.385  audio: 6 stems, ctx.state=running, rate=48000",
+          "log: 07:03:16.824  control rAF (full composite of 4 static frames, no decoders): 7.37 Hz",
+          "log: 07:03:18.839  control rAF (4 decoders flat out, no composite): 44.7 Hz; chunks=[745,745,746,745]"
+        ]
+      },
+      "aggregate": {
+        "runs": 1,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 0,
+          "displayedFps": 0,
+          "droppedFrames": 450,
+          "droppedFramesPct": 100,
+          "targetDeadlines": 450,
+          "framesPresented": 0,
+          "rafHz": 76.06,
+          "rafIntervalMs_p95": 16.8,
+          "deadlineLatenessMs_p50": null,
+          "deadlineLatenessMs_p95": null,
+          "decodeLatencyUs_p50": 101600,
+          "decodeLatencyUs_p95": 232200,
+          "decodeLatencyUs_p99": 268037,
+          "decodeLatencyUs_max": 695700,
+          "bufferedAheadFrames_min": null,
+          "bufferedAheadFrames_p50": null,
+          "evictedUndisplayed_total": 2292,
+          "glUploadMs_p50": null,
+          "glUploadMs_p95": null,
+          "glDrawMs_p50": null,
+          "glDrawMs_p95": null,
+          "glCompositeMs_p50": null,
+          "glCompositeMs_p95": null,
+          "layersVerified": 4,
+          "audioDriftMs": 6.37,
+          "audioStemRms_min_of_means": 0.041,
+          "controls_bareRafHz": 62.09,
+          "controls_canvasClearOnlyRafHz": 61.7,
+          "controls_fullCompositeNoDecodersRafHz": 7.37,
+          "controls_fourDecodersFlatOutRafHz": 44.7,
+          "glCompositeSyncedMs_p50": null,
+          "glCompositeSyncedMs_p95": null,
+          "decodeDeliveredFpsPerLayer": 30.18,
+          "openMs": 81.3,
+          "fetchMs": 31
+        }
+      },
+      "errors": []
+    },
+    "sizes": {
+      "harness": "T-201 compositor budget",
+      "mode": "sizes",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": {
+        "available": true,
+        "contextType": "webgl2",
+        "debugRendererInfoExtension": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "maskedRenderer": "WebKit WebGL",
+        "maskedVendor": "WebKit",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "maxTextureSize": 8192,
+        "isSoftware": true
+      },
+      "browser": {
+        "userAgent": null,
+        "timerResolutionUs": 100,
+        "webCodecs": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "decoderConfig": {
+          "codec": "avc1.640028",
+          "codedWidth": 1920,
+          "codedHeight": 1080,
+          "hardwareAcceleration": null,
+          "isConfigSupported": true
+        },
+        "hardwareConcurrency": null
+      },
+      "path": "webcodecs-4layer-gl2-composite",
+      "driver": {
+        "runIndex": 0,
+        "mode": "sizes",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": null,
+        "poolOverride": null,
+        "consoleMessages": [
+          "log: 07:03:39.664  playback harness ready \u2014 call window.runScenario()",
+          "log: 07:03:39.688  runScenario {\"seconds\":6,\"warmupSec\":3,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":true}",
+          "log: 07:03:39.843  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+          "log: 07:03:40.855  control rAF (bare page, no canvas): 59.34 Hz over 60 ticks",
+          "log: 07:03:40.885  proxy fetched: 6512582 bytes in 30.5 ms",
+          "log: 07:03:40.970  4 layers opened in 64.9 ms; codec=avc1.640028",
+          "log: 07:03:41.994  control rAF (canvas attached, gl.clear only): 61.92 Hz",
+          "log: 07:03:42.348  audio: 6 stems, ctx.state=running, rate=48000",
+          "log: 07:03:44.830  control rAF (full composite of 4 static frames, no decoders): 7.23 Hz",
+          "log: 07:03:46.840  control rAF (4 decoders flat out, no composite): 45.34 Hz; chunks=[771,771,770,771]",
+          "log: 07:03:58.780  scaling 480x270: 241.8 ms/frame (4.14 Hz)",
+          "log: 07:04:01.196  scaling 640x360: 128.4 ms/frame (7.79 Hz)",
+          "log: 07:04:02.976  scaling 960x540: 115.3 ms/frame (8.67 Hz)",
+          "log: 07:04:04.783  scaling 1280x720: 142.2 ms/frame (7.03 Hz)",
+          "log: 07:04:06.876  scaling 1920x1080: 166.6 ms/frame (6 Hz)"
+        ]
+      },
+      "aggregate": {
+        "runs": 1,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 4.7,
+          "displayedFps": 4.86,
+          "droppedFrames": 166,
+          "droppedFramesPct": 84.26,
+          "targetDeadlines": 197,
+          "framesPresented": 32,
+          "rafHz": 6.37,
+          "rafIntervalMs_p95": 1171.705,
+          "deadlineLatenessMs_p50": 16.267,
+          "deadlineLatenessMs_p95": 29.037,
+          "decodeLatencyUs_p50": 138850,
+          "decodeLatencyUs_p95": 753060,
+          "decodeLatencyUs_p99": 1819200,
+          "decodeLatencyUs_max": 2496500,
+          "bufferedAheadFrames_min": 0,
+          "bufferedAheadFrames_p50": 8,
+          "evictedUndisplayed_total": 32,
+          "glUploadMs_p50": 7.05,
+          "glUploadMs_p95": 29.64,
+          "glDrawMs_p50": 0.1,
+          "glDrawMs_p95": 0.245,
+          "glCompositeMs_p50": 7.2,
+          "glCompositeMs_p95": 29.74,
+          "layersVerified": 4,
+          "audioDriftMs": -4.17,
+          "audioStemRms_min_of_means": 0.025,
+          "controls_bareRafHz": 59.34,
+          "controls_canvasClearOnlyRafHz": 61.92,
+          "controls_fullCompositeNoDecodersRafHz": 7.23,
+          "controls_fourDecodersFlatOutRafHz": 45.34,
+          "glCompositeSyncedMs_p50": 1791.8,
+          "glCompositeSyncedMs_p95": 1791.8,
+          "decodeDeliveredFpsPerLayer": 29.25,
+          "openMs": 64.9,
+          "fetchMs": 30.5
+        }
+      },
+      "errors": []
+    },
+    "fallback": {
+      "harness": "T-201 compositor budget",
+      "mode": "fallback",
+      "ticket": "T-201",
+      "fixture": {
+        "path": "web/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+        "bytes": 6512582,
+        "sha256": "42729be302b7869de4baac5b40f803974a4ffd2125f77a2b0a7b7ae290b7f1de"
+      },
+      "gl": null,
+      "browser": null,
+      "path": "fallback-video-element",
+      "driver": {
+        "runIndex": 0,
+        "mode": "fallback",
+        "playwright": "1.63.0",
+        "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+        "browserVersion": "153.0.8010.12",
+        "launchedArgs": [
+          "--no-sandbox",
+          "--ozone-platform=headless",
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--disable-gpu-sandbox",
+          "--autoplay-policy=no-user-gesture-required",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-backgrounding-occluded-windows"
+        ],
+        "channel": "chromium",
+        "headed": false,
+        "killSwitch": {
+          "VideoDecoder": "removed",
+          "VideoEncoder": "removed",
+          "EncodedVideoChunk": "removed",
+          "VideoFrame": "removed"
+        },
+        "poolOverride": null,
+        "consoleMessages": [
+          "log: 07:04:09.279  playback harness ready \u2014 call window.runScenario()",
+          "log: 07:04:09.310  WebCodecs kill switch: {\"VideoDecoder\":\"removed\",\"VideoEncoder\":\"removed\",\"EncodedVideoChunk\":\"removed\",\"VideoFrame\":\"removed\"}",
+          "log: 07:04:09.313  runScenario {\"seconds\":32,\"warmupSec\":0,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+          "log: 07:04:09.313  WebCodecs unavailable -> taking the \u00a73.5 fallback path (single-track <video>)"
+        ]
+      },
+      "aggregate": {
+        "runs": 1,
+        "crossRunMedianOfSameRunFigures": true,
+        "metrics": {
+          "achievedFps": 29.87,
+          "displayedFps": null,
+          "droppedFrames": null,
+          "droppedFramesPct": null,
+          "targetDeadlines": null,
+          "framesPresented": null,
+          "rafHz": 59.76,
+          "rafIntervalMs_p95": null,
+          "deadlineLatenessMs_p50": null,
+          "deadlineLatenessMs_p95": null,
+          "decodeLatencyUs_p50": null,
+          "decodeLatencyUs_p95": null,
+          "decodeLatencyUs_p99": null,
+          "decodeLatencyUs_max": null,
+          "bufferedAheadFrames_min": null,
+          "bufferedAheadFrames_p50": null,
+          "evictedUndisplayed_total": 0,
+          "glUploadMs_p50": null,
+          "glUploadMs_p95": null,
+          "glDrawMs_p50": null,
+          "glDrawMs_p95": null,
+          "glCompositeMs_p50": null,
+          "glCompositeMs_p95": null,
+          "layersVerified": null,
+          "audioDriftMs": null,
+          "audioStemRms_min_of_means": null,
+          "controls_bareRafHz": null,
+          "controls_canvasClearOnlyRafHz": null,
+          "controls_fullCompositeNoDecodersRafHz": null,
+          "controls_fourDecodersFlatOutRafHz": null,
+          "glCompositeSyncedMs_p50": null,
+          "glCompositeSyncedMs_p95": null,
+          "decodeDeliveredFpsPerLayer": null,
+          "openMs": null,
+          "fetchMs": null
+        }
+      },
+      "errors": []
+    }
+  },
+  "runs": {
+    "main": [
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:00:41.251Z",
+        "durationMsTotal": 45467.6,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 5,
+          "measuredWindowSec": 32.16,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 12,
+          "lookAheadSec": 0.4,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 61.94,
+        "controlRafTicks": 62,
+        "controlRafWithCanvasHz": 61.54,
+        "controlRafWithCanvasTicks": 62,
+        "controls": {
+          "bareRafHz": 61.94,
+          "canvasClearOnlyRafHz": 61.54,
+          "fullCompositeNoDecodersRafHz": 5.52,
+          "fourDecodersFlatOutNoCompositeRafHz": 41.84,
+          "fourDecodersFlatOutChunksSubmitted": [
+            673,
+            673,
+            673,
+            672
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 32.16,
+          "targetDeadlines": 964,
+          "onTimeFrames": 197,
+          "achievedFps": 6.13,
+          "framesPresented": 212,
+          "displayedFps": 6.59,
+          "droppedFrames": 767,
+          "droppedFramesPct": 79.56,
+          "deadlinesSkippedBetweenRafTicks": 91,
+          "stalePresents": 15,
+          "rafTicks": 260,
+          "rafHz": 8.08,
+          "rafIntervalMs": {
+            "n": 219,
+            "min": 2.2,
+            "p50": 159.9,
+            "p95": 288.37,
+            "p99": 359.556,
+            "max": 514.6,
+            "mean": 147.23,
+            "stdDev": 84.372
+          },
+          "deadlineLatenessMs": {
+            "n": 182,
+            "min": 0.367,
+            "p50": 16.917,
+            "p95": 31.975,
+            "p99": 32.906,
+            "max": 33.3,
+            "mean": 17.137,
+            "stdDev": 9.065
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 4304,
+            "min": 6700,
+            "p50": 105100,
+            "p95": 236285,
+            "p99": 464367,
+            "max": 810700,
+            "mean": 137752.5,
+            "stdDev": 86652.1
+          },
+          "perLayer": [
+            {
+              "n": 1076,
+              "min": 6700,
+              "p50": 104700,
+              "p95": 236225,
+              "p99": 462100,
+              "max": 810700,
+              "mean": 137503.7,
+              "stdDev": 86712.4
+            },
+            {
+              "n": 1076,
+              "min": 7800,
+              "p50": 104950,
+              "p95": 236225,
+              "p99": 462750,
+              "max": 805200,
+              "mean": 137656.2,
+              "stdDev": 86652.8
+            },
+            {
+              "n": 1076,
+              "min": 7800,
+              "p50": 105350,
+              "p95": 236225,
+              "p99": 463300,
+              "max": 805100,
+              "mean": 137819,
+              "stdDev": 86625.5
+            },
+            {
+              "n": 1076,
+              "min": 8300,
+              "p50": 105350,
+              "p95": 236150,
+              "p99": 463900,
+              "max": 803900,
+              "mean": 138031.1,
+              "stdDev": 86616.8
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 7600,
+                "p95": 97860,
+                "p99": 101560,
+                "max": 655200,
+                "mean": 33621.3,
+                "stdDev": 48151.8
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 8000,
+                "p95": 97860,
+                "p99": 101560,
+                "max": 654100,
+                "mean": 33616.1,
+                "stdDev": 47942.1
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 8700,
+                "p95": 97860,
+                "p99": 101534,
+                "max": 653600,
+                "mean": 33615.8,
+                "stdDev": 47809
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 8800,
+                "p95": 97560,
+                "p99": 102590,
+                "max": 653500,
+                "mean": 33614.9,
+                "stdDev": 47670.8
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.74,
+              29.75,
+              29.75,
+              29.75
+            ]
+          },
+          "decodedFrames": [
+            1076,
+            1076,
+            1076,
+            1076
+          ],
+          "submittedChunks": [
+            1080,
+            1080,
+            1080,
+            1080
+          ],
+          "evictedUndisplayed": [
+            5,
+            5,
+            5,
+            5
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 728,
+              "min": 0,
+              "p50": 8,
+              "p95": 9,
+              "p99": 9,
+              "max": 9,
+              "mean": 7.42,
+              "stdDev": 2.47
+            },
+            "perLayer": [
+              {
+                "n": 182,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.43,
+                "stdDev": 2.47
+              },
+              {
+                "n": 182,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.42,
+                "stdDev": 2.47
+              },
+              {
+                "n": 182,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.42,
+                "stdDev": 2.47
+              },
+              {
+                "n": 182,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.42,
+                "stdDev": 2.47
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 182,
+            "min": 1.5,
+            "p50": 2.8,
+            "p95": 4.695,
+            "p99": 9.337,
+            "max": 21,
+            "mean": 3.105,
+            "stdDev": 2.035
+          },
+          "drawMs": {
+            "n": 182,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.195,
+            "p99": 0.2,
+            "max": 0.4,
+            "mean": 0.07,
+            "stdDev": 0.061
+          },
+          "totalMs": {
+            "n": 182,
+            "min": 1.5,
+            "p50": 2.85,
+            "p95": 4.895,
+            "p99": 9.518,
+            "max": 21.1,
+            "mean": 3.175,
+            "stdDev": 2.046
+          },
+          "totalSyncedMs": {
+            "n": 7,
+            "min": 304.5,
+            "p50": 327.5,
+            "p95": 455.65,
+            "p99": 498.01,
+            "max": 508.6,
+            "mean": 349.014,
+            "stdDev": 65.742
+          },
+          "readPixelsSyncMs": {
+            "n": 7,
+            "min": 301.1,
+            "p50": 325.3,
+            "p95": 452.37,
+            "p99": 494.874,
+            "max": 505.5,
+            "mean": 345.543,
+            "stdDev": 65.911
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 174.6,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 15,
+              "min": 0.02556,
+              "p50": 0.03961,
+              "p95": 0.06121,
+              "p99": 0.06194,
+              "max": 0.06213,
+              "mean": 0.04236,
+              "stdDev": 0.01412
+            },
+            {
+              "n": 15,
+              "min": 0.02492,
+              "p50": 0.05165,
+              "p95": 0.06193,
+              "p99": 0.06193,
+              "max": 0.06193,
+              "mean": 0.0483,
+              "stdDev": 0.01147
+            },
+            {
+              "n": 15,
+              "min": 0.0254,
+              "p50": 0.03363,
+              "p95": 0.06157,
+              "p99": 0.06164,
+              "max": 0.06166,
+              "mean": 0.03951,
+              "stdDev": 0.01338
+            },
+            {
+              "n": 15,
+              "min": 0.02493,
+              "p50": 0.04138,
+              "p95": 0.06235,
+              "p99": 0.0624,
+              "max": 0.06242,
+              "mean": 0.04409,
+              "stdDev": 0.01378
+            },
+            {
+              "n": 15,
+              "min": 0.02583,
+              "p50": 0.05077,
+              "p95": 0.06133,
+              "p99": 0.06169,
+              "max": 0.06178,
+              "mean": 0.04721,
+              "stdDev": 0.01259
+            },
+            {
+              "n": 15,
+              "min": 0.0256,
+              "p50": 0.04814,
+              "p95": 0.06122,
+              "p99": 0.06237,
+              "max": 0.06266,
+              "mean": 0.04541,
+              "stdDev": 0.01391
+            }
+          ],
+          "driftMs": -4.43,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            9,
+            8,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 52.5,
+        "openMs": 90.5,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 32,
+          "warmupSec": 5,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "main",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 06:59:55.752  playback harness ready \u2014 call window.runScenario()",
+            "log: 06:59:55.782  runScenario {\"seconds\":32,\"warmupSec\":5,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 06:59:56.278  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 06:59:57.280  control rAF (bare page, no canvas): 61.94 Hz over 62 ticks",
+            "log: 06:59:57.333  proxy fetched: 6512582 bytes in 52.5 ms",
+            "log: 06:59:57.449  4 layers opened in 90.5 ms; codec=avc1.640028",
+            "log: 06:59:58.464  control rAF (canvas attached, gl.clear only): 61.54 Hz",
+            "log: 06:59:58.696  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:00:01.271  control rAF (full composite of 4 static frames, no decoders): 5.52 Hz",
+            "log: 07:00:03.281  control rAF (4 decoders flat out, no composite): 41.84 Hz; chunks=[673,673,673,672]"
+          ]
+        }
+      },
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:01:27.474Z",
+        "durationMsTotal": 45355.2,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 5,
+          "measuredWindowSec": 32.077,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 12,
+          "lookAheadSec": 0.4,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 62.01,
+        "controlRafTicks": 63,
+        "controlRafWithCanvasHz": 61.47,
+        "controlRafWithCanvasTicks": 62,
+        "controls": {
+          "bareRafHz": 62.01,
+          "canvasClearOnlyRafHz": 61.47,
+          "fullCompositeNoDecodersRafHz": 5.51,
+          "fourDecodersFlatOutNoCompositeRafHz": 43.25,
+          "fourDecodersFlatOutChunksSubmitted": [
+            655,
+            655,
+            655,
+            656
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 32.077,
+          "targetDeadlines": 962,
+          "onTimeFrames": 203,
+          "achievedFps": 6.33,
+          "framesPresented": 218,
+          "displayedFps": 6.8,
+          "droppedFrames": 759,
+          "droppedFramesPct": 78.9,
+          "deadlinesSkippedBetweenRafTicks": 94,
+          "stalePresents": 15,
+          "rafTicks": 260,
+          "rafHz": 8.11,
+          "rafIntervalMs": {
+            "n": 224,
+            "min": 1.9,
+            "p50": 156.35,
+            "p95": 274.49,
+            "p99": 425.859,
+            "max": 496.2,
+            "mean": 143.714,
+            "stdDev": 87.017
+          },
+          "deadlineLatenessMs": {
+            "n": 187,
+            "min": 0.033,
+            "p50": 17.767,
+            "p95": 31.55,
+            "p99": 32.867,
+            "max": 33,
+            "mean": 16.911,
+            "stdDev": 9.92
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 4304,
+            "min": 7800,
+            "p50": 103300,
+            "p95": 232700,
+            "p99": 538542,
+            "max": 805600,
+            "mean": 137638.4,
+            "stdDev": 88946.4
+          },
+          "perLayer": [
+            {
+              "n": 1076,
+              "min": 7800,
+              "p50": 103150,
+              "p95": 232625,
+              "p99": 517900,
+              "max": 805600,
+              "mean": 137415.7,
+              "stdDev": 88978.2
+            },
+            {
+              "n": 1076,
+              "min": 10300,
+              "p50": 103200,
+              "p95": 232600,
+              "p99": 517900,
+              "max": 804000,
+              "mean": 137567.6,
+              "stdDev": 88975.7
+            },
+            {
+              "n": 1076,
+              "min": 10300,
+              "p50": 103350,
+              "p95": 232900,
+              "p99": 517950,
+              "max": 802400,
+              "mean": 137716.2,
+              "stdDev": 88931.5
+            },
+            {
+              "n": 1076,
+              "min": 10400,
+              "p50": 103700,
+              "p95": 232850,
+              "p99": 517950,
+              "max": 801600,
+              "mean": 137854.1,
+              "stdDev": 88899.4
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 6700,
+                "p95": 98900,
+                "p99": 100778,
+                "max": 696700,
+                "mean": 33616.6,
+                "stdDev": 50124.8
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 7200,
+                "p95": 98830,
+                "p99": 100852,
+                "max": 694100,
+                "mean": 33615,
+                "stdDev": 49937.4
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 7700,
+                "p95": 98730,
+                "p99": 100852,
+                "max": 694100,
+                "mean": 33613.5,
+                "stdDev": 49802.8
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 7800,
+                "p95": 98560,
+                "p99": 101108,
+                "max": 693200,
+                "mean": 33612.7,
+                "stdDev": 49724.1
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.75,
+              29.75,
+              29.75,
+              29.75
+            ]
+          },
+          "decodedFrames": [
+            1076,
+            1076,
+            1076,
+            1076
+          ],
+          "submittedChunks": [
+            1080,
+            1080,
+            1080,
+            1080
+          ],
+          "evictedUndisplayed": [
+            7,
+            7,
+            7,
+            7
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 748,
+              "min": 0,
+              "p50": 8,
+              "p95": 9,
+              "p99": 9,
+              "max": 9,
+              "mean": 7.41,
+              "stdDev": 2.39
+            },
+            "perLayer": [
+              {
+                "n": 187,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.42,
+                "stdDev": 2.38
+              },
+              {
+                "n": 187,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.42,
+                "stdDev": 2.38
+              },
+              {
+                "n": 187,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.4,
+                "stdDev": 2.4
+              },
+              {
+                "n": 187,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.4,
+                "stdDev": 2.4
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 187,
+            "min": 1.5,
+            "p50": 2.7,
+            "p95": 4.34,
+            "p99": 6.464,
+            "max": 10.9,
+            "mean": 2.772,
+            "stdDev": 1.111
+          },
+          "drawMs": {
+            "n": 187,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.2,
+            "mean": 0.07,
+            "stdDev": 0.061
+          },
+          "totalMs": {
+            "n": 187,
+            "min": 1.5,
+            "p50": 2.7,
+            "p95": 4.44,
+            "p99": 6.478,
+            "max": 11,
+            "mean": 2.842,
+            "stdDev": 1.125
+          },
+          "totalSyncedMs": {
+            "n": 6,
+            "min": 269.5,
+            "p50": 339.55,
+            "p95": 491.15,
+            "p99": 491.35,
+            "max": 491.4,
+            "mean": 372.6,
+            "stdDev": 88.267
+          },
+          "readPixelsSyncMs": {
+            "n": 6,
+            "min": 266.1,
+            "p50": 337,
+            "p95": 486.975,
+            "p99": 487.155,
+            "max": 487.2,
+            "mean": 369.117,
+            "stdDev": 87.882
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 194.3,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 15,
+              "min": 0.02491,
+              "p50": 0.03281,
+              "p95": 0.06104,
+              "p99": 0.06171,
+              "max": 0.06188,
+              "mean": 0.0383,
+              "stdDev": 0.01308
+            },
+            {
+              "n": 15,
+              "min": 0.02528,
+              "p50": 0.05266,
+              "p95": 0.06236,
+              "p99": 0.06258,
+              "max": 0.06264,
+              "mean": 0.04663,
+              "stdDev": 0.01451
+            },
+            {
+              "n": 15,
+              "min": 0.02541,
+              "p50": 0.03793,
+              "p95": 0.0613,
+              "p99": 0.06179,
+              "max": 0.06191,
+              "mean": 0.03979,
+              "stdDev": 0.01202
+            },
+            {
+              "n": 15,
+              "min": 0.02668,
+              "p50": 0.03634,
+              "p95": 0.06116,
+              "p99": 0.06164,
+              "max": 0.06176,
+              "mean": 0.04184,
+              "stdDev": 0.01264
+            },
+            {
+              "n": 15,
+              "min": 0.03073,
+              "p50": 0.04642,
+              "p95": 0.06123,
+              "p99": 0.06207,
+              "max": 0.06228,
+              "mean": 0.04625,
+              "stdDev": 0.01238
+            },
+            {
+              "n": 15,
+              "min": 0.02575,
+              "p50": 0.04964,
+              "p95": 0.06142,
+              "p99": 0.06205,
+              "max": 0.06221,
+              "mean": 0.04638,
+              "stdDev": 0.01311
+            }
+          ],
+          "driftMs": -3.67,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            9,
+            8,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 27.2,
+        "openMs": 70.9,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 32,
+          "warmupSec": 5,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 1,
+          "mode": "main",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 07:00:42.089  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:00:42.118  runScenario {\"seconds\":32,\"warmupSec\":5,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 07:00:42.427  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:00:43.445  control rAF (bare page, no canvas): 62.01 Hz over 63 ticks",
+            "log: 07:00:43.473  proxy fetched: 6512582 bytes in 27.2 ms",
+            "log: 07:00:43.564  4 layers opened in 70.9 ms; codec=avc1.640028",
+            "log: 07:00:44.578  control rAF (canvas attached, gl.clear only): 61.47 Hz",
+            "log: 07:00:44.832  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:00:47.415  control rAF (full composite of 4 static frames, no decoders): 5.51 Hz",
+            "log: 07:00:49.428  control rAF (4 decoders flat out, no composite): 43.25 Hz; chunks=[655,655,655,656]"
+          ]
+        }
+      },
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:02:13.804Z",
+        "durationMsTotal": 45572.9,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 5,
+          "measuredWindowSec": 32.242,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 12,
+          "lookAheadSec": 0.4,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 62.38,
+        "controlRafTicks": 63,
+        "controlRafWithCanvasHz": 61.62,
+        "controlRafWithCanvasTicks": 62,
+        "controls": {
+          "bareRafHz": 62.38,
+          "canvasClearOnlyRafHz": 61.62,
+          "fullCompositeNoDecodersRafHz": 5.84,
+          "fourDecodersFlatOutNoCompositeRafHz": 41.45,
+          "fourDecodersFlatOutChunksSubmitted": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 32.242,
+          "targetDeadlines": 967,
+          "onTimeFrames": 155,
+          "achievedFps": 4.81,
+          "framesPresented": 172,
+          "displayedFps": 5.33,
+          "droppedFrames": 812,
+          "droppedFramesPct": 83.97,
+          "deadlinesSkippedBetweenRafTicks": 102,
+          "stalePresents": 17,
+          "rafTicks": 209,
+          "rafHz": 6.48,
+          "rafIntervalMs": {
+            "n": 176,
+            "min": 2.4,
+            "p50": 171.8,
+            "p95": 540.95,
+            "p99": 678.2,
+            "max": 687.2,
+            "mean": 183.602,
+            "stdDev": 152.811
+          },
+          "deadlineLatenessMs": {
+            "n": 142,
+            "min": 0.4,
+            "p50": 16.583,
+            "p95": 31.412,
+            "p99": 32.969,
+            "max": 33.267,
+            "mean": 16.695,
+            "stdDev": 9.381
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 4304,
+            "min": 10600,
+            "p50": 109750,
+            "p95": 239170,
+            "p99": 694116,
+            "max": 884400,
+            "mean": 141837.8,
+            "stdDev": 99871.1
+          },
+          "perLayer": [
+            {
+              "n": 1076,
+              "min": 10600,
+              "p50": 108000,
+              "p95": 237475,
+              "p99": 691950,
+              "max": 884300,
+              "mean": 141237.8,
+              "stdDev": 99948.7
+            },
+            {
+              "n": 1076,
+              "min": 10900,
+              "p50": 109300,
+              "p95": 239050,
+              "p99": 692025,
+              "max": 884400,
+              "mean": 141680.7,
+              "stdDev": 99867.4
+            },
+            {
+              "n": 1076,
+              "min": 10600,
+              "p50": 110600,
+              "p95": 240325,
+              "p99": 692100,
+              "max": 884400,
+              "mean": 142101.9,
+              "stdDev": 99846
+            },
+            {
+              "n": 1076,
+              "min": 10900,
+              "p50": 111550,
+              "p95": 240325,
+              "p99": 692100,
+              "max": 884400,
+              "mean": 142331,
+              "stdDev": 99818.7
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 13000,
+                "p95": 96400,
+                "p99": 101230,
+                "max": 751600,
+                "mean": 33618,
+                "stdDev": 51931.6
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 13800,
+                "p95": 94790,
+                "p99": 100852,
+                "max": 736400,
+                "mean": 33613.4,
+                "stdDev": 51347
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 15400,
+                "p95": 94720,
+                "p99": 100878,
+                "max": 735900,
+                "mean": 33613.4,
+                "stdDev": 51150.8
+              },
+              {
+                "n": 1075,
+                "min": 0,
+                "p50": 15200,
+                "p95": 94430,
+                "p99": 100878,
+                "max": 735400,
+                "mean": 33612.3,
+                "stdDev": 51050.2
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.75,
+              29.75,
+              29.75,
+              29.75
+            ]
+          },
+          "decodedFrames": [
+            1076,
+            1076,
+            1076,
+            1076
+          ],
+          "submittedChunks": [
+            1080,
+            1080,
+            1080,
+            1080
+          ],
+          "evictedUndisplayed": [
+            26,
+            26,
+            26,
+            26
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 568,
+              "min": 0,
+              "p50": 8,
+              "p95": 9,
+              "p99": 9,
+              "max": 9,
+              "mean": 7.23,
+              "stdDev": 2.77
+            },
+            "perLayer": [
+              {
+                "n": 142,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.23,
+                "stdDev": 2.77
+              },
+              {
+                "n": 142,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.23,
+                "stdDev": 2.77
+              },
+              {
+                "n": 142,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.23,
+                "stdDev": 2.77
+              },
+              {
+                "n": 142,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.23,
+                "stdDev": 2.77
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 142,
+            "min": 1.7,
+            "p50": 2.9,
+            "p95": 5.895,
+            "p99": 16.79,
+            "max": 42.8,
+            "mean": 3.659,
+            "stdDev": 3.948
+          },
+          "drawMs": {
+            "n": 142,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.418,
+            "max": 3.6,
+            "mean": 0.097,
+            "stdDev": 0.306
+          },
+          "totalMs": {
+            "n": 142,
+            "min": 1.7,
+            "p50": 2.95,
+            "p95": 6.57,
+            "p99": 17.049,
+            "max": 42.9,
+            "mean": 3.756,
+            "stdDev": 3.975
+          },
+          "totalSyncedMs": {
+            "n": 5,
+            "min": 341.2,
+            "p50": 367.2,
+            "p95": 668.04,
+            "p99": 679.128,
+            "max": 681.9,
+            "mean": 473.38,
+            "stdDev": 143.925
+          },
+          "readPixelsSyncMs": {
+            "n": 5,
+            "min": 336.1,
+            "p50": 364.5,
+            "p95": 664.68,
+            "p99": 676.296,
+            "max": 679.2,
+            "mean": 469.12,
+            "stdDev": 144.053
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 212.6,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 11,
+              "min": 0.02461,
+              "p50": 0.03919,
+              "p95": 0.05193,
+              "p99": 0.0612,
+              "max": 0.06352,
+              "mean": 0.0388,
+              "stdDev": 0.00924
+            },
+            {
+              "n": 11,
+              "min": 0.02991,
+              "p50": 0.05401,
+              "p95": 0.05838,
+              "p99": 0.05925,
+              "max": 0.05947,
+              "mean": 0.04789,
+              "stdDev": 0.01071
+            },
+            {
+              "n": 11,
+              "min": 0.02627,
+              "p50": 0.04263,
+              "p95": 0.06176,
+              "p99": 0.06217,
+              "max": 0.06228,
+              "mean": 0.04378,
+              "stdDev": 0.01592
+            },
+            {
+              "n": 11,
+              "min": 0.02517,
+              "p50": 0.05258,
+              "p95": 0.06231,
+              "p99": 0.0626,
+              "max": 0.06267,
+              "mean": 0.04788,
+              "stdDev": 0.01466
+            },
+            {
+              "n": 11,
+              "min": 0.02624,
+              "p50": 0.0278,
+              "p95": 0.06198,
+              "p99": 0.06206,
+              "max": 0.06208,
+              "mean": 0.03607,
+              "stdDev": 0.01349
+            },
+            {
+              "n": 11,
+              "min": 0.02551,
+              "p50": 0.05576,
+              "p95": 0.06145,
+              "p99": 0.06167,
+              "max": 0.06173,
+              "mean": 0.04967,
+              "stdDev": 0.01327
+            }
+          ],
+          "driftMs": 6.1,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            9,
+            8,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 40.2,
+        "openMs": 85.2,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 32,
+          "warmupSec": 5,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 2,
+          "mode": "main",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 07:01:28.202  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:01:28.229  runScenario {\"seconds\":32,\"warmupSec\":5,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 07:01:28.466  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:01:29.477  control rAF (bare page, no canvas): 62.38 Hz over 63 ticks",
+            "log: 07:01:29.517  proxy fetched: 6512582 bytes in 40.2 ms",
+            "log: 07:01:29.629  4 layers opened in 85.2 ms; codec=avc1.640028",
+            "log: 07:01:30.644  control rAF (canvas attached, gl.clear only): 61.62 Hz",
+            "log: 07:01:30.911  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:01:33.371  control rAF (full composite of 4 static frames, no decoders): 5.84 Hz",
+            "log: 07:01:35.377  control rAF (4 decoders flat out, no composite): 41.45 Hz; chunks=[627,627,627,627]"
+          ]
+        }
+      }
+    ],
+    "native": [
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:02:41.921Z",
+        "durationMsTotal": 27080.1,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1920,
+          "compositeHeight": 1080,
+          "targetFps": 30,
+          "warmupSec": 4,
+          "measuredWindowSec": 15.096,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 12,
+          "lookAheadSec": 0.4,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 62.67,
+        "controlRafTicks": 63,
+        "controlRafWithCanvasHz": 62.04,
+        "controlRafWithCanvasTicks": 63,
+        "controls": {
+          "bareRafHz": 62.67,
+          "canvasClearOnlyRafHz": 62.04,
+          "fullCompositeNoDecodersRafHz": 6.96,
+          "fourDecodersFlatOutNoCompositeRafHz": 40,
+          "fourDecodersFlatOutChunksSubmitted": [
+            560,
+            560,
+            560,
+            559
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 15.096,
+          "targetDeadlines": 452,
+          "onTimeFrames": 79,
+          "achievedFps": 5.23,
+          "framesPresented": 82,
+          "displayedFps": 5.43,
+          "droppedFrames": 373,
+          "droppedFramesPct": 82.52,
+          "deadlinesSkippedBetweenRafTicks": 54,
+          "stalePresents": 3,
+          "rafTicks": 96,
+          "rafHz": 6.36,
+          "rafIntervalMs": {
+            "n": 69,
+            "min": 3,
+            "p50": 191,
+            "p95": 541.08,
+            "p99": 800.892,
+            "max": 1260.3,
+            "mean": 220.235,
+            "stdDev": 181.311
+          },
+          "deadlineLatenessMs": {
+            "n": 62,
+            "min": 0.967,
+            "p50": 11,
+            "p95": 27.1,
+            "p99": 32.074,
+            "max": 32.867,
+            "mean": 13.214,
+            "stdDev": 8.302
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 2324,
+            "min": 9900,
+            "p50": 108700,
+            "p95": 238755,
+            "p99": 720782,
+            "max": 1395000,
+            "mean": 145653.8,
+            "stdDev": 132691.6
+          },
+          "perLayer": [
+            {
+              "n": 581,
+              "min": 10000,
+              "p50": 106700,
+              "p95": 237400,
+              "p99": 711320,
+              "max": 1395000,
+              "mean": 144982.8,
+              "stdDev": 132705.4
+            },
+            {
+              "n": 581,
+              "min": 9900,
+              "p50": 108000,
+              "p95": 237400,
+              "p99": 709060,
+              "max": 1395000,
+              "mean": 145495.2,
+              "stdDev": 132760.3
+            },
+            {
+              "n": 581,
+              "min": 10000,
+              "p50": 109800,
+              "p95": 238500,
+              "p99": 707240,
+              "max": 1395000,
+              "mean": 145810.7,
+              "stdDev": 132667.9
+            },
+            {
+              "n": 581,
+              "min": 10000,
+              "p50": 111500,
+              "p95": 238800,
+              "p99": 707820,
+              "max": 1395000,
+              "mean": 146326.7,
+              "stdDev": 132629
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 580,
+                "min": 0,
+                "p50": 10550,
+                "p95": 96720,
+                "p99": 102984,
+                "max": 1262900,
+                "mean": 33647.2,
+                "stdDev": 70486.2
+              },
+              {
+                "n": 580,
+                "min": 0,
+                "p50": 11100,
+                "p95": 96505,
+                "p99": 102905,
+                "max": 1262900,
+                "mean": 33643.3,
+                "stdDev": 70392.2
+              },
+              {
+                "n": 580,
+                "min": 0,
+                "p50": 11200,
+                "p95": 96505,
+                "p99": 102905,
+                "max": 1262800,
+                "mean": 33639.5,
+                "stdDev": 70307.7
+              },
+              {
+                "n": 580,
+                "min": 0,
+                "p50": 12100,
+                "p95": 96505,
+                "p99": 102905,
+                "max": 1260500,
+                "mean": 33642.8,
+                "stdDev": 70039.9
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.72,
+              29.72,
+              29.73,
+              29.72
+            ]
+          },
+          "decodedFrames": [
+            581,
+            581,
+            581,
+            581
+          ],
+          "submittedChunks": [
+            585,
+            585,
+            585,
+            585
+          ],
+          "evictedUndisplayed": [
+            11,
+            11,
+            11,
+            11
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 248,
+              "min": 0,
+              "p50": 8,
+              "p95": 9,
+              "p99": 9,
+              "max": 9,
+              "mean": 7.74,
+              "stdDev": 1.93
+            },
+            "perLayer": [
+              {
+                "n": 62,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.74,
+                "stdDev": 1.93
+              },
+              {
+                "n": 62,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.74,
+                "stdDev": 1.93
+              },
+              {
+                "n": 62,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.74,
+                "stdDev": 1.93
+              },
+              {
+                "n": 62,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.74,
+                "stdDev": 1.93
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 62,
+            "min": 1.6,
+            "p50": 2.7,
+            "p95": 4.49,
+            "p99": 5.912,
+            "max": 6.4,
+            "mean": 2.847,
+            "stdDev": 0.996
+          },
+          "drawMs": {
+            "n": 62,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.2,
+            "mean": 0.076,
+            "stdDev": 0.064
+          },
+          "totalMs": {
+            "n": 62,
+            "min": 1.6,
+            "p50": 2.8,
+            "p95": 4.59,
+            "p99": 5.912,
+            "max": 6.4,
+            "mean": 2.923,
+            "stdDev": 1.009
+          },
+          "totalSyncedMs": {
+            "n": 2,
+            "min": 584.1,
+            "p50": 919.25,
+            "p95": 1220.885,
+            "p99": 1247.697,
+            "max": 1254.4,
+            "mean": 919.25,
+            "stdDev": 335.15
+          },
+          "readPixelsSyncMs": {
+            "n": 2,
+            "min": 580.9,
+            "p50": 915.7,
+            "p95": 1217.02,
+            "p99": 1243.804,
+            "max": 1250.5,
+            "mean": 915.7,
+            "stdDev": 334.8
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 196.3,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 5,
+              "min": 0.02543,
+              "p50": 0.0304,
+              "p95": 0.04498,
+              "p99": 0.04539,
+              "max": 0.04549,
+              "mean": 0.03484,
+              "stdDev": 0.00788
+            },
+            {
+              "n": 5,
+              "min": 0.02539,
+              "p50": 0.0596,
+              "p95": 0.06247,
+              "p99": 0.06259,
+              "max": 0.06262,
+              "mean": 0.0525,
+              "stdDev": 0.01397
+            },
+            {
+              "n": 5,
+              "min": 0.02696,
+              "p50": 0.02894,
+              "p95": 0.05147,
+              "p99": 0.05382,
+              "max": 0.05441,
+              "mean": 0.0355,
+              "stdDev": 0.01054
+            },
+            {
+              "n": 5,
+              "min": 0.03503,
+              "p50": 0.05315,
+              "p95": 0.06025,
+              "p99": 0.06131,
+              "max": 0.06158,
+              "mean": 0.05128,
+              "stdDev": 0.0088
+            },
+            {
+              "n": 5,
+              "min": 0.02572,
+              "p50": 0.04533,
+              "p95": 0.05752,
+              "p99": 0.05972,
+              "max": 0.06027,
+              "mean": 0.04078,
+              "stdDev": 0.01324
+            },
+            {
+              "n": 5,
+              "min": 0.0268,
+              "p50": 0.03235,
+              "p95": 0.0561,
+              "p99": 0.05818,
+              "max": 0.0587,
+              "mean": 0.03892,
+              "stdDev": 0.01175
+            }
+          ],
+          "driftMs": -25.43,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            12,
+            11,
+            82,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 39.8,
+        "openMs": 78,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 15,
+          "warmupSec": 4,
+          "compositeWidth": 1920,
+          "compositeHeight": 1080,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "native",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 07:02:14.816  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:02:14.840  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1920,\"compositeHeight\":1080,\"scalingProbeRequested\":false}",
+            "log: 07:02:15.035  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:02:16.041  control rAF (bare page, no canvas): 62.67 Hz over 63 ticks",
+            "log: 07:02:16.081  proxy fetched: 6512582 bytes in 39.8 ms",
+            "log: 07:02:16.184  4 layers opened in 78.0 ms; codec=avc1.640028",
+            "log: 07:02:17.208  control rAF (canvas attached, gl.clear only): 62.04 Hz",
+            "log: 07:02:17.461  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:02:19.877  control rAF (full composite of 4 static frames, no decoders): 6.96 Hz",
+            "log: 07:02:21.878  control rAF (4 decoders flat out, no composite): 40 Hz; chunks=[560,560,560,559]"
+          ]
+        }
+      }
+    ],
+    "pool6": [
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:03:10.640Z",
+        "durationMsTotal": 27561.8,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 4,
+          "measuredWindowSec": 15.145,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 6,
+          "lookAheadSec": 0.2,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 62.66,
+        "controlRafTicks": 63,
+        "controlRafWithCanvasHz": 61.82,
+        "controlRafWithCanvasTicks": 62,
+        "controls": {
+          "bareRafHz": 62.66,
+          "canvasClearOnlyRafHz": 61.82,
+          "fullCompositeNoDecodersRafHz": 6.99,
+          "fourDecodersFlatOutNoCompositeRafHz": 42.65,
+          "fourDecodersFlatOutChunksSubmitted": [
+            751,
+            751,
+            751,
+            750
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 15.145,
+          "targetDeadlines": 454,
+          "onTimeFrames": 112,
+          "achievedFps": 7.39,
+          "framesPresented": 118,
+          "displayedFps": 7.79,
+          "droppedFrames": 342,
+          "droppedFramesPct": 75.33,
+          "deadlinesSkippedBetweenRafTicks": 23,
+          "stalePresents": 6,
+          "rafTicks": 151,
+          "rafHz": 9.97,
+          "rafIntervalMs": {
+            "n": 120,
+            "min": 2.3,
+            "p50": 162.25,
+            "p95": 182.39,
+            "p99": 284.686,
+            "max": 287.4,
+            "mean": 126.533,
+            "stdDev": 75.779
+          },
+          "deadlineLatenessMs": {
+            "n": 92,
+            "min": 0.133,
+            "p50": 14.783,
+            "p95": 31.353,
+            "p99": 32.008,
+            "max": 33.1,
+            "mean": 16.23,
+            "stdDev": 9.523
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 2304,
+            "min": 7900,
+            "p50": 101900,
+            "p95": 236200,
+            "p99": 434748,
+            "max": 806800,
+            "mean": 138869,
+            "stdDev": 88251
+          },
+          "perLayer": [
+            {
+              "n": 576,
+              "min": 7900,
+              "p50": 101850,
+              "p95": 236225,
+              "p99": 407125,
+              "max": 804900,
+              "mean": 138675.2,
+              "stdDev": 88191.8
+            },
+            {
+              "n": 576,
+              "min": 9600,
+              "p50": 101800,
+              "p95": 236225,
+              "p99": 407025,
+              "max": 805400,
+              "mean": 138798.6,
+              "stdDev": 88223.8
+            },
+            {
+              "n": 576,
+              "min": 9700,
+              "p50": 101850,
+              "p95": 236225,
+              "p99": 407050,
+              "max": 806800,
+              "mean": 138939.2,
+              "stdDev": 88288
+            },
+            {
+              "n": 576,
+              "min": 9600,
+              "p50": 102200,
+              "p95": 236200,
+              "p99": 407050,
+              "max": 806800,
+              "mean": 139063,
+              "stdDev": 88299.7
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 575,
+                "min": 0,
+                "p50": 7400,
+                "p95": 99000,
+                "p99": 101012,
+                "max": 679400,
+                "mean": 34132.9,
+                "stdDev": 48568.2
+              },
+              {
+                "n": 575,
+                "min": 0,
+                "p50": 7700,
+                "p95": 98930,
+                "p99": 101060,
+                "max": 679400,
+                "mean": 34122.1,
+                "stdDev": 48472.3
+              },
+              {
+                "n": 575,
+                "min": 0,
+                "p50": 8500,
+                "p95": 98830,
+                "p99": 101060,
+                "max": 674500,
+                "mean": 34121.9,
+                "stdDev": 48240.9
+              },
+              {
+                "n": 575,
+                "min": 0,
+                "p50": 8600,
+                "p95": 98730,
+                "p99": 100986,
+                "max": 672600,
+                "mean": 34121.7,
+                "stdDev": 48095.7
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.3,
+              29.31,
+              29.31,
+              29.31
+            ]
+          },
+          "decodedFrames": [
+            576,
+            576,
+            576,
+            576
+          ],
+          "submittedChunks": [
+            580,
+            580,
+            580,
+            580
+          ],
+          "evictedUndisplayed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 368,
+              "min": 0,
+              "p50": 2,
+              "p95": 3,
+              "p99": 3,
+              "max": 3,
+              "mean": 2.21,
+              "stdDev": 0.85
+            },
+            "perLayer": [
+              {
+                "n": 92,
+                "min": 0,
+                "p50": 2,
+                "p95": 3,
+                "p99": 3,
+                "max": 3,
+                "mean": 2.22,
+                "stdDev": 0.84
+              },
+              {
+                "n": 92,
+                "min": 0,
+                "p50": 2,
+                "p95": 3,
+                "p99": 3,
+                "max": 3,
+                "mean": 2.22,
+                "stdDev": 0.84
+              },
+              {
+                "n": 92,
+                "min": 0,
+                "p50": 2,
+                "p95": 3,
+                "p99": 3,
+                "max": 3,
+                "mean": 2.2,
+                "stdDev": 0.86
+              },
+              {
+                "n": 92,
+                "min": 0,
+                "p50": 2,
+                "p95": 3,
+                "p99": 3,
+                "max": 3,
+                "mean": 2.2,
+                "stdDev": 0.86
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 92,
+            "min": 1.7,
+            "p50": 2.7,
+            "p95": 3.645,
+            "p99": 3.909,
+            "max": 4,
+            "mean": 2.752,
+            "stdDev": 0.507
+          },
+          "drawMs": {
+            "n": 92,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.2,
+            "mean": 0.068,
+            "stdDev": 0.061
+          },
+          "totalMs": {
+            "n": 92,
+            "min": 1.8,
+            "p50": 2.75,
+            "p95": 3.7,
+            "p99": 3.918,
+            "max": 4.1,
+            "mean": 2.821,
+            "stdDev": 0.525
+          },
+          "totalSyncedMs": {
+            "n": 3,
+            "min": 283.6,
+            "p50": 284.3,
+            "p95": 286.64,
+            "p99": 286.848,
+            "max": 286.9,
+            "mean": 284.933,
+            "stdDev": 1.42
+          },
+          "readPixelsSyncMs": {
+            "n": 3,
+            "min": 280.8,
+            "p50": 281.2,
+            "p95": 283,
+            "p99": 283.16,
+            "max": 283.2,
+            "mean": 281.733,
+            "stdDev": 1.05
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 140.1,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 8,
+              "min": 0.02556,
+              "p50": 0.03389,
+              "p95": 0.0596,
+              "p99": 0.06016,
+              "max": 0.0603,
+              "mean": 0.04068,
+              "stdDev": 0.01393
+            },
+            {
+              "n": 8,
+              "min": 0.02545,
+              "p50": 0.04296,
+              "p95": 0.0586,
+              "p99": 0.0593,
+              "max": 0.05947,
+              "mean": 0.04206,
+              "stdDev": 0.01269
+            },
+            {
+              "n": 8,
+              "min": 0.025,
+              "p50": 0.05247,
+              "p95": 0.06128,
+              "p99": 0.06132,
+              "max": 0.06133,
+              "mean": 0.04745,
+              "stdDev": 0.01348
+            },
+            {
+              "n": 8,
+              "min": 0.02608,
+              "p50": 0.04714,
+              "p95": 0.06157,
+              "p99": 0.06264,
+              "max": 0.06291,
+              "mean": 0.04446,
+              "stdDev": 0.01459
+            },
+            {
+              "n": 8,
+              "min": 0.0307,
+              "p50": 0.0479,
+              "p95": 0.05895,
+              "p99": 0.05994,
+              "max": 0.06019,
+              "mean": 0.04772,
+              "stdDev": 0.00884
+            },
+            {
+              "n": 8,
+              "min": 0.02603,
+              "p50": 0.04286,
+              "p95": 0.0604,
+              "p99": 0.06094,
+              "max": 0.06108,
+              "mean": 0.04433,
+              "stdDev": 0.01233
+            }
+          ],
+          "driftMs": 10.33,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            9,
+            8,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 44.1,
+        "openMs": 71.9,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 15,
+          "warmupSec": 4,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "pool",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": {
+            "decodersPerLayer": 1,
+            "lookAheadFrames": 6,
+            "lookAheadSec": 0.2,
+            "maxDecodedBufferedFrames": 18,
+            "maxEncodedQueuedChunks": 8
+          },
+          "consoleMessages": [
+            "log: 07:02:43.045  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:02:43.074  pool set: {\"decodersPerLayer\":1,\"lookAheadFrames\":6,\"lookAheadSec\":0.2,\"maxDecodedBufferedFrames\":18,\"maxEncodedQueuedChunks\":8}",
+            "log: 07:02:43.077  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 07:02:43.451  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:02:44.457  control rAF (bare page, no canvas): 62.66 Hz over 63 ticks",
+            "log: 07:02:44.501  proxy fetched: 6512582 bytes in 44.1 ms",
+            "log: 07:02:44.598  4 layers opened in 71.9 ms; codec=avc1.640028",
+            "log: 07:02:45.607  control rAF (canvas attached, gl.clear only): 61.82 Hz",
+            "log: 07:02:45.791  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:02:48.339  control rAF (full composite of 4 static frames, no decoders): 6.99 Hz",
+            "log: 07:02:50.357  control rAF (4 decoders flat out, no composite): 42.65 Hz; chunks=[751,751,751,750]"
+          ]
+        }
+      }
+    ],
+    "pool24": [
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:03:38.474Z",
+        "durationMsTotal": 26699.6,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 4,
+          "measuredWindowSec": 15.014,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 24,
+          "lookAheadSec": 0.8,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 62.09,
+        "controlRafTicks": 63,
+        "controlRafWithCanvasHz": 61.7,
+        "controlRafWithCanvasTicks": 62,
+        "controls": {
+          "bareRafHz": 62.09,
+          "canvasClearOnlyRafHz": 61.7,
+          "fullCompositeNoDecodersRafHz": 7.37,
+          "fourDecodersFlatOutNoCompositeRafHz": 44.7,
+          "fourDecodersFlatOutChunksSubmitted": [
+            745,
+            745,
+            746,
+            745
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 15.014,
+          "targetDeadlines": 450,
+          "onTimeFrames": 0,
+          "achievedFps": 0,
+          "framesPresented": 0,
+          "displayedFps": 0,
+          "droppedFrames": 450,
+          "droppedFramesPct": 100,
+          "deadlinesSkippedBetweenRafTicks": 310620,
+          "stalePresents": 0,
+          "rafTicks": 1142,
+          "rafHz": 76.06,
+          "rafIntervalMs": {
+            "n": 901,
+            "min": 15.2,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 17.2,
+            "max": 18.2,
+            "mean": 16.666,
+            "stdDev": 0.164
+          },
+          "deadlineLatenessMs": {
+            "n": 0
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 2364,
+            "min": 15600,
+            "p50": 101600,
+            "p95": 232200,
+            "p99": 268037,
+            "max": 695700,
+            "mean": 134439.6,
+            "stdDev": 73313.8
+          },
+          "perLayer": [
+            {
+              "n": 591,
+              "min": 20400,
+              "p50": 101600,
+              "p95": 232200,
+              "p99": 268010,
+              "max": 690700,
+              "mean": 134345.2,
+              "stdDev": 73201
+            },
+            {
+              "n": 591,
+              "min": 15600,
+              "p50": 101500,
+              "p95": 232200,
+              "p99": 268010,
+              "max": 692400,
+              "mean": 134404.9,
+              "stdDev": 73338.8
+            },
+            {
+              "n": 591,
+              "min": 16200,
+              "p50": 101600,
+              "p95": 232200,
+              "p99": 268010,
+              "max": 692500,
+              "mean": 134457.5,
+              "stdDev": 73323.9
+            },
+            {
+              "n": 591,
+              "min": 18300,
+              "p50": 101700,
+              "p95": 232200,
+              "p99": 268020,
+              "max": 695700,
+              "mean": 134550.8,
+              "stdDev": 73391.1
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 590,
+                "min": 0,
+                "p50": 7000,
+                "p95": 99900,
+                "p99": 100111,
+                "max": 566600,
+                "mean": 33135.4,
+                "stdDev": 41904.7
+              },
+              {
+                "n": 590,
+                "min": 0,
+                "p50": 7750,
+                "p95": 99810,
+                "p99": 100100,
+                "max": 566200,
+                "mean": 33126.9,
+                "stdDev": 41775.1
+              },
+              {
+                "n": 590,
+                "min": 0,
+                "p50": 8000,
+                "p95": 99810,
+                "p99": 100100,
+                "max": 565500,
+                "mean": 33126.9,
+                "stdDev": 41692.9
+              },
+              {
+                "n": 590,
+                "min": 0,
+                "p50": 8100,
+                "p95": 99800,
+                "p99": 100100,
+                "max": 565600,
+                "mean": 33126.9,
+                "stdDev": 41637.3
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              30.18,
+              30.19,
+              30.19,
+              30.19
+            ]
+          },
+          "decodedFrames": [
+            591,
+            591,
+            591,
+            591
+          ],
+          "submittedChunks": [
+            595,
+            595,
+            595,
+            595
+          ],
+          "evictedUndisplayed": [
+            573,
+            573,
+            573,
+            573
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 0
+            },
+            "perLayer": [
+              {
+                "n": 0
+              },
+              {
+                "n": 0
+              },
+              {
+                "n": 0
+              },
+              {
+                "n": 0
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 0
+          },
+          "drawMs": {
+            "n": 0
+          },
+          "totalMs": {
+            "n": 0
+          },
+          "totalSyncedMs": {
+            "n": 0
+          },
+          "readPixelsSyncMs": {
+            "n": 0
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 193.9,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 60,
+              "min": 0.03035,
+              "p50": 0.04329,
+              "p95": 0.0568,
+              "p99": 0.05706,
+              "max": 0.05707,
+              "mean": 0.04368,
+              "stdDev": 0.01206
+            },
+            {
+              "n": 60,
+              "min": 0.02577,
+              "p50": 0.04882,
+              "p95": 0.06167,
+              "p99": 0.06207,
+              "max": 0.06224,
+              "mean": 0.04404,
+              "stdDev": 0.01321
+            },
+            {
+              "n": 60,
+              "min": 0.02535,
+              "p50": 0.04388,
+              "p95": 0.06199,
+              "p99": 0.06235,
+              "max": 0.06276,
+              "mean": 0.0438,
+              "stdDev": 0.01314
+            },
+            {
+              "n": 60,
+              "min": 0.02485,
+              "p50": 0.04358,
+              "p95": 0.06225,
+              "p99": 0.06251,
+              "max": 0.06252,
+              "mean": 0.04405,
+              "stdDev": 0.01297
+            },
+            {
+              "n": 60,
+              "min": 0.03776,
+              "p50": 0.04069,
+              "p95": 0.04268,
+              "p99": 0.04329,
+              "max": 0.04357,
+              "mean": 0.04064,
+              "stdDev": 0.00145
+            },
+            {
+              "n": 60,
+              "min": 0.02572,
+              "p50": 0.03731,
+              "p95": 0.061,
+              "p99": 0.06119,
+              "max": 0.06128,
+              "mean": 0.04255,
+              "stdDev": 0.01302
+            }
+          ],
+          "driftMs": 6.37,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            8,
+            9,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": null,
+        "fetchMs": 31,
+        "openMs": 81.3,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 15,
+          "warmupSec": 4,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "pool",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": {
+            "decodersPerLayer": 1,
+            "lookAheadFrames": 24,
+            "lookAheadSec": 0.8,
+            "maxDecodedBufferedFrames": 18,
+            "maxEncodedQueuedChunks": 8
+          },
+          "consoleMessages": [
+            "log: 07:03:11.752  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:03:11.771  pool set: {\"decodersPerLayer\":1,\"lookAheadFrames\":24,\"lookAheadSec\":0.8,\"maxDecodedBufferedFrames\":18,\"maxEncodedQueuedChunks\":8}",
+            "log: 07:03:11.773  runScenario {\"seconds\":15,\"warmupSec\":4,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 07:03:11.974  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:03:12.989  control rAF (bare page, no canvas): 62.09 Hz over 63 ticks",
+            "log: 07:03:13.020  proxy fetched: 6512582 bytes in 31.0 ms",
+            "log: 07:03:13.126  4 layers opened in 81.3 ms; codec=avc1.640028",
+            "log: 07:03:14.139  control rAF (canvas attached, gl.clear only): 61.7 Hz",
+            "log: 07:03:14.385  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:03:16.824  control rAF (full composite of 4 static frames, no decoders): 7.37 Hz",
+            "log: 07:03:18.839  control rAF (4 decoders flat out, no composite): 44.7 Hz; chunks=[745,745,746,745]"
+          ]
+        }
+      }
+    ],
+    "sizes": [
+      {
+        "harness": "T-201 compositor budget",
+        "path": "webcodecs-4layer-gl2-composite",
+        "requiresWebCodecs": true,
+        "startedAt": "2026-10-03T07:04:07.609Z",
+        "durationMsTotal": 27920,
+        "scenario": {
+          "videoLayers": 4,
+          "audioTracks": 6,
+          "sourceResolution": "1920x1080",
+          "sourceFps": 30,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "targetFps": 30,
+          "warmupSec": 3,
+          "measuredWindowSec": 6.591,
+          "sourceProxyBytes": 6512582,
+          "sourceDurationSec": 36
+        },
+        "pool": {
+          "decodersPerLayer": 1,
+          "lookAheadFrames": 12,
+          "lookAheadSec": 0.4,
+          "maxDecodedBufferedFrames": 18,
+          "maxEncodedQueuedChunks": 8
+        },
+        "capabilities": {
+          "gl": {
+            "available": true,
+            "contextType": "webgl2",
+            "debugRendererInfoExtension": true,
+            "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+            "vendor": "Google Inc. (Google)",
+            "maskedRenderer": "WebKit WebGL",
+            "maskedVendor": "WebKit",
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "maxTextureSize": 8192,
+            "isSoftware": true
+          },
+          "webCodecs": {
+            "videoDecoder": true,
+            "encodedVideoChunk": true,
+            "requestVideoFrameCallback": true
+          },
+          "timerResolutionUs": 100,
+          "decoderConfig": {
+            "codec": "avc1.640028",
+            "codedWidth": 1920,
+            "codedHeight": 1080,
+            "hardwareAcceleration": null,
+            "isConfigSupported": true
+          }
+        },
+        "controlRafHz": 59.34,
+        "controlRafTicks": 60,
+        "controlRafWithCanvasHz": 61.92,
+        "controlRafWithCanvasTicks": 63,
+        "controls": {
+          "bareRafHz": 59.34,
+          "canvasClearOnlyRafHz": 61.92,
+          "fullCompositeNoDecodersRafHz": 7.23,
+          "fourDecodersFlatOutNoCompositeRafHz": 45.34,
+          "fourDecodersFlatOutChunksSubmitted": [
+            771,
+            771,
+            770,
+            771
+          ],
+          "note": "each control ran ~2 s on the same page, same browser, same launch flags; the decoders were restarted and every counter reset between a control and the run."
+        },
+        "achieved": {
+          "targetFps": 30,
+          "wallSec": 6.591,
+          "targetDeadlines": 197,
+          "onTimeFrames": 31,
+          "achievedFps": 4.7,
+          "framesPresented": 32,
+          "displayedFps": 4.86,
+          "droppedFrames": 166,
+          "droppedFramesPct": 84.26,
+          "deadlinesSkippedBetweenRafTicks": 53,
+          "stalePresents": 1,
+          "rafTicks": 42,
+          "rafHz": 6.37,
+          "rafIntervalMs": {
+            "n": 14,
+            "min": 5.3,
+            "p50": 473.05,
+            "p95": 1171.705,
+            "p99": 1677.301,
+            "max": 1803.7,
+            "mean": 471.279,
+            "stdDev": 449
+          },
+          "deadlineLatenessMs": {
+            "n": 12,
+            "min": 4.533,
+            "p50": 16.267,
+            "p95": 29.037,
+            "p99": 29.301,
+            "max": 29.367,
+            "mean": 17.308,
+            "stdDev": 7.932
+          }
+        },
+        "decodeLatency": {
+          "unit": "\u00b5s",
+          "definition": "per decoded frame: performance.now() at the decoder output callback minus the moment its EncodedVideoChunk was handed to decode(). This INCLUDES the time the frame sat behind the pool's look-ahead in the decoder queue, so it is the \"when is the frame ready to show\" number, NOT the codec's own speed. The codec's speed is `throughput` below.",
+          "overall": {
+            "n": 1580,
+            "min": 24600,
+            "p50": 138850,
+            "p95": 753060,
+            "p99": 1819200,
+            "max": 2496500,
+            "mean": 215681.9,
+            "stdDev": 307177.7
+          },
+          "perLayer": [
+            {
+              "n": 395,
+              "min": 26500,
+              "p50": 138900,
+              "p95": 737210,
+              "p99": 1273142,
+              "max": 2495000,
+              "mean": 212240.8,
+              "stdDev": 296864.4
+            },
+            {
+              "n": 395,
+              "min": 26000,
+              "p50": 138800,
+              "p95": 741570,
+              "p99": 1819666,
+              "max": 2495000,
+              "mean": 215220,
+              "stdDev": 309064.3
+            },
+            {
+              "n": 395,
+              "min": 26200,
+              "p50": 139100,
+              "p95": 743830,
+              "p99": 1819572,
+              "max": 2495000,
+              "mean": 216587.3,
+              "stdDev": 309372.4
+            },
+            {
+              "n": 395,
+              "min": 24600,
+              "p50": 138200,
+              "p95": 771270,
+              "p99": 1819572,
+              "max": 2496500,
+              "mean": 218679.5,
+              "stdDev": 313129.6
+            }
+          ],
+          "throughput": {
+            "definition": "per layer, the interval between consecutive decoder output callbacks \u2014 the layer's own decode throughput, independent of queue depth.",
+            "unit": "\u00b5s",
+            "intervalPerLayer": [
+              {
+                "n": 394,
+                "min": 0,
+                "p50": 11000,
+                "p95": 94170,
+                "p99": 136621,
+                "max": 1804100,
+                "mean": 34186,
+                "stdDev": 116860.1
+              },
+              {
+                "n": 394,
+                "min": 100,
+                "p50": 11000,
+                "p95": 92900,
+                "p99": 133862,
+                "max": 1800100,
+                "mean": 34178.4,
+                "stdDev": 116359.5
+              },
+              {
+                "n": 394,
+                "min": 100,
+                "p50": 11500,
+                "p95": 92835,
+                "p99": 133869,
+                "max": 1800100,
+                "mean": 34177.2,
+                "stdDev": 116331.5
+              },
+              {
+                "n": 394,
+                "min": 0,
+                "p50": 11750,
+                "p95": 92340,
+                "p99": 133974,
+                "max": 1800200,
+                "mean": 34190.1,
+                "stdDev": 116237
+              }
+            ],
+            "effectiveDecodeFpsPerLayer": [
+              29.25,
+              29.26,
+              29.26,
+              29.25
+            ]
+          },
+          "decodedFrames": [
+            395,
+            395,
+            395,
+            395
+          ],
+          "submittedChunks": [
+            399,
+            399,
+            399,
+            399
+          ],
+          "evictedUndisplayed": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "bufferedAheadFrames": {
+            "overall": {
+              "n": 48,
+              "min": 0,
+              "p50": 8,
+              "p95": 9,
+              "p99": 9,
+              "max": 9,
+              "mean": 7.6,
+              "stdDev": 2.37
+            },
+            "perLayer": [
+              {
+                "n": 12,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.67,
+                "stdDev": 2.39
+              },
+              {
+                "n": 12,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.58,
+                "stdDev": 2.36
+              },
+              {
+                "n": 12,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.58,
+                "stdDev": 2.36
+              },
+              {
+                "n": 12,
+                "min": 0,
+                "p50": 8,
+                "p95": 9,
+                "p99": 9,
+                "max": 9,
+                "mean": 7.58,
+                "stdDev": 2.36
+              }
+            ]
+          }
+        },
+        "glComposite": {
+          "unit": "ms",
+          "definition": "per presented frame. upload = 4 \u00d7 texImage2D(VideoFrame); draw = clear + 4 blended full-frame quads + 4 marker quads. `totalMs` ends at gl.finish(), which is NOT a WebGL synchronisation primitive; `totalSyncedMs` additionally does a 1-pixel readPixels, whose result cannot be produced before the GL work has executed. quote `totalSyncedMs`. Software GL: these are CPU-side costs.",
+          "uploadMs": {
+            "n": 12,
+            "min": 2.5,
+            "p50": 7.05,
+            "p95": 29.64,
+            "p99": 31.048,
+            "max": 31.4,
+            "mean": 11.417,
+            "stdDev": 9.803
+          },
+          "drawMs": {
+            "n": 12,
+            "min": 0,
+            "p50": 0.1,
+            "p95": 0.245,
+            "p99": 0.289,
+            "max": 0.3,
+            "mean": 0.092,
+            "stdDev": 0.095
+          },
+          "totalMs": {
+            "n": 12,
+            "min": 2.5,
+            "p50": 7.2,
+            "p95": 29.74,
+            "p99": 31.148,
+            "max": 31.5,
+            "mean": 11.508,
+            "stdDev": 9.818
+          },
+          "totalSyncedMs": {
+            "n": 1,
+            "min": 1791.8,
+            "p50": 1791.8,
+            "p95": 1791.8,
+            "p99": 1791.8,
+            "max": 1791.8,
+            "mean": 1791.8,
+            "stdDev": 0
+          },
+          "readPixelsSyncMs": {
+            "n": 1,
+            "min": 1787.8,
+            "p50": 1787.8,
+            "p95": 1787.8,
+            "p99": 1787.8,
+            "max": 1787.8,
+            "mean": 1787.8,
+            "stdDev": 0
+          },
+          "frameBudgetMs": 33.333
+        },
+        "audio": {
+          "contextStateDuringRun": "running",
+          "contextStateAfterClose": "running",
+          "sampleRate": 48000,
+          "loadMs": 288.7,
+          "buffers": [
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            },
+            {
+              "durationSec": 10,
+              "sampleRate": 48000,
+              "channels": 2,
+              "frames": 480000
+            }
+          ],
+          "perStemRms": [
+            {
+              "n": 1,
+              "min": 0.03467,
+              "p50": 0.03467,
+              "p95": 0.03467,
+              "p99": 0.03467,
+              "max": 0.03467,
+              "mean": 0.03467,
+              "stdDev": 0
+            },
+            {
+              "n": 1,
+              "min": 0.0543,
+              "p50": 0.0543,
+              "p95": 0.0543,
+              "p99": 0.0543,
+              "max": 0.0543,
+              "mean": 0.0543,
+              "stdDev": 0
+            },
+            {
+              "n": 1,
+              "min": 0.06247,
+              "p50": 0.06247,
+              "p95": 0.06247,
+              "p99": 0.06247,
+              "max": 0.06247,
+              "mean": 0.06247,
+              "stdDev": 0
+            },
+            {
+              "n": 1,
+              "min": 0.05133,
+              "p50": 0.05133,
+              "p95": 0.05133,
+              "p99": 0.05133,
+              "max": 0.05133,
+              "mean": 0.05133,
+              "stdDev": 0
+            },
+            {
+              "n": 1,
+              "min": 0.0329,
+              "p50": 0.0329,
+              "p95": 0.0329,
+              "p99": 0.0329,
+              "max": 0.0329,
+              "mean": 0.0329,
+              "stdDev": 0
+            },
+            {
+              "n": 1,
+              "min": 0.02538,
+              "p50": 0.02538,
+              "p95": 0.02538,
+              "p99": 0.02538,
+              "max": 0.02538,
+              "mean": 0.02538,
+              "stdDev": 0
+            }
+          ],
+          "driftMs": -4.17,
+          "driftDefinition": "audioContext.currentTime advance minus wall-clock advance at the end of the window. Audio is on its own thread; a render loop that falls behind must not move this number."
+        },
+        "compositeCheck": {
+          "readbackTiming": "same task as a draw, immediately after gl.finish()",
+          "markers": [
+            {
+              "layer": "V1",
+              "expectedRgb": [
+                255,
+                0,
+                0
+              ],
+              "gotRgb": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V2",
+              "expectedRgb": [
+                0,
+                255,
+                0
+              ],
+              "gotRgb": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "layer": "V3",
+              "expectedRgb": [
+                0,
+                0,
+                255
+              ],
+              "gotRgb": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "layer": "V4",
+              "expectedRgb": [
+                255,
+                255,
+                0
+              ],
+              "gotRgb": [
+                255,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "centerPixelRgb": [
+            9,
+            8,
+            98,
+            255
+          ],
+          "layersVerified": 4
+        },
+        "compositeScaling": [
+          {
+            "width": 480,
+            "height": 270,
+            "megapixels": 0.13,
+            "rafHz": 4.14,
+            "msPerFrame": 241.82,
+            "msPerMegapixel": 1865.9,
+            "meetsFps30": false
+          },
+          {
+            "width": 640,
+            "height": 360,
+            "megapixels": 0.23,
+            "rafHz": 7.79,
+            "msPerFrame": 128.44,
+            "msPerMegapixel": 557.47,
+            "meetsFps30": false
+          },
+          {
+            "width": 960,
+            "height": 540,
+            "megapixels": 0.518,
+            "rafHz": 8.67,
+            "msPerFrame": 115.32,
+            "msPerMegapixel": 222.45,
+            "meetsFps30": false
+          },
+          {
+            "width": 1280,
+            "height": 720,
+            "megapixels": 0.922,
+            "rafHz": 7.03,
+            "msPerFrame": 142.16,
+            "msPerMegapixel": 154.25,
+            "meetsFps30": false
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "megapixels": 2.074,
+            "rafHz": 6,
+            "msPerFrame": 166.6,
+            "msPerMegapixel": 80.34,
+            "meetsFps30": false
+          }
+        ],
+        "fetchMs": 30.5,
+        "openMs": 64.9,
+        "errors": [],
+        "requestedConfig": {
+          "seconds": 6,
+          "warmupSec": 3,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": true
+        },
+        "webCodecsProbe": {
+          "videoDecoder": true,
+          "encodedVideoChunk": true,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "sizes",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": null,
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 07:03:39.664  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:03:39.688  runScenario {\"seconds\":6,\"warmupSec\":3,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":true}",
+            "log: 07:03:39.843  GL renderer: ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)  (isSoftware=true)",
+            "log: 07:03:40.855  control rAF (bare page, no canvas): 59.34 Hz over 60 ticks",
+            "log: 07:03:40.885  proxy fetched: 6512582 bytes in 30.5 ms",
+            "log: 07:03:40.970  4 layers opened in 64.9 ms; codec=avc1.640028",
+            "log: 07:03:41.994  control rAF (canvas attached, gl.clear only): 61.92 Hz",
+            "log: 07:03:42.348  audio: 6 stems, ctx.state=running, rate=48000",
+            "log: 07:03:44.830  control rAF (full composite of 4 static frames, no decoders): 7.23 Hz",
+            "log: 07:03:46.840  control rAF (4 decoders flat out, no composite): 45.34 Hz; chunks=[771,771,770,771]",
+            "log: 07:03:58.780  scaling 480x270: 241.8 ms/frame (4.14 Hz)",
+            "log: 07:04:01.196  scaling 640x360: 128.4 ms/frame (7.79 Hz)",
+            "log: 07:04:02.976  scaling 960x540: 115.3 ms/frame (8.67 Hz)",
+            "log: 07:04:04.783  scaling 1280x720: 142.2 ms/frame (7.03 Hz)",
+            "log: 07:04:06.876  scaling 1920x1080: 166.6 ms/frame (6 Hz)"
+          ]
+        }
+      }
+    ],
+    "fallback": [
+      {
+        "harness": "T-201 compositor budget \u2014 fallback path",
+        "path": "fallback-video-element",
+        "fallbackReason": "WebCodecs VideoDecoder is not available in this page, so the compositor cannot run; the \u00a73.5 degradation is a single <video> over the proxy.",
+        "requiresWebCodecs": false,
+        "videoElement": {
+          "readyStateAfter": 0,
+          "firstFrameMs": 240,
+          "currentSrc": "http://127.0.0.1:45335/lib/editing/preview/spike/fixtures/playback/proxy-1080p-36s.mp4",
+          "sourceDurationSec": null,
+          "requestVideoFrameCallback": true
+        },
+        "measuredWindowSec": 32.01,
+        "achieved": {
+          "rafTicks": 1913,
+          "rafHz": 59.76,
+          "decodedFramesPresented": 956,
+          "achievedFps": 29.87,
+          "targetFps": 30,
+          "firstFrameExpectedDisplayMs": 44.5,
+          "lastFrameExpectedDisplayMs": 32026.7
+        },
+        "playbackQuality": {
+          "start": {},
+          "end": {},
+          "totalVideoFramesDelta": 960,
+          "droppedVideoFramesDelta": 5
+        },
+        "layers": 1,
+        "audioTracks": 0,
+        "errors": [],
+        "notes": "Fallback plays ONE video track with NO compositing and NO WebAudio mix. Its numbers are not comparable to the primary path and are reported separately on purpose.",
+        "requestedConfig": {
+          "seconds": 32,
+          "warmupSec": 0,
+          "compositeWidth": 1280,
+          "compositeHeight": 720,
+          "scalingProbeRequested": false
+        },
+        "webCodecsProbe": {
+          "videoDecoder": false,
+          "encodedVideoChunk": false,
+          "requestVideoFrameCallback": true
+        },
+        "driver": {
+          "runIndex": 0,
+          "mode": "fallback",
+          "playwright": "1.63.0",
+          "playwrightFrom": "e2e/node_modules (resolved by absolute path; web/package.json untouched)",
+          "browserVersion": "153.0.8010.12",
+          "launchedArgs": [
+            "--no-sandbox",
+            "--ozone-platform=headless",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--disable-gpu-sandbox",
+            "--autoplay-policy=no-user-gesture-required",
+            "--disable-background-timer-throttling",
+            "--disable-renderer-backgrounding",
+            "--disable-backgrounding-occluded-windows"
+          ],
+          "channel": "chromium",
+          "headed": false,
+          "killSwitch": {
+            "VideoDecoder": "removed",
+            "VideoEncoder": "removed",
+            "EncodedVideoChunk": "removed",
+            "VideoFrame": "removed"
+          },
+          "poolOverride": null,
+          "consoleMessages": [
+            "log: 07:04:09.279  playback harness ready \u2014 call window.runScenario()",
+            "log: 07:04:09.310  WebCodecs kill switch: {\"VideoDecoder\":\"removed\",\"VideoEncoder\":\"removed\",\"EncodedVideoChunk\":\"removed\",\"VideoFrame\":\"removed\"}",
+            "log: 07:04:09.313  runScenario {\"seconds\":32,\"warmupSec\":0,\"compositeWidth\":1280,\"compositeHeight\":720,\"scalingProbeRequested\":false}",
+            "log: 07:04:09.313  WebCodecs unavailable -> taking the \u00a73.5 fallback path (single-track <video>)"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+Hello {{.Name}},
+
+The email address you use to sign in to ReelBolt was changed to {{.NewEmail}}. This address no longer signs in to the account, and you were signed out everywhere.
+
+If you did not make this change, contact support@reelbolt.ai right away.
+
+-- {{.FooterNote}}

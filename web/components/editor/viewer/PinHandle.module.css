@@ -1,0 +1,40 @@
+/* The corner pin handle: a transparent hit area (24 px fine, 44 px coarse, set inline) around a small mark. */
+.handle {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: var(--rb-cursor-move);
+  outline: none;
+}
+
+.handle:disabled {
+  cursor: var(--rb-cursor-default);
+}
+
+.mark {
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: 2px solid var(--pin-color);
+  background: var(--pin-color);
+  box-shadow: 0 0 0 1.5px var(--rb-ed-handle-halo);
+}
+
+.active .mark {
+  background: var(--rb-ed-handle-core);
+}
+
+/* Keyboard focus: a light ring inside a dark band, so it shows on a dark picture and on a light one. */
+.handle:focus-visible .mark {
+  outline: 2px solid var(--rb-ed-handle-core);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1.5px var(--rb-ed-handle-halo), 0 0 0 4.5px var(--rb-ed-handle-halo);
+}

@@ -1,0 +1,226 @@
+{
+ "fps": 30,
+ "width": 960,
+ "height": 540,
+ "clip": "syn-anim-04",
+ "videoType": "animation",
+ "frames": 480,
+ "theme": {
+  "bg": "#2a0a3a"
+ },
+ "scenes": [
+  {
+   "from": 0,
+   "bg": "#2a0a3a",
+   "bgB": "#5a1a78",
+   "deco": "stripes",
+   "accent": "#ffe14d",
+   "decoOpacity": 0.08
+  },
+  {
+   "from": 240,
+   "trans": "fade",
+   "dur": 20,
+   "bg": "#ffe14d",
+   "bgB": "#ffc933",
+   "deco": "grid",
+   "accent": "#2a0a3a",
+   "decoOpacity": 0.1
+  },
+  {
+   "from": 380,
+   "trans": "cut",
+   "bg": "#101820",
+   "bgB": "#1f3345",
+   "deco": "dots",
+   "accent": "#ff3d9a",
+   "decoOpacity": 0.2
+  }
+ ],
+ "elements": [
+  {
+   "kind": "rect",
+   "id": "r1",
+   "name": "magenta box",
+   "x": 80,
+   "y": 160,
+   "w": 130,
+   "h": 130,
+   "color": "#ff3d9a",
+   "scene": 0,
+   "skip": [
+    "appear",
+    "disappear"
+   ],
+   "vis": [
+    {
+     "in": 14,
+     "out": 150,
+     "fade": 4
+    }
+   ],
+   "hits": [
+    {
+     "kind": "shake",
+     "frame": 100
+    },
+    {
+     "kind": "shake",
+     "frame": 108,
+     "amp": 10
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "r2",
+   "name": "yellow box",
+   "x": 300,
+   "y": 260,
+   "w": 130,
+   "h": 130,
+   "color": "#ffe14d",
+   "scene": 0,
+   "textColor": "#2a0a3a",
+   "label": "GO",
+   "skip": [
+    "appear",
+    "disappear"
+   ],
+   "vis": [
+    {
+     "in": 60,
+     "out": 200,
+     "fade": 4
+    }
+   ],
+   "moves": [
+    {
+     "start": 70,
+     "end": 90,
+     "x": 520,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "kind": "rect",
+   "id": "banner",
+   "name": "banner",
+   "x": 220,
+   "y": 30,
+   "w": 520,
+   "h": 70,
+   "color": "#00e0b8",
+   "scene": 0,
+   "label": "NEW ARRIVAL",
+   "textColor": "#2a0a3a",
+   "skip": [
+    "disappear"
+   ],
+   "vis": [
+    {
+     "in": 30,
+     "out": 220,
+     "slide": [
+      0,
+      -140
+     ],
+     "fade": 14,
+     "fadeOut": 14
+    }
+   ]
+  },
+  {
+   "kind": "ball",
+   "id": "ball",
+   "name": "ball",
+   "x": 760,
+   "y": 120,
+   "w": 50,
+   "h": 50,
+   "color": "#ffffff",
+   "release": 130,
+   "floor": 500,
+   "vis": [
+    {
+     "in": 0
+    }
+   ],
+   "scene": 0,
+   "e": 0.62,
+   "quiet": true
+  },
+  {
+   "kind": "char",
+   "id": "ch",
+   "name": "dancer",
+   "x": 160,
+   "y": 250,
+   "w": 100,
+   "h": 170,
+   "color": "#2a0a3a",
+   "color2": "#ff3d9a",
+   "scene": 1,
+   "skip": [
+    "appear",
+    "disappear",
+    "move_stop"
+   ],
+   "vis": [
+    {
+     "in": 256,
+     "out": 370,
+     "fade": 5
+    }
+   ],
+   "moves": [
+    {
+     "start": 268,
+     "end": 300,
+     "x": 640,
+     "y": 250
+    }
+   ],
+   "hits": [
+    {
+     "kind": "pop",
+     "frame": 330
+    }
+   ]
+  },
+  {
+   "kind": "text",
+   "id": "t",
+   "name": "closing text",
+   "text": "Fin",
+   "x": 380,
+   "y": 180,
+   "w": 200,
+   "h": 120,
+   "color": "#ff3d9a",
+   "scene": 2,
+   "fontSize": 96,
+   "skip": [
+    "text_out"
+   ],
+   "vis": [
+    {
+     "in": 385,
+     "out": 450,
+     "fade": 6
+    }
+   ]
+  }
+ ],
+ "speech": [
+  {
+   "start": 12,
+   "end": 105
+  },
+  {
+   "start": 262,
+   "end": 372
+  }
+ ]
+}

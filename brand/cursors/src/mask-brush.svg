@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- mask-brush: paintbrush drawn upright then rotated 45deg; bristle tip lands on the hotspot (4,28) -->
+  <g transform="rotate(45 16 16)" stroke="#2E1065" stroke-width="1.7" stroke-linejoin="round">
+    <rect x="14.1" y="1" width="3.8" height="18" rx="1.9" fill="#F5F3F8"/>
+    <rect x="12.6" y="17.5" width="6.8" height="6" rx="1" fill="#C4B5FD"/>
+    <path d="M12.8 23.5 H19.2 C19.6 27 18.4 30.4 16 33 C13.6 30.4 12.4 27 12.8 23.5 Z" fill="#F5F3F8"/>
+    <path d="M12.9 26.6 C14.2 27.6 17.8 27.6 19.1 26.6 C18.6 29.6 17.4 31.6 16 33 C14.6 31.6 13.4 29.6 12.9 26.6 Z" fill="#A855F7" stroke-width="1"/>
+  </g>
+</svg>

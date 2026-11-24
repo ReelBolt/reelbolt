@@ -1,0 +1,2010 @@
+{
+  "version": 1,
+  "description": "50-goal evaluation fixture for the recipe-first assistant: realistic marketer goals with the expected template, run brief, lint findings and cost. Template keys come from WorkflowTemplateCatalog.cs.",
+  "routes": {
+    "template": "One catalog template runs unmodified. A template listed in plannedTemplates counts as available only after its phase ships; until then the goal is scored as decline_with_alternative (see eval-goals.md).",
+    "template_with_patch": "A catalog template plus small plain-English edits (e.g. add a Voiceover step).",
+    "custom_graph": "No template fits; the assistant assembles a new graph from existing steps.",
+    "clarify_first": "Too vague to run; ask the listed questions before building.",
+    "decline_with_alternative": "ReelBolt cannot do it; say so and name the real alternative in why."
+  },
+  "goals": [
+    {
+      "id": "G01",
+      "locale": "it",
+      "goal": "Ci serve un video esplicativo di circa 60 secondi sul portale note spese, in italiano, 16:9, con una voce che racconta. Usa il nostro design system.",
+      "project": {
+        "code": "blazor",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "approved",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "quick-win-promo-ds",
+        "alternates": [],
+        "patch": [
+          "Insert a Voiceover step (source ScriptScenes, pointing at the Scriptwriter step) between the Scriptwriter and the Director so the narration is spoken before shots are timed",
+          "Move the review loop's target to the Author step number after the insertion"
+        ],
+        "brief": {
+          "language": "it",
+          "format": "Landscape",
+          "resolution": "1080p",
+          "lengthSec": 60,
+          "designSystem": "project",
+          "voice": "narrated",
+          "notes": "Video esplicativo del portale note spese, voce narrante in italiano.",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL016",
+          "WL002"
+        ],
+        "paid": true,
+        "why": "quick-win-promo-ds builds from the approved profile but has no Voiceover step (Scriptwriter is step 4, Director step 5), so narration needs a patch; unpatched it is silent."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G02",
+      "locale": "en",
+      "goal": "15 sec vertical reel about our timeline feature, with a voice pls",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "cinematic-feature-spotlight",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Vertical",
+          "lengthSec": 15,
+          "designSystem": "none",
+          "voice": "narrated",
+          "tone": "Energetic",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "cinematic-feature-spotlight is the narrated vertical reel from code and already has a Voiceover step (ScriptScenes)."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G03",
+      "locale": "en",
+      "goal": "We launch Monday. Need a proper launch trailer, around 45 seconds, landscape, dramatic.",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "story-arc-launch-trailer",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Landscape",
+          "lengthSec": 45,
+          "designSystem": "none",
+          "voice": "narrated",
+          "tone": "Inspirational",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL006"
+        ],
+        "paid": true,
+        "why": "story-arc-launch-trailer is the narrated trailer from code; it needs a voice provider and none is configured, so the assistant must say so before running."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G04",
+      "locale": "es",
+      "goal": "Quiero un video promo de mi app pero la versión más barata, mi código es enorme.",
+      "project": {
+        "code": "other",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "lean-context-promo",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "es",
+          "designSystem": "none",
+          "voice": "none",
+          "notes": "Versión ligera y económica; el código es muy grande.",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "lean-context-promo reads less code per step so large projects cost less; it is silent unless a Voiceover step is added."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G05",
+      "locale": "en",
+      "goal": "30s square video for LinkedIn showing what our app does, no voiceover",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Square",
+          "lengthSec": 30,
+          "designSystem": "none",
+          "stylePreset": "corporate-explainer",
+          "voice": "none",
+          "tone": "Calm",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "quick-win-promo is the default video from code and is silent, matching no voiceover."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G06",
+      "locale": "de",
+      "goal": "Mach bitte ein 20-Sekunden-Reel im Hochformat mit unserem Markenprofil, ohne Ton.",
+      "project": {
+        "code": "blazor",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "approved",
+        "providers": [
+          "chat"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo-ds",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "de",
+          "format": "Vertical",
+          "lengthSec": 20,
+          "designSystem": "project",
+          "voice": "none",
+          "stylePreset": "fast-social-reel",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "An approved profile exists, so quick-win-promo-ds avoids re-reading the code; it is silent, as requested."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G07",
+      "locale": "fr",
+      "goal": "Une vidéo promo avec nos couleurs de marque et des fonds animés générés par IA, c'est possible ?",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "approved",
+        "providers": [
+          "chat",
+          "videoGeneration"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo-plates-ds",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "fr",
+          "designSystem": "project",
+          "voice": "none",
+          "notes": "Fonds abstraits animés générés par IA; la génération coûte de l'argent, à annoncer avant.",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "quick-win-promo-plates-ds is the profile promo with one or two AI background plates; needs an approved profile and a video-generation provider, both present."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G08",
+      "locale": "en",
+      "goal": "60 second promo for our app with a narrator, landscape",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "trial"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "quick-win-promo",
+        "alternates": [
+          "cinematic-feature-spotlight",
+          "story-arc-launch-trailer"
+        ],
+        "patch": [
+          "Insert a Voiceover step (ScriptScenes, Scriptwriter step 8) before the Director step and retarget the review loop"
+        ],
+        "brief": {
+          "language": "en",
+          "format": "Landscape",
+          "lengthSec": 60,
+          "designSystem": "none",
+          "voice": "narrated",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL016",
+          "WL006"
+        ],
+        "paid": true,
+        "why": "quick-win-promo plus a Voiceover patch wins for a 60 s landscape explainer; cinematic-feature-spotlight is a short punchy vertical reel and story-arc-launch-trailer is a dramatic arc. No voice provider is configured (WL006) and the unpatched template is silent (WL016)."
+      },
+      "difficulty": "hard"
+    },
+    {
+      "id": "G09",
+      "locale": "pt",
+      "goal": "Faz um vídeo do nosso app com o perfil de marca, por favor.",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "draft",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo-ds",
+        "alternates": [
+          "quick-win-promo"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "pt",
+          "designSystem": "project",
+          "voice": "none",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL012"
+        ],
+        "paid": false,
+        "why": "quick-win-promo-ds requires an approved profile and the profile is still a draft, so WL012 fires until it is approved; the assistant should offer approval. quick-win-promo (code only, no profile step, so no WL012) would ignore the brand profile."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G10",
+      "locale": "en",
+      "goal": "vertical reel of our app w/ some cool animated ai backgrounds",
+      "project": {
+        "code": "other",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "videoGeneration"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo-plates",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Vertical",
+          "designSystem": "none",
+          "voice": "none",
+          "stylePreset": "fast-social-reel",
+          "notes": "Abstract AI backgrounds; disclose generation cost first.",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "quick-win-promo-plates adds one or two AI background plates to the code promo; no approved profile, so the non-ds variant."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G11",
+      "locale": "en",
+      "goal": "Explainer for our Blazor admin tool, about 90 seconds, landscape, calm voiceover.",
+      "project": {
+        "code": "blazor",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "quick-win-promo",
+        "alternates": [
+          "cinematic-feature-spotlight",
+          "story-arc-launch-trailer"
+        ],
+        "patch": [
+          "Insert a Voiceover step (ScriptScenes, Scriptwriter step 8) before the Director step and retarget the review loop"
+        ],
+        "brief": {
+          "language": "en",
+          "format": "Landscape",
+          "lengthSec": 90,
+          "designSystem": "none",
+          "stylePreset": "corporate-explainer",
+          "voice": "narrated",
+          "tone": "Calm",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL016",
+          "WL002"
+        ],
+        "paid": true,
+        "why": "quick-win-promo plus a Voiceover patch wins for a calm 90 s explainer; spotlight is short and punchy, trailer is dramatic. Unpatched quick-win-promo is silent."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G12",
+      "locale": "en",
+      "goal": "cut my interview down to the best 2 minutes",
+      "project": {
+        "code": "none",
+        "videoClips": 8,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "lengthSec": 120,
+          "voice": "none",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit is the plain highlight edit that removes dead air and filler."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G13",
+      "locale": "it",
+      "goal": "Abbiamo già il video dell'app in inglese, rifallo in italiano.",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "approved",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo-ds",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "it",
+          "designSystem": "project",
+          "voice": "none",
+          "notes": "Stessa idea del video inglese, testi e sottotitoli in italiano.",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "No localise template exists for a code video; re-running quick-win-promo-ds with an Italian brief regenerates scenes and captions in Italian (assumption: Scriptwriter follows the brief language)."
+      },
+      "difficulty": "medium",
+      "assumptions": [
+        "Not verified from code in T-007: whether the Scriptwriter follows the brief language (the brief language reaches agents through the run brief; confirm with the first measured run)."
+      ]
+    },
+    {
+      "id": "G14",
+      "locale": "en",
+      "goal": "add name tags and the key points on screen, 6 clips from our panel",
+      "project": {
+        "code": "none",
+        "videoClips": 6,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-graphics",
+        "alternates": [
+          "video-derush-edit-graphics-room"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "notes": "Speaker name tags and key-point callouts.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-graphics adds titles, name tags and callouts where the picture has room."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G15",
+      "locale": "en",
+      "goal": "Highlight edit of the event footage with the music track I uploaded under it, 90s.",
+      "project": {
+        "code": "none",
+        "videoClips": 4,
+        "images": 0,
+        "musicTrack": true,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-music",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "lengthSec": 90,
+          "voice": "none",
+          "sourceFiles": [
+            "video-clips",
+            "music-track"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-music mixes an uploaded track under the voices; the track is present."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G16",
+      "locale": "en",
+      "goal": "make the footage edit more upbeat, add some music",
+      "project": {
+        "code": "none",
+        "videoClips": 4,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-music",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "tone": "Upbeat",
+          "sourceFiles": [
+            "video-clips",
+            "music-track"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL010"
+        ],
+        "paid": false,
+        "why": "video-derush-edit-music needs an uploaded track and ReelBolt has no built-in music library; the assistant must ask for the file before running."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G17",
+      "locale": "es",
+      "goal": "Subí mis whooshes y clics, ponlos en los cortes del video.",
+      "project": {
+        "code": "none",
+        "videoClips": 3,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": true,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-sfx",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "es",
+          "voice": "none",
+          "sourceFiles": [
+            "video-clips",
+            "sfx"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-sfx places uploaded sound effects on key cuts; the sfx files are present."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G18",
+      "locale": "en",
+      "goal": "Here's my wedding footage. Make the best possible film out of it, take your time.",
+      "project": {
+        "code": "none",
+        "videoClips": 12,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-room",
+        "alternates": [
+          "video-derush-edit"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "stylePreset": "cinematic",
+          "tone": "Calm",
+          "notes": "Quality over speed and cost.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-room has several AI editors debate the cut for a more considered result at higher token cost; video-derush-edit is the cheaper valid alternative."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G19",
+      "locale": "de",
+      "goal": "Alle meine Clips sollen aussehen wie aus einem Film, warm und einheitlich.",
+      "project": {
+        "code": "none",
+        "videoClips": 9,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-grade-room",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "de",
+          "voice": "none",
+          "stylePreset": "cinematic",
+          "notes": "Einheitlicher warmer, filmischer Look.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-grade-room applies one colour look chosen from the footage."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G20",
+      "locale": "en",
+      "goal": "edit the clips, put titles on and mix my track under it",
+      "project": {
+        "code": "none",
+        "videoClips": 5,
+        "images": 0,
+        "musicTrack": true,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "video-derush-edit-music",
+        "alternates": [
+          "video-derush-edit-graphics"
+        ],
+        "patch": [
+          "Add the on-screen titles and callouts step(s) from video-derush-edit-graphics before the final compile"
+        ],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "notes": "Titles for key moments plus music bed.",
+          "sourceFiles": [
+            "video-clips",
+            "music-track"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "No single template does music and titles; video-derush-edit-music plus the titles step wins because the uploaded track is the harder requirement; the reverse (graphics plus a music step) is equally valid."
+      },
+      "difficulty": "hard"
+    },
+    {
+      "id": "G21",
+      "locale": "en",
+      "goal": "Tell a 45 second story about our product using these clips plus our app, vertical, with narration",
+      "project": {
+        "code": "react",
+        "videoClips": 7,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "narrated-story",
+        "alternates": [
+          "video-derush-edit-voiceover"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Vertical",
+          "lengthSec": 45,
+          "voice": "narrated",
+          "stylePreset": "fast-social-reel",
+          "sourceFiles": [
+            "video-clips",
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "narrated-story writes the script first then orders the clips; valid alternate is video-derush-edit-voiceover (cut first, then narrate)."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G22",
+      "locale": "fr",
+      "goal": "Coupe mes rushs puis ajoute une voix off et des sous-titres, 1 minute 30.",
+      "project": {
+        "code": "none",
+        "videoClips": 6,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-voiceover",
+        "alternates": [
+          "video-derush-edit-dub"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "fr",
+          "lengthSec": 90,
+          "voice": "narrated",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "video-derush-edit-voiceover cuts, narrates and captions in the stated language; video-derush-edit-dub only wins if the footage speech is in another language."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G23",
+      "locale": "en",
+      "goal": "Dub my product walkthrough into Spanish with subtitles",
+      "project": {
+        "code": "none",
+        "videoClips": 2,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "transcription"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-dub",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "es",
+          "voice": "narrated",
+          "notes": "Dub the English walkthrough into Spanish with burned subtitles.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL006"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-dub translates and re-speaks the edit; no voice provider is configured."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G24",
+      "locale": "en",
+      "goal": "fix the bits where I stumble using my own voice",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-pickups",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "project-voice",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL008"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-pickups re-records stumbles in a cloned voice, which needs a consented project voice; none exists yet, so the assistant must send the user to the Voices tab."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G25",
+      "locale": "es",
+      "goal": "Corta mi grabación, ponle un color uniforme y una voz en off que explique el producto.",
+      "project": {
+        "code": "none",
+        "videoClips": 4,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "video-derush-edit-grade-room",
+        "alternates": [
+          "video-derush-edit-voiceover"
+        ],
+        "patch": [
+          "Add the narration and caption steps from video-derush-edit-voiceover after the cut and before the final compile"
+        ],
+        "brief": {
+          "language": "es",
+          "voice": "narrated",
+          "notes": "Color uniforme y voz en off explicando el producto.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL016"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-grade-room plus narration steps keeps the colour look; video-derush-edit-voiceover already narrates and captions but has no colour grade."
+      },
+      "difficulty": "hard"
+    },
+    {
+      "id": "G26",
+      "locale": "pt",
+      "goal": "Quero dublar o meu vídeo para japonês.",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice",
+          "transcription"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-dub",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "ja",
+          "voice": "narrated",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL009"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-dub covers dubbing; whether the configured voice supports Japanese is an assumption, so the assistant must check."
+      },
+      "difficulty": "hard",
+      "assumptions": [
+        "Checked 2026-10-24: no code or doc states which voices support Japanese; the dub template comment says speech providers detect the language from the text. Vendor-dependent, unverifiable from code; the assistant must check or state the limit."
+      ]
+    },
+    {
+      "id": "G27",
+      "locale": "de",
+      "goal": "Aus den Interview-Clips mit unserem Kunden soll ein 45-Sekunden-Testimonial werden, mit Namenseinblendung.",
+      "project": {
+        "code": "none",
+        "videoClips": 4,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-graphics",
+        "alternates": [
+          "video-derush-edit"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "de",
+          "lengthSec": 45,
+          "voice": "none",
+          "notes": "Kunden-Testimonial; Name und Firma einblenden.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "video-derush-edit-graphics cuts the interview and adds name tags where the picture has room; video-derush-edit is valid without the name tag."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G28",
+      "locale": "en",
+      "goal": "I'd like a short AI-made opening shot and a closing card on my video",
+      "project": {
+        "code": "none",
+        "videoClips": 5,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "videoGeneration"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-broll",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "notes": "Opening shot and end card generated by AI.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "video-derush-edit-broll adds AI shots; generation costs money and is capped, so disclose first."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G29",
+      "locale": "en",
+      "goal": "need an ai generated shot of a city at night for my intro",
+      "project": {
+        "code": "none",
+        "videoClips": 3,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "videoGeneration"
+        ],
+        "plan": "trial"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-broll",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "notes": "Night city shot for the intro.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL007"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-broll requires a plan that allows generation; the trial plan is not entitled (assumption: entitlement rules are outside the catalog)."
+      },
+      "difficulty": "medium",
+      "assumptions": [
+        "Verified from inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json: the first plan (Trial) has videoGenAllowed false and audioGenAllowed false; video generation needs the third plan or higher. Expectation holds."
+      ]
+    },
+    {
+      "id": "G30",
+      "locale": "it",
+      "goal": "Voglio delle inquadrature create con l'AI nel mio video.",
+      "project": {
+        "code": "none",
+        "videoClips": 4,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "pro"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-broll",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "it",
+          "voice": "none",
+          "notes": "Inquadrature generate con AI.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL006"
+        ],
+        "paid": true,
+        "why": "video-derush-edit-broll needs a video-generation provider and none is configured."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G31",
+      "locale": "en",
+      "goal": "I need a cover image for my reel",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 1,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "decline_with_alternative",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en"
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "No workflow template makes a cover image; the picture (thumbnail) editor is available for a picture in the project, with layers, text and AI tools, so use that."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G32",
+      "locale": "en",
+      "goal": "I have 12 photos from the event, make a slideshow video with calm music, 40 seconds",
+      "project": {
+        "code": "none",
+        "videoClips": 0,
+        "images": 12,
+        "musicTrack": true,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-music",
+        "alternates": [
+          "video-derush-edit"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "lengthSec": 40,
+          "voice": "none",
+          "tone": "Calm",
+          "sourceFiles": [
+            "images",
+            "music-track"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "Stills are turned into video clips (video-editing.md, Still images), so video-derush-edit-music can cut photos and mix the uploaded track; assumption: no slideshow-specific template exists."
+      },
+      "difficulty": "hard",
+      "assumptions": [
+        "Verified from docs/video-editing.md 'Still images': photos become 9 s clips with motion, so derush templates cut them; no slideshow-specific template exists in WorkflowTemplateCatalog. Expectation holds."
+      ]
+    },
+    {
+      "id": "G33",
+      "locale": "en",
+      "goal": "build our brand profile from the code and design files",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "product-profile-from-code",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "designSystem": "none",
+          "sourceFiles": [
+            "code",
+            "brief-doc"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "product-profile-from-code reads design files and code to build the reusable profile; free reads first, AI only for gaps."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G34",
+      "locale": "it",
+      "goal": "Costruisci il profilo del brand dal nostro codice Blazor, abbiamo già una bozza.",
+      "project": {
+        "code": "blazor",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "draft",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "product-profile-from-code",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "it",
+          "designSystem": "project",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "product-profile-from-code refreshes the draft profile so it can then be approved."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G35",
+      "locale": "en",
+      "goal": "Make a 30 second video for our release notes, the changelog is in the project",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "quick-win-promo",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "lengthSec": 30,
+          "designSystem": "none",
+          "voice": "none",
+          "notes": "Cover the highlights of the changelog.",
+          "sourceFiles": [
+            "code",
+            "brief-doc"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "quick-win-promo is the code video; the changelog goes in as a brief document and is read as the brief."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G36",
+      "locale": "es",
+      "goal": "Haz el video con nuestro design system.",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "clarify_first",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "es",
+          "designSystem": "project",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [
+          "No tenemos un perfil de marca todavía: ¿quieres que lo cree primero a partir del código y los archivos de diseño?",
+          "¿Cuánto debe durar el video y en qué formato?"
+        ],
+        "lint": [
+          "WL012"
+        ],
+        "paid": false,
+        "why": "No profile exists at all, so quick-win-promo-ds would stop at its Require step (WL012); building the profile first (product-profile-from-code) is a separate step the user must approve, so ask before building."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G37",
+      "locale": "en",
+      "goal": "the license plates in my dashcam video need to be hidden the whole time",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "vision"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-region-effect",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "notes": "Hide license plates throughout.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL015"
+        ],
+        "paid": false,
+        "why": "video-region-effect blurs a named object across the clip; sending the clip to tracking is a separate OFF permission that must be enabled."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G38",
+      "locale": "fr",
+      "goal": "Floute le visage de la personne à gauche dans toute la vidéo.",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "vision"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-region-effect",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "fr",
+          "voice": "none",
+          "notes": "Flouter le visage de la personne à gauche.",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL015"
+        ],
+        "paid": false,
+        "why": "video-region-effect tracks and blurs one named object; the tracking permission is off by default."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G39",
+      "locale": "en",
+      "goal": "Put the screen recording of our dashboard on the laptop in my office clip",
+      "project": {
+        "code": "react",
+        "videoClips": 2,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "green-screen-insert",
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "green-screen-insert places a recording onto a green screen in the clip; no AI model, processing time only."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G40",
+      "locale": "en",
+      "goal": "just add subtitles to my finished video, nothing else",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "transcription"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-subtitles",
+        "alternates": [
+          "video-subtitles-translated"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "none",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL019"
+        ],
+        "paid": false,
+        "why": "Product decision Q16: subtitles-only is a supported goal. The video-subtitles template transcribes the clip and burns the transcript as captions (VideoCompileStepConfig.CaptionSource = Transcript) and writes SRT and VTT files; a plain captions flag on a derush template would trip WL019, which is the trap the template avoids. Its alternate video-subtitles-translated adds a translation step when the brief names another language."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G41",
+      "locale": "en",
+      "goal": "can you make a talking avatar presenter for our product video?",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "decline_with_alternative",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "narrated",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "ReelBolt has no talking-avatar or lip-sync capability; alternative is narrated-story or a code promo with a voiceover."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G42",
+      "locale": "en",
+      "goal": "Make an Instagram carousel for our launch",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "decline_with_alternative",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "ReelBolt produces video, not multi-image carousels; alternative is a vertical reel (cinematic-feature-spotlight)."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G43",
+      "locale": "en",
+      "goal": "I recorded 3 screen recordings of our product, make a demo with captions explaining what's going on, 1 minute",
+      "project": {
+        "code": "react",
+        "videoClips": 3,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template",
+        "templateKey": "video-derush-edit-voiceover",
+        "alternates": [
+          "narrated-story"
+        ],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "lengthSec": 60,
+          "voice": "narrated",
+          "tone": "Calm",
+          "sourceFiles": [
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "video-derush-edit-voiceover cuts the recordings, speaks a narration and burns captions from it, which is what a captioned demo needs; narrated-story is valid if the user wants the story written before the cut."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G44",
+      "locale": "en",
+      "goal": "I have the vertical video, can you make a landscape version of it?",
+      "project": {
+        "code": "none",
+        "videoClips": 1,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "decline_with_alternative",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "format": "Landscape"
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": false,
+        "why": "No template reformats a finished video; format is chosen per run, so re-run the original template with Landscape in the brief (the editor's Deliver step exports other formats, but the video editor is off in 0.1.0-alpha)."
+      },
+      "difficulty": "medium",
+      "assumptions": [
+        "Not verified from code in T-007; expectation rests on the absence of any reformat template in WorkflowTemplateCatalog (checked: none by key list)."
+      ]
+    },
+    {
+      "id": "G45",
+      "locale": "en",
+      "goal": "Mix real screens from our code with my demo footage in one trailer",
+      "project": {
+        "code": "react",
+        "videoClips": 3,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "custom_graph",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "voice": "narrated",
+          "sourceFiles": [
+            "code",
+            "video-clips"
+          ]
+        },
+        "clarify": [],
+        "lint": [],
+        "paid": true,
+        "why": "No template takes both source code and footage; needs a custom graph joining the code promo steps with the footage edit."
+      },
+      "difficulty": "hard"
+    },
+    {
+      "id": "G46",
+      "locale": "en",
+      "goal": "make me a video",
+      "project": {
+        "code": "none",
+        "videoClips": 12,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "clarify_first",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {},
+        "clarify": [
+          "Who is the video for and what should it say?",
+          "How long, and which format (vertical, square or landscape)?"
+        ],
+        "lint": [],
+        "paid": false,
+        "why": "Too vague: no length, audience or purpose; a template cannot be chosen yet."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G47",
+      "locale": "it",
+      "goal": "Fammi un video per Instagram.",
+      "project": {
+        "code": "none",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "clarify_first",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "it",
+          "format": "Vertical"
+        },
+        "clarify": [
+          "Hai del codice dell'app o dei video da montare?",
+          "Quanto deve durare e di cosa parla?"
+        ],
+        "lint": [
+          "WL010"
+        ],
+        "paid": false,
+        "why": "No files uploaded and no topic; the assistant must learn the source before choosing between the code promo and footage templates."
+      },
+      "difficulty": "easy"
+    },
+    {
+      "id": "G48",
+      "locale": "en",
+      "goal": "Need the same ad for Instagram, YouTube and LinkedIn",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "clarify_first",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [
+          "What should the ad say and how long should it be?",
+          "Should I make three separate runs (vertical, landscape, square)?"
+        ],
+        "lint": [],
+        "paid": false,
+        "why": "Format is chosen per run, so each of Vertical, Landscape and Square is a separate run; ask for the message and length, and confirm three runs."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G49",
+      "locale": "pt",
+      "goal": "Preciso de um vídeo de onboarding mostrando o passo a passo do app para novos clientes.",
+      "project": {
+        "code": "react",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat",
+          "voice"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "template_with_patch",
+        "templateKey": "quick-win-promo",
+        "alternates": [
+          "cinematic-feature-spotlight"
+        ],
+        "patch": [
+          "Insert a Voiceover step (ScriptScenes, Scriptwriter step 8) before the Director step and retarget the review loop"
+        ],
+        "brief": {
+          "language": "pt",
+          "lengthSec": 90,
+          "format": "Landscape",
+          "voice": "narrated",
+          "tone": "Calm",
+          "sourceFiles": [
+            "code"
+          ]
+        },
+        "clarify": [],
+        "lint": [
+          "WL016"
+        ],
+        "paid": true,
+        "why": "quick-win-promo shows the real screens in order but is silent; narration for an onboarding walkthrough needs a Voiceover patch."
+      },
+      "difficulty": "medium"
+    },
+    {
+      "id": "G50",
+      "locale": "en",
+      "goal": "Need something for the launch",
+      "project": {
+        "code": "none",
+        "videoClips": 0,
+        "images": 0,
+        "musicTrack": false,
+        "sfxFiles": false,
+        "consentedVoice": false,
+        "designSystem": "none",
+        "providers": [
+          "chat"
+        ],
+        "plan": "creator"
+      },
+      "expected": {
+        "route": "clarify_first",
+        "templateKey": null,
+        "alternates": [],
+        "patch": [],
+        "brief": {
+          "language": "en"
+        },
+        "clarify": [
+          "Do you have app code or video footage to start from?",
+          "How long should it be and where will it run?"
+        ],
+        "lint": [
+          "WL010"
+        ],
+        "paid": false,
+        "why": "No source and no deliverable stated; code or footage, and length, are unknown."
+      },
+      "difficulty": "easy"
+    }
+  ],
+  "plannedTemplates": []
+}

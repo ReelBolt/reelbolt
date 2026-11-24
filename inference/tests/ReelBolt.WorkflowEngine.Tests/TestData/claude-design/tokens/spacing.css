@@ -1,0 +1,8 @@
+/* Trimmed fixture: the 4px spacing scale, radii, layout sizes and the z-index tokens that are skipped. */
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;
+--radius-default:4px;--radius-tile:12px;--radius-card:16px;--radius-button-lg:12px;--radius-pill:var(--radius-default);
+--appbar-height:64px;--drawer-width:240px;--drawer-width-mobile:300px;--content-cap:1700px;--touch-target:44px;--fab-size:56px;
+--z-drawer:1100;
+--z-tooltip:2300;
+}

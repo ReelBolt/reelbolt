@@ -1,0 +1,98 @@
+{
+  "menu": {
+    "help": "Help",
+    "takeTheTour": "Take the tour",
+    "readTheGuides": "Read the guides",
+    "documentation": "Documentation"
+  },
+  "tour": {
+    "steps": {
+      "welcome": {
+        "title": "Welcome to ReelBolt",
+        "body": "This menu takes you to your projects, the editor and your settings. On a phone it sits behind the menu button at the top."
+      },
+      "newProject": {
+        "title": "Start with a project",
+        "body": "A project is a folder for one video job. Create one, then add your clips, pictures or audio to it."
+      },
+      "apps": {
+        "title": "Pick an app and run it",
+        "body": "Inside a project, the Apps tab lists what you can make. Choose one, set a few options and press Run."
+      },
+      "appsOff": {
+        "title": "Pick an app and run it",
+        "body": "Inside a project, the Workflows tab lists what you can run. Choose one, set a few options and press Run."
+      },
+      "progress": {
+        "title": "Watch it work",
+        "body": "Each run shows its progress as it goes. You can leave the page: your video keeps going and the result is waiting when you are back."
+      },
+      "assistant": {
+        "title": "Ask the assistant",
+        "body": "Not sure where to start? Ask in your own words. The assistant can explain things, suggest next steps and check with you before it changes anything."
+      },
+      "editor": {
+        "title": "Fine-tune in the editor",
+        "body": "Open a finished video to trim, reorder and add text. The editor is an Early preview, so some things are still being polished."
+      },
+      "pictures": {
+        "title": "Pictures and thumbnails",
+        "body": "Make a cover picture or thumbnail for your video from the same place, then download it or use it in your video."
+      },
+      "credits": {
+        "title": "Credits and your plan",
+        "body": "Runs use credits. Open this menu to see your plan and balance, and to take this tour again any time."
+      }
+    },
+    "learnMore": "Learn more (opens in a new tab)",
+    "skip": "Skip tour",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "announce": "Step {n} of {total}: {title}",
+    "progress": "Step {n} of {total}"
+  },
+  "checklist": {
+    "title": "Getting started",
+    "doneTitle": "All done",
+    "doneBody": "You have tried everything on the list. Nicely done.",
+    "progress": "{done} of {total} done",
+    "dismiss": "Dismiss Getting started",
+    "closeDone": "Close Getting started",
+    "showSteps": "Show steps",
+    "hideSteps": "Hide steps",
+    "how": "How",
+    "howLabel": "How: {label} (opens in a new tab)",
+    "doneMark": " (done)",
+    "freeFirstVideo": "your first one is free",
+    "items": {
+      "create_project": "Create a project",
+      "upload_file": "Upload a file",
+      "run_video": "Run your first video",
+      "open_result": "Open the result",
+      "try_assistant": "Try the assistant",
+      "open_editor": "Open the editor (Early preview)"
+    },
+    "assistantPrompt": "What can I do from the dashboard? Suggest the most useful next step given my projects and recent runs."
+  },
+  "tourCard": {
+    "title": "New here? Take a look around",
+    "body": "A short tour of the menu, the assistant and where your videos land. It stays in the Help and account menus if you would rather do it later.",
+    "dismiss": "Not now"
+  },
+  "firstFilm": {
+    "title": "Make your first film",
+    "body": "Never made one here? We add a short sample clip to a new project and open the app ready to go. You press Run when you want to; nothing starts by itself.",
+    "button": "Make your first film",
+    "settingUp": "Setting it up...",
+    "dismiss": "Dismiss Make your first film",
+    "failedTitle": "Could not set up your first film",
+    "projectDescription": "A sample clip to try the highlight edit app.",
+    "error": {
+      "unverified": "Confirm your email address first: open the link we sent you, then try again.",
+      "tooLarge": "Your storage is full, so the sample clip could not be added. Free some space and try again.",
+      "network": "We could not reach ReelBolt. Check your connection and try again.",
+      "generic": "Please try again in a moment."
+    }
+  }
+}

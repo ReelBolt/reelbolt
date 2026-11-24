@@ -1,0 +1,21 @@
+#!/bin/sh
+# Added by the reelbolt-runner Debian package.
+#
+# WHY THIS EXISTS: the runner looks up ffmpeg and ffprobe as programs named
+# "ffmpeg" and "ffprobe" on PATH (runner/internal/daemon/probe.go). The .deb
+# installs this release's own pinned static builds under /opt/reelbolt/runner
+# so that a job on a user's machine produces the same bytes as the same job in
+# the cloud, whatever the distribution happens to ship. This wrapper is the one
+# line that makes them discoverable, for the runner and for anything it starts.
+#
+# It execs the real binary rather than symlinking it so that os.Executable() in
+# the running process resolves to /opt/reelbolt/runner/reelbolt-runner: an
+# install under /opt/reelbolt is package-managed (see runner/internal/update),
+# which is how the runner knows it must never replace itself behind dpkg's
+# back, and instead tells the user to upgrade through the package manager.
+set -eu
+
+PATH="/opt/reelbolt/runner:$PATH"
+export PATH
+
+exec /opt/reelbolt/runner/reelbolt-runner "$@"

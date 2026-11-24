@@ -1,0 +1,7 @@
+Ciao{{if .Name}} {{.Name}}{{end}},
+
+L'email che usi per accedere a ReelBolt è stata cambiata in {{.NewEmail}}. Questo indirizzo non dà più accesso all'account e tutte le sessioni sono state chiuse.
+
+Se non hai fatto tu questa modifica, scrivi subito a support@reelbolt.ai.
+
+-- {{.FooterNote}}

@@ -1,0 +1,67 @@
+/* The editor's tokens by reference only (read-only); nothing is added to that set. */
+.panel {
+  background: var(--rb-surface-raised);
+  border: 1px solid var(--rb-border);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-md);
+}
+
+.row {
+  background: var(--rb-surface);
+  border: 1px solid var(--rb-border);
+  border-radius: var(--mantine-radius-sm);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+}
+
+.list { list-style: none; margin: 0; padding: 0; }
+.item { margin-bottom: var(--mantine-spacing-xs); }
+
+.srOnly {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Phone: every control in the panel is a 44 px target. */
+@media (max-width: 599.98px) {
+  .panel :global(.mantine-Input-input),
+  .panel :global(.mantine-Button-root) { min-height: 44px; }
+  .panel :global(.mantine-Switch-root) { min-height: 44px; display: flex; align-items: center; }
+}
+
+.rowHidden {
+  background: var(--rb-surface-raised);
+  border-style: dashed;
+  border-color: var(--rb-border-strong);
+  color: var(--mantine-color-dimmed);
+}
+
+.error {
+  background: var(--rb-surface);
+  border: 1px solid var(--mantine-color-red-6);
+  border-radius: var(--mantine-radius-sm);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+}
+
+/* App inputs on (docs/design/app-inputs.md 24): the field list beside a live preview; one column on a phone. */
+.editorGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mantine-spacing-lg);
+}
+@media (min-width: 62em) {
+  .editorGrid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
+}
+.editBody {
+  border-top: 1px solid var(--rb-border);
+  margin-top: var(--mantine-spacing-xs);
+  padding-top: var(--mantine-spacing-xs);
+}
+.wrap { overflow-wrap: anywhere; min-width: 0; }
+
+.locked {
+  border: 1px dashed var(--rb-border-strong);
+  border-radius: var(--mantine-radius-sm);
+  padding: 8px 10px;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}

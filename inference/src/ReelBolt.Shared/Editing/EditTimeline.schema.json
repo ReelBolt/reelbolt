@@ -1,0 +1,1687 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reelbolt.local/schemas/editing/edit-timeline.schema.json",
+  "title": "EditTimeline",
+  "description": "Complete video editing timeline with tracks, markers, items, and metadata",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "projectId",
+    "name",
+    "settings",
+    "tracks",
+    "markers"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "description": "Schema version for this timeline (currently 2)",
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this timeline"
+    },
+    "projectId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Project identifier this timeline belongs to"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the timeline"
+    },
+    "settings": {
+      "$ref": "#/$defs/EditTimelineSettings"
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Track"
+      },
+      "description": "List of tracks in this timeline"
+    },
+    "markers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Marker"
+      },
+      "description": "List of markers in this timeline"
+    },
+    "inOut": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EditRange"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Optional in/out point range for playback"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EditTimelineSeed"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Optional seed data for timeline generation"
+    },
+    "colorGroups": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ColorGroup"
+          },
+          "maxItems": 32
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "P7: clips graded together; a clip is in at most one group"
+    },
+    "sequences": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EditSequence"
+          },
+          "maxItems": 64
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "P8: the nested timelines compound clips play; a sequence never contains itself, nesting depth at most 4"
+    },
+    "buses": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AudioBus"
+          },
+          "maxItems": 16
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "P8: the submix buses tracks route to through busId; a bus with no outputBusId feeds the master"
+    }
+  },
+  "$defs": {
+    "Rational": {
+      "type": "object",
+      "required": ["num", "den"],
+      "properties": {
+        "num": {
+          "type": "integer",
+          "description": "Numerator"
+        },
+        "den": {
+          "type": "integer",
+          "description": "Denominator"
+        }
+      },
+      "description": "Rational number representation (numerator/denominator)"
+    },
+    "EditTimelineSettings": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "rate",
+        "sampleRate",
+        "pixelAspect",
+        "aspectPolicy",
+        "startTimecodeFrames"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "description": "Video width in pixels"
+        },
+        "height": {
+          "type": "integer",
+          "description": "Video height in pixels"
+        },
+        "rate": {
+          "$ref": "#/$defs/Rational",
+          "description": "Frame rate (as a rational number)"
+        },
+        "sampleRate": {
+          "type": "integer",
+          "description": "Audio sample rate in Hz"
+        },
+        "pixelAspect": {
+          "$ref": "#/$defs/Rational",
+          "description": "Pixel aspect ratio"
+        },
+        "aspectPolicy": {
+          "enum": ["fit", "fill", "stretch"],
+          "description": "How to handle aspect ratio mismatches"
+        },
+        "startTimecodeFrames": {
+          "type": "integer",
+          "description": "Starting timecode offset in frames"
+        }
+      }
+    },
+    "Track": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "height",
+        "locked",
+        "enabled",
+        "mute",
+        "solo",
+        "items"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique track identifier"
+        },
+        "kind": {
+          "enum": ["video", "audio"],
+          "description": "Track type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Track name"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Color hex code (e.g., #FF0000)"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "height": {
+          "type": "number",
+          "description": "Track height in editor units"
+        },
+        "locked": {
+          "type": "boolean",
+          "description": "Whether the track is locked for editing"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the track is enabled in output"
+        },
+        "mute": {
+          "type": "boolean",
+          "description": "Whether the track is muted (audio tracks)"
+        },
+        "solo": {
+          "type": "boolean",
+          "description": "Whether only this track should play (audio tracks)"
+        },
+        "busId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional audio bus for mixing"
+        },
+        "gainDb": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Keyframed"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P5: the track fader in dB — value is the static level, keys an automation envelope over timeline frames; null is unity"
+        },
+        "pan": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "P5: stereo balance, -1 hard left .. 1 hard right; 0 (the default) is centre"
+        },
+        "eq": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TrackEq"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P5: the track equaliser; null is flat"
+        },
+        "dynamics": {
+          "anyOf": [{ "$ref": "#/$defs/AudioDynamics" }, { "type": "null" }],
+          "description": "P8: the track's dynamics section; null is none"
+        },
+        "denoise": {
+          "anyOf": [{ "$ref": "#/$defs/AudioDenoise" }, { "type": "null" }],
+          "description": "P8: the track's denoiser; null is none"
+        },
+        "leveler": {
+          "anyOf": [{ "$ref": "#/$defs/AudioLeveler" }, { "type": "null" }],
+          "description": "P8: the track's leveler; null is none"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Item"
+          },
+          "description": "Clips and elements on this track"
+        }
+      }
+    },
+    "Item": {
+      "discriminator": {
+        "propertyName": "type"
+      },
+      "required": ["id", "name", "recordIn", "recordOut"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for this item"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for this item"
+        },
+        "recordIn": {
+          "type": "integer",
+          "description": "Start position on the record (output) clock in frames"
+        },
+        "recordOut": {
+          "type": "integer",
+          "description": "End position on the record (output) clock in frames (exclusive)"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "How this item was created (agent decision, import, manual edit)"
+        }
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/MediaClip"
+        },
+        {
+          "$ref": "#/$defs/TitleClip"
+        },
+        {
+          "$ref": "#/$defs/GeneratorClip"
+        },
+        {
+          "$ref": "#/$defs/InsertClip"
+        },
+        {
+          "$ref": "#/$defs/Caption"
+        },
+        {
+          "$ref": "#/$defs/Transition"
+        },
+        {
+          "$ref": "#/$defs/CompoundClip"
+        },
+        {
+          "$ref": "#/$defs/MulticamClip"
+        },
+        {
+          "$ref": "#/$defs/AdjustmentClip"
+        }
+      ]
+    },
+    "MediaClip": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut",
+        "assetRef"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "mediaClip"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer",
+          "description": "Start position on the record (output) clock in frames"
+        },
+        "recordOut": {
+          "type": "integer",
+          "description": "End position on the record (output) clock in frames (exclusive)"
+        },
+        "assetRef": {
+          "$ref": "#/$defs/AssetRef",
+          "description": "Reference to the source media asset (resolvable against the owning project)"
+        },
+        "sourceIn": {
+          "type": "integer",
+          "description": "Offset into the source asset in frames"
+        },
+        "playbackRate": {
+          "type": "number",
+          "description": "Playback speed multiplier"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gainDb": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Keyframed"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Clip gain in dB as a keyframed 'double': 'value' is the static clip gain, 'keys' an optional time-varying gain envelope that overrides it"
+        },
+        "transform": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClipTransform"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P5: position/scale/rotation/opacity, each optionally keyframed; null is the identity"
+        },
+        "crop": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClipCrop"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P5: a static crop as fractions of the source picture; null crops nothing"
+        },
+        "sourceRotation": {
+          "type": ["integer", "null"],
+          "enum": [0, 90, 180, 270, null],
+          "description": "An extra clockwise quarter turn of the source picture, applied before crop and fit; null/0 is the identity"
+        },
+        "reverse": {
+          "type": "boolean",
+          "description": "P5: play the source backwards (sourceIn stays the lowest source frame touched); bounded by MaxReverseFrames"
+        },
+        "hold": {
+          "type": "boolean",
+          "description": "P5: freeze frame — every frame shows source frame sourceIn and the clip is silent; exclusive with reverse"
+        },
+        "fadeInFrames": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "P5: picture and sound fade in over this many frames from recordIn"
+        },
+        "fadeOutFrames": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "P5: picture and sound fade out over this many frames before recordOut"
+        },
+        "grade": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GradeStack"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: the clip's own grade stack, applied after its colour group's; null is no grade"
+        },
+        "mask": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ShapeMask"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: a shape mask (no kind = rect) or a segmentation mask (kind 'segmentation') on the picture; null shows the whole picture"
+        },
+        "keyer": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChromaKeyer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: a chroma keyer; null keys nothing"
+        },
+        "effects": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ClipEffect"
+              },
+              "maxItems": 8
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: effects from the closed catalogue, applied in order after the grade"
+        },
+        "regionEffects": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/RegionClipEffect"
+              },
+              "maxItems": 4
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Prompted region effects applied to the object a segmentation mask follows, in order; at most 4"
+        },
+        "stabilize": {
+          "type": "boolean",
+          "description": "P7: stabilise the picture at render time (two-pass vidstab)"
+        },
+        "reframe": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReframeTarget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: crop the source to the canvas aspect around a subject point; null keeps the aspect policy's fit"
+        },
+        "retimeQuality": {
+          "type": "string",
+          "enum": ["frame", "opticalFlow"],
+          "description": "P7: how a slowed clip makes its frames — duplicated, or motion-interpolated"
+        },
+        "cornerPin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuadCorners"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: a manual corner pin of the whole picture onto the canvas, corners in canvas fractions"
+        },
+        "channelMap": {
+          "type": "string",
+          "enum": ["stereo", "left", "right", "mono", "swap"],
+          "description": "P8: how the source's channels reach the stereo mix; stereo (the default) passes them as they are"
+        },
+        "linkId": {
+          "anyOf": [{ "type": "string", "pattern": "^[A-Za-z0-9_-]{1,64}$" }, { "type": "null" }],
+          "description": "R08.1: clips sharing a link id form a link group (a video clip and its camera-audio companion); null is not linked"
+        },
+        "inputProfile": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "appleLog",
+                "djiDLog",
+                "djiDLogM",
+                "sonySLog3",
+                "panasonicVLog",
+                "canonCLog3",
+                "arriLogC3",
+                "arriLogC4",
+                "fujiFLog",
+                "fujiFLog2",
+                "nikonNLog",
+                "redLog3G10"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P3: the camera log profile the source was shot in (CameraProfiles.Ids); null or absent is a display-space source"
+        },
+        "blendMode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "multiply", "screen", "overlay", "softLight", "hardLight", "darken", "lighten", "add", "difference"]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "L5: how the picture combines with what is below it (a video-track clip); null or absent is normal alpha-over"
+        }
+      }
+    },
+    "TitleClip": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "titleClip"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "text": {
+          "type": "string",
+          "description": "Title text content"
+        },
+        "fontSize": {
+          "type": "number"
+        },
+        "fontFamily": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string",
+          "description": "Text color hex code"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "template": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": ["plain", "lowerThird", "boxed", "outline", "card"]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: a title template from the closed catalogue; null is the plain centred title"
+        },
+        "position": {
+          "anyOf": [{ "type": "string", "enum": ["topLeft", "topCenter", "topRight", "middleLeft", "center", "middleRight", "bottomLeft", "bottomCenter", "bottomRight"] }, { "type": "null" }],
+          "description": "R09.6/R10.5: where the text sits on a 3x3 pad; null is the default placement (caption bottom centre, title centred)"
+        },
+        "transform": {
+          "anyOf": [{ "$ref": "#/$defs/ClipTransform" }, { "type": "null" }],
+          "description": "L6: free move/scale/rotate/opacity of the title around its own anchor; null keeps the template/position placement"
+        }
+      }
+    },
+    "GeneratorClip": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut",
+        "generatorType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "generatorClip"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "generatorType": {
+          "type": "string",
+          "description": "Type of generated content (e.g., bars, noise, color)"
+        },
+        "generatorConfig": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": true,
+              "description": "Configuration specific to the generator type"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "InsertClip": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "insertClip"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "assetRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AssetRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Reference to an inserted asset"
+        },
+        "quad": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Keyframed"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Tracked corner-pin quad as a keyframed 'QuadCorners' value"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "matte": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChromaKeyer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: the matte parameters the insert is keyed with before it is pinned; null is an opaque insert"
+        }
+      }
+    },
+    "Caption": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "caption"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "text": {
+          "type": "string",
+          "description": "Caption text content"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code (e.g., en, es, fr)"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "look": {
+          "anyOf": [{ "type": "string", "enum": ["clean", "bold", "boxed", "outline", "spotlight"] }, { "type": "null" }],
+          "description": "R09.6: the caption burn-in look from the closed catalogue; null is clean"
+        },
+        "position": {
+          "anyOf": [{ "type": "string", "enum": ["topLeft", "topCenter", "topRight", "middleLeft", "center", "middleRight", "bottomLeft", "bottomCenter", "bottomRight"] }, { "type": "null" }],
+          "description": "R09.6/R10.5: where the text sits on a 3x3 pad; null is the default placement (caption bottom centre, title centred)"
+        }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "recordIn",
+        "recordOut",
+        "transitionType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "transition"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "transitionType": {
+          "type": "string",
+          "description": "Type of transition (e.g., dissolve, fade, wipe)"
+        },
+        "easing": {
+          "type": "string",
+          "description": "Easing function for the transition"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "CompoundClip": {
+      "type": "object",
+      "required": ["id", "type", "name", "recordIn", "recordOut", "sequenceId"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "type": { "const": "compoundClip" },
+        "name": { "type": "string" },
+        "recordIn": { "type": "integer" },
+        "recordOut": { "type": "integer" },
+        "provenance": { "anyOf": [{ "$ref": "#/$defs/Provenance" }, { "type": "null" }] },
+        "sequenceId": { "type": "string", "format": "uuid", "description": "The sequence this clip plays; must exist in the document's sequences" },
+        "sourceIn": { "type": "integer", "minimum": 0, "description": "Offset into the sequence, in frames" },
+        "enabled": { "type": "boolean" }
+      },
+      "description": "P8: a compound clip - plays a nested sequence from sourceIn for its span; flattened for rendering and preview"
+    },
+    "MulticamClip": {
+      "type": "object",
+      "required": ["id", "type", "name", "recordIn", "recordOut", "angles", "activeAngleId"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "type": { "const": "multicamClip" },
+        "name": { "type": "string" },
+        "recordIn": { "type": "integer" },
+        "recordOut": { "type": "integer" },
+        "provenance": { "anyOf": [{ "$ref": "#/$defs/Provenance" }, { "type": "null" }] },
+        "angles": { "type": "array", "items": { "$ref": "#/$defs/MulticamAngle" }, "minItems": 1, "maxItems": 16 },
+        "activeAngleId": { "type": "string", "format": "uuid", "description": "The angle playing from recordIn until the first cut" },
+        "cuts": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/MulticamCut" }, "maxItems": 2000 }, { "type": "null" }], "description": "Angle switches in strictly increasing frame order, each strictly inside the span" },
+        "sourceIn": { "type": "integer", "minimum": 0, "description": "Offset into the synchronised multicam source, in frames" },
+        "enabled": { "type": "boolean" },
+        "gainDb": { "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }], "description": "Clip gain in dB for the active angle's audio" },
+        "audioSource": { "anyOf": [{ "type": "string" }, { "type": "null" }], "description": "R08.5: which audio the clip plays: null or \"program\" follows the active angle, \"none\" is silent, an angle id plays that angle throughout" }
+      },
+      "description": "P8: a multicam clip - synchronised angles of one moment, one playing at a time; flattened into media clips for rendering and preview"
+    },
+    "AdjustmentClip": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "const": "adjustmentClip"
+        },
+        "name": {
+          "type": "string"
+        },
+        "recordIn": {
+          "type": "integer"
+        },
+        "recordOut": {
+          "type": "integer"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "grade": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GradeStack"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: the grade applied to every layer composited below this clip for its span"
+        },
+        "effects": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ClipEffect"
+              },
+              "maxItems": 8
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P7: effects from the closed catalogue, applied after the grade"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "description": "P7: an adjustment clip - a grade and effects applied to everything composited below it for its span"
+    },
+    "Marker": {
+      "type": "object",
+      "required": ["id", "frame", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "frame": {
+          "type": "integer",
+          "description": "Marker position in frames"
+        },
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "anyOf": [
+            {
+              "type": "string",
+              "description": "Marker color hex code"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional marker note"
+        },
+        "durationFrames": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional marker duration in frames"
+        }
+      }
+    },
+    "EditRange": {
+      "type": "object",
+      "required": ["inFrame", "outFrame"],
+      "properties": {
+        "inFrame": {
+          "type": "integer",
+          "description": "In point in frames"
+        },
+        "outFrame": {
+          "type": "integer",
+          "description": "Out point in frames"
+        }
+      },
+      "description": "A range with in and out points"
+    },
+    "EditTimelineSeed": {
+      "type": "object",
+      "required": ["executionId", "version"],
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The workflow execution ID that generated this timeline"
+        },
+        "version": {
+          "type": "integer",
+          "description": "The version of the timeline manifest"
+        }
+      },
+      "description": "Seed data for timeline generation"
+    },
+    "ClipTransform": {
+      "type": "object",
+      "description": "P5: a media clip's picture transform. Every channel is a Keyframed number; a null channel is its identity (position 0, scale 1, rotation 0, opacity 1).",
+      "properties": {
+        "positionX": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "Horizontal offset of the clip centre from the canvas centre, as a fraction of the canvas width; range [-2, 2]"
+        },
+        "positionY": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "Vertical offset as a fraction of the canvas height, positive = down; range [-2, 2]"
+        },
+        "scale": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "Uniform scale relative to the fitted size; range (0, 8]"
+        },
+        "rotation": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "Rotation about the clip centre in degrees, positive = clockwise; range [-360, 360]"
+        },
+        "opacity": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "Opacity 0..1"
+        },
+        "scaleY": {
+          "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }],
+          "description": "L6: vertical scale, range (0, 8]; absent means the same as scale (uniform); when present, scale is the horizontal scale"
+        }
+      }
+    },
+    "ClipCrop": {
+      "type": "object",
+      "description": "P5: a static crop of the source picture, each edge a fraction in [0, 1); left+right and top+bottom each stay below 1.",
+      "properties": {
+        "left": { "type": "number", "minimum": 0, "exclusiveMaximum": 1 },
+        "top": { "type": "number", "minimum": 0, "exclusiveMaximum": 1 },
+        "right": { "type": "number", "minimum": 0, "exclusiveMaximum": 1 },
+        "bottom": { "type": "number", "minimum": 0, "exclusiveMaximum": 1 }
+      }
+    },
+    "TrackEq": {
+      "type": "object",
+      "description": "P5: a track equaliser — optional low cut, optional high cut, up to four parametric bands.",
+      "properties": {
+        "lowCutHz": {
+          "anyOf": [{ "type": "number", "minimum": 20, "maximum": 20000 }, { "type": "null" }],
+          "description": "High-pass corner frequency in Hz, or null for none"
+        },
+        "highCutHz": {
+          "anyOf": [{ "type": "number", "minimum": 20, "maximum": 20000 }, { "type": "null" }],
+          "description": "Low-pass corner frequency in Hz, or null for none"
+        },
+        "bands": {
+          "anyOf": [
+            { "type": "array", "items": { "$ref": "#/$defs/EqBand" }, "maxItems": 4 },
+            { "type": "null" }
+          ],
+          "description": "Parametric bands, at most four"
+        }
+      }
+    },
+    "EqBand": {
+      "type": "object",
+      "description": "P5: one parametric EQ band.",
+      "required": ["frequencyHz", "gainDb"],
+      "properties": {
+        "frequencyHz": { "type": "number", "minimum": 20, "maximum": 20000 },
+        "gainDb": { "type": "number", "minimum": -24, "maximum": 24 },
+        "q": { "type": "number", "exclusiveMinimum": 0, "maximum": 10 }
+      }
+    },
+    "Keyframed": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Base/default value"
+        },
+        "keys": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Keyframe"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional keyframes for animation"
+        }
+      },
+      "description": "Generic keyframed value"
+    },
+    "Keyframe": {
+      "type": "object",
+      "required": ["frame", "value", "interp"],
+      "properties": {
+        "frame": {
+          "type": "integer",
+          "description": "Frame position of this keyframe"
+        },
+        "value": {
+          "description": "Value at this keyframe"
+        },
+        "interp": {
+          "enum": ["linear", "easeInQuad", "easeOutQuad", "easeInOutQuad", "easeInCubic", "easeOutCubic", "easeInOutCubic", "step"],
+          "description": "Interpolation method to the next keyframe"
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "required": ["origin", "editedByUser"],
+      "properties": {
+        "origin": {
+          "enum": ["manual", "generated", "imported", "analyzed"],
+          "description": "How this item was created"
+        },
+        "stepResultId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional workflow step result that generated this"
+        },
+        "agentDefinitionId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional agent that created this"
+        },
+        "providerId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional inference provider used"
+        },
+        "offeredId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional offered ID from analysis"
+        },
+        "rationale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional explanation of why this was chosen/created"
+        },
+        "editedByUser": {
+          "type": "boolean",
+          "description": "Whether the user has manually edited this item"
+        },
+        "agentName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional agent display name (a v1 seed fills this); ids are filled by v2-native paths"
+        },
+        "providerName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional inference provider display name (a v1 seed fills this); ids are filled by v2-native paths"
+        }
+      }
+    },
+    "AssetRef": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": ["projectFile", "stepResult"],
+          "description": "Type of asset reference"
+        },
+        "projectFileId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Reference to a project file"
+        },
+        "stepResultId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Reference to a workflow step result"
+        }
+      }
+    },
+    "QuadPoint": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "Horizontal coordinate"
+        },
+        "y": {
+          "type": "number",
+          "description": "Vertical coordinate"
+        }
+      },
+      "description": "A point in source-frame coordinates"
+    },
+    "QuadCorners": {
+      "type": "object",
+      "required": ["topLeft", "topRight", "bottomRight", "bottomLeft"],
+      "properties": {
+        "topLeft": {
+          "$ref": "#/$defs/QuadPoint"
+        },
+        "topRight": {
+          "$ref": "#/$defs/QuadPoint"
+        },
+        "bottomRight": {
+          "$ref": "#/$defs/QuadPoint"
+        },
+        "bottomLeft": {
+          "$ref": "#/$defs/QuadPoint"
+        }
+      },
+      "description": "Four corner points of a (possibly non-planar) quad"
+    },
+    "GradeWheel": {
+      "type": "object",
+      "description": "P7: one colour wheel - a per-channel offset plus a master, each in [-1, 1], 0 = no change",
+      "properties": {
+        "r": { "type": "number", "minimum": -1, "maximum": 1 },
+        "g": { "type": "number", "minimum": -1, "maximum": 1 },
+        "b": { "type": "number", "minimum": -1, "maximum": 1 },
+        "master": { "type": "number", "minimum": -1, "maximum": 1 }
+      }
+    },
+    "GradePrimaries": {
+      "type": "object",
+      "description": "P7: the primaries of one grade node; every field defaults to its identity",
+      "properties": {
+        "lift": { "anyOf": [{ "$ref": "#/$defs/GradeWheel" }, { "type": "null" }] },
+        "gamma": { "anyOf": [{ "$ref": "#/$defs/GradeWheel" }, { "type": "null" }] },
+        "gain": { "anyOf": [{ "$ref": "#/$defs/GradeWheel" }, { "type": "null" }] },
+        "offset": { "anyOf": [{ "$ref": "#/$defs/GradeWheel" }, { "type": "null" }] },
+        "contrast": { "type": "number", "minimum": 0.25, "maximum": 3 },
+        "pivot": { "type": "number", "minimum": 0, "maximum": 1 },
+        "saturation": { "type": "number", "minimum": 0, "maximum": 3 },
+        "hue": { "type": "number", "minimum": -180, "maximum": 180 },
+        "temperature": { "type": "number", "minimum": -1, "maximum": 1 },
+        "tint": { "type": "number", "minimum": -1, "maximum": 1 },
+        "exposure": { "type": "number", "minimum": -4, "maximum": 4 }
+      }
+    },
+    "CurvePoint": {
+      "type": "object",
+      "required": ["x", "y"],
+      "description": "P7: a point of a tone curve, both coordinates in [0, 1]",
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "GradeCurves": {
+      "type": "object",
+      "description": "P7: a master (luma) curve and one per channel, each at most 16 points with strictly increasing x; null/empty is the identity",
+      "properties": {
+        "y": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/CurvePoint" }, "maxItems": 16 }, { "type": "null" }] },
+        "r": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/CurvePoint" }, "maxItems": 16 }, { "type": "null" }] },
+        "g": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/CurvePoint" }, "maxItems": 16 }, { "type": "null" }] },
+        "b": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/CurvePoint" }, "maxItems": 16 }, { "type": "null" }] }
+      }
+    },
+    "GradeLut": {
+      "type": "object",
+      "required": ["file"],
+      "description": "P7: a .cube project file applied as a 3D LUT, blended toward identity by intensity",
+      "properties": {
+        "file": { "$ref": "#/$defs/AssetRef" },
+        "intensity": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "GradeNode": {
+      "type": "object",
+      "required": ["id"],
+      "description": "P7: one correction of a grade stack - primaries, curves and/or a LUT, individually bypassable",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "primaries": { "anyOf": [{ "$ref": "#/$defs/GradePrimaries" }, { "type": "null" }] },
+        "curves": { "anyOf": [{ "$ref": "#/$defs/GradeCurves" }, { "type": "null" }] },
+        "lut": { "anyOf": [{ "$ref": "#/$defs/GradeLut" }, { "type": "null" }] },
+        "qualifier": { "anyOf": [{ "$ref": "#/$defs/GradeQualifier" }, { "type": "null" }], "description": "P9: an HSL qualifier confining the correction" },
+        "window": { "anyOf": [{ "$ref": "#/$defs/GradeWindow" }, { "type": "null" }], "description": "P9: a (tracked) power window confining the correction" }
+      }
+    },
+    "GradeQualifier": {
+      "type": "object",
+      "description": "P9: an HSL secondary selection - hue within hueWidth degrees of hueCenter, saturation and lightness bands, softness, invert",
+      "properties": {
+        "hueCenter": { "type": "number", "minimum": 0, "exclusiveMaximum": 360 },
+        "hueWidth": { "type": "number", "exclusiveMinimum": 0, "maximum": 180 },
+        "satMin": { "type": "number", "minimum": 0, "maximum": 1 },
+        "satMax": { "type": "number", "minimum": 0, "maximum": 1 },
+        "lumMin": { "type": "number", "minimum": 0, "maximum": 1 },
+        "lumMax": { "type": "number", "minimum": 0, "maximum": 1 },
+        "softness": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "invert": { "type": "boolean" }
+      }
+    },
+    "GradeWindow": {
+      "type": "object",
+      "required": ["shape"],
+      "description": "P9: a power window - a shape, optionally tracked by keyframed offsets in canvas fractions",
+      "properties": {
+        "shape": { "$ref": "#/$defs/ShapeMask" },
+        "offsetX": { "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }] },
+        "offsetY": { "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }] }
+      }
+    },
+    "GradeStack": {
+      "type": "object",
+      "description": "P7: the ordered corrections of a clip, a colour group or an adjustment clip; enabled=false bypasses the whole stack",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "nodes": { "anyOf": [{ "type": "array", "items": { "$ref": "#/$defs/GradeNode" }, "maxItems": 8 }, { "type": "null" }] }
+      }
+    },
+    "ColorGroup": {
+      "type": "object",
+      "required": ["id", "name", "clipIds"],
+      "description": "P7: clips graded together; the group's stack is applied before each member's own",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "clipIds": { "type": "array", "items": { "type": "string", "format": "uuid" } },
+        "grade": { "anyOf": [{ "$ref": "#/$defs/GradeStack" }, { "type": "null" }] },
+        "lookGroupId": { "anyOf": [{ "type": "string" }, { "type": "null" }], "description": "The analysis look group (k{n}) the group was pre-populated from" }
+      }
+    },
+    "ShapeMask": {
+      "type": "object",
+      "description": "P7: a rectangle or ellipse mask in canvas fractions with a feathered edge; or, with kind 'segmentation' (a clip mask only), the union of tracks g{n} of a same-project VideoAnalyze result: only kind, analysisStepResultId, trackIds, invert and featherPx apply",
+      "properties": {
+        "kind": { "type": "string", "enum": ["rect", "ellipse", "segmentation"] },
+        "analysisStepResultId": { "type": "string", "format": "uuid", "description": "segmentation: the VideoAnalyze step result (same project) whose SegmentationTracks are named" },
+        "trackIds": { "type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": { "type": "string", "pattern": "^g[0-9]{1,6}$" }, "description": "segmentation: the track ids (g{n}) whose union is the matte" },
+        "featherPx": { "type": "number", "minimum": 0, "maximum": 64, "description": "segmentation: the edge feather in pixels" },
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "w": { "type": "number", "minimum": 0, "maximum": 1 },
+        "h": { "type": "number", "minimum": 0, "maximum": 1 },
+        "feather": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "invert": { "type": "boolean" }
+      }
+    },
+    "ChromaKeyer": {
+      "type": "object",
+      "description": "P7: a chroma keyer - key colour #RRGGBB, colorkey similarity (0, 1] and blend [0, 1], spill suppression [0, 1]",
+      "properties": {
+        "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "similarity": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "blend": { "type": "number", "minimum": 0, "maximum": 1 },
+        "spill": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "ClipEffect": {
+      "type": "object",
+      "required": ["type"],
+      "description": "P7: one effect of the closed catalogue with an amount in [0, 1]; blur alone ranges to [0, 2] (sigma = amount x 20)",
+      "properties": {
+        "type": { "type": "string", "enum": ["blur", "sharpen", "vignette", "grain", "pixelate", "mono"] },
+        "amount": { "type": "number", "minimum": 0, "maximum": 2 },
+        "enabled": { "type": "boolean" }
+      },
+      "if": { "properties": { "type": { "const": "blur" } }, "required": ["type"] },
+      "else": { "properties": { "amount": { "maximum": 1 } } }
+    },
+    "RegionClipEffect": {
+      "type": "object",
+      "required": ["effect", "strength", "mask"],
+      "description": "One region effect of a clip: applied inside (or, with the mask invert flag, outside) the object a segmentation mask follows; strength in [0, 1]",
+      "properties": {
+        "effect": { "type": "string", "enum": ["blur", "pixelate", "highlight", "spotlight", "colorpop", "outline"] },
+        "strength": { "type": "number", "minimum": 0, "maximum": 1 },
+        "mask": { "$ref": "#/$defs/ShapeMask", "description": "Must be kind 'segmentation' (validated), with invert and featherPx" },
+        "enabled": { "type": "boolean" }
+      }
+    },
+    "ReframeTarget": {
+      "type": "object",
+      "description": "P7: the subject point (canvas fractions) an auto-reframe crops around",
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "EditSequence": {
+      "type": "object",
+      "required": ["id", "name", "tracks"],
+      "description": "P8: a nested timeline a compound clip plays - its own tracks in sequence-local frames",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "tracks": { "type": "array", "items": { "$ref": "#/$defs/Track" } }
+      }
+    },
+    "MulticamAngle": {
+      "type": "object",
+      "required": ["id", "name", "assetRef"],
+      "description": "P8: one angle of a multicam clip; offsetFrames is the angle's source frame at multicam-source frame 0",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "assetRef": { "$ref": "#/$defs/AssetRef" },
+        "offsetFrames": { "type": "integer" },
+        "inputProfile": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "appleLog",
+                "djiDLog",
+                "djiDLogM",
+                "sonySLog3",
+                "panasonicVLog",
+                "canonCLog3",
+                "arriLogC3",
+                "arriLogC4",
+                "fujiFLog",
+                "fujiFLog2",
+                "nikonNLog",
+                "redLog3G10"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "P3: the camera log profile the angle's source was shot in (CameraProfiles.Ids), carried onto every flattened run; null or absent is a display-space source"
+        }
+      }
+    },
+    "MulticamCut": {
+      "type": "object",
+      "required": ["atFrame", "angleId"],
+      "description": "P8: an angle switch at a record frame inside the clip's span",
+      "properties": {
+        "atFrame": { "type": "integer" },
+        "angleId": { "type": "string", "format": "uuid" }
+      }
+    },
+    "AudioCompressor": {
+      "type": "object",
+      "description": "P8: a compressor - threshold dBFS [-60, 0], ratio [1, 20], attack/release ms [1, 2000], make-up dB [0, 24]",
+      "properties": {
+        "thresholdDb": { "type": "number", "minimum": -60, "maximum": 0 },
+        "ratio": { "type": "number", "minimum": 1, "maximum": 20 },
+        "attackMs": { "type": "number", "minimum": 1, "maximum": 2000 },
+        "releaseMs": { "type": "number", "minimum": 1, "maximum": 2000 },
+        "makeupDb": { "type": "number", "minimum": 0, "maximum": 24 }
+      }
+    },
+    "AudioLimiter": {
+      "type": "object",
+      "description": "P8: a brick-wall limiter at a ceiling in dBFS [-24, 0]",
+      "properties": {
+        "ceilingDb": { "type": "number", "minimum": -24, "maximum": 0 }
+      }
+    },
+    "AudioGate": {
+      "type": "object",
+      "description": "P8: a noise gate - threshold dBFS [-90, 0], ratio [1, 20], attack/release ms [1, 2000]",
+      "properties": {
+        "thresholdDb": { "type": "number", "minimum": -90, "maximum": 0 },
+        "ratio": { "type": "number", "minimum": 1, "maximum": 20 },
+        "attackMs": { "type": "number", "minimum": 1, "maximum": 2000 },
+        "releaseMs": { "type": "number", "minimum": 1, "maximum": 2000 }
+      }
+    },
+    "AudioDeesser": {
+      "type": "object",
+      "description": "P8: a de-esser at an intensity in [0, 1]",
+      "properties": {
+        "intensity": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "AudioDynamics": {
+      "type": "object",
+      "description": "P8: the dynamics section of a track or bus; every stage optional",
+      "properties": {
+        "compressor": { "anyOf": [{ "$ref": "#/$defs/AudioCompressor" }, { "type": "null" }] },
+        "limiter": { "anyOf": [{ "$ref": "#/$defs/AudioLimiter" }, { "type": "null" }] },
+        "gate": { "anyOf": [{ "$ref": "#/$defs/AudioGate" }, { "type": "null" }] },
+        "deesser": { "anyOf": [{ "$ref": "#/$defs/AudioDeesser" }, { "type": "null" }] }
+      }
+    },
+    "AudioDenoise": {
+      "type": "object",
+      "description": "P8: a denoiser - kind fft, strength [0, 1]",
+      "properties": {
+        "kind": { "type": "string", "enum": ["fft"] },
+        "strength": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "AudioLeveler": {
+      "type": "object",
+      "description": "P8: a leveler - kind speech or dynamic, target dBFS [-40, 0]",
+      "properties": {
+        "kind": { "type": "string", "enum": ["speech", "dynamic"] },
+        "targetDb": { "type": "number", "minimum": -40, "maximum": 0 }
+      }
+    },
+    "AudioBus": {
+      "type": "object",
+      "required": ["id", "name"],
+      "description": "P8: a submix bus - fader, pan, EQ, dynamics, denoise, leveler, and an optional output bus (never a cycle, depth at most 4)",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "gainDb": { "anyOf": [{ "$ref": "#/$defs/Keyframed" }, { "type": "null" }] },
+        "pan": { "type": "number", "minimum": -1, "maximum": 1 },
+        "eq": { "anyOf": [{ "$ref": "#/$defs/TrackEq" }, { "type": "null" }] },
+        "dynamics": { "anyOf": [{ "$ref": "#/$defs/AudioDynamics" }, { "type": "null" }] },
+        "denoise": { "anyOf": [{ "$ref": "#/$defs/AudioDenoise" }, { "type": "null" }] },
+        "leveler": { "anyOf": [{ "$ref": "#/$defs/AudioLeveler" }, { "type": "null" }] },
+        "outputBusId": { "anyOf": [{ "type": "string", "format": "uuid" }, { "type": "null" }] }
+      }
+    }
+  }
+}

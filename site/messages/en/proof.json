@@ -1,0 +1,55 @@
+{
+  "beforeAfter": {
+    "before": "Before",
+    "after": "After",
+    "rawLabel": "The raw footage of “{title}”",
+    "finishedLabel": "“{title}”, the finished video",
+    "madeWith": "A real pair, made with ReelBolt: “{title}”, {recipe}.",
+    "facts": {
+      "source": "{time} of footage in",
+      "output": "{time} finished video",
+      "cuts": "{count, plural, one {# cut} other {# cuts}}"
+    }
+  },
+  "trust": {
+    "title": "What is true today",
+    "items": {
+      "noCard": {
+        "title": "No card required",
+        "body": "Start on the free trial without entering any payment details."
+      },
+      "firstVideo": {
+        "title": "Your first video is on us",
+        "body": "{credits} credits when you verify your email, on top of the {trialCredits} trial credits, to use within {days, plural, one {# day} other {# days}}. They are given once per person, and they are not available from some connections or with a temporary email address. Trial exports are {resolution} with a watermark."
+      },
+      "reviewed": {
+        "title": "Every cut is reviewed",
+        "body": "Every edited cut is scored before you see it; a low score sends it back for another pass. Subtitles, thumbnails and post text are made in a single pass."
+      },
+      "refund": {
+        "title": "Our failure, your credits back",
+        "body": "If a step fails on our side, the credits held for it are refunded."
+      },
+      "speed": {
+        "title": "How long it takes",
+        "body": "Minutes for a small job, sometimes half an hour for a big one."
+      },
+      "alpha": {
+        "title": "Public alpha, said plainly",
+        "body": "ReelBolt is in public alpha. Expect rough edges; things may change."
+      }
+    }
+  },
+  "samples": {
+    "title": "Real videos, made here",
+    "intro": "Every video below was made with ReelBolt and is shown with the recipe that made it.",
+    "recipe": "Recipe: {recipe}",
+    "videoLabel": "“{title}”, made with ReelBolt"
+  },
+  "testimonials": {
+    "title": "What people say"
+  },
+  "founder": {
+    "title": "A note from the founder"
+  }
+}

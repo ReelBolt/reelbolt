@@ -1,0 +1,22 @@
+{
+  "name": "reelbolt-e2e",
+  "version": "1.0.0",
+  "description": "End-to-end tests for ReelBolt workflow builder",
+  "scripts": {
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:assistant-http-boundary": "node scripts/assistant-http-boundary.mjs",
+    "test:editor-v2": "playwright test -c playwright.editor-v2.config.ts",
+    "test:gl-compositor": "playwright test -c playwright.gl-compositor.config.ts",
+    "test:stripe-mock": "node --test stripe-mock/server.test.mjs",
+    "perf:measure": "node perf/measure.mjs",
+    "perf:analyze": "node perf/analyze.mjs",
+    "perf:test": "node --test perf/sanitize.test.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^26.6.3",
+    "typescript": "^5.9.3"
+  }
+}

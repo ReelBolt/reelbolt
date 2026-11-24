@@ -1,0 +1,11 @@
+Hello {{.Name}},
+
+{{if .ActorName}}{{.ActorName}} added a file{{else}}A file was added{{end}} to {{.ProjectName}} (workspace {{.OrgName}}).
+{{if .FileName}}
+File: {{.FileName}}
+{{end}}
+View the project files:
+
+{{.Link}}
+
+-- {{.FooterNote}}

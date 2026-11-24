@@ -1,0 +1,64 @@
+{
+  "alpha": {
+    "notice": "ReelBolt {version} — alpha pubblica. Aspettati qualche imperfezione: le cose potrebbero cambiare.",
+    "dismiss": "Chiudi l'avviso sull'alpha"
+  },
+  "trademark": "ReelBolt™ è un marchio di Tommaso Celano.",
+  "theme": {
+    "toLight": "Passa al tema chiaro",
+    "toDark": "Passa al tema scuro"
+  },
+  "userMenu": {
+    "labelWithEmail": "Menu dell'account, {email}",
+    "label": "Menu dell'account",
+    "account": "Account",
+    "billing": "Piano e fatturazione",
+    "logout": "Esci"
+  },
+  "org": {
+    "workspace": "Spazio di lavoro",
+    "switchFailed": "Impossibile cambiare spazio di lavoro.",
+    "switch": "Cambia spazio di lavoro",
+    "loadFailed": "Impossibile caricare gli spazi di lavoro",
+    "loading": "Caricamento degli spazi di lavoro…"
+  },
+  "install": {
+    "button": "Installa l'app",
+    "dismiss": "Chiudi l'invito all'installazione"
+  },
+  "nav": {
+    "skip": "Vai al contenuto principale",
+    "toggle": "Apri o chiudi la navigazione",
+    "dashboard": "Dashboard",
+    "projects": "Progetti",
+    "editor": "Editor",
+    "agents": "Agenti (avanzati)",
+    "styles": "Stili",
+    "publishing": "Pubblicazione",
+    "runners": "Runner",
+    "account": "Account",
+    "data": "I tuoi dati",
+    "usage": "Utilizzo",
+    "billing": "Piano e fatturazione",
+    "notifications": "Notifiche",
+    "brandLibraries": "Librerie del brand",
+    "avatarLibrary": "Libreria degli avatar",
+    "orgSettings": "Impostazioni",
+    "members": "Membri",
+    "providers": "Provider",
+    "sectionMore": "Altro",
+    "sectionSettings": "Impostazioni",
+    "sectionWorkspace": "Spazio di lavoro",
+    "videoEditorSoon": "Video editor · In arrivo",
+    "apiKeys": "Chiavi API"
+  },
+  "titles": {
+    "dashboard": "Dashboard",
+    "agents": "Agenti",
+    "agent": "Agente",
+    "styles": "Stili"
+  },
+  "offline": {
+    "banner": "Sei offline. Quello che vedi potrebbe non essere aggiornato."
+  }
+}

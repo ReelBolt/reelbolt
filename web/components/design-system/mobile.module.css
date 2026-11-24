@@ -1,0 +1,46 @@
+/* Phone layout for the Brand & product (design language) surfaces. Selectors are doubled so they
+   win over Mantine's single-class Group rules regardless of stylesheet order. */
+
+/* Rows that are nowrap on desktop may wrap on a phone so nothing is pushed off-screen. */
+.wrapRow.wrapRow {
+  min-width: 0;
+}
+
+/* Mantine's `sm` starts at 48em; stop 0.00625em short so exactly 768px is the desktop layout. */
+@media (max-width: 47.99375em) {
+  .wrapRow.wrapRow {
+    flex-wrap: wrap;
+  }
+
+  /* Full-width action rows: controls stack and fill the width (44px touch targets). */
+  .actionRow.actionRow {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .actionRow.actionRow > *,
+  .actionRow.actionRow button {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+
+  /* Sub-tab strip scrolls sideways instead of squeezing or wrapping. */
+  .tabList.tabList {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 100%;
+  }
+
+  .tabList.tabList > button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* Long token names / paths / hex values wrap instead of overflowing. */
+.breakText.breakText {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
