@@ -46,7 +46,7 @@
     <PackageReference Include="Anthropic" Version="12.55.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="10.0.12" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.12" />
-    <PackageReference Include="AWSSDK.S3" Version="4.0.104.4" />
+    <PackageReference Include="AWSSDK.S3" Version="4.1.2.1" />
     <!-- Same AWSSDK 4.x family as AWSSDK.S3; wraps the Data Protection key ring (docs/design/cloud-provider-adr.md). -->
     <PackageReference Include="AWSSDK.KeyManagementService" Version="4.0.100.17" />
     <!-- IXmlRepository / KeyManagementOptions live in the full DataProtection assembly (shared framework). -->
