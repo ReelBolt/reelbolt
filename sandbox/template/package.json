@@ -30,7 +30,7 @@
     "@remotion/zod-types": "4.0.542",
     "d3": "7.9.0",
     "framer-motion": "13.4.6",
-    "gsap": "3.15.0",
+    "gsap": "3.15.1",
     "lottie-web": "5.13.0",
     "lucide-react": "1.59.0",
     "react": "19.3.0",
