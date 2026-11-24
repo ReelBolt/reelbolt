@@ -12,7 +12,7 @@
     "@phosphor-icons/react": "2.1.10",
     "@react-spring/web": "10.1.2",
     "@react-three/drei": "10.7.9",
-    "@react-three/fiber": "9.8.1",
+    "@react-three/fiber": "9.8.2",
     "@remotion/captions": "4.0.542",
     "@remotion/cli": "4.0.542",
     "@remotion/fonts": "4.0.542",
