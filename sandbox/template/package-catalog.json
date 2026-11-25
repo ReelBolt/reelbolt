@@ -96,7 +96,7 @@
   },
   {
     "name": "d3",
-    "version": "7.9.0",
+    "version": "7.9.2",
     "purpose": "Data-driven visualisation"
   },
   {
@@ -116,7 +116,7 @@
   },
   {
     "name": "lucide-react",
-    "version": "1.59.0",
+    "version": "1.77.0",
     "purpose": "Icon set"
   },
   {
@@ -141,7 +141,7 @@
   },
   {
     "name": "three",
-    "version": "0.172.0",
+    "version": "0.187.0",
     "purpose": "3D graphics"
   },
   {

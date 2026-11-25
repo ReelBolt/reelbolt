@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.15" />
     <!-- Same version both hosts resolve through Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3 (Data/PostgresDatabaseBootstrap.cs). -->
     <PackageReference Include="Npgsql" Version="10.0.3" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.23.0" />

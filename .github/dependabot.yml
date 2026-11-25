@@ -91,6 +91,12 @@ updates:
           - "react-dom"
           - "@types/react"
           - "@types/react-dom"
+    ignore:
+      # jsdom 31 changes CSSOM serialisation (url("#id"), aspect-ratio, missing
+      # inline min-height) and fails about six web test files. Move it together
+      # with the tests that pin those strings. Revisit 2027-02-15.
+      - dependency-name: "jsdom"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: /site
