@@ -6,6 +6,7 @@ using ReelBolt.Inference.Api.Services.Billing;
 using ReelBolt.Inference.Api.Services.DesignSystems;
 using ReelBolt.Inference.Api.Services.Graphics;
 using ReelBolt.Inference.Api.Services.Storage;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Storage;
@@ -153,7 +154,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
         }
         catch (GitHubApiException ex)
         {
-            _logger.LogWarning("Resolving {Repository}@{Branch} failed: {Message}", link.RepositoryFullName, branch, ex.Message);
+            _logger.LogWarning("Resolving {Repository}@{Branch} failed: {Message}", link.RepositoryFullName.ForLog(), branch.ForLog(), ex.Message.ForLog());
             throw Record(link, ex.StatusCode == System.Net.HttpStatusCode.NotFound
                 ? new GitHubApiException(
                     $"The branch \"{branch}\" could not be found in {link.RepositoryFullName}. It may have been "
@@ -187,7 +188,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
         }
         catch (GitHubApiException ex)
         {
-            _logger.LogWarning("Pulling {Repository}@{Commit} failed: {Message}", link.RepositoryFullName, commitSha, ex.Message);
+            _logger.LogWarning("Pulling {Repository}@{Commit} failed: {Message}", link.RepositoryFullName.ForLog(), commitSha.ForLog(), ex.Message.ForLog());
             throw Record(link, InPlainWords(link, ex));
         }
         catch (GitHubSyncRefusedException ex)
@@ -265,7 +266,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
             // Operator detail goes to the log; the link gets the sentence its owner can act on.
             _logger.LogWarning(
                 "GitHub truncated the tree of {Repository}@{Commit}; the pull was refused rather than half-applied",
-                link.RepositoryFullName, commitSha);
+                link.RepositoryFullName.ForLog(), commitSha.ForLog());
             throw new GitHubSyncRefusedException(
                 "repository_too_large",
                 $"{link.RepositoryFullName} is too large for GitHub to list in one go, so ReelBolt cannot tell which files "
@@ -292,7 +293,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
         {
             _logger.LogWarning(
                 "{Repository}@{Commit}: {Count} selected files is over GitHub:MaxFilesPerPull ({Limit})",
-                link.RepositoryFullName, commitSha, selected.Count, _options.MaxFilesPerPull);
+                link.RepositoryFullName.ForLog(), commitSha.ForLog(), selected.Count, _options.MaxFilesPerPull);
             throw new GitHubSyncRefusedException(
                 "too_many_files",
                 $"Too many files are chosen to sync: {selected.Count}, and the limit is {_options.MaxFilesPerPull}. "
@@ -306,7 +307,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
         {
             _logger.LogWarning(
                 "{Repository}@{Commit}: {Bytes} selected bytes is over GitHub:MaxTotalBytes ({Limit})",
-                link.RepositoryFullName, commitSha, declaredBytes, _options.MaxTotalBytes);
+                link.RepositoryFullName.ForLog(), commitSha.ForLog(), declaredBytes, _options.MaxTotalBytes);
             throw new GitHubSyncRefusedException(
                 "selection_too_large",
                 $"The chosen files are too large to sync together: {FormatBytes(declaredBytes)}, and the limit is "
@@ -389,7 +390,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
                 // The row (if any) keeps its old revision, so the next pull asks for it again.
                 _logger.LogWarning(
                     "{Repository}@{Commit}: skipped {Path}, GitHub returned no readable content for blob {Blob} ({Reason})",
-                    link.RepositoryFullName, commitSha, path, ex.BlobSha, ex.Reason);
+                    link.RepositoryFullName.ForLog(), commitSha.ForLog(), path.ForLog(), ex.BlobSha.ForLog(), ex.Reason.ForLog());
                 skipped++;
                 continue;
             }
@@ -489,7 +490,7 @@ public sealed class GitHubRepositoryPullService : IGitHubRepositoryPullService
 
         _logger.LogInformation(
             "GitHub pull of {Repository}@{Commit} into project {ProjectId}: {Written} written, {Deleted} deleted, {Unchanged} unchanged, {Skipped} skipped",
-            link.RepositoryFullName, commitSha, link.ProjectId, written, vanished.Count, unchanged, skipped);
+            link.RepositoryFullName.ForLog(), commitSha.ForLog(), link.ProjectId, written, vanished.Count, unchanged, skipped);
 
         return new GitHubPullOutcome("pulled", commitSha, written, vanished.Count, unchanged, skipped);
     }

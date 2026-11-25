@@ -32,7 +32,7 @@ test('links are absolute, built from the site URL, with or without a trailing sl
   assert.ok(xml.includes(`<link>${SITE}/blog/compare-a-and-b</link>`), xml);
   assert.ok(xml.includes(`<link>${SITE}/blog</link>`), xml);
   assert.ok(xml.includes(`href="${SITE}/blog/rss.xml"`), xml);
-  assert.ok(!xml.includes('https://reelbolt.example//'), 'no double slash');
+  assert.ok(!xml.includes('//blog'), 'no double slash');
 });
 
 test('produces an RSS 2.0 document with one item per post, in the order given', () => {

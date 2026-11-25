@@ -789,7 +789,7 @@ render starts. With several staged videos playing at once that overran a 4 GB sa
 signal SIGKILL` at frame 352, exit 1).
 
 So the engine's `RenderVideoAndUploadToStorage` adds two flags to every render whose args do not
-already set them (both exist in the pinned Remotion 4.0.542):
+already set them (both exist in the pinned Remotion 4.0.545):
 
 | Flag | Engine key | Default |
 |---|---|---|
@@ -990,12 +990,12 @@ Defines the default `Root` component and a single `Main` composition (1920×1080
 | Package | Purpose |
 |---|---|
 | `remotion` + `@remotion/cli` + `@remotion/renderer` | Core Remotion framework and CLI |
-| `@remotion/captions`, `fonts`, `gif`, `layout-utils`, `lottie`, `media-utils`, `motion-blur`, `noise`, `paths`, `shapes`, `three`, `transitions`, `zod-types` | Remotion companion packages, all pinned to the same version as `remotion` (4.0.542) |
+| `@remotion/captions`, `fonts`, `gif`, `layout-utils`, `lottie`, `media-utils`, `motion-blur`, `noise`, `paths`, `shapes`, `three`, `transitions`, `zod-types` | Remotion companion packages, all pinned to the same version as `remotion` (4.0.545) |
 | `react` + `react-dom` | React 19.3 (peer dep of Remotion) |
 | `@react-spring/web`, `framer-motion`, `gsap` | Animation libraries (gsap: timeline animation driven by the frame, see the ReelBolt gsap guide in the remotion-markup skill preface) |
 | `@react-three/fiber` + `@react-three/drei` + `three` | React bindings for Three.js and 3D graphics |
 | `d3` (+ `@types/d3` dev) | Data-driven visualisations |
-| `lottie-web`, `simplex-noise`, `zod` | Lottie playback, procedural noise, schema validation (`zod` pinned to 4.6.7, the exact version the `@remotion/*` 4.0.542 packages depend on, so Remotion prints no zod version-mismatch warning) |
+| `lottie-web`, `simplex-noise`, `zod` | Lottie playback, procedural noise, schema validation (`zod` pinned to 4.6.7, the exact version the `@remotion/*` 4.0.545 packages depend on, so Remotion prints no zod version-mismatch warning) |
 | `lucide-react`, `@phosphor-icons/react` | Icon sets |
 
 `@remotion/google-fonts` is no longer installed: it fetches `fonts.gstatic.com` at load time and the sandbox has no network (the engine still refuses a project that imports it, `NETWORK_FONT`, below). The authoritative list is `sandbox/template/package-catalog.json`, which a test keeps equal to `package.json` dependencies. All versions are exact and `package-lock.json` is committed (integrity hashes). The image installs with `npm ci --ignore-scripts`, and the build fails if any locked dependency declares an install script other than the reviewed `esbuild` one (its platform binary ships in the optional `@esbuild/*` package, so the script is not needed). The engine's `InstallNpmPackages` tool answers "already installed" for catalog names and refuses all others (no network); it does not call the sandbox `POST /packages` endpoint.

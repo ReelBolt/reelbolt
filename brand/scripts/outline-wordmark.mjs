@@ -26,8 +26,11 @@ glyphs.forEach((g, i) => {
   x += g.advanceWidth;
   if (i < glyphs.length - 1) x += font.getKerningValue(g, glyphs[i + 1]) + TRACKING;
 });
+// opentype.js 2.0.0 roundDecimal() returns NaN for coordinates whose fractional part is below
+// 1e-6 (e.g. 182.00000000000003), so snap the float noise away before serialising.
+const snap = (n) => (typeof n === 'number' ? Math.round(n * 1e4) / 1e4 : n);
 const path0 = new opentype.Path();
-path0.commands = commands;
+path0.commands = commands.map((c) => Object.fromEntries(Object.entries(c).map(([k, v]) => [k, snap(v)])));
 const bb = path0.getBoundingBox();
 const capHeight = font.tables.os2.sCapHeight * scale;
 

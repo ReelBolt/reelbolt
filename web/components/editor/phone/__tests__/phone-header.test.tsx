@@ -60,7 +60,7 @@ describe('PhoneHeader overflow menu', () => {
     wrap(<PhoneHeader {...base} onAskAssistant={onAskAssistant} />);
     fireEvent.click(screen.getByTestId('phone-more'));
     for (const label of ['Assistant', 'Ask the Assistant', 'Review page', 'History', 'Drag clips with your finger (beta)', 'Copy link']) {
-      expect(await screen.findByText(new RegExp('^' + label.replace(/[()]/g, '\\$&')))).toBeTruthy();
+      expect(await screen.findByText(new RegExp('^' + label.replace(/[()\\]/g, '\\$&')))).toBeTruthy();
     }
     fireEvent.click(screen.getByTestId('phone-more-ask-assistant'));
     expect(onAskAssistant).toHaveBeenCalledTimes(1);

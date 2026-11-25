@@ -5,6 +5,7 @@ using ReelBolt.Inference.Api.Data;
 using ReelBolt.Inference.Api.Services.History;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.History;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.Storage;
 
@@ -232,7 +233,7 @@ public sealed class ProjectHistoryProtectingStorage : IFileStorageService
                 // check the live bytes against, so nothing can be vouched for.
                 _logger.LogWarning(
                     "Project {ProjectId}: item {ContentId} has no verified ETag, so its old bytes at {StorageKey} are not protected",
-                    projectId, candidate.ContentId, storageKey);
+                    projectId, candidate.ContentId, storageKey.ForLog());
                 continue;
             }
 
@@ -247,7 +248,7 @@ public sealed class ProjectHistoryProtectingStorage : IFileStorageService
                 // protect the replacement under the old identity, which would restore the wrong file.
                 _logger.LogWarning(
                     "Project {ProjectId}: the live ETag at {StorageKey} no longer matches the captured item {ContentId}; nothing is protected",
-                    projectId, storageKey, candidate.ContentId);
+                    projectId, storageKey.ForLog(), candidate.ContentId);
                 continue;
             }
 

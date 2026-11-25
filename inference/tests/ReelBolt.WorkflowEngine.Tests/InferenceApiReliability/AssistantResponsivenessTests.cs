@@ -141,6 +141,18 @@ public class AssistantResponsivenessTests
         stopwatch.Elapsed.Should().BeLessThan(TimeSpan.FromSeconds(5));
     }
 
+    [Fact]
+    public async Task A_deadline_that_lapses_mid_loop_never_throws_from_Task_Delay()
+    {
+        var monitor = new AssistantActivityMonitor();
+        using IDisposable turn = monitor.BeginTurn();
+
+        // Waits of a few ticks straddle the deadline between the busy check and the delay computation;
+        // before the fix this threw ArgumentOutOfRangeException (negative delay) on a slow or loaded host.
+        for (int i = 0; i < 2000; i++)
+            await monitor.YieldToInteractiveAsync(TimeSpan.FromTicks(1 + (i % 50) * 400), CancellationToken.None);
+    }
+
     // ---------------------------------------------------------------- thread history truthfulness
 
     private sealed class FakeUser(Guid id) : ICurrentUser

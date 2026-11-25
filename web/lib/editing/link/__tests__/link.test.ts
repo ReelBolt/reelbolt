@@ -277,7 +277,7 @@ describe('R08.1 migration', () => {
     let n = 0;
     const plan = migrateToLinkedAudio(d, probes, () => `id-${++n}`);
     expect(plan).toMatchObject({ linked: 1, added: 0 });
-    expect(plan.summary).toBe('Linked 1 clip.'.replace('clip.', 'clip.'));
+    expect(plan.summary).toBe('Linked 1 clip.');
     const withAudio = doc([track('V1', 'video', [media('v1', 0, 100), media('v4', 100, 150, 5)]), track('A1', 'audio', [media('a1', 0, 100)])]);
     const s = store(withAudio);
     const both = migrateToLinkedAudio(withAudio, probes, () => `g-${++n}`);

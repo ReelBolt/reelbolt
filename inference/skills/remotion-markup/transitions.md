@@ -70,5 +70,5 @@ import {fade} from '@remotion/transitions/fade';
 ```
 
 It is not pre-installed. Install it only if it can be added at exactly the project's Remotion
-version (4.0.542); otherwise use the hand-built version above. A transition shortens the total by its
+version (4.0.545); otherwise use the hand-built version above. A transition shortens the total by its
 own duration, same as a negative `offset`.

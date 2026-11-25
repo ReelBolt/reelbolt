@@ -307,20 +307,6 @@ public class RobustJsonExtractorTests
     }
 
     [Fact]
-    public void ExtractScoredJsonObject_is_linear_on_60k_of_brace_heavy_unbalanced_text()
-    {
-        string raw = string.Concat(System.Linq.Enumerable.Repeat("{\"a\":[{", 8000));
-        System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
-
-        RobustJsonExtractor.ExtractScoredJsonObject(raw, ScoreKeys);
-
-        clock.Stop();
-        // Loose on purpose: a shared CI or dev box under load runs this well over 100 ms; the old
-        // quadratic scan took over a second here, and the 1 MB timing test is the real linear guard.
-        clock.ElapsedMilliseconds.Should().BeLessThan(500);
-    }
-
-    [Fact]
     public void ExtractScoredJsonObject_skips_a_last_fenced_block_that_carries_no_score()
     {
         string raw = "```json\n{\"score\":4}\n```\nAnd the files I read:\n```json\n{\"files\":[\"a.tsx\"]}\n```";

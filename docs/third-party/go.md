@@ -1,6 +1,6 @@
 # Third-party notices: Go modules
 
-Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from the lockfiles and package metadata at commit `e0ffe67ef` (2026-10-24). Licence texts are in [licences.md](licences.md). Not legal advice. Entries marked `confirm` are listed in the TODO section of the root notices file.
+Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from the lockfiles and package metadata at commit `e0ffe67ef` (2026-10-24). Licence texts are in [licences.md](licences.md). Entries marked `confirm` are listed in the TODO section of the root notices file.
 
 #### BSD-2-Clause (2 packages)
 

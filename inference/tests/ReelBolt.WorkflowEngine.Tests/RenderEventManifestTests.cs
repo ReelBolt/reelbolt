@@ -150,29 +150,23 @@ public class RenderEventManifestTests
     // ================================================================ S-69: bounded before any regex
 
     [Fact]
-    public void S69_an_adversarial_label_is_sanitized_in_linear_time()
+    public void S69_an_adversarial_label_is_capped_and_sanitized()
     {
-        // ~100 KiB of '<' with no '>' made "<[^>]*>" quadratic: every '<' scanned to the end of the label.
-        string label = new('<', 100_000);
-        System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+        // Smoke test, not a complexity proof: the label is capped at MaxLabelChars before any regex runs (and the regexes
+        // are NonBacktracking with a timeout), so cost cannot grow with input size and a scaling guard has nothing to detect.
+        (RenderEventManifest? manifest, IReadOnlyList<string> errors) = RenderEventManifest.Validate([Ev("stamp", 1, new string('<', 100_000))]);
 
-        (RenderEventManifest? manifest, IReadOnlyList<string> errors) = RenderEventManifest.Validate([Ev("stamp", 1, label)]);
-
-        watch.Stop();
         errors.Should().BeEmpty();
         manifest!.Events.Single().Label.Length.Should().BeLessThanOrEqualTo(RenderEventManifest.MaxLabelChars);
-        watch.ElapsedMilliseconds.Should().BeLessThan(1000, "the label is capped before any regex runs");
     }
 
     [Fact]
-    public void S69_a_time_shaped_adversarial_label_is_also_linear()
+    public void S69_a_time_shaped_adversarial_label_is_also_bounded()
     {
+        // Smoke test, not a complexity proof (see above): the output is bounded and the call returns.
         string label = string.Concat(Enumerable.Repeat("1:", 50_000)) + "x";
-        System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
-        RenderEventManifest.SanitizeLabel(label);
-
-        watch.ElapsedMilliseconds.Should().BeLessThan(1000);
+        RenderEventManifest.SanitizeLabel(label).Length.Should().BeLessThanOrEqualTo(RenderEventManifest.MaxLabelChars);
     }
 
     [Fact]

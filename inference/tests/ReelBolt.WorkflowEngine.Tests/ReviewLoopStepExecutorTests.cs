@@ -268,20 +268,6 @@ public class ReviewLoopStepExecutorTests
     }
 
     [Fact]
-    public void ParseReviewScore_scores_60k_of_brace_heavy_unbalanced_text_in_under_500_ms()
-    {
-        string raw = string.Concat(System.Linq.Enumerable.Repeat("{\"a\":[{", 8000));
-        System.Diagnostics.Stopwatch clock = System.Diagnostics.Stopwatch.StartNew();
-
-        ReviewLoopStepExecutor.ParseReviewScore(raw);
-
-        clock.Stop();
-        // Loose on purpose: a shared CI or dev box under load runs this well over 100 ms; the old
-        // quadratic scan took over a second here, and the 1 MB timing test is the real linear guard.
-        clock.ElapsedMilliseconds.Should().BeLessThan(500);
-    }
-
-    [Fact]
     public async Task Disputed_review_scores_log_a_warning_naming_the_step_result_and_the_candidate_count()
     {
         StepExecutionContext context = CapContext("""{"ok":true}""");
