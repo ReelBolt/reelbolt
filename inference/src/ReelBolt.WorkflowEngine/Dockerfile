@@ -5,7 +5,7 @@ FROM alpine:3.24 AS legal
 RUN for f in LICENSE THIRD_PARTY_NOTICES.md GPL-SOURCE-OFFER.md; do \
 	echo "PLACEHOLDER: build with --build-context legal=<repository root>" > "/$f"; done
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:11.0-alpine AS base
 USER root
 # ffmpeg/ffprobe run in-process for the video-editing pipeline (plan §2) — never in the sandbox
 # service, which is untrusted-code territory this feature deliberately does not touch. Both the
