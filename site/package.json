@@ -32,7 +32,7 @@
     "eslint-config-next": "^16.4.6",
     "eslint-plugin-i18next": "^6.1.5",
     "png-to-ico": "^3.0.2",
-    "postcss": "^8.5.0",
+    "postcss": "^8.5.33",
     "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^6.0.3"
