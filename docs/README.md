@@ -42,6 +42,8 @@ Billing and marketing: [`billing.md`](billing.md) (the Paddle and Stripe provide
 
 New-user funnel: [`product-events.md`](product-events.md) is the reference for the `product_events` rows (the event vocabulary, the visitor events, first-touch attribution and retention); the decisions and the contract shared by the site, the app, the two APIs and BI are in [`design/new-user-funnel.md`](design/new-user-funnel.md). The operator runbooks for tracked links and the BI role are operator documents and are not in the public repository.
 
+CSP and COEP violation reports: [`csp-reporting.md`](csp-reporting.md) is the operator reference for the anonymous report endpoint, what it stores and never stores, its switch and the BI read file.
+
 Desktop runner distribution: the customer pages are under `user-guide/runner/`. No runner container image is published to GHCR at launch.
 
 On-demand cloud compute: [`pool-waker.md`](pool-waker.md) covers the pool waker that starts and deletes CloudPool servers when work is queued: the loop, the node and spend caps, orphan cleanup, the heartbeat, the usage record, failure modes, the security model and the operator runbook (stage 0, bake, flag). Off by default; internal and not published. Turning it on in production: the operator runbook (the `pool-waker` compose service, the pool-only engine switches, the public object-store prerequisite, the private pool subnet and host isolation with its apply-and-verify runbook, enable and rollback order).

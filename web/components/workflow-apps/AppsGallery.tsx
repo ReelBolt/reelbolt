@@ -173,8 +173,8 @@ function RecipeCardView({
             // Stays focusable while another recipe is set up, looks disabled and ignores presses.
             aria-disabled={anyBusy}
           >
-            {t('useRecipe')}
-            <VisuallyHidden> {t('useRecipeFor', { title: recipe.title })}</VisuallyHidden>
+            {t('useRecipe')}{' '}
+            <VisuallyHidden>{t('useRecipeFor', { title: recipe.title })}</VisuallyHidden>
           </button>
         </div>
       </article>

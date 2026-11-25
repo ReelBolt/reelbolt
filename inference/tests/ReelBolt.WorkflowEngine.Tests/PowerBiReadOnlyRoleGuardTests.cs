@@ -193,8 +193,8 @@ public class PowerBiReadOnlyRoleGuardTests
         };
 
     /// <summary>
-    /// The twenty-eight granted tables, table-wide or column-by-column: the twenty-four of the BI brief and
-    /// its follow-ups, plus the four new-user funnel tables (docs/design/new-user-funnel.md section 5:
+    /// The twenty-nine granted tables, table-wide or column-by-column: the twenty-four of the BI brief and
+    /// its follow-ups, plus csp_violation_counts (security-headers) and the four new-user funnel tables (docs/design/new-user-funnel.md section 5:
     /// <c>marketing_links</c>, <c>marketing_link_daily_stats</c>, <c>visitor_attribution</c>,
     /// <c>user_onboarding_profiles</c>), which the acquisition funnel reads.
     /// </summary>
@@ -207,6 +207,7 @@ public class PowerBiReadOnlyRoleGuardTests
         "credit_accounts",
         "credit_grants",
         "credit_ledger_entries",
+        "csp_violation_counts",
         "inference_models",
         "inference_providers",
         "marketing_link_daily_stats",

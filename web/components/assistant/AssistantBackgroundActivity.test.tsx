@@ -507,7 +507,8 @@ describe('marking read', () => {
     activity = UNREAD;
     await mountSignedIn();
     act(() => captured.value!.openThread(T1));
-    await advance(2000);
+    // jsdom 31 settles the thread load a few macrotasks later than 26 did: keep advancing until the mark lands.
+    for (let i = 0; i < 6 && readCalls.length === 0; i += 1) await advance(1000);
     expect(readCalls.length).toBeGreaterThanOrEqual(1);
     expect(readCalls[0].url).toContain(`/threads/${T1}/read`);
   });

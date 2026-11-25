@@ -36,7 +36,7 @@ const ITEMS: ClipMenuItem[] = [
 
 function show(overrides: Record<string, string>) {
   return render(
-    <MantineProvider>
+    <MantineProvider env="test">
       <LiveChordsProvider chords={liveChords(overrides)}>
         <ClipContextMenu anchor={{ x: 10, y: 10 }} items={ITEMS} onClose={() => {}} />
       </LiveChordsProvider>

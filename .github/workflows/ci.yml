@@ -961,6 +961,13 @@ jobs:
         # The live half (docker build + throwaway containers) runs in the nginx-live job below.
         run: sh nginx/tests/forwarded-headers.sh --static-only
 
+      - name: nginx security headers (static)
+        # The snippet, the path-class maps and the enforced/report-only split; the live half runs in nginx-live.
+        run: sh nginx/tests/security-headers.sh --static-only
+
+      - name: Upgrade-by-reload delivery (static)
+        run: sh nginx/tests/upgrade-reload.sh --static-only
+
       - name: Hadolint
         # One invocation over every Dockerfile; thresholds and rule exemptions
         # live in .hadolint.yaml so local runs match CI exactly.
@@ -1052,6 +1059,12 @@ jobs:
       - name: Language choice at / (live)
         run: sh nginx/tests/i18n-home.sh
 
+      - name: Security headers per path, with and without FORCE_HTTPS (live)
+        run: sh nginx/tests/security-headers.sh
+
+      - name: Upgrade by reload from the pre-1450 scripts (live)
+        run: sh nginx/tests/upgrade-reload.sh
+
   # ── E13: the end-to-end runner harness (pair → route → execute → re-probe) ──
   # Driven through the Playwright spec so it is a real e2e test in the gate. The
   # harness is the D13 worker-smoke chain, and a leg whose preconditions are
@@ -1125,13 +1138,19 @@ jobs:
   # editor_webkit=true. Traces are switched off and only the HTML report is
   # uploaded: traces and the storage state hold a session cookie.
   editor-e2e:
-    name: E2E · editor v2
+    name: E2E · editor v2 (${{ matrix.shard }}/4)
     runs-on: ubuntu-latest
+    # The whole suite outgrew one 90-minute job (about 690 tests passed in 90 minutes with the seed
+    # working). Four Playwright shards each build the stack and run a quarter of the tests.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
     needs: changes
     if: >-
       github.event_name != 'pull_request' ||
       needs.changes.outputs['editor-e2e'] == 'true'
-    timeout-minutes: 90
+    timeout-minutes: ${{ github.event_name == 'workflow_dispatch' && inputs.editor_webkit && 150 || 75 }}
     defaults:
       run:
         working-directory: e2e
@@ -1180,7 +1199,7 @@ jobs:
         run: |
           projects=(--project=desktop --project=pixel7)
           if [ "$WEBKIT" = 1 ]; then projects+=(--project=iphone14webkit); fi
-          npm run test:editor-v2 -- "${projects[@]}" --trace=off --reporter=list,html
+          npm run test:editor-v2 -- "${projects[@]}" --shard=${{ matrix.shard }}/4 --trace=off --reporter=list,html
 
       # Failure diagnostics, before teardown deletes the stack. The seed's first workflow run is the usual
       # first casualty on a runner, and its reason lives only in the service logs. The stack is a throwaway
@@ -1205,7 +1224,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: editor-e2e-diagnostics
+          name: editor-e2e-diagnostics-${{ matrix.shard }}
           path: /tmp/editor-remediation/diagnostics/
           if-no-files-found: ignore
           retention-days: 2
@@ -1221,7 +1240,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: editor-e2e-html-report
+          name: editor-e2e-html-report-${{ matrix.shard }}
           path: /tmp/editor-remediation/html-report/
           if-no-files-found: ignore
           retention-days: 14

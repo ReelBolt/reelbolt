@@ -31,7 +31,7 @@ if [ -d "$RELEASE_SRC" ]; then SRC_DIR="$RELEASE_SRC"; fi
 
 if [ -d "$SRC_DIR" ]; then
     for f in nginx.conf auth.js i18n.js pick-locale.js locales.json locations.conf \
-             proxy-client-headers.conf cloudflare-realip.conf http-server-dev.conf \
+             proxy-client-headers.conf security-headers.conf cloudflare-realip.conf http-server-dev.conf \
              http-server-redirect.conf https-server.conf.template common.conf.template \
              runner-server.conf.template runner-locations.conf.template private-server.conf.template \
              slots-vars.conf.template slots-locations.conf fetch-paddle-ips.sh; do
@@ -206,16 +206,32 @@ if [ "$SLOTS" = 1 ]; then
     fi
 fi
 
+# The deployment's storage origin (R2/S3) for the report-only Content-Security-Policy: the browser fetches
+# presigned media and uploads from it (media-src, connect-src). Taken from MINIO_PUBLIC_ENDPOINT, reduced
+# to scheme://host[:port]; anything that is not a plain http(s) origin (or empty) renders no source, so a
+# stray value can never inject a directive. $sh_csp_storage is empty or " https://host" (nginx.conf).
+SH_STORAGE=""
+case "${MINIO_PUBLIC_ENDPOINT:-}" in
+    http://*|https://*)
+        SH_ORIGIN=$(printf '%s' "$MINIO_PUBLIC_ENDPOINT" | sed -n 's#^\(https\{0,1\}://[A-Za-z0-9.-]*\(:[0-9]\{1,5\}\)\{0,1\}\)\(/.*\)\{0,1\}$#\1#p')
+        if [ -n "$SH_ORIGIN" ]; then SH_STORAGE=" $SH_ORIGIN"; else echo "[nginx] MINIO_PUBLIC_ENDPOINT is not a plain http(s) origin; the CSP will not name it" >&2; fi ;;
+esac
+rm -f /etc/nginx/conf.d/security-storage.conf
+printf 'default "%s";\n' "$SH_STORAGE" > /etc/nginx/conf.d/security-storage.map
+
 # HSTS only when FORCE_HTTPS=true, i.e. once the operator has confirmed https:// works: a browser
 # that has seen the header refuses plain http for the host for max-age, so it must never be sent by
-# an install that still serves http://. No includeSubDomains and no preload: other hostnames under
-# the same domain are not this container's to promise. Included by glob (hsts*.inc) from
-# common.conf.template, runner-server.conf.template and the locations with an add_header of their own.
+# an install that still serves http://. includeSubDomains is on: every hostname under the domain is
+# then https-only for a year, which holds for the hosts this stack serves. NO preload, and we do NOT
+# submit the domain to the HSTS preload list: preload is a near-permanent, browser-shipped commitment
+# and may only be considered once EVERY subdomain (downloads., cdn., runner., test. and any other,
+# including ones outside this stack) is served over https. Included by glob (hsts*.inc) from
+# security-headers.conf and runner-server.conf.template.
 rm -f /etc/nginx/conf.d/hsts.inc
 if [ "$FORCE_HTTPS" = "true" ]; then
     echo "[nginx] FORCE_HTTPS=true — redirecting http:// to https://"
     cp /etc/nginx/http-server-redirect.conf /etc/nginx/conf.d/http-server.conf
-    printf 'add_header Strict-Transport-Security "max-age=31536000" always;\n' > /etc/nginx/conf.d/hsts.inc
+    printf 'add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;\n' > /etc/nginx/conf.d/hsts.inc
 else
     cp /etc/nginx/http-server-dev.conf /etc/nginx/conf.d/http-server.conf
 fi

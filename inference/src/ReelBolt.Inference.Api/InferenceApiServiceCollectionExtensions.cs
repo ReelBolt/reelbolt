@@ -318,7 +318,9 @@ public static class InferenceApiServiceCollectionExtensions
             // alpha-launch T-018: server and client errors, so a failure reaches the watched destination.
             ReelBolt.Inference.Api.Observability.ErrorTrackingDiagnostics.MeterName,
             // alpha-launch T-018: the four alpha funnel events the browser reports.
-            ReelBolt.Inference.Api.Services.Telemetry.AlphaFunnelDiagnostics.MeterName);
+            ReelBolt.Inference.Api.Services.Telemetry.AlphaFunnelDiagnostics.MeterName,
+            // security-headers T-003: CSP/COEP violation reports by outcome.
+            ReelBolt.Inference.Api.Services.Telemetry.CspReportDiagnostics.MeterName);
 
         // alpha-launch T-018: the browser telemetry ingest endpoints. Off by default, so a deployment
         // that has not opted in answers 404 exactly as it did before.
@@ -339,6 +341,13 @@ public static class InferenceApiServiceCollectionExtensions
             ReelBolt.Inference.Api.Services.Telemetry.IProductEventEmitter,
             ReelBolt.Inference.Api.Services.Telemetry.ProductEventEmitter>();
         services.AddHostedService<ReelBolt.Inference.Api.Services.Telemetry.ProductEventsRetentionService>();
+        // security-headers T-003: anonymous CSP/COEP violation counts (daily aggregate, 90-day sweep).
+        services.TryAddSingleton(TimeProvider.System);
+        services.AddSingleton<ReelBolt.Inference.Api.Services.Telemetry.CspReportRateLimiter>();
+        services.AddScoped<
+            ReelBolt.Inference.Api.Services.Telemetry.ICspReportStore,
+            ReelBolt.Inference.Api.Services.Telemetry.CspReportStore>();
+        services.AddHostedService<ReelBolt.Inference.Api.Services.Telemetry.CspReportRetentionService>();
 
         // --- MinIO / S3 ---
         services.AddReelBoltS3(configuration);
