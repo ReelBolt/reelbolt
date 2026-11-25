@@ -52,4 +52,4 @@ The desktop runner's FFmpeg is a different build, and its offer is in [runner/bu
 
 ## Other notices
 
-The full list of third-party software is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Not legal advice; not yet reviewed by counsel.
+The full list of third-party software is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
