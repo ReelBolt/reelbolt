@@ -390,6 +390,16 @@ export interface ParsedSubtitles {
 export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
 export const MAX_IMPORT_CUES = 5000;
 
+/** Removes markup tags until none are left, so nested fragments like `<scr<b>ipt>` cannot reassemble into a tag. */
+function stripTags(text: string): string {
+  let out = text;
+  for (;;) {
+    const next = out.replace(/<[^<>]+>/g, '');
+    if (next === out) return out;
+    out = next;
+  }
+}
+
 const TIMING = /^\s*((?:\d{1,3}:)?\d{1,2}:\d{2}[,.]\d{1,3})\s*-->\s*((?:\d{1,3}:)?\d{1,2}:\d{2}[,.]\d{1,3})/;
 
 function timestampSec(raw: string): number {
@@ -423,7 +433,7 @@ export function parseSubtitleFile(raw: string): ParsedSubtitles {
     }
     const startSec = timestampSec(match[1]);
     const endSec = timestampSec(match[2]);
-    const body = decodeEntities(lines.slice(timingIndex + 1).join('\n').replace(/\{\\[^}]*\}/g, '').replace(/<[^>]+>/g, '')).split('\n').map((l) => l.trim()).filter((l) => l.length > 0).join('\n');
+    const body = decodeEntities(stripTags(lines.slice(timingIndex + 1).join('\n').replace(/\{\\[^}]*\}/g, ''))).split('\n').map((l) => l.trim()).filter((l) => l.length > 0).join('\n');
     if (!Number.isFinite(startSec) || !Number.isFinite(endSec) || endSec <= startSec) {
       problems.push(`Cue ${seen} ends before it starts and was skipped.`);
       continue;

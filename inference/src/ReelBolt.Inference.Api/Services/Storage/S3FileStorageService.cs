@@ -1,5 +1,6 @@
 using Amazon.S3;
 using Amazon.S3.Model;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared;
 using System.Net;
 using System.Text.Json;
@@ -119,7 +120,7 @@ public class S3FileStorageService : IFileStorageService, IObjectListing
         }
 
         await _s3Client.PutObjectAsync(request, ct);
-        _logger.LogInformation("Uploaded file {FileName} as {StorageKey}", fileName, storageKey);
+        _logger.LogInformation("Uploaded file {FileName} as {StorageKey}", fileName.ForLog(), storageKey.ForLog());
         string metadataJson = JsonSerializer.Serialize(request.Metadata.Keys
             .ToDictionary(k => k, k => request.Metadata[k]));
         return new StoredFileObject(
@@ -170,7 +171,7 @@ public class S3FileStorageService : IFileStorageService, IObjectListing
         DeleteObjectRequest request = new() { BucketName = _bucketName, Key = storageKey };
         await _s3Client.DeleteObjectAsync(request, ct);
         await ImagePreviewStore.DeleteAllAsync(_s3Client, _bucketName, projectId, storageKey, ct);
-        _logger.LogInformation("Deleted file {StorageKey}", storageKey);
+        _logger.LogInformation("Deleted file {StorageKey}", storageKey.ForLog());
     }
 
     /// <inheritdoc />
@@ -286,8 +287,8 @@ public class S3FileStorageService : IFileStorageService, IObjectListing
 
         _logger.LogInformation(
             "Moved file object from {SourceStorageKey} to {DestinationStorageKey}",
-            sourceStorageKey,
-            destinationStorageKey);
+            sourceStorageKey.ForLog(),
+            destinationStorageKey.ForLog());
     }
 
     /// <inheritdoc />
@@ -353,7 +354,7 @@ public class S3FileStorageService : IFileStorageService, IObjectListing
             _logger.LogWarning(
                 ex,
                 "Could not read the ETag for {StorageKey}; continuing without a content identity",
-                storageKey);
+                storageKey.ForLog());
 
             return null;
         }

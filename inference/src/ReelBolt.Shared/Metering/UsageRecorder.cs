@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ReelBolt.Shared.Data.Models;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared.Tenancy;
 
 namespace ReelBolt.Shared.Metering;
@@ -91,13 +92,13 @@ public sealed class UsageRecorder : IUsageRecorder, IHostedService
             // Fail closed means "never silently free": the row is still written (credits 0, no price) so the
             // gap is visible in the ledger, and the error is loud enough to page on.
             _logger.LogError(ex, "Usage {Kind} for {ProviderKind}/{Model} has no price; recorded unpriced",
-                request.Kind, request.ProviderKind, request.ModelName);
+                request.Kind, request.ProviderKind, request.ModelName.ForLog());
             MarkUnpriced(row, request, scope, noPriceFound: true);
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
             _logger.LogError(ex, "Pricing {Kind} for {ProviderKind}/{Model} failed; recorded unpriced",
-                request.Kind, request.ProviderKind, request.ModelName);
+                request.Kind, request.ProviderKind, request.ModelName.ForLog());
             MarkUnpriced(row, request, scope, noPriceFound: false);
         }
 
@@ -155,7 +156,7 @@ public sealed class UsageRecorder : IUsageRecorder, IHostedService
             // Never lost, never silent: it lands on the platform org and is flagged for a human to chase.
             _logger.LogWarning(
                 "Metered {Kind} call for {ProviderKind}/{Model} ran outside any usage scope; attributing to the platform org as Unattributed",
-                request.Kind, request.ProviderKind, request.ModelName);
+                request.Kind, request.ProviderKind, request.ModelName.ForLog());
             row.OrganizationId = WellKnownOrganizations.PlatformId;
             row.Source = UsageSource.Unattributed;
             row.IdempotencyKey = request.IdempotencyKey ?? $"unattributed:{Guid.NewGuid():N}:{KindCode(request.Kind)}";

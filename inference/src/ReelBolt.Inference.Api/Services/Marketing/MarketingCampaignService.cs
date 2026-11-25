@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using ReelBolt.Inference.Api.Data;
 using ReelBolt.Inference.Api.Services.CloudStorage;
 using ReelBolt.Shared.Data.Models.Marketing;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.Marketing;
 
@@ -431,7 +432,7 @@ public sealed class MarketingCampaignService(
             throw new CampaignRefusal("not_send_unknown");
         }
 
-        logger.LogWarning("Marketing campaign send resolved by {UserId}: campaign={CampaignId} outcome={Outcome}", adminUserId, id, outcome);
+        logger.LogWarning("Marketing campaign send resolved by {UserId}: campaign={CampaignId} outcome={Outcome}", adminUserId, id, outcome.ForLog());
         return await GetAsync(id, ct);
     }
 
