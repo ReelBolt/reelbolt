@@ -53,15 +53,49 @@ was added.
    `http://` redirect to `https://`. Flipping it on before step 5 is
    confirmed just replaces a working `http://` dev flow with a broken or
    self-signed-warning `https://` one. With it on, nginx also sends
-   `Strict-Transport-Security: max-age=31536000` on `:443` (no
-   `includeSubDomains`, no preload): a browser that has seen it refuses plain
-   `http://` for this host for a year, so do not turn `FORCE_HTTPS` back off
-   on a host people already use. Every response also carries
-   `X-Content-Type-Options: nosniff`, with or without `FORCE_HTTPS`.
+   `Strict-Transport-Security: max-age=31536000; includeSubDomains` on `:443` (no
+   preload): a browser that has seen it refuses plain `http://` for this host
+   and every subdomain for a year, so do not turn `FORCE_HTTPS` back off on a
+   host people already use, and make sure every subdomain is served over
+   https first. We do not submit the domain to the HSTS preload list; that is
+   only worth considering once every subdomain (downloads., cdn., runner.,
+   test. and any other) is https. Every response also carries the other
+   security headers below, with or without `FORCE_HTTPS`.
 7. Set `COOKIE_SECURE=true` in `.env` and restart `go-api`. Do this only
    after `https://<DOMAIN>` is confirmed working — browsers silently drop
    `Secure` cookies sent over plain HTTP, so setting this too early breaks
    login with no obvious error.
+
+## Security headers
+
+`nginx/security-headers.conf` is the one snippet that sets them; the values that differ by path come from
+the `$sh_class` maps in `nginx/nginx.conf`, and the upstream's own copies are removed (`proxy_hide_header`),
+so each header appears once. `nginx/tests/security-headers.sh` pins the set per path.
+
+A deploy reloads the running nginx instead of recycling it, so the container still runs the previous image's
+`render-config.sh`. `release.sh` therefore copies the activated release's `render-config.sh`,
+`reload-config.sh` and `security-headers.conf` into the container before `reload-config.sh`, and the rendered
+storage source is included by glob (`conf.d/security-storage*.map`) so its absence never fails `nginx -t`.
+`nginx/tests/upgrade-reload.sh` reproduces the old-renderer failure and proves the fix.
+
+| Header | Value |
+|---|---|
+| `X-Content-Type-Options` | `nosniff` everywhere |
+| `X-Frame-Options` | `DENY` everywhere (the CSP's `frame-ancestors 'none'` says the same) |
+| `Referrer-Policy` | `strict-origin-when-cross-origin`; `no-referrer` on `/app/review/g/`, the output-link and review-link API paths and `/oauth/` |
+| `Permissions-Policy` | site, docs, API: `camera=(), microphone=(), geolocation=(), payment=()`; `/app`: `microphone=(self)` (voice-over recorder; no camera use) and `payment=(self "https://*.paddle.com")` |
+| `Content-Security-Policy-Report-Only` | documents only (site, `/docs`, `/app`); never on `/api/`, `/_next/static`, `/health`. **Report-only, not enforced.** The API's own enforced CSP on file/SVG responses passes through untouched |
+| `Cross-Origin-Opener-Policy` | `same-origin` on `/` and `/docs`; `same-origin-allow-popups` on `/app` (OAuth and checkout popups) |
+| `Cross-Origin-Resource-Policy` | `same-origin`, except `cross-origin` on public-by-design paths: output/review links, `/l/`, `/api/v1/l/`, `/api/v1/public/`, brand and blog images, favicons, `/_next/static` |
+| `Cross-Origin-Embedder-Policy-Report-Only` | `credentialless; report-to="csp-endpoint"` on documents; never enforced |
+| `Reporting-Endpoints` | `csp-endpoint="/api/v1/telemetry/csp-report"` on the same documents as the two report-only headers. The CSP also carries `report-uri /api/v1/telemetry/csp-report; report-to csp-endpoint`. The endpoint is anonymous, always answers an empty `204`, has its own rate limit and a path-only access log (`docs/csp-reporting.md`) |
+| `Strict-Transport-Security` | only with `FORCE_HTTPS=true`; see step 6 above |
+
+The CSP names the deployment's storage origin (R2/S3) in `media-src` and `connect-src`. nginx takes it from
+`MINIO_PUBLIC_ENDPOINT` (passed into the nginx container by `docker-compose.yml`), reduced to
+`scheme://host[:port]`; empty or malformed means no storage source. There is no `upgrade-insecure-requests`
+(plain-http local and e2e stacks). The policy is a starting point, tuned from real violation reports before
+anyone proposes the enforcing header.
 
 ## How the pieces fit together
 

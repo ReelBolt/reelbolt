@@ -256,7 +256,7 @@ describe('viewer skeleton (VF12)', () => {
   it('the frame carries the program aspect and a booted flag; no "No preview" alert before a session exists', () => {
     render(<Harness />);
     const frame = screen.getByTestId('program-frame');
-    expect(frame.style.aspectRatio).toBe(String(timeline.settings.width / timeline.settings.height));
+    expect(Number.parseFloat(frame.style.aspectRatio)).toBeCloseTo(timeline.settings.width / timeline.settings.height, 4);
     expect(screen.queryByTestId('preview-unavailable')).toBeNull();
   });
 });

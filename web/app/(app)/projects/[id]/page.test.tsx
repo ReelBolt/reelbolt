@@ -124,12 +124,19 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 
+/**
+ * One params promise for every `rerender`. The page reads it with `use()`; a promise minted on each
+ * render is a new, unresolved thing to React, so the page re-suspends, its layout effects are
+ * cleaned up and re-run, and SWR revalidates the (already mounted) Repository panel a second time.
+ */
+const PROJECT_PARAMS = Promise.resolve({ id: 'p1' });
+
 /** A fresh SWR cache per page render, so one test's GitHub answer cannot satisfy the next. */
 function pageTree() {
   return (
     <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 0 }}>
       <MantineProvider>
-        <Suspense fallback={null}><ProjectDetailPage params={Promise.resolve({ id: 'p1' })} /></Suspense>
+        <Suspense fallback={null}><ProjectDetailPage params={PROJECT_PARAMS} /></Suspense>
       </MantineProvider>
     </SWRConfig>
   );

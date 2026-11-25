@@ -1,5 +1,6 @@
 import { request, type FullConfig } from '@playwright/test';
 import * as fs from 'fs';
+import { ensureMedia } from './seed';
 import { ARTIFACTS, READONLY, assertWriteTargetAllowed, credentials, ignoreHTTPSErrorsFor, storageStatePath } from './env';
 
 /**
@@ -15,6 +16,8 @@ export default async function globalSetup(config: FullConfig): Promise<void> {
   // Before anything else (no request, no file): the write suite only ever targets the local stack.
   assertWriteTargetAllowed(baseURL);
   fs.mkdirSync(ARTIFACTS, { recursive: true, mode: 0o700 });
+  // The seed media is made once here, before any worker starts, so no worker can read a half-written file.
+  if (!READONLY) ensureMedia();
   process.env.EDITOR_E2E_RUN ??= new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
 
   const { email, password } = credentials(baseURL);
