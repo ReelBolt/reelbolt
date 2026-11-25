@@ -3,6 +3,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Shared.Metering;
 
@@ -53,7 +54,7 @@ public sealed class MeteringEmbeddingGenerator : DelegatingEmbeddingGenerator<st
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} embedding call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} embedding call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
 
         return result;
@@ -99,7 +100,7 @@ public sealed class MeteringTranscriptionClient : ITranscriptionClient
             {
                 _logger?.LogWarning(
                     "Could not read the duration of {FileName} (not a seekable, well-formed WAV); transcription by {Kind}/{Model} was not metered",
-                    fileName, _provider.Kind, _provider.ModelName);
+                    fileName.ForLog(), _provider.Kind, _provider.ModelName.ForLog());
             }
             else
             {
@@ -111,7 +112,7 @@ public sealed class MeteringTranscriptionClient : ITranscriptionClient
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} transcription failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} transcription failed", _provider.Kind, _provider.ModelName.ForLog());
         }
 
         return result;
@@ -322,7 +323,7 @@ public sealed class MeteringImageClient : IImageClient
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} image call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} image call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
     }
 }
@@ -396,7 +397,7 @@ public sealed class MeteringImageAnalysisClient : IImageAnalysisClient
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} analysis call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} analysis call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
     }
 }
@@ -457,7 +458,7 @@ public sealed class MeteringVideoSegmentationClient : IVideoSegmentationClient
             {
                 _logger?.LogWarning(
                     "Video segmentation by {Kind}/{Model} reported no input frames; nothing was metered",
-                    _provider.Kind, _provider.ModelName);
+                    _provider.Kind, _provider.ModelName.ForLog());
                 return result;
             }
 
@@ -470,7 +471,7 @@ public sealed class MeteringVideoSegmentationClient : IVideoSegmentationClient
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} video segmentation call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} video segmentation call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
 
         return result;
@@ -511,7 +512,7 @@ public sealed class MeteringSpeechSynthesisClient : ISpeechSynthesisClient, IWra
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} synthesis call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} synthesis call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
 
         return speech;

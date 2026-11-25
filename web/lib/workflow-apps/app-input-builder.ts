@@ -628,7 +628,7 @@ export function conditionReadable(manifest: AppManifest): (AppManifestInput & { 
 export function conditionSnippet(input: AppManifestInput & { id: string }): string {
   if (input.type === 'choice' && input.options && input.options.length > 0) {
     const value = input.options[0].value;
-    return typeof value === 'number' ? `input.${input.id} == ${value}` : `input.${input.id} == '${String(value).replace(/'/g, "\\'")}'`;
+    return typeof value === 'number' ? `input.${input.id} == ${value}` : `input.${input.id} == '${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
   }
   return `input.${input.id}`;
 }

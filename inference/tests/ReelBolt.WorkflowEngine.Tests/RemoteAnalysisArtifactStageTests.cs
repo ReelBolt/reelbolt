@@ -106,7 +106,7 @@ public class RemoteAnalysisArtifactStageTests
     private static string FindRepoRoot()
     {
         string? dir = AppContext.BaseDirectory;
-        while (dir is not null && !File.Exists(Path.Combine(dir, "CLAUDE.md")))
+        while (dir is not null && !File.Exists(Path.Combine(dir, "inference", "ReelBolt.sln")))
             dir = Path.GetDirectoryName(dir);
         return dir ?? throw new InvalidOperationException("repo root not found");
     }

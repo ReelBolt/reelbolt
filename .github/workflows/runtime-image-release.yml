@@ -57,20 +57,26 @@ jobs:
       - name: Prepare licence files
         run: infra/scripts/prepare-legal-context.sh "$RUNNER_TEMP/legal"
 
-      # OCI labels: source, revision and created come from the repository and commit.
+      # OCI labels and tags, written by a plain step: docker/metadata-action is not on the public repository's
+      # allowed-actions list, and one disallowed action fails the whole workflow at startup.
       - name: Image metadata
         id: imgmeta
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        with:
-          images: ${{ env.IMAGE }}
-          tags: type=raw,value=${{ steps.meta.outputs.version }}
-          labels: |
-            org.opencontainers.image.title=reelbolt-sandbox-runtime
-            org.opencontainers.image.description=ReelBolt sandbox runtime (Remotion render environment). ReelBolt code is AGPL-3.0-only. Third-party GPL programs included: FFmpeg (Debian package) and the Remotion compositor FFmpeg; see /licenses/GPL-SOURCE-OFFER.md
-            org.opencontainers.image.licenses=AGPL-3.0-only
-            org.opencontainers.image.version=${{ steps.meta.outputs.version }}
-            org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+        env:
+          VERSION_OUT: ${{ steps.meta.outputs.version }}
+        run: |
+          {
+            echo 'labels<<__LABELS__'
+            echo "org.opencontainers.image.title=reelbolt-sandbox-runtime"
+            echo "org.opencontainers.image.description=ReelBolt sandbox runtime (Remotion render environment). ReelBolt code is AGPL-3.0-only. Third-party GPL programs are included (FFmpeg, the Remotion compositor FFmpeg); see /licenses/GPL-SOURCE-OFFER.md"
+            echo "org.opencontainers.image.licenses=AGPL-3.0-only"
+            echo "org.opencontainers.image.version=${VERSION_OUT}"
+            echo "org.opencontainers.image.revision=${GITHUB_SHA}"
+            echo "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+            echo '__LABELS__'
+            echo 'tags<<__TAGS__'
+            echo "${IMAGE}:${VERSION_OUT}"
+            echo '__TAGS__'
+          } >> "$GITHUB_OUTPUT"
 
       # The gate: build once locally (linux/amd64, not pushed), check, produce the source bundle.
       # Nothing is pushed unless every check passes.
