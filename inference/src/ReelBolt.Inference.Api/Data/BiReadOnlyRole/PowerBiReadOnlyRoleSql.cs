@@ -57,6 +57,7 @@ public static class PowerBiReadOnlyRoleSql
         "credit_accounts",
         "credit_grants",
         "credit_ledger_entries",
+        "csp_violation_counts",
         "inference_models",
         "marketing_link_daily_stats",
         "marketing_links",
@@ -313,6 +314,12 @@ BEGIN
     IF to_regclass('public.user_onboarding_profiles') IS NOT NULL THEN
       REVOKE SELECT ON user_onboarding_profiles FROM powerbi_ro;
       GRANT SELECT ON user_onboarding_profiles TO powerbi_ro;
+    END IF;
+    -- csp_violation_counts: a daily count per closed token, scheme+host and sanitized path (docs/csp-reporting.md);
+    -- no person, URL query, IP or user agent.
+    IF to_regclass('public.csp_violation_counts') IS NOT NULL THEN
+      REVOKE SELECT ON csp_violation_counts FROM powerbi_ro;
+      GRANT SELECT ON csp_violation_counts TO powerbi_ro;
     END IF;
 
     GRANT SELECT (agent_type, assigned_skills_json, available_tools_json, color,

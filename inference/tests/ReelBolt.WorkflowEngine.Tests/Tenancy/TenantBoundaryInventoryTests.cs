@@ -280,6 +280,10 @@ public class TenantBoundaryInventoryTests
     [InlineData(typeof(ReelBolt.Shared.Data.Models.Marketing.MarketingLinkDailyStat))]
     [InlineData(typeof(ReelBolt.Inference.Api.Services.Telemetry.VisitorAttribution))]
     [InlineData(typeof(UserOnboardingProfile))]
+    // csp_violation_counts (security-headers T-003): an anonymous daily aggregate of browser CSP/COEP violation reports, keyed by
+    // closed tokens, a scheme+host and a sanitized path; no person, organization or tenant, written by the anonymous
+    // csp-report beacon and read only by BI.
+    [InlineData(typeof(ReelBolt.Inference.Api.Services.Telemetry.CspViolationCount))]
     // user_video_spend_limits: one row per user (user_id FK, cascade), read and written only for the JWT sub by
     // VideoSpendLimitController; the engine gate reads the run owner's row. Never per organization.
     [InlineData(typeof(UserVideoSpendLimit))]

@@ -143,7 +143,7 @@ describe('ProgramViewer: graphics recovery', () => {
     script = { ...script, kind: 'fallback', fault: 'userChoice', reason: REASON_USER_CHOICE, liveAvailable: true, filter };
     render(<View forceFallback />);
     expect(screen.getByTestId('grade-filter-defs').querySelector(`filter#${filter.id}`)).toBeTruthy();
-    expect((screen.getByTestId('program-video') as HTMLVideoElement).style.filter).toBe(`url(#${filter.id})`);
+    expect((screen.getByTestId('program-video') as HTMLVideoElement).style.filter).toMatch(new RegExp(`^url\\(("|')?#${filter.id}\\1\\)$`));
     script.filter = null;
     act(() => current.notify());
     expect(screen.queryByTestId('grade-filter-defs')).toBeNull();

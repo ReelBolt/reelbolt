@@ -79,7 +79,7 @@ describe('phone transcript lane', () => {
     render(<Sheet store={make(stepDoc())} />);
     expect((screen.getByTestId('phone-captions-generate') as HTMLButtonElement).disabled).toBe(true);
     const start = screen.getByTestId('analyse-first');
-    expect(start.outerHTML).toContain('min-height: 44px');
+    expect(start.style.minHeight).toBe('44px');
     fireEvent.click(start);
     await waitFor(() => expect(screen.getByTestId('analyse-first-price').textContent).toContain('4 credits'));
     fireEvent.click(screen.getByTestId('analyse-first-confirm'));

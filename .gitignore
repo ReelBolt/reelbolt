@@ -63,6 +63,9 @@ Desktop.ini
 .claude/*
 # The shared project agent setting is committed
 !.claude/settings.json
+# Shared path-scoped rules are committed
+!.claude/rules/
+!.claude/rules/**
 
 # QDrant
 # docker-compose.yml bind-mounts ./data/qdrant; its raft state is local runtime data.

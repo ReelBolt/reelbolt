@@ -651,7 +651,10 @@ async function deliver(event, { secret, signature, attempts = WEBHOOK_ATTEMPTS, 
       status = res.status;
       body = (await res.text()).slice(0, 500);
     } catch (err) {
-      body = String(err?.message || err);
+      // The detail goes to the log only: what the delivery record (served by the mock's control API)
+      // holds is a fixed label, so nothing derived from an Error reaches a response.
+      log(`webhook ${event.event_type} ${event.event_id} attempt ${attempt} failed`, err);
+      body = 'delivery failed';
     }
     record.attempts.push({ at: new Date().toISOString(), status, body });
     log(`webhook ${event.event_type} ${event.event_id} attempt ${attempt} -> ${status || 'error'} ${body}`);

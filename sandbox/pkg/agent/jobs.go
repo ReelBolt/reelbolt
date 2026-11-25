@@ -252,7 +252,17 @@ func (a *Agent) handleAssign(ctx context.Context, c *connection, env protocol.En
 		return
 	}
 
-	scratch := filepath.Join(a.cfg.ScratchRoot, env.JobID)
+	scratch, err := jobScratchDir(a.cfg.ScratchRoot, env.JobID)
+	if err != nil {
+		a.logf("rejecting job: %v", err)
+		_ = c.sendJob(protocol.TypeReject, env.JobID, env.SessionID, protocol.RejectPayload{
+			LeaseEpoch: payload.LeaseEpoch,
+			JobToken:   payload.JobToken,
+			Reason:     protocol.RejectCapabilityMismatch,
+			Message:    "the job id is not usable as a scratch directory name",
+		})
+		return
+	}
 	if err := os.MkdirAll(scratch, 0o700); err != nil {
 		a.logf("cannot create the job's scratch directory: %v", err)
 		_ = c.sendJob(protocol.TypeReject, env.JobID, env.SessionID, protocol.RejectPayload{
@@ -325,6 +335,21 @@ func (a *Agent) handleAssign(ctx context.Context, c *connection, env protocol.En
 	_ = ctx
 
 	go a.runJob(js)
+}
+
+// jobScratchDir is the job's directory under root. The id arrives from the gateway; it must be one
+// plain path element, so it can never name anything outside root.
+func jobScratchDir(root, jobID string) (string, error) {
+	if jobID == "" || len(jobID) > 128 {
+		return "", errors.New("job id is empty or too long")
+	}
+	for _, r := range jobID {
+		ok := r == '-' || r == '_' || (r >= '0' && r <= '9') || (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z')
+		if !ok {
+			return "", errors.New("job id has characters outside [A-Za-z0-9_-]")
+		}
+	}
+	return filepath.Join(filepath.Clean(root), jobID), nil
 }
 
 // rejection reports why a job must be declined, or "" to take it. Every check

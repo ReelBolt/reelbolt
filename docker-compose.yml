@@ -648,6 +648,8 @@ services:
       # false (the default) = the visit beacon answers 404 and no visitor row is written, so every tracked
       # link reads 0 visitors; the admin Links funnel reports this switch as visitIngestEnabled.
       Telemetry__VisitIngestEnabled: ${TELEMETRY_VISIT_INGEST_ENABLED:-false}
+      # Anonymous POST /api/v1/telemetry/csp-report (browser CSP/COEP violation reports, aggregate counts only); false stores nothing (still 204).
+      Telemetry__CspReportEnabled: ${TELEMETRY_CSP_REPORT_ENABLED:-true}
       # New-user funnel (docs/design/new-user-funnel.md sections 6 and 7).
       # Tracked links: GET /api/v1/l/{code} (the public /l/{code}) counts the click and redirects.
       # On by default; false answers 404 there and nothing is counted.
@@ -1323,6 +1325,9 @@ services:
       - FORCE_HTTPS=${FORCE_HTTPS:-false}
       # Cloud-only knobs (docs/tls.md); every default reproduces the single-host stack.
       - REAL_IP_FROM_CLOUDFLARE=${REAL_IP_FROM_CLOUDFLARE:-false}
+      # The storage (R2/S3) origin the browser fetches media from; named in the report-only
+      # Content-Security-Policy (media-src, connect-src). Empty = omitted. docs/tls.md "Security headers".
+      - MINIO_PUBLIC_ENDPOINT=${MINIO_PUBLIC_ENDPOINT:-}
       - CLIENT_MAX_BODY_SIZE=${CLIENT_MAX_BODY_SIZE:-100M}
       - UPSTREAM_WORKFLOW_ENGINE=${UPSTREAM_WORKFLOW_ENGINE:-http://workflow-engine:8080}
       # Operator-supplied certificate, e.g. a Cloudflare Origin CA cert covering

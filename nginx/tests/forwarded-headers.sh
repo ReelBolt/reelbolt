@@ -175,7 +175,7 @@ PM='^/api/promotions(/|$)'
 LK='"^/(?:api/v1/)?l/(?<link_code>[a-z0-9][a-z0-9-]{1,39})/?$"'
 LKR='limit_req zone=link_redirect burst=40 nodelay;'
 LKL='limit_req zone=link_relay burst=400 nodelay;'
-want="/api/v1/auth/token $A|/api/v1/auth/signup $A|/api/v1/auth/forgot-password $A|/api/v1/auth/resend-verification $A|location ~ ^/api/v1/auth/email-change/(preview|confirm|cancel)\$ $A|$M/subscribe(/|\$) $A|$M/subscribe(/|\$) $S|$M/confirm(/|\$) $A|$M/unsubscribe(/|\$) $A|$M/webhooks/brevo(/|\$) $TL|$B $P|$B $S2|$O $OL|$R $RR|$R $RW|^/api/public/ limit_req zone=public_api burst=200 nodelay;|$MM $MMR|$ML $MLR|^/api/v1/telemetry/visit(/|\$) limit_req zone=telemetry_visit burst=20 nodelay;|$T $TL|location ^~ /app/review/g/ $RR|$LK $LKR|$LK $LKL|$CT $F|$SU $F|$PM $PR|location /.well-known/oauth-protected-resource limit_req zone=mcp burst=200 nodelay;|/oauth/register $A|location /mcp limit_req zone=mcp burst=200 nodelay;|"
+want="/api/v1/auth/token $A|/api/v1/auth/signup $A|/api/v1/auth/forgot-password $A|/api/v1/auth/resend-verification $A|location ~ ^/api/v1/auth/email-change/(preview|confirm|cancel)\$ $A|$M/subscribe(/|\$) $A|$M/subscribe(/|\$) $S|$M/confirm(/|\$) $A|$M/unsubscribe(/|\$) $A|$M/webhooks/brevo(/|\$) $TL|$B $P|$B $S2|$O $OL|$R $RR|$R $RW|^/api/public/ limit_req zone=public_api burst=200 nodelay;|$MM $MMR|$ML $MLR|^/api/v1/telemetry/visit(/|\$) limit_req zone=telemetry_visit burst=20 nodelay;|^/api/v1/telemetry/csp-report/?\$ limit_req zone=csp_report burst=20 nodelay;|$T $TL|location ^~ /app/review/g/ $RR|$LK $LKR|$LK $LKL|$CT $F|$SU $F|$PM $PR|location /.well-known/oauth-protected-resource limit_req zone=mcp burst=200 nodelay;|/oauth/register $A|location /mcp limit_req zone=mcp burst=200 nodelay;|"
 [ "$zones" = "$want" ] || { echo "FAIL locations.conf: limit_req lines are [$zones], expected [$want]"; RL=1; }
 # S-05: the Inference API routes case-insensitively and tolerates a trailing slash, so the marketing
 # locations are case-insensitive regexes (the live half proves the variants share the limit). An
@@ -368,7 +368,8 @@ for spec in 'location ~* ^/api/v1/billing/webhooks/paddle(/|$) {=client_max_body
             'location ~* ^/api/v1/billing/webhooks/paddle(/|$) {=include /etc/nginx/conf.d/paddle-webhook-allow.conf;' \
             'location ~* ^/api/v1/billing/webhooks/stripe(/|$) {=client_max_body_size 1m;' \
             'location ~* ^/api/v1/github/webhook(/|$) {=client_max_body_size 2m;' \
-            'location ~* ^/api/v1/telemetry/visit(/|$) {=client_max_body_size 2k;'; do
+            'location ~* ^/api/v1/telemetry/visit(/|$) {=client_max_body_size 2k;' \
+            'location ~* ^/api/v1/telemetry/csp-report/?$ {=client_max_body_size 16k;'; do
     pat=${spec%%=*}; need=${spec#*=}
     b="$(loc_block "$pat")"
     [ -n "$b" ] || { echo "FAIL locations.conf: no [$pat]"; E=1; continue; }
@@ -380,6 +381,9 @@ done
 # The visit beacon must stay ahead of the telemetry ingest regex: the first matching regex wins.
 v_line=$(grep -nF 'location ~* ^/api/v1/telemetry/visit(/|$) {' "$LC" | head -1 | cut -d: -f1)
 t_line=$(grep -nF 'location ~* ^/api/v1/telemetry/ {' "$LC" | head -1 | cut -d: -f1)
+c_line=$(grep -nF 'location ~* ^/api/v1/telemetry/csp-report/?$ {' "$LC" | head -1 | cut -d: -f1)
+[ -n "$c_line" ] && [ -n "$t_line" ] && [ "$c_line" -lt "$t_line" ] \
+    || { echo "FAIL locations.conf: the csp-report location must come before the telemetry ingest regex"; E=1; }
 [ -n "$v_line" ] && [ -n "$t_line" ] && [ "$v_line" -lt "$t_line" ] \
     || { echo "FAIL locations.conf: the visit beacon location must come before the telemetry ingest regex"; E=1; }
 # EDGE-07: a limit_req rejection logs the request line at `error` by default, and these three paths
@@ -402,21 +406,28 @@ for n in 'proxy_set_header X-Real-IP $remote_addr;' 'proxy_set_header X-Forwarde
 done
 grep -v '^[[:space:]]*#' "$PV" | grep -Eq 'proxy_add_x_forwarded_for|proxy_set_header[[:space:]]+Authorization' \
     && { echo "FAIL private-server.conf.template appends to a caller-supplied X-Forwarded-For or touches Authorization"; E=1; }
-# EDGE-04: nosniff for every upstream, HSTS only when FORCE_HTTPS=true. add_header is inherited
-# only into a scope with no add_header of its own, so every scope (file level, location, `if`)
-# that sets one must repeat both lines.
+# EDGE-04: the security header snippet (nginx/security-headers.conf: nosniff, framing, referrer,
+# permissions, report-only CSP/COEP, COOP, CORP, and HSTS only when FORCE_HTTPS=true). add_header is
+# inherited only into a scope with no add_header of its own, so every scope (file level, location, `if`)
+# that sets one must include the snippet. The runner.<domain> server keeps its own minimal pair
+# (nosniff + the hsts include) and sets no add_header in any location.
+SH='include /etc/nginx/security-headers.conf;'
 NS='add_header X-Content-Type-Options "nosniff" always;'
 HS='include /etc/nginx/conf.d/hsts*.inc;'
-for f in common.conf.template runner-server.conf.template; do
-    grep -qF "$NS" "$DIR/$f" || { echo "FAIL $f lacks [$NS]"; E=1; }
-    grep -qF "$HS" "$DIR/$f" || { echo "FAIL $f lacks [$HS]"; E=1; }
+grep -qF "$SH" "$DIR/common.conf.template" || { echo "FAIL common.conf.template lacks [$SH]"; E=1; }
+grep -qF "$NS" "$DIR/runner-server.conf.template" || { echo "FAIL runner-server.conf.template lacks [$NS]"; E=1; }
+grep -qF "$HS" "$DIR/runner-server.conf.template" || { echo "FAIL runner-server.conf.template lacks [$HS]"; E=1; }
+grep -qF "$HS" "$DIR/security-headers.conf" || { echo "FAIL security-headers.conf lacks [$HS]"; E=1; }
+for f in locations.conf common.conf.template; do
+    grep -qF "$NS" "$DIR/$f" && { echo "FAIL $f repeats the nosniff line instead of including the snippet"; E=1; }
+    grep -qF "$HS" "$DIR/$f" && { echo "FAIL $f repeats the hsts include instead of including the snippet"; E=1; }
 done
 for f in locations.conf slots-locations.conf runner-locations.conf.template runner-server.conf.template \
          common.conf.template http-server-dev.conf https-server.conf.template; do
-    awk -v file="$f" -v ns="$NS" -v hs="$HS" '
+    awk -v file="$f" -v ns="$NS" -v hs="$HS" -v snip="$SH" '
         function close_scope() {
-            if (ah[d] && !(sn[d] && sh[d])) {
-                printf "FAIL %s:%d a block sets add_header without repeating nosniff and the hsts include\n", file, st[d]
+            if (ah[d] && !(si[d] || (sn[d] && sh[d]))) {
+                printf "FAIL %s:%d a block sets add_header without including the security header snippet\n", file, st[d]
                 bad = 1
             }
         }
@@ -424,17 +435,18 @@ for f in locations.conf slots-locations.conf runner-locations.conf.template runn
         {
             line = $0
             o = gsub(/\{/, "{", line); c = gsub(/\}/, "}", line)
-            if (o > c) { d++; ah[d] = 0; sn[d] = 0; sh[d] = 0; st[d] = NR; next }
+            if (o > c) { d++; ah[d] = 0; sn[d] = 0; sh[d] = 0; si[d] = 0; st[d] = NR; next }
             if (c > o) { close_scope(); d--; next }
             if ($0 ~ /^[ \t]*add_header[ \t]/) ah[d] = 1
             if (index($0, ns)) sn[d] = 1
             if (index($0, hs)) sh[d] = 1
+            if (index($0, snip)) si[d] = 1
         }
         END { st[0] = 1; close_scope(); exit bad }
     ' "$DIR/$f" || E=1
 done
 RC="$DIR/render-config.sh"
-grep -qF "printf 'add_header Strict-Transport-Security \"max-age=31536000\" always;\n' > /etc/nginx/conf.d/hsts.inc" "$RC" \
+grep -qF "printf 'add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;\n' > /etc/nginx/conf.d/hsts.inc" "$RC" \
     || { echo "FAIL render-config.sh does not render conf.d/hsts.inc"; E=1; }
 grep -qF 'rm -f /etc/nginx/conf.d/hsts.inc' "$RC" \
     || { echo "FAIL render-config.sh does not remove a stale conf.d/hsts.inc (FORCE_HTTPS turned off)"; E=1; }
@@ -442,8 +454,15 @@ grep -qF 'rm -f /etc/nginx/conf.d/hsts.inc' "$RC" \
 awk '/^if \[ "\$FORCE_HTTPS" = "true" \]; then/ { on = 1 } on && /^else/ { on = 0 }
      /Strict-Transport-Security/ && !/^#/ && !on { bad = 1 } END { exit bad }' "$RC" \
     || { echo "FAIL render-config.sh writes HSTS outside the FORCE_HTTPS=true branch"; E=1; }
-grep -Eq '^[[:space:]]*add_header[[:space:]]+(Content-Security-Policy|X-Frame-Options)' "$DIR"/*.conf "$DIR"/*.template \
-    && { echo "FAIL a CSP or framing header is set at the edge (needs a product decision: it can break embeds)"; E=1; }
+# The CSP is only ever report-only at the edge (the API sets its own enforced one on file responses, and
+# that must pass through): an enforced add_header Content-Security-Policy, or a CSP/framing header set
+# anywhere but the snippet, fails.
+grep -Eq '^[[:space:]]*add_header[[:space:]]+Content-Security-Policy[[:space:]]' "$DIR"/*.conf "$DIR"/*.template \
+    && { echo "FAIL an enforcing Content-Security-Policy is set at the edge (only Content-Security-Policy-Report-Only is allowed)"; E=1; }
+grep -Eq '^[[:space:]]*add_header[[:space:]]+(Content-Security-Policy-Report-Only|X-Frame-Options)' "$DIR/locations.conf" "$DIR/slots-locations.conf" "$DIR"/*.template \
+    && { echo "FAIL a CSP-report-only or framing header is set outside security-headers.conf"; E=1; }
+grep -Eq '^[[:space:]]*proxy_hide_header' "$DIR/locations.conf" "$DIR/slots-locations.conf" \
+    && { echo "FAIL a location sets proxy_hide_header: it would drop the http-level list that dedupes the security headers"; E=1; }
 # EDGE-02: /mcp has its own per-address zone and a small body cap.
 grep -qF 'limit_req_zone $client_ip_key zone=mcp:10m rate=600r/m;' "$NC" \
     || { echo "FAIL nginx.conf: no mcp zone (600r/m on \$client_ip_key)"; E=1; }
@@ -826,7 +845,7 @@ header_check() {
     label=$1; want_hsts=$2; shift 2
     h=$(resp_headers "$@")
     ns=$(printf '%s\n' "$h" | grep -ci '^x-content-type-options: nosniff$' || true)
-    hs=$(printf '%s\n' "$h" | grep -ci '^strict-transport-security: max-age=31536000$' || true)
+    hs=$(printf '%s\n' "$h" | grep -ci '^strict-transport-security: max-age=31536000; includeSubDomains$' || true)
     if [ "$ns" = 1 ] && [ "$hs" = "$want_hsts" ]; then echo "ok   $label: nosniff x$ns, HSTS x$hs"
     else echo "FAIL $label: nosniff x$ns (want 1), HSTS x$hs (want $want_hsts)"; FAIL=1; fi
 }
@@ -964,6 +983,7 @@ fi
 probe "/l/{code} (auth_basic off)" "$UPSTREAM" -H 'Authorization: Bearer leak' http://127.0.0.1/l/some-code
 probe "/api/v1/l/{code} (auth_basic off)" "$UPSTREAM" -H 'Authorization: Bearer leak' -H 'Cookie: reelbolt_token=TESTTOKEN' http://127.0.0.1/api/v1/l/some-code
 probe "/api/v1/telemetry/visit (auth_basic off, client Host)" "$CLIENT" -X POST http://127.0.0.1/api/v1/telemetry/visit
+probe "/api/v1/telemetry/csp-report (auth_basic off, anonymous, upstream Host)" "$UPSTREAM" -X POST -H 'Authorization: Bearer leak' -H 'Cookie: reelbolt_token=TESTTOKEN' http://127.0.0.1/api/v1/telemetry/csp-report
 for p in /l/Bad_Code /l/api-down /api/v1/l/Bad_Code /api/v1/l/api-down; do
     code=$(docker exec "$NGX" curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1$p")
     [ "$code" = 302 ] && echo "ok   $p needs no credentials (302)" || { echo "FAIL $p answered $code behind the front door, expected 302"; FAIL=1; }

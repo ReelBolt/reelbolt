@@ -7,10 +7,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
+	"net/netip"
 	"net/url"
 	"os"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/vecchiotom/reelbolt/sandbox/pkg/protocol"
@@ -230,4 +233,28 @@ func (s *stallReader) Close() error {
 	err := s.rc.Close()
 	s.cancel()
 	return err
+}
+
+// ErrBlockedAddress is returned by DialGuard for an address a presigned transfer must never reach.
+var ErrBlockedAddress = errors.New("agent: transfer address is not permitted")
+
+// DialGuard is a net.Dialer.Control func. It checks the IP actually being dialled (so DNS rebinding
+// cannot slip past a hostname check) and refuses link-local (including the 169.254.169.254 cloud
+// metadata address), unspecified, multicast and broadcast addresses. Loopback and private ranges
+// stay allowed: self-hosted Garage/MinIO on a LAN or docker network is a supported deployment.
+func DialGuard(_, address string, _ syscall.RawConn) error {
+	host, _, err := net.SplitHostPort(address)
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrBlockedAddress, err)
+	}
+	ip, err := netip.ParseAddr(host)
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrBlockedAddress, err)
+	}
+	ip = ip.Unmap()
+	if ip.IsLinkLocalUnicast() || ip.IsLinkLocalMulticast() || ip.IsUnspecified() || ip.IsMulticast() ||
+		ip == netip.AddrFrom4([4]byte{255, 255, 255, 255}) {
+		return fmt.Errorf("%w: %s", ErrBlockedAddress, ip)
+	}
+	return nil
 }

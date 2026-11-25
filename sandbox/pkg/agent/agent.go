@@ -456,7 +456,7 @@ func newNonce(r io.Reader) (string, error) {
 
 func guardedTransport() *http.Transport {
 	tr := http.DefaultTransport.(*http.Transport).Clone()
-	tr.DialContext = (&net.Dialer{Timeout: 15 * time.Second, KeepAlive: 30 * time.Second}).DialContext
+	tr.DialContext = (&net.Dialer{Timeout: 15 * time.Second, KeepAlive: 30 * time.Second, Control: DialGuard}).DialContext
 	tr.TLSHandshakeTimeout = 15 * time.Second
 	tr.ResponseHeaderTimeout = 60 * time.Second
 	tr.IdleConnTimeout = 90 * time.Second
