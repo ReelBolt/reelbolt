@@ -162,7 +162,7 @@ What changed against the design above:
 - **gsap** 3.15.1 is in the package catalog (Owner decision of 2026-10-27, recorded in the initiative's `decisions.md`). It
   ships under the GSAP Standard "No Charge" licence, not MIT, which prohibits use in no-code visual animation tools that
   compete with Webflow without written consent; the owner accepted that risk. Agents drive it only by the frame, see the
-  "GSAP in Remotion (ReelBolt)" guide. `lucide-react` is 1.59.0.
+  "GSAP in Remotion (ReelBolt)" guide. `lucide-react` is 1.77.0.
 - **Lockfile.** The image installs from a lockfile with a 7-day release cooldown, so a freshly published version is
   not picked up.
 - **zod** is pinned through an `overrides` entry so every dependent resolves one version.
