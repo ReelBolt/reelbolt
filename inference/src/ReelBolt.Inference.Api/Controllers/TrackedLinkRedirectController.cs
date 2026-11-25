@@ -5,6 +5,7 @@ using Microsoft.Net.Http.Headers;
 using ReelBolt.Inference.Api.Services.Marketing.Links;
 using ReelBolt.Shared.Acquisition;
 using ReelBolt.Shared.Data.Models.Marketing;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Controllers;
 
@@ -72,7 +73,7 @@ public sealed class TrackedLinkRedirectController(
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            logger.LogError(ex, "Tracked link {Code} could not be read; redirecting to the home page with the code", code);
+            logger.LogError(ex, "Tracked link {Code} could not be read; redirecting to the home page with the code", code.ForLog());
             // The code is well formed (checked above), so it is safe in a query. The visit still joins the
             // link, as it does when nginx or the Pages Function cannot reach the API.
             return Found(TrackedLinkRules.FallbackPath + "?utm_content=" + code);
@@ -89,7 +90,7 @@ public sealed class TrackedLinkRedirectController(
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
             // The count is best effort; the person who clicked still gets the page.
-            logger.LogWarning(ex, "Tracked link {Code}: the hit was not counted", code);
+            logger.LogWarning(ex, "Tracked link {Code}: the hit was not counted", code.ForLog());
         }
 
         return Found(TrackedLinkRules.LongPath(link));

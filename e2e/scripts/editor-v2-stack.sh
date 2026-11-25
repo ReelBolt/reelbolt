@@ -3,6 +3,7 @@
 #
 #   e2e/scripts/editor-v2-stack.sh up     [--from <worktree>]   build + start (idempotent)
 #   e2e/scripts/editor-v2-stack.sh status [--from <worktree>]   docker compose ps
+#   e2e/scripts/editor-v2-stack.sh logs   [--from <worktree>]   tail of workflow-engine, go-api, inference logs
 #   e2e/scripts/editor-v2-stack.sh down   [--from <worktree>]   stop and DELETE the stack's volumes
 #   e2e/scripts/editor-v2-stack.sh env                          print the local login as shell exports
 #
@@ -246,6 +247,10 @@ case "$cmd" in
     [ -f "$OVERRIDE" ] || ensure_state
     compose down -v --remove-orphans
     ;;
+  logs)
+    [ -f "$OVERRIDE" ] || ensure_state
+    compose logs --no-color --tail "${EDITOR_STACK_LOG_TAIL:-400}" workflow-engine go-api inference
+    ;;
   env)
     [ -f "$ENV_FILE" ] || die "no $ENV_FILE yet; run '$0 up' first"
     # shellcheck disable=SC1090
@@ -255,7 +260,7 @@ case "$cmd" in
     echo "export EDITOR_E2E_PASSWORD='${ADMIN_PASSWORD}'"
     ;;
   *)
-    sed -n '2,8p' "$0" >&2
+    sed -n '2,9p' "$0" >&2
     exit 2
     ;;
 esac

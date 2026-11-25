@@ -94,8 +94,8 @@ soon as the bundle is served from a sub-path.
 
 ## The sandbox project
 
-- It is pre-installed. Installed Remotion packages are all pinned to **4.0.542**; every extra
-  `@remotion/*` package you add must be the same exact version (`@remotion/transitions@4.0.542`),
+- It is pre-installed. Installed Remotion packages are all pinned to **4.0.545**; every extra
+  `@remotion/*` package you add must be the same exact version (`@remotion/transitions@4.0.545`),
   or the render fails on a version mismatch.
 - Pre-installed: the template catalog in `sandbox/template/package-catalog.json` (`remotion`,
   `@remotion/*` helpers, React 19, `three` with react-three-fiber, `d3`, `framer-motion`, `gsap`,

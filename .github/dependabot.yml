@@ -64,6 +64,15 @@ updates:
       - dependency-name: "FluentAssertions"
       - dependency-name: "MassTransit*"
         versions: [">= 9"]
+      # The solution targets .NET 10; the 11.x majors of the framework packages
+      # belong to the .NET 11 move. Minor and patch updates still arrive.
+      # Revisit 2027-02-15.
+      - dependency-name: "Microsoft.Extensions.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.AspNetCore.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: /web
@@ -96,6 +105,11 @@ updates:
           - "react-dom"
           - "@types/react"
           - "@types/react-dom"
+    ignore:
+      # typescript-eslint does not yet accept TypeScript 7 and the lint step
+      # fails with it. Revisit when it does.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   # The Remotion project the sandbox renders with. Remotion refuses to mix
   # versions across its packages, so they only ever move as one group.
@@ -155,6 +169,10 @@ updates:
       interval: weekly
     commit-message:
       prefix: "deps(runner-ui)"
+    ignore:
+      # @vitejs/plugin-react 6 needs Vite 8; the runner UI is on Vite 7.
+      - dependency-name: "@vitejs/plugin-react"
+        update-types: ["version-update:semver-major"]
     groups:
       vitest:
         patterns:
@@ -187,6 +205,10 @@ updates:
       interval: weekly
     commit-message:
       prefix: "deps(mcp)"
+    ignore:
+      # The MCP image runs Node 22; @types/node must match the runtime major.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: docker
     directories:
@@ -201,3 +223,12 @@ updates:
       interval: weekly
     commit-message:
       prefix: "deps(docker)"
+    ignore:
+      # The .NET images stay on 10 with the net10.0 target framework; the 11.0
+      # tags belong to the .NET 11 move. Revisit 2027-02-15.
+      - dependency-name: "mcr.microsoft.com/dotnet/sdk"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "mcr.microsoft.com/dotnet/aspnet"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "mcr.microsoft.com/dotnet/runtime"
+        update-types: ["version-update:semver-major"]

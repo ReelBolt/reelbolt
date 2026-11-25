@@ -35,7 +35,7 @@ public class SandboxPackageCatalogTests
         Assert.Equal(fromFile.OrderBy(p => p.Key), inEngine.OrderBy(p => p.Key));
         Assert.All(fromFile.Values, v => Assert.Matches(@"^\d+\.\d+\.\d+$", v));
         Assert.DoesNotContain("@remotion/google-fonts", fromFile.Keys);
-        Assert.Equal("3.15.0", fromFile["gsap"]);
+        Assert.Equal("3.15.1", fromFile["gsap"]);
         Assert.Contains("@remotion/gif", fromFile.Keys);
         Assert.Contains("@remotion/lottie", fromFile.Keys);
         Assert.Contains("@remotion/transitions", fromFile.Keys);
@@ -46,8 +46,8 @@ public class SandboxPackageCatalogTests
     {
         using JsonDocument doc = JsonDocument.Parse(ReactRemotionSandboxTools.InstallFromCatalog(["framer-motion", "gsap", "@remotion/shapes@4.0.0"]));
         Assert.True(doc.RootElement.GetProperty("ok").GetBoolean());
-        Assert.Contains("framer-motion: already installed at 13.4.6", doc.RootElement.GetProperty("message").GetString());
-        Assert.Contains("gsap: already installed at 3.15.0", doc.RootElement.GetProperty("message").GetString());
+        Assert.Contains("framer-motion: already installed at 14.14.0", doc.RootElement.GetProperty("message").GetString());
+        Assert.Contains("gsap: already installed at 3.15.1", doc.RootElement.GetProperty("message").GetString());
     }
 
     [Fact]

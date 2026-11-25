@@ -317,10 +317,10 @@ and the three.js chunk is among the 6 it never asks for.
 
 `package.json` pins `@react-three/fiber` to exactly `9.8.1` — no caret — because its peer
 dependency on React is bounded (`react: ">=19 <19.4"`) while this project's declared React is
-`^19.3.0`, which resolves to `19.3.0` in the lockfile: the range still admits that version today,
+`^19.3.1`, which resolves to `19.3.1` in the lockfile: the range still admits that version today,
 but an unpinned bump would let a future React 19.4+ resolution break `npm ci` (used by the
 production Dockerfile's `deps` stage, and by this phase's full regression rebuild). `9.8.1`
-declares `react: ">=19 <19.4"`, which resolves cleanly against React 19.3.0. Do not bump
+declares `react: ">=19 <19.4"`, which resolves cleanly against React 19.3.1. Do not bump
 `@react-three/fiber` past `9.8.1` without first confirming its peer-dependency range against
 whatever React version is installed at the time.
 

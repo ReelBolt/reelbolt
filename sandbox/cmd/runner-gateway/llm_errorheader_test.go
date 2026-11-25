@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -19,7 +20,7 @@ func TestLLMGatewayRefusalsCarryTheRelayErrorHeader(t *testing.T) {
 	g.cfg.InternalToken = ""
 	h := g.requireInternalToken(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
 	rec = httptest.NewRecorder()
-	h.ServeHTTP(rec, httptest.NewRequest(http.MethodPost, "/", nil))
+	h.ServeHTTP(rec, httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/", nil))
 	if got := rec.Header().Get(llmRelayErrorHeader); got != "internal_api_disabled" {
 		t.Fatalf("disabled header = %q", got)
 	}
@@ -27,7 +28,7 @@ func TestLLMGatewayRefusalsCarryTheRelayErrorHeader(t *testing.T) {
 	g.cfg.InternalToken = "secret"
 	h = g.requireInternalToken(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
 	rec = httptest.NewRecorder()
-	h.ServeHTTP(rec, httptest.NewRequest(http.MethodPost, "/", nil))
+	h.ServeHTTP(rec, httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/", nil))
 	if rec.Code != http.StatusUnauthorized || rec.Header().Get(llmRelayErrorHeader) != "unauthorized" {
 		t.Fatalf("unauthorized: %d %q", rec.Code, rec.Header().Get(llmRelayErrorHeader))
 	}

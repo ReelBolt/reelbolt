@@ -83,7 +83,7 @@ func TestMailsAreLocalized(t *testing.T) {
 		itHTML         string
 	}{
 		{TemplateResetPassword, "Reset your ReelBolt password", "Reimposta la password di ReelBolt", "scade tra 1 ora", "expires in 1 hour", "Scegli una nuova password"},
-		{TemplateInvite, "Grace invited you to Acme Studio on ReelBolt", "Grace ti ha invitato in Acme Studio su ReelBolt", "Accetta l'invito", "Accept the invitation", "Accetta l'invito"},
+		{TemplateInvite, "Grace invited you to Acme Studio on ReelBolt", "Grace ti ha invitato in Acme Studio su ReelBolt", "Accetta l'invito", "Accept the invitation", "Accetta l'invito"}, //nolint:misspell // Italian test text
 		{TemplateVerifyEmail, "Confirm your ReelBolt email", "Conferma la tua email di ReelBolt", "Conferma il tuo indirizzo email", "Confirm your email address", "Conferma email"},
 	}
 	for _, c := range cases {
@@ -172,7 +172,7 @@ func TestItalianGreetingWithoutNameAndRole(t *testing.T) {
 
 func TestItalianDeletionNoticeReadsNaturally(t *testing.T) {
 	m := renderLoc(t, TemplateDeletionSchedule, "it", func(d *MailData) { d.DeletionDate = "8 novembre 2026" })
-	if !strings.Contains(m.Text, "verrà eliminato il giorno 8 novembre 2026") {
+	if !strings.Contains(m.Text, "verrà eliminato il giorno 8 novembre 2026") { //nolint:misspell // Italian test text
 		t.Errorf("date wording:\n%s", m.Text)
 	}
 	if strings.Contains(strings.ToLower(m.Text), "workflow") {

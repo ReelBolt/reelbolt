@@ -7,6 +7,7 @@ import (
 	"errors"
 	"log"
 	"os"
+	"runtime"
 	"strings"
 	"testing"
 
@@ -103,7 +104,7 @@ func TestKeyringFailureFallsBackToAPrivateFileAndWarns(t *testing.T) {
 	if err != nil {
 		t.Fatalf("the fallback file was not written: %v", err)
 	}
-	if perm := info.Mode().Perm(); perm != 0o600 {
+	if perm := info.Mode().Perm(); runtime.GOOS != "windows" && perm != 0o600 { // POSIX modes do not apply on Windows
 		t.Errorf("key file mode = %o, want 600", perm)
 	}
 	if !strings.Contains(logs.String(), "keyring is unavailable") {

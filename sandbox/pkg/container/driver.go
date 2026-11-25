@@ -751,7 +751,8 @@ func (d *Driver) takeOverExisting(execID string) (bool, error) {
 		}
 		return rows[i][0] < rows[j][0]
 	})
-	for _, parts := range rows {
+	if len(rows) > 0 { // only the best-ranked candidate is considered
+		parts := rows[0]
 		name := parts[0]
 		id := strings.TrimPrefix(name, d.prefix())
 		if !ownerIDRE.MatchString(id) {

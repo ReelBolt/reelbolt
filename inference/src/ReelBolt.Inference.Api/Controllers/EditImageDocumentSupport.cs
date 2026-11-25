@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using ReelBolt.Inference.Api.Controllers.Dto;
 using ReelBolt.Inference.Api.Data;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Data.Models.Billing;
@@ -107,7 +108,7 @@ internal static class EditImageDocumentSupport
     public static string VendorLogDetail(Exception ex)
     {
         string text = ex.GetType().Name + ": " + ScrubUrls(ex.Message);
-        return text.Length > 1000 ? text[..1000] + "..." : text;
+        return LogSafe.Value(text.Length > 1000 ? text[..1000] + "..." : text)!;
     }
 
     /// <summary>A subject cut-out with no layer named, on a document whose original image is gone.</summary>

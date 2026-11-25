@@ -20,7 +20,7 @@ func TestAdoptRequiresBearer(t *testing.T) {
 	h := &apiHandler{manager: container.NewWithRunner(container.Config{SandboxRoot: t.TempDir()}, "docker", nil)}
 	guarded := requireAPIToken("tok", http.HandlerFunc(h.adopt))
 	rec := httptest.NewRecorder()
-	guarded.ServeHTTP(rec, httptest.NewRequest(http.MethodPost, "/admin/adopt", nil))
+	guarded.ServeHTTP(rec, httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/admin/adopt", nil))
 	if rec.Code != http.StatusUnauthorized {
 		t.Fatalf("want 401, got %d", rec.Code)
 	}
@@ -39,7 +39,7 @@ func TestAdoptRefusesMissingOrNullPeerSlots(t *testing.T) {
 		`{"peerSlots":["green"," "]}`: http.StatusBadRequest,
 	} {
 		rec := httptest.NewRecorder()
-		h.adopt(rec, httptest.NewRequest(http.MethodPost, "/admin/adopt", strings.NewReader(body)))
+		h.adopt(rec, httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/admin/adopt", strings.NewReader(body)))
 		if rec.Code != want {
 			t.Fatalf("body %q: want %d, got %d", body, want, rec.Code)
 		}
@@ -52,7 +52,7 @@ func TestAdoptIs404WithoutASlot(t *testing.T) {
 	h := &apiHandler{manager: container.NewWithRunner(container.Config{SandboxRoot: t.TempDir()},
 		"docker", func(ctx context.Context, args ...string) ([]byte, error) { ran = true; return nil, nil })}
 	rec := httptest.NewRecorder()
-	h.adopt(rec, httptest.NewRequest(http.MethodPost, "/admin/adopt", strings.NewReader(`{"peerSlots":[]}`)))
+	h.adopt(rec, httptest.NewRequestWithContext(context.Background(), http.MethodPost, "/admin/adopt", strings.NewReader(`{"peerSlots":[]}`)))
 	if rec.Code != http.StatusNotFound || ran {
 		t.Fatalf("want 404 and no container call, got %d (ran=%v)", rec.Code, ran)
 	}

@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -67,7 +68,7 @@ func TestLdflagsStampARealBuild(t *testing.T) {
 	}
 
 	// The command the release workflow runs, verbatim.
-	bin := filepath.Join(dir, "reelbolt-runner")
+	bin := filepath.Join(dir, "reelbolt-runner"+exeSuffix())
 	args := []string{"build", "-trimpath"}
 	if tags != "" {
 		args = append(args, "-tags", tags)
@@ -87,7 +88,7 @@ func TestLdflagsStampARealBuild(t *testing.T) {
 
 	// The collector address. The headless runner does not link the telemetry
 	// package, so a probe built with the same line reports what it holds.
-	probe := filepath.Join(dir, "telemetryprobe")
+	probe := filepath.Join(dir, "telemetryprobe"+exeSuffix())
 	probeArgs := append([]string{goTool, "build", "-trimpath", "-tags", tags, "-ldflags", ldflags, "-o", probe},
 		"./cmd/reelbolt-manifest/testdata/telemetryprobe")
 	if out, err := runCommand(t, filepath.Join("..", ".."), probeArgs...); err != nil {
@@ -135,7 +136,7 @@ func TestAFullPathXDoesNotStampAMainPackage(t *testing.T) {
 		t.Skip("no go toolchain")
 	}
 	dir := t.TempDir()
-	bin := filepath.Join(dir, "reelbolt-runner")
+	bin := filepath.Join(dir, "reelbolt-runner"+exeSuffix())
 	full := "github.com/vecchiotom/reelbolt/runner/cmd/reelbolt-runner.Version=1.4.2"
 	if out, err := runCommand(t, filepath.Join("..", ".."), goTool, "build", "-ldflags", "-X "+full, "-o", bin, "./cmd/reelbolt-runner"); err != nil {
 		t.Fatalf("go build: %v\n%s", err, out)
@@ -150,4 +151,14 @@ func TestAFullPathXDoesNotStampAMainPackage(t *testing.T) {
 	if !strings.Contains(string(out), "dev") {
 		t.Fatalf("unexpected version output: %s", out)
 	}
+}
+
+// exeSuffix is the executable extension of the platform the test runs on: go
+// build -o writes exactly the name given, and Windows will not exec a file
+// without ".exe".
+func exeSuffix() string {
+	if runtime.GOOS == "windows" {
+		return ".exe"
+	}
+	return ""
 }

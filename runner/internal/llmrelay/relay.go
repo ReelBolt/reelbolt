@@ -158,12 +158,6 @@ func (r *Relay) Settings() Settings {
 	return r.set
 }
 
-func (r *Relay) enabled() bool {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-	return r.set.Enabled && r.base != nil
-}
-
 // Status is a snapshot for the UI.
 func (r *Relay) Status() Status {
 	r.mu.Lock()

@@ -465,7 +465,7 @@ func TestValidateDisplayNameBoundaries(t *testing.T) {
 		"emoji 101":    strings.Repeat("😀", 101),
 		"nbsp":         "a b",
 		"tab":          "a\tb",
-		"rtl mark":     "a‏b",
+		"rtl mark":     "a\u200fb",
 		"invalid utf8": "a\xffb",
 	}
 	for name, in := range bad {

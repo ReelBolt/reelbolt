@@ -132,7 +132,7 @@ func TestMailLocalePrefersSavedThenRequest(t *testing.T) {
 }
 
 func TestRequestLocalePtrIsNilWithoutALanguageSignal(t *testing.T) {
-	r := httptest.NewRequest("POST", "/api/v1/auth/signup", nil)
+	r := httptest.NewRequestWithContext(t.Context(), "POST", "/api/v1/auth/signup", nil)
 	if p := requestLocalePtr(r); p != nil {
 		t.Fatalf("no signal must store nothing, got %q", *p)
 	}

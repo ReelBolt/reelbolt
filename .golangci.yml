@@ -26,6 +26,12 @@ linters:
   # three of each kind.
   exclusions:
     generated: lax
+    rules:
+      # Test helpers (llmPost, llmGet, ...) return the *http.Response and close
+      # the body in a t.Cleanup; bodyclose cannot see across the helper boundary.
+      - path: _test\.go
+        linters:
+          - bodyclose
     presets:
       - comments
       - common-false-positives

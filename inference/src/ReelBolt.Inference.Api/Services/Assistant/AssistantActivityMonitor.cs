@@ -50,9 +50,14 @@ public sealed class AssistantActivityMonitor
             return false;
 
         DateTime deadline = DateTime.UtcNow + maxWait;
-        while (IsInteractiveBusy && DateTime.UtcNow < deadline)
+        while (IsInteractiveBusy)
         {
+            // One clock read per pass: the deadline can lapse between a separate loop check and this
+            // subtraction, and Task.Delay throws on a negative delay (seen on a loaded CI runner).
             TimeSpan remaining = deadline - DateTime.UtcNow;
+            if (remaining <= TimeSpan.Zero)
+                break;
+
             await Task.Delay(remaining < PollInterval ? remaining : PollInterval, ct);
         }
 

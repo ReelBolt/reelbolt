@@ -201,7 +201,7 @@ func TestStaleOwnerChainAThenCAdopts(t *testing.T) {
 		t.Fatal(err)
 	}
 	f.d.AdoptExistingWithPeers([]string{})
-	if _, err := f.d.GetByExecution(slotExecA); err == ErrNotFound {
+	if _, err := f.d.GetByExecution(slotExecA); errors.Is(err, ErrNotFound) {
 		t.Fatal("C answered not-found for a sandbox it adopted")
 	}
 	if got := f.d.readOwner("mine"); got != "slotc" {
@@ -243,7 +243,7 @@ func TestHasLiveExecFailsClosed(t *testing.T) {
 		"error":   {"", errors.New("daemon down"), true},
 		"timeout": {"", context.DeadlineExceeded, true},
 		"garbage": {"", nil, true},
-		"exit1":   {"", exec.Command("sh", "-c", "exit 1").Run(), true},
+		"exit1":   {"", exec.CommandContext(context.Background(), "sh", "-c", "exit 1").Run(), true},
 	}
 	for name, c := range cases {
 		d := NewWithRunner(Config{}, "docker", func(ctx context.Context, args ...string) ([]byte, error) {
@@ -274,7 +274,7 @@ func TestTakeoverRefusedWhenScanFails(t *testing.T) {
 		}
 		return inner(ctx, args...)
 	}
-	if _, _, err := d.Create(slotExecA); err != ErrPeerSandboxExists {
+	if _, _, err := d.Create(slotExecA); !errors.Is(err, ErrPeerSandboxExists) {
 		t.Fatalf("want ErrPeerSandboxExists, got %v", err)
 	}
 	if d.readOwner("kept") != "" {

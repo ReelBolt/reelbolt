@@ -335,7 +335,7 @@ func (p *Provider) Create(ctx context.Context, spec poolwaker.NodeSpec) (poolwak
 			dctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 			defer cancel()
 			if _, derr := p.do(dctx, http.MethodDelete, "/servers/"+strconv.FormatInt(out.Server.ID, 10), nil, nil); derr != nil {
-				return poolwaker.Node{}, fmt.Errorf("%w (cleanup delete of server %d also failed: %v)", err, out.Server.ID, derr)
+				return poolwaker.Node{}, fmt.Errorf("%w (cleanup delete of server %d also failed: %w)", err, out.Server.ID, derr)
 			}
 			return poolwaker.Node{}, err
 		}

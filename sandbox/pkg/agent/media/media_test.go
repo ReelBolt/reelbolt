@@ -494,7 +494,7 @@ func TestMediaReadOpInlineLimits(t *testing.T) {
 	if opErr != nil {
 		t.Fatalf("read 2 MiB: %+v", opErr)
 	}
-	if !agent.FitsInline(json.RawMessage(out)) {
+	if !agent.FitsInline(out) {
 		t.Fatalf("a 2 MiB read result does not fit inline: %d bytes", len(out))
 	}
 

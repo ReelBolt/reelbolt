@@ -15,6 +15,7 @@ import (
 func isolatedCache(t *testing.T) *governor.Control {
 	t.Helper()
 	t.Setenv("XDG_CACHE_HOME", t.TempDir())
+	t.Setenv("LocalAppData", t.TempDir()) // Windows: os.UserCacheDir ignores XDG_CACHE_HOME and HOME
 	t.Setenv("HOME", t.TempDir())
 	c, err := controlChannel()
 	if err != nil {

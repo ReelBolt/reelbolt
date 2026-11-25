@@ -89,7 +89,7 @@ func TestCoreLimitRefusalFallsBackAndDoesNotStorm(t *testing.T) {
 	}
 	// After the backoff the preferred size is tried again.
 	asked = nil
-	r.prov.Delete(context.Background(), nodes[0].ID)
+	_ = r.prov.Delete(context.Background(), nodes[0].ID)
 	r.c.nodes = map[string]*tracked{}
 	r.clk.Advance(2 * time.Hour)
 	r.gw.DemandVal = Demand{DesiredNodes: 1, Queued: 1}

@@ -16,82 +16,82 @@
   },
   {
     "name": "@react-three/fiber",
-    "version": "9.8.1",
+    "version": "9.8.2",
     "purpose": "React renderer for three.js"
   },
   {
     "name": "@remotion/captions",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Caption data types and helpers"
   },
   {
     "name": "@remotion/cli",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "CLI: compositions, render, bundle"
   },
   {
     "name": "@remotion/fonts",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Load local font files (no network)"
   },
   {
     "name": "@remotion/gif",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "GIF playback"
   },
   {
     "name": "@remotion/layout-utils",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Text measurement and fit"
   },
   {
     "name": "@remotion/lottie",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Lottie animation playback"
   },
   {
     "name": "@remotion/media-utils",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Audio/video metadata and waveform helpers"
   },
   {
     "name": "@remotion/motion-blur",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Trail and camera motion blur"
   },
   {
     "name": "@remotion/noise",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Perlin-style noise"
   },
   {
     "name": "@remotion/paths",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "SVG path utilities"
   },
   {
     "name": "@remotion/renderer",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Server-side rendering"
   },
   {
     "name": "@remotion/shapes",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "SVG shape generators"
   },
   {
     "name": "@remotion/three",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Remotion integration for three.js"
   },
   {
     "name": "@remotion/transitions",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Scene transitions"
   },
   {
     "name": "@remotion/zod-types",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Zod types for composition props"
   },
   {
@@ -101,12 +101,12 @@
   },
   {
     "name": "framer-motion",
-    "version": "13.4.6",
+    "version": "14.14.0",
     "purpose": "Declarative animation"
   },
   {
     "name": "gsap",
-    "version": "3.15.0",
+    "version": "3.15.1",
     "purpose": "Timeline animation, driven by the frame (see the ReelBolt gsap guide)"
   },
   {
@@ -121,17 +121,17 @@
   },
   {
     "name": "react",
-    "version": "19.3.0",
+    "version": "19.3.1",
     "purpose": "UI runtime"
   },
   {
     "name": "react-dom",
-    "version": "19.3.0",
+    "version": "19.3.1",
     "purpose": "UI runtime"
   },
   {
     "name": "remotion",
-    "version": "4.0.542",
+    "version": "4.0.545",
     "purpose": "Core framework"
   },
   {

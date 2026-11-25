@@ -22,6 +22,7 @@ import (
 //     Windows branch here compiles but cannot run without Windows).
 
 func TestIntegrationUpdatesFromALocalReleaseServer(t *testing.T) {
+	skipOnWindows(t)
 	dir := t.TempDir()
 	target := writeFakeBinary(t, dir, "reelbolt-runner", "v0.0.1")
 	rel := newTestRelease(t, releaseOptions{Version: "0.0.2"})
@@ -119,6 +120,7 @@ func TestIntegrationRefusesAManifestSomeoneElseSigned(t *testing.T) {
 }
 
 func TestIntegrationDefersWhileAJobRuns(t *testing.T) {
+	skipOnWindows(t)
 	dir := t.TempDir()
 	target := writeFakeBinary(t, dir, "reelbolt-runner", "v0.0.1")
 	rel := newTestRelease(t, releaseOptions{Version: "0.0.2"})

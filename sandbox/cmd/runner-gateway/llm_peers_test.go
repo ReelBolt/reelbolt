@@ -73,7 +73,7 @@ func TestLLMRelayPeerForwardsStreamInOrder(t *testing.T) {
 		send(t, r.ws, mustEnvelope(t, protocol.TypeLLMResponseEnd, protocol.LLMResponseEndPayload{RequestID: req.RequestID}))
 	}()
 	resp := llmPost(t, a, testOrgID, r.deviceID, `{"model":"llama3.2","stream":true}`)
-	if resp.StatusCode != 200 || resp.Header.Get("Content-Type") != "text/event-stream" {
+	if resp.StatusCode != http.StatusOK || resp.Header.Get("Content-Type") != "text/event-stream" {
 		t.Fatalf("status=%d type=%q", resp.StatusCode, resp.Header.Get("Content-Type"))
 	}
 	rd := bufio.NewReader(resp.Body)
@@ -113,7 +113,7 @@ func TestLLMRelayPeerHopIsNeverForwarded(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() { _ = resp.Body.Close() }()
-	if resp.StatusCode != 503 || hits.Load() != 0 {
+	if resp.StatusCode != http.StatusServiceUnavailable || hits.Load() != 0 {
 		t.Fatalf("status=%d forwards=%d, want 503 and none", resp.StatusCode, hits.Load())
 	}
 }
@@ -128,7 +128,7 @@ func TestLLMRelayPeersAllOffline(t *testing.T) {
 	a.gateway.peerSet.locals = func() []string { return nil }
 	resp := llmPost(t, a, testOrgID, d.deviceID, `{}`)
 	body, _ := io.ReadAll(resp.Body)
-	if resp.StatusCode != 503 || !strings.Contains(string(body), "runner_offline") {
+	if resp.StatusCode != http.StatusServiceUnavailable || !strings.Contains(string(body), "runner_offline") {
 		t.Fatalf("status=%d body=%s", resp.StatusCode, body)
 	}
 }
@@ -142,7 +142,7 @@ func TestLLMRelayPeerOrgMismatchNotForwarded(t *testing.T) {
 		return []string{strings.TrimPrefix(spy.URL, "http://")}, nil
 	}
 	resp := llmPost(t, a, "11111111-1111-4111-8111-111111111111", r.deviceID, `{}`)
-	if resp.StatusCode != 404 || hits.Load() != 0 {
+	if resp.StatusCode != http.StatusNotFound || hits.Load() != 0 {
 		t.Fatalf("status=%d forwards=%d, want 404 and none", resp.StatusCode, hits.Load())
 	}
 }
@@ -152,7 +152,7 @@ func TestLLMRelayPeersDisabledUnchanged(t *testing.T) {
 	var hits atomic.Int32
 	b.server.Config.Handler = http.HandlerFunc(func(http.ResponseWriter, *http.Request) { hits.Add(1) })
 	resp := llmPost(t, a, testOrgID, r.deviceID, `{}`)
-	if resp.StatusCode != 503 || hits.Load() != 0 {
+	if resp.StatusCode != http.StatusServiceUnavailable || hits.Load() != 0 {
 		t.Fatalf("status=%d forwards=%d, want 503 and none", resp.StatusCode, hits.Load())
 	}
 }
@@ -185,7 +185,7 @@ func TestLLMRelayPeerOfflineDecidedByHeaderNotBody(t *testing.T) {
 	// A model server whose answer body merely contains the text must be relayed.
 	a.gateway.peerSet.lookup = func(context.Context, string) ([]string, error) {
 		srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-			w.WriteHeader(503)
+			w.WriteHeader(http.StatusServiceUnavailable)
 			_, _ = w.Write([]byte(`{"error":"runner_offline"}`))
 		}))
 		t.Cleanup(srv.Close)
@@ -193,7 +193,7 @@ func TestLLMRelayPeerOfflineDecidedByHeaderNotBody(t *testing.T) {
 	}
 	resp := llmPost(t, a, testOrgID, r.deviceID, `{}`)
 	b, _ := io.ReadAll(resp.Body)
-	if resp.StatusCode != 503 || !strings.Contains(string(b), `"error":"runner_offline"`) {
+	if resp.StatusCode != http.StatusServiceUnavailable || !strings.Contains(string(b), `"error":"runner_offline"`) {
 		t.Fatalf("status=%d body=%q: a body substring must not read as offline", resp.StatusCode, b)
 	}
 	if v := a.metricValue(t, `reelbolt_runner_gateway_llm_requests_total{result="forwarded"}`); v != 1 {
@@ -207,7 +207,7 @@ func TestLLMRelayPeerOversizedBodyIs413(t *testing.T) {
 	a.gateway.peerSet.lookup = func(context.Context, string) ([]string, error) { return []string{"127.0.0.1:1"}, nil }
 	big := `{"x":"` + strings.Repeat("a", protocol.LLMMaxRequestBodyBytes+10) + `"}`
 	resp := llmPost(t, a, testOrgID, r.deviceID, big)
-	if resp.StatusCode != 413 {
+	if resp.StatusCode != http.StatusRequestEntityTooLarge {
 		t.Fatalf("status = %d, want 413", resp.StatusCode)
 	}
 }
@@ -217,7 +217,7 @@ func TestLLMRelayPeerTruncatedStreamAbortsCaller(t *testing.T) {
 	a.gateway.peerSet.lookup = func(context.Context, string) ([]string, error) {
 		srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.Header().Set("Content-Type", "text/event-stream")
-			w.WriteHeader(200)
+			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write([]byte("data: 1\n\n"))
 			w.(http.Flusher).Flush()
 			panic(http.ErrAbortHandler)

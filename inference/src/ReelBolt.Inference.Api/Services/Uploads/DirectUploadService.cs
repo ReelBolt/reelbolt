@@ -5,6 +5,7 @@ using ReelBolt.Inference.Api.Data;
 using ReelBolt.Inference.Api.Services.Assistant;
 using ReelBolt.Inference.Api.Services.Billing;
 using ReelBolt.Inference.Api.Services.Storage;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared;
 using ReelBolt.Shared.Billing;
 using ReelBolt.Shared.Data.Models;
@@ -575,7 +576,7 @@ public sealed class DirectUploadService : IDirectUploadService
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger?.LogWarning(ex, "Aborting the upload to {StorageKey} failed; storage's lifecycle rule will remove it.", ticket.Key);
+            _logger?.LogWarning(ex, "Aborting the upload to {StorageKey} failed; storage's lifecycle rule will remove it.", ticket.Key.ForLog());
         }
     }
 
@@ -895,7 +896,7 @@ public sealed class DirectUploadService : IDirectUploadService
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger?.LogWarning(ex, "Could not delete the object at {StorageKey}.", key);
+            _logger?.LogWarning(ex, "Could not delete the object at {StorageKey}.", key.ForLog());
         }
     }
 

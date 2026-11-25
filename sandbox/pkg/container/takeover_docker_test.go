@@ -3,6 +3,8 @@
 package container
 
 import (
+	"context"
+	"errors"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -30,7 +32,7 @@ func TestTakeoverStopAndChainAgainstRealDocker(t *testing.T) {
 		if c == "" {
 			continue
 		}
-		if out, err := exec.Command("docker", "image", "inspect", c, "--format", "{{.Id}}").CombinedOutput(); err == nil && len(out) > 0 {
+		if out, err := exec.CommandContext(context.Background(), "docker", "image", "inspect", c, "--format", "{{.Id}}").CombinedOutput(); err == nil && len(out) > 0 {
 			image = c
 			break
 		}
@@ -45,14 +47,14 @@ func TestTakeoverStopAndChainAgainstRealDocker(t *testing.T) {
 			ContainerPrefix: prefix, SandboxTTL: time.Hour, MemoryLimit: "256m", CPULimit: "1", PIDsLimit: 64}, "docker")
 	}
 	t.Cleanup(func() {
-		out, _ := exec.Command("docker", "ps", "-aq", "--filter", "name="+prefix).Output()
+		out, _ := exec.CommandContext(context.Background(), "docker", "ps", "-aq", "--filter", "name="+prefix).Output()
 		for _, id := range strings.Fields(string(out)) {
-			_ = exec.Command("docker", "rm", "-f", id).Run()
+			_ = exec.CommandContext(context.Background(), "docker", "rm", "-f", id).Run()
 		}
-		_ = exec.Command("docker", "network", "rm", prefix+"net").Run()
+		_ = exec.CommandContext(context.Background(), "docker", "network", "rm", prefix+"net").Run()
 	})
 	running := func(name string) bool {
-		out, _ := exec.Command("docker", "inspect", "-f", "{{.State.Running}}", name).Output()
+		out, _ := exec.CommandContext(context.Background(), "docker", "inspect", "-f", "{{.State.Running}}", name).Output()
 		return strings.TrimSpace(string(out)) == "true"
 	}
 	const (
@@ -92,7 +94,7 @@ func TestTakeoverStopAndChainAgainstRealDocker(t *testing.T) {
 	if green.readOwner(zb.ID) != "green" {
 		t.Fatalf(".owners entry = %q, want green", green.readOwner(zb.ID))
 	}
-	if _, err := blue.GetByExecution(execZ); err != ErrNotFound {
+	if _, err := blue.GetByExecution(execZ); !errors.Is(err, ErrNotFound) {
 		t.Fatalf("blue still indexes the taken-over sandbox: %v", err)
 	}
 
@@ -106,7 +108,7 @@ func TestTakeoverStopAndChainAgainstRealDocker(t *testing.T) {
 	if _, err := os.Lstat(filepath.Join(zb.WorkspacePath, "hostile.fifo")); err != nil {
 		t.Fatalf("a stop must keep the workspace: %v", err)
 	}
-	if out, _ := exec.Command("docker", "ps", "-aq", "--filter", "name="+zb.ContainerName).Output(); strings.TrimSpace(string(out)) == "" {
+	if out, _ := exec.CommandContext(context.Background(), "docker", "ps", "-aq", "--filter", "name="+zb.ContainerName).Output(); strings.TrimSpace(string(out)) == "" {
 		t.Fatal("a stop must keep the container")
 	}
 	// Removal is DeleteByExecution (what the runner session uses), and it copes with the hostile files.
@@ -125,7 +127,7 @@ func TestTakeoverStopAndChainAgainstRealDocker(t *testing.T) {
 	}
 	chained := mk("blue", "green")
 	chained.AdoptExistingWithPeers([]string{"green"})
-	if _, err := chained.GetByExecution(execW); err != ErrNotFound {
+	if _, err := chained.GetByExecution(execW); !errors.Is(err, ErrNotFound) {
 		t.Fatalf("the chained executor must not index a sandbox its peer holds: %v", err)
 	}
 	if sb, err := green2.GetByExecution(execW); err != nil || sb == nil {

@@ -15,7 +15,7 @@ ko() { printf '  FAIL %s\n' "$1"; failed=$((failed + 1)); }
 
 export FAKE_OS_RELEASE=$'ID=debian\nVERSION_ID="12"\nVERSION_CODENAME=bookworm'
 export FAKE_DPKG='ffmpeg\t7:5.1.9-0+deb12u1\tffmpeg\t7:5.1.9-0+deb12u1\nglibc\t2.36-9\tlibc6\t2.36-9'
-export FAKE_COMPOSITOR=$'@remotion/compositor-linux-x64-gnu\t4.0.542\t/opt/x/node_modules/@remotion/compositor-linux-x64-gnu'
+export FAKE_COMPOSITOR=$'@remotion/compositor-linux-x64-gnu\t4.0.545\t/opt/x/node_modules/@remotion/compositor-linux-x64-gnu'
 export FAKE_REPO_DIGEST="ghcr.io/o/reelbolt-sandbox-runtime@sha256:1111 "
 
 out="$work/out"
@@ -30,7 +30,7 @@ done
 x="$work/x"; mkdir "$x"; tar -xzf "$tb" -C "$x"; d="$x/reelbolt-source-reelbolt-sandbox-runtime-abcdef012345"
 grep -q 'registry:     ghcr.io/o/reelbolt-sandbox-runtime@sha256:1111' "$d/MANIFEST.txt" && ok "manifest records the registry digest" || ko "manifest lacks the registry digest"
 grep -q 'ffmpeg	7:5.1.9-0+deb12u1' "$d/source-packages.tsv" && ok "source list has the installed ffmpeg version" || ko "source list wrong: $(cat "$d/source-packages.tsv")"
-grep -q 'remotion-dev/remotion/tree/v4.0.542/packages/compositor' "$d/COMPOSITOR-FFMPEG.md" && ok "compositor reference names the Remotion tag" || ko "compositor reference missing"
+grep -q 'remotion-dev/remotion/tree/v4.0.545/packages/compositor' "$d/COMPOSITOR-FFMPEG.md" && ok "compositor reference names the Remotion tag" || ko "compositor reference missing"
 
 # Alpine: origin and version come from `apk list -I`
 export FAKE_OS_RELEASE=$'ID=alpine\nVERSION_ID=3.24.3'

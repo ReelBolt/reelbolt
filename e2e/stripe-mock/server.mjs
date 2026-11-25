@@ -32,7 +32,7 @@
 //   FAKE_FEE_MINOR        the processing fee every balance transaction reports (default 100)
 
 import { createServer } from 'node:http';
-import { createHmac, randomBytes } from 'node:crypto';
+import { createHmac, randomInt } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -126,9 +126,8 @@ export function signPayload(rawBody, secret, timestamp = Math.floor(Date.now() /
 
 const ID_ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 function newId(prefix, length = 24) {
-  const bytes = randomBytes(length);
   let s = '';
-  for (const b of bytes) s += ID_ALPHABET[b % ID_ALPHABET.length];
+  for (let i = 0; i < length; i++) s += ID_ALPHABET[randomInt(ID_ALPHABET.length)];
   return `${prefix}_${s}`;
 }
 
@@ -1353,7 +1352,7 @@ export function createMock(options = {}) {
   }
 
   function authorize(req) {
-    const m = /^Bearer\s+(.+)$/i.exec(req.headers.authorization || '');
+    const m = /^Bearer\s+(\S.*)$/i.exec(req.headers.authorization || '');
     if (!m) {
       return new ApiError(401, { message: "You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/." });
     }
@@ -1731,7 +1730,7 @@ ${extra}
       return send(res, 404, { error: { message: `Unknown path ${url.pathname}` } });
     } catch (err) {
       log('handler error', err);
-      if (!res.headersSent) return send(res, 500, { error: { type: 'api_error', message: String(err?.message || err) } });
+      if (!res.headersSent) return send(res, 500, { error: { type: 'api_error', message: 'Internal mock error.' } });
     } finally {
       call.status = res.statusCode;
       if (parts[0] === 'v1') state.calls.push(call);

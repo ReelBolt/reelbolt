@@ -13,7 +13,7 @@ func TestNormalizeLocale(t *testing.T) {
 		out string
 		ok  bool
 	}{
-		"it": {"it", true}, "IT": {"it", true}, "it-IT": {"it", true}, "it_it": {"it", true}, " en-US ": {"en", true},
+		"it": {"it", true}, "IT": {"it", true}, "it-IT": {"it", true}, "it_it": {"it", true}, " en-US ": {"en", true}, //nolint:gocritic // the whitespace in the key is the point of the case
 		"": {"", false}, "xx": {"", false}, "../etc": {"", false}, "it/../en": {"", false}, "fr-CA": {"", false},
 		strings.Repeat("a", 500): {"", false},
 	}
@@ -69,7 +69,7 @@ func TestLocaleFromRequest(t *testing.T) {
 
 func TestLocaleSignalFromRequest(t *testing.T) {
 	mk := func(cookie, al string) *http.Request {
-		r := httptest.NewRequest("GET", "/", nil)
+		r := httptest.NewRequestWithContext(t.Context(), "GET", "/", nil)
 		if cookie != "" {
 			r.AddCookie(&http.Cookie{Name: "rb_locale", Value: cookie})
 		}

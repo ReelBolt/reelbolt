@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -46,7 +47,7 @@ func TestSaveLoadRoundTripIsPrivate(t *testing.T) {
 	if err != nil {
 		t.Fatalf("stat: %v", err)
 	}
-	if perm := info.Mode().Perm(); perm != 0o600 {
+	if perm := info.Mode().Perm(); runtime.GOOS != "windows" && perm != 0o600 { // POSIX modes do not apply on Windows
 		t.Errorf("config mode = %o, want 600", perm)
 	}
 	out, err := LoadFrom(path)
@@ -86,7 +87,7 @@ func TestValidate(t *testing.T) {
 		{"slots too high", func(c *Config) { c.Slots = MaxSlots + 1 }, false},
 		{"slots zero", func(c *Config) { c.Slots = 0 }, false},
 		{"relative scratch root", func(c *Config) { c.ScratchRoot = "relative/dir" }, false},
-		{"absolute scratch root", func(c *Config) { c.ScratchRoot = filepath.Join(string(filepath.Separator), "var", "lib") }, true},
+		{"absolute scratch root", func(c *Config) { c.ScratchRoot = filepath.Join(os.TempDir(), "scratch") }, true},
 		{"unknown cli", func(c *Config) { c.ContainerCLI = "containerd" }, false},
 		{"podman", func(c *Config) { c.ContainerCLI = "podman" }, true},
 		{"paired without a gateway", func(c *Config) { c.GatewayURL = "" }, false},
