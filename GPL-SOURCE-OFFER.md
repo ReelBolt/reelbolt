@@ -44,7 +44,7 @@ The script reads the package database of that exact image, then downloads the ma
 
 ## What we ship from Remotion
 
-The sandbox images contain Remotion's compositor, unmodified, taken from Remotion's own npm packages `@remotion/compositor-linux-x64-gnu` and `@remotion/compositor-linux-arm64-gnu`, version 4.0.542 (see `REMOTION_VERSION` in [infra/image-pins.env](infra/image-pins.env)). It includes an FFmpeg built with GPL options (libx264, libx265) and with libfdk-aac, which is non-free. ReelBolt did not build it and cannot offer more than a reference for its source: Remotion's repository, <https://github.com/remotion-dev/remotion>, `packages/compositor`, at the tag for that version, and the FFmpeg release named in the bundle's `COMPOSITOR-FFMPEG.md`. Its licence is the Remotion License, <https://www.remotion.dev/docs/license>. This offer does not claim that the Remotion licence resolves the GPL or libfdk-aac questions, or that Remotion has cleared redistribution; anyone running these images needs their own Remotion licence unless they are covered by Remotion's Free License (for-profit organisations of up to three people, three included; an organisation of more than three people, four or more, is not).
+The sandbox images contain Remotion's compositor, unmodified, taken from Remotion's own npm packages `@remotion/compositor-linux-x64-gnu` and `@remotion/compositor-linux-arm64-gnu`, version 4.0.545 (see `REMOTION_VERSION` in [infra/image-pins.env](infra/image-pins.env)). It includes an FFmpeg built with GPL options (libx264, libx265) and with libfdk-aac, which is non-free. ReelBolt did not build it and cannot offer more than a reference for its source: Remotion's repository, <https://github.com/remotion-dev/remotion>, `packages/compositor`, at the tag for that version, and the FFmpeg release named in the bundle's `COMPOSITOR-FFMPEG.md`. Its licence is the Remotion License, <https://www.remotion.dev/docs/license>. This offer does not claim that the Remotion licence resolves the GPL or libfdk-aac questions, or that Remotion has cleared redistribution; anyone running these images needs their own Remotion licence unless they are covered by Remotion's Free License (for-profit organisations of up to three people, three included; an organisation of more than three people, four or more, is not).
 
 ## Desktop runner
 
@@ -52,4 +52,4 @@ The desktop runner's FFmpeg is a different build, and its offer is in [runner/bu
 
 ## Other notices
 
-The full list of third-party software is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Not legal advice; not yet reviewed by counsel.
+The full list of third-party software is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

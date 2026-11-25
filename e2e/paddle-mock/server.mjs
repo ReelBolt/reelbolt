@@ -21,7 +21,7 @@
 //   PADDLE_MOCK_PRICES     optional JSON {"pri_…": <unit amount in USD cents>} merged over PRICE_AMOUNTS
 
 import { createServer } from 'node:http';
-import { createHmac, randomBytes } from 'node:crypto';
+import { createHmac, randomInt } from 'node:crypto';
 
 const PORT = Number(process.env.PORT || 8080);
 const API_KEY = process.env.PADDLE_API_KEY || '';
@@ -30,6 +30,7 @@ const WEBHOOK_URL = process.env.WEBHOOK_URL || 'http://inference:8080/api/v1/bil
 const PUBLIC_URL = (process.env.PUBLIC_URL || `http://localhost:${PORT}`).replace(/\/+$/, '');
 const APP_PUBLIC_URL = (process.env.APP_PUBLIC_URL || 'http://localhost').replace(/\/+$/, '');
 const WEBHOOK_DELAY_MS = Number(process.env.WEBHOOK_DELAY_MS ?? 300);
+const WEBHOOK_DELAY_BUCKETS_MS = [0, 100, 300, 1000, 2000, 5000, 10_000, 12_000, 20_000, 30_000, 60_000];
 const WEBHOOK_ATTEMPTS = 4;
 
 // Unit amounts in USD cents for the price ids e2e/scripts/seed-billing.mjs and docker-compose.e2e.yml
@@ -98,9 +99,8 @@ function addMonth(d) {
 
 const ID_ALPHABET = 'abcdefghjkmnpqrstvwxyz0123456789';
 function newId(prefix) {
-  const bytes = randomBytes(24);
   let s = '';
-  for (const b of bytes) s += ID_ALPHABET[b % ID_ALPHABET.length];
+  for (let i = 0; i < 24; i++) s += ID_ALPHABET[randomInt(ID_ALPHABET.length)];
   return `${prefix}_01${s}`;
 }
 
@@ -398,10 +398,20 @@ function completeTransaction(txn, { delayMs = WEBHOOK_DELAY_MS } = {}) {
 
   const txnSnapshot = JSON.parse(JSON.stringify(txn));
   const subSnapshot = sub ? JSON.parse(JSON.stringify(sub)) : null;
+  // The caller's number only SELECTS a delay from this fixed table (smallest entry that covers it,
+  // the last entry for anything larger); the number itself never reaches setTimeout.
+  const requestedDelayMs = Number(delayMs);
+  let webhookDelayMs = WEBHOOK_DELAY_BUCKETS_MS[WEBHOOK_DELAY_BUCKETS_MS.length - 1];
+  for (const bucket of WEBHOOK_DELAY_BUCKETS_MS) {
+    if (!(requestedDelayMs > bucket)) {
+      webhookDelayMs = bucket;
+      break;
+    }
+  }
   setTimeout(() => {
     enqueueWebhook('transaction.completed', transactionPayload(txnSnapshot), { occurredAt: txnSnapshot.updated_at });
     if (subSnapshot) enqueueWebhook('subscription.created', subscriptionView(subSnapshot), { occurredAt: subSnapshot.updated_at });
-  }, Math.max(0, delayMs));
+  }, webhookDelayMs);
   log(`completed ${txn.id}${sub ? ` -> ${sub.id}` : ' (top-up)'}`);
   return { transaction: txn, subscription: sub, alreadyCompleted: false };
 }
@@ -671,7 +681,7 @@ function enqueueWebhook(eventType, data, options = {}) {
 
 function requireBearer(req, res) {
   const auth = req.headers['authorization'] || '';
-  const m = /^Bearer\s+(.+)$/i.exec(auth);
+  const m = /^Bearer\s+(\S.*)$/i.exec(auth);
   if (!m) {
     paddleError(res, 401, 'authentication_missing', 'Authentication header missing or malformed. Expected `Authorization: Bearer <api key>`.');
     return false;
@@ -1388,7 +1398,7 @@ const server = createServer(async (req, res) => {
     return await handleApi(req, res, method, parts, body);
   } catch (err) {
     log('handler error', err);
-    if (!res.headersSent) return paddleError(res, 500, 'internal_error', String(err?.message || err), 'api_error');
+    if (!res.headersSent) return paddleError(res, 500, 'internal_error', 'Internal mock error.', 'api_error');
   }
 });
 

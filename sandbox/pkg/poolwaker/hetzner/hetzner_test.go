@@ -407,16 +407,16 @@ func (f *netFake) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		_ = json.NewDecoder(r.Body).Decode(&b)
 		f.attachIPs = append(f.attachIPs, fmt.Sprint(b["ip"]))
 		if b["network"] != float64(55) {
-			w.WriteHeader(400)
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 		if f.failAttach {
-			w.WriteHeader(500)
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprint(w, `{"error":{"code":"server_error","message":"boom"}}`)
 			return
 		}
 		if len(f.attachIPs) <= f.conflicts {
-			w.WriteHeader(422)
+			w.WriteHeader(http.StatusUnprocessableEntity)
 			fmt.Fprint(w, `{"error":{"code":"ip_not_available","message":"taken"}}`)
 			return
 		}
@@ -427,7 +427,7 @@ func (f *netFake) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		f.deleted = true
 		fmt.Fprint(w, `{}`)
 	default:
-		w.WriteHeader(404)
+		w.WriteHeader(http.StatusNotFound)
 	}
 }
 
@@ -537,7 +537,7 @@ func TestConflictExhaustionDeletesServer(t *testing.T) {
 
 func TestSizeRefusalStillSurfacesWithSubnet(t *testing.T) {
 	p := newP(t, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(403)
+		w.WriteHeader(http.StatusForbidden)
 		fmt.Fprint(w, `{"error":{"code":"resource_limit_exceeded","message":"limit"}}`)
 	}), func(c *Config) { c.Network = "55"; c.NetworkSubnet = "10.0.2.0/24" })
 	_, err := createA(p)

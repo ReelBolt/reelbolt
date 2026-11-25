@@ -3,6 +3,7 @@
 package container
 
 import (
+	"context"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -19,7 +20,7 @@ func TestHandoffSequenceAgainstRealDocker(t *testing.T) {
 	if _, err := exec.LookPath("docker"); err != nil {
 		t.Skip("no docker binary")
 	}
-	if out, err := exec.Command("docker", "image", "inspect", "alpine:3", "--format", "{{.Id}}").CombinedOutput(); err != nil || len(out) == 0 {
+	if out, err := exec.CommandContext(context.Background(), "docker", "image", "inspect", "alpine:3", "--format", "{{.Id}}").CombinedOutput(); err != nil || len(out) == 0 {
 		t.Skip("docker daemon or alpine:3 not available")
 	}
 	suffix := newExecMarker()[:8]
@@ -42,15 +43,15 @@ func TestHandoffSequenceAgainstRealDocker(t *testing.T) {
 		"--label", ExecutionLabel + "=" + hoExecX,
 		"--label", ConfigLabel + "=" + green.configFingerprint(green.containerPolicyArgs()),
 		"--label", SlotLabel + "=green", "alpine:3", "sleep", "120"}
-	if out, err := exec.Command("docker", runArgs...).CombinedOutput(); err != nil {
+	if out, err := exec.CommandContext(context.Background(), "docker", runArgs...).CombinedOutput(); err != nil {
 		t.Skipf("cannot start container: %v %s", err, out)
 	}
-	t.Cleanup(func() { _ = exec.Command("docker", "rm", "-f", name).Run() })
+	t.Cleanup(func() { _ = exec.CommandContext(context.Background(), "docker", "rm", "-f", name).Run() })
 	if err := green.writeOwner(id, "green"); err != nil {
 		t.Fatal(err)
 	}
 	running := func() bool {
-		out, _ := exec.Command("docker", "inspect", "-f", "{{.State.Running}}", name).Output()
+		out, _ := exec.CommandContext(context.Background(), "docker", "inspect", "-f", "{{.State.Running}}", name).Output()
 		return strings.TrimSpace(string(out)) == "true"
 	}
 
@@ -78,7 +79,7 @@ func TestHandoffSequenceAgainstRealDocker(t *testing.T) {
 	if c.readOwner(id) != "c" {
 		t.Fatalf("owner = %q", c.readOwner(id))
 	}
-	out, _ := exec.Command("docker", "ps", "-a", "-q", "--filter", "label="+ExecutionLabel+"="+hoExecX).Output()
+	out, _ := exec.CommandContext(context.Background(), "docker", "ps", "-a", "-q", "--filter", "label="+ExecutionLabel+"="+hoExecX).Output()
 	if n := len(strings.Fields(string(out))); n != 1 {
 		t.Fatalf("%d containers for the execution, want 1", n)
 	}

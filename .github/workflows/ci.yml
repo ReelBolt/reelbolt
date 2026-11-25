@@ -166,7 +166,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
           # Single source of truth for the Go version: each module's go.mod.
           go-version-file: ${{ matrix.module }}/go.mod
@@ -228,7 +228,7 @@ jobs:
         working-directory: runner
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
           go-version-file: runner/go.mod
           cache: false
@@ -251,7 +251,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
         with:
           go-version-file: ${{ matrix.module }}/go.mod
           # runner/ has no dependencies, hence no go.sum to key a cache on.
@@ -277,7 +277,7 @@ jobs:
 
       - uses: ./.github/actions/free-disk-space
 
-      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           dotnet-version: '10.0.x'
 
@@ -327,7 +327,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           dotnet-version: '10.0.x'
 
@@ -677,22 +677,28 @@ jobs:
         id: version
         run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
 
-      # OCI labels: source, revision and created come from the repository and commit; the rest is set here.
+      # OCI labels and tags, written by a plain step: docker/metadata-action is not on the public repository's
+      # allowed-actions list, and one disallowed action fails the whole workflow at startup.
       - name: Image metadata
         id: meta
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        with:
-          images: ${{ env.IMAGE }}
-          tags: |
-            type=raw,value=${{ github.sha }}
-            type=raw,value=main
-          labels: |
-            org.opencontainers.image.title=reelbolt-${{ matrix.name }}
-            org.opencontainers.image.description=ReelBolt ${{ matrix.name }} image. ReelBolt code is AGPL-3.0-only. Third-party GPL programs may be included (FFmpeg, poppler-utils; sandbox images also the Remotion compositor FFmpeg); see /licenses/GPL-SOURCE-OFFER.md
-            org.opencontainers.image.licenses=AGPL-3.0-only
-            org.opencontainers.image.version=${{ steps.version.outputs.version }}
-            org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+        env:
+          NAME: ${{ matrix.name }}
+          VERSION_OUT: ${{ steps.version.outputs.version }}
+        run: |
+          {
+            echo 'labels<<__LABELS__'
+            echo "org.opencontainers.image.title=reelbolt-${NAME}"
+            echo "org.opencontainers.image.description=ReelBolt ${NAME} image. ReelBolt code is AGPL-3.0-only. Third-party GPL programs may be included (FFmpeg, poppler-utils; sandbox images also the Remotion compositor FFmpeg); see /licenses/GPL-SOURCE-OFFER.md"
+            echo "org.opencontainers.image.licenses=AGPL-3.0-only"
+            echo "org.opencontainers.image.version=${VERSION_OUT}"
+            echo "org.opencontainers.image.revision=${GITHUB_SHA}"
+            echo "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+            echo '__LABELS__'
+            echo 'tags<<__TAGS__'
+            echo "${IMAGE}:${GITHUB_SHA}"
+            echo "${IMAGE}:main"
+            echo '__TAGS__'
+          } >> "$GITHUB_OUTPUT"
 
       # The gate builds the image once, locally (linux/amd64, not pushed), checks it, and produces its
       # source bundle. Nothing is pushed unless every check passes.
@@ -723,7 +729,7 @@ jobs:
         run: infra/scripts/check-image-publish-gate.sh --image "${IMAGE}:gate" --bundle-dir "$RUNNER_TEMP/bundles"
 
       - name: Log in to GHCR
-        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -761,7 +767,7 @@ jobs:
           DIGEST: ${{ steps.build.outputs.digest }}
         run: infra/scripts/check-image-publish-gate.sh --post-push "${IMAGE}@${DIGEST}" --platform linux/arm64
 
-      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532 # v4.1.3
 
       - name: Sign the pushed digest
         env:
@@ -1163,6 +1169,11 @@ jobs:
           npx playwright install --with-deps "${browsers[@]}"
 
       - name: Start the editor v2 stack
+        # The script defaults image builds to the host network (a workaround for one machine's DNS), which
+        # BuildKit refuses without the network.host entitlement ("additional privileges requested"). The
+        # hosted runner resolves DNS on the default network, so build there.
+        env:
+          EDITOR_STACK_BUILD_NETWORK: default
         run: scripts/editor-v2-stack.sh up
 
       - name: Run the editor v2 suite
@@ -1170,6 +1181,34 @@ jobs:
           projects=(--project=desktop --project=pixel7)
           if [ "$WEBKIT" = 1 ]; then projects+=(--project=iphone14webkit); fi
           npm run test:editor-v2 -- "${projects[@]}" --trace=off --reporter=list,html
+
+      # Failure diagnostics, before teardown deletes the stack. The seed's first workflow run is the usual
+      # first casualty on a runner, and its reason lives only in the service logs. The stack is a throwaway
+      # one with generated secrets; the tails are printed and also kept as an artifact for two days.
+      - name: Diagnostics on failure (host, resources, service log tails)
+        if: failure()
+        run: |
+          set +e
+          mkdir -p /tmp/editor-remediation/diagnostics
+          {
+            echo "== docker version"; docker version
+            echo "== nproc"; nproc
+            echo "== df -h"; df -h
+            echo "== free -m"; free -m
+            echo "== docker compose ps"; scripts/editor-v2-stack.sh status
+          } 2>&1 | tee /tmp/editor-remediation/diagnostics/host.txt
+          EDITOR_STACK_LOG_TAIL=400 scripts/editor-v2-stack.sh logs > /tmp/editor-remediation/diagnostics/services.log 2>&1
+          echo "== service log tails (last 150 lines)"
+          tail -n 150 /tmp/editor-remediation/diagnostics/services.log
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: editor-e2e-diagnostics
+          path: /tmp/editor-remediation/diagnostics/
+          if-no-files-found: ignore
+          retention-days: 2
 
       - name: Strip traces from the HTML report
         if: always()

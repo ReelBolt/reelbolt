@@ -29,6 +29,7 @@ func newUpdaterFor(t *testing.T, rel *testRelease, target string, gate Gate) *Up
 }
 
 func TestApplyInstallsAVerifiedArtifact(t *testing.T) {
+	skipOnWindows(t)
 	dir := t.TempDir()
 	target := writeFakeBinary(t, dir, "reelbolt-runner", "OLD BINARY")
 	rel := newTestRelease(t, releaseOptions{})
@@ -179,6 +180,7 @@ func TestApplyRefusesWhenThereIsNothingToReplace(t *testing.T) {
 }
 
 func TestRollbackRestoresThePreviousBinary(t *testing.T) {
+	skipOnWindows(t)
 	dir := t.TempDir()
 	target := writeFakeBinary(t, dir, "reelbolt-runner", "OLD BINARY")
 	rel := newTestRelease(t, releaseOptions{})

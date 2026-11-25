@@ -12,7 +12,7 @@ public sealed record Html5VideoUse(string SourceFile, int Line, string Component
 
 /// <summary>
 /// Refuses a full render of a composition that plays a clip through <c>remotion</c>'s HTML5 video element
-/// (<c>&lt;Video&gt;</c>, renamed <c>&lt;Html5Video&gt;</c>; both exported by the pinned 4.0.542) instead of
+/// (<c>&lt;Video&gt;</c>, renamed <c>&lt;Html5Video&gt;</c>; both exported by the pinned 4.0.545) instead of
 /// <c>&lt;OffthreadVideo&gt;</c>.
 ///
 /// <para>

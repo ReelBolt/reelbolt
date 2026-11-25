@@ -665,7 +665,6 @@ func TestLocalLLMCapabilitiesValidate(t *testing.T) {
 		{Enabled: true, MaxConcurrent: protocol.LLMMaxConcurrent + 1},
 	}
 	for i, l := range bad {
-		l := l
 		c := ok
 		c.LocalLLM = &l
 		if err := c.Validate(); err == nil {

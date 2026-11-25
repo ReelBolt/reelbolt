@@ -2,6 +2,7 @@ package container
 
 import (
 	"context"
+	"errors"
 	"os"
 	"path/filepath"
 	"strings"
@@ -219,7 +220,7 @@ func TestCreateTakesOverPeerSandbox(t *testing.T) {
 
 func TestCreateRefusesWhileLiveExecRunsInPeerSandbox(t *testing.T) {
 	d, calls, _ := peerTakeoverFixture(t, "running", true)
-	if _, _, err := d.Create(slotExecA); err != ErrPeerSandboxExists {
+	if _, _, err := d.Create(slotExecA); !errors.Is(err, ErrPeerSandboxExists) {
 		t.Fatalf("want ErrPeerSandboxExists, got %v", err)
 	}
 	if d.readOwner("kept") != "" {
@@ -238,7 +239,7 @@ func TestCreateRefusesWhileLiveExecRunsInPeerSandbox(t *testing.T) {
 func TestCreateRefusesWhenPeerWorkspaceIsGone(t *testing.T) {
 	d, _, root := peerTakeoverFixture(t, "exited", false)
 	_ = os.RemoveAll(filepath.Join(root, "kept"))
-	if _, _, err := d.Create(slotExecA); err != ErrPeerSandboxExists {
+	if _, _, err := d.Create(slotExecA); !errors.Is(err, ErrPeerSandboxExists) {
 		t.Fatalf("want ErrPeerSandboxExists, got %v", err)
 	}
 }
@@ -268,15 +269,15 @@ func TestPeerForgetsTakenOverSandbox(t *testing.T) {
 				t.Fatal("janitor kept a taken-over sandbox in the index")
 			}
 		case "stop":
-			if err := d.StopByExecution(slotExecA); err != ErrNotFound {
+			if err := d.StopByExecution(slotExecA); !errors.Is(err, ErrNotFound) {
 				t.Fatalf("stop: %v", err)
 			}
 		case "delete":
-			if err := d.DeleteByExecution(slotExecA); err != ErrNotFound {
+			if err := d.DeleteByExecution(slotExecA); !errors.Is(err, ErrNotFound) {
 				t.Fatalf("delete: %v", err)
 			}
 		case "get":
-			if _, err := d.GetByExecution(slotExecA); err != ErrNotFound {
+			if _, err := d.GetByExecution(slotExecA); !errors.Is(err, ErrNotFound) {
 				t.Fatalf("get: %v", err)
 			}
 		}

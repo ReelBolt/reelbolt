@@ -105,7 +105,7 @@ func TestLLMRelayStreamsChunksInOrder(t *testing.T) {
 	}()
 
 	resp := llmPost(t, tg, testOrgID, r.deviceID, `{"model":"llama3.2","stream":true}`)
-	if resp.StatusCode != 200 || resp.Header.Get("Content-Type") != "text/event-stream" {
+	if resp.StatusCode != http.StatusOK || resp.Header.Get("Content-Type") != "text/event-stream" {
 		t.Fatalf("status=%d type=%q", resp.StatusCode, resp.Header.Get("Content-Type"))
 	}
 	reader := bufio.NewReader(resp.Body)
@@ -119,7 +119,7 @@ func TestLLMRelayStreamsChunksInOrder(t *testing.T) {
 		t.Fatalf("rest = %q, want %q", rest, want)
 	}
 	req := <-got
-	if req.Path != protocol.LLMPathChatCompletions || req.Method != "POST" || !req.Stream || req.TimeoutSec <= 0 ||
+	if req.Path != protocol.LLMPathChatCompletions || req.Method != http.MethodPost || !req.Stream || req.TimeoutSec <= 0 ||
 		req.Body != `{"model":"llama3.2","stream":true}` {
 		t.Fatalf("llm.request = %+v", req)
 	}
@@ -133,7 +133,7 @@ func TestLLMRelayModelsIsGet(t *testing.T) {
 	r := llmRunner(t, tg, testOrgID, true)
 	go func() {
 		req := readLLMRequest(t, r.ws)
-		if req.Method != "GET" || req.Path != protocol.LLMPathModels || req.Body != "" {
+		if req.Method != http.MethodGet || req.Path != protocol.LLMPathModels || req.Body != "" {
 			t.Errorf("llm.request = %+v", req)
 		}
 		send(t, r.ws, mustEnvelope(t, protocol.TypeLLMResponseStart, protocol.LLMResponseStartPayload{RequestID: req.RequestID, Status: 200, ContentType: "application/json"}))
@@ -148,7 +148,7 @@ func TestLLMRelayModelsIsGet(t *testing.T) {
 	}
 	defer func() { _ = resp.Body.Close() }()
 	body, _ := io.ReadAll(resp.Body)
-	if resp.StatusCode != 200 || string(body) != `{"data":[]}` {
+	if resp.StatusCode != http.StatusOK || string(body) != `{"data":[]}` {
 		t.Fatalf("status=%d body=%s", resp.StatusCode, body)
 	}
 }
@@ -217,7 +217,7 @@ func TestLLMRelayPathOutsideAllowlistNeverReachesRunner(t *testing.T) {
 			t.Fatalf("%s %s: %v", c.method, c.path, err)
 		}
 		_ = resp.Body.Close()
-		if resp.StatusCode < 300 || resp.StatusCode == 200 {
+		if resp.StatusCode < 300 || resp.StatusCode == http.StatusOK {
 			t.Errorf("%s %s: status %d, want a refusal", c.method, c.path, resp.StatusCode)
 		}
 	}
@@ -328,7 +328,6 @@ func TestLLMRelayMapsRunnerErrors(t *testing.T) {
 	} {
 		tg := newLLMGateway(t)
 		r := llmRunner(t, tg, testOrgID, true)
-		code := code
 		go func() {
 			req := readLLMRequest(t, r.ws)
 			send(t, r.ws, mustEnvelope(t, protocol.TypeLLMError, protocol.LLMErrorPayload{RequestID: req.RequestID, Code: code, Message: "x"}))
@@ -426,10 +425,10 @@ func TestLLMEmbeddingsRelaysAboveChatCap(t *testing.T) {
 	resp := llmEmbeddingsPost(t, tg, testOrgID, r.deviceID, `{"model":"m","input":"x"}`)
 	n, _ := io.Copy(io.Discard, resp.Body)
 	req := <-got
-	if resp.StatusCode != 200 || n != int64(total) {
+	if resp.StatusCode != http.StatusOK || n != int64(total) {
 		t.Fatalf("status=%d bytes=%d, want %d", resp.StatusCode, n, total)
 	}
-	if req.Path != protocol.LLMPathEmbeddings || req.Method != "POST" || req.Stream {
+	if req.Path != protocol.LLMPathEmbeddings || req.Method != http.MethodPost || req.Stream {
 		t.Fatalf("llm.request = %+v", req)
 	}
 }
@@ -467,7 +466,7 @@ func TestLLMRelayEscapeHeavyBodyIs413(t *testing.T) {
 	// Under the 3 MiB cap, but every '<' becomes six bytes once JSON-escaped.
 	body := `{"p":"` + strings.Repeat("<", protocol.LLMMaxRequestBodyBytes-100) + `"}`
 	resp := llmPost(t, tg, testOrgID, r.deviceID, body)
-	if resp.StatusCode != 413 {
+	if resp.StatusCode != http.StatusRequestEntityTooLarge {
 		t.Fatalf("status = %d, want 413 request_too_large", resp.StatusCode)
 	}
 }
@@ -475,7 +474,7 @@ func TestLLMRelayEscapeHeavyBodyIs413(t *testing.T) {
 func TestLLMRelayNullBodyIsBadRequest(t *testing.T) {
 	tg := newLLMGateway(t)
 	r := llmRunner(t, tg, testOrgID, true)
-	if resp := llmPost(t, tg, testOrgID, r.deviceID, `null`); resp.StatusCode != 400 {
+	if resp := llmPost(t, tg, testOrgID, r.deviceID, `null`); resp.StatusCode != http.StatusBadRequest {
 		t.Fatalf("status = %d, want 400", resp.StatusCode)
 	}
 }

@@ -446,12 +446,16 @@ func deref(p *int) int {
 }
 
 func TestImageDownloadableOnlyForAPinnedPublishedImage(t *testing.T) {
-	for ref, want := range map[string]bool{
-		"ghcr.io/reelbolt/reelbolt-sandbox-runtime@sha256:abc": true,
-		"reelbolt-sandbox-runtime:local":                         false,
-		"ghcr.io/reelbolt/reelbolt-sandbox-runtime:0.1.0":      false,
-		"": false,
+	for _, c := range []struct {
+		ref  string
+		want bool
+	}{
+		{"ghcr.io/reelbolt/reelbolt-sandbox-runtime@sha256:abc", true},
+		{"reelbolt-sandbox-runtime:local", false},
+		{"ghcr.io/reelbolt/reelbolt-sandbox-runtime:0.1.0", false},
+		{"", false},
 	} {
+		ref, want := c.ref, c.want
 		if got := imageDownloadable(ref); got != want {
 			t.Errorf("imageDownloadable(%q) = %v, want %v", ref, got, want)
 		}

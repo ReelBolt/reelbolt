@@ -17,6 +17,7 @@ using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Storage;
 using ReelBolt.Shared.Tenancy;
 using ReelBolt.Shared.Workflows;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.Avatars;
 
@@ -542,7 +543,7 @@ public sealed class SubjectClipService : ISubjectClipService
         List<string> configErrors = [.. config!.Validate(capabilities), .. config.ValidateForKind(provider.Kind)];
         if (configErrors.Count > 0)
         {
-            _logger.LogWarning("A subject clip config failed its own validation: {Errors}", string.Join("; ", configErrors));
+            _logger.LogWarning("A subject clip config failed its own validation: {Errors}", string.Join("; ", configErrors).ForLog());
             return (null, Invalid(configErrors));
         }
 

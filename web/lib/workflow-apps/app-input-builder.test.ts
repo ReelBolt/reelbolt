@@ -147,6 +147,7 @@ describe('editing the page', () => {
   it('writes a condition for a switch and a choice', () => {
     expect(conditionSnippet({ kind: 'input', id: 'lite', type: 'toggle' })).toBe('input.lite');
     expect(conditionSnippet({ kind: 'input', id: 'q', type: 'choice', options: [{ value: 'high' }] })).toBe("input.q == 'high'");
+    expect(conditionSnippet({ kind: 'input', id: 'q', type: 'choice', options: [{ value: "a\\'b" }] })).toBe("input.q == 'a\\\\\\'b'");
   });
 
   it('places each server refusal under the field it names', () => {

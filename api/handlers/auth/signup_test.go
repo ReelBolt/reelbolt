@@ -453,8 +453,8 @@ func TestSignup_DisplayNameValidation(t *testing.T) {
 	}{
 		"100 emoji ok":  {strings.Repeat("😀", 100), 202},
 		"101 emoji":     {strings.Repeat("😀", 101), 400},
-		"zero width":    {"a​b", 400},
-		"bidi override": {"a‮b", 400},
+		"zero width":    {"a\u200bb", 400},
+		"bidi override": {"a\u202eb", 400},
 		"newline":       {"a\nb", 400},
 		"nbsp":          {"a b", 400},
 	} {
@@ -467,8 +467,8 @@ func TestSignup_DisplayNameValidation(t *testing.T) {
 func TestSignup_BlankNameFallbackIsSanitised(t *testing.T) {
 	for name, tc := range map[string]struct{ local, want string }{
 		"long local part": {strings.Repeat("a", 5000), strings.Repeat("a", 100)},
-		"bidi and zwsp":   {"ev‮il​x", "evilx"},
-		"only invisible":  {"​‮", "User"},
+		"bidi and zwsp":   {"ev\u202eil\u200bx", "evilx"},
+		"only invisible":  {"\u200b\u202e", "User"},
 		"long multibyte":  {strings.Repeat("é", 300), strings.Repeat("é", 100)},
 	} {
 		if got := fallbackDisplayName(tc.local); got != tc.want {

@@ -256,7 +256,7 @@ func (c *Controller) Tick(ctx context.Context) {
 
 	// Spend state.
 	sel := c.selectType(ctx, now)
-	priceKnown, capped := sel.priceKnown, sel.capped
+	capped := sel.capped
 	breakerOpen := now.Before(c.breakerUntil)
 
 	// Scale up.
@@ -265,7 +265,7 @@ func (c *Controller) Tick(ctx context.Context) {
 	}
 	// Scaling up may have changed the picture (a size refused, the cap used up): report that one.
 	sel = c.selectType(ctx, now)
-	priceKnown = sel.priceKnown
+	priceKnown := sel.priceKnown
 	capped = capped || sel.capped
 
 	c.metrics.set("nodes", float64(len(present)))

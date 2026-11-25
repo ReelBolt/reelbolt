@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ReelBolt.Inference.Api.Data;
 using ReelBolt.Shared.Data.Models;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.GitHub;
 
@@ -184,7 +185,7 @@ public sealed class GitHubLinkService : IGitHubLinkService
         {
             _logger.LogWarning(
                 "Refused a link of {Repository} for organization {OrganizationId}: installation {InstallationId} belongs to another organization",
-                info.FullName, organizationId, installation.Id);
+                info.FullName.ForLog(), organizationId, installation.Id);
             return GitHubLinkResult.Refused(404, "github_app_not_installed");
         }
 
@@ -273,7 +274,7 @@ public sealed class GitHubLinkService : IGitHubLinkService
 
         _logger.LogInformation(
             "Linked {Repository} (installation {InstallationId}) to project {ProjectId} in organization {OrganizationId}",
-            link.RepositoryFullName, link.InstallationId, projectId, organizationId);
+            link.RepositoryFullName.ForLog(), link.InstallationId, projectId, organizationId);
 
         return GitHubLinkResult.Ok(link);
     }
@@ -319,7 +320,7 @@ public sealed class GitHubLinkService : IGitHubLinkService
 
         _logger.LogInformation(
             "Updated the link of project {ProjectId} to {Repository}: branch {Branch}, selection changed {SelectionChanged}",
-            link.ProjectId, link.RepositoryFullName, link.Branch ?? "(default)", change.SelectionChanged);
+            link.ProjectId, link.RepositoryFullName.ForLog(), (link.Branch ?? "(default)").ForLog(), change.SelectionChanged);
 
         return GitHubLinkResult.Ok(link);
     }
@@ -457,7 +458,7 @@ public sealed class GitHubLinkService : IGitHubLinkService
 
             _logger.LogWarning(
                 "Refused a link of {Owner}/{Name} for user {UserId}: their connected GitHub account cannot use it",
-                owner, name, userId);
+                owner.ForLog(), name.ForLog(), userId);
             return (null, GitHubLinkResult.Refused(404, "repository_not_found"));
         }
         catch (GitHubAccountUnavailableException)

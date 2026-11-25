@@ -15,6 +15,7 @@ using ReelBolt.Shared.Billing;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
 using ReelBolt.Shared.Metering;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared.Storage;
 using static ReelBolt.Inference.Api.Controllers.EditImageDocumentSupport;
 
@@ -798,7 +799,7 @@ public class EditImageDocumentsController : ControllerBase
         {
             _logger.LogWarning(
                 "Subject cut-out on {Kind}/{Model} timed out after {Seconds}s (project {ProjectId}): {Detail}",
-                provider.Kind, segmentationRequest.Model, (int)_segmentationTimeout.TotalSeconds, projectId, VendorLogDetail(ex));
+                provider.Kind, segmentationRequest.Model.ForLog(), (int)_segmentationTimeout.TotalSeconds, projectId, VendorLogDetail(ex));
             return StatusCode(VendorFailureStatus, new
             {
                 code = OperationTimeoutCode,
@@ -813,7 +814,7 @@ public class EditImageDocumentsController : ControllerBase
             // Cloudflare replaces with its own page), so the UI can say which control to change instead of
             // "something went wrong". The reason is logged too.
             _logger.LogWarning("Subject cut-out on {Kind}/{Model} failed at the vendor (project {ProjectId}): {Detail}",
-                provider.Kind, segmentationRequest.Model, projectId, VendorLogDetail(ex));
+                provider.Kind, segmentationRequest.Model.ForLog(), projectId, VendorLogDetail(ex));
             return StatusCode(VendorFailureStatus, new
             {
                 code = SegmentationFailedCode,

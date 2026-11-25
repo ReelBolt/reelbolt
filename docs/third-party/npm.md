@@ -1,6 +1,6 @@
 # Third-party notices: npm packages
 
-Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from the lockfiles and package metadata at commit `e0ffe67ef` (2026-10-24). Licence texts are in [licences.md](licences.md). Not legal advice. Entries marked `confirm` are listed in the TODO section of the root notices file.
+Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from the lockfiles and package metadata at commit `e0ffe67ef` (2026-10-24). Licence texts are in [licences.md](licences.md). Entries marked `confirm` are listed in the TODO section of the root notices file.
 
 
 
@@ -371,7 +371,7 @@ Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from t
 - **Copyright (c) 2021 - present, Yusuke Wada and Hono contributors**: hono@4.13.13
 - **Copyright (c) 2021 Dulin Marat**: html-entities@2.6.0
 - **Copyright (c) 2021 Jason Johnston**: bidi-js@1.0.3, webgl-sdf-generator@1.1.1
-- **Copyright (c) 2021 JonnyBurger**: @remotion/media-utils@4.0.542
+- **Copyright (c) 2021 JonnyBurger**: @remotion/media-utils@4.0.545
 - **Copyright (c) 2021 Marc Görtz <https://marcgoertz.de/>**: postcss-opacity-percentage@3.0.0
 - **Copyright (c) 2021 Martin Heidegger**: @leichtgewicht/ip-codec@2.0.5
 - **Copyright (c) 2021 Paul Henschel**: suspend-react@0.1.3
@@ -404,7 +404,7 @@ Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from t
 - **Copyright (c) 2022-present Toyobayashi**: @tybys/wasm-util@0.10.4
 - **Copyright (c) 2023 Ben Gubler <nebrelbug@gmail.com>**: eta@2.2.0
 - **Copyright (c) 2023 Damon Oehlman &lt;damon.oehlman@gmail.com&gt;**: wildcard@2.0.1
-- **Copyright (c) 2023 JonnyBurger**: @remotion/paths@4.0.542
+- **Copyright (c) 2023 JonnyBurger**: @remotion/paths@4.0.545
 - **Copyright (c) 2023 Jordan Harband**: define-data-property@1.1.4
 - **Copyright (c) 2023 MONOGRID**: @monogrid/gainmap-js@3.4.0
 - **Copyright (c) 2023 Nathan Friedly, Vedant K**: express-rate-limit@8.7.1
@@ -446,7 +446,7 @@ Part of [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Generated from t
 - **Copyright (c) Jared Wray**: cacheable-request@10.2.14, keyv@4.5.4
 - **Copyright (c) Jens Taylor**: imurmurhash@0.1.4
 - **Copyright (c) Jonathan Ong <me@jongleberry.com>**: merge-descriptors@2.0.0
-- **Copyright (c) Jonny Burger**: @remotion/captions@4.0.542, @remotion/codemods@4.0.542, @remotion/elevenlabs@4.0.542, @remotion/licensing@4.0.542, @remotion/openai-whisper@4.0.542, @remotion/streaming@4.0.542, @remotion/studio-server@4.0.542, @remotion/studio-shared@4.0.542, @remotion/studio@4.0.542, @remotion/timeline-utils@4.0.542, @remotion/zod-types@4.0.542
+- **Copyright (c) Jonny Burger**: @remotion/captions@4.0.545, @remotion/codemods@4.0.545, @remotion/elevenlabs@4.0.545, @remotion/licensing@4.0.545, @remotion/openai-whisper@4.0.545, @remotion/streaming@4.0.545, @remotion/studio-server@4.0.545, @remotion/studio-shared@4.0.545, @remotion/studio@4.0.545, @remotion/timeline-utils@4.0.545, @remotion/zod-types@4.0.545
 - **Copyright (c) Jordan Harband and contributors**: hasown@2.0.4, set-function-length@1.2.2
 - **Copyright (c) Jorge Bucaran <<https://jorgebucaran.com>>**: classcat@5.0.5, colorette@2.0.20
 - **Copyright (c) Joyent, Inc. and other Node contributors**: @algolia/events@4.0.1, events@3.3.0

@@ -62,6 +62,6 @@ produce the same pixels. Everything that moves is computed from `useCurrentFrame
 ## 3D
 
 `three` and `@react-three/fiber` are pre-installed. Inside Remotion, three.js content must be
-wrapped in `ThreeCanvas` from `@remotion/three` (same version, 4.0.542), because the stock R3F canvas
+wrapped in `ThreeCanvas` from `@remotion/three` (same version, 4.0.545), because the stock R3F canvas
 runs its own clock. If `@remotion/three` is not available, do not use 3D; use CSS transforms
 (`perspective`, `rotateX/Y`) instead, driven by the frame.

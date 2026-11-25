@@ -41,7 +41,6 @@ type llmPeerSet struct {
 	lookup  func(ctx context.Context, host string) ([]string, error)
 	locals  func() []string
 	clock   func() time.Time
-	connect time.Duration
 	skipped int // addresses refused as not cluster-internal, since last takeSkipped
 }
 

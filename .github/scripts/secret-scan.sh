@@ -60,7 +60,8 @@ scan() {
   if [ "$maj" -lt 2 ] || { [ "$maj" -eq 2 ] && [ "$min" -lt 40 ]; }; then
     echo "git >= 2.40 is required for GIT_ATTR_SOURCE; found $gv" >&2; exit 2
   fi
-  export GIT_ATTR_SOURCE="$(git hash-object -t tree /dev/null)"
+  GIT_ATTR_SOURCE="$(git hash-object -t tree /dev/null)"
+  export GIT_ATTR_SOURCE
   "$GITLEAKS_BIN" git --redact --no-banner --exit-code 1 --log-level warn \
     --ignore-gitleaks-allow --gitleaks-ignore-path "$CFG_DIR" \
     --config "$CFG_DIR/gitleaks.toml" "$SOURCE"

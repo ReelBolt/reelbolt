@@ -12,6 +12,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -212,3 +213,14 @@ func shaOf(b []byte) string {
 
 func hexOf(b []byte) string    { return hex.EncodeToString(b) }
 func base64Of(b []byte) string { return base64.StdEncoding.EncodeToString(b) }
+
+// skipOnWindows skips the tests that drive the in-place swap: a running Windows
+// image cannot be replaced, so the real swap is deferred to a helper script
+// that runs after this process exits (apply_windows.go) and cannot be observed
+// from inside the test.
+func skipOnWindows(t *testing.T) {
+	t.Helper()
+	if runtime.GOOS == "windows" {
+		t.Skip("the in-place swap is deferred to a post-exit helper on Windows")
+	}
+}

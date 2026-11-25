@@ -66,7 +66,7 @@ by this initiative; heavy 3D or shader blocks must be budgeted for 1080p.
 - `StageProjectFile` refuses `.js .ts .tsx .json .wasm .html` (a guardrail-bypass control while tool screening is on; shipped config has screening Off)
   and stages only under `public/`. Font files (`.ttf .otf .woff2`) are stageable and a local `@font-face` passes the network-font preflight, but no
   prompt or tool says so.
-- Preinstalled: remotion 4.0.542 core/cli/renderer, react 19, three + react-three, d3, framer-motion, react-spring.
+- Preinstalled: remotion 4.0.545 core/cli/renderer, react 19, three + react-three, d3, framer-motion, react-spring.
 
 ## 2. Design
 
@@ -159,7 +159,7 @@ What changed against the design above:
 - **Fonts.** `StageFont` returns a JSON result with a `snippet` (`loadFont` from `@remotion/fonts` with a local
   `staticFile(...)`, one call per staged file) instead of an `@font-face` block. The agent pastes it at module top
   level and uses the plain family name; `loadFont` calls `delayRender` itself. Project fonts use the same snippet.
-- **gsap** 3.15.0 is in the package catalog (Owner decision of 2026-10-27, recorded in the initiative's `decisions.md`). It
+- **gsap** 3.15.1 is in the package catalog (Owner decision of 2026-10-27, recorded in the initiative's `decisions.md`). It
   ships under the GSAP Standard "No Charge" licence, not MIT, which prohibits use in no-code visual animation tools that
   compete with Webflow without written consent; the owner accepted that risk. Agents drive it only by the frame, see the
   "GSAP in Remotion (ReelBolt)" guide. `lucide-react` is 1.59.0.

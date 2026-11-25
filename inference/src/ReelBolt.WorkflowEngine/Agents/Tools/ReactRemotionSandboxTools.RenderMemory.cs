@@ -17,7 +17,7 @@ namespace ReelBolt.WorkflowEngine.Agents.Tools;
 /// kernel kill the compositor (<c>Compositor quit with signal SIGKILL</c>, a memory-cgroup OOM)
 /// and the render exits 1. So every render through <c>RenderVideoAndUploadToStorage</c> gets
 /// <c>--concurrency</c> and <c>--offthreadvideo-cache-size-in-bytes</c> unless the model set them
-/// (both exist in the pinned Remotion 4.0.542; the cache flag since 4.0.23).
+/// (both exist in the pinned Remotion 4.0.545; the cache flag since 4.0.23).
 /// </para>
 ///
 /// <para>

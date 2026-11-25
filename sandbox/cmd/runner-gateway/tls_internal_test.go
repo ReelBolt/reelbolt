@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
@@ -99,7 +100,7 @@ func newTLSFixture(t *testing.T, withClientCA bool) *tlsFixture {
 	})
 	s, err := f.tg.gateway.newInternalTLSServer()
 	must(t, err)
-	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	ln, err := (&net.ListenConfig{}).Listen(context.Background(), "tcp", "127.0.0.1:0")
 	must(t, err)
 	go func() { _ = s.Serve(tls.NewListener(ln, s.TLSConfig)) }()
 	t.Cleanup(func() { _ = s.Close() })
@@ -125,7 +126,7 @@ func (f *tlsFixture) client(trust *testCA, clientCert *tls.Certificate, maxVer u
 }
 
 func get(c *http.Client, url string, auth bool) (int, error) {
-	req, _ := http.NewRequest(http.MethodGet, url, nil)
+	req, _ := http.NewRequestWithContext(context.Background(), http.MethodGet, url, nil)
 	if auth {
 		req.Header.Set("Authorization", "Bearer "+tlsTestToken)
 	}
@@ -230,7 +231,7 @@ func TestPlainLocalOnly(t *testing.T) {
 	tg.gateway.interfaceAddrs = func() ([]net.Addr, error) { return []net.Addr{lan}, nil }
 	h := mux2(tg)
 	do := func(remote, path string) *httptest.ResponseRecorder {
-		req := httptest.NewRequest(http.MethodGet, path, nil)
+		req := httptest.NewRequestWithContext(context.Background(), http.MethodGet, path, nil)
 		req.RemoteAddr = remote
 		req.Header.Set("Authorization", "Bearer "+tlsTestToken)
 		rec := httptest.NewRecorder()
@@ -286,7 +287,7 @@ func TestValidateInternalTLSConfig(t *testing.T) {
 }
 
 func TestParseStrictBool(t *testing.T) {
-	for v, want := range map[string]bool{"": false, "true": true, "TRUE": true, "1": true, "Yes": true, "false": false, "0": false, "NO": false, " true ": true} {
+	for v, want := range map[string]bool{"": false, "true": true, "TRUE": true, "1": true, "Yes": true, "false": false, "0": false, "NO": false, " true ": true} { //nolint:gocritic // the padded key is the point of the case
 		if got, err := parseStrictBool("X", v); err != nil || got != want {
 			t.Errorf("%q: %v %v", v, got, err)
 		}
@@ -336,7 +337,7 @@ func TestInternalTLS_ClientCAReload(t *testing.T) {
 	t.Cleanup(func() { tlsClock = time.Now })
 	s, err := f.tg.gateway.newInternalTLSServer()
 	must(t, err)
-	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	ln, err := (&net.ListenConfig{}).Listen(context.Background(), "tcp", "127.0.0.1:0")
 	must(t, err)
 	go func() { _ = s.Serve(tls.NewListener(ln, s.TLSConfig)) }()
 	t.Cleanup(func() { _ = s.Close() })

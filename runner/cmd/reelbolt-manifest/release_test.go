@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
 	"testing"
 
@@ -95,7 +96,7 @@ func TestGenKeyWritesAPrivateKeyAndPrintsOnlyThePublicOne(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if perm := info.Mode().Perm(); perm != 0o600 {
+	if perm := info.Mode().Perm(); runtime.GOOS != "windows" && perm != 0o600 { // POSIX modes do not apply on Windows
 		t.Fatalf("the private key file is mode %o, want 600", perm)
 	}
 	raw, err := os.ReadFile(path)
@@ -263,7 +264,7 @@ func TestAssembleRefusesWhatTheRunnerWouldRefuse(t *testing.T) {
 		{"an unknown format", "linux/amd64/zip=" + artifact, "https://downloads.reelbolt.ai/runner/1.4.2", "unknown format"},
 		{"an unknown os", "plan9/amd64/tarball=" + artifact, "https://downloads.reelbolt.ai/runner/1.4.2", "unknown os"},
 		{"a plaintext public host", "linux/amd64/tarball=" + artifact, "http://downloads.reelbolt.ai/runner/1.4.2", "must be https"},
-		{"a missing file", "linux/amd64/tarball=" + filepath.Join(dir, "nope"), "https://downloads.reelbolt.ai/runner/1.4.2", "no such file"},
+		{"a missing file", "linux/amd64/tarball=" + filepath.Join(dir, "nope"), "https://downloads.reelbolt.ai/runner/1.4.2", missingFileMessage()},
 	} {
 		args := append(append([]string{}, base...), "-url-base", tc.urlBase, "-artifact", tc.spec)
 		_, err := runCmd(t, args...)
@@ -533,4 +534,12 @@ func TestUnknownCommandAndUsage(t *testing.T) {
 	if out := mustRun(t, "help"); !strings.Contains(out, "gen-key") {
 		t.Fatalf("help does not list the commands: %s", out)
 	}
+}
+
+// missingFileMessage is the OS's own wording for "that path does not exist".
+func missingFileMessage() string {
+	if runtime.GOOS == "windows" {
+		return "cannot find the file specified"
+	}
+	return "no such file"
 }

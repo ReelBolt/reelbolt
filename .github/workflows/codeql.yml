@@ -30,15 +30,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [csharp, go, javascript-typescript]
+        include:
+          # Go does not support build-mode none. 'manual' builds the three modules that compile on a plain runner:
+          # autobuild would also try the Wails desktop module, which needs gtk4/webkitgtk headers.
+          - { language: csharp, build-mode: none }
+          - { language: go, build-mode: manual }
+          - { language: javascript-typescript, build-mode: none }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
+      # Go must be installed BEFORE codeql-action/init: init puts a tracing `go` shim first on PATH and
+      # warns "Expected `which go` to return .../codeql-action-go-tracing/bin/go" when setup-go runs after
+      # it, so the manual build is not traced and CodeQL reports "could not process any code written in Go".
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        if: matrix.language == 'go'
+        with:
+          go-version-file: api/go.mod
+          cache: false
+      - uses: github/codeql-action/init@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
         with:
           languages: ${{ matrix.language }}
-          build-mode: none
+          build-mode: ${{ matrix.build-mode }}
 
-      - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
+
+      - name: Build the Go modules (CodeQL manual build)
+        if: matrix.language == 'go'
+        run: |
+          for d in api runner sandbox; do
+            (cd "$d" && go build ./...)
+          done
+
+      - uses: github/codeql-action/analyze@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
         with:
           category: /language:${{ matrix.language }}

@@ -108,7 +108,10 @@ async function createDerushTimeline(api: EditorApi, projectId: string, clipA: st
     ],
   }, [200, 201]);
   const run = await api.runWorkflow(projectId, wf.id);
-  expect(run.status, `derush run ${JSON.stringify(run.stepResults.map((s) => s.status))}`).toBe('Passed');
+  expect(
+    run.status,
+    `derush run ${JSON.stringify(run.stepResults.map((s) => ({ status: s.status, code: s.failureCode, class: s.failureClass, error: s.errorDetails?.slice(0, 400) })))}`,
+  ).toBe('Passed');
   const compile = run.stepResults.find((s) => /\.mp4$/i.test(s.outputStorageKey ?? ''));
   expect(compile, 'VideoCompile result with a media output').toBeTruthy();
   const tl = await api.createTimeline(projectId, 'remediation-derush', compile!.id);

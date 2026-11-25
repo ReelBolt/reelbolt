@@ -23,7 +23,7 @@ namespace ReelBolt.WorkflowEngine.Tests.Agents.Tools;
 
 public sealed class BlockAgentToolsTests : IDisposable
 {
-    private const string PackageJson = "{\"dependencies\":{\"remotion\":\"4.0.542\",\"react\":\"^19.2.0\"}}";
+    private const string PackageJson = "{\"dependencies\":{\"remotion\":\"4.0.545\",\"react\":\"^19.2.0\"}}";
 
     private readonly string _root = Path.Combine(Path.GetTempPath(), "block-tools-" + Guid.NewGuid().ToString("N"));
     private readonly Dictionary<string, string> _workspace = new(StringComparer.Ordinal) { ["package.json"] = PackageJson };

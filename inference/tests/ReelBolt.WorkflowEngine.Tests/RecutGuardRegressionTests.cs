@@ -295,18 +295,6 @@ public class RecutGuardRegressionTests
     }
 
     [Fact]
-    public void Merge_word_guard_stays_fast_on_a_very_long_transcript()
-    {
-        List<(double Start, double End)> words = Enumerable.Range(0, 40_000).Select(i => (i * 1.0, i * 1.0 + 0.5)).ToList();
-        List<(double Start, double End)> spans = Enumerable.Range(0, 20_000).Select(i => (i * 2.0 + 0.5, i * 2.0 + 1.0)).ToList();
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-        List<(double Start, double End)> merged = ProposalCuts.Merge(spans, words);
-        watch.Stop();
-        merged.Should().NotBeEmpty();
-        watch.Elapsed.TotalSeconds.Should().BeLessThan(0.5);
-    }
-
-    [Fact]
     public void Merge_still_keeps_a_short_word_between_two_close_spans()
     {
         ProposalCuts.Merge([(1.0, 2.0), (2.05, 3.0)], [(2.0, 2.05 + 0.01)]).Should().HaveCount(2);

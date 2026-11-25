@@ -16,11 +16,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -60,11 +60,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -104,11 +104,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -149,11 +149,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -194,15 +194,15 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "@remotion/captions",
-          "version": "4.0.542"
+          "version": "4.0.545"
         }
       ],
       "files": [
@@ -246,15 +246,15 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "@remotion/captions",
-          "version": "4.0.542"
+          "version": "4.0.545"
         }
       ],
       "files": [
@@ -299,15 +299,15 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "@remotion/captions",
-          "version": "4.0.542"
+          "version": "4.0.545"
         }
       ],
       "files": [
@@ -352,15 +352,15 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "@remotion/captions",
-          "version": "4.0.542"
+          "version": "4.0.545"
         }
       ],
       "files": [
@@ -405,11 +405,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -458,11 +458,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -511,11 +511,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -564,11 +564,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -617,11 +617,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -670,11 +670,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -722,11 +722,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -766,11 +766,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -810,11 +810,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -854,11 +854,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -898,11 +898,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -942,11 +942,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -986,11 +986,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1030,11 +1030,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1074,11 +1074,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1118,11 +1118,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1162,11 +1162,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1206,11 +1206,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1250,11 +1250,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1295,11 +1295,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -1352,11 +1352,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -1414,11 +1414,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "d3",
@@ -1474,11 +1474,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1518,11 +1518,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1562,11 +1562,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1610,11 +1610,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1659,11 +1659,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1709,15 +1709,15 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         },
         {
           "name": "gsap",
-          "version": "3.15.0"
+          "version": "3.15.1"
         }
       ],
       "files": [
@@ -1757,11 +1757,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1803,11 +1803,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1851,11 +1851,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1899,11 +1899,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1948,11 +1948,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -1997,11 +1997,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2046,11 +2046,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2094,11 +2094,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2142,11 +2142,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2186,11 +2186,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2231,11 +2231,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2280,11 +2280,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2328,11 +2328,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2376,11 +2376,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [
@@ -2422,11 +2422,11 @@
       "requires": [
         {
           "name": "remotion",
-          "version": "4.0.542"
+          "version": "4.0.545"
         },
         {
           "name": "react",
-          "version": "19.3.0"
+          "version": "19.3.1"
         }
       ],
       "files": [

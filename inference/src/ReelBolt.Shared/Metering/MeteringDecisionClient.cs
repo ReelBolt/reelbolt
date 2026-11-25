@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Shared.Metering;
 
@@ -53,7 +54,7 @@ public sealed class MeteringDecisionClient : IDecisionClient
         }
         catch (Exception ex) when (ex is not OperationCanceledException and not UnattributedUsageException)
         {
-            _logger?.LogError(ex, "Metering a {Kind}/{Model} decision call failed", _provider.Kind, _provider.ModelName);
+            _logger?.LogError(ex, "Metering a {Kind}/{Model} decision call failed", _provider.Kind, _provider.ModelName.ForLog());
         }
 
         return result;

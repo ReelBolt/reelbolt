@@ -15,6 +15,7 @@ using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
 using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Moderation;
+using ReelBolt.Shared.Observability;
 using ReelBolt.Shared.Storage;
 using static ReelBolt.Inference.Api.Controllers.EditImageDocumentSupport;
 
@@ -839,14 +840,14 @@ public partial class EditImageOperationsController : ControllerBase
                         _logger.LogWarning(
                             "Image editor {Operation} on {Kind}/{Model} metered {Metered} millicredits against a {Hold} hold " +
                             "(project {ProjectId}); settled at the hold",
-                            operationName, kind, billedModel, metered, hold.RequiredMillis, projectId);
+                            operationName.ForLog(), kind, billedModel.ForLog(), metered, hold.RequiredMillis, projectId);
                     }
                     else if (sizePriced && _charges is not null && metered > SettleCeilingMillis(hold.RequiredMillis, _charges.Options))
                     {
                         _logger.LogWarning(
                             "Image editor {Operation} on {Kind}/{Model} metered {Metered} millicredits against a {Hold} hold " +
                             "(project {ProjectId}); settled uncapped",
-                            operationName, kind, billedModel, metered, hold.RequiredMillis, projectId);
+                            operationName.ForLog(), kind, billedModel.ForLog(), metered, hold.RequiredMillis, projectId);
                     }
                 }
             }
@@ -872,7 +873,7 @@ public partial class EditImageOperationsController : ControllerBase
                 // did not cancel, the vendor did not answer in time. 424, not 504: see VendorFailureStatus.
                 _logger.LogWarning(
                     "Image editor {Operation} on {Kind}/{Model} timed out after {Seconds}s (project {ProjectId}): {Detail}",
-                    operationName, kind, model.Length == 0 ? rowModel : model, (int)_operationTimeout.TotalSeconds, projectId,
+                    operationName.ForLog(), kind, (model.Length == 0 ? rowModel : model).ForLog(), (int)_operationTimeout.TotalSeconds, projectId,
                     VendorLogDetail(ex));
                 return StatusCode(VendorFailureStatus, new
                 {
@@ -888,7 +889,7 @@ public partial class EditImageOperationsController : ControllerBase
                 // change - and the reason is logged, because it is the only record of what the vendor said.
                 _logger.LogWarning(
                     "Image editor {Operation} on {Kind}/{Model} failed at the vendor (project {ProjectId}): {Detail}",
-                    operationName, kind, model.Length == 0 ? rowModel : model, projectId, VendorLogDetail(ex));
+                    operationName.ForLog(), kind, (model.Length == 0 ? rowModel : model).ForLog(), projectId, VendorLogDetail(ex));
                 return StatusCode(VendorFailureStatus, new
                 {
                     code = op == Op.RemoveBackground ? SegmentationFailedCode : OperationFailedCode,
@@ -905,7 +906,7 @@ public partial class EditImageOperationsController : ControllerBase
         if (vendor.Outputs.Count == 0)
         {
             _logger.LogWarning("Image editor {Operation} on {Kind}/{Model} answered without a picture (project {ProjectId})",
-                operationName, kind, model.Length == 0 ? rowModel : model, projectId);
+                operationName.ForLog(), kind, (model.Length == 0 ? rowModel : model).ForLog(), projectId);
             return StatusCode(VendorFailureStatus, new
             {
                 code = op == Op.RemoveBackground ? SegmentationFailedCode : OperationFailedCode,
@@ -1400,7 +1401,7 @@ public partial class EditImageOperationsController : ControllerBase
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger.LogWarning("Could not read the size of {Key} in project {ProjectId}: {Message}", key, projectId, ex.Message);
+            _logger.LogWarning("Could not read the size of {Key} in project {ProjectId}: {Message}", key.ForLog(), projectId, ex.Message.ForLog());
             return null;
         }
     }

@@ -25,7 +25,7 @@ func GatewayEndpoint(raw string) (host, port string, err error) {
 		}
 	case "ws":
 		ip := net.ParseIP(host)
-		if ip == nil || ip.To4() == nil || !(ip.IsLoopback() || ip.IsPrivate()) {
+		if ip == nil || ip.To4() == nil || (!ip.IsLoopback() && !ip.IsPrivate()) {
 			return "", "", fmt.Errorf("gateway URL %q: plain ws:// is only allowed for a private or loopback IPv4 address; use wss://", raw)
 		}
 		if port == "" {

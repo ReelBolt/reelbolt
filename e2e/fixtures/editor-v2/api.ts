@@ -107,7 +107,7 @@ export class EditorApi {
     return agent!.id;
   }
 
-  async runWorkflow(projectId: string, workflowId: string, timeoutMs = 300_000): Promise<{ id: string; status: string; stepResults: Array<{ id: string; status: string; outputStorageKey?: string | null; artifactStorageKey?: string | null; workflowStepId: string }> }> {
+  async runWorkflow(projectId: string, workflowId: string, timeoutMs = 300_000): Promise<{ id: string; status: string; stepResults: Array<{ id: string; status: string; errorDetails?: string | null; failureCode?: string | null; failureClass?: string | null; outputStorageKey?: string | null; artifactStorageKey?: string | null; workflowStepId: string }> }> {
     const started = await this.json<{ id: string }>('POST', `/api/v1/projects/${projectId}/workflows/${workflowId}/execute`, {}, [200, 201, 202]);
     const deadline = Date.now() + timeoutMs;
     let last: { id: string; status: string; stepResults: never[] } | undefined;

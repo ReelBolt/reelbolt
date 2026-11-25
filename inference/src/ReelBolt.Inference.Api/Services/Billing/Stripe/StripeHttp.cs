@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.Billing.Stripe;
 
@@ -118,7 +119,7 @@ internal sealed class StripeHttp(
             {
                 if (safeToRepeat && attempt < MaxRetries)
                 {
-                    logger?.LogWarning("Stripe {Method} {Path} failed on the wire ({Type}); retry {Attempt}.", method, Path(path), ex.GetType().Name, attempt + 1);
+                    logger?.LogWarning("Stripe {Method} {Path} failed on the wire ({Type}); retry {Attempt}.", method, Path(path).ForLog(), ex.GetType().Name, attempt + 1);
                     await Backoff(attempt, ct);
                     continue;
                 }
@@ -140,7 +141,7 @@ internal sealed class StripeHttp(
                 bool retryable = status == 429 || code == "lock_timeout" || (status >= 500 && safeToRepeat);
                 if (retryable && attempt < MaxRetries)
                 {
-                    logger?.LogWarning("Stripe {Method} {Path} answered {Status} ({Code}); retry {Attempt}.", method, Path(path), status, code ?? type, attempt + 1);
+                    logger?.LogWarning("Stripe {Method} {Path} answered {Status} ({Code}); retry {Attempt}.", method, Path(path).ForLog(), status, (code ?? type).ForLog(), attempt + 1);
                     await Backoff(attempt, ct);
                     continue;
                 }
