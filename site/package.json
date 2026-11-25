@@ -14,7 +14,7 @@
     "test:build": "node --test i18n/build-output.test.ts"
   },
   "dependencies": {
-    "@react-three/fiber": "9.8.1",
+    "@react-three/fiber": "9.8.2",
     "next": "^16.4.6",
     "next-intl": "^4.15.3",
     "react": "^19.3.1",
