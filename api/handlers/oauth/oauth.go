@@ -440,26 +440,33 @@ func handleAuthorize(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// From here on the redirect target is trusted, so RFC 6749 §4.1.2.1 says these failures go back
-	// to the client as an error redirect rather than being rendered here.
+	// Dynamic registration is open, so a registered redirect URI proves nothing about its owner: an
+	// attacker can register one. Until the user has made an explicit decision on the consent screen,
+	// every failure is therefore rendered here, never redirected (RFC 9700 4.11.2). Error redirects
+	// happen only after the decision (access_denied in handleConsent).
 	if !contains(client.GrantTypes, "authorization_code") {
-		redirectOAuthError(w, r, redirectURI, "unauthorized_client", "This application may not use the authorization code flow.", state)
+		authorizeRefusalPage(w, http.StatusBadRequest,
+			"Unsupported request", "This application may not use the authorization code flow.")
 		return
 	}
 	if responseType != "code" {
-		redirectOAuthError(w, r, redirectURI, "unsupported_response_type", "Only response_type=code is supported.", state)
+		authorizeRefusalPage(w, http.StatusBadRequest,
+			"Unsupported request", "Only response_type=code is supported.")
 		return
 	}
 	if method != "S256" {
-		redirectOAuthError(w, r, redirectURI, "invalid_request", "code_challenge_method must be S256.", state)
+		authorizeRefusalPage(w, http.StatusBadRequest,
+			"Invalid request", "code_challenge_method must be S256.")
 		return
 	}
 	if !services.ValidPKCEChallenge(challenge) {
-		redirectOAuthError(w, r, redirectURI, "invalid_request", "code_challenge is required and must be a base64url string of 43 to 128 characters.", state)
+		authorizeRefusalPage(w, http.StatusBadRequest,
+			"Invalid request", "code_challenge is required and must be a base64url string of 43 to 128 characters.")
 		return
 	}
 	if len(requestedScope) > maxRequestedScopeLen {
-		redirectOAuthError(w, r, redirectURI, "invalid_scope", "The requested scope is too long.", state)
+		authorizeRefusalPage(w, http.StatusBadRequest,
+			"Invalid request", "The requested scope is too long.")
 		return
 	}
 

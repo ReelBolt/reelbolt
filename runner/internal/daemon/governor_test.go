@@ -280,16 +280,26 @@ func TestACorruptControlRequestDoesNotPause(t *testing.T) {
 	go func() { served <- d.run(ctx, make(chan os.Signal, 1)) }()
 	waitFor(t, "the agent to start", func() bool { return factory.count() == 1 })
 
+	// The control directory is made by whoever writes into it first (the command line's Request, or the
+	// daemon's live-document writer on its own schedule): the test writes the raw file itself, so it makes the
+	// directory rather than racing the daemon for it.
+	if err := os.MkdirAll(filepath.Dir(control.RequestPath), 0o700); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(control.RequestPath, []byte("{not json"), 0o600); err != nil {
 		t.Fatal(err)
 	}
-	// The watcher polls once a second: give it two passes and then some.
-	time.Sleep(2500 * time.Millisecond)
-	if !d.Governor().Allowed() {
-		t.Fatalf("a corrupt request paused the runner: %+v", d.Governor().Status())
-	}
-	if _, err := os.Stat(control.RequestPath); !os.IsNotExist(err) {
-		t.Fatal("the corrupt request was not consumed, so it would be retried for ever")
+	// The watcher polls once a second: wait for it to consume the unreadable request (it drops it), then
+	// check the machine was never paused.
+	waitFor(t, "the corrupt request to be consumed", func() bool {
+		_, err := os.Stat(control.RequestPath)
+		return os.IsNotExist(err)
+	})
+	// A request that does pause does so right after it is read: watch the machine for a short window.
+	for end := time.Now().Add(300 * time.Millisecond); time.Now().Before(end); time.Sleep(10 * time.Millisecond) {
+		if !d.Governor().Allowed() {
+			t.Fatalf("a corrupt request paused the runner: %+v", d.Governor().Status())
+		}
 	}
 	cancel()
 	<-served

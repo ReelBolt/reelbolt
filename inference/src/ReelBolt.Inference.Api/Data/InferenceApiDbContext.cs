@@ -232,6 +232,7 @@ public class InferenceApiDbContext : DbContext
 
     /// <summary>First-touch attribution of a consented anonymous visitor (written by the visit beacon).</summary>
     public DbSet<Services.Telemetry.VisitorAttribution> VisitorAttributions => Set<Services.Telemetry.VisitorAttribution>();
+    public DbSet<Services.Telemetry.CspViolationCount> CspViolationCounts => Set<Services.Telemetry.CspViolationCount>();
 
     /// <summary>Who a person said they are and what they start from, one row per user (new-user funnel).</summary>
     public DbSet<UserOnboardingProfile> UserOnboardingProfiles => Set<UserOnboardingProfile>();
@@ -441,6 +442,22 @@ public class InferenceApiDbContext : DbContext
                 .HasFilter("utm_content IS NOT NULL");
             entity.HasIndex(e => e.FirstTouchAt)
                 .HasDatabaseName("ix_visitor_attribution_first_touch_at");
+        });
+
+        // security-headers T-003: daily aggregate of browser CSP/COEP violation reports. The key is the whole
+        // row (closed tokens, scheme+host, a sanitized path, a UTC day); no tenant, no person, no URL.
+        modelBuilder.Entity<Services.Telemetry.CspViolationCount>(entity =>
+        {
+            entity.ToTable("csp_violation_counts");
+            entity.HasKey(e => new { e.Day, e.ReportType, e.Disposition, e.EffectiveDirective, e.BlockedOrigin, e.DocumentPath, e.UaFamily })
+                .HasName("pk_csp_violation_counts");
+            entity.Property(e => e.ReportType).HasMaxLength(16);
+            entity.Property(e => e.Disposition).HasMaxLength(16);
+            entity.Property(e => e.EffectiveDirective).HasMaxLength(32);
+            entity.Property(e => e.BlockedOrigin).HasMaxLength(100);
+            entity.Property(e => e.DocumentPath).HasMaxLength(200);
+            entity.Property(e => e.UaFamily).HasMaxLength(16);
+            entity.HasIndex(e => e.Day).HasDatabaseName("ix_csp_violation_counts_day");
         });
 
         // new-user funnel: who a person said they are and what they start from. One row per user, removed

@@ -28,17 +28,13 @@ include /etc/nginx/conf.d/slots-vars*.inc;
 # restarted. Do not convert the proxy_pass targets to static upstreams without also handling
 # re-resolution (`server ... resolve` with a shared zone, nginx 1.27.3+).
 
-# Response headers for every upstream behind these server blocks (EDGE-04).
-#   - X-Content-Type-Options: nosniff, always.
-#   - Strict-Transport-Security only when FORCE_HTTPS=true: render-config.sh writes
-#     conf.d/hsts.inc then and removes it otherwise. A glob with no match is valid, so plain-http
-#     installs and an older entrypoint (which never writes the file) are unaffected.
-# nginx inherits add_header from this level ONLY into a location that has no add_header of its own,
-# so every location (and `if` block) in locations.conf that sets one repeats these two lines;
-# nginx/tests/forwarded-headers.sh fails if one does not. Deliberately no Content-Security-Policy
-# and no frame-ancestors/X-Frame-Options here: they could break embeds and need a product decision.
-add_header X-Content-Type-Options "nosniff" always;
-include /etc/nginx/conf.d/hsts*.inc;
+# Response headers for every upstream behind these server blocks: nosniff, framing, referrer,
+# permissions, CSP/COEP (report-only), COOP, CORP, and HSTS when FORCE_HTTPS=true. All of them are
+# in security-headers.conf (values per path class: the maps in nginx.conf; HSTS: conf.d/hsts.inc,
+# written by render-config.sh). nginx inherits add_header from this level ONLY into a location that
+# has no add_header of its own, so every location (and `if` block) in locations.conf that sets one
+# repeats the include below; nginx/tests/forwarded-headers.sh fails if one does not.
+include /etc/nginx/security-headers.conf;
 
 # Front door for a private (staging) environment, rendered by docker-entrypoint.sh:
 # empty unless BASIC_AUTH_USER and BASIC_AUTH_PASSWORD are set, otherwise `auth_basic`

@@ -30,16 +30,16 @@ public partial class ReactRemotionSandboxTools
         ("@remotion/three", "4.0.545", "Remotion integration for three.js"),
         ("@remotion/transitions", "4.0.545", "Scene transitions"),
         ("@remotion/zod-types", "4.0.545", "Zod types for composition props"),
-        ("d3", "7.9.0", "Data-driven visualisation"),
+        ("d3", "7.9.2", "Data-driven visualisation"),
         ("framer-motion", "14.14.0", "Declarative animation"),
         ("gsap", "3.15.1", "Timeline animation, driven by the frame (see the ReelBolt gsap guide)"),
         ("lottie-web", "5.13.0", "Lottie runtime (peer of @remotion/lottie)"),
-        ("lucide-react", "1.59.0", "Icon set"),
+        ("lucide-react", "1.77.0", "Icon set"),
         ("react", "19.3.1", "UI runtime"),
         ("react-dom", "19.3.1", "UI runtime"),
         ("remotion", "4.0.545", "Core framework"),
         ("simplex-noise", "4.0.3", "Simplex noise"),
-        ("three", "0.172.0", "3D graphics"),
+        ("three", "0.187.0", "3D graphics"),
         ("zod", "4.6.7", "Schema validation for composition props")
     ];
 

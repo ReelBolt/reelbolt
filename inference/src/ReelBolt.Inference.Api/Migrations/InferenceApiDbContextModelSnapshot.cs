@@ -1194,6 +1194,55 @@ namespace ReelBolt.Inference.Api.Migrations
                     b.ToTable("alpha_funnel_claims", (string)null);
                 });
 
+            modelBuilder.Entity("ReelBolt.Inference.Api.Services.Telemetry.CspViolationCount", b =>
+                {
+                    b.Property<DateOnly>("Day")
+                        .HasColumnType("date")
+                        .HasColumnName("day");
+
+                    b.Property<string>("ReportType")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("report_type");
+
+                    b.Property<string>("Disposition")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("disposition");
+
+                    b.Property<string>("EffectiveDirective")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("effective_directive");
+
+                    b.Property<string>("BlockedOrigin")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("blocked_origin");
+
+                    b.Property<string>("DocumentPath")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("document_path");
+
+                    b.Property<string>("UaFamily")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("ua_family");
+
+                    b.Property<long>("Count")
+                        .HasColumnType("bigint")
+                        .HasColumnName("count");
+
+                    b.HasKey("Day", "ReportType", "Disposition", "EffectiveDirective", "BlockedOrigin", "DocumentPath", "UaFamily")
+                        .HasName("pk_csp_violation_counts");
+
+                    b.HasIndex("Day")
+                        .HasDatabaseName("ix_csp_violation_counts_day");
+
+                    b.ToTable("csp_violation_counts", (string)null);
+                });
+
             modelBuilder.Entity("ReelBolt.Inference.Api.Services.Telemetry.ProductEvent", b =>
                 {
                     b.Property<long>("Id")

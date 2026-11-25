@@ -12,7 +12,7 @@ RUN apk add --no-cache openssl gettext curl
 
 # The whole config ships in the image (the cloud runs prebuilt images with no bind
 # mounts); the dev compose file still bind-mounts these over the top.
-COPY nginx.conf auth.js i18n.js pick-locale.js locales.json locations.conf proxy-client-headers.conf cloudflare-realip.conf /etc/nginx/
+COPY nginx.conf auth.js i18n.js pick-locale.js locales.json locations.conf proxy-client-headers.conf security-headers.conf cloudflare-realip.conf /etc/nginx/
 COPY http-server-dev.conf http-server-redirect.conf https-server.conf.template \
      common.conf.template runner-server.conf.template runner-locations.conf.template \
      private-server.conf.template slots-vars.conf.template slots-locations.conf /etc/nginx/

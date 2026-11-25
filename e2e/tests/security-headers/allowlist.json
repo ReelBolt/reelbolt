@@ -1,0 +1,34 @@
+{
+  "allow": [
+    {
+      "kind": "csp",
+      "directive": "connect-src",
+      "blocked": "^http://garage:3900/",
+      "reason": "e2e stack artefact: MINIO_PUBLIC_ENDPOINT is unset, so the presigned PUT names the compose-internal storage host. A deployment sets MINIO_PUBLIC_ENDPOINT, which nginx renders into $sh_csp_storage."
+    },
+    {
+      "kind": "console",
+      "blocked": "garage:3900",
+      "reason": "same storage-host artefact (console copy of the CSP report)"
+    },
+    {
+      "kind": "coep",
+      "source": "\"type\":\"corp\".*launch-film",
+      "blocked": "\\(document\\)",
+      "reason": "COEP-RO: cdn.reelbolt.ai launch video sends no CORP; CDN-side fix pending (Cloudflare transform rule). Report-only, harmless until COEP is enforced."
+    },
+    {
+      "kind": "coep",
+      "source": "worker initialization.*turbopack-worker",
+      "blocked": "\\(document\\)",
+      "reason": "COEP-RO: the editor's dedicated worker script response carries no COEP header of its own. Report-only; must be fixed before COEP is ever enforced."
+    },
+    {
+      "kind": "coep",
+      "source": "about:srcdoc",
+      "blocked": "\\(document\\)",
+      "flow": "admin",
+      "reason": "COEP-RO: admin campaigns email preview is a sandboxed srcdoc iframe. Admin-only; re-verify before enforcing."
+    }
+  ]
+}

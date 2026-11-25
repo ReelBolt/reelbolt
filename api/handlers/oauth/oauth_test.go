@@ -710,18 +710,11 @@ func TestAuthorizePKCERequirementsTable(t *testing.T) {
 				return
 			}
 
-			if rec.Code != http.StatusFound {
-				t.Fatalf("status = %d, want 302 to the client", rec.Code)
+			if rec.Code != http.StatusBadRequest {
+				t.Fatalf("status = %d, want 400 refusal page (no redirect before consent)", rec.Code)
 			}
-			location := rec.Header().Get("Location")
-			if got := queryParam(t, location, "error"); got != tc.wantError {
-				t.Fatalf("error = %q, want %q (location %q)", got, tc.wantError, location)
-			}
-			if got := queryParam(t, location, "state"); got != "state-xyz" {
-				t.Fatalf("state must be echoed, got %q", got)
-			}
-			if !strings.HasPrefix(location, testRedirectURI) {
-				t.Fatalf("error must go to the registered redirect URI, got %q", location)
+			if loc := rec.Header().Get("Location"); loc != "" {
+				t.Fatalf("a pre-consent error must not redirect, got Location %q", loc)
 			}
 			if len(h.store.codes) != 0 {
 				t.Fatal("a refused authorization must issue no code")

@@ -24,6 +24,26 @@ public sealed class AlphaTelemetryOptions
     /// </summary>
     public bool VisitIngestEnabled { get; set; }
 
+    /// <summary>
+    /// Whether <c>POST /api/v1/telemetry/csp-report</c> stores browser CSP/COEP violation counts (env
+    /// <c>TELEMETRY_CSP_REPORT_ENABLED</c>). Default true; off, the endpoint still answers 204 and stores
+    /// nothing. Independent of <see cref="VisitIngestEnabled"/>: only allowlisted, non-personal fields are
+    /// kept, so it needs no cookie consent (docs/csp-reporting.md).
+    /// </summary>
+    public bool CspReportEnabled { get; set; } = true;
+
+    /// <summary>Per-process refill rate of the CSP report token bucket, reports per second.</summary>
+    public double CspReportRatePerSecond { get; set; } = 20;
+
+    /// <summary>Per-process burst size of the CSP report token bucket.</summary>
+    public int CspReportBurst { get; set; } = 60;
+
+    /// <summary>Distinct keys per UTC day before new keys fold into the overflow row.</summary>
+    public int CspReportMaxKeysPerDay { get; set; } = 2000;
+
+    /// <summary>Days a CSP violation count row is kept before the retention sweep deletes it.</summary>
+    public int CspReportRetentionDays { get; set; } = 90;
+
     /// <summary>Months a visitor-only product_events row is kept before the retention sweep deletes it.</summary>
     public int VisitRetentionMonths { get; set; } = 13;
 
