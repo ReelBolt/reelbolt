@@ -16,6 +16,7 @@ using ReelBolt.Shared.Auth;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
 using ReelBolt.Shared.Metering;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Controllers;
 
@@ -386,7 +387,7 @@ public class AssistantToolBridgeController : ControllerBase
         catch (OperationCanceledException) when (wallClock.IsCancellationRequested && !ct.IsCancellationRequested)
         {
             // Past the wall clock: cancelled, and answered as a readable tool error rather than a protocol error.
-            _logger.LogWarning("Assistant tool {ToolName} for user {UserId} cancelled after Assistant:MaxTurnSeconds", toolName, userId);
+            _logger.LogWarning("Assistant tool {ToolName} for user {UserId} cancelled after Assistant:MaxTurnSeconds", toolName.ForLog(), userId);
             await RecordCallAsync(userId, toolName, succeeded: false, ErrorCodes.TurnTimeout, startedAt, CancellationToken.None);
             return Ok(AssistantToolCallResultDto.TextResult(NonWorkflowChargeResults.AssistantTurnTooLongText, isError: true));
         }
@@ -400,7 +401,7 @@ public class AssistantToolBridgeController : ControllerBase
         catch (Exception ex) when ((ex as ModelUnpricedException ?? ex.InnerException as ModelUnpricedException) is { } unpriced)
         {
             // A tool whose model is an unpriced Platform model: the refusal's own plain sentence, as a tool error.
-            _logger.LogWarning("Assistant tool {ToolName} for user {UserId} refused: {Reason}", toolName, userId, unpriced.Message);
+            _logger.LogWarning("Assistant tool {ToolName} for user {UserId} refused: {Reason}", toolName.ForLog(), userId, unpriced.Message.ForLog());
             await RecordCallAsync(userId, toolName, succeeded: false, ErrorCodes.ModelUnpriced, startedAt, ct);
             return Ok(AssistantToolCallResultDto.TextResult(unpriced.Message, isError: true));
         }
@@ -412,7 +413,7 @@ public class AssistantToolBridgeController : ControllerBase
             // (AssistantChatController logs the turn and closes with "(ref …)"). The reference is the request's own
             // trace identifier, so the log line and the answer name the same call.
             string reference = HttpContext.TraceIdentifier;
-            _logger.LogError(ex, "Assistant tool {ToolName} failed for user {UserId} (ref {Reference})", toolName, userId, reference);
+            _logger.LogError(ex, "Assistant tool {ToolName} failed for user {UserId} (ref {Reference})", toolName.ForLog(), userId, reference.ForLog());
             await RecordCallAsync(userId, toolName, succeeded: false, ErrorCodes.ExecutionFailed, startedAt, ct);
             return Ok(AssistantToolCallResultDto.TextResult(
                 $"tool execution failed: the server could not run it. Try again in a moment. (ref {reference})", isError: true));

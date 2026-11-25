@@ -39,17 +39,20 @@ RUN f="$(mktemp)" \
 
 # Build-time guard (audio-cleanup): local VoiceBasic cleanup needs ffmpeg's arnndn (RNNoise) filter
 # plus the others the Cleanup/ chains use. Fail the build rather than ship an image that cannot clean.
-RUN ffmpeg -hide_banner -filters | grep -q arnndn \
- && ffmpeg -hide_banner -filters | grep -q afftdn \
- && ffmpeg -hide_banner -filters | grep -q bandreject
+# Written to a file first (no pipe), so a failing ffmpeg fails the build instead of reading as "filter absent".
+RUN f="$(mktemp)" && ffmpeg -hide_banner -filters > "$f" \
+ && grep -q arnndn "$f" && grep -q afftdn "$f" && grep -q bandreject "$f" \
+ && rm -f "$f"
 # Build-time guard (video-enhance): the local enhancement engines need hqdn3d/nlmeans (denoise),
 # minterpolate+tmix (motion blur and frame interpolation), cas (fast upscale), zscale (HDR to
 # SDR), noise (keep-grain), tpad/apad/fps/scale (duration repair and conform). Names are matched
 # exactly on the filter-name column, not as a substring. Fail the image build rather than ship an engine that cannot enhance.
-RUN for f in hqdn3d nlmeans minterpolate tmix cas zscale noise tpad apad fps scale; do \
-      ffmpeg -hide_banner -filters | awk -v f="$f" '$2 == f { found = 1 } END { exit !found }' \
-        || { echo "ffmpeg is missing the $f filter" >&2; exit 1; }; \
-    done
+RUN f="$(mktemp)" && ffmpeg -hide_banner -filters > "$f" \
+ && for n in hqdn3d nlmeans minterpolate tmix cas zscale noise tpad apad fps scale; do \
+      awk -v n="$n" '$2 == n { found = 1 } END { exit !found }' "$f" \
+        || { echo "ffmpeg is missing the $n filter" >&2; exit 1; }; \
+    done \
+ && rm -f "$f"
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080

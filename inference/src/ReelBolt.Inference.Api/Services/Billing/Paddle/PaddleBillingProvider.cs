@@ -152,8 +152,8 @@ public sealed class PaddleBillingProvider(
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
             logger?.LogWarning(ex,
-                "Could not pre-create a Paddle customer for {Email}; the checkout will ask for the address instead.",
-                request.Email);
+                "Could not pre-create a Paddle customer for organization {Org}; the checkout will ask for the address instead.",
+                request.OrganizationId);
             return null;
         }
     }
@@ -178,14 +178,14 @@ public sealed class PaddleBillingProvider(
             }
 
             logger?.LogWarning(
-                "{Email} already has a Paddle customer, but none of organization {Org}; the checkout will ask for the address instead.",
-                request.Email, request.OrganizationId);
+                "The checkout address already has a Paddle customer, but none of organization {Org}; the checkout will ask for the address instead.",
+                request.OrganizationId);
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
             logger?.LogWarning(ex,
-                "Could not look up the existing Paddle customer for {Email}; the checkout will ask for the address instead.",
-                request.Email);
+                "Could not look up the existing Paddle customer for organization {Org}; the checkout will ask for the address instead.",
+                request.OrganizationId);
         }
 
         return null;

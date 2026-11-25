@@ -24,6 +24,7 @@ function namespaces(dir) {
 
 const cell = (v) =>
   String(v ?? '')
+    .replace(/\\/g, '\\\\')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')

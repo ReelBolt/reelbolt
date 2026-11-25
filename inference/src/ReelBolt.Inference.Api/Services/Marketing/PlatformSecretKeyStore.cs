@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using ReelBolt.Inference.Api.Data;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Inference.Api.Services.Marketing;
 
@@ -82,7 +83,7 @@ public sealed class PlatformSecretKeyStore : IMarketingSecretStore
                     $"INSERT INTO platform_secrets (name, value, created_at) VALUES ({name}, {protectedKey}, {DateTime.UtcNow}) ON CONFLICT (name) DO NOTHING");
                 if (TryRead(db, name, out byte[] winner, out _))
                 {
-                    _logger.LogInformation("Generated the platform secret {SecretName}.", name);
+                    _logger.LogInformation("Generated the platform secret {SecretName}.", name.ForLog());
                     return winner;
                 }
             }

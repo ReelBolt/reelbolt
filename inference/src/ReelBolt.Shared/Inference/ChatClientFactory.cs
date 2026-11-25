@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using OpenAI;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Metering;
+using ReelBolt.Shared.Observability;
 
 namespace ReelBolt.Shared.Inference;
 
@@ -152,7 +153,7 @@ public sealed class ChatClientFactory : IChatClientFactory
             {
                 _logger?.LogInformation(
                     "Chat client for provider {Provider} ({Model}) built on the OpenAI Responses API at {Host}, store=false",
-                    provider.Name, provider.ModelName, OpenAIPlatformHost);
+                    provider.Name.ForLog(), provider.ModelName.ForLog(), OpenAIPlatformHost);
             }
 
             return Build(provider);

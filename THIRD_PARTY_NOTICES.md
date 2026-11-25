@@ -2,7 +2,7 @@
 
 ReelBolt includes and uses third-party software, fonts and other material. Each keeps its own licence. This file is the summary and carries the notices that need a human-readable statement; the full generated lists are under [docs/third-party/](docs/third-party/).
 
-ReelBolt's own licence is decided separately and is not stated here. Not legal advice; not yet reviewed by counsel.
+ReelBolt itself is licensed under the GNU Affero General Public License v3.0 (see the `LICENSE` file); a commercial licence is also offered (see [COMMERCIAL.md](COMMERCIAL.md)). Each component below keeps its own licence.
 
 ## Contents
 
