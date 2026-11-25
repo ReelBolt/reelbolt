@@ -11,7 +11,7 @@ RUN for f in LICENSE THIRD_PARTY_NOTICES.md GPL-SOURCE-OFFER.md; do \
 
 FROM scratch AS platform-docs
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:11.0-alpine AS base
 USER root
 # Ingest moderation samples uploaded media with the shared FfmpegModerationMediaSampler.
 # Exact Alpine ffmpeg build (infra/image-pins.env; tests keep the two equal). Kept: the ingest
