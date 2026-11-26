@@ -104,16 +104,26 @@ test('TL-069 Loop wraps playback at the end of the In/Out range', async ({ fresh
   await ed.tap(ed.testId('mark-in'));
   await ed.seek(50);
   await ed.tap(ed.testId('mark-out'));
-  await ed.seek(25);
+  // Start close to Out so the wrap comes within a few seconds, and so a run with Loop OFF (which stops at Out) cannot pass.
+  await ed.seek(47);
   await ed.tap(transport(ed, 'Loop'));
   await expect(transport(ed, 'Loop')).toHaveAttribute('aria-pressed', 'true');
+  // Record every timecode the page shows from inside the page: a Node-side poll samples at a fixed rate and, on a slow runner,
+  // can beat against the one-second loop and never see the wrap.
+  await ed.testId('status-timecode').evaluate((el) => {
+    const w = window as unknown as { __tcSeen: string[] };
+    w.__tcSeen = [];
+    new MutationObserver(() => { w.__tcSeen.push(el.textContent ?? ''); }).observe(el, { childList: true, characterData: true, subtree: true });
+  });
   await ed.tap(ed.testId('transport-play'));
   // With Loop on, playback keeps running past Out and the playhead never leaves the range.
-  const seen: number[] = [];
+  let seen: number[] = [];
   await expect.poll(async () => {
-    seen.push(await playhead(ed));
-    return seen.length > 6 && seen.some((f, i) => i > 0 && f < seen[i - 1]);
-  }, { message: 'the playhead wrapped back inside the range', timeout: 30_000, intervals: [400] }).toBe(true);
+    seen = (await ed.page.evaluate(() => (window as unknown as { __tcSeen: string[] }).__tcSeen)).map((tc) => frameOf(tc));
+    // The playhead reached the end of the range (Out is 50) and later came back near In (20): a real wrap, not a seek or a stop.
+    const reachedOut = seen.findIndex((f) => f >= 49);
+    return reachedOut >= 0 && seen.slice(reachedOut + 1).some((f) => f <= 30);
+  }, { message: 'the playhead wrapped from Out back to In', timeout: 30_000, intervals: [250] }).toBe(true);
   expect(Math.max(...seen), 'never past Out').toBeLessThanOrEqual(52);
   await expect(ed.testId('transport-play'), 'still playing').toHaveAttribute('aria-label', 'Pause');
   await ed.tap(ed.testId('transport-play'));

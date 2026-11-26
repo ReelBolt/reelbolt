@@ -2,7 +2,7 @@ import { test, expect, type EditorPage } from '../../../fixtures/editor-v2/lane-
 import { PAIR, clipsTimeline, type ClipSpec } from '../../../fixtures/editor-v2/lane-a';
 import type { Item, Timeline } from '../../../fixtures/editor-v2/api';
 import { stubAnalysis, type StubWord } from '../../../fixtures/editor-v2/analysis-stub';
-import { runOn } from '../../../fixtures/editor-v2/rows';
+import { runOn, desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 
 /**
  * T-014 analysis-driven cuts: R09.2 (linked picture and sound are cut together), R09.3 (audition without
@@ -154,6 +154,7 @@ const TAKES: StubWord[] = [
 ];
 
 test('R09.9 repeated takes are grouped, the clean one is suggested, the others are set aside (not lost)', async ({ page, freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('takes are not on a phone');
   runOn('desktop', 'pixel7');
   await stubAnalysis(page, [{ fileId: seed.files.clipA, transcript: TAKES }], { mode: 'transcriptOnly', readyAtStart: true });
   const ed = await openEditor(await freshTimeline('derush'));

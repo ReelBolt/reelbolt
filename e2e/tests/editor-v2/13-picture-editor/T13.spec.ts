@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { createPicture, openPicture, pickAiTool } from '../../../fixtures/editor-v2/picture';
+import { createPicture, openPanel, openPicture, pickAiTool } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -19,8 +19,8 @@ test('T13 the AI prompt survives a switch to the Layers tab and back', async ({ 
   await expect(prompt).toBeVisible();
   await prompt.fill('the red car on the left');
 
-  await page.getByRole('tab', { name: 'Layers' }).click();
+  await openPanel(page, 'Layers');
   await expect(page.getByRole('list', { name: 'Layers, front first' })).toBeVisible();
-  await page.getByRole('tab', { name: 'AI' }).click();
+  await openPanel(page, 'AI');
   await expect(page.getByRole('textbox', { name: 'Or describe it' }), 'the typed prompt is still there').toHaveValue('the red car on the left');
 });

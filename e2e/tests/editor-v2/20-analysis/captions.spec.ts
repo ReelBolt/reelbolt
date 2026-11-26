@@ -27,13 +27,13 @@ async function chooseFile(ed: EditorPage, name: string, text: string): Promise<v
 test('R09.6 a caption added by hand keeps its two lines, its look and its place; the look can be set on all and the timing nudged', async ({ freshTimeline, openEditor, api, seed }) => {
   runOn('desktop', 'pixel7');
   const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
+  await ed.seek(10); // before the panel opens: on a phone an open sheet hides the transport
   await openSubtitles(ed);
   // A wide 1920x1080 picture starts with the clean look at the bottom.
   await expect(ed.page.getByTestId('caption-look-clean')).toHaveAttribute('aria-checked', 'true');
   await ed.tap(ed.page.getByTestId('caption-look-boxed'));
   await ed.tap(ed.page.getByTestId('caption-position-topCenter'));
   await ed.page.getByTestId('subtitles-new-text').fill('Line one\nLine two');
-  await ed.seek(10);
   await ed.tap(ed.page.getByTestId('subtitles-add'));
   const added = await ed.expectServer((tl) => captionsOf(tl).length === 1, 'the caption is stored');
   const c = captionsOf(added)[0];

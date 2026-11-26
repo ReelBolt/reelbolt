@@ -5,14 +5,16 @@ namespace ReelBolt.Shared.Data;
 
 /// <summary>
 /// Creates a missing database before <c>MigrateAsync</c>, so EF Core never takes its own create path.
-/// That path (Npgsql EF 10.0.3 <c>NpgsqlRelationalConnection.CreateAdminConnection</c>) opens an admin
+/// That path (Npgsql EF provider 10.0.4 <c>NpgsqlRelationalConnection.CreateAdminConnection</c>) opens an admin
 /// connection on an unnamed data source whose <c>db.client.connection.pool.name</c> metric tag is the
 /// connection string minus <c>Password</c> (host, user, <c>SSL Password</c>; Security S-1). Here both
-/// data sources carry a fixed name, never pool, and are disposed before returning.
+/// data sources carry a fixed name, never pool, and are disposed before returning. The path also throws
+/// <c>MissingMethodException</c> on Npgsql 11 with EF provider 10.0.4 (it sets the removed
+/// <c>Multiplexing</c> keyword), a second reason it must never run.
 /// </summary>
 public static class PostgresDatabaseBootstrap
 {
-    // Npgsql EF 10.0.3 connects to NpgsqlOptionsExtension.AdminDatabase ?? "postgres"; neither service
+    // Npgsql EF provider 10.0.4 connects to NpgsqlOptionsExtension.AdminDatabase ?? "postgres"; neither service
     // calls UseAdminDatabase, so this is the database EF itself would use.
     private const string AdminDatabase = "postgres";
 
@@ -46,9 +48,8 @@ public static class PostgresDatabaseBootstrap
             var target = new NpgsqlConnectionStringBuilder(PostgresPoolSizing.RemoveMaxPoolSize(connectionString))
             {
                 Pooling = false,
-                Multiplexing = false,
             };
-            // Npgsql 10.0.3 sends a database only when Database is set; otherwise the server opens the database
+            // Npgsql 11.0.0 sends a database only when Database is set; otherwise the server opens the database
             // named after the user. That user is Username, else PGUSER, else the Kerberos principal, else
             // Environment.UserName (NpgsqlConnector.GetUsernameAsync); PGDATABASE is never read. Without
             // Username the name is left to Npgsql's own inference and read back as session_user on the admin

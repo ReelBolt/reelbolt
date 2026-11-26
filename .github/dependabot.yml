@@ -91,6 +91,11 @@ updates:
           - "react-dom"
           - "@types/react"
           - "@types/react-dom"
+    ignore:
+      # typescript-eslint 8.74 peer-caps TypeScript below 6.1. Lift when
+      # typescript-eslint supports TypeScript 7.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: npm
     directory: /site
@@ -169,10 +174,6 @@ updates:
       interval: weekly
     commit-message:
       prefix: "deps(runner-ui)"
-    ignore:
-      # @vitejs/plugin-react 6 needs Vite 8; the runner UI is on Vite 7.
-      - dependency-name: "@vitejs/plugin-react"
-        update-types: ["version-update:semver-major"]
     groups:
       vitest:
         patterns:
@@ -205,10 +206,6 @@ updates:
       interval: weekly
     commit-message:
       prefix: "deps(mcp)"
-    ignore:
-      # The MCP image runs Node 22; @types/node must match the runtime major.
-      - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: docker
     directories:

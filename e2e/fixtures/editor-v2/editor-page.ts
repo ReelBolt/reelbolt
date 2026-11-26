@@ -85,7 +85,11 @@ export class EditorPage {
   get canvas(): Locator { return this.page.getByTestId('timeline-canvas'); }
   get chip(): Locator { return this.page.getByTestId('save-state-chip'); }
   get viewer(): Locator { return this.page.getByTestId('program-canvas'); }
-  testId(id: string): Locator { return this.page.getByTestId(id).first(); }
+  /** A test id, with the phone's own Undo and Redo standing in for the toolbar's (the phone header has them, not a toolbar). */
+  testId(id: string): Locator {
+    const phoneId = this.isPhone ? ({ undo: 'phone-undo', redo: 'phone-redo' } as Record<string, string>)[id] : undefined;
+    return this.page.getByTestId(phoneId ?? id).first();
+  }
 
   /* ------------------------------------------------------------------ server state */
 
@@ -220,7 +224,15 @@ export class EditorPage {
     await this.testId('steppers-menu-panel').waitFor({ state: 'hidden' });
   }
 
+  /** The "Running your workflow ... is done" toast of the seed's own workflow lands at a random moment and covers the header on a phone: close it when it is up. */
+  async closeActivityToasts(): Promise<void> {
+    const toast = this.page.locator('[role="alert"][id^="activity-run:"]').first();
+    if (!(await toast.isVisible().catch(() => false))) return;
+    await toast.getByRole('button').first().click({ timeout: 2_000 }).catch(() => undefined);
+  }
+
   async tap(locator: Locator): Promise<void> {
+    if (this.isPhone) await this.closeActivityToasts();
     await locator.scrollIntoViewIfNeeded();
     if (this.isTouch) await locator.tap();
     else await locator.click();
@@ -236,7 +248,17 @@ export class EditorPage {
     const fps = 30;
     const tc = [Math.floor(frame / fps / 3600), Math.floor(frame / fps / 60) % 60, Math.floor(frame / fps) % 60, frame % fps]
       .map((n) => String(n).padStart(2, '0')).join(':');
+    // On a phone an open sheet takes the viewer's place (and the transport with it): close it first.
     const field = this.testId('timecode-field');
+    // A phone sheet hides the transport: close it for the seek and reopen the same dock item after, so a spec that seeks
+    // in the middle of a panel flow finds its panel again.
+    let reopen: 'media' | 'edit' | 'audio' | 'look' | 'captions' | null = null;
+    if (this.isPhone && !(await field.isVisible().catch(() => false))) {
+      for (const item of ['media', 'edit', 'audio', 'look', 'captions'] as const) {
+        if ((await this.page.getByTestId(`dock-${item}`).getAttribute('aria-pressed').catch(() => null)) === 'true') reopen = item;
+      }
+      await this.closeSheet();
+    }
     await this.closeDrawer();
     // Deliver is its own page (no timecode field, no timeline): coming back from a render, return to Edit first.
     if (!(await field.isVisible().catch(() => false)) && !this.isPhone) await this.workspace('edit');
@@ -247,6 +269,8 @@ export class EditorPage {
     await field.fill(tc);
     await field.press('Enter');
     await expect(this.testId('status-timecode')).toHaveText(tc);
+    if (reopen === 'captions' && this.lastPanelTab) await this.openPanelTab(this.lastPanelTab);
+    else if (reopen && reopen !== 'edit') await this.dock(reopen);
   }
 
   /** Real touch drag through CDP `Input.dispatchTouchEvent` (Chromium only). */
@@ -273,10 +297,10 @@ export class EditorPage {
   /* ------------------------------------------------------------------ phone-aware editing actions (RM.16) */
 
   /** Phone: selects the clip drawn under the (centred) playhead unless one is already selected, so the action bar offers Split. No-op elsewhere. */
-  async selectClipUnderPlayhead(): Promise<void> {
+  async selectClipUnderPlayhead(options: { reselect?: boolean } = {}): Promise<void> {
     if (!this.isPhone) return;
     const bar = this.page.getByTestId('phone-action-bar');
-    if ((await bar.getAttribute('data-mode')) === 'clip') return;
+    if (!options.reselect && (await bar.getAttribute('data-mode')) === 'clip') return;
     const cv = await this.canvasBox();
     await this.tapAt(cv.x + cv.width / 2, await this.laneY(0));
     await expect(bar).toHaveAttribute('data-mode', 'clip');
@@ -412,7 +436,9 @@ export class EditorPage {
   }
 
   /** Opens a left-panel tab by its test id (e.g. `tab-structure`) or role name (e.g. `Markers`). */
+  private lastPanelTab: string | RegExp | null = null;
   async openPanelTab(tab: string | RegExp): Promise<void> {
+    this.lastPanelTab = tab;
     await this.dock('captions');
     const loc = typeof tab === 'string' && tab.startsWith('tab-') ? this.page.getByTestId(tab) : this.page.getByRole('tab', { name: tab });
     // On a phone the desktop panels sit under "More tools" in the Captions sheet.

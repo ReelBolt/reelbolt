@@ -39,7 +39,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.4" />
     <!-- Local PDQ hashing for CSAM matching (Project Arachnid Shield): MIT, pure managed, and the
          reference implementation's own regression vector is pinned by a test (Hamming distance <= 11).
          The native-assets package ships libSkiaSharp for the Alpine API image, which has no system one. -->

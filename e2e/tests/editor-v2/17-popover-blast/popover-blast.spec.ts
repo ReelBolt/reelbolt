@@ -10,7 +10,18 @@ import { probe, expectReachable, press } from '../../../fixtures/editor-v2/popov
  * every option must stay inside the viewport, hit-test to itself and be pickable, on desktop and pixel7.
  */
 
-test.beforeEach(() => runOn('desktop', 'pixel7'));
+test.beforeEach(async ({ page }) => {
+  runOn('desktop', 'pixel7');
+  // A fresh user gets the first-run onboarding tour, whose full-page layer sits over the header and navbar (by design) and
+  // swallows every hit-test. These tests are about the dropdowns, so the tour is already skipped (same stub as the assistant suite).
+  await page.route(/\/api\/v1\/onboarding(\?.*)?$/, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ tour: { status: 'skipped', version: 1, updatedAt: null }, checklist: { dismissed: true, items: [] } }),
+    }),
+  );
+});
 
 test('POP-01 header Account menu: items reachable', async ({ page }) => {
   await page.goto('/app/dashboard');

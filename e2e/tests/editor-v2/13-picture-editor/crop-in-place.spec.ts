@@ -1,3 +1,4 @@
+import { reloadPicture } from '../../../fixtures/editor-v2/picture-lane';
 import {
   test, expect, openFresh, getFull, pollPicture, press, layerOf, savedBadge, decodeImage, saveDownload, addBadgeLayer, hubUrl,
 } from '../../../fixtures/editor-v2/picture-lane';
@@ -59,7 +60,7 @@ test('T35.1 crop edits the layer in place: same layer, same stored pixels, a cro
   await page.keyboard.press('Escape');
 
   // The crop survives a reload and can be widened again (the original was kept).
-  await page.reload();
+  await reloadPicture(page);
   const again = await openCrop(page, source.label, false);
   await expect(again.getByTestId('crop-w')).toHaveValue('960');
   await again.getByTestId('crop-w').fill('1920');
@@ -79,7 +80,7 @@ test('T35.2 a cropped layer merged with another is baked into the merged layer; 
   runOn('desktop');
   const { pic } = await openFresh(page, api, pics, `t35merge-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   const source = pic.layers[0];
   const dialog = await openCrop(page, source.label, false);
   await dialog.getByTestId('crop-w').fill('960');

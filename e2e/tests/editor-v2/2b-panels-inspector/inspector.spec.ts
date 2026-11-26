@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect } from '../../../fixtures/editor-v2/lane-b-test';
 import { mediaClip, type Item, type Timeline } from '../../../fixtures/editor-v2/api';
 import { type EditorPage } from '../../../fixtures/editor-v2/editor-page';
@@ -152,6 +153,7 @@ test('S7 TL-248 TL-251 TL-253 the Inspector follows the track a clip sits on', a
 });
 
 test('S20 TL-248 typing a number is ONE edit: "50" (percent) in Opacity writes a single op and the picture dims', async ({ freshTimeline, openEditor }) => {
+  desktopLayoutOnly('the desktop Inspector number field; the phone has the clip sheet');
   const ed = await openEditor(await freshTimeline('seeded'));
   await ed.seek(30);
   await selectOnTrack(ed, 'video', 30);

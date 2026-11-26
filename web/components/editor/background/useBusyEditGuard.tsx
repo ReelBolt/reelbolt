@@ -11,6 +11,7 @@ import { getResultsStore, type BackgroundEntry } from '@/lib/editing/background/
 import type { EditOp } from '@/lib/editing/engine';
 import type { EditorStore } from '@/lib/editing/store/editor-store';
 import { useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 interface Held {
   ops: readonly EditOp[];
@@ -110,11 +111,11 @@ export function useBusyEditGuard(args: { store: EditorStore; projectId: string; 
   );
   const title = t('busyTitle', { tool });
   return phone ? (
-    <Drawer opened={held !== null} onClose={() => setHeld(null)} title={title} position="bottom" size="auto" data-testid="busy-edit-sheet">
+    <Drawer zIndex={EDITOR_MODAL_Z} opened={held !== null} onClose={() => setHeld(null)} title={title} position="bottom" size="auto" data-testid="busy-edit-sheet">
       {body}
     </Drawer>
   ) : (
-    <Modal opened={held !== null} onClose={() => setHeld(null)} title={title} centered>
+    <Modal zIndex={EDITOR_MODAL_Z} opened={held !== null} onClose={() => setHeld(null)} title={title} centered>
       {body}
     </Modal>
   );

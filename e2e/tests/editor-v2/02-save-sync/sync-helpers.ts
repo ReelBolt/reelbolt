@@ -26,7 +26,8 @@ export const hasCutAt = (tl: Timeline, frame: number): boolean => videoItems(tl)
 /** Splits the clip under the playhead (the visible Split button: the toolbar scissors on desktop and tablet, the action bar's Split on a phone). */
 export async function bladeAt(ed: EditorPage, frame: number): Promise<void> {
   await ed.seek(frame);
-  await ed.selectClipUnderPlayhead();
+  // On a phone an earlier selection may be a clip the playhead has left: tap the clip under the playhead again.
+  await ed.selectClipUnderPlayhead({ reselect: true });
   await ed.page.evaluate(() => {
     const visible = [...document.querySelectorAll<HTMLElement>('[data-testid="blade-at-playhead"], [data-testid="phone-action-split"]')].find((e) => e.offsetParent !== null);
     if (!visible) throw new Error('no visible Split button');
@@ -101,3 +102,6 @@ export async function stubPatches(page: Page, timelineId: string, answers: Patch
 export async function killTab(page: Page): Promise<void> {
   await page.close({ runBeforeUnload: false });
 }
+
+/** The Retry button: the status bar's on desktop and tablet, the header's on a phone. */
+export const retryButton = (page: Page) => page.getByTestId('save-retry').or(page.getByTestId('phone-retry'));

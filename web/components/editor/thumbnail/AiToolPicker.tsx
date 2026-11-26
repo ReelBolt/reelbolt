@@ -20,6 +20,7 @@ import { aiToolDescriptionMsg, aiToolGroupTitleMsg, aiToolTitleMsg } from '@/lib
 import { AI_TOOL_GROUPS, availabilityOperation, type AiToolId } from '@/lib/editor/ai-tools';
 import type { EditImageOperation } from '@/lib/types/image-document';
 import { useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 /** One icon per tool; the words come from `lib/editor/ai-tools.ts`. */
 export const AI_TOOL_ICONS: Record<AiToolId, React.ComponentType<{ size?: number | string }>> = {
@@ -57,7 +58,7 @@ export function AiToolPicker({ opened, onClose, current, onPick, unavailable, gr
   const isPhone = useIsPhoneClass();
 
   return (
-    <Modal
+    <Modal zIndex={EDITOR_MODAL_Z}
       opened={opened}
       onClose={onClose}
       title={t('title')}

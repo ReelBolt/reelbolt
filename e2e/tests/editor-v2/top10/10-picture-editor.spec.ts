@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { test, expect } from '../../../fixtures/editor-v2';
 import { ensureMedia } from '../../../fixtures/editor-v2/seed';
+import { openPanel } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -15,7 +16,9 @@ test('TOP10-10 TH-DOC-06 a 1920x1080 photo opens in a 1920x1080 picture', async 
   const doc = await api.json<{ id: string }>('POST', docs(seed.projectId), { sourceProjectFileId: seed.files.still, name: `top10-10-${Date.now()}` }, [200, 201]);
   await page.goto(`/app/editor/thumbnails/${doc.id}?project=${seed.projectId}`);
   await expect(page.locator('[role=application][aria-label="Thumbnail canvas"]')).toBeVisible({ timeout: 45_000 });
-  await expect(page.getByText(/^\d+ × \d+$/).first(), 'the canvas readout').toHaveText('1920 × 1080');
+  // The always-visible size text is desktop only; the phone shows the same size in the Canvas sheet.
+  await openPanel(page, 'Canvas');
+  await expect(page.getByText(/^\d+ × \d+$/).or(page.getByTestId('picture-sheet').getByText(/\d+ × \d+/)).first(), 'the canvas readout').toHaveText(/1920 × 1080/);
   await expect.poll(async () => {
     const d = await api.json<{ canvasWidth: number; canvasHeight: number }>('GET', `${docs(seed.projectId)}/${doc.id}`);
     return `${d.canvasWidth}x${d.canvasHeight}`;

@@ -1,3 +1,4 @@
+import { reloadPicture, toolButton, expectPanelOn } from '../../../fixtures/editor-v2/picture-lane';
 import {
   test, expect, openFresh, pollPicture, getFull, isPhone, press, addBadgeLayer, layerOf, screenMapper, zoomPercent, handles, rotateHandle, stageOf, openTab, stageInView,
 } from '../../../fixtures/editor-v2/picture-lane';
@@ -11,7 +12,7 @@ test.use({ serviceWorkers: 'block' });
 async function withBadge(page: import('@playwright/test').Page, api: import('../../../fixtures/editor-v2/api').EditorApi, pics: import('../../../fixtures/editor-v2/picture-lane').PictureSeed, tag: string) {
   const { pic, stage } = await openFresh(page, api, pics, tag);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await expect(stage).toBeVisible();
   return { pic, stage, badge };
 }
@@ -29,6 +30,7 @@ test('PE-050 PE-051 clicking a layer selects it (outline and handles), clicking 
   await stage.focus();
   await page.keyboard.press('Escape');
   await expect(handles(page)).toHaveCount(0);
+  if (phone) await openTab(page, 'Layers'); // Escape also closes the phone sheet
   await expect(rowOf(page, badge.label)).toHaveAttribute('aria-current', 'false');
 
   const at = map.toPage(badge.transform.x + 300, badge.transform.y + 150);
@@ -60,7 +62,7 @@ test('PE-052 PE-053 PE-054 PE-055 PE-056 PE-057 dragging a layer moves it, a cor
   const moved = await pollPicture(api, pics.projectId, pic.id, (p) => (layerOf(p, badge.id).transform.x > 50 ? layerOf(p, badge.id).transform : null), 'the move was saved');
   expect(moved!.x, 'x moved by about 200 screen px').toBeCloseTo(200 / map.zoom, -1);
   expect(moved!.y, 'y moved by about 100 screen px').toBeCloseTo(100 / map.zoom, -1);
-  await page.reload();
+  await reloadPicture(page);
   await rowOf(page, badge.label).click();
   expect((await stored(api, pics, pic.id, badge.id)).x, 'a reload keeps the position').toBeCloseTo(moved!.x, 0);
 
@@ -238,7 +240,7 @@ test('PE-041 the hand tool: dragging on the stage pans the view and never moves 
 test('PE-041 PE-042 PE-043 PE-044 PE-044a the tool column arms each tool; the brush never leaves you with nothing to paint on', async ({ page, api, pics }, testInfo) => {
   const phone = isPhone(testInfo.project.name);
   const { pic, badge } = await withBadge(page, api, pics, `pe040-${testInfo.project.name}`);
-  const tool = (name: string) => page.getByRole('button', { name, exact: true });
+  const tool = (name: string) => toolButton(page, name);
 
   await expect(tool('Select and move')).toHaveAttribute('aria-pressed', 'true');
   await press(tool('Move around the canvas'), phone);
@@ -247,10 +249,10 @@ test('PE-041 PE-042 PE-043 PE-044 PE-044a the tool column arms each tool; the br
 
   await press(tool('Text'), phone);
   await expect(tool('Text')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByRole('tab', { name: 'Text', exact: true })).toHaveAttribute('aria-selected', 'true');
+  await expectPanelOn(page, 'Text');
 
   await press(tool('Cut out a subject'), phone);
-  await expect(page.getByRole('tab', { name: 'AI', exact: true })).toHaveAttribute('aria-selected', 'true');
+  await expectPanelOn(page, 'AI');
   await expect(page.getByTestId('ai-tool-subject')).toBeVisible();
 
   // PE-044a: nothing is selected, and the brush is armed. It must pick a layer to paint on, and say so.

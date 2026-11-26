@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { box, createPicture, openPicture, picturesUrl } from '../../../fixtures/editor-v2/picture';
+import { box, createPicture, openPanel, openPicture, picturesUrl } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -21,11 +21,13 @@ test('m4-N3 T15 layer and zoom buttons are 44 px touch targets on a phone', asyn
   }, [200, 201]);
   const stage = await openPicture(page, seed.projectId, pic.id);
 
+  await openPanel(page, 'Layers');
   const list = page.getByRole('list', { name: 'Layers, front first' });
   await list.scrollIntoViewIfNeeded();
-  const buttons = list.getByRole('button', { name: /^(Hide|Show|Lock|Unlock|Delete) |^Move .+ (forward|back)$/ });
+  // The phone's layer rows keep the select and show/hide buttons and put lock, move and delete in the row's menu: measure every button in the list.
+  const buttons = list.getByRole('button');
   const n = await buttons.count();
-  expect(n, 'eye, lock, move and delete buttons for two layers').toBeGreaterThanOrEqual(8);
+  expect(n, 'select, show/hide and the row menu for two layers').toBeGreaterThanOrEqual(4);
   const small: string[] = [];
   for (let i = 0; i < n; i++) {
     const b = buttons.nth(i);

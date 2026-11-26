@@ -34,6 +34,7 @@ import { CANVAS_MAX, CANVAS_MIN, clampCanvasEdge } from '@/lib/editor/model';
 import type { CanvasPatch } from '@/lib/editor/history';
 import { EditorIcon } from '../ui';
 import { useFormat, useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export interface CanvasPanelProps {
   canvasWidth: number;
@@ -136,7 +137,7 @@ export function CanvasPanel({
 
   return (
     <Stack gap="lg">
-      <Modal
+      <Modal zIndex={EDITOR_MODAL_Z}
         opened={pending !== null}
         onClose={() => setPending(null)}
         title={pending ? t('changeTo', { size: formatSize(pending.size.width, pending.size.height) }) : ''}

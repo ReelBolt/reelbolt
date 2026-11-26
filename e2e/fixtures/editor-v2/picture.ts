@@ -41,9 +41,32 @@ export async function openPicture(page: Page, projectId: string, id: string): Pr
   return stage;
 }
 
+/**
+ * Opens one of the picture editor's tools: a tab on a desktop or tablet, the dock button that opens the bottom
+ * sheet on a phone (the phone has no tab strip: `picture-dock-<name>` buttons with aria-pressed).
+ */
+export const isNarrow = (page: Page): boolean => (page.viewportSize()?.width ?? 1280) < 600;
+
+export async function openPanel(page: Page, name: 'Layers' | 'Text' | 'AI' | 'Canvas'): Promise<void> {
+  const dock = page.getByTestId(`picture-dock-${name.toLowerCase()}`);
+  // The dock is drawn a beat after the stage on a phone: wait for it instead of falling back to a tab that never exists there.
+  if (isNarrow(page)) await dock.waitFor({ state: 'visible', timeout: 15_000 });
+  // A dialog left open (the AI tool picker after "Change tool") covers the dock on a phone: close it first.
+  if (isNarrow(page) && (await page.locator('.mantine-Modal-content').first().isVisible().catch(() => false))) {
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.mantine-Modal-content')).toHaveCount(0);
+  }
+  if (await dock.isVisible().catch(() => false)) {
+    if ((await dock.getAttribute('aria-pressed')) !== 'true') await dock.tap();
+    await expect(dock).toHaveAttribute('aria-pressed', 'true');
+    return;
+  }
+  await page.getByRole('tab', { name, exact: true }).click();
+}
+
 /** Opens the AI tab's tool picker and picks a tool by its title (e.g. "Cut out a subject"). */
 export async function pickAiTool(page: Page, title: string): Promise<void> {
-  await page.getByRole('tab', { name: 'AI' }).click();
+  await openPanel(page, 'AI');
   const change = page.getByRole('button', { name: 'Change tool' });
   if (await change.isVisible().catch(() => false)) await change.click();
   else await page.getByRole('button', { name: /Choose an AI tool/ }).click();
@@ -72,4 +95,44 @@ export function inside(inner: Box, outer: Box, slack = 0.5): boolean {
     inner.x + inner.width <= outer.x + outer.width + slack &&
     inner.y + inner.height <= outer.y + outer.height + slack
   );
+}
+
+/** The picture tool button in the Tools toolbar (the phone's dock also has buttons named Text and AI). */
+export const toolButton = (page: Page, name: string) => page.getByRole('toolbar', { name: 'Tools' }).getByRole('button', { name, exact: true });
+
+/** Expects one tool panel to be the open one: the selected tab, or the pressed dock button on a phone. */
+export async function expectPanelOn(page: Page, name: 'Layers' | 'Text' | 'AI' | 'Canvas'): Promise<void> {
+  if (isNarrow(page)) await expect(page.getByTestId(`picture-dock-${name.toLowerCase()}`)).toHaveAttribute('aria-pressed', 'true');
+  else await expect(page.getByRole('tab', { name, exact: true })).toHaveAttribute('aria-selected', 'true');
+}
+
+/**
+ * Where a tool's Run button and the sentences about it are: the tool's own panel on a desktop, the sheet's pinned footer on
+ * a phone (PinnedRun portals them out of the panel so Run stays on screen next to the brush and the prompt).
+ */
+export const runArea = (page: Page, panel: Locator): Locator => (isNarrow(page) ? page.getByTestId('picture-sheet') : panel);
+
+/** Phone: the Text sheet keeps weight, wrapping and the other detail fields behind its "More" button; opens it (a no-op elsewhere). */
+export async function textMore(page: Page): Promise<void> {
+  if (!isNarrow(page)) return;
+  const more = page.getByRole('button', { name: 'More', exact: true });
+  await more.waitFor({ state: 'visible', timeout: 10_000 });
+  if ((await more.getAttribute('aria-expanded')) !== 'true') await more.tap();
+}
+
+/**
+ * One layer action: the row's Move and Delete buttons on a desktop or tablet, the row's "..." menu on a phone
+ * (menu items `layer-menu-forward|back|delete-<id>`). `open` only opens the menu, for checks on a disabled item.
+ */
+export async function layerAction(page: Page, layer: { id: string; label: string }, action: 'forward' | 'back' | 'delete', open = false): Promise<Locator> {
+  if (isNarrow(page)) {
+    await page.getByTestId(`layer-menu-${layer.id}`).tap();
+    const item = page.getByTestId(action === 'delete' ? `layer-menu-delete-${layer.id}` : `layer-menu-${action}-${layer.id}`);
+    await expect(item).toBeVisible();
+    if (!open) await item.tap();
+    return item;
+  }
+  const button = page.getByRole('button', { name: action === 'delete' ? `Delete ${layer.label}` : `Move ${layer.label} ${action}` });
+  if (!open) await button.click();
+  return button;
 }

@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect, type EditorPage } from '../../../fixtures/editor-v2';
 import type { Timeline } from '../../../fixtures/editor-v2/api';
 import { knownFailure } from '../expected-failures';
@@ -35,6 +36,7 @@ function skipCutOnPhone(row: string, edit: string): void {
 
 test.describe('guards: edit, reload, edit survives', () => {
   test('GUARD-ADD-VIDEO-TRACK P8-SEQ-01 +V then an edit both survive reload', async ({ freshTimeline, openEditor }) => {
+    desktopLayoutOnly('adding a track is not on a phone');
     knownFailure('GUARD-ADD-VIDEO-TRACK');
     const ed = await openEditor(await freshTimeline('seeded'));
     const before = await ed.serverTimeline();
@@ -45,6 +47,7 @@ test.describe('guards: edit, reload, edit survives', () => {
   });
 
   test('GUARD-ADD-AUDIO-TRACK P8-SEQ-01 +A then an edit both survive reload', async ({ freshTimeline, openEditor }) => {
+    desktopLayoutOnly('adding a track is not on a phone');
     knownFailure('GUARD-ADD-AUDIO-TRACK');
     const ed = await openEditor(await freshTimeline('seeded'));
     const before = await ed.serverTimeline();
@@ -154,9 +157,15 @@ test.describe('guards: risky edits keep autosave alive', () => {
     const ed = await openEditor(id);
     const before = await ed.serverTimeline();
     expect(before.document.tracks[0].items.some((i) => i.type === 'transition'), 'fixture holds a transition').toBe(true);
-    await ed.selectClipAt(120); // clipB, the clip AFTER the transition (engine.md D7 recipe: [A][T][B][C], delete B)
-    // Keyboard Delete on every project: phones have no touch delete control yet (top-10 #8, W0.7).
-    await ed.page.keyboard.press('Delete');
+    // clipB, the clip AFTER the transition (engine.md D7 recipe: [A][T][B][C], delete B). The phone strip keeps the playhead
+    // centred and shows about 150 frames, so there the playhead is put on clipB first.
+    if (ed.isPhone) {
+      await ed.seek(120);
+      await ed.selectClipUnderPlayhead({ reselect: true });
+    } else await ed.selectClipAt(120);
+    // Keyboard Delete on desktop; the phone's action bar has its own Delete (a tap on the selected clip's bar).
+    if (ed.isPhone) await ed.clipAction('delete');
+    else await ed.page.keyboard.press('Delete');
     const gone = (tl: Timeline) => !tl.document.tracks[0].items.some((i) => i.name === 'clipB.mp4');
     await ed.expectServer(gone, 'the delete is stored');
     await reloadAndCheck(ed, gone, 'delete survives reload');

@@ -1,7 +1,7 @@
 import { test, expect } from '../../../fixtures/editor-v2/lane-b-test';
 import { type EditorPage } from '../../../fixtures/editor-v2';
 import type { Item, Timeline } from '../../../fixtures/editor-v2/api';
-import { extendAnalysis, TRANSCRIPT } from '../../../fixtures/editor-v2/rows';
+import { extendAnalysis, TRANSCRIPT, desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { addVideoTrack, mediaClipOnNewTrack, uuid } from '../../../fixtures/editor-v2/lane-b';
 
 /**
@@ -39,14 +39,17 @@ test('S11 on a timeline that was not made from an analysed run every analysis pa
   await expect(ed.testId('subtitles-generate'), 'no cues, so Generate is off').toBeDisabled();
   await expect(ed.page.getByTestId('analysis-open-workflows').first()).toHaveAttribute('href', workflows);
 
-  await ed.openPanelTab('tab-takes');
-  await expect(ed.page.getByText(/not made from|Seed the timeline from an analysed run/i).first()).toBeVisible();
-  await expect(ed.page.getByTestId('analysis-open-workflows').first()).toBeVisible();
+  // Takes and the Cut workspace are not on a phone (PHONE_HIDDEN_TOOL_TABS; docs/editor.md "Not on a phone").
+  if (!ed.isPhone) {
+    await ed.openPanelTab('tab-takes');
+    await expect(ed.page.getByText(/not made from|Seed the timeline from an analysed run/i).first()).toBeVisible();
+    await expect(ed.page.getByTestId('analysis-open-workflows').first()).toBeVisible();
 
-  await ed.workspace('cut');
-  await expect(ed.testId('cut-boring-no-analysis')).toContainText(/not made from an analysed run/i);
-  await expect(ed.testId('cut-boring-no-analysis').getByTestId('analysis-open-workflows')).toBeVisible();
-  await ed.workspace('edit');
+    await ed.workspace('cut');
+    await expect(ed.testId('cut-boring-no-analysis')).toContainText(/not made from an analysed run/i);
+    await expect(ed.testId('cut-boring-no-analysis').getByTestId('analysis-open-workflows')).toBeVisible();
+    await ed.workspace('edit');
+  }
 
   await ed.openRemoveSilence();
   const dialog = ed.page.getByRole('dialog');
@@ -159,6 +162,7 @@ test('TL-180 the Speech-from track decides which words are captioned', async ({ 
 });
 
 test('TL-195 TL-196 Takes: choose the track, jump to a clip', async ({ page, freshTimeline, openEditor, api, seed }) => {
+  desktopLayoutOnly('the Takes tab is hidden on a phone (PHONE_HIDDEN_TOOL_TABS in phone/captions-logic.ts; docs/editor.md "Not on a phone": takes)');
   await extendAnalysis(page, {
     shots: [
       { id: 's0', startSec: 0, endSec: 4.5, visual: { motionMean: 0.02, motionClass: 'Subtle', duplicateGroupId: 'k0', isBestTake: false } },

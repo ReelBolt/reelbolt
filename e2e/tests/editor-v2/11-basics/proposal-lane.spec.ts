@@ -38,7 +38,7 @@ test('UI2-11 a partial proposal accept then the remaining group reuses the new l
     ],
   };
   const ed = await openEditor(id);
-  await ed.page.route(/\/edit-timelines\/[^/]+\/proposals$/, (route) =>
+  await ed.page.route(/\/edit-timelines\/[^/]+\/proposals(\?.*)?$/, (route) =>
     route.request().method() === 'POST' ? route.fulfill({ status: 200, contentType: 'application/json', json: proposal }) : route.continue(),
   );
   await ed.openPanelTab('tab-assist');

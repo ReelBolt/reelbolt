@@ -10,9 +10,8 @@ import { runOn } from '../../../fixtures/editor-v2/rows';
  */
 type Clip = { assetRef?: { kind: string; projectFileId?: string | null } };
 const json = (body: unknown, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) });
-const CLEAN = '00000000-0000-4000-8000-0000000000c1';
 
-async function stubCleanup(page: import('@playwright/test').Page, opts: { credits?: number; startStatus?: number } = {}) {
+async function stubCleanup(page: import('@playwright/test').Page, cleanId: string, opts: { credits?: number; startStatus?: number } = {}) {
   const starts: unknown[] = [];
   await page.route(/\/media\/[^/]+\/cleanup\/estimate$/, (route) => route.fulfill(json({ billingEnabled: true, hosted: (opts.credits ?? 0) > 0, credits: opts.credits ?? 0, balanceCredits: 50, affordable: true, cached: false })));
   await page.route(/\/media\/[^/]+\/cleanup$/, (route) => {
@@ -20,16 +19,18 @@ async function stubCleanup(page: import('@playwright/test').Page, opts: { credit
     if (opts.startStatus === 402) return route.fulfill(json({ code: 'INSUFFICIENT_CREDITS', message: 'Not enough credits', missing: 2 }, 402));
     return route.fulfill(json({ executionId: 'x1', target: 'Hum', hosted: false, state: 'queued', credits: null }, 202));
   });
-  await page.route(/\/media\/[^/]+\/cleanup\/x1$/, (route) => route.fulfill(json({ executionId: 'x1', state: 'ready', target: 'Hum', applied: true, outputFileId: CLEAN })));
+  await page.route(/\/media\/[^/]+\/cleanup\/x1$/, (route) => route.fulfill(json({ executionId: 'x1', state: 'ready', target: 'Hum', applied: true, outputFileId: cleanId })));
   return starts;
 }
 
 test('audio cleanup: a free option shows Free, plays before and after, and Apply switches the clip to the cleaned file', async ({ page, freshTimeline, openEditor, api, seed }) => {
   runOn('desktop');
-  const starts = await stubCleanup(page);
+  // The cleaned file must be a real file of this project: the server refuses an asset reference to one that does not exist.
+  const CLEAN = seed.files.clipB;
+  const starts = await stubCleanup(page, CLEAN);
   const ed = await openEditor(await audioTimeline(freshTimeline, api, seed, [{ name: 'Voice', clips: [{ name: 'voice-1', recordIn: 0, recordOut: 60 }] }]));
   await ed.workspace('audio');
-  await ed.selectClipAt(10, 0);
+  await ed.selectClipAt(10, 1);
   await ed.tap(ed.testId('cleanup-choice-hum'));
   await expect(ed.testId('cleanup-estimate')).toContainText(/free/i);
   await ed.tap(ed.testId('cleanup-run'));
@@ -44,10 +45,10 @@ test('audio cleanup: a free option shows Free, plays before and after, and Apply
 
 test('audio cleanup: the first AI run asks before sending anything', async ({ page, freshTimeline, openEditor, api, seed }) => {
   runOn('desktop');
-  const starts = await stubCleanup(page, { credits: 3 });
+  const starts = await stubCleanup(page, seed.files.clipB, { credits: 3 });
   const ed = await openEditor(await audioTimeline(freshTimeline, api, seed, [{ name: 'Voice', clips: [{ name: 'voice-1', recordIn: 0, recordOut: 60 }] }]));
   await ed.workspace('audio');
-  await ed.selectClipAt(10, 0);
+  await ed.selectClipAt(10, 1);
   await ed.tap(ed.testId('cleanup-choice-studio'));
   await expect(ed.testId('cleanup-estimate')).toContainText(/about 3 credits/i);
   await ed.tap(ed.testId('cleanup-run'));
@@ -60,10 +61,10 @@ test('audio cleanup: the first AI run asks before sending anything', async ({ pa
 
 test('audio cleanup: a 402 shows the add-credits refusal', async ({ page, freshTimeline, openEditor, api, seed }) => {
   runOn('desktop');
-  await stubCleanup(page, { startStatus: 402 });
+  await stubCleanup(page, seed.files.clipB, { startStatus: 402 });
   const ed = await openEditor(await audioTimeline(freshTimeline, api, seed, [{ name: 'Voice', clips: [{ name: 'voice-1', recordIn: 0, recordOut: 60 }] }]));
   await ed.workspace('audio');
-  await ed.selectClipAt(10, 0);
+  await ed.selectClipAt(10, 1);
   await ed.tap(ed.testId('cleanup-choice-hum'));
   await ed.tap(ed.testId('cleanup-run'));
   await expect(ed.testId('cleanup-add-credits')).toBeVisible();

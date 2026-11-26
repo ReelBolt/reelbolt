@@ -108,7 +108,7 @@ export async function apiFetch<T>(url: string, options?: RequestInit): Promise<T
     } catch {}
     // A 401 on an authenticated call is a session expiry: one central redirect, and a sentence
     // instead of the server's raw "Unauthorized" for whichever toast or banner shows the error.
-    handleUnauthorized(res.status, url);
+    handleUnauthorized(res.status, url, options?.method);
     message = unauthorizedMessage(res.status, url) ?? message;
     const apiError = new ApiError(message, res.status, errors, body);
     const retryAfter = Number(res.headers?.get('Retry-After'));

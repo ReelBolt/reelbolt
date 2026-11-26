@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import { execFileSync } from 'child_process';
-import * as fs from 'fs';
 import * as path from 'path';
 import { EditorApi, mediaClip } from './api';
 import { MEDIA_DIR, READONLY_PROJECT } from './env';
@@ -36,30 +35,14 @@ const MEDIA: Array<[keyof SeedFiles, string, string]> = [
   ['tone', 'tone.wav', 'audio/wav'],
 ];
 
-/**
- * Generates the five media files (ffmpeg, deterministic generators) into MEDIA_DIR once.
- *
- * Every worker calls this, and on a fresh machine (CI) two workers used to run the generator into the same
- * directory at the same time: one saw a file the other was still writing (or both wrote it), uploaded a
- * damaged mp4, and the engine's ffmpeg then failed on it ("Prediction is not allowed in AAC-LC", decode error
- * rate 1), which failed the seed of nearly every test of that worker. So the generator now writes into a
- * private directory and each finished file is moved into place with an atomic rename; a file that is already
- * there is never touched. The global setup calls this once before any worker starts.
- */
+/** Generates the five media files (ffmpeg, deterministic generators) into MEDIA_DIR once. */
+let mediaChecked = false;
 export function ensureMedia(): string {
-  const script = path.join(__dirname, 'media', 'make-media.sh');
-  if (!MEDIA.every(([, f]) => fs.existsSync(path.join(MEDIA_DIR, f)))) {
-    fs.mkdirSync(MEDIA_DIR, { recursive: true });
-    const staging = fs.mkdtempSync(`${MEDIA_DIR}.tmp-`);
-    try {
-      execFileSync('bash', [script, staging], { stdio: 'pipe' });
-      for (const [, f] of MEDIA) {
-        const target = path.join(MEDIA_DIR, f);
-        if (!fs.existsSync(target)) fs.renameSync(path.join(staging, f), target);
-      }
-    } finally {
-      fs.rmSync(staging, { recursive: true, force: true });
-    }
+  // The script locks, decode-checks and writes atomically, so it is safe to call from every worker; it is cheap when
+  // everything is already valid. Once per process is enough.
+  if (!mediaChecked) {
+    execFileSync('bash', [path.join(__dirname, 'media', 'make-media.sh'), MEDIA_DIR], { stdio: 'pipe' });
+    mediaChecked = true;
   }
   return MEDIA_DIR;
 }
@@ -144,8 +127,10 @@ async function requestProxies(api: EditorApi, projectId: string, fileIds: string
 }
 
 async function waitForProxies(api: EditorApi, projectId: string, fileIds: string[], timeoutMs = 180_000): Promise<void> {
-  const deadline = Date.now() + timeoutMs;
   for (const id of fileIds) {
+    // One budget per file: the proxies are encoded one after the other by an engine that shares four vCPUs with two workers
+    // and their browsers on a hosted runner, so a budget shared by every file ran out on the last one under load.
+    const deadline = Date.now() + timeoutMs;
     for (;;) {
       const body = await api.json<unknown>('GET', `/api/v1/projects/${projectId}/media/file:${id}/derivatives`);
       const rows = (Array.isArray(body) ? body : ((body as { derivatives?: unknown[]; items?: unknown[] }).derivatives ?? (body as { items?: unknown[] }).items ?? [])) as Array<{ kind: string }>;

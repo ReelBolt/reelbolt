@@ -21,6 +21,17 @@ test('R08.3 typing a dB value into the fader stores gainDb; reset goes back to 0
   const ed = await openEditor(await audioTimeline(freshTimeline, api, seed, [VOICE]));
   const id = await stripId(ed, 'Voice');
   await ed.workspace('audio');
+  if (ed.isPhone) {
+    // The phone's Audio sheet has a volume slider and a "Back to 0 dB" button, not a typed dB field (docs/editor.md "Phone Audio sheet").
+    const thumb = ed.testId(`phone-audio-gain-${id}`).getByRole('slider');
+    await thumb.scrollIntoViewIfNeeded();
+    await thumb.focus();
+    await thumb.press('Home');
+    await ed.expectServer((tl) => audioTrack(tl, 'Voice')?.gainDb?.value === -60, 'the slider at its bottom stores -60 dB');
+    await ed.tap(ed.testId(`phone-audio-gain-reset-${id}`));
+    await ed.expectServer((tl) => audioTrack(tl, 'Voice')?.gainDb?.value === 0, 'Back to 0 dB stores 0 dB');
+    return;
+  }
   const field = ed.testId(`mixer-fader-${id}-db`);
   await field.scrollIntoViewIfNeeded();
   await field.click();

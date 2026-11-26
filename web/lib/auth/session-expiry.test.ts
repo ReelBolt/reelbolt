@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   handleUnauthorized,
   isAuthEndpoint,
+  isInPlaceSignInCall,
   resetSessionExpiryForTests,
   sessionExpiredLoginUrl,
   unauthorizedMessage,
@@ -82,6 +83,17 @@ describe('handleUnauthorized', () => {
     handleUnauthorized(401, '/api/v1/marketplace/recipes/x/me');
     expect(assign).not.toHaveBeenCalled();
     expect(unauthorizedMessage(401, '/api/v1/public/marketplace/facets')).toBeNull();
+  });
+  it('leaves the editor save to sign in in place (R02.2) but not any other call on a timeline', () => {
+    setLocation('/app/projects/p1/editor/t1');
+    const save = '/api/v1/projects/p1/edit-timelines/t1';
+    handleUnauthorized(401, save, 'PATCH');
+    expect(assign).not.toHaveBeenCalled();
+    expect(isInPlaceSignInCall(save, 'patch')).toBe(true);
+    expect(isInPlaceSignInCall(save, 'GET')).toBe(false);
+    expect(isInPlaceSignInCall(`${save}/proposals`, 'PATCH')).toBe(false);
+    handleUnauthorized(401, save, 'GET');
+    expect(assign).toHaveBeenCalledTimes(1);
   });
   it('still redirects a 401 from the signed-in /community/mine page', () => {
     setLocation('/app/community/mine');

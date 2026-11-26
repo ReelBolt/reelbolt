@@ -9,6 +9,7 @@ import { CARD_DEFAULT_SECONDS, TITLE_DEFAULT_SECONDS, TITLE_TEMPLATE_CHOICES, ty
 import { ColorSwatchPicker } from './ColorSwatchPicker';
 import { TitlePositionPad } from './TitlePositionPad';
 import { useT, type T } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 const AUTO_TRACK = 'auto';
 
@@ -61,7 +62,7 @@ export function AddTitleDialog({ opened, doc, onClose, onSubmit }: DialogBase) {
   const clean = sanitizeTitleText(text);
   const ready = clean.trim().length > 0 && seconds > 0;
   return (
-    <Modal opened={opened} onClose={onClose} title={t('addTitleTitle')} size="lg" centered>
+    <Modal zIndex={EDITOR_MODAL_Z} opened={opened} onClose={onClose} title={t('addTitleTitle')} size="lg" centered>
       <Stack gap="sm" data-testid="add-title-dialog">
         <TitlePreview text={clean} template={template} />
         <Radio.Group label={t('style')} value={template} onChange={(v) => setTemplate(v as TitleTemplate)}>
@@ -105,7 +106,7 @@ export function AddColorCardDialog({ opened, doc, onClose, onSubmit }: DialogBas
   const [seconds, setSeconds] = useState<number>(CARD_DEFAULT_SECONDS);
   const [track, setTrack] = useState<string>(AUTO_TRACK);
   return (
-    <Modal opened={opened} onClose={onClose} title={t('addCardTitle')} size="md" centered>
+    <Modal zIndex={EDITOR_MODAL_Z} opened={opened} onClose={onClose} title={t('addCardTitle')} size="md" centered>
       <Stack gap="sm" data-testid="add-card-dialog">
         <Box style={{ ...previewBox, background: color }} data-testid="card-preview" role="img" aria-label={t('cardPreview', { color })} />
         <ColorSwatchPicker value={color} onChange={setColor} testIdPrefix="card-swatch" />

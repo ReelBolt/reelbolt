@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect } from '../../../fixtures/editor-v2/lane-b-test';
 import { SEEDED_LAYOUT, type EditorPage } from '../../../fixtures/editor-v2';
 import type { Timeline } from '../../../fixtures/editor-v2/api';
@@ -27,6 +28,7 @@ async function pickSource(ed: EditorPage, fileId: string): Promise<void> {
 }
 
 test('TL-320 TL-322 Insert at playhead puts the picture and its sound at the edit point, and ONE undo removes both', async ({ freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   const ed = await openEditor(await freshTimeline('seeded'));
   await ed.seek(160); // nearest edit point is 150 (the clipA|clipB cut)
   const before = await ed.serverTimeline();
@@ -51,6 +53,7 @@ test('TL-320 TL-322 Insert at playhead puts the picture and its sound at the edi
 });
 
 test('TL-321 Add to end appends the source at the end of the track with its sound', async ({ freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   const ed = await openEditor(await freshTimeline('seeded'));
   await pickSource(ed, seed.files.clipB);
   await ed.tap(ed.testId('media-append'));
@@ -62,6 +65,7 @@ test('TL-321 Add to end appends the source at the end of the track with its soun
 });
 
 test('TL-323 Create subclip adds the marked range to the end of the timeline', async ({ freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   // The source viewer's marks need the <video> to seek; Playwright's Linux WebKit never advances a video (the same
   // limit as P3-VIEW-01@iphone14webkit in expected-failures.ts), so the marks cannot be taken there.
   test.skip(test.info().project.name === 'iphone14webkit', 'Playwright WebKit cannot seek a <video> (audit D8)');
@@ -92,6 +96,7 @@ test('TL-323 Create subclip adds the marked range to the end of the timeline', a
 });
 
 test('S9 TL-330 TL-332 Cut > Insert brings the sound too (same as Media > Insert), in one undo step', async ({ freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   const ed = await openEditor(await freshTimeline('seeded'));
   await ed.seek(160);
   const before = await ed.serverTimeline();
@@ -113,6 +118,7 @@ test('S9 TL-330 TL-332 Cut > Insert brings the sound too (same as Media > Insert
 });
 
 test('TL-331 the Cut overview strip: a click moves the playhead, a drag edits nothing', async ({ freshTimeline, openEditor }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   const ed = await openEditor(await freshTimeline('seeded'));
   await ed.workspace('cut');
   const strip = ed.testId('cut-overview');
@@ -133,6 +139,7 @@ test('TL-331 the Cut overview strip: a click moves the playhead, a drag edits no
 });
 
 test('TL-333 TL-334 Fast review plays each clip at a speed that follows its length', async ({ freshTimeline, openEditor, api, seed }) => {
+  desktopLayoutOnly('the Cut workspace and the source viewer are not on a phone (insert is the Add media tile menu, 30-phone/media)');
   const id = await freshTimeline('seeded');
   // One short (2 s) and one long (5 s, the whole source) clip on V1, so the review speeds differ.
   await api.putDocument(seed.projectId, id, (doc) => {
