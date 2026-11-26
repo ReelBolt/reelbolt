@@ -50,35 +50,22 @@ test.describe('guards: edits survive leaving the page', () => {
   test('GUARD-NAV-300MS P3-SYNC-10 edit then "All timelines" within 300 ms keeps the edit', async ({ freshTimeline, openEditor }) => {
     knownFailure('GUARD-NAV-300MS');
     const ed = await openEditor(await freshTimeline('seeded'));
-    // Only an attempt whose edit was saved BY LEAVING decides the guard: the editor unmounted before the
-    // 500 ms autosave debounce fired, so the first PATCH left earlier than the debounce could send one
-    // (under 450 ms after the edit). On desktop and Pixel 7 that is the 300 ms unmount the row names. Linux
-    // WebKit took 385-3544 ms to switch routes on the shared stack (T-073): an attempt it unmounts in time
-    // proves the same flush; one the debounce saved first is retried (fresh load, a new cut point) and must
-    // still have stored the edit, but never decides the guard.
-    const tries: string[] = [];
-    for (const frame of [75, 45, 105, 135]) {
-      if (tries.length) await ed.goto();
-      const before = await ed.serverTimeline();
-      await ed.seek(frame);
-      await bladeThenLeave(ed, 'back');
-      await expect(ed.page).not.toHaveURL(new RegExp(`/timeline/${ed.timelineId}`));
-      await expect.poll(() => ed.page.evaluate(() => (window as unknown as { __e2eLeftMs?: number }).__e2eLeftMs ?? -1)).toBeGreaterThanOrEqual(0);
-      const { left, patch } = await ed.page.evaluate(() => {
-        const w = window as unknown as { __e2eLeftMs: number; __e2ePatchMs?: number };
-        return { left: w.__e2eLeftMs, patch: w.__e2ePatchMs ?? null };
-      });
-      tries.push(`unmounted ${Math.round(left)} ms, first PATCH ${patch === null ? 'none' : `${Math.round(patch)} ms`}`);
-      const stored = (tl: Timeline) => itemCount(tl) === itemCount(before) + 1;
-      if (patch !== null && patch >= 450) {
-        // The autosave debounce sent it: the edit must still be stored, but this attempt does not prove the flush.
-        await ed.expectServer(stored, `the edit made before leaving (${Math.round(left)} ms) is stored`, 10_000);
-        continue;
-      }
-      await ed.expectServer(stored, `the edit made ${Math.round(left)} ms before leaving is stored`, 10_000);
-      return;
-    }
-    throw new Error(`the editor never left before the autosave debounce saved the edit (${tries.join('; ')}): the guard could not run`);
+    // The contract (P3-SYNC-10): leaving within 300 ms of an edit must START the flush within 300 ms of the navigation
+    // action, i.e. the first PATCH is issued less than 300 ms after the click (the 500 ms autosave debounce alone could never
+    // do that: a PATCH under 450 ms can only come from the leave path). Measured on the page's own fetch from the click.
+    // It is NOT "the editor unmounted in time": that depends on how long the next route's payload takes, which is runner
+    // speed, not the contract. The edit must also be stored.
+    const before = await ed.serverTimeline();
+    await ed.seek(75);
+    await bladeThenLeave(ed, 'back');
+    await expect(ed.page).not.toHaveURL(new RegExp(`/timeline/${ed.timelineId}`));
+    await expect.poll(() => ed.page.evaluate(() => (window as unknown as { __e2ePatchMs?: number }).__e2ePatchMs ?? -1), { timeout: 10_000 }).toBeGreaterThanOrEqual(0);
+    const { left, patch } = await ed.page.evaluate(() => {
+      const w = window as unknown as { __e2eLeftMs?: number; __e2ePatchMs: number };
+      return { left: w.__e2eLeftMs ?? null, patch: w.__e2ePatchMs };
+    });
+    await ed.expectServer((tl) => itemCount(tl) === itemCount(before) + 1, 'the edit made before leaving is stored', 10_000);
+    expect(patch, `the flush started ${Math.round(patch)} ms after the navigation click (editor unmounted at ${left === null ? 'n/a' : `${Math.round(left)} ms`}; a PATCH near 500 ms is the autosave debounce, not the leave flush)`).toBeLessThan(300);
   });
 
   test('GUARD-RELOAD-300MS P3-SYNC-10 edit then reload within 300 ms keeps the edit', async ({ freshTimeline, openEditor }) => {

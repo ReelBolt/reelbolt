@@ -226,13 +226,20 @@ export class EditorPage {
 
   /** The "Running your workflow ... is done" toast of the seed's own workflow lands at a random moment and covers the header on a phone: close it when it is up. */
   async closeActivityToasts(): Promise<void> {
-    const toast = this.page.locator('[role="alert"][id^="activity-run:"]').first();
-    if (!(await toast.isVisible().catch(() => false))) return;
-    await toast.getByRole('button').first().click({ timeout: 2_000 }).catch(() => undefined);
+    // Every worker's finished render raises one toast in the shared activity feed, so several can be stacked over the controls: close them all.
+    const toasts = this.page.locator('[role="alert"][id^="activity-run:"]');
+    for (let i = 0; i < 8; i += 1) {
+      const before = await toasts.count();
+      if (before === 0) return;
+      await toasts.first().getByRole('button').first().click({ timeout: 2_000 }).catch(() => undefined);
+      await expect(toasts).toHaveCount(before - 1, { timeout: 1_000 }).catch(() => undefined);
+    }
   }
 
   async tap(locator: Locator): Promise<void> {
-    if (this.isPhone) await this.closeActivityToasts();
+    // Clicking a toast is an outside click: it would close an open dropdown and take the option about to be tapped with it.
+    // So toasts are closed only while no list of options is open.
+    if (this.isPhone && (await this.page.getByRole('listbox').count()) === 0) await this.closeActivityToasts();
     await locator.scrollIntoViewIfNeeded();
     if (this.isTouch) await locator.tap();
     else await locator.click();

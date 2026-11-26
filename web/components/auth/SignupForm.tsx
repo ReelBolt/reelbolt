@@ -102,7 +102,6 @@ export function SignupForm({
 
   const form = useForm({
     initialValues: {
-      displayName: '',
       email: initialEmail,
       password: '',
       acceptTerms: false,
@@ -135,7 +134,6 @@ export function SignupForm({
       const res = await signup({
         email: values.email.trim(),
         password: values.password,
-        displayName: values.displayName.trim(),
         acceptTerms: values.acceptTerms,
         termsVersion: versions.termsVersion,
         privacyVersion: versions.privacyVersion,
@@ -171,7 +169,6 @@ export function SignupForm({
       setSentTo(values.email.trim());
       setResendState('idle');
       form.setValues({
-        displayName: '',
         email: '',
         password: '',
         acceptTerms: false,
@@ -297,12 +294,6 @@ export function SignupForm({
             {notice}
           </Alert>
         )}
-        <TextInput
-          label={t('name')}
-          placeholder={t('namePlaceholder')}
-          autoComplete="name"
-          {...form.getInputProps('displayName')}
-        />
         <TextInput
            
           label={tLogin('email')}

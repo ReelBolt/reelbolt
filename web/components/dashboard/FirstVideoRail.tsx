@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { Anchor, Button, Group, Text, VisuallyHidden } from '@mantine/core';
 import { IconCheck, IconPlayerPlay, IconUpload } from '@tabler/icons-react';
+import { DescribeSceneLink, FirstFilmButton } from '@/components/onboarding/FirstFilmCard';
 import { fileKindsOf } from '@/components/workflow-apps/gallery-model';
 import { getGitHubAccount } from '@/lib/api/github';
 import type { Persona } from '@/lib/attribution/persona';
@@ -35,6 +36,8 @@ export interface FirstVideoRailProps {
   welcomeEnabled: boolean;
   /** Opens the plain "New project" form: the start when the welcome flow is switched off. */
   onCreate: () => void;
+  /** Show the sample-film button; the page turns it off while the dashboard's own first-film card is offered. */
+  showSampleFilm?: boolean;
 }
 
 /**
@@ -46,7 +49,7 @@ export interface FirstVideoRailProps {
  * The middle step has no signal of its own (the brief is typed on the run page and sent with the
  * run), so it is ticked together with the run, never before.
  */
-export function FirstVideoRail({ persona, material, project, addDone, runDone, welcomeEnabled, onCreate }: FirstVideoRailProps) {
+export function FirstVideoRail({ persona, material, project, addDone, runDone, welcomeEnabled, onCreate, showSampleFilm = true }: FirstVideoRailProps) {
   const t = useT('dashboard.firstVideo');
   const { data: workflows } = useWorkflows(project?.id ?? '');
 
@@ -157,6 +160,12 @@ export function FirstVideoRail({ persona, material, project, addDone, runDone, w
             <Anchor component={Link} href={shotListHref(project.id)} size="sm" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>
               {t('shotList')}
             </Anchor>
+          )}
+          {project && material === 'idea' && !added && (
+            <>
+              {showSampleFilm && <FirstFilmButton projectId={project.id} variant="light" />}
+              <DescribeSceneLink projectId={project.id} />
+            </>
           )}
         </Group>
       </div>

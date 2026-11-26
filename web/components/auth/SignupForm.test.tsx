@@ -55,8 +55,7 @@ const renderForm = (props: Partial<React.ComponentProps<typeof SignupForm>> = {}
   );
 
 // The whole field set a visitor types into: there is no "type it again" box.
-const fill = (over: Partial<Record<'name' | 'email' | 'password', string>> = {}) => {
-  fireEvent.change(screen.getByLabelText('Name'), { target: { value: over.name ?? 'Ada' } });
+const fill = (over: Partial<Record<'email' | 'password', string>> = {}) => {
   fireEvent.change(screen.getByLabelText('Email'), { target: { value: over.email ?? 'ada@example.com' } });
   fireEvent.change(screen.getByLabelText('Password'), { target: { value: over.password ?? 'correct horse battery' } });
 };
@@ -102,7 +101,6 @@ describe('SignupForm', () => {
     expect(signup.mock.calls[0][0]).toEqual({
       email: 'ada@example.com',
       password: 'correct horse battery',
-      displayName: 'Ada',
       acceptTerms: true,
       termsVersion: '2026-10',
       privacyVersion: '2026-10',
@@ -392,12 +390,13 @@ describe('SignupForm password field', () => {
     M.wording = { data: WORDING, mutate: vi.fn() };
   });
 
-  it('asks for the password once: name, email, one password, and nothing to retype', () => {
+  it('asks for the password once: email, one password, and nothing to retype', () => {
     renderForm();
     expect(screen.queryByLabelText('Confirm password')).toBeNull();
+    expect(screen.queryByLabelText('Name')).toBeNull();
     expect(screen.queryByLabelText(/repeat|again|confirm/i)).toBeNull();
     const inputs = Array.from(document.querySelectorAll('input:not([type="checkbox"])')) as HTMLInputElement[];
-    expect(inputs.map((i) => i.getAttribute('autocomplete'))).toEqual(['name', 'email', 'new-password']);
+    expect(inputs.map((i) => i.getAttribute('autocomplete'))).toEqual(['email', 'new-password']);
   });
 
   it('lets the visitor check what they typed with a keyboard-reachable show/hide toggle', () => {
@@ -454,7 +453,6 @@ describe('SignupForm carries the link through to the request and the sign-in lin
     expect(signup.mock.calls[0][0]).toEqual({
       email: 'ada@example.com',
       password: 'correct horse battery',
-      displayName: 'Ada',
       acceptTerms: true,
       termsVersion: '2026-10',
       privacyVersion: '2026-10',

@@ -6,6 +6,8 @@ import { SWRConfig } from 'swr';
 import type { Project } from '@/lib/types/project';
 import { FirstVideoRail, type FirstVideoRailProps } from './FirstVideoRail';
 
+vi.mock('@/lib/hooks/use-billing', () => ({ useBillingSummary: () => ({ data: { entitlements: { maxOutputHeight: 2160, unlocks: [] } } }) }));
+vi.mock('next/navigation', () => ({ useRouter: () => ({ push: vi.fn() }) }));
 vi.mock('next/link', () => ({
   default: ({ children, href, ...rest }: { children: React.ReactNode; href: string }) => <a href={href} {...rest}>{children}</a>,
 }));
@@ -223,5 +225,20 @@ describe('FirstVideoRail', () => {
     expect(text).toContain('Minutes for a small job, sometimes half an hour for a big one.');
     expect(text).not.toMatch(/\d+\s*(x|%|hours?|credits?)\b/i);
     expect(text).not.toMatch(/scored|faster|saves?/i);
+  });
+});
+
+describe('FirstVideoRail no-footage actions', () => {
+  it('offers a sample film and a describe-a-scene action for the idea path, not for footage', () => {
+    mount({ material: 'idea' });
+    expect(screen.getByRole('button', { name: 'Make your first film' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Describe a scene instead' })).toBeTruthy();
+    cleanup();
+    mount({ material: 'idea', showSampleFilm: false });
+    expect(screen.queryByRole('button', { name: 'Make your first film' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Describe a scene instead' })).toBeTruthy();
+    cleanup();
+    mount({ material: 'footage' });
+    expect(screen.queryByRole('button', { name: 'Describe a scene instead' })).toBeNull();
   });
 });

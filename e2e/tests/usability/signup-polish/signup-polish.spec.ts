@@ -23,7 +23,6 @@ async function stubSignup(page: Page, status: number, headers: Record<string, st
 
 async function fillAndSubmit(page: Page) {
   await page.goto('/signup');
-  await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('ada@example.com');
   await page.getByLabel('Password', { exact: true }).fill('correct horse battery');
   await page.getByRole('checkbox', { name: /accept the/i }).check();

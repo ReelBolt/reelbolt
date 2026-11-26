@@ -1,5 +1,5 @@
 import { test, expect } from '../../../fixtures/editor-v2';
-import { renderAndWait, runOn, startRender } from '../../../fixtures/editor-v2/rows';
+import { renderAndWait, runOn, startRender, waitRender } from '../../../fixtures/editor-v2/rows';
 
 /**
  * Wave 3 / T-006: phone Deliver and share (RM.9, R06.8; x1 acceptance criterion 8). The header Export opens a
@@ -120,6 +120,7 @@ test.describe('RM.9 phone Deliver', () => {
       // The queue rows carry the render's id and say it in the activity words (Waiting for a free slot, Running, Done), so ask for the row itself.
       return ed.testId(`render-row-${started.executionId}`).count();
     }, { message: `the queue shows render ${started.executionId} after the foreground refetch`, timeout: 30_000 }).toBe(1);
+    await waitRender(api, seed.projectId, id, started.executionId); // never leave a Running render behind: it holds the org's execution slot for the next spec
   });
 
   test('RM.9 a render that finishes while Export is closed puts a Ready badge on Export', async ({ freshTimeline, openEditor, api, seed }) => {

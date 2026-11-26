@@ -20,7 +20,7 @@ async function openSubtitles(ed: EditorPage): Promise<void> {
 
 async function chooseFile(ed: EditorPage, name: string, text: string): Promise<void> {
   await ed.tap(ed.page.getByTestId('subtitles-import'));
-  await expect(ed.page.getByRole('dialog')).toBeVisible();
+  await expect(ed.page.getByRole('dialog', { name: 'Import captions' })).toBeVisible();
   await ed.page.locator('input[type="file"]').last().setInputFiles({ name, mimeType: 'text/plain', buffer: Buffer.from(text) });
 }
 

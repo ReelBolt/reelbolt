@@ -1226,7 +1226,8 @@ jobs:
             echo "== free -m"; free -m
             echo "== docker compose ps"; scripts/editor-v2-stack.sh status
           } 2>&1 | tee /tmp/editor-remediation/diagnostics/host.txt
-          EDITOR_STACK_LOG_TAIL=400 scripts/editor-v2-stack.sh logs > /tmp/editor-remediation/diagnostics/services.log 2>&1
+          # The WHOLE run's logs (not a tail): a render stuck for minutes sits far before the end of a 25-minute shard.
+          EDITOR_STACK_LOG_TAIL=all scripts/editor-v2-stack.sh logs > /tmp/editor-remediation/diagnostics/services.log 2>&1
           echo "== service log tails (last 150 lines)"
           tail -n 150 /tmp/editor-remediation/diagnostics/services.log
 

@@ -137,11 +137,20 @@ export async function startRender(api: EditorApi, projectId: string, timelineId:
 /** Polls the render queue until the execution finishes (Passed, Failed or Cancelled). */
 export async function waitRender(api: EditorApi, projectId: string, timelineId: string, executionId: string, timeoutMs = 240_000): Promise<RenderSummary> {
   let row: RenderSummary | undefined;
-  await expect.poll(async () => {
-    const list = await api.json<RenderSummary[]>('GET', `${api.timelinesUrl(projectId, timelineId)}/renders`);
-    row = list.find((r) => r.executionId === executionId);
-    return row && ['Passed', 'Failed', 'Cancelled'].includes(row.status) ? 'finished' : row?.status ?? 'missing';
-  }, { message: `render ${executionId} finishes`, timeout: timeoutMs, intervals: [2000] }).toBe('finished');
+  let list: RenderSummary[] = [];
+  try {
+    await expect.poll(async () => {
+      list = await api.json<RenderSummary[]>('GET', `${api.timelinesUrl(projectId, timelineId)}/renders`);
+      row = list.find((r) => r.executionId === executionId);
+      return row && ['Passed', 'Failed', 'Cancelled'].includes(row.status) ? 'finished' : row?.status ?? 'missing';
+    }, { message: `render ${executionId} finishes`, timeout: timeoutMs, intervals: [2000] }).toBe('finished');
+  } catch (e) {
+    // A render that never leaves Running is an engine-side wait (admission, the ffmpeg gate), invisible from the status
+    // alone: say what this timeline's renders and the execution looked like when the wait gave up (CI run 45796910736).
+    const detail = await api.json<{ status?: string; startedAt?: string; createdAt?: string; stepResults?: Array<{ status: string; workflowStepId: string }> }>('GET', `/api/v1/projects/${projectId}/executions/${executionId}`).catch((err: unknown) => ({ error: String(err) }));
+    const note = `renders of this timeline: ${JSON.stringify(list.map((r) => ({ id: r.executionId, status: r.status, preset: r.preset })))}; execution ${executionId}: ${JSON.stringify(detail).slice(0, 800)}; waited ${timeoutMs} ms, gave up at ${new Date().toISOString()}`;
+    throw new Error(`${(e as Error).message}\n${note}`);
+  }
   return row!;
 }
 

@@ -31,7 +31,8 @@ export interface LoginResponse {
 export interface SignupRequest {
   email: string;
   password: string;
-  displayName: string;
+  /** Optional: the sign-up form no longer asks; the API derives a name from the address. */
+  displayName?: string;
   acceptTerms: boolean;
   termsVersion: string;
   privacyVersion: string;

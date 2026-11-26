@@ -93,6 +93,8 @@
       "tooLarge": "Lo spazio è esaurito, quindi non è stato possibile aggiungere la clip di esempio. Libera un po' di spazio e riprova.",
       "network": "Non siamo riusciti a raggiungere ReelBolt. Controlla la connessione e riprova.",
       "generic": "Riprova tra un momento."
-    }
+    },
+    "describeScene": "Descrivi invece una scena",
+    "describeFailedTitle": "Impossibile aprire l'app per le scene"
   }
 }

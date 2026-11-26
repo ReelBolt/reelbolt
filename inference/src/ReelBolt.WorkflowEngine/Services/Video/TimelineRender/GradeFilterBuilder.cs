@@ -79,12 +79,28 @@ public static class GradeFilterBuilder
             parts.Add(
                 $"format=gbrap,split=3[{l}o][{l}c][{l}m];" +
                 $"[{l}c]{string.Join(',', correction)},format=gbrap[{l}g];" +
-                $"[{l}m]geq=r='{matte}':g='{matte}':b='{matte}':a='255'[{l}k];" +
+                MatteStream($"{l}m", $"{l}k", matte) +
                 $"[{l}o][{l}g][{l}k]maskedmerge");
         }
 
         return string.Join(',', parts);
     }
+
+    /// <summary>
+    /// The matte as a gbrap stream whose three colour planes all hold the matte and whose alpha plane is 255.
+    /// <c>geq</c> evaluates its expression once per pixel PER PLANE, and the matte (a qualifier's hue/saturation/
+    /// luma, a window's ellipse) is by far the dearest thing in a secondary: writing the same expression to the
+    /// r, g and b planes cost three times what one costs (about 4 s a frame at 1080p on four cores, which held the
+    /// engine's single ffmpeg lane for minutes on a hosted CI runner: public run 45796910736, WS-108/WS-151). So it
+    /// is evaluated into one plane (the others are the constant 0), that plane is extracted and copied into the
+    /// three colour planes of a gbrap stream, with the alpha plane taken from the same <c>geq</c>. The pixels are
+    /// identical to the three-plane form (<c>GradeMatteStreamTests</c> compares them through ffmpeg).
+    /// </summary>
+    public static string MatteStream(string input, string output, string matte) =>
+        $"[{input}]geq=r='{matte}':g='0':b='0':a='255',split=2[{output}p][{output}a];" +
+        $"[{output}p]extractplanes=r,split=3[{output}r0][{output}r1][{output}r2];" +
+        $"[{output}a]extractplanes=a[{output}r3];" +
+        $"[{output}r0][{output}r1][{output}r2][{output}r3]mergeplanes=map0s=0:map0p=0:map1s=1:map1p=0:map2s=2:map2p=0:map3s=3:map3p=0:format=gbrap[{output}];";
 
     /// <summary>
     /// P9: the 0..255 matte expression (for <c>geq</c> on gbrap) of a node's qualifier and window, or

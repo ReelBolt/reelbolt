@@ -57,7 +57,12 @@ export async function openPanel(page: Page, name: 'Layers' | 'Text' | 'AI' | 'Ca
     await expect(page.locator('.mantine-Modal-content')).toHaveCount(0);
   }
   if (await dock.isVisible().catch(() => false)) {
-    if ((await dock.getAttribute('aria-pressed')) !== 'true') await dock.tap();
+    if ((await dock.getAttribute('aria-pressed')) !== 'true') {
+      await dock.tap();
+      // After a raw CDP touch stroke (painting a mask) Chromium can swallow the next synthetic tap's click: fall back to a click.
+      const opened = await expect(dock).toHaveAttribute('aria-pressed', 'true', { timeout: 2_000 }).then(() => true, () => false);
+      if (!opened) await dock.click();
+    }
     await expect(dock).toHaveAttribute('aria-pressed', 'true');
     return;
   }
