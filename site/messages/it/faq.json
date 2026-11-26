@@ -27,7 +27,7 @@
     },
     "6": {
       "q": "Dove sono i miei dati e quali modelli AI vengono usati?",
-      "a": "Sul servizio ospitato, i tuoi progetti, le tue riprese e i video finiti restano nel tuo spazio di lavoro, e i servizi AI ricevono solo ciò che serve a un lavoro. Sui piani che lo includono puoi collegare il tuo account di un provider AI e scegliere quale modello usa ogni agente. Con una licenza di self-hosting Enterprise puoi anche far girare l'intera piattaforma sulla tua infrastruttura."
+      "a": "Sul servizio ospitato, i tuoi progetti, le tue riprese e i video finiti restano nel tuo spazio di lavoro, e i servizi AI ricevono solo ciò che serve a un lavoro. Sui piani che lo includono puoi collegare il tuo account di un provider AI e scegliere quale modello usa ogni agente. Il codice è open source, quindi puoi anche far girare l'intera piattaforma sulla tua infrastruttura."
     },
     "7": {
       "q": "Può aggiungere una voce narrante?",
@@ -97,7 +97,7 @@
     },
     "10": {
       "q": "Le mie riprese vengono usate per addestrare modelli AI?",
-      "a": "No. Non addestriamo modelli sui tuoi contenuti e non li vendiamo. Quando ReelBolt usa la propria capacità AI, al provider del modello arriva solo ciò che serve a quel lavoro. Se il tuo materiale deve restare con te, collega il tuo account di un provider AI, oppure chiedici del self-hosting."
+      "a": "No. Non addestriamo modelli sui tuoi contenuti e non li vendiamo. Quando ReelBolt usa la propria capacità AI, al provider del modello arriva solo ciò che serve a quel lavoro. Se il tuo materiale deve restare con te, collega il tuo account di un provider AI, oppure fallo girare da te: il codice è open source."
     }
   }
 }

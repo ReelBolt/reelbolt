@@ -44,6 +44,10 @@
       "title": "Chi siamo: perché abbiamo creato un team video AI",
       "description": "Perché esiste ReelBolt: perché chiunque abbia una storia da raccontare ottenga un video finito dalle proprie riprese e dalle proprie parole, con il controllo su modelli e dati."
     },
+    "openSource": {
+      "title": "Open source: leggilo, fallo girare da te o lascia che lo ospitiamo noi",
+      "description": "ReelBolt è open source con licenza AGPL-3.0. Fallo girare da te gratis, o lascia che lo ospitiamo noi. Scopri cosa offre ciascuna strada, come iniziare e come funziona la licenza."
+    },
     "contact": {
       "title": "Contatta il team ReelBolt",
       "description": "Domande su ReelBolt, su un piano per il tuo team o sul self-hosting? Scrivici cosa stai realizzando e il team ti risponde."

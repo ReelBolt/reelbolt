@@ -877,6 +877,8 @@ jobs:
           bash infra/scripts/tests/gpl-source-bundle.test.sh
           bash infra/scripts/tests/image-pins.test.sh
           bash infra/scripts/tests/sandbox-compositor-guard.test.sh
+          bash infra/scripts/tests/image-release-matrix.test.sh
+          bash infra/scripts/tests/release-compose.test.sh
 
       - name: Pool node image and stage 0 kit self-test
         # Private-operations test: the public tree does not ship the file, so the step is skipped there.

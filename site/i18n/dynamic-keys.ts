@@ -30,4 +30,8 @@ export const dynamicKeyPrefixes: readonly string[] = [
   'audiences.steps',
   'audiences.page.make.gate',
   'proof.trust.items',
+  'openSource.run.items',
+  'openSource.compare.rows',
+  'openSource.start.steps',
+  'openSource.faq.items',
 ];

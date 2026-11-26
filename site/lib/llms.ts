@@ -6,6 +6,7 @@ import type { Plan } from './pricing/index.ts';
 import { creditsLabel, formatMoney } from './pricing/offers.ts';
 import { AUDIENCES } from './audiences/registry.ts';
 import type { LandingPersona } from './attribution-persona.ts';
+import { productVersion, RELEASE_URL } from './site-config.ts';
 
 export interface LlmsCta {
   label: string;
@@ -86,7 +87,7 @@ function section(title: string, lines: readonly string[]): string {
 function summaryParagraphs(name: string): string[] {
   return [
     `${name} is an AI video team for anyone who has a story to tell and no time to tell it. You drop in the clips you already shot and say what the video is for, and a group of specialized AI agents find the story and cut the footage; captions, titles, narration and sound are added when the recipe or the person asks for them. A reviewer agent scores every edited cut and sends weak ones back, so what reaches you is a reviewed cut you can still change. Subtitles, thumbnails and post text are made in a single pass. Software teams can also start from their product's source code instead of footage.`,
-    `Every finished video also opens as an editable timeline, so a person can change anything the agents did. ${name} is in public alpha. It runs as a hosted service with a free trial and monthly plans, and Enterprise customers can self-host it.`,
+    `Every finished video also opens as an editable timeline, so a person can change anything the agents did. ${name} is in public alpha. It runs as a hosted service with a free trial and monthly plans, and the code is open source under AGPL-3.0. Self-hosting is free and the hosted service is the easy path; a commercial licence is available on request.`,
   ];
 }
 
@@ -207,6 +208,7 @@ function pageLines(input: LlmsInput, abs: (path: string) => string): string[] {
     ),
     `- [Features](${abs('/features')}): editing, the timeline and picture editors, designed graphics, brand kit, narration, dubs, generated b-roll, rooms, screen inserts, privacy, the assistant, sync, your own machine, output and control, in detail.`,
     `- [Pricing](${abs('/pricing')}): the plans, what a credit is, and what ${name} does and does not charge for.`,
+    `- [Open source](${abs('/open-source')}): the code, self-hosting versus the hosted service, the licence and how to contribute.`,
     `- [About](${abs('/about')}): why ${name} exists and the principles it is built on.`,
     `- [Contact](${abs('/contact')}): talk to us or reach the team.`,
   ];
@@ -224,6 +226,19 @@ function pageLines(input: LlmsInput, abs: (path: string) => string): string[] {
     `- [Refund and cancellation policy](${abs('/legal/refunds')})`,
   );
   return lines;
+}
+
+function openSourceLines(input: LlmsInput, abs: (path: string) => string): string[] {
+  const { name } = input;
+  return [
+    `${name} is open source under AGPL-3.0. The code is at https://github.com/ReelBolt/reelbolt, and you can read it, change it, or run it yourself for free.`,
+    `- Current release: ${productVersion}, at ${RELEASE_URL}.`,
+    `- Self-hosting is free; you pay for your own server and the AI services you connect. It is an early alpha, and support for self-hosted copies is community support through GitHub issues.`,
+    `- The hosted service is the easy path: no setup, and support by plan. See [Pricing](${abs('/pricing')}).`,
+    `- A commercial licence is available on request for companies that do not want the AGPL obligations: legal@reelbolt.ai.`,
+    `- The ${name} name and logo are trademarks of the project owner and are reserved; a fork needs its own name.`,
+    `- [Open source page](${abs('/open-source')}): what you can run yourself, hosted versus self-hosted, and how to start.`,
+  ];
 }
 
 function blogLines(posts: readonly LlmsPost[], abs: (path: string) => string): string[] {
@@ -248,6 +263,7 @@ export function buildLlmsTxt(input: LlmsInput): string {
     section('Key features', KEY_FEATURES),
     section('How pricing works', pricingLines(input)),
     section('Where to go next', nextLines(input, abs)),
+    section('Open source', openSourceLines(input, abs)),
     section('Pages', pageLines(input, abs)),
     section('Blog', blogLines(input.posts, abs)),
     `## Frequently asked questions\n\n${input.faqs.home.map(faqBlock).join('\n\n')}`,

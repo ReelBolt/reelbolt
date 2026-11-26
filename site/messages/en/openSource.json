@@ -1,0 +1,135 @@
+{
+  "hero": {
+    "eyebrow": "Open source",
+    "title": "Read it, run it, or let us host it",
+    "intro": "Open source under AGPL-3.0. Run it on your own machine for free, or let us host it. Version {version} is an early alpha, so expect rough edges.",
+    "release": "Release {version} on GitHub"
+  },
+  "run": {
+    "title": "The same video team, on your own machine",
+    "items": {
+      "0": {
+        "title": "Your data stays with you",
+        "body": "Projects, uploads and finished videos live on your own machines."
+      },
+      "1": {
+        "title": "Your choice of AI services",
+        "body": "Connect the model providers you already pay for, and pay each of them directly."
+      },
+      "2": {
+        "title": "Read and change the code",
+        "body": "Fix a bug, add a step, send it back."
+      }
+    }
+  },
+  "compare": {
+    "title": "Two ways to run the same code",
+    "caption": "Self-hosting compared with the hosted service",
+    "selfHost": "Self-host",
+    "hosted": "Hosted",
+    "note": "Hosted adds what is not code: managed servers, plans and credits, and support. For plans and prices, see the <link>pricing page</link>.",
+    "rows": {
+      "cost": {
+        "label": "Cost",
+        "selfHost": "The software is free. You pay for your own server and your AI usage.",
+        "hosted": "Paid plans.",
+        "hostedNote": "See the pricing page for what each one includes."
+      },
+      "setup": {
+        "label": "Setup",
+        "selfHost": "You install it and look after it.",
+        "hosted": "None."
+      },
+      "providers": {
+        "label": "Model providers",
+        "selfHost": "You bring your own keys and pay each provider directly.",
+        "hosted": "No provider accounts to open. You can still connect your own on the plans that include it."
+      },
+      "updates": {
+        "label": "Updates",
+        "selfHost": "You update when you choose.",
+        "hosted": "We roll them out."
+      },
+      "support": {
+        "label": "Support",
+        "selfHost": "Community, best effort, through GitHub issues.",
+        "hosted": "By plan."
+      },
+      "data": {
+        "label": "Your data",
+        "selfHost": "Stays on your machines.",
+        "hosted": "Stored by us. The privacy policy explains how."
+      },
+      "engine": {
+        "label": "Render-engine licence",
+        "selfHost": "Yours. You hold it for your install.",
+        "hosted": "Nothing for you to set up."
+      },
+      "name": {
+        "label": "Name and logo",
+        "selfHost": "Reserved. A fork needs its own name.",
+        "hosted": "Not applicable."
+      }
+    }
+  },
+  "start": {
+    "title": "Three steps",
+    "step": "Step {n}",
+    "guide": "Everything is in the <guide>self-hosting guide</guide>. Prebuilt images are published with the v0.4.0-alpha release; the <images>release images guide</images> explains how to use them.",
+    "steps": {
+      "0": {
+        "title": "Check you can run it",
+        "body": "You need a machine that runs Docker and Docker Compose, with plenty of free memory and disk. The guide lists the exact needs."
+      },
+      "1": {
+        "title": "Add your settings",
+        "body": "Copy the sample settings file and fill in the required secrets. You add your AI provider keys in the dashboard after you sign in."
+      },
+      "2": {
+        "title": "Start it and open the dashboard",
+        "body": "The guide walks through each step and what to do when something does not start."
+      }
+    }
+  },
+  "licence": {
+    "title": "The licence in plain words",
+    "p1": "ReelBolt is released under AGPL-3.0. Running it for yourself or your team is free, and you do not have to publish anything. If you change it and let other people use your version over a network, you must share your changes under the same licence. This is a summary, not legal advice, so read the <licence>licence text</licence> if it matters to you.",
+    "p2": "If that does not suit you, because you want to embed ReelBolt in a product you sell, run a changed version as a service without publishing it, or need contractual terms such as a warranty or support, there is a commercial licence. Write to <mail>legal@reelbolt.ai</mail> or read the <commercial>commercial licence details</commercial>.",
+    "p3": "The video render engine, Remotion, is not part of our licence and is not open source. It is source-available under its own terms, and when you self-host you are its licensee. Its free licence covers individuals, for-profit organisations of up to three people, non-profits and anyone evaluating it. Larger organisations need a Company License. The Remotion team has confirmed ReelBolt’s own use of Remotion. Read the terms at <remotion>remotion.dev/docs/license</remotion>.",
+    "p4": "The ReelBolt name and logo are reserved by the project owner, Tommaso Celano. You can say you run ReelBolt, but a fork needs its own name. The details are in <trademark>trademark policy</trademark>."
+  },
+  "contribute": {
+    "title": "Send a fix, a step or an idea",
+    "p1": "You sign a contributor licence agreement once, with a single sentence on your first pull request, and you keep the copyright on what you write. The <guide>contributing guide</guide> explains the rest. Bugs and questions go to the <issues>issue list</issues>."
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "Frequently asked",
+    "items": {
+      "0": {
+        "q": "Is it really free?",
+        "a": "The software is free to run under AGPL-3.0. You pay for your own server and for the AI services you connect."
+      },
+      "1": {
+        "q": "What is the difference from the hosted version?",
+        "a": "Hosted means no setup, no provider accounts to open and support by plan. Self-hosting means you run everything yourself and get community help through GitHub issues."
+      },
+      "2": {
+        "q": "Can I use it at work?",
+        "a": "Yes. Running it for your own team needs nothing from us. The video render engine has its own licence, and you hold it for your install. A company above the free size limit needs a Company License from the engine’s authors. If you want to embed ReelBolt in a product you sell, or run a changed version as a service without publishing your changes, ask us about a commercial licence at legal@reelbolt.ai."
+      },
+      "3": {
+        "q": "Is it ready for production?",
+        "a": "It is an early alpha and this is the first open-source release, so expect rough edges and changes between versions. If you need something steady today, the hosted service is the safer path."
+      },
+      "4": {
+        "q": "Can I contribute?",
+        "a": "Yes. You sign a contributor licence agreement once, with a single sentence on your first pull request, and you keep the copyright on what you write. The contributing guide and the issue list on GitHub are the place to start."
+      }
+    }
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "openSource": "Open source"
+  }
+}

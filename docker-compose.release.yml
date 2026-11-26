@@ -1,0 +1,88 @@
+# Run ReelBolt from the published release images instead of building from source.
+#
+#   export REELBOLT_IMAGE_TAG=0.4.0-alpha     # or set it in .env
+#   docker compose -f docker-compose.yml -f docker-compose.release.yml pull
+#   docker compose -f docker-compose.yml -f docker-compose.release.yml up -d
+#
+# Always pass BOTH -f flags. When -f is given, Compose does not auto-load docker-compose.override.yml
+# (the developer overrides), so a release install gets the base file plus this file and nothing else.
+# Do not add `-f docker-compose.override.yml` here.
+#
+# What it does: every service that the base file builds from this repository gets the matching
+# ghcr.io/reelbolt/reelbolt-<name>:<tag> image and its `build:` is reset, so nothing compiles locally.
+# Third-party images (postgres, rabbitmq, garage, qdrant, whisper, embeddings, ...) are untouched.
+#
+# pull_policy: missing. A release tag is meant to stay fixed (a registry tag can in principle be moved, so verify with cosign or pin by digest for anything important), so a local copy of the tag is the image to use; an
+# explicit `docker compose ... pull` (above, and on every upgrade) fetches it. This keeps a restart
+# working while the registry is unreachable. Needs Compose 2.24 or newer (`!reset`).
+#
+# Not published (no image exists, left as in the base file): the `decision` and `comfyui` GPU services
+# (profile gpu, images from DECISION_IMAGE / COMFYUI_IMAGE).
+
+services:
+  go-api:
+    image: ghcr.io/reelbolt/reelbolt-go-api:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  inference:
+    image: ghcr.io/reelbolt/reelbolt-inference-api:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  workflow-engine:
+    image: ghcr.io/reelbolt/reelbolt-workflow-engine:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  import-worker:
+    image: ghcr.io/reelbolt/reelbolt-import-worker:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  mcp:
+    image: ghcr.io/reelbolt/reelbolt-mcp:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  web:
+    image: ghcr.io/reelbolt/reelbolt-web:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  site:
+    image: ghcr.io/reelbolt/reelbolt-site:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  docs:
+    image: ghcr.io/reelbolt/reelbolt-docs-site:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  nginx:
+    image: ghcr.io/reelbolt/reelbolt-nginx:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  # One-shot: in the base file it builds the untrusted-code runtime image under a local name and exits, because
+  # sandbox-executor `docker run`s it by name and never pulls. Here the same one-shot pulls the published image
+  # (its `image:` is the ghcr name), so the image is on the daemon under that name before the executor starts.
+  sandbox-runtime:
+    image: ghcr.io/reelbolt/reelbolt-sandbox-runtime:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+
+  sandbox-executor:
+    image: ghcr.io/reelbolt/reelbolt-sandbox-executor:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null
+    environment:
+      # The executor starts sandboxes from this image name: point it at the pulled ghcr image (see above).
+      SANDBOX_IMAGE: ghcr.io/reelbolt/reelbolt-sandbox-runtime:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+
+  # Profile fabric (off by default).
+  runner-gateway:
+    image: ghcr.io/reelbolt/reelbolt-runner-gateway:${REELBOLT_IMAGE_TAG:?set REELBOLT_IMAGE_TAG, for example 0.4.0-alpha}
+    pull_policy: missing
+    build: !reset null

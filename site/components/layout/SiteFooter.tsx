@@ -1,3 +1,4 @@
+import { GitHubLink } from '@/components/ui/GitHubLink';
 import { SignInLink, SignupLink } from '@/components/analytics/SignupLink';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { Link } from '@/i18n/link';
@@ -22,6 +23,8 @@ const PRODUCT_LINKS = [
   { key: 'pricing', href: '/pricing' },
   { key: 'recipes', href: '/recipes' },
   { key: 'blog', href: '/blog' },
+  { key: 'openSource', href: '/open-source' },
+  { key: 'github', href: siteConfig.repoUrl, external: true },
   // Linked even while the runner is still being built, and deliberately so: the page states its
   // own availability ("not available yet", from `lib/runner-downloads`'s empty artifact list), so
   // the link never promises a download — while an unlinked page would be an orphan nobody could
@@ -29,7 +32,7 @@ const PRODUCT_LINKS = [
   { key: 'desktopRunner', href: siteConfig.runnerPath },
   { key: 'whatYouGet', href: '/#whats-inside' },
   { key: 'faq', href: '/#faq' },
-] as const;
+] as ReadonlyArray<{ key: string; href: string; external?: boolean }>;
 
 // Deliberately a <p>, not a heading. These four labels repeat on every page of the site; as <h2>
 // elements they sat in the document outline alongside each page's real section headings and
@@ -75,9 +78,19 @@ export function SiteFooter() {
               <ul className="mt-4 space-y-0">
                 {PRODUCT_LINKS.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="inline-flex min-h-11 items-center text-sm text-ink-muted hover:text-ink">
-                      {t(link.key)}
-                    </Link>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        rel="noopener"
+                        className="inline-flex min-h-11 items-center text-sm text-ink-muted hover:text-ink"
+                      >
+                        {t(link.key)}
+                      </a>
+                    ) : (
+                      <Link href={link.href} className="inline-flex min-h-11 items-center text-sm text-ink-muted hover:text-ink">
+                        {t(link.key)}
+                      </Link>
+                    )}
                   </li>
                 ))}
                 <li>
@@ -212,7 +225,9 @@ export function SiteFooter() {
         <div className="flex flex-col gap-6 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
           <Lockup />
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <GitHubLink />
             <span className="font-mono text-xs text-ink-faint">{t('version', { version: productVersion })}</span>
+            <p className="font-mono text-xs text-ink-faint">{t('openSourceNote')}</p>
             <p className="font-mono text-xs text-ink-faint">
               {t('copyright', { year: String(new Date().getFullYear()), name: siteConfig.name })}
             </p>

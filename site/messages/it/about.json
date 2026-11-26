@@ -20,11 +20,15 @@
   },
   "ownership": {
     "title": "Le chiavi restano a te",
-    "p1": "I video si fanno con lavori non ancora usciti, registrazioni private e materiale che nessuno vuole veder circolare. Così scegli tu quanto resta con te: collega il tuo account di un provider AI, fai il render su una macchina tua oppure, con una licenza di self-hosting Enterprise, fai girare l'intera piattaforma nel tuo ambiente.",
+    "p1": "I video si fanno con lavori non ancora usciti, registrazioni private e materiale che nessuno vuole veder circolare. Così scegli tu quanto resta con te: collega il tuo account di un provider AI, fai il render su una macchina tua oppure fai girare l'intera piattaforma nel tuo ambiente. Il codice è open source, quindi puoi leggerlo o farlo girare da te. <link>Scopri come funziona l'open source qui</link>.",
     "p2": "Decidi tu quali modelli vedono il tuo materiale. Non addestriamo modelli AI sui tuoi contenuti e non li vendiamo.",
     "l1": "Il tuo account di un provider AI, sui piani che lo includono",
     "l2": "Rendering su una macchina tua, senza costo in crediti",
-    "l3": "Self-hosting per i team le cui regole di sicurezza lo richiedono"
+    "l3": "Codice open source che puoi leggere, o far girare da te se le tue regole di sicurezza lo richiedono"
+  },
+  "openSource": {
+    "title": "Il codice è aperto",
+    "body": "Puoi leggere come funziona ReelBolt, farlo girare da te o lasciare che lo ospitiamo noi. <link>Scopri cosa significa</link> oppure <repo>guarda il codice su GitHub</repo>."
   },
   "contact": {
     "title": "Contatti",

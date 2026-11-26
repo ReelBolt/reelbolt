@@ -60,7 +60,7 @@ test('splitLocalePath undoes localizePath, and does not read /en/ or unregistere
 });
 
 test('hreflang: every translated page lists every language plus x-default (English), reciprocally', () => {
-  for (const path of ['/', '/features', '/pricing', '/about', '/contact', '/runner']) {
+  for (const path of ['/', '/features', '/pricing', '/about', '/open-source', '/contact', '/runner']) {
     assert.equal(isTranslatedPath(path), true, path);
     const alt = alternateLanguages(path);
     assert.deepEqual(Object.keys(alt).sort(), [...localeList.map((l) => l.htmlLang), 'x-default'].sort());

@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { HOME_FAQS, PRICING_FAQS } from './faqs.ts';
+import { OPEN_SOURCE_FAQS } from './open-source-faqs.ts';
 import { FAILED_RUN_POLICY, SUPPORT_EMAIL } from './legal-placeholders.ts';
 import catalog from './pricing/plans.catalog.json' with { type: 'json' };
 
@@ -21,7 +22,7 @@ function flatten(node: unknown, prefix = ''): Record<string, string> {
 }
 const placeholders = (s: string) => [...s.matchAll(/\{(\w+)[,}]|<(\w+)>/g)].map((m) => m[1] ?? m[2]).sort();
 
-const NAMESPACES = ['home', 'pricing', 'plans', 'about', 'contact', 'runner', 'features', 'faq', 'blog', 'audiences', 'proof'];
+const NAMESPACES = ['home', 'pricing', 'plans', 'about', 'contact', 'runner', 'features', 'faq', 'blog', 'audiences', 'proof', 'openSource'];
 
 for (const ns of NAMESPACES) {
   test(`${ns}: Italian mirrors English keys and placeholders`, () => {
@@ -33,6 +34,14 @@ for (const ns of NAMESPACES) {
     }
   });
 }
+
+test('openSource: the English FAQ catalogue equals the typed open-source FAQ array', () => {
+  const faq = read('en', 'openSource').faq.items;
+  OPEN_SOURCE_FAQS.forEach((f, i) => {
+    assert.equal(faq[i].q, f.question);
+    assert.equal(faq[i].a, f.answer);
+  });
+});
 
 test('faq: the English catalogue equals the typed FAQ arrays', () => {
   const faq = read('en', 'faq');

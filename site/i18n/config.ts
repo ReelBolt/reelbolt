@@ -36,7 +36,7 @@ export function localeMeta(locale: Locale): LocaleMeta {
  * Pages that exist in every registered language. Everything else (legal documents, the blog, the
  * dashboard under /app, API routes, files) lives at one URL and is never prefixed.
  */
-const TRANSLATED_ROUTES = ['/', '/features', '/pricing', '/examples', '/about', '/contact', '/contact/thank-you', '/runner', '/recipes'];
+const TRANSLATED_ROUTES = ['/', '/features', '/pricing', '/examples', '/about', '/open-source', '/contact', '/contact/thank-you', '/runner', '/recipes'];
 
 /** One recipe's page, `/recipes/<id>`: a family of translated pages rather than one fixed route. */
 const RECIPE_DETAIL = /^\/recipes\/[^/]+$/;

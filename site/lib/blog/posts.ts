@@ -16,6 +16,8 @@ import { meta as invideoMeta } from '@/content/blog/reelbolt-vs-invideo';
 import ReelboltVsInvideo from '@/content/blog/reelbolt-vs-invideo';
 import { meta as runwayMeta } from '@/content/blog/reelbolt-vs-runway';
 import ReelboltVsRunway from '@/content/blog/reelbolt-vs-runway';
+import { meta as openSourceMeta } from '@/content/blog/why-reelbolt-is-open-source';
+import WhyReelBoltIsOpenSource from '@/content/blog/why-reelbolt-is-open-source';
 import { meta as speechMeta } from '@/content/blog/edits-that-respect-speech';
 import EditsThatRespectSpeech from '@/content/blog/edits-that-respect-speech';
 import { meta as enhanceMeta } from '@/content/blog/enhance-a-clip';
@@ -57,6 +59,7 @@ import ReelboltVsCanva from '@/content/blog/reelbolt-vs-canva';
 // export. Add a post here, nowhere else. `validatePosts` runs at import time, so a bad entry fails
 // the build.
 const entries: { meta: PostMeta; Body: BlogPost['Body'] }[] = [
+  { meta: openSourceMeta, Body: WhyReelBoltIsOpenSource },
   { meta: helloMeta, Body: HelloReelBolt },
   { meta: descriptMeta, Body: ReelboltVsDescript },
   { meta: runwayMeta, Body: ReelboltVsRunway },

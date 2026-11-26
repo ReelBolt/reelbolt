@@ -259,7 +259,7 @@
         "1": "Scegli un modello diverso per ogni agente, o uno per tutto",
         "2": "L'uso sul tuo provider non costa crediti ReelBolt; paghi direttamente il provider",
         "3": "Cerca nei file del progetto per significato, non solo per nome",
-        "4": "Licenza di self-hosting su Enterprise, per far girare l'intera piattaforma dentro la tua infrastruttura"
+        "4": "Codice open source: leggilo, oppure fai girare l'intera piattaforma sulla tua infrastruttura"
       },
       "after": "Tutto ciò che fa la piattaforma è descritto nella <docs>documentazione</docs>, una guida per l'utente in linguaggio semplice. Trovi di più sul pensiero che c'è dietro nella <about>pagina chi siamo</about>."
     }

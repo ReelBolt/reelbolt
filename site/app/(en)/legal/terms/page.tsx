@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
 import { siteConfig } from '@/lib/site-config';
 import {
@@ -379,6 +380,15 @@ export default function TermsPage() {
         in the {siteConfig.name} name, logo or other marks unless we agree otherwise in writing. Any
         trademark policy we publish with the source code explains what a fork or a self-hosted copy
         may and may not do.
+      </p>
+      <p className={p}>
+        {siteConfig.name}&apos;s own source code is released under the AGPL-3.0 licence at{' '}
+        <a href={siteConfig.repoUrl} rel="noopener" className="text-accent-ink underline underline-offset-2 hover:text-accent">
+          github.com/ReelBolt/reelbolt
+        </a>
+        . The AGPL-3.0 licence covers that source code and any copy of it you run yourself. These Terms govern the hosted service.
+        See <Link href="/open-source" className="text-accent-ink underline underline-offset-2 hover:text-accent">Open source</Link>{' '}
+        for what that means in practice.
       </p>
 
       <h2 className={h2}>13. User submissions via the contact form</h2>

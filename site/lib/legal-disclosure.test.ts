@@ -676,8 +676,10 @@ test('the storage inventory lists the visit marker and withdrawal removes it', (
 
 test('the legal documents carry their own current revision date', () => {
   // Both moved together on November 17th, 2026 (avatars of objects, pictures, the workspace avatar library).
+  // The Terms page's visible date then moved to November 24th, 2026 for the AGPL clarification;
+  // its stored version stays 2026-11-17.
   assert.equal(LAST_UPDATED, 'November 17th, 2026');
-  assert.equal(TERMS_LAST_UPDATED, 'November 17th, 2026');
+  assert.equal(TERMS_LAST_UPDATED, 'November 24th, 2026');
   assert.match(termsPage, /\{TERMS_LAST_UPDATED\}/);
   assert.match(privacyPage, /\{LAST_UPDATED\}/);
 });

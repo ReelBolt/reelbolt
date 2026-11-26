@@ -2,7 +2,7 @@
 title: Piani e crediti
 sidebar_position: 2
 description: Cos'è un piano ReelBolt, come i crediti vengono assegnati e spesi, quali piani esistono e cosa include ciascuno, quanto spazio di archiviazione ha uno spazio di lavoro e cosa conta ai fini del limite, e dove trovare le pagine su cambio piano, codici promo, stime, risoluzione e costi dell'assistente.
-i18n_source_sha: ca675367bb1acb3dab36012aa421dbb7c8fcaba0
+i18n_source_sha: f4f4317f24e0df3f55f234087eac48a1f66f0822
 ---
 
 # Piani e crediti {#plans-and-credits}
@@ -52,7 +52,7 @@ Questi sono i piani del catalogo. I prezzi sono IVA e imposte sulle vendite escl
 | **Creator** | $29 / mese | 1.000 / mese | 15 GB | Esportazioni in 1080p, senza filigrana, provider proprio, crediti di ricarica. |
 | **Pro** | $79 / mese | 3.500 / mese | 50 GB | Esportazioni in 4K, le stanze di montaggio, clip b-roll generate, render prioritario, crediti di ricarica. |
 | **Team** | $49 / mese per postazione (minimo 3 postazioni) | 1.500 per postazione / mese, in comune | 100 GB condivisi | Tutto ciò che include Pro (comprese le esportazioni in 4K), con uno spazio di lavoro condiviso e ruoli. I crediti sono in comune tra le postazioni. |
-| **Enterprise** | Contattaci | — | illimitata | 4K e oltre, single sign-on, capacità dedicata, licenza per il self-hosting, condizioni e supporto personalizzati. |
+| **Enterprise** | Contattaci | — | illimitata | 4K e oltre, single sign-on, capacità dedicata, una licenza commerciale senza obblighi AGPL, condizioni e supporto personalizzati. |
 
 I pacchetti di ricarica sono disponibili nei piani a pagamento (Creator, Pro e Team) nei tagli da 500, 1.000 e 3.000 crediti. Scadono dodici mesi dopo l'acquisto. Il piano Trial gratuito non può ricaricare, quindi scegli prima un piano a pagamento.
 

@@ -51,7 +51,7 @@ These are the plans in the catalog. Prices exclude VAT and sales tax, which are 
 | **Creator** | $29 / month | 1,000 / month | 15 GB | 1080p exports, no watermark, bring your own provider, top-up credits. |
 | **Pro** | $79 / month | 3,500 / month | 50 GB | 4K exports, the editing rooms, generated b-roll clips, priority rendering, top-up credits. |
 | **Team** | $49 / month per seat (3 seats minimum) | 1,500 per seat / month, pooled | 100 GB shared | Everything in Pro (including 4K exports), with a shared workspace and roles. Credits pool across seats. |
-| **Enterprise** | Contact us | — | unlimited | 4K and above, single sign-on, dedicated capacity, self-hosting licence, custom terms and support. |
+| **Enterprise** | Contact us | — | unlimited | 4K and above, single sign-on, dedicated capacity, a commercial licence with no AGPL obligations, custom terms and support. |
 
 Top-up packs are available on paid plans (Creator, Pro and Team) in sizes of 500, 1,000 and 3,000 credits. They expire twelve months after purchase. The free Trial plan cannot top up, so choose a paid plan first.
 

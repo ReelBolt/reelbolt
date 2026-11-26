@@ -204,6 +204,27 @@ function HomePageBody({ locale }: { locale: string }) {
       </Reveal>
 
       <Reveal as="div">
+        <Section id="open-source" className="border-t border-line">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">
+              {t('openSource.title')}
+            </h2>
+            <p className="mt-4 text-ink-muted">
+              {t('openSource.body')}
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button href="/open-source" variant="outline" size="lg">
+                {t('openSource.page')}
+              </Button>
+              <Button href={siteConfig.repoUrl} variant="ghost" size="lg">
+                {t('openSource.github')}
+              </Button>
+            </div>
+          </div>
+        </Section>
+      </Reveal>
+
+      <Reveal as="div">
         <Section id="faq" className="bg-paper-2">
           <div className="text-center">
             <h2 className="mt-3 font-display text-3xl font-bold text-ink sm:text-4xl">

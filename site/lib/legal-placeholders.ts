@@ -58,7 +58,10 @@ export const COURTS_JURISDICTION = 'the courts of Novara, Italy';
 // Privacy Policy). They match the legal_documents versions 2026-11-17; a Terms bump asks every user to
 // re-accept, and the Privacy Policy moves with it.
 export const LAST_UPDATED = 'November 17th, 2026';
-export const TERMS_LAST_UPDATED = 'November 17th, 2026';
+// The Terms page then gained one non-material AGPL clarification (open-source release, 12.1):
+// only this visible date moves; the legal_documents Terms version stays 2026-11-17 and nobody
+// re-accepts.
+export const TERMS_LAST_UPDATED = 'November 24th, 2026';
 export const PHONE_NUMBER = '';
 
 // Sub-processors. Disclosed only as far as the privacy policy needs.

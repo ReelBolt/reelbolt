@@ -91,6 +91,12 @@
       "title": "Tutto ciò che farebbe un team video interno",
       "link": "Scopri tutto quello che fa ReelBolt"
     },
+    "openSource": {
+      "title": "Leggi il codice, o fallo girare da te",
+      "body": "Il codice è open source. Niente è blindato: puoi leggere come funziona ReelBolt, farlo girare sulla tua macchina, oppure lasciarlo ospitare a noi e saltare la configurazione.",
+      "page": "Come funziona l'open source qui",
+      "github": "Vedi su GitHub"
+    },
     "faq": {
       "title": "Domande frequenti",
       "deciding": "Hai ancora dubbi? <link>Leggi cosa stiamo costruendo e perché</link>."

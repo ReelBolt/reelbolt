@@ -259,7 +259,7 @@
         "1": "Pick a different model for each agent, or one for everything",
         "2": "Usage on your own provider costs no ReelBolt credits; you pay the provider directly",
         "3": "Search inside your project files by meaning, not just by name",
-        "4": "Self-hosting license on Enterprise, to run the whole platform inside your own infrastructure"
+        "4": "Open source code: read it, or run the whole platform on your own infrastructure"
       },
       "after": "Everything the platform does is written up in the <docs>documentation</docs>, a plain-language user guide. More on the thinking behind it on the <about>about page</about>."
     }
