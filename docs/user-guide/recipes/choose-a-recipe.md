@@ -59,6 +59,7 @@ The run page has no download button for the SRT and VTT files yet; the page abov
 |---|---|---|
 | A promo of your product, with a switch for a spoken voiceover | [Product promo, your way](product-promo-your-way.md) | Your source code, and a voice provider if the voiceover is on |
 | A person from your avatars explaining a topic, or saying your words (about 15 seconds at most) | [Avatar explainer from a topic](avatar-explainer.md) | A ready avatar with a voice, and sending media switched on by you |
+| A short animated video from a few sentences, with no footage and no code | [Animated video from your idea](animation-from-idea.md) | Nothing else: every plan can run it |
 | A short AI clip of a scene you describe | [AI video clip from your idea](ai-clip-from-idea.md) | A video-generation provider |
 
 ## Dub a video into another language

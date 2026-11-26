@@ -133,7 +133,7 @@ describe('answeredWelcome (the tour suppression rule)', () => {
 describe('the first project', () => {
   it('maps a material to the starter recipe the contract fixes', () => {
     expect(starterTemplateKeyFor('footage')).toBe('edit-my-video');
-    expect(starterTemplateKeyFor('idea')).toBe('edit-my-video');
+    expect(starterTemplateKeyFor('idea')).toBe('animation-from-idea');
     expect(starterTemplateKeyFor('code')).toBe('quick-win-promo');
   });
 

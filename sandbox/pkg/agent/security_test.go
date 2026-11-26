@@ -120,14 +120,80 @@ func TestRunnerMessagesCarryNoBillingOrProviderMaterial(t *testing.T) {
 	if len(frames) < 3 {
 		t.Fatalf("only %d frames were captured; the test is not observing the job", len(frames))
 	}
-	forbidden := []string{"credit", "price", "cost", "billed", "apikey", "api_key", "authorization", "bearer ", "sk-", "env:", "provider"}
 	for _, raw := range frames {
-		lower := strings.ToLower(string(raw))
-		for _, f := range forbidden {
-			if strings.Contains(lower, f) {
-				t.Errorf("a runner message carries %q: %s", f, raw)
+		for _, problem := range wireProblems(raw) {
+			t.Errorf("a runner message carries %s: %s", problem, raw)
+		}
+	}
+}
+
+// Field names that must never appear on the wire, matched against JSON keys
+// only (never against encoded values, which are random).
+var wireForbiddenKey = regexp.MustCompile("(?i)(credit|price|cost|billed|billing|apikey|api_key|authorization|provider)")
+
+// Credential shapes matched in string values. The key shape needs a boundary
+// before it, so a random base64url run that happens to hold "sk-" cannot match.
+var wireSecretValue = regexp.MustCompile(`(?i)((^|[^A-Za-z0-9_-])sk-[A-Za-z0-9_-]{16,}|bearer\s+\S+|\benv:)`)
+
+// Values under these keys are random encodings (signatures, nonces, ids); they
+// are not scanned for credential shapes.
+var wireRandomKey = regexp.MustCompile("(?i)(^sig$|signature|nonce|(^|_)id$)")
+
+// wireProblems parses one frame as JSON and reports forbidden keys and
+// credential-shaped string values.
+func wireProblems(raw []byte) []string {
+	var doc any
+	if err := json.Unmarshal(raw, &doc); err != nil {
+		return []string{fmt.Sprintf("a frame that is not JSON (%v)", err)}
+	}
+	var out []string
+	var walk func(v any, key string)
+	walk = func(v any, key string) {
+		switch x := v.(type) {
+		case map[string]any:
+			for k, child := range x {
+				if wireForbiddenKey.MatchString(k) {
+					out = append(out, fmt.Sprintf("the field %q", k))
+				}
+				walk(child, k)
+			}
+		case []any:
+			for _, child := range x {
+				walk(child, key)
+			}
+		case string:
+			if wireRandomKey.MatchString(key) {
+				return
+			}
+			if wireSecretValue.MatchString(x) {
+				out = append(out, fmt.Sprintf("a credential-shaped value under %q", key))
 			}
 		}
+	}
+	walk(doc, "")
+	return out
+}
+
+// The check must still catch what it exists for, and must not trip on random
+// encodings that happen to contain short forbidden words.
+func TestWireCheckCatchesLeaksAndIgnoresRandomEncodings(t *testing.T) {
+	leaks := map[string]string{
+		"billing field":  `{"type":"progress","payload":{"creditsUsed":3}}`,
+		"price field":    `{"payload":{"nested":{"price":1}}}`,
+		"provider field": `{"payload":{"Provider":"x"}}`,
+		"api key value":  `{"payload":{"note":"sk-abcdefghijklmnopqrstuv"}}`,
+		"bearer value":   `{"payload":{"note":"Bearer abc.def"}}`,
+		"env reference":  `{"payload":{"note":"env:SECRET"}}`,
+		"in an array":    `{"payload":{"list":["fine","sk-abcdefghijklmnopqrstuv"]}}`,
+	}
+	for name, frame := range leaks {
+		if len(wireProblems([]byte(frame))) == 0 {
+			t.Errorf("%s was not caught: %s", name, frame)
+		}
+	}
+	benign := `{"type":"hello","payload":{"auth":{"sig":"xsk-ABCDEFGHIJKLMNOPQRSTUVcostpriceXY","nonce":"sk-ABCDEFGHIJKLMNOPQRSTUV"},"deviceId":"d1","note":"xsk-ABCDEFGHIJKLMNOPQRSTUVW"}}`
+	if got := wireProblems([]byte(benign)); len(got) != 0 {
+		t.Errorf("random encodings were flagged: %v", got)
 	}
 }
 

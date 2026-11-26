@@ -132,7 +132,7 @@ public class OnboardingProfileTests
         foreach (string persona in AcquisitionVocabulary.Personas)
         {
             foreach (string material in AcquisitionVocabulary.Materials)
-                data.Add(persona, material, material == "code" ? "quick-win-promo" : "edit-my-video");
+                data.Add(persona, material, material switch { "code" => "quick-win-promo", "idea" => "animation-from-idea", _ => "edit-my-video" });
         }
 
         return data;
@@ -268,13 +268,13 @@ public class OnboardingProfileTests
 
         answered.Profile.SkippedAt.Should().Be(skipped.Profile.SkippedAt);
         answered.Profile.AnsweredAt.Should().NotBeNull();
-        answered.StarterTemplateKey.Should().Be("edit-my-video");
+        answered.StarterTemplateKey.Should().Be("animation-from-idea");
 
         OnboardingProfileResponse again = Saved(await rig.Controller().PutProfile(Skip(), default));
         again.Profile.Persona.Should().Be("educator");
         again.Profile.Material.Should().Be("idea");
         again.Profile.AnsweredAt.Should().Be(answered.Profile.AnsweredAt);
-        again.StarterTemplateKey.Should().Be("edit-my-video", "the recipe follows the stored material");
+        again.StarterTemplateKey.Should().Be("animation-from-idea", "the recipe follows the stored material");
     }
 
     [Fact]

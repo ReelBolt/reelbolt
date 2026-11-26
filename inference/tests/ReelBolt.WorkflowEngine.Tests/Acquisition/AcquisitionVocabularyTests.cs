@@ -186,7 +186,7 @@ public class AcquisitionVocabularyTests
 
     [Theory]
     [InlineData("footage", "edit-my-video")]
-    [InlineData("idea", "edit-my-video")]
+    [InlineData("idea", "animation-from-idea")]
     [InlineData("code", "quick-win-promo")]
     public void Each_material_has_its_starter_recipe(string material, string expected)
     {
