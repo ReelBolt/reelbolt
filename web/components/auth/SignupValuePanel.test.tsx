@@ -11,10 +11,10 @@ import { loadFlat } from '@/i18n/catalog-utils';
 import { ensureMatchMedia, renderWithI18n } from '@/test/i18n';
 import { SignupValuePanel } from './SignupValuePanel';
 
-const renderPanel = (persona?: Persona) =>
+const renderPanel = (persona?: Persona, firstVideoOffered?: boolean) =>
   render(
     <MantineProvider>
-      <SignupValuePanel persona={persona} />
+      <SignupValuePanel persona={persona} firstVideoOffered={firstVideoOffered} />
     </MantineProvider>,
   );
 
@@ -64,11 +64,21 @@ describe('SignupValuePanel', () => {
     expect(aside.getAttribute('aria-labelledby')).toBe(within(aside).getByRole('heading', { level: 2 }).id);
   });
 
-  it('states the two trust facts that hold on every deployment', () => {
+  it('states the two trust facts that hold on every deployment, and no first-video promise by default', () => {
     renderPanel();
     const facts = within(screen.getByTestId('signup-value-trust')).getAllByRole('listitem').map((li) => li.textContent);
     expect(facts).toEqual([
       'No card required. Starting is free.',
+      'Every edited cut is scored before you see it. A low score sends it back for another pass.',
+    ]);
+  });
+
+  it('adds the first-video line only when the grant is offered', () => {
+    renderPanel(undefined, true);
+    const facts = within(screen.getByTestId('signup-value-trust')).getAllByRole('listitem').map((li) => li.textContent);
+    expect(facts).toEqual([
+      'No card required. Starting is free.',
+      'Your first video is on us: the credits for it are added when you verify your email. A few connections and temporary addresses are not eligible.',
       'Every edited cut is scored before you see it. A low score sends it back for another pass.',
     ]);
   });
@@ -82,11 +92,11 @@ describe('SignupValuePanel', () => {
   for (const locale of ['en', 'it']) {
     it(`makes no numeric, testimonial or plan-specific claim for any audience (${locale})`, () => {
       for (const audience of AUDIENCES) {
-        renderWithI18n(<SignupValuePanel persona={audience === 'general' ? undefined : audience} />, { locale });
+        renderWithI18n(<SignupValuePanel persona={audience === 'general' ? undefined : audience} firstVideoOffered />, { locale });
         const text = panelText();
         expect(text, `${locale}/${audience}`).not.toMatch(/\d/);
         expect(text, `${locale}/${audience}`).not.toMatch(/["“”«»]/);
-        expect(text, `${locale}/${audience}`).not.toMatch(/\bcredits?\b|\bcrediti\b|watermark|filigrana|%/i);
+        expect(text, `${locale}/${audience}`).not.toMatch(/watermark|filigrana|%/i);
         expect(text, `${locale}/${audience}`).not.toMatch(
           /customers?|clienti|users|utenti|creators trust|trusted by|rated|stars|stelle|reviews|recensioni|testimonial/i,
         );

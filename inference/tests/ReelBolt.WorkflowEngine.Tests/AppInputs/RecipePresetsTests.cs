@@ -34,6 +34,7 @@ public class RecipePresetsTests
         [WorkflowTemplatePresets.ThumbnailKey] = AppCostClass.NoCredits,
         [WorkflowTemplatePresets.ReadAloudKey] = AppCostClass.UsesCreditsAndVoice,
         [WorkflowTemplatePresets.AiClipKey] = AppCostClass.UsesCreditsAndAiShots,
+        [WorkflowTemplatePresets.AnimationFromIdeaKey] = AppCostClass.UsesCredits,
     };
 
     public static IEnumerable<object[]> Keys() => WorkflowTemplatePresets.Keys.Select(k => new object[] { k });
@@ -343,6 +344,16 @@ public class RecipePresetsTests
         IReadOnlyList<AppBindingStep> promo = Steps(Template(WorkflowTemplatePresets.ProductPromoKey));
         StaticBranchResolver.ReachableStepOrders(promo, Values(("voiceover", "false"))).Should().NotContain(10).And.Contain(12);
         StaticBranchResolver.ReachableStepOrders(promo, Values(("voiceover", "true"))).Should().Contain([10, 12, 13]);
+    }
+
+    [Fact]
+    public void The_animation_from_an_idea_needs_no_plan_feature_so_a_trial_workspace_can_run_it()
+    {
+        WorkflowTemplateDefinition t = Template(WorkflowTemplatePresets.AnimationFromIdeaKey);
+        t.Steps.Select(s => s.StepType).Should().OnlyContain(type => type == StepType.Agent || type == StepType.ReviewLoop,
+            "no video generation, room, audio or avatar step: the plan gates only those");
+        t.Steps.Select(s => s.AgentType).Should().Equal(AgentType.ScriptwriterAgent, AgentType.DirectorAgent, AgentType.AuthorAgent, AgentType.ReviewAgent);
+        t.AppManifest!.RequestTemplate.Should().Contain("{{input.idea}}");
     }
 
     [Fact]

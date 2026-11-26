@@ -2,7 +2,7 @@
 title: Scegli un'app
 sidebar_position: 0
 description: Abbina quello che vuoi creare all'app ReelBolt che lo realizza e scopri quali richieste ReelBolt non può ancora soddisfare.
-i18n_source_sha: 002ead17ba2d1c186034083ce6bf7f01f8ab6a65
+i18n_source_sha: 763fe1797ec5d3f744f9a207e2fdce54f9ab6e33
 ---
 
 # Scegli un'app {#choose-an-app}
@@ -60,6 +60,7 @@ Nella pagina dell'esecuzione non c'è ancora un pulsante per scaricare i file SR
 |---|---|---|
 | Un promo del tuo prodotto, con un interruttore per la voce narrante | [Product promo, your way](product-promo-your-way.md) | Il tuo codice sorgente, e un provider vocale se la voce narrante è attiva |
 | Una persona dei tuoi avatar che spiega un argomento o dice le tue parole (circa 15 secondi al massimo) | [Avatar explainer from a topic](avatar-explainer.md) | Un avatar pronto con una voce, e l'invio dei media attivato da te |
+| Un breve video animato da poche frasi, senza riprese né codice | [Animated video from your idea](animation-from-idea.md) | Nient'altro: ogni piano può eseguirlo |
 | Un breve clip AI di una scena che descrivi | [AI video clip from your idea](ai-clip-from-idea.md) | Un provider di generazione video |
 
 ## Doppia un video in un'altra lingua {#dub-a-video-into-another-language}

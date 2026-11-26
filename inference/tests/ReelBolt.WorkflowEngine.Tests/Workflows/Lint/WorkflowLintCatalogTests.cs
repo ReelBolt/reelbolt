@@ -40,7 +40,7 @@ public class WorkflowLintCatalogTests(ITestOutputHelper output)
     {
         // 28 since avatars phase 3 added "talking-avatar-budget" (27 with phase 2's "spokesperson-clip"); the method
         // name keeps its history.
-        WorkflowTemplateCatalog.GetAll().Should().HaveCount(39, "the 29 authored templates (the sound-effects-only recipe is the newest) plus the merged Avatar clip, the six preset recipes and the three video apps");
+        WorkflowTemplateCatalog.GetAll().Should().HaveCount(40, "the 29 authored templates (the sound-effects-only recipe is the newest) plus the merged Avatar clip, the seven preset recipes and the three video apps");
     }
 
     [Theory]

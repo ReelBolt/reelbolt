@@ -1,6 +1,6 @@
 import { test, expect, type EditorPage } from '../../../fixtures/editor-v2';
 import { selectAt } from '../../../fixtures/editor-v2/lane-b';
-import { startRender } from '../../../fixtures/editor-v2/rows';
+import { startRender, waitRender } from '../../../fixtures/editor-v2/rows';
 
 /**
  * Wave 1 (T-008): the Versions panel. Versions are created by real causes (a named version from the button, a render
@@ -51,10 +51,11 @@ test('R01.2 R02.4 versions: named, before-render and before-restore points are l
 
   // 2. A render start takes a "before a render" point of the revision it pinned.
   await renameFirstClip(ed, 'Edit B');
-  await startRender(api, seed.projectId, id);
+  const pinned = await startRender(api, seed.projectId, id);
   let rendered!: Version;
   await expect.poll(async () => (rendered = (await versions()).find((v) => v.cause === 'beforeRender')!) !== undefined, { message: 'a render start stores a version' }).toBe(true);
   expect(rendered.expiresAt, 'an automatic point expires').toBeTruthy();
+  await waitRender(api, seed.projectId, id, pinned.executionId); // never leave a Running render behind: it holds the org's execution slot for the next spec
 
   // 3. Restoring Version A asks first, stores the stored document as a new revision and keeps the state it replaced.
   await renameFirstClip(ed, 'Edit C'); // a revision with no point of its own yet, so the restore has something to keep

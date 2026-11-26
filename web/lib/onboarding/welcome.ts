@@ -102,7 +102,8 @@ export function answeredWelcome(server: OnboardingServerState | null, mirror: On
  * is what is normally passed on; this is the same mapping for the moment that answer is missing.
  */
 export function starterTemplateKeyFor(material: Material): string {
-  return material === 'code' ? 'quick-win-promo' : 'edit-my-video';
+  if (material === 'code') return 'quick-win-promo';
+  return material === 'idea' ? 'animation-from-idea' : 'edit-my-video';
 }
 
 /** What a project can start from in the plain "New project" form: clips, or an app's code. */

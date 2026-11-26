@@ -1048,11 +1048,13 @@ own usage scope with a source, and the source decides how it is charged (decisio
 | `Mcp` | an assistant tool run through the MCP bridge (Claude Code) | Shared monthly allowance with `Assistant`, then charged |
 | `Editor` | picture-editor AI operations and subject cut-out | Charged per operation |
 | `TimelineAssist` | timeline AI-assist proposals | Charged per proposal |
-| `Moderation` | content moderation on generation prompts, ingest, generated text and publish | Free: `ModerationCalls` is priced at a real `$0`, one row per call |
-| `FileSummary`, `Indexing`, `DocsIndex` | file summaries, file indexing and search, the platform-docs index | Free |
+| `Moderation` | content moderation on generation prompts, ingest, generated text and publish, including the ASR transcription of audio sampled for ingest, publish and marketplace-preview checks | Free: `ModerationCalls` is priced at a real `$0`, one row per call; the ASR rows are attributed to the file's or output's org under `Moderation`, never debited |
+| `FileSummary`, `Indexing`, `DocsIndex` | file summaries, file indexing and search (the project-search query embedding is `Indexing`), the platform-docs index | Free |
 | `Storage` | the daily storage sample | Free (storage is a plan quota; project-history bytes count toward it, see [project-versioning.md](project-versioning.md#quota-counting)) |
 | `Workflow` | workflow steps, including designed graphics and revisions | Unchanged: the engine's credit gate |
 | `Unattributed` | a call that ran outside any scope | Recorded against the platform organization, never charged |
+
+An admin provider test ping (ASR or embedding) has no organization and is accepted as `Unattributed`.
 
 **The assistant allowance** comes from the plan entitlements in `plans.catalog.json`:
 

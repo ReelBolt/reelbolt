@@ -34,7 +34,7 @@ public partial class ReactRemotionSandboxTools
         ("framer-motion", "14.14.0", "Declarative animation"),
         ("gsap", "3.15.1", "Timeline animation, driven by the frame (see the ReelBolt gsap guide)"),
         ("lottie-web", "5.13.0", "Lottie runtime (peer of @remotion/lottie)"),
-        ("lucide-react", "1.77.0", "Icon set"),
+        ("lucide-react", "1.78.0", "Icon set"),
         ("react", "19.3.1", "UI runtime"),
         ("react-dom", "19.3.1", "UI runtime"),
         ("remotion", "4.0.545", "Core framework"),

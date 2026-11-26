@@ -390,6 +390,30 @@ describe('SyncClient — saves never silently stop (T-014: eng D8-D12)', () => {
     expect(store.getState().dirty).toBe(false);
   });
 
+  // P3-SYNC-10: a client-side route change (Next <Link>) fires no unload event and the editor only unmounts once the
+  // next route answers; acting on a same-origin link starts the save then, not after the route payload.
+  it('a click on a same-origin link to another page while dirty sends the save at once with keepalive; a link to the same page or another origin does not', async () => {
+    const { store, client, calls, callOptions } = make();
+    const { win } = fakeWindow();
+    (win as unknown as { location: unknown }).location = { origin: 'https://app.test', pathname: '/editor/p/timeline/t', search: '' };
+    client.attachLifecycle(win);
+    const click = (href: { origin: string; pathname: string; search?: string }) => {
+      const a = { origin: href.origin, pathname: href.pathname, search: href.search ?? '', target: '', hasAttribute: () => false };
+      const e = Object.assign(new Event('click', { cancelable: true }), { button: 0, metaKey: false, ctrlKey: false, shiftKey: false, altKey: false });
+      Object.defineProperty(e, 'target', { value: { closest: () => a } });
+      win.document.dispatchEvent(e);
+    };
+    store.dispatch({ type: 'setProperty', itemId: 'c1', key: 'name', value: 'a' });
+    click({ origin: 'https://app.test', pathname: '/editor/p/timeline/t' });
+    click({ origin: 'https://elsewhere.test', pathname: '/x' });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(calls).toHaveLength(0);
+    click({ origin: 'https://app.test', pathname: '/projects/p/timelines' });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(calls).toHaveLength(1);
+    expect(callOptions[0]).toEqual({ keepalive: true });
+  });
+
   // C-319-1: the browser aborts a normal fetch at unload and the server honours the abort, so a
   // PATCH in flight at tab close (with no later edit) must go again, identically, with keepalive.
   it('pagehide while a normal save is in flight with no later edit re-sends that same body with keepalive', async () => {

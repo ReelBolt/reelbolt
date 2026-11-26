@@ -1,7 +1,7 @@
 {
   "card": {
     "running": "{count} in corso",
-    "emptyHint": "Vuoto. Aprilo per caricare le riprese.",
+    "emptyHint": "Vuoto. Aprilo per caricare le riprese, fare un film di esempio o descrivere un video.",
     "noDescription": "Nessuna descrizione",
     "contents": "Contenuto del progetto",
     "videos": "Video",

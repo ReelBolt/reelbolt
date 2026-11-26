@@ -44,6 +44,7 @@ import { UnpackStatus } from './UnpackStatus';
 import { UploadTray } from './UploadTray';
 import { ACCEPTED_TYPES_NOTE, findDuplicates, isUnusualType, withUniqueNames } from '@/lib/files/upload-guidance';
 import { useFormat, useT } from '@/i18n';
+import { DescribeSceneLink, FirstFilmButton } from '@/components/onboarding/FirstFilmCard';
 import { formatBytes } from '@/lib/utils/bytes';
 import { msg, type Msg } from '@/i18n/msg';
 import type { T } from '@/i18n/translator';
@@ -556,6 +557,10 @@ export function FileManager({ projectId, files, onChanged, registerPicker, onEdi
                 onClick={() => openWithPrompt(t('whatToUploadPrompt'), { projectId }, { send: true })}>
                 {t('whatToUpload')}
               </Button>
+            </Group>
+            <Group gap="md" justify="center">
+              <FirstFilmButton projectId={projectId} variant="light" />
+              <DescribeSceneLink projectId={projectId} />
             </Group>
           </Stack>
         ) : listing.folders.length === 0 && listing.files.length === 0 ? (

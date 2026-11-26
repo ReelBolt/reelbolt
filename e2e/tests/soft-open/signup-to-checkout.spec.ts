@@ -179,7 +179,6 @@ test.describe('the flow: switches ON', () => {
     await watch(page, 'signup');
     await page.goto('/app/signup');
     expect(await page.locator('iframe[src*="turnstile"], .cf-turnstile').count(), 'no Turnstile widget in this stack (prod has one)').toBe(0);
-    await page.getByLabel('Name', { exact: true }).fill('Soft Open');
     await page.getByLabel('Email', { exact: true }).fill(acct.email);
     await page.getByLabel('Password', { exact: true }).fill(PASSWORD);
     await page.getByLabel(/I accept the/).check();

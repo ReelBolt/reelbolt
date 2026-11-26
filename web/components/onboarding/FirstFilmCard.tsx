@@ -1,11 +1,12 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button, CloseButton, Text } from '@mantine/core';
+import { Anchor, Button, CloseButton, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
-import { IconMovie } from '@tabler/icons-react';
+import { IconMovie, IconBulb } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useT } from '@/i18n';
+import { describeError } from '@/lib/api/describe-error';
 import { addSampleFile } from '@/lib/api/files';
 import { createProject } from '@/lib/api/projects';
 import { applyWorkflowTemplate } from '@/lib/api/workflows';
@@ -57,6 +58,39 @@ export function FirstFilmButton({
     <Button variant={variant} leftSection={<IconMovie size={18} aria-hidden />} loading={busy} style={{ minHeight: 44 }} onClick={() => void go()}>
       {busy ? t('settingUp') : t('button')}
     </Button>
+  );
+}
+
+/** The animation-from-idea recipe (inference WorkflowTemplatePresets.AnimationFromIdeaKey): a video described in words. */
+export const DESCRIBE_VIDEO_TEMPLATE_KEY = 'animation-from-idea';
+
+/**
+ * "Describe a video instead": adds the idea app to the project (no run, no spend) and opens its
+ * page; the person presses Run and sees the estimate first. The app is an animation of text, shapes
+ * and motion with no paid video generation, so every plan can run it.
+ */
+export function DescribeSceneLink({ projectId }: { projectId: string }) {
+  const t = useT('onboarding.firstFilm');
+  const tAll = useT();
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const go = async () => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const workflow = await applyWorkflowTemplate(projectId, DESCRIBE_VIDEO_TEMPLATE_KEY, true);
+      router.push(`/projects/${encodeURIComponent(projectId)}/workflows/${encodeURIComponent(workflow.id)}`);
+    } catch (err: unknown) {
+      notifications.show({ title: t('describeFailedTitle'), message: describeError(tAll, err, t('error.generic')), color: 'red' });
+      setBusy(false);
+    }
+  };
+  return (
+    <Anchor component="button" type="button" size="sm" disabled={busy} onClick={() => void go()}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 44 }}>
+      <IconBulb size={16} aria-hidden />
+      {busy ? t('settingUp') : t('describeScene')}
+    </Anchor>
   );
 }
 

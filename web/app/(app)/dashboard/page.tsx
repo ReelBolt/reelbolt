@@ -29,6 +29,7 @@ import { useSignupIntent } from '@/lib/hooks/use-signup-intent';
 import { useBillingSummary } from '@/lib/hooks/use-billing';
 import { CHECKOUT_START_TOKEN_KEY, pickedPlanCheckoutHref } from '@/components/billing/subscription';
 import { checklistFallback, mergeChecklist, useOnboarding } from '@/lib/hooks/use-onboarding';
+import { shouldOfferFirstFilm } from '@/lib/onboarding/first-film';
 import { WELCOME_PATH } from '@/lib/onboarding/welcome';
 import { emitFunnelEvent, userKeyFromEmail } from '@/lib/telemetry';
 import { useDashboardOverview, useWorkflowEvents, type LiveExecutionState } from '@/lib/hooks/use-dashboard';
@@ -325,6 +326,7 @@ export default function DashboardPage() {
             runDone={runDone}
             welcomeEnabled={welcomeEnabled}
             onCreate={() => setCreateOpen(true)}
+            showSampleFilm={!shouldOfferFirstFilm(overview, false)}
           />
           {gettingStarted}
           {(projects?.length ?? 0) > 1 && (

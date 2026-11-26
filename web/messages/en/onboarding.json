@@ -93,6 +93,8 @@
       "tooLarge": "Your storage is full, so the sample clip could not be added. Free some space and try again.",
       "network": "We could not reach ReelBolt. Check your connection and try again.",
       "generic": "Please try again in a moment."
-    }
+    },
+    "describeScene": "Describe a video instead",
+    "describeFailedTitle": "Could not open the video app"
   }
 }

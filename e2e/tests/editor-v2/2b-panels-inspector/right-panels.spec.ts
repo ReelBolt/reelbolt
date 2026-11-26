@@ -94,7 +94,10 @@ test('TL-273 TL-277 Assist: the ghost diff toggles, and Reject all clears the pr
   await expect(ed.testId('proposal-group-0')).toBeVisible();
   const ghost = ed.testId('proposal-ghost-toggle');
   await expect(ghost).toBeChecked();
-  await ghost.click({ force: true });
+  // Keyboard, not a forced pointer click: a forced click lands on the coordinates read before the panel settles, and on the
+  // loaded CI desktop run it never toggled the box (run 45796910736); Space on the focused checkbox cannot miss.
+  await ghost.focus();
+  await ghost.press('Space');
   await expect(ghost).not.toBeChecked();
   const patches = ed.patches.length;
   await ed.tap(ed.testId('proposal-reject'));

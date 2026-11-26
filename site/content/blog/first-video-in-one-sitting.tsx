@@ -77,7 +77,7 @@ export default function FirstVideoInOneSitting(): JSX.Element {
 
       <h2 id="create-your-account">1. Create your account</h2>
       <p>
-        Sign up with your name, your email and a password, or with a Google or GitHub account where the
+        Sign up with your email and a password, or with a Google or GitHub account where the
         sign-up page offers one. No card is asked for.
       </p>
       <p>

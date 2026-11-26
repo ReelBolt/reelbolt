@@ -64,6 +64,7 @@ public static class RecipeFit
         ["music-or-sound-effect"] = ["make a music track", "a sound effect from a description", "generate music for my video"],
         ["thumbnail-and-cover-text"] = ["a thumbnail for my video with a title on it", "pick a cover image from my video"],
         ["read-text-aloud"] = ["read this text out loud", "turn my script into an audio file", "text to speech"],
+        ["animation-from-idea"] = ["an animated video from my idea", "a short animation of text and shapes", "a video with no footage and no code"],
         ["ai-clip-from-idea"] = ["an AI video clip of a scene I describe", "generate a short video from an idea"],
         ["edit-my-video"] = ["edit my video", "cut my footage down", "edit raw footage, a screen recording or a finished animation", "add music, sound effects, zooms, titles or a voice-over to my video", "captions on my footage", "fix a flubbed line with a pickup", "b-roll over my footage"],
         ["languages"] = ["add subtitles to my video", "translate my video into another language", "dub my video into another language", "burn captions into a video"],

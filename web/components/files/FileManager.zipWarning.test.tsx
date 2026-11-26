@@ -15,6 +15,7 @@ const hoisted = vi.hoisted(() => ({
   drop: { current: null as null | ((items: unknown[]) => void) },
 }));
 
+vi.mock('next/navigation', () => ({ useRouter: () => ({ push: vi.fn() }) }));
 vi.mock('@/components/assistant/AssistantShellProvider', () => ({ useAssistantShell: () => ({ openWithPrompt: vi.fn() }) }));
 const queue = { entries: [], enqueue: vi.fn(), retry: vi.fn(), clearFinished: vi.fn() };
 vi.mock('@/lib/hooks/use-upload-queue', () => ({ useUploadQueue: () => queue }));
@@ -137,5 +138,17 @@ describe.each(Object.keys(entryPoints))('zip size warning via %s', (via) => {
       expect(screen.queryByRole('dialog')).toBeNull();
       unmount();
     }
+  });
+});
+
+describe('Files empty state without footage', () => {
+  it('offers a sample film and a describe-a-video action', () => {
+    render(
+      <MantineProvider>
+        <FileManager projectId="p" files={[]} onChanged={vi.fn()} />
+      </MantineProvider>,
+    );
+    expect(screen.getByRole('button', { name: 'Make your first film' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Describe a video instead' })).toBeTruthy();
   });
 });

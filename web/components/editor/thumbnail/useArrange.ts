@@ -48,6 +48,14 @@ interface Options {
   guard?(layerId: string, run: () => void): void;
 }
 
+/**
+ * A real dialog (a modal, a popover dialog) mutes the Delete key. The phone's non-modal sheet is a dialog too (it is
+ * always mounted, and it holds the layer list), so it must not: it has `data-side` and no `aria-modal`.
+ */
+export function dialogMutesDelete(root: ParentNode): boolean {
+  return root.querySelector('[role="dialog"]:not([data-side]:not([aria-modal="true"]))') !== null;
+}
+
 /** Everything the "Position and size / Line up / Crop and merge" section and the Delete key do. */
 export function useArrange({ projectId, documentId, editor, layers, bitmaps, doc, fontVersion, selectedId, onSelect, say, onFileAdded, guard }: Options) {
   const t = useT('editor-thumbnail-b.arrange.messages');
@@ -203,7 +211,7 @@ export function useArrange({ projectId, documentId, editor, layers, bitmaps, doc
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       const el = e.target as HTMLElement | null;
       if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
-      if (typeof document !== 'undefined' && document.querySelector('[role="dialog"]')) return;
+      if (typeof document !== 'undefined' && dialogMutesDelete(document)) return;
       const ids = (picking && liveChecked.size > 0 ? [...liveChecked] : selectedId ? [selectedId] : []).filter((id) => {
         const l = layers.find((x) => x.id === id);
         return l && !l.locked;

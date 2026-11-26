@@ -17,6 +17,7 @@ import { firstProjectHref, projectFilesHref, shotListHref } from '@/lib/onboardi
 import { emitFunnelEvent, userKeyFromEmail } from '@/lib/telemetry';
 import type { GitHubAccount } from '@/lib/types/github';
 import { useT } from '@/i18n';
+import { DescribeSceneLink } from '@/components/onboarding/FirstFilmCard';
 import { MATERIAL_CARDS, PERSONA_CARDS, SHOT_LISTS } from './welcome-content';
 import classes from './welcome.module.css';
 
@@ -295,6 +296,7 @@ export function WelcomeFlow({ sampleClipUrls = [], shotsForProjectId = null }: W
           )}
         </div>
         <p className={classes.progress}>{t('shots.laterHint')}</p>
+        <DescribeSceneLink projectId={projectId} />
       </section>
     );
   }
