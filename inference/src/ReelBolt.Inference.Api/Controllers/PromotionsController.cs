@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using ReelBolt.Inference.Api.Services.Billing;
 using ReelBolt.Inference.Api.Services.Billing.Promotions;
 using ReelBolt.Shared.Auth;
 using ReelBolt.Shared.Billing;
@@ -110,5 +112,19 @@ public class PromotionsController(
                 return item;
             })
         });
+    }
+
+    /// <summary>
+    /// Whether the first-video grant is on, so the sign-up page only promises it when it is real. Anonymous,
+    /// cached for 30 s, and carries no figure, code or id.
+    /// </summary>
+    [HttpGet("first-video")]
+    [AllowAnonymous]
+    public IActionResult FirstVideo([FromServices] IConfiguration configuration)
+    {
+        if (Disabled) return NotFound();
+
+        Response.Headers.CacheControl = "public, max-age=30";
+        return Ok(new { enabled = configuration.GetValue(CreditAccountProvisioner.FirstVideoEnabledKey, true) });
     }
 }

@@ -18,6 +18,8 @@ vi.mock('next/headers', () => ({
 }));
 vi.mock('@/lib/hooks/use-auth', () => ({ notifyAuthChange: vi.fn() }));
 vi.mock('@/lib/api/auth', () => ({ signup: vi.fn() }));
+const firstVideo = vi.hoisted(() => ({ offered: false }));
+vi.mock('@/lib/auth/first-video-server', () => ({ firstVideoGrantOffered: async () => firstVideo.offered }));
 
 vi.stubGlobal(
   'ResizeObserver',
@@ -142,6 +144,24 @@ describe('SignupPage value panel and layout', () => {
   });
 
   const panel = () => screen.getByTestId('signup-value-panel');
+
+  it('makes no first-video promise unless the grant is offered', async () => {
+    firstVideo.offered = false;
+    await renderPage();
+    expect(screen.getByText('Create your free account. No card required.')).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/first video is on us/i);
+  });
+
+  it('promises the first video in the subtitle and the trust list when the grant is offered', async () => {
+    firstVideo.offered = true;
+    try {
+      await renderPage();
+      expect(screen.getByText('Create your free account. No card required. Your first video is on us.')).toBeTruthy();
+      expect(within(screen.getByTestId('signup-value-trust')).getAllByRole('listitem')).toHaveLength(3);
+    } finally {
+      firstVideo.offered = false;
+    }
+  });
 
   it('leads with the outcome, not with "create an account"', async () => {
     await renderPage();

@@ -1,13 +1,15 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button, CloseButton, Text } from '@mantine/core';
+import { Anchor, Button, CloseButton, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
-import { IconMovie } from '@tabler/icons-react';
+import { IconMovie, IconBulb } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useT } from '@/i18n';
+import { describeError } from '@/lib/api/describe-error';
 import { addSampleFile } from '@/lib/api/files';
 import { createProject } from '@/lib/api/projects';
+import { useBillingSummary } from '@/lib/hooks/use-billing';
 import { applyWorkflowTemplate } from '@/lib/api/workflows';
 import { FIRST_FILM_DISMISS_KEY, firstFilmErrorKind, shouldOfferFirstFilm, startFirstFilm } from '@/lib/onboarding/first-film';
 import type { DashboardOverview } from '@/lib/types/dashboard';
@@ -57,6 +59,47 @@ export function FirstFilmButton({
     <Button variant={variant} leftSection={<IconMovie size={18} aria-hidden />} loading={busy} style={{ minHeight: 44 }} onClick={() => void go()}>
       {busy ? t('settingUp') : t('button')}
     </Button>
+  );
+}
+
+/** The ai-clip-from-idea recipe (inference WorkflowTemplatePresets.AiClipKey): a scene described in words. */
+export const DESCRIBE_SCENE_TEMPLATE_KEY = 'ai-clip-from-idea';
+
+/**
+ * "Describe a scene instead": adds the idea app to the project (no run, no spend) and opens its
+ * page; the person presses Run.
+ *
+ * The app makes AI video, which the Trial and Creator plans do not include (Run answers 402
+ * PLAN_NOT_ENTITLED). So the link shows only once the plan is known to include video generation
+ * (the summary's `unlocks` is present and does not list it): while the summary is unread, when billing is off, or when it is not included, it is not drawn,
+ * and nobody lands on an app they cannot run.
+ */
+export function DescribeSceneLink({ projectId }: { projectId: string }) {
+  const t = useT('onboarding.firstFilm');
+  const tAll = useT();
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const { data: summary } = useBillingSummary();
+  // The summary lists the features the plan lacks as `unlocks`; a loaded plan that does not list video generation has it.
+  const entitlements = summary?.entitlements;
+  if (!entitlements || entitlements.unlocks?.some((u) => u.feature === 'video_generation') !== false) return null;
+  const go = async () => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const workflow = await applyWorkflowTemplate(projectId, DESCRIBE_SCENE_TEMPLATE_KEY, true);
+      router.push(`/projects/${encodeURIComponent(projectId)}/workflows/${encodeURIComponent(workflow.id)}`);
+    } catch (err: unknown) {
+      notifications.show({ title: t('describeFailedTitle'), message: describeError(tAll, err, t('error.generic')), color: 'red' });
+      setBusy(false);
+    }
+  };
+  return (
+    <Anchor component="button" type="button" size="sm" disabled={busy} onClick={() => void go()}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 44 }}>
+      <IconBulb size={16} aria-hidden />
+      {busy ? t('settingUp') : t('describeScene')}
+    </Anchor>
   );
 }
 

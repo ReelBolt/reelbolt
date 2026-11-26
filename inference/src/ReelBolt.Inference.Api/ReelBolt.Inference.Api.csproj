@@ -30,7 +30,7 @@
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.7.0" />
     <PackageReference Include="DnsClient" Version="1.8.0" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.12" />
-    <PackageReference Include="RabbitMQ.Client" Version="7.2.2" />
+    <PackageReference Include="RabbitMQ.Client" Version="7.3.0" />
     <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.28.0" />
     <PackageReference Include="Microsoft.Agents.AI.Workflows" Version="1.28.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.15" />
@@ -44,11 +44,12 @@
          reference implementation's own regression vector is pinned by a test (Hamming distance <= 11).
          The native-assets package ships libSkiaSharp for the Alpine API image, which has no system one. -->
     <PackageReference Include="PdqHash" Version="1.1.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.2" />
+    <PackageReference Include="SkiaSharp" Version="4.157.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.157.0" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.21.0" />
-    <PackageReference Include="Qdrant.Client" Version="1.19.0" />
+    <PackageReference Include="Qdrant.Client" Version="1.20.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.0" />
   </ItemGroup>
 

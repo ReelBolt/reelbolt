@@ -73,6 +73,15 @@ export function registerSheet(id: string, close: () => void): () => void {
       id,
       setTimeout(() => {
         pending.delete(id);
+        // Take a sheet entry off only while the current entry IS a sheet entry (any sheet's: a sheet replaced in the same
+        // commit leaves the new one on top). When the page left the editor first (a Link inside the sheet, e.g. "Open in
+        // project files"), the current entry is the next page's, it carries no marker, and going back would bounce the
+        // user straight back into the editor.
+        const state = window.history.state as { rbSheet?: string } | null;
+        if (!state?.rbSheet) {
+          detachIfIdle();
+          return;
+        }
         ignorePops += 1;
         try {
           window.history.back();

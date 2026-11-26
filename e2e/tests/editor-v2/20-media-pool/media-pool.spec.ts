@@ -70,7 +70,12 @@ test('R05.2 search, sort and the kind filter change which tiles are shown', asyn
   // Kind filter: pictures only -> the still.
   await ed.tap(ed.testId('media-filter-button'));
   await ed.page.getByTestId('media-filter-kind-image').check();
-  await expect.poll(() => tileRefs(ed)).toEqual([ref(seed.files.still)]);
+  // Other specs upload more pictures into this shared project, so the picture filter is asserted as
+  // "the still is shown and no video or sound is" rather than "the still is the only tile".
+  const notPictures = [ref(seed.files.clipA), ref(seed.files.clipB), ref(seed.files.tone)];
+  await expect.poll(() => tileRefs(ed)).toContain(ref(seed.files.still));
+  await expect.poll(async () => (await tileRefs(ed)).filter((r) => notPictures.includes(r))).toEqual([]);
+  expect((await tileRefs(ed)).length).toBeLessThan(all.length);
   await ed.page.getByTestId('media-filter-kind-image').uncheck();
   await ed.page.keyboard.press('Escape');
   await expect.poll(() => tileRefs(ed)).toEqual(all);

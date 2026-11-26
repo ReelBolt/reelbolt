@@ -148,7 +148,7 @@ public sealed class StripeConfirmCheckoutTests : IDisposable
     private async Task<(long Balance, int Payments, int Subs, int Redemptions, string State)> Snapshot()
     {
         await using InferenceApiDbContext db = NewDb();
-        long balance = (await new CreditLedger(db).GetBalanceAsync(OrgId)).BalanceMillis;
+        long balance = (await new CreditLedger(db, new StripeKit.FixedClock(Now)).GetBalanceAsync(OrgId)).BalanceMillis;
         string state = string.Join(',', await db.Subscriptions.Select(s => s.Status + ":" + s.PeriodEnd).ToListAsync());
         return (balance, await db.BillingPayments.CountAsync(), await db.Subscriptions.CountAsync(), await db.PromotionRedemptions.CountAsync(), state);
     }

@@ -1,7 +1,7 @@
 {
   "card": {
     "running": "{count} running",
-    "emptyHint": "Empty. Open it to upload footage.",
+    "emptyHint": "Empty. Open it to upload footage or make a sample film.",
     "noDescription": "No description",
     "contents": "Project contents",
     "videos": "Videos",

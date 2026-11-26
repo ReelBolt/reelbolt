@@ -14,6 +14,7 @@ using ReelBolt.Inference.Api.Services.Workflows;
 using ReelBolt.Shared.Auth;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Workflows;
 
 namespace ReelBolt.Inference.Api.Controllers;
@@ -443,6 +444,9 @@ public class ProjectVoicesController : ControllerBase
             try
             {
                 ITranscriptionClient client = _transcriptionFactory.Get(asr);
+                // Metered to the project's organization as editor usage; an outer scope wins.
+                using IDisposable usageScope = UsageScope.BeginIfNone(
+                    _currentUser.OrganizationId, projectId, _currentUser.UserId, UsageSource.Editor);
                 await using var audio = new MemoryStream(reference.Bytes, writable: false);
                 TranscriptResult result = await client.TranscribeAsync(audio, reference.FileName, language: null, wordTimestamps: false, ct);
                 transcript = result.Text?.Trim() ?? string.Empty;

@@ -7,6 +7,7 @@ import { BrandMark } from '@/components/shell/BrandMark';
 import { authPageConfig, singleParam } from '@/lib/auth/config';
 import { offeredOAuth } from '@/lib/auth/oauth-server';
 import { servedLegalVersions } from '@/lib/auth/legal-server';
+import { firstVideoGrantOffered } from '@/lib/auth/first-video-server';
 import { isInAppBrowser } from '@/lib/auth/in-app-browser';
 import { readSignupCarry } from '@/lib/auth/signup-carry';
 import { welcomeFlowEnabled } from '@/lib/onboarding/config';
@@ -23,7 +24,7 @@ export const dynamic = 'force-dynamic';
  * that it is free to start. An invited teammate, and a visitor to an instance that takes no
  * sign-ups, keep the plain "Create your account": the outcome line is not what they came for.
  */
-function SignupHeading({ invite, open }: { invite: boolean; open: boolean }) {
+function SignupHeading({ invite, open, firstVideoOffered }: { invite: boolean; open: boolean; firstVideoOffered: boolean }) {
   const t = useT('auth.pages.signup');
   const outcomeLed = open && !invite;
   return (
@@ -33,7 +34,7 @@ function SignupHeading({ invite, open }: { invite: boolean; open: boolean }) {
       </Title>
       {(invite || outcomeLed) && (
         <Text size="sm" ta="center" c="dimmed">
-          {invite ? t('subtitleInvite') : t('subtitle')}
+          {invite ? t('subtitleInvite') : firstVideoOffered ? t('subtitleFirstVideo') : t('subtitle')}
         </Text>
       )}
     </>
@@ -82,6 +83,9 @@ export default async function SignupPage({
   // answer renders the form without a version; the API refuses a submission that names nothing it
   // serves and answers with the current ones, which the form then shows.
   const legal = await servedLegalVersions();
+  // The first-video promise is shown only when the grant is really on (a product decision): a self-hosted
+  // instance, or any failure to ask, shows the plain no-card wording.
+  const firstVideoOffered = await firstVideoGrantOffered();
   // A provider button on the SIGNUP page creates an account, which the API allows only when signup
   // is open; on an invite-only server it would only ever answer "ask for an invite".
   const signupProviders = oauth
@@ -109,7 +113,7 @@ export default async function SignupPage({
         <Center>
           <BrandMark size={56} />
         </Center>
-        <SignupHeading invite={!!inviteToken} open={config.signupEnabled} />
+        <SignupHeading invite={!!inviteToken} open={config.signupEnabled} firstVideoOffered={firstVideoOffered} />
       </Stack>
       {/* Provider sign-in comes first: one click and no password to choose. The form follows.
           Inside an in-app browser the order is reversed: the form is the way that works there. */}
@@ -156,7 +160,7 @@ export default async function SignupPage({
           {/* Document order: the form first (that is the phone layout), then the panel. */}
           {card}
           <div className={classes.value}>
-            <SignupValuePanel persona={carry.persona} welcomeEnabled={welcomeEnabled} />
+            <SignupValuePanel persona={carry.persona} welcomeEnabled={welcomeEnabled} firstVideoOffered={firstVideoOffered} />
           </div>
         </div>
       ) : (

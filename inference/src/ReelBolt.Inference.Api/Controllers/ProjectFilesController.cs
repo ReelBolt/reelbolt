@@ -25,6 +25,7 @@ using ReelBolt.Shared.Billing;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Data.Models.Billing;
 using ReelBolt.Shared.IntegrationEvents;
+using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Storage;
 using DirectUploadTicket = ReelBolt.Inference.Api.Controllers.Dto.DirectUploadTicket;
 
@@ -1398,6 +1399,10 @@ public class ProjectFilesController : ControllerBase
 
         try
         {
+            // The query embedding is metered to the project's organization under Indexing (a free kind), like
+            // the file-indexing consumer; the search service itself relies on this caller-opened scope.
+            using IDisposable usageScope = UsageScope.BeginIfNone(
+                project.OrganizationId, projectId, _currentUser.UserId, UsageSource.Indexing);
             IReadOnlyList<VectorSearchChunkResult> results = await _vectorSearchQueryService
                 .SearchProjectFilesAsync(projectId, request.Query, limit, ct);
 

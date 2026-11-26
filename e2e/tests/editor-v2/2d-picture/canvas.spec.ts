@@ -224,6 +224,7 @@ test('PE-041 the hand tool: dragging on the stage pans the view and never moves 
   await press(page.getByRole('button', { name: 'Move around the canvas', exact: true }), phone);
   const origin = () => stage.locator('svg > g').first().getAttribute('transform');
   const before = await origin();
+  await stageInView(page); // on a phone the page scrolls to the sheet: bring the stage under the header so the drag lands on it
   const box = (await stage.boundingBox())!;
   const c = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
   await page.mouse.move(c.x, c.y);

@@ -9,6 +9,7 @@ using ReelBolt.Shared.Tenancy;
 using ReelBolt.Inference.Api.Services.Tenancy;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Moderation;
 using ReelBolt.Shared.Storage;
 
@@ -582,7 +583,7 @@ public sealed class PublishModeration : IStoredCopyGate
                 if (mayProceed is not null && !await mayProceed(ct))
                     return HeldResult();
 
-                (transcript, noProvider) = await TryTranscribeAsync(sample.Audio, ct);
+                (transcript, noProvider) = await TryTranscribeAsync(sample.Audio, attribution, ct);
 
                 // A transcription that was attempted and failed is a real failure, never "frames only".
                 if (transcript is null && !noProvider)
@@ -601,7 +602,7 @@ public sealed class PublishModeration : IStoredCopyGate
                         if (mayProceed is not null && !await mayProceed(ct))
                             return HeldResult();
 
-                        (string? extraTranscript, bool extraNoProvider) = await TryTranscribeAsync(extra, ct);
+                        (string? extraTranscript, bool extraNoProvider) = await TryTranscribeAsync(extra, attribution, ct);
                         if (extraTranscript is null && !extraNoProvider)
                             return Unavailable(ModerationReasonCodes.Unclassified);
                         transcript = ModerationMediaSample.JoinTranscripts(transcript, extraTranscript);
@@ -1011,8 +1012,14 @@ public sealed class PublishModeration : IStoredCopyGate
         }
     }
 
-    private async Task<(string? Text, bool NoProvider)> TryTranscribeAsync(byte[] audio, CancellationToken ct)
+    private async Task<(string? Text, bool NoProvider)> TryTranscribeAsync(
+        byte[] audio, ModerationAttribution attribution, CancellationToken ct)
     {
+        // An outer scope (a run or a request) keeps its attribution; otherwise the ASR call is metered to the
+        // output's organization under Moderation (uncharged) instead of landing Unattributed.
+        using IDisposable usageScope = UsageScope.BeginIfNone(
+            attribution.OrganizationId == Guid.Empty ? null : attribution.OrganizationId, attribution.ProjectId, attribution.UserId, UsageSource.Moderation);
+
         ResolvedTranscriptionProvider? provider = await _providers.ResolvePlatformTranscriptionAsync(ct);
         if (provider is null)
         {

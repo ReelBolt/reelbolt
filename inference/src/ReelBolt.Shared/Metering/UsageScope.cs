@@ -107,6 +107,25 @@ public static class UsageScope
         return new Restore(previous);
     }
 
+    /// <summary>
+    /// Opens a scope only when the current flow has none, so an outer scope keeps its attribution. Always
+    /// returns a disposable (a no-op when a scope already exists), so callers can use it in a <c>using</c>.
+    /// </summary>
+    public static IDisposable BeginIfNone(
+        Guid? organizationId, Guid? projectId, Guid? userId, UsageSource source)
+        => Current is null
+            ? Begin(organizationId, projectId, null, null, userId, source)
+            : NoopScope.Instance;
+
+    private sealed class NoopScope : IDisposable
+    {
+        public static readonly NoopScope Instance = new();
+
+        public void Dispose()
+        {
+        }
+    }
+
     private sealed class Restore(UsageScopeState? previous) : IDisposable
     {
         private int _disposed;

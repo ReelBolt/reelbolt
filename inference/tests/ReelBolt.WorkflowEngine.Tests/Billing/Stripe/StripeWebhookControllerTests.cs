@@ -89,7 +89,7 @@ public sealed class StripeWebhookControllerTests : IDisposable
     private async Task<long> Balance()
     {
         await using InferenceApiDbContext db = NewDb();
-        return (await new CreditLedger(db).GetBalanceAsync(OrgId)).BalanceMillis;
+        return (await new CreditLedger(db, new StripeKit.FixedClock(Now)).GetBalanceAsync(OrgId)).BalanceMillis;
     }
 
     private static string TopUpBody(string id = "evt_t1") => Envelope("checkout.session.completed", TopUpSession(credits: 1000), id: id);
