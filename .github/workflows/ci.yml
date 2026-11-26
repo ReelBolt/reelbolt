@@ -1126,6 +1126,8 @@ jobs:
         run: npm test -- runner.spec.ts
 
   # ── E2E: editor v2 regression suite on its isolated stack ────────────────
+  # ADVISORY: not in the `ci` aggregate's needs, so a red shard does not block a
+  # merge. Keep the job and shard names unchanged. See docs/ci.md.
   # e2e/scripts/editor-v2-stack.sh builds and starts compose project
   # reelbolt-editor-remediation on http://localhost:18080 with random secrets
   # in /tmp/editor-remediation/stack.env; the suite reads the local admin login
@@ -1289,7 +1291,9 @@ jobs:
       - docker-publish
       - sandbox-runtime-arm64
       - runner-e2e
-      - editor-e2e
+      # editor-e2e is deliberately NOT listed: it runs and reports as its own
+      # checks but is advisory (flaky on shared hosted runners). See docs/ci.md
+      # "Editor E2E is advisory" for the policy and how to promote it back.
       - infra-lint
       - nginx-live
     steps:

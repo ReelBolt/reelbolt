@@ -43,8 +43,14 @@ public static partial class AcquisitionVocabulary
     /// <summary>What a person starts from.</summary>
     public static readonly IReadOnlyList<string> Materials = [FootageMaterial, CodeMaterial, IdeaMaterial];
 
-    /// <summary>The recipe a person who starts from clips, or from an idea they will film, gets first.</summary>
+    /// <summary>The recipe a person who starts from clips gets first.</summary>
     public const string FootageStarterTemplateKey = "edit-my-video";
+
+    /// <summary>
+    /// The recipe a person who has only an idea gets first: an animation made of text, shapes and motion from words alone.
+    /// It runs on every plan (no paid video generation), so a new Trial workspace can press Run.
+    /// </summary>
+    public const string IdeaStarterTemplateKey = "animation-from-idea";
 
     /// <summary>The recipe a person who starts from code gets first (the automatic code-promo starter).</summary>
     public const string CodeStarterTemplateKey = WorkflowTemplateCatalog.StarterTemplateKey;
@@ -134,12 +140,13 @@ public static partial class AcquisitionVocabulary
         value is { Length: >= 1 and <= UtmValueMaxLength } && !value.Contains('\n') && UtmValueRegex().IsMatch(value);
 
     /// <summary>
-    /// The starter recipe for a material: clips and an idea start from <see cref="FootageStarterTemplateKey"/>,
-    /// code from <see cref="CodeStarterTemplateKey"/>. Null for anything that is not a material.
+    /// The starter recipe for a material: clips start from <see cref="FootageStarterTemplateKey"/>, an idea from
+    /// <see cref="IdeaStarterTemplateKey"/>, code from <see cref="CodeStarterTemplateKey"/>. Null for anything that is not a material.
     /// </summary>
     public static string? StarterTemplateKeyFor(string? material) => material switch
     {
-        FootageMaterial or IdeaMaterial => FootageStarterTemplateKey,
+        FootageMaterial => FootageStarterTemplateKey,
+        IdeaMaterial => IdeaStarterTemplateKey,
         CodeMaterial => CodeStarterTemplateKey,
         _ => null,
     };

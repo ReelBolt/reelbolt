@@ -63,8 +63,9 @@ a review loop that scores the cut and sends a low score back for another pass.
 
 - **Persona**: `creator`, `business`, `educator`, `nonprofit`, `software`, `agency`, `other`.
 - **Material** (what the person starts from): `footage`, `code`, `idea`.
-- **Starter recipe**: `footage` and `idea` -> `video-derush-edit`; `code` -> `quick-win-promo`.
-  `idea` also shows a persona shot list ("film these five clips on your phone").
+- **Starter recipe**: `footage` -> `edit-my-video`; `idea` -> `animation-from-idea` (an animation of text, shapes and
+  motion made from words alone, no paid video generation, so every plan can run it); `code` -> `quick-win-promo`.
+  `idea` also shows a persona shot list ("film these five clips on your phone") with a "Describe a video instead" link to the app.
 - **Link channel**: `hackernews`, `reddit`, `linkedin`, `x`, `producthunt`, `youtube`, `tiktok`,
   `instagram`, `facebook`, `github`, `discord`, `newsletter`, `email`, `blog`, `directory`, `press`,
   `partner`, `ads`, `other`.
