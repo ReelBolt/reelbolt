@@ -398,6 +398,7 @@ public sealed class InferenceProviderTester
         try
         {
             ITranscriptionClient client = _transcriptionClientFactory.Get(provider);
+            // Accepted unattributed: an admin connectivity ping has no organization (usage-attribution drift guard allowlist).
             await using MemoryStream wav = BuildSilentWav();
 
             TranscriptResult result = await client.TranscribeAsync(wav, "ping.wav", language: null, wordTimestamps: false, ct);
@@ -430,6 +431,7 @@ public sealed class InferenceProviderTester
         Stopwatch stopwatch = Stopwatch.StartNew();
         try
         {
+            // Accepted unattributed: an admin connectivity ping has no organization (usage-attribution drift guard allowlist).
             Microsoft.Extensions.AI.IEmbeddingGenerator<string, Microsoft.Extensions.AI.Embedding<float>> client =
                 _embeddingClientFactory.Get(provider);
             Microsoft.Extensions.AI.GeneratedEmbeddings<Microsoft.Extensions.AI.Embedding<float>> result =

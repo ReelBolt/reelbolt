@@ -18,16 +18,26 @@ const TITLE_ID = 'signup-value-title';
  *  - "what happens next" lists only steps this deployment has: the welcome questions are named
  *    only while the welcome flow is switched on (`welcomeEnabled`), and the email step says it
  *    applies to an email sign-up (a provider sign-up sends no email);
- *  - the trust facts are the two that hold whatever the billing settings are. The first-video
- *    credit grant is deliberately NOT quoted here: whether it applies (billing on, the grant
- *    switched on, the address eligible) is only known after sign-in, where the dashboard says it
- *    with the real figure. The public-alpha notice is the auth layout's, right below.
+ *  - the trust facts hold whatever the billing settings are. The first-video grant is said in
+ *    words, the same promise and caveats the marketing site makes (its trust strip), and WITHOUT a
+ *    figure: whether it applies (billing on, the grant switched on, the address eligible) and the
+ *    amount are only known after sign-in, where the dashboard shows the real number. This page
+ *    has no public source for it, and a typed credit amount would drift from the billing config.
+ *    The public-alpha notice is the auth layout's, right below.
  *
  * No hooks beyond the translator and no handlers, so it renders inside the server-rendered page.
  * For the same reason the list rows are the named `ListItem` export, never `List.Item`: on the
  * server `List` is a client reference, and a property read off it is undefined (a 500 on the page).
  */
-export function SignupValuePanel({ persona, welcomeEnabled = true }: { persona?: Persona; welcomeEnabled?: boolean }) {
+export function SignupValuePanel({
+  persona,
+  welcomeEnabled = true,
+  firstVideoOffered = false,
+}: {
+  persona?: Persona;
+  welcomeEnabled?: boolean;
+  firstVideoOffered?: boolean;
+}) {
   // The root translator: the per-audience keys in lib/auth/signup-value.ts are absolute.
   const t = useT();
   const audience = valueAudience(persona);
@@ -99,6 +109,7 @@ export function SignupValuePanel({ persona, welcomeEnabled = true }: { persona?:
           }
         >
           <ListItem>{t('auth.value.trustNoCard')}</ListItem>
+          {firstVideoOffered && <ListItem>{t('auth.value.trustFirstVideo')}</ListItem>}
           <ListItem>{t('auth.value.trustReviewed')}</ListItem>
         </List>
       </Stack>

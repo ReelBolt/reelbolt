@@ -1214,6 +1214,17 @@ export class SyncClient {
         event.returnValue = '';
       }
     };
+    // A client-side route change (Next <Link>) fires none of the three events above and the editor only unmounts
+    // (and dispose() flushes) once the next route's payload arrives: 0.5-7 s on a loaded machine, so the 500 ms
+    // debounce, not the leave, saved the edit. Sending when the user ACTS on a same-origin link starts the flush
+    // within the 300 ms contract (P3-SYNC-10); like beforeunload it is only the autosave a little early.
+    const onLinkClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const a = (event.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
+      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+      if (a.origin !== target.location.origin || (a.pathname === target.location.pathname && a.search === target.location.search)) return;
+      onHide();
+    };
     const onOnline = () => {
       void this.reconnect();
     };
@@ -1223,6 +1234,7 @@ export class SyncClient {
     target.addEventListener('pagehide', onHide);
     target.document.addEventListener('visibilitychange', onVisibility);
     target.addEventListener('beforeunload', onBeforeUnload);
+    target.document.addEventListener('click', onLinkClick, true);
     target.addEventListener('online', onOnline);
     target.addEventListener('offline', onOffline);
     this.startPresence();
@@ -1232,6 +1244,7 @@ export class SyncClient {
       target.removeEventListener('pagehide', onHide);
       target.document.removeEventListener('visibilitychange', onVisibility);
       target.removeEventListener('beforeunload', onBeforeUnload);
+      target.document.removeEventListener('click', onLinkClick, true);
     };
     return this.detachLifecycle;
   }

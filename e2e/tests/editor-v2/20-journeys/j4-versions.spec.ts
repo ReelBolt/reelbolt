@@ -1,6 +1,6 @@
 import { test, expect, EditorPage, type Seed } from '../../../fixtures/editor-v2';
 import type { Item, Timeline } from '../../../fixtures/editor-v2/api';
-import { startRender, runOn } from '../../../fixtures/editor-v2/rows';
+import { startRender, waitRender, runOn } from '../../../fixtures/editor-v2/rows';
 import { TABLET, seekTo, tapOn } from './journey-helpers';
 
 /**
@@ -64,8 +64,9 @@ async function journey4History(ed: EditorPage, seed: Seed, touch: boolean): Prom
   await expect.poll(async () => (await versions()).some((v) => v.name === 'Edit two'), { message: 'Edit two is a named version' }).toBe(true);
   await splitAt(ed, 375, touch);
   await ed.expectServer((t) => hasCutAt(t, 375), 'the third split is stored');
-  await startRender(api, seed.projectId, ed.timelineId); // pins this revision, which has no point of its own yet
+  const pinned = await startRender(api, seed.projectId, ed.timelineId); // pins this revision, which has no point of its own yet
   await expect.poll(async () => (await versions()).some((v) => v.cause === 'beforeRender'), { message: 'a render start stores a version' }).toBe(true);
+  await waitRender(api, seed.projectId, ed.timelineId, pinned.executionId); // never leave a Running render behind: it holds the org's execution slot for the next spec
   await splitAt(ed, 525, touch);
   await ed.expectServer((t) => hasCutAt(t, 525), 'the fourth split is stored (it has no point yet, so the restore has something to keep)');
 

@@ -58,6 +58,6 @@ public class SandboxPackageCatalogTests
         string error = doc.RootElement.GetProperty("error").GetString()!;
         Assert.Contains("no network", error);
         Assert.Contains("left-pad", error);
-        Assert.Contains("lucide-react@1.77.0", doc.RootElement.GetProperty("availablePackages").EnumerateArray().Select(e => e.GetString()));
+        Assert.Contains("lucide-react@1.78.0", doc.RootElement.GetProperty("availablePackages").EnumerateArray().Select(e => e.GetString()));
     }
 }

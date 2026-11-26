@@ -185,10 +185,13 @@ for (const source of SOURCES) {
     runOn('desktop');
     test.setTimeout(420_000);
     const seed = await seedFor(source, baseURL!);
-    const load = await waitForQuietMachine();
+    // Software GL (no display: every hosted runner) is measured and printed but never enforced, so a quiet machine buys
+    // nothing there: waiting up to 240 s for it only ate the 420 s test budget (CI run 45796910736: the first case timed
+    // out in the wait + a slow seed instead of reaching its annotated skip).
+    const load = SOFTWARE_ONLY ? os.loadavg()[0] : await waitForQuietMachine();
     console.log(`PERF-01 ${source.name}: machine load average ${load.toFixed(1)} on ${os.cpus().length} cores (skip above ${SKIP_LOAD_FACTOR * os.cpus().length})`);
     testInfo.annotations.push({ type: 'perf-load', description: `1-min load ${load.toFixed(1)}` });
-    test.skip(load > SKIP_LOAD_FACTOR * os.cpus().length, `machine saturated (load ${load.toFixed(1)} > ${SKIP_LOAD_FACTOR} x cores): frame delivery cannot be measured; NOT a pass`);
+    test.skip(!SOFTWARE_ONLY && load > SKIP_LOAD_FACTOR * os.cpus().length, `machine saturated (load ${load.toFixed(1)} > ${SKIP_LOAD_FACTOR} x cores): frame delivery cannot be measured; NOT a pass`);
     const fps = 'fps60' in source ? 60 : 30;
     const is4k = 'res4k' in source;
 

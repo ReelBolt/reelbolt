@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Options;
 using ReelBolt.Inference.Api.Services.Tenancy;
 using ReelBolt.Shared.Inference;
+using ReelBolt.Shared.Data.Models;
+using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Moderation;
 using ReelBolt.Shared.Tenancy;
 
@@ -62,7 +64,7 @@ public sealed class MarketplacePreviewModerator(
                 }
                 else
                 {
-                    transcript = await TranscribeAsync(provider, sample.Audio, ct);
+                    transcript = await TranscribeAsync(provider, sample.Audio, organizationId, ct);
                     if (transcript is null)
                         return new(PreviewModerationOutcome.Unavailable, "transcription_failed");
                 }
@@ -103,8 +105,12 @@ public sealed class MarketplacePreviewModerator(
         }
     }
 
-    private async Task<string?> TranscribeAsync(ResolvedTranscriptionProvider provider, byte[] audio, CancellationToken ct)
+    private async Task<string?> TranscribeAsync(ResolvedTranscriptionProvider provider, byte[] audio, Guid organizationId, CancellationToken ct)
     {
+        // The publisher's organization, under Moderation (uncharged); an outer scope wins.
+        using IDisposable usageScope = UsageScope.BeginIfNone(
+            organizationId == Guid.Empty ? null : organizationId, null, null, UsageSource.Moderation);
+
         try
         {
             ITranscriptionClient client = transcription.Get(provider);

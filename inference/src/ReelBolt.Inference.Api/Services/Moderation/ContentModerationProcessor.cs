@@ -10,6 +10,7 @@ using ReelBolt.Inference.Api.Services.Tenancy;
 using ReelBolt.Shared.Data.Models;
 using ReelBolt.Shared.Inference;
 using ReelBolt.Shared.IntegrationEvents;
+using ReelBolt.Shared.Metering;
 using ReelBolt.Shared.Moderation;
 using ReelBolt.Shared.Tenancy;
 
@@ -109,6 +110,11 @@ public sealed class ContentModerationProcessor
             _logger.LogInformation("Project file {FileId} no longer exists; nothing to moderate", fileId);
             return;
         }
+
+        // The ASR call that transcribes sampled audio is metered to the file's organization under Moderation
+        // (uncharged), not left as Unattributed platform usage; a hosted worker has no ambient scope.
+        using IDisposable usageScope = UsageScope.BeginIfNone(
+            organizationId == Guid.Empty ? null : organizationId, file.ProjectId, null, UsageSource.Moderation);
 
         // Judge the CSAM state before touching the bytes. A quarantined file is suspected illegal
         // material and must never reach a general moderation API; an unresolved verdict waits for

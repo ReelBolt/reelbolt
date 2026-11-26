@@ -980,6 +980,8 @@ There is **no migration** and no stored interval column.
 | `Billing:FirstVideoGrant:Credits` | `750` | Whole credits. |
 | `Billing:FirstVideoGrant:ExpiryDays` | `30` | Days until the grant expires. |
 
+**Public read.** `GET /api/v1/billing/promotions/first-video` is anonymous and answers `{ "enabled": bool }` from the kill switch above (404 when billing is off), cached 30 s (`Cache-Control: public, max-age=30`). It carries no figure, code or id; the web sign-up page reads it so it only promises the grant when it is on.
+
 **Summary.** `GET /api/v1/billing/summary` carries an additive `firstVideoGrant` block `{ credits, expiresAt, remaining }`, or `null` once it is spent, expired or never granted. It is derived from the Promo grant behind the `firstvideo:` ledger entry, not from a new table.
 
 **Refusals.** The grant is refused (the account and the 100-credit trial still work) when the new account looks abusive. The reason is decided before the grant is written, stored in `trial_claims.first_video_denied_reason` in the same transaction as the claim, and logged as reason plus organization id only. The raw sign-up IP is never stored in that row or logged.
@@ -2361,7 +2363,7 @@ the results of the organizations it checked, plus the ledger's unattributed `usa
 
 The unattributed-usage count is chased the same way: find the metered call that ran without a usage
 scope (the recorder logs a Warning with the kind, provider and model when it writes such a row) and
-give it one.
+give it one. Accepted exceptions: the admin provider test pings (no organization). Moderation ASR is attributed under `Moderation` (uncharged) and the project-search query embedding under `Indexing`; a new ASR or embedding call site needs a scope too (`UsageAttributionDriftGuardTests`).
 
 ### What the reconciler deliberately does not do
 
