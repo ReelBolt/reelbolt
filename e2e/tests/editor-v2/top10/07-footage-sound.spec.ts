@@ -103,9 +103,15 @@ test('TOP10-07 P3-VIEW-03 footage inserted from the media pool plays its sound, 
     const pane = page.locator('label', { hasText: /^Media$/ }).first();
     if (await pane.isVisible().catch(() => false)) await pane.tap();
   }
-  await ed.tap(tile);
-  await expect(ed.testId('media-insert-length'), 'the pool says clipA goes in with its sound').toContainText(/with its sound/i);
-  await ed.tap(ed.testId('media-insert-at-playhead'));
+  if (ed.isPhone) {
+    // The phone's Add media sheet inserts from the tile's menu; the stored result below proves the sound came along.
+    await ed.tap(page.locator(`[data-testid="media-tile-menu"][data-for-media-ref="file:${files.clipA}"]`).first());
+    await ed.tap(ed.testId('tile-place-insert'));
+  } else {
+    await ed.tap(tile);
+    await expect(ed.testId('media-insert-length'), 'the pool says clipA goes in with its sound').toContainText(/with its sound/i);
+    await ed.tap(ed.testId('media-insert-at-playhead'));
+  }
   const placed = await ed.expectServer(
     (tl) => tl.document.tracks.some((t) => t.kind === 'video' && t.items.some((i) => i.assetRef?.projectFileId === files.clipA))
       && tl.document.tracks.some((t) => t.kind === 'audio' && t.items.some((i) => i.assetRef?.projectFileId === files.clipA)),

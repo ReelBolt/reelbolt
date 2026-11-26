@@ -1,3 +1,4 @@
+import { reloadPicture, layerAction, openPanel } from '../../../fixtures/editor-v2/picture-lane';
 import {
   test, expect, openFresh, savedBadge, getFull, pollPicture, isPhone, press, addBadgeLayer, addTextLayer, layerOf, openTab, createFull,
 } from '../../../fixtures/editor-v2/picture-lane';
@@ -15,7 +16,7 @@ test('PE-081 PE-082 PE-083 hide, lock and select a layer: the server follows and
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe081-${testInfo.project.name}`);
   const layer = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await expect(list(page).getByRole('button', { name: /^Select / })).toHaveCount(2);
 
   // Select: the row is marked current and the layer's own controls appear.
@@ -35,7 +36,7 @@ test('PE-081 PE-082 PE-083 hide, lock and select a layer: the server follows and
   await pollPicture(api, pics.projectId, pic.id, (p) => layerOf(p, layer.id).locked === true, 'locked on the server');
   await expect(page.getByRole('button', { name: 'Flip horizontally' })).toBeDisabled();
   await expect(page.getByText('Locked: unlock to move, resize or flip.')).toBeVisible();
-  await page.reload();
+  await reloadPicture(page);
   await expect(page.getByRole('button', { name: `Unlock ${layer.label}` }), 'the lock survives a reload').toBeVisible();
   await press(page.getByRole('button', { name: `Unlock ${layer.label}` }), phone);
   await pollPicture(api, pics.projectId, pic.id, (p) => !layerOf(p, layer.id).locked, 'unlocked on the server');
@@ -45,18 +46,27 @@ test('PE-083 a layer\'s name is readable and a 44 px target on a phone, with its
   runOn('pixel7', 'iphone14webkit');
   const { pic } = await openFresh(page, api, pics, `pe083p-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   const name = list(page).getByRole('button', { name: `Select ${badge.label}` });
   const box = (await name.boundingBox())!;
   expect(box.width, `the name button is wide enough to read (${box.width} px)`).toBeGreaterThanOrEqual(80);
   expect(box.height).toBeGreaterThanOrEqual(43.5);
   await expect(name.getByText(badge.label), 'the name text is visible, not squeezed to nothing').toBeVisible();
   const row = (await list(page).getByRole('listitem').first().boundingBox())!;
-  for (const label of [`Move ${badge.label} forward`, `Move ${badge.label} back`, `Delete ${badge.label}`, `Hide ${badge.label}`]) {
-    const b = (await page.getByRole('button', { name: label }).boundingBox())!;
+  // On a phone the row keeps Hide and a "..." menu (Move and Delete live in that menu): both stay inside the row and are 44 px targets.
+  const buttons = { Hide: page.getByRole('button', { name: `Hide ${badge.label}` }), 'row menu': page.getByTestId(`layer-menu-${badge.id}`) };
+  for (const [label, locator] of Object.entries(buttons)) {
+    const b = (await locator.boundingBox())!;
     expect(b.x + b.width, `${label} stays inside the row`).toBeLessThanOrEqual(row.x + row.width + 1);
     expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(43.5);
   }
+  await layerAction(page, badge, 'forward', true);
+  for (const action of ['forward', 'back', 'delete'] as const) {
+    const item = page.getByTestId(action === 'delete' ? `layer-menu-delete-${badge.id}` : `layer-menu-${action}-${badge.id}`);
+    expect((await item.boundingBox())!.height, `the menu item ${action} is a 44 px target`).toBeGreaterThanOrEqual(43.5);
+  }
+  await page.keyboard.press('Escape');
+  await openPanel(page, 'Layers'); // Escape may close the sheet under the menu too
   await name.tap();
   await expect(name).toHaveAttribute('aria-current', 'true');
 });
@@ -65,18 +75,23 @@ test('PE-084 PE-085 PE-080 move a layer forward and back with the buttons (the t
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe084-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   const order = async () => (await getFull(api, pics.projectId, pic.id)).layers.sort((a, b) => a.zOrder - b.zOrder).map((l) => l.id);
   const original = pic.layers[0].id;
   expect(await order(), 'the badge starts in front').toEqual([original, badge.id]);
 
   const front = () => list(page).getByRole('listitem').first();
   await expect(front()).toContainText(badge.label);
-  await expect(page.getByRole('button', { name: `Move ${badge.label} forward` }), 'the front layer cannot go further forward').toBeDisabled();
-  await press(page.getByRole('button', { name: `Move ${badge.label} back` }), phone);
+  const forwardOpen = await layerAction(page, badge, 'forward', true);
+  await expect(forwardOpen, 'the front layer cannot go further forward').toBeDisabled();
+  if (phone) {
+    await page.keyboard.press('Escape'); // closes the row menu (and, on some builds, the sheet under it)
+    await openPanel(page, 'Layers');
+  }
+  await layerAction(page, badge, 'back');
   await expect.poll(order, { message: 'back moved the badge behind the photo on the server' }).toEqual([badge.id, original]);
   await expect(front()).not.toContainText(badge.label);
-  await press(page.getByRole('button', { name: `Move ${badge.label} forward` }), phone);
+  await layerAction(page, badge, 'forward');
   await expect.poll(order, { message: 'forward put it in front again' }).toEqual([original, badge.id]);
 
   if (!phone) {
@@ -90,9 +105,9 @@ test('PE-086 PE-087 deleting a layer asks first, removes it for good and clears 
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe086-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
 
-  await press(page.getByRole('button', { name: `Delete ${badge.label}` }), phone);
+  await layerAction(page, badge, 'delete');
   const dialog = page.getByRole('dialog', { name: 'Delete this layer?' });
   await expect(dialog).toContainText('undo history is cleared');
   await press(dialog.getByRole('button', { name: 'Cancel' }), phone);
@@ -101,17 +116,18 @@ test('PE-086 PE-087 deleting a layer asks first, removes it for good and clears 
 
   await press(page.getByRole('button', { name: 'Hide ' + pic.layers[0].label }), phone); // something to undo
   await expect(page.getByRole('button', { name: 'Undo', exact: true })).toBeEnabled();
-  await press(page.getByRole('button', { name: `Delete ${badge.label}` }), phone);
+  await layerAction(page, badge, 'delete');
   await press(page.getByRole('dialog', { name: 'Delete this layer?' }).getByRole('button', { name: 'Delete' }), phone);
   await expect(list(page).getByRole('button', { name: `Select ${badge.label}` })).toHaveCount(0);
   await pollPicture(api, pics.projectId, pic.id, (p) => p.layers.every((l) => l.id !== badge.id), 'the layer is gone on the server');
   await expect(page.getByRole('button', { name: 'Undo', exact: true }), 'deleting clears the undo history').toBeDisabled();
 
   // The original photo layer can be deleted as well; the picture still opens and lists no layers.
-  await press(page.getByRole('button', { name: `Delete ${pic.layers[0].label}` }), phone);
+  await layerAction(page, pic.layers[0], 'delete');
   await press(page.getByRole('dialog', { name: 'Delete this layer?' }).getByRole('button', { name: 'Delete' }), phone);
   await pollPicture(api, pics.projectId, pic.id, (p) => p.layers.length === 0, 'the original layer is gone too');
   await openPicture(page, pics.projectId, pic.id);
+  await openPanel(page, 'Layers');
   await expect(page.getByText(/no layers yet/i)).toBeVisible();
 });
 
@@ -119,7 +135,7 @@ test('PE-089 PE-090 PE-091 PE-092 PE-093 PE-094 name, opacity, blend, role and f
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe089-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await press(list(page).getByRole('button', { name: `Select ${badge.label}` }), phone);
 
   const name = page.getByLabel('Name', { exact: true });
@@ -148,7 +164,7 @@ test('PE-089 PE-090 PE-091 PE-092 PE-093 PE-094 name, opacity, blend, role and f
   await pollPicture(api, pics.projectId, pic.id, (p) => layerOf(p, badge.id).transform.flipX === true && layerOf(p, badge.id).transform.flipY === true, 'both flips on the server');
 
   await savedBadge(page);
-  await page.reload();
+  await reloadPicture(page);
   await press(list(page).getByRole('button', { name: 'Select Sticker' }), phone);
   await expect(page.getByLabel('Name', { exact: true })).toHaveValue('Sticker');
   await expect(page.getByRole('button', { name: 'Flip horizontally' })).toHaveAttribute('aria-pressed', 'true');

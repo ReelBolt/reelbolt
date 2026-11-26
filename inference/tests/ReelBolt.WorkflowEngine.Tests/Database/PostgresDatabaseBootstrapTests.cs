@@ -86,6 +86,33 @@ public class PostgresDatabaseBootstrapTests
         }
     }
 
+    // Npgsql 11 + EF provider 10.0.4: EF's own create path throws MissingMethodException, so the database
+    // must exist as soon as the bootstrap returns, before any MigrateAsync (docs/database-connections.md).
+    [Fact]
+    public async Task The_bootstrap_creates_a_missing_database_before_any_migration_runs()
+    {
+        string? baseConnection = PostgresTestEnvironment.BaseConnectionString();
+        if (string.IsNullOrWhiteSpace(baseConnection))
+        {
+            return;
+        }
+
+        string dbName = NewDatabaseName();
+        await using NpgsqlDataSource admin = PostgresTestEnvironment.CreateAdminDataSource(baseConnection);
+
+        try
+        {
+            (await DatabaseExistsAsync(admin, dbName)).Should().BeFalse();
+            await PostgresDatabaseBootstrap.EnsureDatabaseExistsAsync(
+                PostgresTestEnvironment.ForDatabase(baseConnection, dbName), BootstrapName, new RecordingLogger());
+            (await DatabaseExistsAsync(admin, dbName)).Should().BeTrue();
+        }
+        finally
+        {
+            await DropDatabaseAsync(admin, dbName);
+        }
+    }
+
     // Security S-16 / QA-13: when the database is missing and the bootstrap cannot create it (no CREATEDB),
     // startup fails with the step and SqlState; it no longer logs and leaves the create to EF's unnamed source.
     [Fact]
@@ -145,7 +172,7 @@ public class PostgresDatabaseBootstrapTests
         }
     }
 
-    // Security S-25: a string with neither Database nor Username. Npgsql 10.0.3 takes the user from PGUSER
+    // Security S-25: a string with neither Database nor Username. Npgsql 11.0.0 takes the user from PGUSER
     // (NpgsqlConnector.GetUsernameAsync) and sends no database, so the server opens the database named
     // after that user; PGDATABASE is never read (PostgresEnvironment has no such key). The bootstrap must
     // create that database instead of returning, or MigrateAsync takes EF's unnamed admin source.

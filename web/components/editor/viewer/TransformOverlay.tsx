@@ -55,6 +55,7 @@ import {
 } from '@/lib/editing/viewer-transform';
 import { useT } from '@/i18n';
 import { msg } from '@/i18n/msg';
+import classes from './TransformOverlay.module.css';
 
 export interface TransformOverlayProps {
   store: EditorStore;
@@ -129,7 +130,10 @@ function PickLayer({ store, sourceSizeFor }: { store: EditorStore; sourceSizeFor
   return <div ref={ref} data-testid="viewer-pick-layer" onPointerDown={onDown} style={{ position: 'absolute', inset: 0, zIndex: 2, touchAction: 'manipulation' }} />;
 }
 
-/** The one-line, dismissible "how to use the handles" hint; shown once per session. */
+/**
+ * The one-line, dismissible "how to use the handles" hint; shown once per session. It lets pointers through (only its button takes
+ * them): on a picture that touches the top of the frame the rotate handle sits below the picture, under the hint.
+ */
 function TransformHint({ x, y, width }: { x: number; y: number; width: number }) {
   const t = useT('editor.viewer.transformOverlay');
   const [open, setOpen] = useState(() => !transformHintSeen());
@@ -142,12 +146,12 @@ function TransformHint({ x, y, width }: { x: number; y: number; width: number })
     <Box
       data-testid="viewer-xform-hint"
       role="note"
-      style={{ position: 'absolute', left: Math.max(8, Math.min(x - w / 2, width - w - 8)), top: y, width: w, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'var(--rb-ed-header-bg)', border: '1px solid var(--rb-ed-line)', borderRadius: 4, pointerEvents: 'auto', zIndex: 4 }}
+      style={{ position: 'absolute', left: Math.max(8, Math.min(x - w / 2, width - w - 8)), top: y, width: w, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'var(--rb-ed-header-bg)', border: '1px solid var(--rb-ed-line)', borderRadius: 4, pointerEvents: 'none', zIndex: 4 }}
     >
       <Text fz={12} style={{ flex: 1, minWidth: 0 }}>
         {t('hint')}
       </Text>
-      <Button data-testid="viewer-xform-hint-dismiss" size="compact-xs" fz={12} variant="default" onClick={() => setOpen(false)}>
+      <Button data-testid="viewer-xform-hint-dismiss" size="compact-xs" fz={12} variant="default" style={{ pointerEvents: 'auto' }} onClick={() => setOpen(false)}>
         {t('hintDismiss')}
       </Button>
     </Box>
@@ -332,8 +336,9 @@ function OverlayFor({ store, doc, clip, frame, playing, sourceSizeFor, readOnly 
       role="group"
       aria-label={t('pictureHandlesArrowKeys')}
       tabIndex={0}
+      className={classes.root}
       onKeyDown={nudge}
-      style={{ position: 'absolute', inset: 0, zIndex: 3, outline: 'none', touchAction: 'none', pointerEvents: 'none' }}
+      style={{ position: 'absolute', inset: 0, zIndex: 3, touchAction: 'none', pointerEvents: 'none' }}
     >
       {k > 0 && (
         <>
@@ -482,7 +487,7 @@ function TextOverlayFor({ store, doc, item, playing, readOnly }: { store: Editor
   const boxStyle = (b: Frame, extra: React.CSSProperties): React.CSSProperties => ({ position: 'absolute', left: b.cx * k, top: b.cy * k, width: b.w * k, height: b.h * k, transform: 'translate(-50%, -50%)', boxSizing: 'border-box', ...extra });
 
   return (
-    <Box ref={rootRef} data-testid="viewer-text-transform" role="group" aria-label={t('textBoxLabel')} tabIndex={0} style={{ position: 'absolute', inset: 0, zIndex: 3, outline: 'none', touchAction: 'none', pointerEvents: 'none' }}>
+    <Box ref={rootRef} data-testid="viewer-text-transform" role="group" aria-label={t('textBoxLabel')} tabIndex={0} className={classes.root} style={{ position: 'absolute', inset: 0, zIndex: 3, touchAction: 'none', pointerEvents: 'none' }}>
       {k > 0 && (
         <>
           <div
@@ -576,7 +581,7 @@ function PositionMenu({ disabled, coarse, onFit, onFill, onPad, onCorner }: { di
   return (
     <Popover opened={open} onChange={setOpen} position="bottom-end" withArrow shadow="md" withinPortal>
       <Popover.Target>
-        <Button data-testid="viewer-xform-menu" size={coarse ? 'md' : 'compact-sm'} fz={12} variant="default" leftSection={<IconFocus2 size={14} />} onClick={() => setOpen((o) => !o)} style={coarse ? { minHeight: 44 } : undefined}>
+        <Button data-testid="viewer-xform-menu" size={coarse ? 'md' : 'compact-sm'} fz={12} variant="default" leftSection={<IconFocus2 size={14} />} onClick={() => setOpen((o) => !o)} style={coarse ? { minHeight: 44, minWidth: 44 } : undefined}>
           {t('position')}
         </Button>
       </Popover.Target>

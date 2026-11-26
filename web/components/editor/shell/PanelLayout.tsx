@@ -72,6 +72,9 @@ export interface PanelLayoutProps {
   timelineToggle?: React.ReactNode;
 }
 
+/** The floating drawer button (6 px in from the edge, at most 120 px wide) never overlaps the viewer: the viewer keeps this much clear on its right. A longer label is cut with an ellipsis and carries the full text as its tooltip. */
+const DRAWER_BUTTON_MAX_WIDTH = 120;
+const DRAWER_BUTTON_CLEARANCE = 132;
 /** The narrowest the left column is allowed to be on a tablet, so its buttons are not clipped. */
 const NARROW_LEFT_MIN = 300;
 /** The left panel's floor in the touch two-pane layout under 1000 px. */
@@ -434,7 +437,7 @@ export function PanelLayout({
         {centrePresent && (
           <Box
             // Tablet: the floating drawer button sits over the viewer's top-right corner, so the viewer keeps clear of it (the parity badge lives there).
-            style={{ flex: '1 1 auto', minWidth: 0, display: 'flex', flexDirection: 'column', paddingRight: right !== undefined && narrow && !twoPane ? 96 : undefined }}
+            style={{ flex: '1 1 auto', minWidth: 0, display: 'flex', flexDirection: 'column', paddingRight: right !== undefined && narrow && !twoPane ? DRAWER_BUTTON_CLEARANCE : undefined }}
             data-testid="panel-viewer"
           >
             {viewer}
@@ -460,7 +463,9 @@ export function PanelLayout({
                 aria-controls="panel-inspector-drawer"
                 onClick={() => setInspectorOpen((o) => !o)}
                 data-testid="inspector-toggle"
-                style={{ minHeight: 44 }}
+                style={{ minHeight: 44, maxWidth: DRAWER_BUTTON_MAX_WIDTH }}
+                styles={{ label: { display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: '40px', textBoxTrim: 'none' } }}
+                title={typeof drawerLabel === 'string' ? drawerLabel : undefined}
               >
                 {drawerLabel}
               </Button>

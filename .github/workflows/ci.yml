@@ -1195,6 +1195,16 @@ jobs:
           EDITOR_STACK_BUILD_NETWORK: default
         run: scripts/editor-v2-stack.sh up
 
+      # The picture editor (and the picture API spec) PUT to a presigned storage URL straight from the browser or
+      # from Node. The isolated stack leaves the public storage endpoint empty, so those URLs name the compose-internal
+      # host garage:3900, which the runner cannot resolve. This points them at the published loopback port and adds
+      # the CORS rule (e2e/scripts/editor-v2-picture-storage.sh, same as a local run; it must follow every `up`).
+      - name: Make the stack's object storage reachable from the runner
+        run: scripts/editor-v2-picture-storage.sh apply
+
+      - name: Seed media is safe under concurrent workers
+        run: bash fixtures/editor-v2/media/make-media.concurrency.test.sh
+
       - name: Run the editor v2 suite
         run: |
           projects=(--project=desktop --project=pixel7)

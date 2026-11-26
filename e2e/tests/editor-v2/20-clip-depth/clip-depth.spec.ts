@@ -168,9 +168,14 @@ test.describe('R07.3 plain-unit clip controls', () => {
     await ed.testId('inspector-volume').fill('50');
     await ed.testId('inspector-volume').press('Enter');
     await ed.expectServer((tl) => A1(tl)[0].gainDb?.value === -6.02, '50% volume is -6.02 dB');
-    await ed.tap(ed.testId('inspector-mute'));
+    // A person presses the switch's label (Mantine's track label sits over the input, so a click on the input is intercepted): press the label that belongs to the input.
+    const mute = ed.page.getByRole('switch', { name: 'Mute', exact: true });
+    const muteLabel = ed.page.locator(`label[for="${await mute.getAttribute('id')}"]`);
+    await muteLabel.click();
+    await expect(mute).toBeChecked();
     await ed.expectServer((tl) => A1(tl)[0].gainDb?.value === -60, 'Mute stores the quietest gain');
-    await ed.tap(ed.testId('inspector-mute'));
+    await muteLabel.click();
+    await expect(mute).not.toBeChecked();
     await ed.expectServer((tl) => A1(tl)[0].gainDb?.value === -6.02, 'Unmute brings the volume back');
     await ed.testId('inspector-volume').fill('500');
     await ed.testId('inspector-volume').press('Enter');

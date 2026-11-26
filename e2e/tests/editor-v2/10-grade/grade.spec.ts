@@ -1,5 +1,5 @@
 import { test, expect, type EditorPage } from '../../../fixtures/editor-v2';
-import { downloadRender, expectLargerScreenState, frameRgb, runOn, waitRender } from '../../../fixtures/editor-v2/rows';
+import { downloadRender, frameRgb, runOn, waitRender } from '../../../fixtures/editor-v2/rows';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -53,26 +53,23 @@ test('P7-GRADE-06 dragging a curve point is one undo step', async ({ freshTimeli
   }, { message: 'one Ctrl+Z undoes the whole drag' }).toBe('drag undone');
 });
 
-test('P7-GRADE-06 phone: the curve editor shows the "needs a larger screen" state', async ({ seed, openEditor }) => {
-  runOn('pixel7', 'iphone14webkit');
-  knownFailure('P7-GRADE-06', 'phone');
-  const ed = await openEditor(seed.seededTimelineId);
-  await gradeClipAOnPhone(ed);
-  await expectLargerScreenState(ed.page, /curve/i, 'Curves on a phone');
-});
-
-/**
- * Phone: the Color workspace puts the grade stack in its own "Color" pane (Timeline | Inspector | Color).
- * Select clipA on the timeline, open that pane and add one correction node, as a touch user would.
+/*
+ * The phone's Look sheet is presets and exposure only: wheels, curves, keying and tracking are not offered on a phone
+ * (docs/editor.md "Not on a phone"). The designed answer is the sheet's own sentence plus the absence of those controls.
  */
-async function gradeClipAOnPhone(ed: EditorPage): Promise<void> {
-  await ed.workspace('color');
+async function openLookSheetOnPhone(ed: EditorPage): Promise<void> {
   await ed.selectClipAt(60);
-  await ed.tap(ed.page.locator('label', { hasText: /^Color$/ }).first());
-  await ed.tap(ed.testId('grade-add-node'));
-  const select0 = ed.page.getByTestId('grade-node-select-0');
-  if (await select0.isVisible().catch(() => false)) await ed.tap(select0);
+  await ed.workspace('color');
+  await expect(ed.testId('look-sheet')).toBeVisible();
 }
+
+test('P7-GRADE-06 phone: the curve editor is not offered; the Look sheet says colour curves are on desktop', async ({ seed, openEditor }) => {
+  runOn('pixel7', 'iphone14webkit');
+  const ed = await openEditor(seed.seededTimelineId);
+  await openLookSheetOnPhone(ed);
+  await expect(ed.testId('look-desktop-note')).toContainText(/curves/i);
+  await expect(ed.page.locator('[data-testid^="curve-point-"], [data-testid="color-tab-curves"]')).toHaveCount(0);
+});
 
 /** P7-GRADE-18 (M) (W0.1): a graded clip renders with its grade (saturation 0 = grey picture), started from the phone. */
 test('P7-GRADE-18 phone: a clip graded to saturation 0 renders grey from Deliver', async ({ freshTimeline, openEditor, api, seed }) => {
@@ -115,12 +112,10 @@ test('P9-GRADE-03 Track through clip writes window keys', async ({ freshTimeline
   await expect(ed.page.getByRole('button', { name: /Clear track \(\d+ keys?\)/ }), 'the window is tracked').toBeVisible({ timeout: 90_000 });
 });
 
-test('P9-GRADE-03 phone: window tracking shows the "needs a larger screen" state', async ({ seed, openEditor }) => {
+test('P9-GRADE-03 phone: window tracking is not offered; the Look sheet says keying and masks are on desktop', async ({ seed, openEditor }) => {
   runOn('pixel7', 'iphone14webkit');
-  knownFailure('P9-GRADE-03', 'phone');
   const ed = await openEditor(seed.seededTimelineId);
-  await gradeClipAOnPhone(ed);
-  // The power window itself works on a phone; tracking it through the clip is what is cut.
-  await ed.tap(ed.testId('grade-window-toggle'));
-  await expectLargerScreenState(ed.page, /track/i, 'Window tracking on a phone');
+  await openLookSheetOnPhone(ed);
+  await expect(ed.testId('look-desktop-note')).toContainText(/keying|masks/i);
+  await expect(ed.page.locator('[data-testid="grade-window-track"], [data-testid="grade-window-toggle"]')).toHaveCount(0);
 });

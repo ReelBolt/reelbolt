@@ -1,0 +1,10 @@
+/* Keyboard focus on the picture-handles group: an inset two-tone ring, visible on a dark picture and on a light one. */
+.root {
+  outline: none;
+}
+
+.root:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.7);
+}

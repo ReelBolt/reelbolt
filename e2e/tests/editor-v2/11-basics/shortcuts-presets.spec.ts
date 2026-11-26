@@ -30,8 +30,8 @@ test('UI2-08 a failed shortcut save keeps the dialog and the change open with th
   const dialog = ed.page.getByRole('dialog', { name: 'Keyboard shortcuts' });
   await expect(dialog).toBeVisible();
   await ed.tap(ed.testId('keymap-change-toolHand'));
-  await ed.page.keyboard.press('F9');
-  await expect(ed.testId('keymap-row-toolHand'), 'the new chord is in the draft').toContainText('F9');
+  await ed.page.keyboard.press('F7');
+  await expect(ed.testId('keymap-row-toolHand'), 'the new chord is in the draft').toContainText('F7');
   await ed.tap(ed.testId('keymap-save'));
   await expect.poll(() => puts, { message: 'Save sent the preferences' }).toBeGreaterThan(0);
   const error = ed.testId('keymap-save-error');
@@ -39,7 +39,7 @@ test('UI2-08 a failed shortcut save keeps the dialog and the change open with th
   await expect(error).toContainText(/not saved/i);
   expect((await error.innerText()).trim().length, 'the reason is not empty').toBeGreaterThan(20);
   await expect(dialog, 'the dialog stays open').toBeVisible();
-  await expect(ed.testId('keymap-row-toolHand'), 'the change is kept for another try').toContainText('F9');
+  await expect(ed.testId('keymap-row-toolHand'), 'the change is kept for another try').toContainText('F7');
   await ed.tap(dialog.getByRole('button', { name: 'Cancel' }));
   await expect(dialog).toBeHidden();
   expect(await api.json<unknown>('GET', '/api/v1/editor/preferences', undefined, [200, 204, 404]), 'nothing was stored').toEqual(stored);
@@ -89,7 +89,9 @@ test('UI2-09 shortcuts do not fire behind a dialog, on a slider or on a focused 
   await expect(dialog, 'Space pressed the focused button').toBeVisible();
   await ed.page.waitForTimeout(1200);
   await expect(ed.testId('status-timecode'), 'Space on a button did not start playback').toHaveText('00:00:02:00');
-  await ed.tap(dialog.getByRole('button', { name: 'Cancel' }));
+  // The button opens the read-only cheatsheet (it has Close, not Cancel; Cancel belongs to the editable dialog above).
+  await ed.page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
 });
 
 /**

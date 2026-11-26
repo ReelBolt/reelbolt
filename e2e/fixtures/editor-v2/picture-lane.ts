@@ -221,7 +221,7 @@ export const stageOf = (page: Page) => page.locator('[role=application][aria-lab
 
 /** Opens the Layers / Text / AI / Canvas tab. */
 export async function openTab(page: Page, name: 'Layers' | 'Text' | 'AI' | 'Canvas'): Promise<void> {
-  await page.getByRole('tab', { name, exact: true }).click();
+  await openPanel(page, name);
 }
 
 /* ------------------------------------------------------------------ fresh projects */
@@ -242,12 +242,16 @@ export const hubUrl = (projectId: string): string => `/app/editor?project=${proj
 
 /* ------------------------------------------------------------------ editing helpers */
 
-import { openPicture } from './picture';
+import { openPicture, openPanel, isNarrow } from './picture';
+export { toolButton, expectPanelOn, openPanel, runArea, textMore, layerAction } from './picture';
 
 /** Creates a picture of the seed photo and opens it; returns what a test needs. */
 export async function openFresh(page: Page, api: EditorApi, pics: PictureSeed, tag: string, file: string = pics.quad) {
   const pic = await createFull(api, pics.projectId, file, `${tag}-${Date.now()}`);
   const stage = await openPicture(page, pics.projectId, pic.id);
+  // On a phone the layer list lives in the dock's Layers sheet, closed on open: most rows start from it, so open it
+  // (the stage stays above the sheet, by design). openPicture itself leaves the first-open state alone.
+  if (isNarrow(page)) await openPanel(page, 'Layers');
   return { pic, stage };
 }
 
@@ -317,3 +321,10 @@ export async function zoomPercent(page: Page): Promise<number> {
 
 export const handles = (page: Page) => page.locator('svg rect[fill="#ffffff"]');
 export const rotateHandle = (page: Page) => page.locator('svg circle[fill="#101218"]');
+
+/** Reloads the open picture and, on a phone, reopens the Layers sheet (a reload closes it; most rows start from the layer list). */
+export async function reloadPicture(page: Page): Promise<void> {
+  await page.reload();
+  await expect(stageOf(page), 'the picture opens again').toBeVisible({ timeout: 45_000 });
+  if (isNarrow(page)) await openPanel(page, 'Layers');
+}

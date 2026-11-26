@@ -3,6 +3,7 @@
 import React from 'react';
 import { Alert, Button, Group, Modal, Text } from '@mantine/core';
 import { useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export interface BusyGuardModalProps {
   opened: boolean;
@@ -16,7 +17,7 @@ export interface BusyGuardModalProps {
 export function BusyGuardModal({ opened, onStop, onGoOn, onBack }: BusyGuardModalProps) {
   const t = useT('editor-thumbnail-a.editor.busyGuard');
   return (
-    <Modal opened={opened} onClose={onBack} title={t('title')} centered size="sm">
+    <Modal zIndex={EDITOR_MODAL_Z} opened={opened} onClose={onBack} title={t('title')} centered size="sm">
       <Text size="sm" mb="lg">
         {t('message')}
       </Text>

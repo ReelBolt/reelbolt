@@ -82,14 +82,25 @@ export function sessionExpiredLoginUrl(pathname: string, search = ''): string {
 let redirecting = false;
 
 /**
+ * The editor's save (`PATCH /api/v1/projects/<id>/edit-timelines/<id>`) is the one call whose 401 is handled where
+ * the user is: the sync client keeps the edit, pauses saving and opens the sign-in dialog IN PLACE (R02.2), so the
+ * page must not navigate away to the login page and drop the unsaved edit from view.
+ */
+const EDIT_TIMELINE_SAVE = /^(?:\/app)?\/api\/v1\/projects\/[^/?#]+\/edit-timelines\/[^/?#]+(?:[?#]|$)/;
+
+export function isInPlaceSignInCall(url: string, method = 'GET'): boolean {
+  return method.toUpperCase() === 'PATCH' && EDIT_TIMELINE_SAVE.test(url);
+}
+
+/**
  * The one place a 401 on an authenticated call goes. Navigates (once, however many calls fail at
  * the same time) to the login page with the return path. It does not touch client state, so
  * locally saved drafts survive the round trip. No-op on the server, on auth pages, and for the
  * auth endpoints' own 401s.
  */
-export function handleUnauthorized(status: number, url = ''): void {
+export function handleUnauthorized(status: number, url = '', method = 'GET'): void {
   if (status !== 401 || typeof window === 'undefined') return;
-  if (isAuthEndpoint(url) || isPublicApiUrl(url)) return;
+  if (isAuthEndpoint(url) || isPublicApiUrl(url) || isInPlaceSignInCall(url, method)) return;
   const { pathname, search } = window.location;
   if (isSessionExemptPath(pathname) || redirecting) return;
   redirecting = true;

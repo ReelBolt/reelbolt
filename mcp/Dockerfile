@@ -6,7 +6,7 @@ RUN for f in LICENSE THIRD_PARTY_NOTICES.md GPL-SOURCE-OFFER.md; do \
 	echo "PLACEHOLDER: build with --build-context legal=<repository root>" > "/$f"; done
 
 # Build stage
-FROM node:22-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Runtime stage
-FROM node:22-alpine
+FROM node:26-alpine
 COPY --from=legal /LICENSE /THIRD_PARTY_NOTICES.md /GPL-SOURCE-OFFER.md /licenses/
 WORKDIR /app
 

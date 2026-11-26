@@ -135,7 +135,7 @@ test('R03 phone shows no join, fit or replace entries', async ({ freshTimeline, 
 
 const AVAILABILITY = /\/edit-timelines\/[^/]+\/proposals\/availability/;
 const ESTIMATE = /\/edit-timelines\/[^/]+\/proposals\/estimate$/;
-const PROPOSALS = /\/edit-timelines\/[^/]+\/proposals$/;
+const PROPOSALS = /\/edit-timelines\/[^/]+\/proposals(\?.*)?$/;
 
 test('R11.2 helper availability and grounding line', async ({ freshTimeline, openEditor }) => {
   runOn('desktop');

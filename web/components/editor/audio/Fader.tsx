@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Group, Stack, Text, TextInput, Tooltip } from '@mantine/core';
 import { EditorIcon } from '../ui';
 import { IconRestore } from '@tabler/icons-react';
@@ -30,6 +30,28 @@ export function Fader({ value, automated, disabled, label, testId, onCommit }: F
   const [draft, setText] = useState('');
   const [editing, setEditing] = useState(false);
   const text = editing ? draft : formatFaderDb(value);
+
+  // The slider reports the end of a drag after the browser's own double-click event, so the releases of the two clicks of a
+  // double-click used to land after the reset and put the clicked position back. For a moment after the reset the slider's
+  // own ends of drag commit nothing; a new press, a key or the delay lifts that.
+  const resetPending = useRef(false);
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearReset = () => {
+    resetPending.current = false;
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+    resetTimer.current = null;
+  };
+  const resetByDoubleClick = () => {
+    if (disabled || value === FADER_RESET_DB) return;
+    clearReset();
+    resetPending.current = true;
+    resetTimer.current = setTimeout(clearReset, 400);
+    onCommit(FADER_RESET_DB);
+  };
+  const commitSlider = (db: number) => {
+    if (resetPending.current) return;
+    onCommit(db);
+  };
 
   const commitText = () => {
     setEditing(false);
@@ -77,7 +99,7 @@ export function Fader({ value, automated, disabled, label, testId, onCommit }: F
         />
         </Group>
       </Group>
-      <div onDoubleClick={() => !disabled && value !== FADER_RESET_DB && onCommit(FADER_RESET_DB)} title={t('doubleClick')} data-testid={`${testId}-wrap`} style={{ paddingTop: 10, paddingBottom: 18 }}>
+      <div onPointerDownCapture={clearReset} onKeyDownCapture={clearReset} onDoubleClick={resetByDoubleClick} title={t('doubleClick')} data-testid={`${testId}-wrap`} style={{ paddingTop: 10, paddingBottom: 18 }}>
         <LiveSlider
           size="xs"
           min={FADER_MIN_DB}
@@ -88,7 +110,7 @@ export function Fader({ value, automated, disabled, label, testId, onCommit }: F
           marks={FADER_MARKS.map((m) => ({ value: m.value, label: m.label }))}
           label={(v) => `${formatFaderDb(v)} dB`}
           thumbLabel={`${label} volume`}
-          onChangeEnd={onCommit}
+          onChangeEnd={commitSlider}
           styles={{ markLabel: { fontSize: 12 } }}
           data-testid={testId}
         />

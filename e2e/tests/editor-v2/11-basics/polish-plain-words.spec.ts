@@ -112,6 +112,15 @@ test('VF17 nothing is under the notch or the home bar: the editor asks for the f
   expect(await px(page, '.mantine-Notifications-root', 'margin-top'), 'toasts clear the notch').toBeGreaterThanOrEqual(INSET.top);
   expect(await px(page, '.mantine-Notifications-root', 'margin-right'), 'toasts clear the right corner').toBeGreaterThanOrEqual(INSET.right);
   const phone = (await page.getByTestId('editor-workspace').getAttribute('data-layout')) === 'phone';
+  if (phone) {
+    // The phone surface is its own full-screen frame: it pads itself by the insets (the app header is not what the phone user sees).
+    const shell = '[data-testid="editor-workspace"]';
+    expect(await px(page, shell, 'padding-top'), 'the phone frame starts below the notch').toBeGreaterThanOrEqual(INSET.top);
+    expect(await px(page, shell, 'padding-left'), 'the workspace clears the left corner').toBeGreaterThanOrEqual(INSET.left);
+    expect(await px(page, shell, 'padding-right'), 'the workspace clears the right corner').toBeGreaterThanOrEqual(INSET.right);
+    expect(await px(page, '[data-testid="phone-dock"]', 'padding-bottom'), 'the dock clears the home bar').toBeGreaterThanOrEqual(INSET.bottom);
+    return;
+  }
 
   expect(await px(page, '.mantine-AppShell-header', 'padding-top'), 'the header pads its content below the notch').toBeGreaterThanOrEqual(INSET.top);
   const headerHeight = await px(page, '.mantine-AppShell-header', 'height');
@@ -120,9 +129,5 @@ test('VF17 nothing is under the notch or the home bar: the editor asks for the f
   await expect.poll(() => px(page, '.mantine-AppShell-main', 'padding-top'), { message: 'the page starts below the taller header' }).toBeGreaterThanOrEqual(headerHeight);
   expect(await px(page, '[data-testid="editor-workspace"]', 'padding-left'), 'the workspace clears the left corner').toBeGreaterThanOrEqual(INSET.left);
   expect(await px(page, '[data-testid="editor-workspace"]', 'padding-right'), 'the workspace clears the right corner').toBeGreaterThanOrEqual(INSET.right);
-  if (phone) {
-    expect(await px(page, '[data-testid="workspace-bar"]', 'padding-bottom'), 'the dock clears the home bar').toBeGreaterThanOrEqual(INSET.bottom);
-  } else {
-    expect(await px(page, '[data-testid="editor-workspace"]', 'padding-bottom'), 'the status bar clears the home bar').toBeGreaterThanOrEqual(INSET.bottom);
-  }
+  expect(await px(page, '[data-testid="editor-workspace"]', 'padding-bottom'), 'the status bar clears the home bar').toBeGreaterThanOrEqual(INSET.bottom);
 });

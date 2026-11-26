@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Group, Modal, Stack, Text, TextInput } from '@mantine/core';
 import { useT } from '@/i18n';
 import { clampCrop, dragCrop, type CropHandle, type CropRect } from '@/lib/editor/crop';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export interface CropDialogProps {
   opened: boolean;
@@ -74,7 +75,7 @@ export function CropDialog({ opened, onClose, imageUrl, width, height, initial, 
   const unchanged = rect.x === start.x && rect.y === start.y && rect.w === start.w && rect.h === start.h;
 
   return (
-    <Modal opened={opened} onClose={onClose} title={t('title', { label })} size="lg" centered fullScreen={coarse && typeof window !== 'undefined' && window.innerWidth < 768}>
+    <Modal zIndex={EDITOR_MODAL_Z} opened={opened} onClose={onClose} title={t('title', { label })} size="lg" centered fullScreen={coarse && typeof window !== 'undefined' && window.innerWidth < 768}>
       <Stack gap="sm" data-testid="crop-dialog">
         <Text size="xs" c="dimmed">
           {t('intro')}

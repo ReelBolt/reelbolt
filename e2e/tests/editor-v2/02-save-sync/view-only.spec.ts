@@ -27,8 +27,9 @@ test('R02.5 a view-only timeline: banner, frozen controls, no PATCH, nothing jou
   await page.goto(`/app/editor/${seed.projectId}/timeline/${id}`);
   await expect(page.getByTestId('timeline-canvas')).toBeVisible({ timeout: 45_000 });
   await expect(page.getByTestId('view-only-banner')).toContainText('You can look but not change this timeline.');
+  // The save chip says "View only" on every device (the phone header's chip too); the desktop status bar adds its read-only chip.
   await expect(page.getByTestId('save-state-chip')).toHaveText('View only');
-  await expect(page.getByTestId('read-only-chip').first()).toBeVisible();
+  if (testInfo.project.name === 'desktop') await expect(page.getByTestId('read-only-chip').first()).toBeVisible();
 
   // The edit controls are inert: disabled buttons, refused keys.
   // (the toolbar scissors on desktop and tablet; the phone has the action bar's Add media, Add text and Select instead)

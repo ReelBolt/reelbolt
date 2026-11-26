@@ -104,12 +104,20 @@ test.describe('desktop', () => {
     await ed.page.keyboard.press('e');
     await expect(ed.page.getByTestId('events-lane-header')).toBeVisible();
     await ed.seek(32);
-    await ed.page.keyboard.press('Shift+E');
-    await expect(ed.page.getByTestId('event-actions-title')).toContainText('00:00:01:00');
+    // seek() leaves the cursor in the timecode field, where Shift+E would only type a letter: hand the keyboard back to the editor.
+    await ed.page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+    // The lane reads the events only once it is shown, so the header can be up before the ticks are: Shift+E on an empty lane
+    // only says "no events here". Ask again until the lane has its events (bounded), instead of racing the fetch.
+    await expect(async () => {
+      await ed.page.keyboard.press('Shift+E');
+      await expect(ed.page.getByTestId('event-actions-title')).toContainText('00:00:01:00', { timeout: 1_500 });
+    }, 'Shift+E opens the menu of the nearest event once the lane has loaded').toPass({ timeout: 30_000, intervals: [500, 1_000] });
     await ed.page.keyboard.press('Escape');
+    await expect(ed.page.getByTestId('event-actions-menu'), 'Escape closes the menu').toBeHidden();
     // Scrubbing near a tick lands on it.
     const cv = await ed.canvasBox();
-    await ed.page.mouse.click(await ed.frameX(46), cv.y + 10);
+    // The ruler is the top 28 px of the canvas; its lower part clears the toolbar above it when a banner narrows the timeline.
+    await ed.page.mouse.click(await ed.frameX(46), cv.y + 22);
     await expect(ed.testId('status-timecode')).toHaveText('00:00:01:15');
   });
 
@@ -131,6 +139,8 @@ test.describe('phone', () => {
     await stubEvents(page, seed.files.clipA);
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
     await ed.seek(30);
+    // The action bar's More sheet belongs to a selected clip: pick the one under the playhead first.
+    await ed.selectClipUnderPlayhead();
     await ed.tap(ed.page.getByTestId('phone-action-more'));
     await ed.tap(ed.page.getByTestId('phone-more-events'));
     await expect(ed.page.getByTestId('phone-events-current')).toContainText('00:00:01:00');

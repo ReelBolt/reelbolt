@@ -22,8 +22,10 @@ export function ActivityIndicator() {
     if (next) markFailuresSeen();
   };
   return (
-    <ActivityTray opened={opened} onChange={change}>
-      <Indicator disabled={!dot} color={failedUnseenCount > 0 ? 'red' : 'yellow'} size={10} offset={4} processing={false} data-testid="activity-dot" data-dot={dot ? 'true' : undefined}>
+    // The Indicator wraps the tray, not the other way round: Popover.Target injects aria-haspopup/aria-expanded into its
+    // direct child, and on the Indicator's plain div those attributes are invalid (axe aria-allowed-attr). The button gets them.
+    <Indicator disabled={!dot} color={failedUnseenCount > 0 ? 'red' : 'yellow'} size={10} offset={4} processing={false} data-testid="activity-dot" data-dot={dot ? 'true' : undefined}>
+      <ActivityTray opened={opened} onChange={change}>
         <ActionIcon
           variant="subtle"
           color="violet"
@@ -44,7 +46,7 @@ export function ActivityIndicator() {
             </Text>
           )}
         </ActionIcon>
-      </Indicator>
-    </ActivityTray>
+      </ActivityTray>
+    </Indicator>
   );
 }

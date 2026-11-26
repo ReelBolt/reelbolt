@@ -41,7 +41,9 @@ test('R06.1 R06.2 R06.3 R06.4 R06.5 R06.9 render, film card, download, open in p
   const ed = await openEditor(id);
   await openDeliver(ed);
   const name = `r06-${Date.now()}`;
-  await ed.testId('render-file-name').fill(name);
+  // On a phone the file name sits under "More options" (the Format and Quality stay on top).
+  if (ed.isPhone) await ed.tap(ed.testId('render-advanced-toggle'));
+  await ed.testId('render-file-name').first().fill(name);
   await expect(ed.testId('film-empty'), 'before a render there is a plain empty state').toBeVisible();
   const r = await renderFromDeliver(ed, id);
   expect(r.status, `render ${r.errorMessage ?? ''}`).toBe('Passed');
@@ -126,9 +128,12 @@ test('R06.1 shape that does not fit the timeline warns; quality and advanced are
   runOn('desktop', 'pixel7', 'iphone14webkit');
   const ed = await openEditor(await freshTimeline('seeded'));
   await openDeliver(ed);
-  await expect(ed.testId('render-fit-warning')).toHaveCount(0);
-  await ed.tap(ed.testId('render-preset'));
-  await ed.tap(ed.page.getByRole('option', { name: 'Vertical for phones' }));
+  // A phone starts on "Vertical for phones" (its own default format), a 16:9 timeline does not fit it; elsewhere the default fits.
+  if (!ed.isPhone) {
+    await expect(ed.testId('render-fit-warning')).toHaveCount(0);
+    await ed.tap(ed.testId('render-preset'));
+    await ed.tap(ed.page.getByRole('option', { name: 'Vertical for phones' }));
+  }
   await expect(ed.testId('render-fit-warning')).toContainText('crop or letterbox your picture');
   for (const label of ['Draft', 'Good', 'Best']) await expect(ed.testId('render-quality').getByText(label, { exact: true })).toBeVisible();
   await expect(ed.testId('render-advanced')).toBeHidden();

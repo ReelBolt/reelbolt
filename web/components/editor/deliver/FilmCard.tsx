@@ -14,6 +14,7 @@ import { PostTextButton } from '@/components/outputs/PostTextDialog';
 import { PublishButton } from '@/components/publishing/PublishDialog';
 import { CheckedAudio, CheckedVideo } from '@/components/outputs/CheckedVideo';
 import { useDownloadGuard } from '@/lib/outputs/output-check';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export interface FilmCardProps {
   projectId: string;
@@ -156,7 +157,7 @@ export function FilmCard({ projectId, render, revision, playUrl, downloadUrl, on
       <Text size="xs" c="dimmed" data-testid="film-status-line">
         {t.msg(renderStatusLineMsg(render.revision, revision))}
       </Text>
-      <Modal opened={confirming} onClose={() => (deleting ? undefined : setConfirming(false))} title={t('deleteThisFilm')} centered closeButtonProps={{ size: 44 }}>
+      <Modal zIndex={EDITOR_MODAL_Z} opened={confirming} onClose={() => (deleting ? undefined : setConfirming(false))} title={t('deleteThisFilm')} centered closeButtonProps={{ size: 44 }}>
         <Stack gap="sm">
           <Text size="sm">
             {t('willBeRemovedFrom', { outputFileName: render.outputFileName })}

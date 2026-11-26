@@ -96,7 +96,7 @@ export function PhoneHeader({ name, save, backHref, canUndo, canRedo, onUndo, on
         </span>
         <span className={classes.headerSub}>
           <span className={classes.saveText} data-testid="save-state-chip" data-status={save.status} title={saveText}>
-            {save.status === 'saved' ? t('saved') : saveText}
+            {save.status === 'saved' && !save.viewOnly ? t('saved') : saveText}
           </span>
         </span>
       </div>

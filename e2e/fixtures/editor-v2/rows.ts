@@ -246,3 +246,12 @@ export async function expectPictureWhole(page: Page, minHeight: number, what: st
   expect(r.shown, `${what}: no part of the picture is cut`).toBeGreaterThanOrEqual(r.height - 0.5);
   expect(r.reachable, `${what}: a finger at the picture's centre reaches the picture`).toBe(true);
 }
+
+/**
+ * Skips a row on the phones whose subject is the desktop panel layout (docs/editor.md "Phone and tablet"): the phone surface
+ * has its own sheets for these jobs, covered by the 30-phone suite, and the control the row drives is "not on a phone".
+ */
+export function desktopLayoutOnly(why: string): void {
+  const name = test.info().project.name;
+  test.skip(name === 'pixel7' || name === 'iphone14webkit', `desktop layout: ${why}`);
+}

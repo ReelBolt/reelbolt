@@ -1,3 +1,4 @@
+import { reloadPicture } from '../../../fixtures/editor-v2/picture-lane';
 import {
   test, expect, openFresh, savedBadge, pollPicture, isPhone, press, openTab, decodeImage, saveDownload, near, getFull,
 } from '../../../fixtures/editor-v2/picture-lane';
@@ -13,13 +14,15 @@ const keepPositions = async (page: import('@playwright/test').Page, phone: boole
   await keep.waitFor({ state: 'visible', timeout: 2000 }).then(() => press(keep, phone), () => undefined);
 };
 
-const readout = (page: import('@playwright/test').Page, w: number, h: number) => page.getByText(`${w} × ${h}`, { exact: true }).first();
+// The always-visible size text is desktop only; the phone shows the size line in the Canvas sheet.
+const readout = (page: import('@playwright/test').Page, w: number, h: number) =>
+  page.getByText(`${w} × ${h}`, { exact: true }).or(page.getByTestId('picture-sheet').getByText(`${w} × ${h}`)).first();
 
 test('PE-024 PE-130 PE-131 PE-132 shape presets, size tiers and "Original size" change the canvas, the readout and the server', async ({ page, api, pics }, testInfo) => {
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe130-${testInfo.project.name}`);
-  await expect(readout(page, 1920, 1080), 'PE-024: the readout shows the canvas size').toBeVisible();
   await openTab(page, 'Canvas');
+  await expect(readout(page, 1920, 1080), 'PE-024: the readout shows the canvas size').toBeVisible();
 
   await press(page.getByRole('button', { name: /^9:16/ }), phone);
   await keepPositions(page, phone);
@@ -37,7 +40,8 @@ test('PE-024 PE-130 PE-131 PE-132 shape presets, size tiers and "Original size" 
 
   await press(page.getByRole('button', { name: /^Original size/ }), phone);
   await pollPicture(api, pics.projectId, pic.id, (p) => p.canvasWidth === 1920 && p.canvasHeight === 1080, 'Original size restores the photo size');
-  await page.reload();
+  await reloadPicture(page);
+  await openTab(page, 'Canvas');
   await expect(readout(page, 1920, 1080), 'the size survives a reload').toBeVisible();
 });
 

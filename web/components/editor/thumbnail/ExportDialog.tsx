@@ -11,6 +11,7 @@ import { fitQuality, UNDER_2_MB } from '@/lib/editor/export-size';
 import { DEFAULT_EXPORT_BASE, exportBaseName, exportFileName } from '@/lib/editor/export-name';
 import { humanizeErrorT } from '@/components/editor/shell/humanize-error-t';
 import { useFormat, useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export type ExportDestination = 'project' | 'download';
 
@@ -200,7 +201,7 @@ export function ExportDialog({
           };
 
   return (
-    <Modal
+    <Modal zIndex={EDITOR_MODAL_Z}
       opened={opened}
       onClose={onClose}
       title={t('title')}

@@ -17,6 +17,8 @@ async function pickSource(ed: EditorPage, fileId: string): Promise<void> {
   await ed.workspace('media');
   await expect(ed.testId('media-pool')).toBeVisible({ timeout: 30_000 });
   await ed.tap(tile(ed, ref(fileId)));
+  // On a tablet the viewer and the metadata are a drawer named Viewer (R05.8): the picked source shows once it is open.
+  if (!(await ed.testId('panel-right').isVisible())) await ed.tap(ed.testId('inspector-toggle'));
   await expect(ed.testId('source-viewer')).toBeVisible();
   await ed.testId('media-insert-length').waitFor();
 }

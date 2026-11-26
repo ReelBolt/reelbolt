@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { bladeAt, expectTapTarget, hasCutAt, otherWriterRenames, stubPatches } from './sync-helpers';
+import { bladeAt, retryButton, expectTapTarget, hasCutAt, otherWriterRenames, stubPatches } from './sync-helpers';
 
 /**
  * Wave 1 T-004, R02.3 the save chip says each failure in plain words, one sentence per class, no revision
@@ -24,7 +24,7 @@ test('R02.3 too large (413): the sentence and Retry; Retry saves once the cause 
   await stubPatches(page, id, [{ status: 413, body: { message: 'the serialized document exceeds the limit' } }]);
   await bladeAt(ed, 75);
   await expect(ed.chip).toContainText('Not saved. This timeline is too large to save.');
-  const retry = page.getByTestId('save-retry');
+  const retry = retryButton(page);
   await expect(retry).toBeVisible();
   if (testInfo.project.name !== 'desktop') await expectTapTarget(retry, 'Retry');
   await retry.click();
@@ -39,11 +39,11 @@ test('R02.3 no permission (403) and timeline deleted (404): their own sentences,
   await stubPatches(page, id, [{ status: 403, body: { message: 'forbidden' } }, { status: 404 }]);
   await bladeAt(ed, 75);
   await expect(ed.chip).toHaveText('Not saved. You no longer have permission to change this timeline.');
-  await expect(page.getByTestId('save-retry')).toHaveCount(0);
+  await expect(retryButton(page)).toHaveCount(0);
   // The next edit meets a deleted timeline.
   await bladeAt(ed, 100);
   await expect(ed.chip).toHaveText('Not saved. This timeline was deleted.');
-  await expect(page.getByTestId('save-retry')).toHaveCount(0);
+  await expect(retryButton(page)).toHaveCount(0);
 });
 
 test('R02.3 the server refuses the document (400): the sentence carries the plain reason', async ({ freshTimeline, openEditor, page }, testInfo) => {
@@ -55,7 +55,7 @@ test('R02.3 the server refuses the document (400): the sentence carries the plai
   await expect(ed.chip).toContainText('Not saved. The server refused this change.');
   await expect(ed.chip).toContainText('Track 1, clip 2: overlaps the previous clip.');
   await expect(ed.chip).not.toContainText(/tracks\[|recordIn|[0-9a-f]{8}-/);
-  const retry = page.getByTestId('save-retry');
+  const retry = retryButton(page);
   if (testInfo.project.name !== 'desktop') await expectTapTarget(retry, 'Retry');
   await retry.click();
   await ed.expectServer((tl) => hasCutAt(tl, 75), 'Retry stores the edit once the stub is gone');
@@ -70,7 +70,7 @@ test('R02.3 server error (5xx): "Trying again" while it retries, then the senten
   await bladeAt(ed, 75);
   await expect(ed.chip).toContainText('Can’t reach the server. Trying again…');
   await expect(ed.chip).toHaveText('Not saved. The server had a problem.', { timeout: 90_000 });
-  const retry = page.getByTestId('save-retry');
+  const retry = retryButton(page);
   if (testInfo.project.name !== 'desktop') await expectTapTarget(retry, 'Retry');
   await stub.heal();
   await retry.click();

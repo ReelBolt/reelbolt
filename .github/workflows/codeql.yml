@@ -31,9 +31,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # C# is built (manual) so CodeQL resolves call targets: build-mode none reported "Low analysis quality"
+          # (calls with call target 82%, below the 85% bar). The test project is left out of the traced build.
           # Go does not support build-mode none. 'manual' builds the three modules that compile on a plain runner:
           # autobuild would also try the Wails desktop module, which needs gtk4/webkitgtk headers.
-          - { language: csharp, build-mode: none }
+          - { language: csharp, build-mode: manual }
           - { language: go, build-mode: manual }
           - { language: javascript-typescript, build-mode: none }
     steps:
@@ -47,6 +49,11 @@ jobs:
         with:
           go-version-file: api/go.mod
           cache: false
+      # Same ordering rule for .NET: setup-dotnet before init, so the build is the traced one.
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        if: matrix.language == 'csharp'
+        with:
+          dotnet-version: '10.0.x'
       - uses: github/codeql-action/init@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4
         with:
           languages: ${{ matrix.language }}
@@ -58,6 +65,15 @@ jobs:
         run: |
           for d in api runner sandbox; do
             (cd "$d" && go build ./...)
+          done
+
+      # Full, non-incremental build of the shipped projects (Shared comes in as a reference); no build server,
+      # so every compile is traced.
+      - name: Build the .NET services (CodeQL manual build)
+        if: matrix.language == 'csharp'
+        run: |
+          for p in ReelBolt.Inference.Api ReelBolt.WorkflowEngine ReelBolt.ImportWorker; do
+            dotnet build "inference/src/$p/$p.csproj" --no-incremental -p:UseSharedCompilation=false -p:TreatWarningsAsErrors=false
           done
 
       - uses: github/codeql-action/analyze@1bd86f2fdb4b86187fa4059f16f31a3202acc9ea # v4.39.4

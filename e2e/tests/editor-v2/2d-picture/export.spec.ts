@@ -1,3 +1,4 @@
+import { reloadPicture } from '../../../fixtures/editor-v2/picture-lane';
 import * as fs from 'fs';
 import {
   test, expect, openFresh, isPhone, press, addBadgeLayer, decodeImage, near, saveDownload, QUADRANT, savedBadge, getFull,
@@ -24,7 +25,7 @@ test('PE-190 PE-191 PE-193 PE-194 Download gives a real PNG of the right size an
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe194-${testInfo.project.name}`);
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await expect(page.getByRole('button', { name: `Hide ${badge.label}` })).toBeVisible();
 
   const dialog = await open(page, phone);
@@ -62,7 +63,7 @@ test('PE-191 PE-192 PE-194 JPEG, WebP, Photoshop and OpenRaster files download a
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe191-${testInfo.project.name}`);
   await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   const dialog = await open(page, phone);
   const get = async (format: RegExp, tag: string) => {
     await press(dialog.getByRole('radio', { name: format }), phone);
@@ -148,7 +149,7 @@ test('PE-196 a layer image that cannot load blocks the export, names the layer, 
   const layer = pic.layers[0];
   let fail = true;
   await page.route(new RegExp(`/layers/${layer.id}/image`), (route) => (fail ? route.abort('failed') : route.continue()));
-  await page.reload();
+  await reloadPicture(page);
   await expect(page.getByRole('button', { name: /^Select / }).first()).toBeVisible();
   const dialog = await open(page, phone);
   await expect(dialog.getByText(new RegExp(`"${layer.label}" could not be loaded`)), 'the blocker names the layer').toBeVisible({ timeout: 30_000 });
@@ -164,7 +165,7 @@ test('PE-196b a layer whose stored image is gone is left out of the export, with
   const badge = await addBadgeLayer(api, pics.projectId, pic.id, pics);
   await page.route(new RegExp(`/layers/${badge.id}/image`), (route) =>
     route.fulfill({ status: 404, contentType: 'application/json', body: JSON.stringify({ code: 'LAYER_IMAGE_MISSING', message: 'gone' }) }));
-  await page.reload();
+  await reloadPicture(page);
   await expect(page.getByText('Image missing')).toBeVisible({ timeout: 30_000 });
   const dialog = await open(page, phone);
   await expect(dialog.getByText(new RegExp(`The image of "${badge.label}" is gone, so the export leaves it out`))).toBeVisible();
