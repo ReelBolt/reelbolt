@@ -1,0 +1,46 @@
+{
+  "version.label": {
+    "message": "0.4.0-alpha",
+    "description": "The label for version 0.4.0-alpha"
+  },
+  "sidebar.guide.category.The basics": {
+    "message": "Le basi",
+    "description": "The label for category 'The basics' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Projects and files": {
+    "message": "Progetti e file",
+    "description": "The label for category 'Projects and files' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Workflows": {
+    "message": "Flussi di lavoro",
+    "description": "The label for category 'Workflows' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Apps": {
+    "message": "App",
+    "description": "The label for category 'Apps' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Editor": {
+    "message": "Editor",
+    "description": "The label for category 'Editor' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Assistant": {
+    "message": "Assistente",
+    "description": "The label for category 'Assistant' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Plans, credits and account": {
+    "message": "Piani, crediti e account",
+    "description": "The label for category 'Plans, credits and account' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Administration": {
+    "message": "Amministrazione",
+    "description": "The label for category 'Administration' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.ReelBolt Runner": {
+    "message": "ReelBolt Runner",
+    "description": "The label for category 'ReelBolt Runner' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Release notes": {
+    "message": "Note di rilascio",
+    "description": "The label for category 'Release notes' in sidebar 'guide'"
+  }
+}
