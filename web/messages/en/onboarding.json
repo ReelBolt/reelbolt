@@ -94,7 +94,7 @@
       "network": "We could not reach ReelBolt. Check your connection and try again.",
       "generic": "Please try again in a moment."
     },
-    "describeScene": "Describe a scene instead",
-    "describeFailedTitle": "Could not open the scene app"
+    "describeScene": "Describe a video instead",
+    "describeFailedTitle": "Could not open the video app"
   }
 }

@@ -160,6 +160,15 @@ public class ProjectStarterTemplateTests : IDisposable
     }
 
     [Fact]
+    public void Each_material_has_its_own_starter_recipe_and_an_idea_needs_no_paid_generation()
+    {
+        AcquisitionVocabulary.StarterTemplateKeyFor("footage").Should().Be("edit-my-video");
+        AcquisitionVocabulary.StarterTemplateKeyFor("code").Should().Be(WorkflowTemplateCatalog.StarterTemplateKey);
+        AcquisitionVocabulary.StarterTemplateKeyFor("idea").Should().Be("animation-from-idea");
+        AcquisitionVocabulary.StarterTemplateKeyFor("other").Should().BeNull();
+    }
+
+    [Fact]
     public async Task Every_starter_recipe_the_welcome_questions_can_return_is_accepted()
     {
         foreach (string material in AcquisitionVocabulary.Materials)

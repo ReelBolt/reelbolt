@@ -35,9 +35,12 @@ public static class WorkflowTemplatePresets
     /// <summary>"AI video clip from your idea".</summary>
     public const string AiClipKey = "ai-clip-from-idea";
 
+    /// <summary>"Animated video from your idea": Remotion motion graphics from words alone, no footage and no code.</summary>
+    public const string AnimationFromIdeaKey = "animation-from-idea";
+
     /// <summary>The keys of every preset recipe, in listing order.</summary>
     public static readonly IReadOnlyList<string> Keys =
-        [ProductPromoKey, AvatarExplainerKey, MusicOrSoundEffectKey, ThumbnailKey, ReadAloudKey, AiClipKey];
+        [ProductPromoKey, AvatarExplainerKey, MusicOrSoundEffectKey, ThumbnailKey, ReadAloudKey, AiClipKey, AnimationFromIdeaKey];
 
     /// <summary>The preset recipes, built on the base templates (the promo steps are copied from the starter promo).</summary>
     internal static IReadOnlyList<WorkflowTemplateDefinition> Build(IReadOnlyList<WorkflowTemplateDefinition> baseTemplates) =>
@@ -48,6 +51,7 @@ public static class WorkflowTemplatePresets
         Thumbnail(),
         ReadAloud(),
         AiClip(),
+        AnimationFromIdea(),
     ];
 
     private static AppManifestInput BriefField(string field, string label, bool? more = null, string? def = null, string? choices = null) =>
@@ -339,4 +343,56 @@ public static class WorkflowTemplatePresets
             ],
             Result: new AppManifestResult("video"),
             Advanced: new AppManifestAdvanced(true)));
+
+    // ---- 7. Animated video from your idea ----
+
+    private const string IdeaRequest =
+        "Make an animated video from this idea alone. This project has no footage and no app code, so there is nothing to analyse: " +
+        "build every scene from big type, simple shapes, colour and motion. Silent, no narration. " +
+        "Use only what the idea says; do not invent names, people, logos, ratings, prices or numbers. The idea: {{input.idea}}";
+
+    // Scriptwriter -> Director -> Author -> review: the code promo's own last four steps with the code analysis dropped. No paid
+    // generation step (language-model calls and the Remotion render only), so every plan can run it, a Trial workspace included.
+    private static WorkflowTemplateDefinition AnimationFromIdea() => new(
+        Key: AnimationFromIdeaKey,
+        Name: "Animated video from your idea",
+        Description: "Describe your video in a few sentences and get a short animated video made of text, shapes and motion, with no footage and no code needed. It is silent and you can pick the length and the shape. You see the estimated cost before you run it. Uses credits.",
+        Version: 1,
+        AutoCreateOnProject: false,
+        RequiresUserInput: false,
+        Steps:
+        [
+            new(AgentType.ScriptwriterAgent, "Write the scenes from your idea", AgentInputContextMode: AgentInputContextMode.FullWorkflow, CacheMode: StepCacheMode.Never),
+            new(AgentType.DirectorAgent, "Build shot direction", AgentInputContextMode: AgentInputContextMode.FullWorkflow, CacheMode: StepCacheMode.Never),
+            new(AgentType.AuthorAgent, "Assemble and render the animation", AgentInputContextMode: AgentInputContextMode.FullWorkflow, CacheMode: StepCacheMode.Never),
+            new(AgentType.ReviewAgent, "Review quality", StepType.ReviewLoop, LoopTargetStepOrder: 3, MaxIterations: 2, MinScore: 8,
+                AgentInputContextMode: AgentInputContextMode.FullWorkflow, CacheMode: StepCacheMode.Never,
+                ReviewLoopConfigJson: WorkflowTemplateCatalog.ShippedReviewLoopConfigJson),
+        ],
+        AppManifest: new AppManifest(
+            Version: AppManifestVocabulary.Version2,
+            Title: "Animated video from your idea",
+            Tagline: "Describe a video and get a short animation made of text, shapes and motion. No footage needed.",
+            Category: "promo",
+            SuggestedStylePreset: "fast-social-reel",
+            RequestTemplate: IdeaRequest,
+            Inputs:
+            [
+                Input("idea", "longText", "Your idea", required: true, maxLength: 1500,
+                    help: "What the video is about and what it should say, in a few sentences.",
+                    example: "A 15 second teaser for our autumn menu: three dishes, a price and an opening date"),
+                BriefField(BriefFieldConsumers.Language, "Language"),
+                BriefField(BriefFieldConsumers.LengthSec, "Length", def: "15", choices: "[10,15,30]"),
+                BriefField(BriefFieldConsumers.Format, "Shape"),
+                Tone(),
+                AgentModel("scriptModel", "Script model"),
+                AgentModel("builderModel", "Video builder model"),
+            ],
+            Result: new AppManifestResult("video"),
+            Advanced: new AppManifestAdvanced(true)),
+        AppInputAgents: new Dictionary<string, AgentType>(StringComparer.Ordinal)
+        {
+            ["scriptModel"] = AgentType.ScriptwriterAgent,
+            ["builderModel"] = AgentType.AuthorAgent,
+        });
 }

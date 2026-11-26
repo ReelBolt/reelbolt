@@ -720,6 +720,24 @@ Worked example: "A calm shot of rain on a window" gives: Your idea: rain running
 
 Typical mistakes: Asking for people or text in the clip. Choosing Best of two when a draft will do.
 
+## Animated video from your idea (`animation-from-idea`)
+
+Goals in the person's words: "a video from my idea and nothing else"; "an animation of my text, no footage"; "a 15 second teaser from a few sentences".
+
+Steps in order: write the scenes from the idea, build the shot direction, assemble and render the animation, then a review loop that goes back to the render (at most two passes).
+
+Needs: nothing but a language model. No footage, no code and no video-generation provider, so Trial runs it. Silent.
+
+Fields on the app page: Your idea; Language; Length (10, 15 or 30 seconds); Shape; Tone; under More options, Script model and Video builder model.
+
+Patches: None.
+
+Cost class: Uses credits. The estimate shows before Run; nothing is spent until the person runs it.
+
+Worked example: "A 15 second teaser for our autumn menu" gives: Your idea: three dishes, a price and an opening date; Length: 15.
+
+Typical mistakes: Expecting real footage or a person (this makes type, shapes and motion). Leaving the idea too short to say what to show.
+
 ## Edit my video (`edit-my-video`)
 
 Goals in the person's words: "edit my footage"; "cut my screen recording down and add music and zooms"; "clean up this animation and add sound effects"; "add a voice-over and captions to my clips". This one app replaces every old footage edit; the old keys (the plain edit, testimonial reel, graphics, music, sfx, colour, b-roll, dailies, voice-over, narrated story, pickups and the edit rooms) are hidden aliases that open it with the matching field preset.

@@ -197,7 +197,7 @@ describe('WelcomeFlow: the two questions', () => {
     expect(Math.min(...targets())).toBeGreaterThanOrEqual(44);
     fireEvent.click(materialCard('idea'));
     await waitFor(() => expect(step()).toBe('shots'));
-    expect(targets().length).toBe(3);
+    expect(targets().length).toBe(4);
     expect(Math.min(...targets())).toBeGreaterThanOrEqual(44);
   });
 });
