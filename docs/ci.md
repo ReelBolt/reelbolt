@@ -12,6 +12,7 @@ fork never executes on infrastructure we own.
 | Secret scan | [`.github/workflows/secret-scan.yml`](../.github/workflows/secret-scan.yml) | push to `master`, every PR, manual. gitleaks over the full history. On a PR the config and ignore file come from the base commit: the tree's `.gitleaksignore`/`.gitleaks.toml` are overwritten with the base copy (or deleted) before the scan, so a PR cannot suppress its own finding. `.github/scripts/secret-scan-trust-test.sh` proves it (plants a fake secret plus a self-serving ignore/allowlist; the scan must still exit 1) and runs as the `trust-test` job |
 | Blue-green deploy | `.github/workflows/blue-green-deploy.yml` | manual dispatch only, on `master` in the upstream repository, and only while the repository variable `BLUE_GREEN_DEPLOY_ENABLED` is `true`; the deploy job waits for approval of the `production` environment. Setup in an operator document |
 | CLA | [`.github/workflows/cla.yml`](../.github/workflows/cla.yml) | pull requests (contributor license agreement check) |
+| Image release | [`.github/workflows/image-release.yml`](../.github/workflows/image-release.yml) | `v<VERSION>` tag (for example `v0.4.0-alpha`). Publishes the container images; waits for approval of the `release` environment. Maintainers only; inert in forks. See "Releasing images" below |
 | Runtime image release | [`.github/workflows/runtime-image-release.yml`](../.github/workflows/runtime-image-release.yml) | `runtime-v*` tag (the desktop runner's sandbox runtime image). Maintainers only; inert in forks |
 | Runner release | [`.github/workflows/runner-release.yml`](../.github/workflows/runner-release.yml) | `runner-v*` tag (publishes the desktop runner to the `beta` channel), manual dispatch (a new version, a no-rebuild `promote` of a published beta to `stable`, or a build-and-verify dry run). Maintainers only; inert in forks. Linux only: every job runs on `vars.RUNNER_RELEASE_LABEL`, else `vars.CI_RUNNER_LINUX`, else `ubuntu-24.04` with the toolchains in pinned containers (Windows is cross-built and signed on Linux). Build jobs use no environment and no secret; only the Windows signing job (when publishing) and `publish` use `release`; a dry run uses the secret-free `release-dry-run`. See [`runner/build/README.md`](../runner/build/README.md) |
 
@@ -85,6 +86,28 @@ no hosted measurement yet.
 | `editor-e2e` | `e2e/tests/editor-v2/**` against an isolated local stack, in 4 Playwright shards (`E2E · editor v2 (N/4)`, each builds its own stack, artifacts `editor-e2e-html-report-N` and `editor-e2e-diagnostics-N`; 75 min each, 150 with the WebKit dispatch input) | Runs on every push and manual dispatch, and on a PR only when the editor, its API/render code or the suite changed (paths filter `editor-e2e`). Installs ffmpeg/ffprobe from the pinned static build (`infra/scripts/install-ffmpeg.sh`, no sudo) and Playwright chromium with `--with-deps` starts the stack with `e2e/scripts/editor-v2-stack.sh up` (compose project `reelbolt-editor-remediation`, loopback ports, no LLM or paid provider), then runs `e2e/scripts/editor-v2-picture-storage.sh apply` so presigned storage URLs name a host the runner can reach (the picture upload specs need it), runs `npm run test:editor-v2` on the `desktop` and `pixel7` projects (`iphone14webkit` too when the `editor_webkit` dispatch input is set), uploads the HTML report without traces, then `down -v` and deletes `/tmp/editor-remediation`. Rows that cannot pass yet are listed in `e2e/tests/editor-v2/expected-failures.ts`. Advisory: not in the `ci` aggregate's `needs`, see "Editor E2E is advisory" below |
 | `stripe-catalog-sync` | `tools/stripe-catalog-sync/**`, `e2e/stripe-mock/**`, `inference/src/ReelBolt.Inference.Api/Billing/plans.catalog.json` | `node --test` in the dependency-free Stripe catalog sync tool, then `node --test e2e/stripe-mock/server.test.mjs` for the e2e Stripe fake (no `npm ci`, no network beyond loopback, no Stripe call). The tool tests cover the promotion-target SQL and the founder window. Path filter `stripe-catalog`: on a PR it runs only when the tool, the fake or the plan catalog they read changed; skipped otherwise, which the `ci` aggregate accepts. See [`tools/stripe-catalog-sync/README.md`](../tools/stripe-catalog-sync/README.md) |
 | `ci` | — | Aggregate gate. Point branch protection at this single check rather than the matrix legs |
+
+## Releasing images
+
+The `Image release` workflow publishes the container images for a release. It is separate from the `docker-publish` job of `ci.yml`, which pushes the per-commit `:<sha>` images from the default branch.
+
+1. Make sure the release commit is on the default branch and the repo-root `VERSION` file holds the version to release.
+2. Tag that commit `v<VERSION>` and push the tag, for example `git tag v0.4.0-alpha && git push origin v0.4.0-alpha`.
+3. The `verify` job fails the run unless the tag equals `v` plus the contents of `VERSION`, and unless the tagged commit is an ancestor of the default branch.
+4. The `publish` jobs wait for a maintainer to approve the `release` environment (so does `release-assets`; `verify` needs no approval). After approval, each image goes through the GPL publication gate and source bundle, is pushed with an SBOM and provenance attestation, and is signed with cosign (keyless, GitHub OIDC). The GPL source bundles are kept as workflow artifacts for 90 days. When every image is published, the `release-assets` job attaches all source bundles (`.tar.gz` and `.sha256`) to the GitHub Release for the tag, creating it as a draft first if it does not exist; review and publish the draft yourself. A tag with a hyphen (for example `v0.4.0-alpha`) creates the draft as a pre-release and never as the latest release. New GHCR packages start private: after the first release, set each `reelbolt-*` package to public in the organisation's package settings and link it to the repository.
+
+Every image is pushed as `ghcr.io/reelbolt/reelbolt-<name>:<version>` (the tag without the leading `v`) and `:<sha>`. No `:latest` tag is pushed: the project is in alpha, so pin the version or the digest.
+
+Verify a signature (the identity is the `image-release.yml` workflow at the tag):
+
+```sh
+cosign verify \
+  --certificate-identity-regexp '^https://github\.com/ReelBolt/reelbolt/\.github/workflows/image-release\.yml@refs/tags/v' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  ghcr.io/reelbolt/reelbolt-go-api:0.4.0-alpha
+```
+
+`infra/scripts/tests/image-release-matrix.test.sh` (part of `infra-lint`) fails when the image list or the publish steps of `image-release.yml` drift from `ci.yml`, so change both together.
 
 ## Path filtering
 

@@ -33,6 +33,11 @@ const TAG_META: Record<BlogTag, { title: string; description: string }> = {
     description:
       'Practical guides for anyone with a story to tell: turning raw clips into a finished cut, planning a shoot, adding captions, and reading the credit estimate.',
   },
+  'open-source': {
+    title: 'Open-source ReelBolt: licence, self-hosting and contributing',
+    description:
+      'Why ReelBolt is open source under AGPL-3.0, what that means for customers and self-hosters, and how to contribute.',
+  },
   product: {
     title: 'ReelBolt product news and updates',
     description:

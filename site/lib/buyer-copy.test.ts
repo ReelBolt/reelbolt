@@ -8,7 +8,8 @@ import { flatten, localeCodes, namespacesOf, readNamespace } from '../i18n/catal
 
 // The rule covers /, /features and /about only. /runner is the desktop-app download page and names its
 // requirements and open-source components (as it did before translation), so its namespace is out of scope.
-const OUT_OF_SCOPE = new Set(['runner']);
+// /open-source is the self-hosting page: it names the render engine and the container tooling on purpose.
+const OUT_OF_SCOPE = new Set(['runner', 'openSource']);
 
 const FORBIDDEN: [string, RegExp][] = [
   ['ffmpeg', /ffmpeg/i],

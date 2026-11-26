@@ -20,11 +20,15 @@
   },
   "ownership": {
     "title": "You keep the keys",
-    "p1": "Videos get made from unreleased work, private recordings and material nobody wants spread around. So you choose how much stays with you: connect your own AI provider account, render on a machine you own, or, with an Enterprise self-hosting license, run the whole platform inside your own environment.",
+    "p1": "Videos get made from unreleased work, private recordings and material nobody wants spread around. So you choose how much stays with you: connect your own AI provider account, render on a machine you own, or run the whole platform inside your own environment. The code is open source, so you can read it or run it yourself. <link>See how open source works here</link>.",
     "p2": "You decide which models see your material. We do not train AI models on your content, and we do not sell it.",
     "l1": "Your own AI provider account, on the plans that include it",
     "l2": "Rendering on a machine you own, at no credit cost",
-    "l3": "Self-hosting for teams whose security rules require it"
+    "l3": "Open source code you can read, or run yourself if your security rules require it"
+  },
+  "openSource": {
+    "title": "The code is open",
+    "body": "You can read how ReelBolt works, run it yourself, or let us host it. <link>See what that means</link> or <repo>view the code on GitHub</repo>."
   },
   "contact": {
     "title": "Contact",

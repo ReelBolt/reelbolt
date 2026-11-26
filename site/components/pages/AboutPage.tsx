@@ -8,6 +8,7 @@ import { Section } from '@/components/layout/Section';
 import { ContactAddress } from '@/components/contact/ContactAddress';
 import { Reveal } from '@/components/motion/Reveal';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { siteConfig } from '@/lib/site-config';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema } from '@/lib/structured-data';
 import { PageMessages } from '@/components/layout/PageMessages';
@@ -104,7 +105,11 @@ function AboutPageBody({ locale }: { locale: string }) {
           </h2>
           <div className="mt-4 max-w-3xl space-y-4 text-ink-muted">
             <p>
-              {t('ownership.p1')}
+              {t.rich('ownership.p1', {
+                link: (chunks) => (
+                  <Link href="/open-source" className="font-medium text-accent-ink underline underline-offset-4">{chunks}</Link>
+                ),
+              })}
             </p>
             <p>
               {t('ownership.p2')}
@@ -116,6 +121,32 @@ function AboutPageBody({ locale }: { locale: string }) {
                 t('ownership.l3'),
               ]}
             />
+          </div>
+        </Section>
+      </Reveal>
+
+      <Reveal as="div">
+        <Section className="border-b border-line">
+          <h2 className="mt-3 font-display text-2xl font-bold text-ink">
+            {t('openSource.title')}
+          </h2>
+          <div className="mt-4 max-w-3xl text-ink-muted">
+            <p>
+              {t.rich('openSource.body', {
+                link: (chunks) => (
+                  <Link href="/open-source" className="font-medium text-accent-ink underline underline-offset-4">{chunks}</Link>
+                ),
+                repo: (chunks) => (
+                  <a
+                    href={siteConfig.repoUrl}
+                    rel="noopener"
+                    className="font-medium text-accent-ink underline underline-offset-4"
+                  >
+                    {chunks}
+                  </a>
+                ),
+              })}
+            </p>
           </div>
         </Section>
       </Reveal>

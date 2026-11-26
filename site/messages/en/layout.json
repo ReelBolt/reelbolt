@@ -10,6 +10,7 @@
   "nav": {
     "howItWorks": "How it works",
     "features": "Features",
+    "openSource": "Open source",
     "teams": "Teams",
     "pricing": "Pricing",
     "recipes": "Recipes",
@@ -17,6 +18,10 @@
     "docs": "Docs",
     "about": "About",
     "contact": "Contact"
+  },
+  "github": {
+    "label": "GitHub",
+    "aria": "ReelBolt on GitHub (opens in a new tab)"
   },
   "header": {
     "signIn": "Sign in",
@@ -37,6 +42,8 @@
     "recipes": "Recipes",
     "blog": "Blog",
     "docs": "Documentation",
+    "openSource": "Open source",
+    "github": "GitHub",
     "desktopRunner": "Desktop runner",
     "whatYouGet": "What you get",
     "faq": "FAQ",
@@ -50,8 +57,9 @@
     "runnerEula": "Runner EULA",
     "cookiePreferences": "Cookie preferences",
     "disclosure": "{name} makes finished videos from the materials you bring: your footage, your words and your brand. Running it means sending some of your material to third-party APIs: AI providers for generation, a storage and hosting provider for your files, and a payment provider for billing. Google is one of them, used only for optional sign-in and Drive sync. Our <privacy>privacy policy</privacy> describes what is sent to each provider and why. We do not use Google APIs or any other third-party AI service to generate non-consensual intimate imagery (NCII) or any sexually explicit content.",
-    "copyright": "© {year} {name}. All rights reserved.",
+    "copyright": "© {year} {name}. Name and logo reserved.",
     "version": "ReelBolt {version}",
+    "openSourceNote": "ReelBolt is open source under AGPL-3.0.",
     "alpha": "ReelBolt {version} — public alpha. Expect rough edges; things may change.",
     "privacyTelemetry": "Privacy and telemetry"
   },

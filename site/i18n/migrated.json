@@ -47,5 +47,6 @@
   "components/proof/TrustStrip.tsx",
   "components/proof/SampleGallery.tsx",
   "components/proof/Testimonials.tsx",
-  "components/proof/FounderNote.tsx"
+  "components/proof/FounderNote.tsx",
+  "components/pages/OpenSourcePage.tsx"
 ]

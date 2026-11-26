@@ -9,6 +9,7 @@ import { docsHref } from '@/i18n/config';
 import { siteConfig } from '@/lib/site-config';
 import { TRADEMARK_SYMBOL } from '@/lib/trademark';
 import { PrimaryCta } from '@/components/ui/PrimaryCta';
+import { GitHubLink } from '@/components/ui/GitHubLink';
 import { SignInLink } from '@/components/analytics/SignupLink';
 
 function Lockup() {
@@ -50,11 +51,11 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8 xl:max-w-7xl xl:px-6">
         <Lockup />
 
-        {/* The desktop nav starts at xl (1280px), not lg: eight labels do not hold one line below
-            that. The hamburger below xl carries all eight links plus Sign in, so the md-to-xl band
+        {/* The desktop nav starts at xl (1280px), not lg: the labels do not hold one line below
+            that (Contact, Teams and About are mobile-menu and footer only). The hamburger below xl carries every link plus Sign in, so the md-to-xl band
             is not left without navigation. See the measurement note below the CTA cluster. */}
-        <nav className="hidden xl:flex xl:items-center xl:gap-4">
-          {siteConfig.nav.map((item) => {
+        <nav className="hidden xl:flex xl:items-center xl:gap-3">
+          {siteConfig.nav.filter((item) => !('desktop' in item && item.desktop === false)).map((item) => {
             const active = pathname === item.href;
             return (
               <NavItem
@@ -89,7 +90,7 @@ export function SiteHeader() {
             between the three groups. The widest state is Italian with signup off ("App · In arrivo"):
             the tighter nav gap and padding at xl keep it inside the row at a 1280px window even with
             a visible 15px scrollbar. e2e/tests/site/header-spacing.spec.ts measures it per locale. */}
-        <div className="hidden shrink-0 items-center gap-3 whitespace-nowrap md:flex xl:gap-5">
+        <div className="hidden shrink-0 items-center gap-3 whitespace-nowrap md:flex xl:gap-4">
           {siteConfig.signupEnabled ? (
             // A plain <a> inside, not next/link: /app/* is the other Next.js app and a client-side
             // navigation inside this app's router would 404 (see components/ui/Button.tsx). It
@@ -102,6 +103,7 @@ export function SiteHeader() {
               {t('appComingSoon')}
             </span>
           )}
+          <GitHubLink className="!min-h-9 !px-3 !py-1.5 !text-xs" />
           <PrimaryCta location="header" variant="accent" skew />
         </div>
 
@@ -153,11 +155,12 @@ export function SiteHeader() {
                 {t('appComingSoon')}
               </span>
             )}
+            <GitHubLink block className="mt-4" onClick={() => setMenuOpen(false)} />
             <PrimaryCta
               location="header-mobile"
               variant="accent"
               block
-              className="mt-4"
+              className="mt-3"
               onNavigate={() => setMenuOpen(false)}
             />
           </nav>

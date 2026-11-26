@@ -1,13 +1,14 @@
 import type { JSX } from 'react';
 
 /** The topics a post can be filed under. Each one gets a `/blog/tag/<tag>` page. */
-export const BLOG_TAGS = ['comparisons', 'guides', 'product'] as const;
+export const BLOG_TAGS = ['comparisons', 'guides', 'open-source', 'product'] as const;
 
 export type BlogTag = (typeof BLOG_TAGS)[number];
 
 const TAG_LABELS: Record<BlogTag, string> = {
   comparisons: 'Comparisons',
   guides: 'Guides',
+  'open-source': 'Open source',
   product: 'Product',
 };
 

@@ -27,7 +27,7 @@
     },
     "6": {
       "q": "Where does my data live, and which AI models are used?",
-      "a": "On the hosted service, your projects, footage and finished videos stay in your workspace, and the AI services only receive what a job needs. On the plans that include it, you can connect your own AI provider account and choose which model each agent uses. With an Enterprise self-hosting license, you can also run the whole platform on your own infrastructure."
+      "a": "On the hosted service, your projects, footage and finished videos stay in your workspace, and the AI services only receive what a job needs. On the plans that include it, you can connect your own AI provider account and choose which model each agent uses. The code is open source, so you can also run the whole platform on your own infrastructure."
     },
     "7": {
       "q": "Can it add a voiceover?",
@@ -97,7 +97,7 @@
     },
     "10": {
       "q": "Is my footage used to train AI models?",
-      "a": "No. We do not train models on your content, and we do not sell it. When ReelBolt uses its own AI capacity, only what a job needs is sent to the model provider for that job. If your material should stay with you, connect your own AI provider account, or ask us about self-hosting."
+      "a": "No. We do not train models on your content, and we do not sell it. When ReelBolt uses its own AI capacity, only what a job needs is sent to the model provider for that job. If your material should stay with you, connect your own AI provider account, or run it yourself: the code is open source."
     }
   }
 }

@@ -87,7 +87,13 @@ export function siteCtas(
 
 const ctas = siteCtas();
 
+/** The public source repository. A plain static link: it is live from the first push. */
+export const REPO_URL = 'https://github.com/ReelBolt/reelbolt';
+/** The GitHub release for the version this build ships. */
+export const RELEASE_URL = `${REPO_URL}/releases/tag/v${productVersion}`;
+
 export const siteConfig = {
+  repoUrl: REPO_URL,
   name: 'ReelBolt',
   // The short tagline of the positioning (docs/marketing/copy-deck.md section 1). The lockup under
   // the logo keeps the two-word `layout.brand.tagline` ("AI video team"): the header's width is
@@ -113,17 +119,21 @@ export const siteConfig = {
   signupEnabled: ctas.signupEnabled,
   primaryCta: ctas.primary,
   salesCta: ctas.sales,
+  // `desktop: false` keeps an item in the mobile menu and the footer but out of the desktop bar:
+  // the labels, the GitHub button and the sign-in cluster do not share one line at 1280px in
+  // Italian. Contact is also the header's sales CTA; Teams is a section of Features; About sits in the footer.
   // One array feeds the desktop nav and the mobile menu, so `/pricing` is listed once and
   // appears in both.
   nav: [
     { key: 'howItWorks', label: 'How it works', href: '/#how-it-works' },
     { key: 'features', label: 'Features', href: '/features' },
-    { key: 'teams', label: 'Teams', href: '/features#teams' },
+    { key: 'openSource', label: 'Open source', href: '/open-source' },
+    { key: 'teams', label: 'Teams', href: '/features#teams', desktop: false },
     { key: 'pricing', label: 'Pricing', href: '/pricing' },
     { key: 'recipes', label: 'Recipes', href: '/recipes' },
     { key: 'blog', label: 'Blog', href: '/blog' },
     { key: 'docs', label: 'Docs', href: '/docs/' },
-    { key: 'about', label: 'About', href: '/about' },
-    { key: 'contact', label: 'Contact', href: '/contact' },
+    { key: 'about', label: 'About', href: '/about', desktop: false },
+    { key: 'contact', label: 'Contact', href: '/contact', desktop: false },
   ],
 } as const;

@@ -70,6 +70,8 @@ Then start the stack:
 docker compose up --build -d
 ```
 
+To run the signed release images instead of building from source, see [Self-hosting from release images](docs/self-hosting-release-images.md).
+
 Open <http://localhost> (the port is `APP_PORT`, default 80). Sign in with `ADMIN_EMAIL` (default `admin@reelbolt.local`). If `ADMIN_PASSWORD` is empty, a random password is printed once to the `go-api` logs on first boot, and you must change it at first login:
 
 ```bash
@@ -112,7 +114,7 @@ ReelBolt renders its videos with [Remotion](https://www.remotion.dev/). Remotion
 - ReelBolt does not let anyone upload their own Remotion project to be rendered. Remotion's terms prohibit running a service that does.
 - Code that ReelBolt's agents write is Remotion code. If you download it or share it, it is subject to Remotion's licence too, and anyone who receives it must check which tier applies to them. Remotion code you export or download must carry a "built with Remotion" notice that links to <https://www.remotion.dev/docs/license>. The notice is about the code, not about the videos it renders.
 
-> Remotion confirmed to the project owner that this use is covered by its free licence. That is the owner's statement, not a published Remotion document, and the Remotion licence does not settle the GPL or libfdk-aac question for the container images (see [GPL-SOURCE-OFFER.md](GPL-SOURCE-OFFER.md)).
+> Remotion confirmed to the project owner that this use is covered by its free licence. Remotion's team has also confirmed that redistributing its compositor in the container images is fine. Both confirmations were given to the project owner directly; they are not published Remotion documents, and the second concerns Remotion's own licence only, not the GPL or libfdk-aac components. The compositor contains a non-free codec (libfdk-aac); see [GPL-SOURCE-OFFER.md](GPL-SOURCE-OFFER.md).
 
 ## Third-party software
 

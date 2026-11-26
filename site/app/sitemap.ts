@@ -21,6 +21,7 @@ const routes: SitemapEntry[] = [
   { path: '/', changeFrequency: 'weekly', priority: 1.0 },
   { path: '/features', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/examples', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/open-source', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/pricing', changeFrequency: 'monthly', priority: 0.9 },
   // The six audience pages (`/for/<slug>`), from the one registry the routes are built from.
   ...AUDIENCE_PATHS.map((path) => ({ path, changeFrequency: 'monthly' as const, priority: 0.8 })),
