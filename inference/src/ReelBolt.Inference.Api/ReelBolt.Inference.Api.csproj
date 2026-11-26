@@ -44,7 +44,7 @@
          reference implementation's own regression vector is pinned by a test (Hamming distance <= 11).
          The native-assets package ships libSkiaSharp for the Alpine API image, which has no system one. -->
     <PackageReference Include="PdqHash" Version="1.1.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.2" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.157.0" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.21.0" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.21.0" />
