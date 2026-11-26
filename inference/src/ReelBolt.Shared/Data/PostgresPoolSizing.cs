@@ -21,11 +21,11 @@ public static class PostgresPoolSizing
     /// <summary>Npgsql's canonical minimum keyword, the one a minimum in any spelling is written back as.</summary>
     public const string CanonicalMinKeyword = "Minimum Pool Size";
 
-    // Npgsql 10 itself accepts "Maximum Pool Size" and "MaxPoolSize" (case-insensitive) but rejects
+    // Npgsql 11 itself accepts "Maximum Pool Size" and "MaxPoolSize" (case-insensitive) but rejects
     // "Max Pool Size" (the SqlClient spelling); it is recognised here and rewritten to the canonical key.
     private static readonly string[] Aliases = [CanonicalKeyword, "MaxPoolSize", "Max Pool Size"];
 
-    // Security S-21: Npgsql 10 likewise rejects "Min Pool Size"; every spelling is validated against the
+    // Security S-21: Npgsql 11 likewise rejects "Min Pool Size"; every spelling is validated against the
     // effective maximum and rewritten to the canonical key.
     private static readonly string[] MinAliases = [CanonicalMinKeyword, "MinPoolSize", "Min Pool Size"];
 

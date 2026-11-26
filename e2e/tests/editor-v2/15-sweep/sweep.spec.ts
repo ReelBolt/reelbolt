@@ -29,7 +29,9 @@ async function smallText(page: Page): Promise<string[]> {
 test('VF2 no visible text under 12 px in the editor workspaces and the deliver page', async ({ openEditor, freshTimeline }) => {
   runOn('desktop', 'pixel7');
   const ed = await openEditor(await freshTimeline('blank'));
-  for (const name of ['media', 'cut', 'edit', 'compose', 'color', 'audio', 'deliver'] as const) {
+  const workspaces = ['media', 'cut', 'edit', 'compose', 'color', 'audio', 'deliver'] as const;
+  // The phone surface has no Cut or Compose workspace (docs/editor.md "Not on a phone"); its dock sheets stand for the rest.
+  for (const name of workspaces.filter((w) => !ed.isPhone || (w !== 'cut' && w !== 'compose'))) {
     await ed.workspace(name);
     expect(await smallText(ed.page), `${name} workspace`).toEqual([]);
   }
@@ -63,6 +65,8 @@ test('DR1 phone touch targets are at least 44 px: Advanced toggle, export links,
   const adv = ed.testId('render-advanced-toggle');
   await expect(adv).toBeVisible();
   expect((await adv.boundingBox())?.height ?? 0, 'Advanced toggle height').toBeGreaterThanOrEqual(44);
+  // On a phone the export file links sit under "More options".
+  await ed.tap(adv);
   for (const f of ['otio', 'edl', 'fcpxml']) {
     const link = ed.testId(`deliver-export-${f}`);
     expect((await link.boundingBox())?.height ?? 0, `export ${f}`).toBeGreaterThanOrEqual(44);

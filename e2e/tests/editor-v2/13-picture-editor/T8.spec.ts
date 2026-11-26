@@ -1,7 +1,7 @@
 import type { Locator } from '@playwright/test';
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { createPicture, getPicture, openPicture } from '../../../fixtures/editor-v2/picture';
+import { createPicture, getPicture, openPanel, openPicture } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -51,9 +51,11 @@ test('T8 TH-DOC-10 an edit followed by an in-app navigation within 0.7 s is kept
   const layer = pic.layers[0];
   expect(layer.visible ?? true, 'the photo layer starts visible').toBe(true);
   await openPicture(page, seed.projectId, pic.id);
+  await openPanel(page, 'Layers');
 
   const hide = page.getByRole('button', { name: `Hide ${layer.label}`, exact: true });
-  const crumb = page.getByRole('link', { name: 'Pictures', exact: true }).first();
+  // On a phone the breadcrumb folds into one "Back to Pictures" link.
+  const crumb = page.getByRole('link', { name: 'Pictures', exact: true }).or(page.getByRole('link', { name: 'Back to Pictures', exact: true })).first();
   await expect(hide).toBeVisible();
   await expect(crumb, 'the "Pictures" breadcrumb leads back in-app').toBeVisible();
   await armTap(hide, 'hide');

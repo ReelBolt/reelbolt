@@ -1,6 +1,6 @@
 import { test, expect, type EditorPage } from '../../../fixtures/editor-v2/lane-a-test';
 import { PAIR, clipsTimeline } from '../../../fixtures/editor-v2/lane-a';
-import { runOn } from '../../../fixtures/editor-v2/rows';
+import { runOn, desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { rgbAt } from './canvas-pixels';
 
 /**
@@ -18,6 +18,7 @@ async function openMenu(ed: EditorPage, trackId: string): Promise<void> {
 
 test.describe('R03.5 track headers', () => {
   test('R03.5 rename a track by double-click and from the menu: the stored name changes', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
     const v = tracksOf(await ed.serverTimeline())[0];
@@ -48,6 +49,7 @@ test.describe('R03.5 track headers', () => {
   });
 
   test('R03.5 colour: a swatch is stored, No colour clears it', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
     const v = tracksOf(await ed.serverTimeline())[0];
@@ -87,6 +89,7 @@ test.describe('R03.5 track headers', () => {
   });
 
   test('R03.5 reorder: Move down in the menu and the drag handle store the new order', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR, { secondVideoTrack: true }));
     const [a, b] = tracksOf(await ed.serverTimeline());
@@ -108,6 +111,7 @@ test.describe('R03.5 track headers', () => {
   });
 
   test('R03.5 add a track above and below from the menu', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
     const before = tracksOf(await ed.serverTimeline());
@@ -121,6 +125,7 @@ test.describe('R03.5 track headers', () => {
   });
 
   test('R03.5 a locked track refuses clip edits with a plain sentence, and Unlock allows them', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR));
     const v = tracksOf(await ed.serverTimeline())[0];
@@ -139,6 +144,7 @@ test.describe('R03.5 track headers', () => {
   });
 
   test('R03.5 removing a track with clips asks first; Keep leaves it, Remove deletes it, Undo restores it', async ({ freshTimeline, openEditor, api, seed }) => {
+    desktopLayoutOnly('track headers are not on the phone surface');
     runOn('desktop', 'pixel7', 'iphone14webkit');
     const ed = await openEditor(await clipsTimeline(freshTimeline, api, seed, PAIR, { secondVideoTrack: true }));
     const v1 = tracksOf(await ed.serverTimeline())[0];

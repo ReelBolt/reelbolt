@@ -48,7 +48,7 @@ How each service picks its value:
   naming both settings and both numbers. The Inference API also fails startup on
   `Billing:ChangeLock:MaxConnections` below 1 or `Billing:ChangeLock:SlotWaitMilliseconds` below 0;
   the message names only the key. The Go API clamps `DB_MAX_IDLE_CONNS` down to `DB_MAX_OPEN_CONNS` with a log line rather than failing.
-- **Npgsql keyword spelling.** Npgsql 10 accepts `Maximum Pool Size` and `MaxPoolSize` in a
+- **Npgsql keyword spelling.** Npgsql 11 accepts `Maximum Pool Size` and `MaxPoolSize` in a
   connection string and rejects `Max Pool Size` (the SqlClient spelling); likewise it accepts
   `Minimum Pool Size` and `MinPoolSize` and rejects `Min Pool Size`. The helper recognises all three
   spellings of each, in any case, and writes back exactly one `Maximum Pool Size` and, when a minimum
@@ -214,7 +214,7 @@ With it false (env `Database__MigrateAtStartup=false`, the media host of a two-b
 and migrates nothing, and refuses to start while a migration is pending; `--migrate-only` applies the
 migrations and exits.
 
-The bootstrap names the database the way Npgsql 10.0.3 connects. `Database` wins; without it Npgsql
+The bootstrap names the database the way Npgsql 11.0.0 connects. `Database` wins; without it Npgsql
 sends no database and the server opens the one named after the user. That user is `Username`, else
 `PGUSER`, else the Kerberos principal, else the OS user (`NpgsqlConnector.GetUsernameAsync`). Npgsql
 never reads `PGDATABASE`, so the bootstrap ignores it too. When the string has neither `Database` nor
@@ -272,6 +272,22 @@ The alert rules are listed with the other starting alerts in
   `db.client.connection.npgsql.timeouts`, means that pool is exhausted.
 - A steadily rising Go API `db.client.connection.wait_count` means the Go API's cap is too low for
   its load.
+
+## Npgsql 11 with EF provider 10.0.4
+
+The services pin Npgsql 11.0.0 (`ReelBolt.Shared.csproj`) while `Npgsql.EntityFrameworkCore.PostgreSQL`
+is still 10.0.4, which declares Npgsql 10.0.4 as a minimum. Npgsql 11 removed
+`NpgsqlConnectionStringBuilder.Multiplexing`, and the provider's own database-create path
+(`NpgsqlRelationalConnection.CreateAdminConnection`) still sets it. Any EF call that takes that path
+throws `MissingMethodException` on a database that does not exist yet: `EnsureCreated()` on a missing
+database, `EnsureDeleted()`, `MigrateAsync()` on a missing database, and `dotnet ef database drop`.
+Nothing else in the provider was found unresolved against Npgsql 11.
+
+Production and tests do not hit it: `PostgresDatabaseBootstrap.EnsureDatabaseExistsAsync` creates the
+database before every `MigrateAsync` (Inference API and engine startup), and Postgres-gated tests run
+`CREATE DATABASE` first. This is a known limitation, accepted by the project owner. Do not add code that
+calls EF's create or drop path directly. Revisit when an EF provider 11 targeting EF Core 10 ships,
+then drop this section.
 
 ## Scale-out path and the PgBouncer precondition
 

@@ -16,7 +16,8 @@ test('UI2-02 the mixer fader moves while it is dragged and writes once on releas
   const ed = await openEditor(await freshTimeline('seeded'));
   await ed.workspace('audio');
   const audio = (await ed.serverTimeline()).document.tracks.find((t) => t.kind === 'audio')!;
-  const fader = ed.testId(`mixer-fader-${audio.id}`);
+  // The phone's Audio sheet has its own volume slider per track (same drag, same one write on release).
+  const fader = ed.testId(ed.isPhone ? `phone-audio-gain-${audio.id}` : `mixer-fader-${audio.id}`);
   const thumb = fader.getByRole('slider').or(ed.page.locator(`[data-testid="mixer-fader-${audio.id}"][role="slider"]`)).first();
   await thumb.scrollIntoViewIfNeeded();
   const start = Number(await thumb.getAttribute('aria-valuenow'));

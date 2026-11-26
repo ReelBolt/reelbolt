@@ -24,6 +24,12 @@ async function waitProbe(seed: Seed, file: string): Promise<void> {
 
 async function insertFromPool(ed: EditorPage, ref: string): Promise<void> {
   await ed.workspace('media');
+  if (ed.isPhone) {
+    // The phone's Add media sheet places a source from the tile's menu.
+    await ed.tap(ed.page.locator(`[data-testid="media-tile-menu"][data-for-media-ref="file:${ref}"]`).first());
+    await ed.tap(ed.testId('tile-place-insert'));
+    return;
+  }
   const tile = ed.page.locator(`[data-testid="media-clip-tile"][data-media-ref="file:${ref}"]`).first();
   await ed.tap(tile);
   await ed.tap(ed.testId('media-insert-at-playhead'));

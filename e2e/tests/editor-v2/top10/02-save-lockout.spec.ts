@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect } from '../../../fixtures/editor-v2';
 import type { Timeline } from '../../../fixtures/editor-v2/api';
 import { knownFailure } from '../expected-failures';
@@ -11,6 +12,7 @@ import { knownFailure } from '../expected-failures';
 const itemCount = (tl: Timeline) => tl.document.tracks.reduce((n, t) => n + t.items.length, 0);
 
 test('TOP10-02 P4-OPS-07 P8-SEQ-01 +V, an edit and +A all reach the server and survive reload', async ({ freshTimeline, openEditor }) => {
+  desktopLayoutOnly('adding a track is not on a phone');
   knownFailure('TOP10-02');
   const ed = await openEditor(await freshTimeline('seeded'));
   const before = await ed.serverTimeline();

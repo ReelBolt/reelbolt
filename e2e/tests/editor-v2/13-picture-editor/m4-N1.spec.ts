@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { createPicture, getPicture, openPicture } from '../../../fixtures/editor-v2/picture';
+import { createPicture, getPicture, openPanel, openPicture } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -15,6 +15,8 @@ test('m4-N1 TH-LAYER-14 an image from the project can be added to the picture by
   const phone = testInfo.project.name !== 'desktop';
   const pic = await createPicture(api, seed.projectId, seed.files.still, `m4n1-${testInfo.project.name}-${Date.now()}`);
   await openPicture(page, seed.projectId, pic.id);
+  // On a phone the Layers tools live in the dock's bottom sheet, not in a tab.
+  await openPanel(page, 'Layers');
 
   const add = page.getByRole('button', { name: 'Add to the picture' });
   await add.scrollIntoViewIfNeeded();
@@ -35,7 +37,8 @@ test('m4-N1 TH-LAYER-14 an image from the project can be added to the picture by
     await option.click();
   }
   const scrollAfter = await page.evaluate(() => window.scrollY);
-  if (phone) expect(scrollBefore, 'on the phone the control sits below the stage, so the page is scrolled to it').toBeGreaterThan(50);
+  // On a phone the page itself never scrolls (the stage and the sheet fill the screen): it must not jump either way.
+  if (phone) expect(Math.abs(scrollAfter - scrollBefore), `the phone page does not move (scrollY ${scrollBefore} -> ${scrollAfter})`).toBeLessThan(5);
   if (scrollBefore > 50) expect(scrollAfter, `the page stays where it was (scrollY ${scrollBefore} -> ${scrollAfter})`).toBeGreaterThan(scrollBefore / 2);
 
   await expect(add).toBeEnabled();

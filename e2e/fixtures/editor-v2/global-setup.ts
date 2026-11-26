@@ -50,6 +50,14 @@ export default async function globalSetup(config: FullConfig): Promise<void> {
       if (!terms.ok()) throw new Error(`editor-v2 accept-terms failed: HTTP ${terms.status()}`);
     }
 
+    if (!READONLY) {
+      // The first-run tour and the welcome questions belong to a person's first visit: mark them finished through the same
+      // calls their Skip buttons make (PUT /onboarding, PUT /onboarding/profile), so no spec meets the dimming tour layer.
+      // Best effort: an API without them just keeps the old behaviour.
+      await api.put('/api/v1/onboarding', { data: { tour: { status: 'skipped', version: 1 }, checklistDismissed: true } }).catch(() => undefined);
+      await api.put('/api/v1/onboarding/profile', { data: { skipped: true } }).catch(() => undefined);
+    }
+
     const probe = await api.get('/api/v1/projects');
     if (!probe.ok()) throw new Error(`editor-v2 session unusable: GET /api/v1/projects -> HTTP ${probe.status()}`);
 

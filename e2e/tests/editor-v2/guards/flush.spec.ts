@@ -39,7 +39,7 @@ async function bladeThenLeave(ed: EditorPage, leave: 'back' | 'reload'): Promise
         if (!canvas.isConnected) { w.__e2eLeftMs = performance.now() - t0; obs.disconnect(); }
       });
       obs.observe(document.body, { childList: true, subtree: true });
-      visible('back-to-timelines').click();
+      (visible('back-to-timelines') ?? visible('phone-back')).click(); // the phone header's back arrow
     } else {
       setTimeout(() => location.reload(), 100);
     }

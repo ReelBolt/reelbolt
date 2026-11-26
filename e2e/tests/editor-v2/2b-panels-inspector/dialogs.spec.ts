@@ -1,7 +1,7 @@
 import { test, expect } from '../../../fixtures/editor-v2/lane-b-test';
 import { type EditorPage } from '../../../fixtures/editor-v2';
 import { mediaClip, type Item, type Timeline } from '../../../fixtures/editor-v2/api';
-import { runOn } from '../../../fixtures/editor-v2/rows';
+import { runOn, desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { allSentOps, trackIndex, uuid, selectAt } from '../../../fixtures/editor-v2/lane-b';
 
 /**
@@ -206,6 +206,7 @@ test('TL-480 TL-481 TL-482 transition presets: save the current settings, apply 
 });
 
 test('TL-249 TL-490 TL-491 TL-492 TL-493 TL-494 keyframe lane: select a key, drag it, change its easing, delete it, double-click seeks', async ({ freshTimeline, openEditor }) => {
+  desktopLayoutOnly('keyframes are not on a phone');
   const ed = await openEditor(await freshTimeline('seeded'));
   const op = (tl: Timeline) => {
     const t = tl.document.tracks[trackIndex(tl.document, 'video')].items[0] as Item;

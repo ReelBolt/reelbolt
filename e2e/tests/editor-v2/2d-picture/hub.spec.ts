@@ -1,3 +1,4 @@
+import { openTab } from '../../../fixtures/editor-v2/picture-lane';
 import { test, expect, freshProject, hubUrl, createFull, getFull, isPhone, press, stageOf } from '../../../fixtures/editor-v2/picture-lane';
 import { picturesUrl } from '../../../fixtures/editor-v2/picture';
 
@@ -53,7 +54,8 @@ test('PE-003 PE-004 PE-005 start a picture from a project image: one new documen
   await expect(page).toHaveURL(/\/editor\/thumbnails\/[0-9a-f-]{36}\?project=/, { timeout: 30_000 });
   const docId = /thumbnails\/([0-9a-f-]{36})/.exec(page.url())![1];
   await expect(stageOf(page)).toBeVisible({ timeout: 45_000 });
-  await expect(page.getByText('1920 × 1080', { exact: true }), 'the canvas opens at the photo size').toBeVisible();
+  if (phone) await openTab(page, 'Canvas'); // the size text is desktop only; the phone has it in the Canvas sheet
+  await expect(page.getByText('1920 × 1080', { exact: true }).or(page.getByTestId('picture-sheet').getByText('1920 × 1080')).first(), 'the canvas opens at the photo size').toBeVisible();
   const created = await getFull(api, proj.id, docId);
   expect(created.layers.length, 'one layer: the original photo').toBe(1);
   expect(created.canvasWidth).toBe(1920);
@@ -118,7 +120,7 @@ test('PE-008 a picture can be renamed from the hub; the name persists', async ({
   await press(dialog.getByRole('button', { name: 'Save name' }), phone);
   await expect(page.getByRole('link', { name: `Open ${name} renamed` })).toBeVisible();
   await expect.poll(async () => (await getFull(api, pics.projectId, pic.id)).name).toBe(`${name} renamed`);
-  await page.reload();
+  await page.reload(); // the hub page has no stage: a plain reload
   await expect(page.getByRole('link', { name: `Open ${name} renamed` }), 'the new name survives a reload').toBeVisible();
 });
 
@@ -157,17 +159,20 @@ test('PE-012 PE-013 PE-014 PE-015 the editor page: breadcrumbs, missing project,
   await expect(page.getByText('Early preview').first(), 'every editor surface carries the Early preview label').toBeVisible();
 
   // Breadcrumbs: "Pictures" lands on the Pictures tab of the same project; "Editor" on the hub.
-  await press(page.getByRole('link', { name: 'Pictures', exact: true }).last(), phone);
+  // On a phone the breadcrumbs fold into one "Back to Pictures" link (there is no separate "Editor" crumb).
+  await press(page.getByRole('link', { name: phone ? 'Back to Pictures' : 'Pictures', exact: true }).last(), phone);
   await expect(page).toHaveURL(new RegExp(`/editor\\?project=${pics.projectId}&view=pictures`));
   await page.goBack();
   await expect(stageOf(page)).toBeVisible({ timeout: 45_000 });
-  await press(page.getByRole('link', { name: 'Editor', exact: true }).last(), phone);
-  await expect(page).toHaveURL(new RegExp(`/editor\\?project=${pics.projectId}`));
-  await expect(page.getByRole('tab', { name: 'Videos' })).toBeVisible();
+  if (!phone) {
+    await press(page.getByRole('link', { name: 'Editor', exact: true }).last(), phone);
+    await expect(page).toHaveURL(new RegExp(`/editor\\?project=${pics.projectId}`));
+    await expect(page.getByRole('tab', { name: 'Videos' })).toBeVisible();
+  }
 
   // No ?project=: an alert and a way to the hub.
   await page.goto(`/app/editor/thumbnails/${pic.id}`);
-  await expect(page.getByText(/project/i).first()).toBeVisible();
+  await expect(page.getByText(/project/i).locator('visible=true').first()).toBeVisible();
   await press(page.getByRole('link', { name: 'Go to the Editor' }).or(page.getByRole('button', { name: 'Go to the Editor' })), phone);
   await expect(page).toHaveURL(/\/editor\?view=pictures|\/editor\?/);
 

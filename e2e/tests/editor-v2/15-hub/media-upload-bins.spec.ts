@@ -13,13 +13,15 @@ test('R-upload a file uploaded from the Media workspace appears in the pool', as
   const ed = await openEditor(await freshTimeline('blank'));
   await ed.workspace('media');
   await expect(ed.testId('media-pool')).toBeVisible({ timeout: 30_000 });
+  const phoneSheet = ed.isPhone;
 
   const fileName = `hub-upload-${Date.now()}.png`;
   const tmp = path.join(os.tmpdir(), fileName);
   fs.copyFileSync(path.join(ensureMedia(), 'still.png'), tmp);
   try {
     const tilesBefore = await ed.page.getByTestId('media-clip-tile').count();
-    await ed.page.locator('[data-testid="media-upload-header"] input[type="file"]').setInputFiles(tmp);
+    // The phone's Add media sheet has its own picker and upload row.
+    await ed.page.locator(phoneSheet ? '[data-testid="add-media-input"]' : '[data-testid="media-upload-header"] input[type="file"]').setInputFiles(tmp);
 
     await expect.poll(async () => (await api.listFiles(seed.projectId)).some((f) => f.originalFileName === fileName), {
       message: 'the file is in the project', timeout: 60_000,
@@ -29,7 +31,7 @@ test('R-upload a file uploaded from the Media workspace appears in the pool', as
       return pool.some((item) => item.fileName === fileName);
     }, { message: 'the media pool lists the new file', timeout: 60_000 }).toBe(true);
     await expect(ed.page.getByTestId('media-clip-tile')).toHaveCount(tilesBefore + 1, { timeout: 30_000 });
-    await expect(ed.page.getByTestId('media-upload-row').first()).toHaveAttribute('data-status', 'done');
+    await expect(ed.page.getByTestId(phoneSheet ? 'add-media-upload-row' : 'media-upload-row').first()).toHaveAttribute('data-status', 'done');
   } finally {
     fs.rmSync(tmp, { force: true });
   }
@@ -42,6 +44,13 @@ test('R04.3 deleting a bin asks first, naming it and what goes; Cancel keeps it 
 
   const ed = await openEditor(await freshTimeline('blank'));
   await ed.workspace('media');
+  if (ed.isPhone) {
+    // The phone lists bins as chips in the Add media sheet and has no bin tree: deleting or reparenting a bin is "not on a phone" (docs/editor.md).
+    await expect(ed.page.getByRole('button', { name: binName })).toBeVisible({ timeout: 30_000 });
+    await expect(ed.testId('bin-tree')).toHaveCount(0);
+    await expect(ed.page.getByRole('button', { name: `Actions for ${binName}` })).toHaveCount(0);
+    return;
+  }
   await expect(ed.testId('bin-tree')).toBeVisible({ timeout: 30_000 });
 
   await ed.page.getByRole('button', { name: `Actions for ${binName}` }).click();

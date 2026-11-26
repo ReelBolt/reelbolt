@@ -28,6 +28,25 @@ const bins = (ed: EditorPage) => ed.seed.api.json<Bin[]>('GET', `/api/v1/project
 type Annotation = { mediaRef: string; favourite: boolean; flag: boolean };
 const annotations = (ed: EditorPage) => ed.seed.api.json<Annotation[]>('GET', `/api/v1/projects/${ed.seed.projectId}/media/annotations`);
 
+/**
+ * The refs the pool lists for one kind, read through the pool's own kind filter. The seed project is shared by every spec
+ * of a worker, so other specs may have added pictures or sounds (a cleaned audio file, an upload): the smart bin is
+ * compared with this set, not with a hard-coded list of the five seed files.
+ */
+async function refsOfKind(ed: EditorPage, kind: 'image' | 'audio', seedRef: string): Promise<string[]> {
+  const everything = (await tileRefs(ed)).length;
+  await ed.tap(ed.testId('media-filter-button'));
+  await ed.page.getByTestId(`media-filter-kind-${kind}`).check();
+  await expect.poll(async () => (await tileRefs(ed)).length, { message: `the ${kind} filter narrowed the pool` }).toBeLessThan(everything);
+  await expect.poll(() => tileRefs(ed)).toContain(seedRef);
+  const refs = await tileRefs(ed);
+  await ed.page.getByTestId(`media-filter-kind-${kind}`).uncheck();
+  await ed.page.keyboard.press('Escape');
+  await expect.poll(async () => (await tileRefs(ed)).length).toBe(everything);
+  return refs.sort();
+}
+const sorted = async (ed: EditorPage) => (await tileRefs(ed)).sort();
+
 async function openBinMenu(ed: EditorPage, name: string): Promise<void> {
   await ed.tap(ed.page.getByRole('button', { name: `Actions for ${name}` }));
 }
@@ -245,6 +264,10 @@ test('R05.6 a smart bin is created from a plain-words rule, matches the right so
   const name = `Pictures-${Date.now()}`;
   const ed = await openEditor(await freshTimeline('blank'));
   await openPool(ed);
+  const pictures = await refsOfKind(ed, 'image', ref(seed.files.still));
+  const sounds = await refsOfKind(ed, 'audio', ref(seed.files.tone));
+  expect(pictures, 'the pictures are not the footage').not.toContain(ref(seed.files.clipA));
+  expect(sounds, 'the sounds are not the pictures').not.toContain(ref(seed.files.still));
   let binId = '';
   try {
     await ed.tap(ed.testId('smart-bin-new'));
@@ -262,8 +285,8 @@ test('R05.6 a smart bin is created from a plain-words rule, matches the right so
 
     // Selecting it lists exactly the pictures; the tree counts the match.
     await ed.tap(ed.testId(`bin-name-${binId}`));
-    await expect.poll(() => tileRefs(ed)).toEqual([ref(seed.files.still)]);
-    await expect(ed.testId(`bin-count-${binId}`)).toContainText('1 match');
+    await expect.poll(() => sorted(ed)).toEqual(pictures);
+    await expect(ed.testId(`bin-count-${binId}`)).toContainText(`${pictures.length} match`);
 
     // Edit the rule in place: sound instead of pictures.
     await openBinMenu(ed, name);
@@ -272,7 +295,7 @@ test('R05.6 a smart bin is created from a plain-words rule, matches the right so
     await ed.page.getByTestId('smart-bin-kind-audio').check();
     await ed.testId('smart-bin-save').click();
     await expect.poll(async () => (await bins(ed)).find((b) => b.id === binId)?.smartFilter?.kinds).toEqual(['audio']);
-    await expect.poll(() => tileRefs(ed)).toEqual([ref(seed.files.tone)]);
+    await expect.poll(() => sorted(ed)).toEqual(sounds);
   } finally {
     if (binId) await seed.api.json('DELETE', `/api/v1/projects/${seed.projectId}/media/bins/${binId}`, undefined, [200, 204, 404]);
   }

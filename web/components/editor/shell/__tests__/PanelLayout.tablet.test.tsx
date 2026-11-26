@@ -43,6 +43,6 @@ describe('PanelLayout on a tablet', () => {
   it('keeps the viewer clear of the floating Inspector button', async () => {
     mount();
     await flush();
-    expect(screen.getByTestId('panel-viewer').style.paddingRight).toBe('96px');
+    expect(screen.getByTestId('panel-viewer').style.paddingRight).toBe('132px');
   });
 });

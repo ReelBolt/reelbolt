@@ -106,7 +106,9 @@ test('api D9 deleting a root comment keeps its replies in the thread', async ({ 
     await page.getByTestId(`review-reply-send-${root.id}`).tap();
     await expect(page.getByTestId(`review-thread-${root.id}`)).toContainText(text);
   }
-  await page.getByTestId(`review-thread-${root.id}`).getByRole('button', { name: 'Delete comment' }).tap();
+  // The phone page asks first: Delete, then the red Delete that confirms (Keep cancels).
+  await page.getByTestId(`review-delete-${root.id}`).tap();
+  await page.getByTestId(`review-delete-confirm-${root.id}`).tap();
   await expect(page.getByTestId(`review-thread-${root.id}`), 'the deleted root thread is gone').toHaveCount(0);
   const panel = page.getByTestId('review-panel');
   await expect(panel, 'the first reply is still shown').toContainText('First reply');

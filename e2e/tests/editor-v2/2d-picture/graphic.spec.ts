@@ -1,3 +1,4 @@
+import { reloadPicture, runArea } from '../../../fixtures/editor-v2/picture-lane';
 import type { Page } from '@playwright/test';
 import {
   test, expect, openFresh, isPhone, press, addBadgeLayer, layerOf, openTab, pollPicture, getFull, type PictureSeed, type FullLayer,
@@ -44,7 +45,7 @@ test('PE-155 with no chat AI provider the Design a graphic panel says so up fron
   await pickAiTool(page, 'Design a graphic');
   const panel = page.getByTestId('design-graphic-panel');
   await expect(panel).toBeVisible();
-  const design = panel.getByRole('button', { name: 'Design it', exact: true });
+  const design = runArea(page, panel).getByRole('button', { name: 'Design it', exact: true });
   if (list.available) {
     // A deployment that does have a chat provider: the button is offered (blocked until a description is typed).
     await expect(design).toBeVisible();
@@ -95,16 +96,16 @@ test('PE-155 with the designer stubbed: Design it queues the request, the finish
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `pe155s-${testInfo.project.name}`);
   const state = await stubGraphics(page, api, pics, pic.id);
-  await page.reload();
+  await reloadPicture(page);
   await expect(page.getByRole('button', { name: 'Undo', exact: true })).toBeDisabled();
   await pickAiTool(page, 'Design a graphic');
   const panel = page.getByTestId('design-graphic-panel');
-  const design = panel.getByRole('button', { name: 'Design it', exact: true });
+  const design = runArea(page, panel).getByRole('button', { name: 'Design it', exact: true });
   await expect(design).toBeDisabled();
   await panel.getByLabel('Describe the graphic').fill('A big yellow title saying HELLO');
   await expect(design).toBeEnabled();
   await press(design, phone);
-  await expect(panel.getByText(/Your graphic is on its way/)).toBeVisible();
+  await expect(runArea(page, panel).getByText(/Your graphic is on its way/)).toBeVisible();
   expect(state.posts).toHaveLength(1);
   expect(state.posts[0]).toMatchObject({ description: 'A big yellow title saying HELLO', placement: 'center' });
 
@@ -132,7 +133,7 @@ test('PE-088 a designed layer offers "Change this graphic", which opens the Desi
       : l));
     return route.fulfill({ response: res, json: body });
   });
-  await page.reload();
+  await reloadPicture(page);
   const plain = page.getByRole('button', { name: 'Change this graphic', exact: true });
   const list = page.getByRole('list', { name: 'Layers, front first' });
   await press(list.getByRole('button', { name: `Select ${pic.layers[0].label}` }), phone);

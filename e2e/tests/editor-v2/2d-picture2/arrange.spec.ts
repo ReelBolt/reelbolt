@@ -1,3 +1,4 @@
+import { reloadPicture } from '../../../fixtures/editor-v2/picture-lane';
 import {
   test, expect, openFresh, getFull, pollPicture, isPhone, press, addBadgeLayer, layerOf, hubUrl, createFull, savedBadge,
 } from '../../../fixtures/editor-v2/picture-lane';
@@ -18,7 +19,7 @@ test('W2-R13.5 undoing an added layer removes it from the list and the server on
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `w2ghost-${testInfo.project.name}`);
   const added = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await expect(list(page).getByRole('button', { name: /^Select / })).toHaveCount(2);
   // Delete (undoable), undo, redo: the layer comes and goes in the list.
   await press(list(page).getByRole('button', { name: `Select ${added.label}` }), phone);
@@ -40,7 +41,7 @@ test('W2 the Delete key does nothing while typing in a number box', async ({ pag
   runOn('desktop');
   const { pic } = await openFresh(page, api, pics, `w2del-${testInfo.project.name}`);
   const layer = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await list(page).getByRole('button', { name: `Select ${layer.label}` }).click();
   await page.getByTestId('arrange-left').click();
   await page.keyboard.press('Delete');
@@ -51,7 +52,7 @@ test('W2 numeric Left/Top/Width set the stored layer, survive a reload and undo'
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `w2num-${testInfo.project.name}`);
   const layer = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await press(list(page).getByRole('button', { name: `Select ${layer.label}` }), phone);
   const left = page.getByTestId('arrange-left');
   await left.fill('123');
@@ -67,7 +68,7 @@ test('W2 numeric Left/Top/Width set the stored layer, survive a reload and undo'
     return t.x === 123 && t.y === 45 && Math.abs(t.scale - 0.5) < 0.01 ? t : null;
   }, 'x 123, y 45 and half the 640 px width are stored');
   expect(stored?.x).toBe(123);
-  await page.reload();
+  await reloadPicture(page);
   await press(list(page).getByRole('button', { name: `Select ${layer.label}` }), phone);
   await expect(page.getByTestId('arrange-left')).toHaveValue('123');
   await expect(page.getByTestId('arrange-width')).toHaveValue('320');
@@ -82,7 +83,7 @@ test('W2 align right and bottom to the picture lands the layer on the edges; und
   const phone = isPhone(testInfo.project.name);
   const { pic } = await openFresh(page, api, pics, `w2align-${testInfo.project.name}`);
   const layer = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await press(list(page).getByRole('button', { name: `Select ${layer.label}` }), phone);
   await press(page.getByTestId('align-right'), phone);
   await press(page.getByTestId('align-bottom'), phone);
@@ -92,7 +93,7 @@ test('W2 align right and bottom to the picture lands the layer on the edges; und
     const h = (sizeOf(l).height ?? 360) * l.transform.scale;
     return Math.abs(l.transform.x + w - p.canvasWidth) < 1 && Math.abs(l.transform.y + h - p.canvasHeight) < 1;
   }, 'the layer touches the right and bottom edges');
-  await page.reload();
+  await reloadPicture(page);
   await expect(list(page).getByRole('button', { name: /^Select / })).toHaveCount(2);
 });
 
@@ -100,7 +101,7 @@ test('W2 merge two layers into one raster layer; undo brings both back', async (
   runOn('desktop');
   const { pic } = await openFresh(page, api, pics, `w2merge-${testInfo.project.name}`);
   const layer = await addBadgeLayer(api, pics.projectId, pic.id, pics);
-  await page.reload();
+  await reloadPicture(page);
   await list(page).getByRole('button', { name: `Select ${layer.label}` }).click();
   await page.getByTestId('arrange-pick-switch').click({ force: true });
   await page.getByTestId(`layer-pick-${layer.id}`).check({ force: true });

@@ -10,7 +10,7 @@ import { runOn } from '../../../fixtures/editor-v2/rows';
  */
 test.use({ serviceWorkers: 'block' });
 
-const PROPOSALS = /\/edit-timelines\/[^/]+\/proposals$/;
+const PROPOSALS = /\/edit-timelines\/[^/]+\/proposals(\?.*)?$/;
 const ESTIMATE = /\/edit-timelines\/[^/]+\/proposals\/estimate$/;
 const titleItem = (id: string, text: string, recordIn: number, recordOut: number): Item => ({
   type: 'titleClip', id, name: text, recordIn, recordOut, text, fontSize: 32, fontFamily: 'Inter', color: '#ffffff', enabled: true, provenance: null,

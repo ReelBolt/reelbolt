@@ -1,4 +1,4 @@
-import { test, expect, openFresh, addBadgeLayer, addTextLayer, openTab, isPhone } from '../../../fixtures/editor-v2/picture-lane';
+import { test, expect, openFresh, addBadgeLayer, addTextLayer, openTab, isPhone, textMore } from '../../../fixtures/editor-v2/picture-lane';
 import { runOn } from '../../../fixtures/editor-v2/rows';
 import { lightApi, withTempProject } from '../../../fixtures/editor-v2/ws';
 import { probe, expectReachable, press } from '../../../fixtures/editor-v2/popover-probe';
@@ -43,6 +43,7 @@ test('POP-08 picture editor Text tab Font and Weight dropdowns: reachable and pi
   await openTab(page, 'Layers');
   await press(page, page.getByRole('button', { name: `Select ${text.label}` }));
   await openTab(page, 'Text');
+  await textMore(page); // the phone keeps Weight under the Text sheet's More
   await expect(field(page, 'Font')).toBeVisible();
   await pickFirstOtherOption(page, field(page, 'Font'), 'text Font');
   await pickFirstOtherOption(page, field(page, 'Weight'), 'text Weight');

@@ -1,3 +1,4 @@
+import { reloadPicture, runArea } from '../../../fixtures/editor-v2/picture-lane';
 import type { Page } from '@playwright/test';
 import * as path from 'path';
 import {
@@ -21,14 +22,14 @@ test.use({ serviceWorkers: 'block' });
 const TOOLS: Tool[] = [
   { id: 'subject', title: 'Cut out a subject', op: 'removeBackground' },
   { id: 'removeBackground', title: 'Remove background', op: 'removeBackground' },
-  { id: 'replaceBackground', title: 'New background', op: 'replaceBackground', prompt: 'a sunny beach', blocker: 'Describe it: new background.' },
+  { id: 'replaceBackground', title: 'New background', op: 'replaceBackground', prompt: 'a sunny beach', blocker: 'Describe the new background.' },
   { id: 'erase', title: 'Erase', op: 'erase', needsMask: true, blocker: 'Paint over the area on the picture first.' },
   { id: 'fill', title: 'Fill', op: 'fill', needsMask: true, prompt: 'a red balloon', blocker: 'Paint over the area on the picture first.' },
-  { id: 'instruct', title: 'Edit with words', op: 'instruct', prompt: 'make it warmer', blocker: 'Describe it: what to change.' },
+  { id: 'instruct', title: 'Edit with words', op: 'instruct', prompt: 'make it warmer', blocker: 'Describe what to change.' },
   { id: 'expand', title: 'Expand', op: 'expand' },
   { id: 'upscale', title: 'Upscale', op: 'upscale' },
   { id: 'relight', title: 'Relight', op: 'relight' },
-  { id: 'generate', title: 'Create a picture', op: 'generate', prompt: 'a red cat', blocker: 'Describe it: describe it.' },
+  { id: 'generate', title: 'Create a picture', op: 'generate', prompt: 'a red cat', blocker: 'Describe the picture you want.' },
   { id: 'designGraphic', title: 'Design a graphic', op: null },
 ];
 
@@ -51,6 +52,7 @@ test('PE-140 PE-141 PE-142 PE-143 the AI tool picker opens, lists the 11 tools, 
   for (const t of TOOLS) await expect(dialog.getByTestId(`ai-tool-option-${t.id}`), `${t.title} is offered`).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(dialog, 'Escape closes the picker').toBeHidden();
+  await openTab(page, 'AI'); // on a phone Escape also closes the sheet under the picker
   await press(page.getByRole('button', { name: /Choose an AI tool/ }), phone);
   await press(dialog.getByRole('button', { name: 'Close' }), phone);
   await expect(dialog, 'the close button closes it too').toBeHidden();
@@ -173,18 +175,19 @@ for (const t of TOOLS.filter((x) => x.op && x.id !== 'subject')) {
     await stubCapabilities(page);
     const { pic } = await openFresh(page, api, pics, `${id.toLowerCase()}-${testInfo.project.name}`);
     const { layer, calls } = await stubOperation(page, api, pics, pic.id, t.op!);
-    await page.reload();
+    await reloadPicture(page);
     await expect(stageOf(page)).toBeVisible();
     // The layer the tool works on: the original photo.
     await press(page.getByRole('list', { name: 'Layers, front first' }).getByRole('button', { name: `Select ${pic.layers[0].label}` }), phone);
     await pickAiTool(page, t.title);
     const panel = page.getByTestId(`ai-tool-${t.id}`);
-    const button = panel.getByRole('button', { name: run, exact: true });
+    const area = runArea(page, panel);
+    const button = area.getByRole('button', { name: run, exact: true });
     await expect(button).toBeVisible();
 
     if (t.blocker) {
       await expect(button, 'disabled until the missing piece is supplied').toBeDisabled();
-      await expect(panel.getByText(t.blocker), 'and the reason is written beside it').toBeVisible();
+      await expect(area.getByText(t.blocker).first(), 'and the reason is written beside it').toBeVisible();
     }
     if (t.prompt) await panel.getByRole('textbox').first().fill(t.prompt);
     if (t.needsMask) {
@@ -234,12 +237,12 @@ test('PE-145 PE-028 "Cut out a subject": marks and words go to the service, the 
     bodies.push(route.request().postDataJSON() as Record<string, unknown>);
     return route.fulfill({ json: [layer] });
   });
-  await page.reload();
+  await reloadPicture(page);
   await pickAiTool(page, 'Cut out a subject');
   const panel = page.getByTestId('ai-tool-subject');
-  const cutOut = panel.getByRole('button', { name: 'Cut out', exact: true });
+  const cutOut = runArea(page, panel).getByRole('button', { name: 'Cut out', exact: true });
   await expect(cutOut, 'nothing to send yet').toBeDisabled();
-  await expect(panel.getByText('Click the picture, drag a box, or type a name first.')).toBeVisible();
+  await expect(runArea(page, panel).getByText('Click the picture, drag a box, or type a name first.')).toBeVisible();
   await panel.getByLabel('Or describe it').fill('the red square');
   await stageInView(page);
   const box = (await stageOf(page).boundingBox())!;

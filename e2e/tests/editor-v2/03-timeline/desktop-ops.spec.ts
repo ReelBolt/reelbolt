@@ -14,6 +14,12 @@ test('P4-OPS-07 + video and + audio add tracks that are stored and survive reloa
   knownFailure('P4-OPS-07');
   const ed = await openEditor(await freshTimeline('blank'));
   const before = await ed.serverTimeline();
+  if (ed.isPhone) {
+    // The phone has no track headers: adding a track is "not on a phone" (docs/editor.md), so the phone offers no such control.
+    await expect(ed.page.getByTestId('add-video-track')).toHaveCount(0);
+    await expect(ed.page.getByTestId('add-audio-track')).toHaveCount(0);
+    return;
+  }
   await ed.tap(ed.testId('add-video-track'));
   await ed.tap(ed.testId('add-audio-track'));
   const both = (tl: Timeline) => tl.document.tracks.filter((t) => t.kind === 'video').length === 2 && tl.document.tracks.filter((t) => t.kind === 'audio').length === 2;

@@ -18,6 +18,8 @@ test.beforeEach(async ({ api }) => { await clearPrefs(api); });
 test.afterEach(async ({ api }) => { await clearPrefs(api); });
 
 async function openKeymap(ed: EditorPage): Promise<void> {
+  // On a tablet the header keeps Keyboard shortcuts inside its More menu.
+  if (!(await ed.testId('open-keymap').isVisible())) await ed.tap(ed.testId('header-more'));
   await ed.tap(ed.testId('open-keymap'));
   // T-007: the header icon opens the read-only cheatsheet; Edit shortcuts opens the editable keymap.
   await ed.tap(ed.page.getByTestId('shortcuts-edit'));
@@ -101,7 +103,7 @@ test('R12.4 a failed save says why in plain words and keeps the dialog; Restore 
 
   await ed.page.route('**/api/v1/editor/preferences', (route) => (route.request().method() === 'PUT' ? route.fulfill({ status: 500, contentType: 'application/json', body: '{"message":"boom"}' }) : route.continue()));
   await openKeymap(ed);
-  await rebind(ed, 'toolHand', 'E');
+  await rebind(ed, 'toolHand', 'F7');
   await ed.tap(ed.testId('keymap-save'));
   await expect(ed.testId('keymap-save-error')).toBeVisible();
   await expect(ed.testId('keymap-search'), 'the dialog stays open').toBeVisible();
@@ -109,7 +111,7 @@ test('R12.4 a failed save says why in plain words and keeps the dialog; Restore 
   await ed.page.unroute('**/api/v1/editor/preferences');
 
   await ed.tap(ed.testId('keymap-save'));
-  await expect.poll(async () => (await getPrefs(api)).keymap.toolHand).toBe('E');
+  await expect.poll(async () => (await getPrefs(api)).keymap.toolHand).toBe('F7');
   await openKeymap(ed);
   await ed.tap(ed.testId('prefs-restore'));
   await expect.poll(async () => (await getPrefs(api)).keymap.toolHand, { message: 'the copy from before the last save is back' }).toBe('W');
@@ -144,7 +146,7 @@ test('R12.7 a saved layout stores fractions, Reset layout restores the default, 
   expect(f.left).toBeLessThan(1);
   expect(f.timeline).toBeLessThan(1);
 
-  await ed.tap(ed.testId('layout-reset'));
+  await ed.tap(ed.testId('layout-reset-page'));
   await expect.poll(() => leftWidth(ed), { message: 'Reset layout restores the default' }).toBe(start);
   await ed.reload();
   expect(await leftWidth(ed), 'the default survives a reload').toBe(start);
@@ -157,6 +159,11 @@ test('R12.7 a saved layout stores fractions, Reset layout restores the default, 
   await ed.tap(ed.testId('layout-delete-Wide left'));
   await ed.tap(ed.testId('layout-delete-confirm-Wide left'));
   await expect.poll(async () => (await getPrefs(api)).layouts.length, { message: 'the layout is gone on the server' }).toBe(0);
+
+  // The applied wide panel is stored for this account: put the page back, or every later test starts with a cramped header.
+  await openLayouts(ed);
+  await ed.tap(ed.testId('layout-reset-page'));
+  await expect.poll(() => leftWidth(ed), { message: 'the default is back for the next test' }).toBe(start);
 });
 
 const mastering = { targetLufs: -16, truePeakDbtp: -1, loudnessRange: 11 };
@@ -208,7 +215,7 @@ test.describe('tablet (coarse pointer, 1024x768)', () => {
     expect(fs.statSync(file).size).toBeGreaterThan(20);
     await ed.page.keyboard.press('Escape');
     await openLayouts(ed);
-    await ed.tap(ed.testId('layout-reset'));
+    await ed.tap(ed.testId('layout-reset-page'));
     await expect(ed.page.getByRole('separator', { name: 'Resize left panel' })).toBeVisible();
   });
 });

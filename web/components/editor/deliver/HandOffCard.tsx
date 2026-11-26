@@ -172,9 +172,9 @@ export function HandOffCard({ projectId, timelineId, doc, dirty, heading = true 
         </Group>
       )}
       <Radio.Group value={mediaValue} onChange={(v) => setMedia(v as HandOffMediaChoice)} label={tx('videoFiles')} data-testid="handoff-media">
-        <Stack gap={6} mt={4}>
+        <Stack gap={4} mt={4}>
           {HAND_OFF_MEDIA_OPTIONS.map((o) => (
-            <Radio key={o.value} size="xs" value={o.value} label={o.label} disabled={o.value === 'zip' && overCap} data-testid={`handoff-media-${o.value}`} />
+            <Radio key={o.value} size="md" value={o.value} label={o.label} disabled={o.value === 'zip' && overCap} data-testid={`handoff-media-${o.value}`} />
           ))}
         </Stack>
       </Radio.Group>

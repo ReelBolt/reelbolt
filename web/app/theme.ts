@@ -1,4 +1,5 @@
 import { createTheme } from '@mantine/core';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 /**
  * The editor's fixed bottom chrome (status bar 28 px + phone dock 52 px + safe area) must never cover a dropdown
@@ -83,7 +84,9 @@ export const theme = createTheme({
     Paper: { defaultProps: { shadow: 'none', withBorder: true } },
     Card: { defaultProps: { shadow: 'none', withBorder: true, padding: 'md' } },
     Title: { styles: { root: { letterSpacing: '0' } } },
-    Modal: { defaultProps: { shadow: 'none', radius: 'xs', overlayProps: { backgroundOpacity: 0.6, blur: 0 } } },
+    // Every dialog opens above the phone bottom sheet (z 250) and below dropdowns (300) and toasts (400): see EDITOR_MODAL_Z.
+    // Drawers keep Mantine's 200 (the app header's lift to 201 at 600-1023 px relies on it); an editor drawer that must cover the sheet sets the constant itself.
+    Modal: { defaultProps: { shadow: 'none', radius: 'xs', zIndex: EDITOR_MODAL_Z, overlayProps: { backgroundOpacity: 0.6, blur: 0 } } },
     Drawer: { defaultProps: { shadow: 'none', overlayProps: { backgroundOpacity: 0.6, blur: 0 } } },
     Menu: { defaultProps: { shadow: 'none', withBorder: true } },
     Tooltip: { defaultProps: { radius: 0 } },

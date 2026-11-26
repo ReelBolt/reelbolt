@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/editor-v2';
 import { runOn } from '../../../fixtures/editor-v2/rows';
-import { box, createPicture, inside, openPicture, overlaps } from '../../../fixtures/editor-v2/picture';
+import { box, createPicture, inside, openPanel, openPicture, overlaps } from '../../../fixtures/editor-v2/picture';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -16,9 +16,13 @@ test('m4-N2 TH-LAYER-11 at Fit the full-frame layer handles sit inside the stage
   const stage = await openPicture(page, seed.projectId, pic.id);
   const layer = pic.layers[0];
 
+  // On a phone the layer list is in the dock's Layers sheet: pick the layer there, then close the sheet to see the stage.
+  await openPanel(page, 'Layers');
   const select = page.getByRole('button', { name: `Select ${layer.label}`, exact: true });
   await select.scrollIntoViewIfNeeded();
   await select.click();
+  const dock = page.getByTestId('picture-dock-layers');
+  if (await dock.isVisible().catch(() => false)) await dock.tap();
   const fit = stage.getByRole('button', { name: 'Fit the picture on screen' });
   await fit.click();
   await stage.scrollIntoViewIfNeeded();

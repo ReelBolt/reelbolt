@@ -161,7 +161,7 @@ public class PostgresPoolSizingTests
         b.Password.Should().Be("p;w");
     }
 
-    // Security S-21 / QA-10: Npgsql 10 rejects the SqlClient spelling "Min Pool Size", so every
+    // Security S-21 / QA-10: Npgsql 11 rejects the SqlClient spelling "Min Pool Size", so every
     // Minimum spelling is rewritten to the canonical keyword, as the Maximum ones are.
     [Theory]
     [InlineData("Min Pool Size")]

@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect } from '../../../fixtures/editor-v2/lane-b-test';
 import type { Item } from '../../../fixtures/editor-v2/api';
 import { allSentOps, uuid, selectAt } from '../../../fixtures/editor-v2/lane-b';
@@ -220,6 +221,7 @@ test('S23 TL-300 TL-301 Versions: Restore asks first; confirming restores the st
 });
 
 test('TL-310 TL-311 TL-312 Compare: against another timeline lists the difference and jumps to it', async ({ freshTimeline, openEditor, seed }) => {
+  desktopLayoutOnly('the Compare tab is hidden on a phone (PHONE_HIDDEN_TOOL_TABS in phone/captions-logic.ts; docs/editor.md "Not on a phone": compare)');
   const ed = await openEditor(await freshTimeline('seeded'));
   // Make a known difference: move nothing, rename one clip.
   await selectAt(ed, 30);

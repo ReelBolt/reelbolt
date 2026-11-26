@@ -1,3 +1,4 @@
+import { desktopLayoutOnly } from '../../../fixtures/editor-v2/rows';
 import { test, expect } from '../../../fixtures/editor-v2';
 import { mediaClip } from '../../../fixtures/editor-v2/api';
 import { knownFailure } from '../expected-failures';
@@ -8,6 +9,7 @@ import { knownFailure } from '../expected-failures';
  * origin/master ends in pointercancel and leaves the document unchanged. WebKit cannot drag by touch.
  */
 test('TOP10-08 P3-CANVAS-03 P4-OPS-06 dragging a clip moves it', async ({ freshTimeline, openEditor, api, seed }, testInfo) => {
+  desktopLayoutOnly('moving a clip by drag is behind the touch-drag flag, off by default; 30-phone/touch covers the flag on and off');
   test.skip(testInfo.project.name === 'iphone14webkit', 'synthetic pointers: Playwright WebKit cannot drag by touch (audit D8)');
   knownFailure('TOP10-08');
   const id = await freshTimeline('blank');

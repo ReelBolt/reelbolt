@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.15" />
-    <!-- Same version both hosts resolve through Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3 (Data/PostgresDatabaseBootstrap.cs). -->
-    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <!-- Overrides the Npgsql 10.0.4 that Npgsql.EntityFrameworkCore.PostgreSQL 10.0.4 declares, so both hosts resolve 11.0.0. EF's own database-create path throws MissingMethodException on it; see Data/PostgresDatabaseBootstrap.cs and docs/database-connections.md "Npgsql 11 with EF provider 10.0.4". -->
+    <PackageReference Include="Npgsql" Version="11.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.23.0" />
     <!-- Same version the engine's ExpressionEvaluator uses: StaticBranchResolver decides input-only conditions with it (docs/design/app-inputs.md 9.3). -->
-    <PackageReference Include="NCalcSync" Version="7.2.0" />
+    <PackageReference Include="NCalcSync" Version="7.5.0" />
     <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.28.0" />
     <PackageReference Include="Azure.AI.OpenAI" Version="2.9.0-beta.1" />
     <PackageReference Include="OpenAI" Version="2.15.0" />

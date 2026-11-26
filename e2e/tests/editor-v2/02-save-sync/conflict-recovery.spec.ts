@@ -35,7 +35,8 @@ test('R02.1 another writer touched the same clip: the choice dialog; Keep my cop
   await bladeAt(ed, 75);
   const dialog = page.getByTestId('conflict-dialog');
   await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText('your changes touch the same part');
+  // The dialog explains why in a sentence; the phone's compact bar says the short form (the chip below carries the reason).
+  await expect(dialog).toContainText(testInfo.project.name === 'desktop' ? 'your changes touch the same part' : 'Your edits are safe');
   // Desktop and tablet show a dialog; the phone shows a compact bar (Wave 3 RM.7) with the same sentence in the chip.
   if (testInfo.project.name === 'desktop') await expect(page.getByRole('dialog')).toContainText('This timeline was changed somewhere else');
   await expect(ed.chip).toHaveText('Not saved. This timeline was changed somewhere else.');

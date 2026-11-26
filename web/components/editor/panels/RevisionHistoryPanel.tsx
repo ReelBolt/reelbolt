@@ -18,6 +18,7 @@ import { formatDate } from '@/lib/utils/format';
 import { humanizeErrorT } from '@/components/editor/shell/humanize-error-t';
 import { causeLabelMsg, NAME_MAX_LENGTH, retentionMsg, sessionLabelMsg, groupVersions } from './versions';
 import { msg, useFormat, useT } from '@/i18n';
+import { EDITOR_MODAL_Z } from '@/components/editor/ui/z-index';
 
 export interface RevisionHistoryPanelProps {
   projectId: string;
@@ -231,7 +232,7 @@ export function RevisionHistoryPanel({ projectId, timelineId, readOnly, onRestor
         </Stack>
       </ScrollArea.Autosize>
 
-      <Modal opened={confirming !== null} onClose={() => setConfirming(null)} title={t('restoreThisVersion')} radius="md" centered>
+      <Modal opened={confirming !== null} onClose={() => setConfirming(null)} title={t('restoreThisVersion')} radius="md" centered zIndex={EDITOR_MODAL_Z}>
         <Stack gap="md">
           <Text size="sm" data-testid="version-restore-text">
             {t('restore2')} {confirming?.name ? `“${confirming.name}”` : t.msg(causeLabelMsg(confirming ?? { cause: 'auto' })).toLowerCase()} {t('from')} {confirming ? formatDate(confirming.createdAt) : ''}{t('yourCurrentStateIs')}

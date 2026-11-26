@@ -1,5 +1,5 @@
-import { test, expect, SEEDED_LAYOUT } from '../../../fixtures/editor-v2';
-import { expectLargerScreenState, renderAndWait, runOn, waitRender } from '../../../fixtures/editor-v2/rows';
+import { test, expect, SEEDED_LAYOUT, type EditorPage } from '../../../fixtures/editor-v2';
+import { renderAndWait, runOn, waitRender } from '../../../fixtures/editor-v2/rows';
 import { knownFailure } from '../expected-failures';
 
 /**
@@ -64,20 +64,26 @@ test('P8-DSP-08 phone: a timeline with every DSP stage and a channel map renders
   expect(r.status, `DSP render ${r.errorMessage ?? ''}`).toBe('Passed');
 });
 
-/** P8-DSP-08 (M), authoring half (cut on phone, R08): the DSP controls show the "needs a larger screen" state. */
-test('P8-DSP-08 phone: authoring track processing shows the "needs a larger screen" state', async ({ seed, openEditor }) => {
-  runOn('pixel7', 'iphone14webkit');
-  knownFailure('P8-DSP-08', 'authoring');
-  const ed = await openEditor(seed.seededTimelineId);
+/*
+ * The phone's Audio sheet is volume, mute, solo, Duck music, Clean voice and the voiceover recorder: no buses, no DSP
+ * numbers, no automation lanes (docs/editor.md "Not on a phone"). It does not render a disabled stand-in, it does not offer them.
+ */
+async function openAudioSheetOnPhone(ed: EditorPage): Promise<void> {
   await ed.workspace('audio');
-  await expectLargerScreenState(ed.page, /dynamics|equali[sz]er|\bEQ\b|processing|effects|denois/i, 'Track processing on a phone');
+  await expect(ed.testId('phone-audio-sheet')).toBeVisible();
+}
+
+test('P8-DSP-08 phone: the Audio sheet offers volume, mute and solo but no track processing (EQ, dynamics, effects)', async ({ seed, openEditor }) => {
+  runOn('pixel7', 'iphone14webkit');
+  const ed = await openEditor(seed.seededTimelineId);
+  await openAudioSheetOnPhone(ed);
+  await expect(ed.page.locator('[data-testid^="phone-audio-gain-"]').first()).toBeVisible();
+  await expect(ed.page.locator('[data-testid="advanced-audio"], [data-testid^="mixer-rumble-"], [data-testid^="mixer-lowcut-"], [data-testid="mixer-dsp-preview-note"]')).toHaveCount(0);
 });
 
-/** P8-AUTO-02 (M) (cut on phone, R08): Latch automation shows the "needs a larger screen" state. */
-test('P8-AUTO-02 phone: latch automation shows the "needs a larger screen" state', async ({ seed, openEditor }) => {
+test('P8-AUTO-02 phone: the Audio sheet offers no automation or latch controls', async ({ seed, openEditor }) => {
   runOn('pixel7', 'iphone14webkit');
-  knownFailure('P8-AUTO-02');
   const ed = await openEditor(seed.seededTimelineId);
-  await ed.workspace('audio');
-  await expectLargerScreenState(ed.page, /automation|latch/i, 'Automation on a phone');
+  await openAudioSheetOnPhone(ed);
+  await expect(ed.page.locator('[data-testid^="automation-mode-"], [data-testid^="automation-fader-"], [data-testid="advanced-audio"]')).toHaveCount(0);
 });
