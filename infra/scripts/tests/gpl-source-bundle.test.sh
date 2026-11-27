@@ -46,6 +46,37 @@ if FAKE_FETCH_MISSING="ffmpeg 8.1.3-r0" "$script" --out "$out" alpineimg >/dev/n
   grep -q "incomplete" "$work/err" && ok "missing source: fails and says the bundle would be incomplete" || ko "missing source: wrong message: $(cat "$work/err")"; fi
 [ -z "$(ls "$out"/*.tar.gz 2>/dev/null)" ] && ok "missing source: no tarball left behind" || ko "missing source: a tarball was written"
 
+# a permissive package from outside the distribution (infra/gpl-source-exempt.txt) needs no source; a copyleft claim in its copyright file fails
+export FAKE_OS_RELEASE=$'ID=debian\nVERSION_ID="12"\nVERSION_CODENAME=bookworm'
+export FAKE_DPKG='ffmpeg\t7:5.1.9-0+deb12u1\tffmpeg\t7:5.1.9-0+deb12u1\ndocker-ce\t5:29.10.1-1~debian.12~bookworm\tdocker-ce-cli\t5:29.10.1-1~debian.12~bookworm'
+rm -rf "$out"
+if FAKE_COPYRIGHT="Licensed under the Apache License, Version 2.0" "$script" --out "$out" debimg >/dev/null 2>"$work/err"; then ok "exempt package: bundle succeeds"; else ko "exempt package: failed: $(cat "$work/err")"; fi
+t3="$(ls "$out"/*.tar.gz 2>/dev/null | head -1)"
+[ -n "$t3" ] && ! tar -xzOf "$t3" --wildcards '*/source-packages.tsv' | grep -q 'docker-ce' && ok "exempt package: no source is looked up for it" || ko "exempt package: still in the source list"
+[ -n "$t3" ] && tar -xzOf "$t3" --wildcards '*/exempt.tsv' | grep -q 'docker-ce-cli.*Apache-2.0' && ok "exempt package: recorded in exempt.tsv" || ko "exempt package: not recorded"
+rm -rf "$out"
+if FAKE_COPYRIGHT="This program is free software under the GNU General Public License" "$script" --out "$out" debimg >/dev/null 2>"$work/err"; then ko "exempt package with a copyleft copyright file: expected failure"; else
+  grep -q "copyleft" "$work/err" && ok "exempt package with a copyleft copyright file: fails" || ko "wrong message: $(cat "$work/err")"; fi
+rm -rf "$out"
+printf 'docker-ce-cli\tApache-2.0\tdocker-ce-cli exempt without a no-copyright-file note\n' > "$work/exempt-bad.txt"
+if GPL_BUNDLE_EXEMPT_FILE="$work/exempt-bad.txt" "$script" --out "$out" debimg >/dev/null 2>"$work/err"; then ko "missing copyright file without note: expected failure"; else
+  grep -q "no copyright file" "$work/err" && ok "missing copyright file without the note: fails" || ko "wrong message: $(cat "$work/err")"; fi
+export FAKE_DPKG='ffmpeg\t7:5.1.9-0+deb12u1\tffmpeg\t7:5.1.9-0+deb12u1\nglibc\t2.36-9\tlibc6\t2.36-9'
+export FAKE_OS_RELEASE=$'ID=alpine\nVERSION_ID=3.24.3'
+
+# Alpine: an exempt package (nginx.org's nginx) needs its declared licence to match the entry; a different one refuses
+export FAKE_OS_RELEASE=$'ID=alpine\nVERSION_ID=3.24.3'
+export FAKE_APK_LIST=$'ffmpeg-libs-8.1.3-r0 x86_64 {ffmpeg} (GPL-2.0-or-later) [installed]\nnginx-1.31.9-r1 x86_64 {nginx} (2-clause BSD-like license) [installed]'
+rm -rf "$out"
+if "$script" --out "$out" alpineimg >/dev/null 2>"$work/err"; then ok "alpine exempt package: bundle succeeds"; else ko "alpine exempt package failed: $(cat "$work/err")"; fi
+t4="$(ls "$out"/*.tar.gz 2>/dev/null | head -1)"
+[ -n "$t4" ] && ! tar -xzOf "$t4" --wildcards '*/source-packages.tsv' | grep -q '^nginx' && ok "alpine exempt package: not in the source list" || ko "alpine exempt package: still in the source list"
+export FAKE_APK_LIST=$'ffmpeg-libs-8.1.3-r0 x86_64 {ffmpeg} (GPL-2.0-or-later) [installed]\nnginx-1.31.9-r1 x86_64 {nginx} (GPL-2.0-or-later) [installed]'
+rm -rf "$out"
+if "$script" --out "$out" alpineimg >/dev/null 2>"$work/err"; then ko "alpine exempt package with another licence: expected failure"; else
+  grep -q "declares" "$work/err" && ok "alpine exempt package with another licence: fails" || ko "wrong message: $(cat "$work/err")"; fi
+export FAKE_APK_LIST=$'ffmpeg-libs-8.1.3-r0 x86_64 {ffmpeg} (GPL-2.0-or-later) [installed]\nmusl-1.2.5-r10 x86_64 {musl} (MIT) [installed]'
+
 # untrusted APKBUILDs: stage B has no network, one read-only mount of the scratch dir, non-root; helpers are digest-pinned
 export FAKE_DOCKER_LOG="$work/docker.log"; : > "$FAKE_DOCKER_LOG"; rm -rf "$out"
 "$script" --out "$out" alpineimg >/dev/null 2>&1

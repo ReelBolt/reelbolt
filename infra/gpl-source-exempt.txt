@@ -1,0 +1,16 @@
+# Installed packages that need no source in a corresponding-source bundle (infra/scripts/gpl-source-bundle.sh).
+# One per line, tab separated: <binary package>  <licence>  <no-copyright-file or -> <reason>
+# A package whose deb ships no copyright file needs `no-copyright-file` in column 3 (the licence was then read
+# from the vendor's own README); otherwise a missing file refuses the entry.
+# A package belongs here only if its licence does not oblige us to offer source (permissive, not
+# GPL/LGPL/AGPL/MPL) and it does not come from the distribution's own source archive. The script also
+# reads the package's /usr/share/doc/<package>/copyright in the image and refuses the entry when that
+# file names a copyleft licence (on Alpine: refuses the entry unless the package database declares exactly the
+# licence in column 2). Every other package still needs its source found, or the bundle fails.
+docker-ce-cli	Apache-2.0	no-copyright-file	Docker CLI from download.docker.com's apt repository (sandbox-executor image); not in Debian's source archive
+nginx	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
+nginx-module-acme	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
+nginx-module-geoip	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
+nginx-module-image-filter	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
+nginx-module-njs	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
+nginx-module-xslt	2-clause BSD-like license	no-copyright-file	nginx.org package in the official nginx base image (not in Alpine's source archive; BSD-2-Clause, no source offer owed)
