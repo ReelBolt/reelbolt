@@ -79,13 +79,15 @@ export function softwareApplicationSchema(locale: Locale = defaultLocale) {
 export function pricingOffersSchema(locale: Locale = defaultLocale) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Product',
+    // An OfferCatalog, not a Product: Google reads Product markup with offers as a merchant
+    // product snippet and asks for `review` and `aggregateRating`, which this site does not have
+    // and will not invent. The prices stay published, and a catalog is not a rich-result type.
+    '@type': 'OfferCatalog',
     name: seoStrings(locale).plansName.replace('{name}', siteConfig.name),
     description: seoStrings(locale).description,
     url: pageUrl(locale, '/pricing'),
-    image: productImageUrl(siteConfig.url),
     inLanguage: localeMeta(locale).htmlLang,
-    offers: [...pricedPlanOffers(plans, currency, siteConfig.url), ...annualPlanOffers(plans, currency, siteConfig.url)],
+    itemListElement: [...pricedPlanOffers(plans, currency, siteConfig.url), ...annualPlanOffers(plans, currency, siteConfig.url)],
   };
 }
 

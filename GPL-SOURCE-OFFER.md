@@ -24,7 +24,7 @@ This offer is made to anyone who received the image, not only to the person who 
 
 ## How to get the source without asking
 
-Each image release has a source bundle: a tarball with the source packages of every package installed in that image, at the exact installed versions, a manifest, and the reference for the Remotion compositor FFmpeg. It is attached to the GitHub release of the same version, next to its SHA-256 file. The release assets are named `reelbolt-source-<image>-<digest-prefix>.tar.gz` and `.sha256`.
+Each image release has a source bundle: a tarball with the source packages of every package installed in that image, at the exact installed versions, a manifest, and the reference for the Remotion compositor FFmpeg. It is attached to the GitHub release of the same version, next to its SHA-256 file. There are a few exceptions, packages that are not under a copyleft licence and are not in the distribution's source archive: the Docker command-line client in the `sandbox-executor` image (Apache-2.0, installed from Docker's own package repository) and the nginx and its modules in the `nginx` and `docs-site` images (2-clause BSD, installed from nginx.org's own package repository). They are listed in [infra/gpl-source-exempt.txt](infra/gpl-source-exempt.txt) and in the bundle's `exempt.tsv`; the build refuses a listed package unless the image's own records agree with the licence listed (the copyright file on Debian, the package database on Alpine) and that licence is not a copyleft one. The release assets are named `reelbolt-source-<image>-<digest-prefix>.tar.gz` and `.sha256`.
 
 To rebuild a bundle yourself for an image you hold:
 

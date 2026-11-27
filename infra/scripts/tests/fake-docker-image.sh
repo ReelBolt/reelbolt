@@ -14,6 +14,7 @@
 #   FAKE_PROBE            the gate's ffmpeg/package/compositor probe output
 #   FAKE_HAS_DPKG         1 when `command -v dpkg-query` should succeed
 #   FAKE_COMPOSITOR       "name<TAB>version<TAB>dir" lines for the bundle's compositor query
+#   FAKE_COPYRIGHT        text of /usr/share/doc/<package>/copyright for any package
 #   FAKE_FETCH_MISSING    "pkg ver" line the helper container reports as missing
 #   FAKE_INDEX_JSON       `docker buildx imagetools inspect <ref> --raw` output (the pushed index)
 #   FAKE_IMAGE_CONFIG     `... --format '{{json .Image}}'` output (one platform's image config)
@@ -62,6 +63,7 @@ case "$cmd" in
       'command -v dpkg-query') [ "${FAKE_HAS_DPKG:-0}" = 1 ]; exit $? ;;
       'cat /etc/os-release') printf '%s\n' "${FAKE_OS_RELEASE:-}" ;;
       *'dpkg-query -W -f='*) printf '%b\n' "${FAKE_DPKG:-}" ;;
+      *'/usr/share/doc/'*'/copyright'*) printf '%s' "${FAKE_COPYRIGHT:-}" ;;
       'apk list -I') printf '%b\n' "${FAKE_APK_LIST:-}" ;;
       *'head -c 200 /licenses/'*) printf '%s' "${FAKE_LICENSE_HEAD-GNU AFFERO GENERAL PUBLIC LICENSE}" ;;
       *'@remotion/compositor-'*'package.json'*) printf '%b\n' "${FAKE_COMPOSITOR:-}" ;;

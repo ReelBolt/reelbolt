@@ -33,6 +33,7 @@ done
 [ -n "$image" ] || usage
 
 die() { echo "gpl-source-bundle: $*" >&2; exit 1; }
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 command -v docker >/dev/null 2>&1 || die "docker not found"
 
 if ! docker image inspect "$image" >/dev/null 2>&1; then
@@ -79,10 +80,48 @@ case "$os_id" in
         else { next }
         printf "%s\t%s\t%s\t%s\n", origin, ver, name, ver }' \
       | sort -u > "$work/packages.tsv" || die "apk list failed in the image"
+    # The apk database records, per package, the aports commit it was built from (`c:`): the exact recipe,
+    # found without searching the history. Absent or unreadable = the lookup falls back to the branch.
+    in_image 'awk "/^o:/{o=substr(\$0,3)} /^c:/{c=substr(\$0,3)} /^\$/{if(o!=\"\"&&c!=\"\")print o\"\\t\"c; o=\"\"; c=\"\"}" /lib/apk/db/installed 2>/dev/null' \
+      | grep -P '^[A-Za-z0-9._+-]+\t[0-9a-f]{40}$' | sort -u > "$work/commits.tsv" || : > "$work/commits.tsv"
     ;;
   *) die "unsupported base distribution '$os_id' (supported: debian, ubuntu, alpine)" ;;
 esac
 [ -s "$work/packages.tsv" ] || die "the image reported no installed packages"
+
+# Packages from outside the distribution with a permissive licence (infra/gpl-source-exempt.txt) need no
+# source. An entry only counts if the image's own copyright file for it names no copyleft licence.
+exempt_file="${GPL_BUNDLE_EXEMPT_FILE:-$script_dir/../gpl-source-exempt.txt}"
+: > "$work/exempt.tsv"
+if [ -f "$exempt_file" ]; then
+  while IFS="$(printf '\t')" read -r bpkg lic note _; do
+    case "$bpkg" in ""|\#*) continue ;; esac
+    case "$bpkg" in *[!a-z0-9.+-]*) die "unusable package name '$bpkg' in $exempt_file" ;; esac
+    awk -F'\t' -v p="$bpkg" '$3 == p' "$work/packages.tsv" | grep -q . || continue
+    if printf '%s' "$lic" | grep -q -i -E 'GPL|General Public|Mozilla Public|\bMPL\b|Eclipse Public|Common Development and Distribution'; then
+      die "the exempt entry for $bpkg names a copyleft licence ($lic)"
+    fi
+    if [ "$os_id" = alpine ]; then
+      # Alpine: the evidence is the licence the package database declares for it; it must equal the entry's.
+      lic_img="$(in_image 'apk list -I' | awk -v p="$bpkg" '{ nv=$1; if (match(nv, /-[0-9][^-]*-r[0-9]+$/) && substr(nv, 1, RSTART-1) == p && match($0, /\(.*\) \[/)) print substr($0, RSTART+1, RLENGTH-4) }' | head -n 1)"
+      [ "$lic_img" = "$lic" ] || die "$bpkg is listed as exempt ($lic) but the image's package database declares '$lic_img'"
+      cr="x"; note=no-copyright-file
+    else
+      cr="$(in_image "cat /usr/share/doc/$bpkg/copyright 2>/dev/null || true")"
+    fi
+    # On Debian a package with no copyright file is accepted only if its entry says so (column 3: no-copyright-file), so a
+    # missing file never passes by accident.
+    if [ -z "$cr" ] && [ "$note" != no-copyright-file ]; then
+      die "$bpkg is listed as exempt ($lic) but the image has no copyright file for it, and the entry does not say no-copyright-file"
+    fi
+    if printf '%s' "$cr" | grep -q -i -E 'GNU (Affero |Lesser |Library )?General Public|\b(A|L)?GPL|Mozilla Public|\bMPL\b|Eclipse Public|Common Development and Distribution'; then
+      die "$bpkg is listed as exempt ($lic) but its copyright file in the image names a copyleft licence"
+    fi
+    awk -F'\t' -v p="$bpkg" -v l="$lic" '$3 == p { print p "\t" $4 "\t" l }' "$work/packages.tsv" >> "$work/exempt.tsv"
+    awk -F'\t' -v p="$bpkg" '$3 != p' "$work/packages.tsv" > "$work/packages.tsv.new" && mv "$work/packages.tsv.new" "$work/packages.tsv"
+  done < "$exempt_file"
+fi
+[ -s "$work/packages.tsv" ] || die "no packages are left to fetch sources for"
 cut -f1,2 "$work/packages.tsv" | sort -u > "$work/source-packages.tsv"
 printf '%s\n' "$os_release" > "$work/os-release"
 
@@ -143,15 +182,27 @@ done < /work/source-packages.tsv'
 branch="$ALPINE_BRANCH"
 api="https://gitlab.alpinelinux.org/api/v4/projects/alpine%2Faports/repository"
 raw="https://gitlab.alpinelinux.org/alpine/aports/-/raw"
-wg() { n=0; until timeout 300 wget -q -T 30 -O "$2" "$1" 2>/dev/null </dev/null; do n=$((n + 1)); [ "$n" -ge 4 ] && { rm -f "$2"; return 1; }; sleep $((n * 3)); done; }
+cgit="https://git.alpinelinux.org/aports/plain"
+# wg URL OUT [ALT_URL]: tries URL then ALT_URL (a second Alpine host) on every round; on the last failure it
+# prints the first response line of each, so a blocked or rate-limited runner is visible in the log.
+wg() { n=0; until { timeout 300 wget -q -T 30 -O "$2" "$1" 2>/dev/null </dev/null || { [ -n "${3:-}" ] && timeout 300 wget -q -T 30 -O "$2" "$3" 2>/dev/null </dev/null; }; }; do n=$((n + 1)); if [ "$n" -eq 1 ]; then nf=1; for u in "$1" ${3:-}; do timeout 60 wget -S -q -O /dev/null "$u" 2>&1 </dev/null | grep -q "HTTP/[0-9.]* 404" || nf=0; done; [ "$nf" = 1 ] && { rm -f "$2"; return 1; }; fi; if [ "$n" -ge 4 ]; then rm -f "$2"; for u in "$1" ${3:-}; do echo "wget failed: $u: $(timeout 60 wget -S -q -O /dev/null "$u" 2>&1 </dev/null | grep -m1 HTTP || echo no-response)" >&2; done; return 1; fi; sleep $((n * 5)); done; }
 mkdir -p /work/sources /work/tmp; cd /work/sources
 while IFS="$(printf "\t")" read -r pkg ver; do
   [ -e "/work/done/$pkg-$ver.plan" ] && continue
   got=0
   for repo in main community testing; do
     d="$pkg-$ver"; mkdir -p "$d"
+    # 0. the commit the image records for this package: the exact recipe in one request
+    c="$(awk -F"\t" -v p="$pkg" "\$1 == p { print \$2; exit }" /work/commits.tsv 2>/dev/null || true)"
+    if [ -n "$c" ] && wg "$raw/$c/$repo/$pkg/APKBUILD" "$d/APKBUILD" "$cgit/$repo/$pkg/APKBUILD?id=$c"; then
+      pv="$(sed -n "s/^pkgver=//p" "$d/APKBUILD" | head -n 1 | sed "s/[ #].*//" | tr -d "\"\047")"
+      pr="$(sed -n "s/^pkgrel=//p" "$d/APKBUILD" | head -n 1 | sed "s/[ #].*//" | tr -d "\"\047")"
+      if [ "$pv-r$pr" = "$ver" ]; then
+        printf "%s\t%s\t%s\t%s\n" "$pkg" "$ver" "$repo" "$c" > "/work/done/$d.plan"; got=1; break
+      fi
+    fi
     # 1. the release branch tip: one fast request, and usually the installed version
-    wg "$raw/$branch/$repo/$pkg/APKBUILD" "$d/APKBUILD" || continue
+    wg "$raw/$branch/$repo/$pkg/APKBUILD" "$d/APKBUILD" "$cgit/$repo/$pkg/APKBUILD?h=$branch" || continue
     pv="$(sed -n "s/^pkgver=//p" "$d/APKBUILD" | head -n 1 | sed "s/[ #].*//" | tr -d "\"'"'"'")"
     pr="$(sed -n "s/^pkgrel=//p" "$d/APKBUILD" | head -n 1 | sed "s/[ #].*//" | tr -d "\"'"'"'")"
     if [ "$pv-r$pr" = "$ver" ]; then
@@ -184,18 +235,19 @@ for plan in /work/done/*.plan; do
 done'
     stage_c='set -eu
 raw="https://gitlab.alpinelinux.org/alpine/aports/-/raw"
+cgit="https://git.alpinelinux.org/aports/plain"
 cd /work/sources
 while IFS="$(printf "\t")" read -r pkg ver repo sha s; do
-  d="$pkg-$ver"
+  d="$pkg-$ver"; alt=""
   case "$s" in
-    *::*) n="${s%%::*}"; u="${s#*::}" ;;
-    *://*) u="$s"; n="${s##*/}" ;;
-    *) u="$raw/$sha/$repo/$pkg/$s"; n="$s" ;;
+    *::*) n="${s%%::*}"; u="${s#*::}"; alt="https://distfiles.alpinelinux.org/distfiles/$ALPINE_REL/$n" ;;
+    *://*) u="$s"; n="${s##*/}"; alt="https://distfiles.alpinelinux.org/distfiles/$ALPINE_REL/$n" ;;
+    *) u="$raw/$sha/$repo/$pkg/$s"; n="$s"; alt="$cgit/$repo/$pkg/$s?id=$sha" ;;
   esac
   case "$n" in ""|*/*|.*) echo "MISSING $pkg $ver" >&2; echo "$pkg $ver" >> /work/missing.txt; continue ;; esac
   [ -s "$d/$n" ] && continue
   k=0
-  until timeout 1800 wget -q -c -T 60 -O "$d/$n.part" "$u" </dev/null 2>/dev/null; do
+  until timeout 1800 wget -q -c -T 60 -O "$d/$n.part" "$u" </dev/null 2>/dev/null || { [ -n "$alt" ] && timeout 1800 wget -q -c -T 60 -O "$d/$n.part" "$alt" </dev/null 2>/dev/null; }; do
     k=$((k + 1)); [ "$k" -ge 4 ] && break; sleep $((k * 3))
   done
   if [ "$k" -lt 4 ]; then mv "$d/$n.part" "$d/$n"; else rm -f "$d/$n.part"; echo "MISSING $pkg $ver" >&2; echo "$pkg $ver" >> /work/missing.txt; fi
@@ -208,7 +260,7 @@ done < /work/sourcelist.tsv'
       --memory 512m --pids-limit 128 -v "$work:/work:ro" "$helper_image" sh -c "timeout 600 sh -c '$stage_b'" > "$work/sourcelist.tsv" \
       || die "reading the source lists failed"
     docker run --rm --user "$uidgid" --read-only --cap-drop ALL --security-opt no-new-privileges \
-      -v "$work:/work" "$helper_image" sh ${GPL_BUNDLE_DEBUG:+-x} -c "$stage_c" >&2 \
+      -e "ALPINE_REL=v${alp_rel}" -v "$work:/work" "$helper_image" sh ${GPL_BUNDLE_DEBUG:+-x} -c "$stage_c" >&2 \
       || die "source download failed (see output above)"
     [ -s "$work/sourcelist.tsv" ] || die "no upstream source list could be read from the downloaded APKBUILDs (the bundle would hold recipes only)"
     # every package that lists a source must hold at least one file besides its APKBUILD
@@ -266,8 +318,9 @@ comp="$(in_image 'for f in $(find / -xdev -path "*/@remotion/compositor-*/packag
   echo "created:      $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   echo "source files: $n_src"
   echo
-  echo "packages.tsv         source package, source version, binary package, binary version (as installed)"
+  echo "packages.tsv         source package, source version, binary package, binary version (as installed, without the exempt packages)"
   echo "source-packages.tsv  the source packages downloaded under sources/"
+  echo "exempt.tsv          installed packages with a permissive licence that need no source (infra/gpl-source-exempt.txt): package, version, licence"
   echo "COMPOSITOR-FFMPEG.md reference for the FFmpeg inside @remotion/compositor-*"
   echo "See GPL-SOURCE-OFFER.md in the repository for the offer and how to use this."
 } > "$work/MANIFEST.txt"
